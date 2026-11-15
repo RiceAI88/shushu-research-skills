@@ -6,10 +6,10 @@ export const test = base.extend({
   page: async ({ page, showEntryNotice }, use) => {
     if (!showEntryNotice) {
       await page.addInitScript(() => {
-        // Resolve against the test's current clock, including tests that freeze time later.
+        // Use the current test clock with a small margin: getItem runs after claimNoticeSlot captures now.
         const getItem = Storage.prototype.getItem;
         Storage.prototype.getItem = function(key) {
-          return key === "prs-recharge-notice-shown-v2" ? String(Date.now()) : getItem.call(this,key);
+          return key === "prs-recharge-notice-shown-v2" ? String(Date.now() - 1000) : getItem.call(this,key);
         };
       });
     }
