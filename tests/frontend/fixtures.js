@@ -13,6 +13,8 @@ export const test = base.extend({
         };
       });
     }
+    // Never send automated test events to the real analytics account.
+    await page.route("https://*.umami.is/**", route => route.abort());
     await use(page);
   },
 });
