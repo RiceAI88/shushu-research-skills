@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-15T03:45:47.680111Z",
+  "checked_at": "2026-11-15T09:55:43.879475Z",
   "repos": {
     "openags/paper-search-mcp": {
       "status": "current",
@@ -51,8 +51,8 @@
           "reviewed_blob_sha": "64627eda97188c2c2e9de4d2cb8174a45fa877f4",
           "current_blob_sha": "3728b9f504e4ab360ccf1defd66b901ccb98d94f",
           "reviewed_url": "https://github.com/Imbad0202/academic-research-skills/blob/09a5d0b15c7b50a20d9fc68d5947bb9897f438b5/README.md",
-          "current_url": "https://github.com/Imbad0202/academic-research-skills/blob/ac42fc3a8635e143a6c3363f5c7132df1b6b0567/README.md",
-          "diff_url": "https://github.com/Imbad0202/academic-research-skills/compare/09a5d0b15c7b50a20d9fc68d5947bb9897f438b5...ac42fc3a8635e143a6c3363f5c7132df1b6b0567"
+          "current_url": "https://github.com/Imbad0202/academic-research-skills/blob/23bd688bbc121da6ae98ec3c4d4a7675cefc4c83/README.md",
+          "diff_url": "https://github.com/Imbad0202/academic-research-skills/compare/09a5d0b15c7b50a20d9fc68d5947bb9897f438b5...23bd688bbc121da6ae98ec3c4d4a7675cefc4c83"
         },
         {
           "path": "docs/SETUP.md",
@@ -60,8 +60,8 @@
           "reviewed_blob_sha": "a4445ca1b8ee558364f5770ee11250b2fb81ed94",
           "current_blob_sha": "426e092c212db4b969ce18608bd998b3a7e422cd",
           "reviewed_url": "https://github.com/Imbad0202/academic-research-skills/blob/09a5d0b15c7b50a20d9fc68d5947bb9897f438b5/docs/SETUP.md",
-          "current_url": "https://github.com/Imbad0202/academic-research-skills/blob/ac42fc3a8635e143a6c3363f5c7132df1b6b0567/docs/SETUP.md",
-          "diff_url": "https://github.com/Imbad0202/academic-research-skills/compare/09a5d0b15c7b50a20d9fc68d5947bb9897f438b5...ac42fc3a8635e143a6c3363f5c7132df1b6b0567"
+          "current_url": "https://github.com/Imbad0202/academic-research-skills/blob/23bd688bbc121da6ae98ec3c4d4a7675cefc4c83/docs/SETUP.md",
+          "diff_url": "https://github.com/Imbad0202/academic-research-skills/compare/09a5d0b15c7b50a20d9fc68d5947bb9897f438b5...23bd688bbc121da6ae98ec3c4d4a7675cefc4c83"
         }
       ]
     },

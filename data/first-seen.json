@@ -157,6 +157,11 @@
       "first_seen_at": "2026-10-28T08:55:06Z",
       "first_seen_is_baseline": false
     },
+    "alchaincyf/huashu-report": {
+      "first_seen_date": "2026-11-15",
+      "first_seen_at": "2026-11-15T09:52:47Z",
+      "first_seen_is_baseline": false
+    },
     "alephpi/texo": {
       "first_seen_date": "2026-09-27",
       "first_seen_is_baseline": false
@@ -1195,6 +1200,11 @@
     "master-cai/research-paper-writing-skills": {
       "first_seen_date": "2026-08-27",
       "first_seen_is_baseline": true
+    },
+    "matsuikentaro1/humanizer_academic": {
+      "first_seen_date": "2026-11-15",
+      "first_seen_at": "2026-11-15T09:52:47Z",
+      "first_seen_is_baseline": false
     },
     "matteocourthoud/awesome-causal-inference": {
       "first_seen_date": "2026-11-14",
