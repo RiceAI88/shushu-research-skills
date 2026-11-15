@@ -1,16 +1,14 @@
 import requirements from "../../config/installation-details.json" with {type:"json"};
-import React, {useEffect,useRef,useState} from 'react';
+import React, {useState} from 'react';
 import paths from '../../config/research-paths.json' with {type:'json'};
 import {installationFor} from '../practical';
 import {detectAgents,AGENT_PLATFORMS} from '../domain';
 import {copyText} from '../clipboard';
 export default function BeginnerGuide({initialSection='basics',lang,items,onClose,onOpenRepo}) {
- const zh=lang==='zh',dialog=useRef(null),[section,setSection]=useState(initialSection),[copied,setCopied]=useState('');
- useEffect(()=>{dialog.current.showModal();},[]);
- const close=()=>{dialog.current.close();onClose();};
+ const zh=lang==='zh',[section,setSection]=useState(initialSection),[copied,setCopied]=useState('');
+ const close=onClose;
  const byRepo=new Map(items.map(i=>[i.repo,i]));
- return <dialog ref={dialog} className="beginner-guide" aria-label={zh?'科研 Skills 入门':'Research Skills starter guide'} onCancel={e=>{e.preventDefault();close();}} onClick={e=>{if(e.target===dialog.current){const r=dialog.current.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)close();}}}>
-  <header><h2>{zh?'科研 Skills 入门':'Research Skills starter guide'}</h2><button type="button" aria-label={zh?'关闭入门指南':'Close starter guide'} onClick={close}>×</button></header>
+ return <>
   <div className="guide-tabs"><button type="button" aria-pressed={section==='basics'} onClick={()=>setSection('basics')}>{zh?'30 秒看懂 Skill':'Skills in 30 seconds'}</button><button type="button" aria-pressed={section==='paths'} onClick={()=>setSection('paths')}>{zh?'专业科研路径':'Discipline research paths'}</button></div>
   {section==='basics'?<section className="guide-basics">
    <h3>{zh?'Skill 是什么？':'What is a Skill?'}</h3><p>{zh?'可以把它理解为给 AI 助手的一份任务说明书：告诉它按什么步骤、用哪些工具完成文献检索、论文阅读、数据分析等任务。Skill 通常需要在支持它的宿主工具中使用。':'A Skill is a reusable set of task instructions for an AI assistant: how to search papers, read a manuscript or analyze data. It usually runs inside a compatible host tool.'}</p>
@@ -21,5 +19,5 @@ export default function BeginnerGuide({initialSection='basics',lang,items,onClos
     const item=byRepo.get(step.repo),installation=installationFor(item);const platforms=[...new Set([...detectAgents(item).map(id=>AGENT_PLATFORMS.find(a=>a.id===id)?.label||id),...(item.documented_platform_names||[])])];
     return <li key={step.repo}><strong>{step[`task_${lang}`]}</strong><button type="button" className="guide-project" onClick={()=>{close();onOpenRepo(item.repo);}}>{item.repo} ↗</button><details><summary>{zh?'工具与安装说明':'Tools and installation'}</summary><p>{zh?'宿主：':'Host: '}{platforms.join(' / ')||(zh?'见项目说明':'See project docs')}</p><p>{installation[`context_${lang}`]}</p><p><strong>{zh?"环境：":"Environment: "}</strong>{requirements[item.repo]?.[`environment_${lang}`]||(zh?"见官方说明":"See official documentation")}</p><p><strong>{zh?"依赖：":"Dependencies: "}</strong>{requirements[item.repo]?.[`dependencies_${lang}`]||(zh?"见官方说明":"See official documentation")}</p>{installation.command && <><pre>{installation.command}</pre><button type="button" onClick={async()=>{try{await copyText(installation.command);setCopied(item.repo);}catch{setCopied('error');}}}>{copied===item.repo?(zh?'已复制':'Copied'):(zh?'复制命令':'Copy command')}</button></>}<a href={installation.source_url} target="_blank" rel="noopener noreferrer">{zh?'官方安装说明 ↗':'Official instructions ↗'}</a>{installation.reviewed_at && <small>{zh?'文档核对：':'Reviewed: '}{installation.reviewed_at}</small>}{copied==='error'&&<p role="status">{zh?'复制失败，请手动选择命令。':'Copy failed; please select the command manually.'}</p>}</details></li>;
    })}</ol></article>)}</div></section>}
- </dialog>;
+ </>;
 }

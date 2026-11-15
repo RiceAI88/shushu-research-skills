@@ -6,14 +6,11 @@ export const test = base.extend({
   page: async ({ page, showEntryNotice }, use) => {
     if (!showEntryNotice) {
       await page.addInitScript(() => {
-        new MutationObserver(() => {
-          document.querySelector(".recharge-notice[open]")?.close();
-        }).observe(document, {
-          subtree: true,
-          childList: true,
-          attributes: true,
-          attributeFilter: ["open"],
-        });
+        // Resolve against the test's current clock, including tests that freeze time later.
+        const getItem = Storage.prototype.getItem;
+        Storage.prototype.getItem = function(key) {
+          return key === "prs-recharge-notice-shown-v2" ? String(Date.now()) : getItem.call(this,key);
+        };
       });
     }
     await use(page);

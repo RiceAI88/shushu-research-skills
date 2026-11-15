@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import {Modal} from 'antd';
+import React, { useEffect, useState } from "react";
 import { CloseOutlined, ArrowUpOutlined } from "@ant-design/icons";
 
 export const NOTICE_STORAGE_KEY = "prs-recharge-notice-shown-v2";
@@ -19,7 +20,7 @@ export function claimNoticeSlot(storage, now = Date.now()) {
 }
 
 export function RechargeNotice({ lang }) {
-  const dialog = useRef(null);
+  const [open,setOpen] = useState(false);
   const zh = lang === "zh";
   useEffect(() => {
     let storage = null;
@@ -28,14 +29,11 @@ export function RechargeNotice({ lang }) {
     } catch {
       storage = null;
     }
-    if (!dialog.current.open && claimNoticeSlot(storage)) {
-      dialog.current.showModal();
-      dialog.current.querySelector("h2")?.focus();
-    }
+    if (claimNoticeSlot(storage)) setOpen(true);
   }, []);
-  const close = () => dialog.current.close();
+  const close = () => setOpen(false);
   return (
-    <dialog ref={dialog} className="recharge-notice" aria-labelledby="recharge-notice-title" aria-describedby="recharge-notice-description">
+    <Modal open={open} onCancel={close} footer={null} closable={false} title={<span className="sr-only">{zh ? "GPT 正规代充" : "GPT top-up service"}</span>} centered width={440} rootClassName="recharge-modal" aria-labelledby="recharge-notice-title" aria-describedby="recharge-notice-description" styles={{header:{display:"none"},container:{padding:26,borderRadius:18,border:"1px solid var(--prs-border)",background:"var(--prs-panel)"}}}><div className="recharge-notice">
       <div className="recharge-notice-top">
         <span>{zh ? "本站自营服务" : "Our own service"}</span>
         <button type="button" className="recharge-notice-close" onClick={close} aria-label={zh ? "关闭代充提示" : "Close top-up notice"}>
@@ -51,6 +49,6 @@ export function RechargeNotice({ lang }) {
         </a>
         <button type="button" onClick={close}>{zh ? "继续浏览" : "Continue browsing"}</button>
       </div>
-    </dialog>
+    </div></Modal>
   );
 }

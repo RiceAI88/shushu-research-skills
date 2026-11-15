@@ -61,7 +61,7 @@ for (const width of [1440, 390]) {
     await expect(page.locator("#agentFilter")).toBeVisible();
     for (const selector of [
       ".task-list button",
-      ".filter-fields .ant-select",
+      ".filter-panel-content .ant-select",
       ".compact-statistics",
       ".editorial-preview",
     ]) {

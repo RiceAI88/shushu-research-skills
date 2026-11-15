@@ -19,6 +19,8 @@ export function SiteMotion({ children }) {
   return <ReducedMotion.Provider value={reduced}>{children}</ReducedMotion.Provider>;
 }
 
+export function useSiteReducedMotion() { return useContext(ReducedMotion); }
+
 // Scoped native animations keep React/sticky geometry unchanged and clean up on unmount.
 export function Reveal({ as: Element = "div", kind = "section", order = 0, children, ref, onPointerEnter, onPointerLeave, onFocusCapture, ...props }) {
   const preference = useContext(ReducedMotion);

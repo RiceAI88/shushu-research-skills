@@ -1,10 +1,12 @@
+import { BeginnerDialog } from "./components/BeginnerDialog";
+import { OverlaySkeleton } from "./components/OverlaySkeleton";
 import { growthState } from "./projectFacts";
 import { ScopeControl } from "./components/ScopeControl";
 import { ActionPopover } from "./components/ActionPopover";
 import { ScopeSwitch } from "./components/ScopeSwitch";
 import { DisciplineSelector } from "./components/DisciplineSelector";
 import { SlidingTaskList } from "./components/SlidingTaskList";
-import { Reveal } from "./components/SiteMotion";
+import { Reveal, useSiteReducedMotion } from "./components/SiteMotion";
 import { DailyArrivals } from "./components/DailyArrivals";
 import { CommunityCard } from "./components/CommunityCard";
 import { RechargeNotice } from "./components/RechargeNotice";
@@ -72,7 +74,6 @@ const RepositoryDrawer = lazy(() =>
     default: module.RepositoryDrawer,
   })),
 );
-const BeginnerGuide = lazy(() => import("./components/BeginnerGuide"));
 const FilterControls = lazy(() => import("./components/FilterControls"));
 const ComparisonDialog = lazy(() => import("./components/ComparisonDialog"));
 import { ViewportInsights } from "./components/ViewportInsights";
@@ -114,6 +115,7 @@ const taskLabels = {
 };
 const localFile = (name) => base + name;
 export default function App() {
+  const reducedMotion=useSiteReducedMotion();
   const items = sourceItems;
   const [state, update] = useState(() =>
     restoreState(storage, location.hash, defaults, items),
@@ -148,6 +150,7 @@ export default function App() {
         algorithm:
           state.theme === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
         token: {
+          motion: !reducedMotion,
           colorPrimary: state.theme === "dark" ? "#B3AAEA" : "#4A3FBF",
           colorLink: state.theme === "dark" ? "#B3AAEA" : "#4A3FBF",
           colorLinkHover: state.theme === "dark" ? "#D5D0F5" : "#372E9D",
@@ -604,7 +607,7 @@ function Dashboard({ state, update }) {
           </section>
           <div className="filter-fields">
             <ActionPopover label={state.lang === "zh" ? "筛选" : "Filters"} filter lang={state.lang} count={Number(state.agent !== "all") + Number(!["rank","stars"].includes(state.sort)) + Number(state.favOnly)}>
-            {() => <DeferredFeature t={t}><FilterControls {...{state,update,t,platformIds}} /></DeferredFeature>}
+            {() => <DeferredFeature t={t} loadingFallback={<OverlaySkeleton kind="filters" lang={state.lang}/>}><FilterControls {...{state,update,t,platformIds}} /></DeferredFeature>}
             </ActionPopover>
             <div className="view-controls">
               <Segmented
@@ -877,7 +880,7 @@ function Dashboard({ state, update }) {
           </Tooltip>
         </div>
       )}
-      {guideSection && <DeferredFeature t={t}><BeginnerGuide initialSection={guideSection} lang={state.lang} items={items} onClose={()=>setGuideSection(null)} onOpenRepo={repo=>update(s=>({...s,repo}))} /></DeferredFeature>}
+      <BeginnerDialog section={guideSection} lang={state.lang} items={items} t={t} onClose={()=>setGuideSection(null)} onOpenRepo={repo=>update(s=>({...s,repo}))} />
       <RechargeNotice lang={state.lang} />
       <BackToTop
         label={t("backToTop")}
