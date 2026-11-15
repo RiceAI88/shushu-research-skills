@@ -1,3 +1,5 @@
+import json
+from pathlib import Path
 import unittest
 
 from scripts.update_rankings import render_readme
@@ -73,3 +75,19 @@ class ReadmeTest(unittest.TestCase):
         self.assertIn("MIT 许可证和版权声明", text)
         self.assertIn("README 会由采集脚本自动生成", text)
         self.assertEqual(text, render_readme(dataset([entry("alpha", "skill")]), window_snapshot={"old": {}}))
+
+    def test_current_brand_disciplines_and_starter_guidance_are_generated(self):
+        text = render_readme(dataset([entry("alpha", "skill")]))
+        self.assertTrue(text.startswith("# 智一刻AI · 科研 Skills 导航\n"))
+        self.assertIn("Awesome Paper Research Skills", text)
+        self.assertIn("面向大学生和研究生", text)
+        self.assertIn("## 按专业找 Skills", text)
+        catalog=json.loads((Path(__file__).resolve().parents[1]/"config/disciplines.json").read_text())
+        for group in catalog["disciplines"]:
+            self.assertIn(f"[{group['zh']}](https://riceai88.github.io/awesome-paper-research-skills/#discipline={group['id']})",text)
+        for task in ["analyze", "compute"]:
+            self.assertIn(f"#task={task}",text)
+        for term in ["30 秒看懂 Skill", "专业路径", "收录范围", "Antigravity", "专业归属依据官方文档"]:
+            self.assertIn(term,text)
+        self.assertIn("Zhiyike AI · Research Skills Directory",text)
+        self.assertNotIn("后续将首页迁移至 React",text)

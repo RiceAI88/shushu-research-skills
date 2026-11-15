@@ -1105,20 +1105,21 @@ def enrich_skill_counts(items: list[dict[str, Any]], token: str | None) -> None:
 
 # Map a backend platform id to a short human label for README / display.
 _AGENT_LABELS = {
-    "claude-code": "Claude",
+    "claude-code": "Claude Code",
     "codex": "Codex",
     "opencode": "OpenCode",
     "cursor": "Cursor",
     "gemini": "Gemini",
     "cline": "Cline",
+    "antigravity": "Antigravity",
     "mcp": "MCP",
 }
 
 
 def agents_to_label(agent_ids: list[str]) -> str:
-    """Render the structured agents list as a /-joined label (通用 when empty)."""
+    """Render platform labels without treating missing metadata as universal support."""
     labels = [_AGENT_LABELS.get(aid, aid) for aid in agent_ids if aid]
-    return "/".join(labels) if labels else "通用"
+    return "/".join(labels) if labels else "平台见说明"
 
 
 def is_newcomer(item: dict[str, Any], window_snapshot: dict[str, Any] | None) -> bool:
@@ -1184,24 +1185,36 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
     daily_block = "\n".join(today_lines) if today_lines else "本次更新日暂无新收录的 Skills，已有项目的 Stars 和维护数据仍会刷新。"
     date_badge = metadata["generated_at"][:10].replace("-", "--")
 
-    return f"""# Awesome Paper Research Skills
+    return f"""# 智一刻AI · 科研 Skills 导航
 
-**发现适合你的论文科研 Skills。**
+**面向大学生和研究生，按专业找到适合自己的科研 Skills。**
 
-汇集 GitHub 上用于文献检索、论文阅读、学术写作、科研绘图和实验复现的 Agent Skills，支持按使用场景与适用平台筛选，持续追踪新收录项目和 Stars 增长。科研相关工具、工作流与资料单独标注。
+**Awesome Paper Research Skills** 由 RiceAI88 整理维护，汇集 GitHub 上用于文献检索、论文阅读、写作、绘图、数据分析和科研计算的 Agent Skills。支持按专业、科研任务和适用平台筛选，并提供安装入口、使用条件与维护信息。科研相关工具、工作流与资料单独标注。
 
-### [打开论文科研 Skills 排行榜 →]({SITE_URL}/)
+### [打开科研 Skills 导航 →]({SITE_URL}/)
 
 [![Skills](https://img.shields.io/badge/Skills-{len(skills)}-4f3bd8)](#skills-榜单)
 [![Updated](https://img.shields.io/badge/updated-{date_badge}-706b91)](#收录与更新)
 [![CI](https://github.com/RiceAI88/awesome-paper-research-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/RiceAI88/awesome-paper-research-skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-706b91)](LICENSE)
 
-[今日新增](#今日新增-skills) · [Skills 榜单](#skills-榜单) · [科研相关项目](#科研相关项目) · [收录与更新](#收录与更新) · [推荐项目](CONTRIBUTING.md) · [English](#english)
+[按专业找](#按专业找-skills) · [按任务找](#按科研任务找-skills) · [新手入门](#网站怎么用) · [今日新增](#今日新增-skills) · [Skills 榜单](#skills-榜单) · [科研相关项目](#科研相关项目) · [收录与更新](#收录与更新) · [推荐项目](CONTRIBUTING.md) · [English](#english)
 
-[![论文科研 Skills 排行榜：场景筛选、项目卡片和今日新增](assets/readme-dashboard.png)]({SITE_URL}/)
+[![科研 Skills 导航：专业分类、科研任务与项目安装入口](assets/readme-dashboard.png)]({SITE_URL}/)
 
-*界面预览；图片中的数量仅代表截图时的数据，最新结果以网站为准。*
+*专业筛选界面示例；图片中的数量仅代表截图时的数据，最新结果以网站为准。*
+
+觉得有帮助，欢迎点一个 Star 🌟；有好用的 Skills，也欢迎[提交推荐](https://github.com/RiceAI88/awesome-paper-research-skills/issues/new?template=recommend-repo.yml)。
+
+## 按专业找 Skills
+
+先选择学科门类，再选择具体专业和你想完成的科研任务：
+
+[理学]({SITE_URL}/#discipline=science) · [工学]({SITE_URL}/#discipline=engineering) · [医学]({SITE_URL}/#discipline=medicine) · [农学]({SITE_URL}/#discipline=agriculture) · [经济学]({SITE_URL}/#discipline=economics) · [管理学]({SITE_URL}/#discipline=management)
+
+[法学]({SITE_URL}/#discipline=law) · [文学]({SITE_URL}/#discipline=literature) · [历史学]({SITE_URL}/#discipline=history) · [哲学]({SITE_URL}/#discipline=philosophy) · [教育学]({SITE_URL}/#discipline=education) · [艺术学]({SITE_URL}/#discipline=arts)
+
+专业归属依据官方文档，当前仍在补充；尚未核验专业归属的项目可在“全部”中浏览。选择专业后，可在“收录范围”中决定是否包含跨专业通用 Skills，以及科研相关项目。
 
 ## 按科研任务找 Skills
 
@@ -1213,16 +1226,21 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
 | 制作论文配图、图表和科研示意图 | [科研绘图]({SITE_URL}/#task=figures) |
 | 复现实验、运行评估与基准测试 | [实验复现]({SITE_URL}/#task=reproduce) |
 | 准备投稿、审稿与返修回复 | [投稿审稿]({SITE_URL}/#task=review) |
+| 数据处理、统计分析与计量研究 | [数据分析]({SITE_URL}/#task=analyze) |
+| 数值计算、仿真与数学建模 | [研究计算]({SITE_URL}/#task=compute) |
 
-一个项目可以用于多个场景。网站默认只展示有 `SKILL.md` 文件证据的 Skills；需要科研工具或资料时，可打开“含科研相关项目”。
+一个项目可以用于多个场景。网站默认只展示有 `SKILL.md` 文件证据的 Skills；需要科研工具或资料时，可在“收录范围”中打开“含科研相关项目”。
 
 ## 网站怎么用
 
+- **第一次接触 Skill**：先点网站首屏的“30 秒看懂 Skill”，了解 Skill 是什么、需要哪些宿主工具，以及账号、费用与依赖要求。
+- **按专业和任务查找**：选择学科门类、具体专业与科研任务，再按平台、Stars、上升最快或最新收录筛选排序；“专业适用优先”是独立的排序选项。
+- **沿专业路径上手**：工具栏的“专业路径”按已核对项目串联任务步骤，列出每一步的工具、环境、依赖与安装来源，不必全部安装。
 - **发现新项目**：查看“今日新增”，也可按近 7 日增长、趋势或最近更新排序。
-- **找到适合的平台**：搜索关键词，按 Claude Code、Codex、Cursor、MCP 等适用平台筛选；平台信息来自项目声明与规则识别，安装前以项目文档为准。
-- **查看使用条件**：点击卡片打开详情，查看安装入口、适用任务、必要依赖与维护信息；已记录安装核对的项目提供核对记录。
+- **找到适合的平台**：搜索关键词，按 Claude Code、Codex、Antigravity、Cursor、MCP 等适用平台筛选；不同项目支持的平台不同，安装前以官方文档为准。
+- **查看使用条件**：点击卡片打开详情，查看安装入口、适用任务、必要依赖与维护信息；已核对项目提供文档来源与核对记录，文档核对不等于已执行安装或运行实测。
 - **收藏与对比**：收藏感兴趣的项目，加入对比后比较任务、安装方式、依赖和维护状态；收藏保存在当前浏览器。
-- **观察趋势**：切换到“数据洞察”，查看增长、场景分布与规模比较；筛选条件与榜单联动。
+- **观察趋势**：切换到“数据洞察”，查看专业分布、专业与场景覆盖及内容缺口；展开更多图表可看 Stars 增长与规模比较，筛选条件与榜单联动。
 - **分享与订阅**：复制当前筛选链接，或使用 [RSS](feed.xml)、[月报](reports/)、[JSON](data/rankings.json) 和 [CSV](data/rankings.csv)。
 
 ## 今日新增 Skills
@@ -1241,7 +1259,7 @@ Skills **{len(skills)}** · 科研相关项目 **{len(related)}** · 类型待�
 
 {skill_table}
 
-[浏览完整 Skills 榜单]({SITE_URL}/) · 简介保留仓库作者原文，仅截短展示；“—”表示近 7 日增量为 0，缺少历史记录时的计算方式见[排名方法](docs/methodology.md)。
+[浏览完整 Skills 榜单]({SITE_URL}/) · 简介保留仓库作者原文，仅截短展示；“—”表示零增量或暂缺可比较的历史记录，计算方式见[排名方法](docs/methodology.md)。
 
 ## 科研相关项目
 
@@ -1271,11 +1289,11 @@ README 会由采集脚本自动生成，静态介绍需修改 [`render_readme`](
 
 ## English
 
-**Awesome Paper Research Skills** helps you discover GitHub Agent Skills for literature search, paper reading, academic writing, scientific figures, experiment reproduction and peer review.
+**Zhiyike AI · Research Skills Directory** (Awesome Paper Research Skills) helps undergraduate and postgraduate students find GitHub research Skills by discipline, task and supported platform, from literature search and writing to figures, data analysis and scientific computing.
 
-[Open the dashboard]({SITE_URL}/en/) to search by task and platform, inspect installation information, save favorites, compare repositories and explore growth charts. Descriptions stay in the repository author's original language.
+[Open the dashboard]({SITE_URL}/en/) to choose a discipline and task, read the starter guide, explore discipline research paths, inspect installation requirements, save favorites, compare repositories and explore data insights. Descriptions stay in the repository author's original language.
 
-The default ranking contains repositories with detected `SKILL.md` files. Research-related tools, workflows and guides are separately labelled and can be included with a toggle; unverified types are excluded from both previews. File detection does not certify quality or successful installation.
+Discipline labels are based on official documentation; coverage is still being expanded. General research Skills and related projects can be included through the scope control. The default ranking contains repositories with detected `SKILL.md` files. Research-related tools, workflows and guides are separately labelled and can be included with a toggle; unverified types are excluded from both previews. File detection does not certify quality or successful installation.
 
 Candidates are discovered through popular, recently updated and star-banded searches, then reviewed against README evidence. The main ranking uses Stars; daily arrivals mean first inclusion on this site, measured by the Beijing calendar day. The scheduled daily refresh may be delayed and does not guarantee new entries every day. Search coverage is bounded.
 
@@ -1285,7 +1303,7 @@ Candidates are discovered through popular, recently updated and star-banded sear
 
 本项目基于 [kael-odin/awesome-academic-research-skills](https://github.com/kael-odin/awesome-academic-research-skills) 导入并进行后续改版，感谢原作者 [kael-odin](https://github.com/kael-odin) 的开源贡献。
 
-本仓库由 RiceAI88 独立维护，后续将首页迁移至 React，并增加场景入口、项目类型区分、今日新增、项目对比、数据洞察与采集核验机制。保留原项目的 MIT 许可证和版权声明；不代表原作者或与原作者存在隶属关系。早期导入的历史快照不代表本站当时已运行。
+本仓库由 RiceAI88 独立维护，已将首页迁移至 React，并增加专业分类、科研任务筛选、入门指南与专业路径、项目类型区分、今日新增、项目对比、数据洞察与采集核验机制。保留原项目的 MIT 许可证和版权声明；不代表原作者或与原作者存在隶属关系。早期导入的历史快照不代表本站当时已运行。
 
 ## License
 

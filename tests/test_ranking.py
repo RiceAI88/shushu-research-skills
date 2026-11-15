@@ -422,8 +422,8 @@ class RankingRulesTest(unittest.TestCase):
         self.assertEqual(ranked[0]["agents"], ["claude-code"])
 
     def test_agents_to_label_renders_human_labels(self):
-        self.assertEqual(agents_to_label(["claude-code", "mcp"]), "Claude/MCP")
-        self.assertEqual(agents_to_label([]), "通用")
+        self.assertEqual(agents_to_label(["claude-code", "mcp"]), "Claude Code/MCP")
+        self.assertEqual(agents_to_label([]), "平台见说明")
 
     def test_excluded_repositories_are_never_ranked(self):
         """Excluded repos (e.g. the meta-repository itself) must be dropped
