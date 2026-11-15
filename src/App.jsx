@@ -12,7 +12,6 @@ import { CommunityCard } from "./components/CommunityCard";
 import { RechargeNotice } from "./components/RechargeNotice";
 import { RechargeAd } from "./components/RechargeAd";
 import { BackToTop } from "./components/BackToTop";
-import { VisitCounter } from "./components/VisitCounter";
 import { SearchBox } from "./components/SearchBox";
 import { Panel } from "./components/Panel";
 import React, {
@@ -835,7 +834,6 @@ function Dashboard({ state, update }) {
         </span>
         <a href={localFile("feed.xml")}>{t("subscribeTitle")}</a>
         <span className="keyboard-hint">{t("shortcuts")}</span>
-        <VisitCounter t={t} lang={state.lang} />
       </Reveal>
       {(selected || drawerRequested) && (
         <DeferredFeature t={t}>

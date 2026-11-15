@@ -1727,12 +1727,7 @@ h1 em {
 .repository-drawer .repository-actions .ant-btn { min-height: 32px; }
 .drawer-footer-actions { display: grid; gap: 8px; }
 .site-footer { flex-wrap: wrap; }
-.site-footer:has(.visit-counter) { padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)); }
-.feedback-app:has(.compare-tray) .site-footer:has(.visit-counter) { padding-bottom: calc(230px + env(safe-area-inset-bottom, 0px)); }
-.visit-counter { flex-basis: 100%; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: 13px; line-height: 1.6; }
-.visit-counter > span { white-space: nowrap; }
-.visit-counter strong { font-weight: 500; font-variant-numeric: tabular-nums; }
-.visit-counter a { margin-left: 6px; font-size: 12px; color: var(--prs-muted); }
+.feedback-app:has(.compare-tray) .site-footer { padding-bottom: calc(230px + env(safe-area-inset-bottom, 0px)); }
 
 /* A clearly labeled promotion, separate from repository data and ranking. */
 .sponsor-banner { --ad-bg: #fff0f5; --ad-bg-soft: #fff8fa; --ad-border: #e8a7bc; --ad-accent: #ad365f; --ad-hover: #922b50; --ad-muted: #754358; --ad-button-text: #fff; --ad-label-bg: #fff9fb; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 24px; padding: 20px 24px; margin: 0 0 14px; border: 1px solid var(--ad-border); border-radius: 8px; background: linear-gradient(110deg, var(--ad-bg), var(--ad-bg-soft)); color: var(--prs-text); }

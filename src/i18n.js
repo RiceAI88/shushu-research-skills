@@ -242,13 +242,6 @@ export const translations = {
     sponsorHeadline: "从一个题目，到一篇论文初稿。",
     sponsorDescription: "开题报告 · 文献综述 · 长文生成，一站式完成。",
     sponsorAction: "免费生成提纲",
-    visitViews: "累计访问",
-    visitVisitors: "累计访客",
-    visitLoading: "访问统计加载中…",
-    visitUnavailable: "访问统计暂不可用",
-    visitProvider: "不蒜子统计",
-    visitCounterHint:
-      "从接入后开始累计；中英文入口合并统计，筛选与切换视图不重复计数。访客为第三方服务的去重估算，仅供参考。",
     stars: "Stars",
     noHistory: "暂无历史数据",
     toastCopied: "已复制 Markdown 到剪贴板",
@@ -539,13 +532,6 @@ export const translations = {
     sponsorDescription:
       "Research proposals, literature reviews and long-form drafts in one place.",
     sponsorAction: "Generate a free outline",
-    visitViews: "Visits",
-    visitVisitors: "Visitors",
-    visitLoading: "Loading visitor totals…",
-    visitUnavailable: "Visitor totals unavailable",
-    visitProvider: "Busuanzi",
-    visitCounterHint:
-      "Counted since integration. Chinese and English entries share totals; filtering and view changes do not count again. Visitors are a third-party deduplicated estimate.",
     stars: "Stars",
     noHistory: "No history yet",
     toastCopied: "Markdown copied to clipboard",

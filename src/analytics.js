@@ -1,11 +1,11 @@
-import {VISIT_SITE} from './visits';
+const SITE_URL='https://riceai88.github.io/awesome-paper-research-skills/';
 
 const TRACKER_URL='https://cloud.umami.is/script.js';
 const WEBSITE_ID='f9eb8025-865b-4ddb-b00e-510bb13e56f5';
 let started=false;
 
 export function startAnalytics() {
- const site=new URL(VISIT_SITE);
+ const site=new URL(SITE_URL);
  if(started || location.origin!==site.origin || !location.pathname.startsWith(site.pathname) || navigator.webdriver)return;
  started=true;
  // Keep the incoming campaign even if the visitor filters before the tracker loads.
