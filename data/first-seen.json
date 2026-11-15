@@ -237,6 +237,11 @@
       "first_seen_at": "2026-10-28T17:00:50Z",
       "first_seen_is_baseline": false
     },
+    "baojie/shiji-kb": {
+      "first_seen_date": "2026-11-15",
+      "first_seen_at": "2026-11-15T03:41:23Z",
+      "first_seen_is_baseline": false
+    },
     "beckyglobal/paidtostudyabroad": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
@@ -1042,6 +1047,11 @@
       "first_seen_at": "2026-10-27T16:05:57Z",
       "first_seen_is_baseline": false
     },
+    "koloyaaa/academic-translation-skills": {
+      "first_seen_date": "2026-11-12",
+      "first_seen_at": "2026-11-12T03:33:40Z",
+      "first_seen_is_baseline": false
+    },
     "koloyaaa/foreign-academic-translator-skill": {
       "first_seen_date": "2026-11-12",
       "first_seen_at": "2026-11-12T03:33:40Z",
@@ -1570,6 +1580,11 @@
       "first_seen_at": "2026-10-28T17:00:50Z",
       "first_seen_is_baseline": false
     },
+    "sustech-cra/sustech-master-thesis": {
+      "first_seen_date": "2026-11-15",
+      "first_seen_at": "2026-11-15T03:41:23Z",
+      "first_seen_is_baseline": false
+    },
     "syntaxsmith/nature-writing-skill": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
@@ -1887,6 +1902,11 @@
     "zhoucz97/mylearning": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
+      "first_seen_is_baseline": false
+    },
+    "zhoy0409-debug/polish-sci-figures": {
+      "first_seen_date": "2026-11-15",
+      "first_seen_at": "2026-11-15T03:41:23Z",
       "first_seen_is_baseline": false
     },
     "zhpmatrix/paperreading": {

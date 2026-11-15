@@ -2528,5 +2528,44 @@
     "at": "2026-11-14T09:06:18Z",
     "repo": "xuzhougeng/wisp-science",
     "action": "added"
+  },
+  {
+    "at": "2026-11-15T03:24:09Z",
+    "repo": "alchaincyf/darwin-skill",
+    "action": "removed",
+    "reasons": [
+      "skill",
+      "skills",
+      "claude code",
+      "research",
+      "missing_strong_academic_signal",
+      "missing_readme_academic_scope"
+    ]
+  },
+  {
+    "at": "2026-11-15T03:24:09Z",
+    "repo": "koloyaaa/foreign-academic-translator-skill",
+    "action": "renamed",
+    "to": "koloyaaa/academic-translation-skills"
+  },
+  {
+    "at": "2026-11-15T03:24:09Z",
+    "repo": "koloyaaa/academic-translation-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-15T03:24:09Z",
+    "repo": "sustech-cra/sustech-master-thesis",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-15T03:24:09Z",
+    "repo": "zhoy0409-debug/polish-sci-figures",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-15T03:24:09Z",
+    "repo": "baojie/shiji-kb",
+    "action": "added"
   }
 ]
