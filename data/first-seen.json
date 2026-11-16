@@ -1266,6 +1266,11 @@
       "first_seen_at": "2026-10-27T16:17:18Z",
       "first_seen_is_baseline": false
     },
+    "moonlit-pages/aigc-detector-rewriter-skill": {
+      "first_seen_date": "2026-11-16",
+      "first_seen_at": "2026-11-16T03:03:06Z",
+      "first_seen_is_baseline": false
+    },
     "mrgediao/paper-reading-zh": {
       "first_seen_date": "2026-11-06",
       "first_seen_at": "2026-11-06T02:17:21Z",
@@ -1273,6 +1278,11 @@
     },
     "mrlee2r/intelligrapher": {
       "first_seen_date": "2026-09-28",
+      "first_seen_is_baseline": false
+    },
+    "mylc2010/sci-translation-skill": {
+      "first_seen_date": "2026-11-16",
+      "first_seen_at": "2026-11-16T03:03:06Z",
       "first_seen_is_baseline": false
     },
     "n-allpass/modex-mh-agent": {
