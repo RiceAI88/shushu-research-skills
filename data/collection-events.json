@@ -2597,5 +2597,21 @@
     "at": "2026-11-17T02:42:49Z",
     "repo": "allen-c-guan/ai-infra-handbook",
     "action": "added"
+  },
+  {
+    "at": "2026-11-17T10:51:19Z",
+    "repo": "koloyaaa/academic-translation-skills",
+    "action": "renamed",
+    "to": "koloyaaa/academic-translation-toolkit"
+  },
+  {
+    "at": "2026-11-17T10:51:19Z",
+    "repo": "koloyaaa/academic-translation-toolkit",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-17T10:51:19Z",
+    "repo": "hzm8341/pi0.6",
+    "action": "added"
   }
 ]

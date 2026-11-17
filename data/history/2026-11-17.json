@@ -2,7 +2,7 @@
   "metadata": {
     "generated_at": "2026-11-17T02:59:41Z",
     "min_stars": 100,
-    "total": 386,
+    "total": 388,
     "source": "GitHub REST Search API",
     "ranking": "stars_desc_then_trend_score",
     "trend_window_days": 7,
@@ -26351,6 +26351,139 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-14",
       "first_seen_at": "2026-11-14T06:02:17Z",
+      "first_seen_is_baseline": false
+    },
+    {
+      "refresh_status": "fresh",
+      "metadata_checked_at": "2026-11-17T10:51:19Z",
+      "pending_reason": null,
+      "previous_names": [],
+      "rank": 351,
+      "repo": "hzm8341/pi0.6",
+      "stars": 139,
+      "star_delta_1d": 0,
+      "star_delta_7d": 0,
+      "star_delta_30d": 0,
+      "trend_score": 37.15,
+      "trend": {
+        "id": "rising",
+        "zh": "持续增长",
+        "en": "Rising"
+      },
+      "category": {
+        "id": "deep-research",
+        "zh": "深度研究",
+        "en": "Deep Research"
+      },
+      "description": "基于pi0.5和pi0.6的论文实现的",
+      "language": "Python",
+      "topics": [],
+      "created_date": "2026-03-18",
+      "last_push_date": "2026-11-17",
+      "url": "https://github.com/hzm8341/pi0.6",
+      "homepage": "",
+      "agents": [],
+      "precision_signals": [
+        "admission:skill_candidate",
+        "missing_skill_signal",
+        "readme_scope",
+        "论文"
+      ],
+      "stale": false,
+      "verifies_citations": false,
+      "forks": 23,
+      "open_issues": 2,
+      "watchers": 139,
+      "size_kb": 1015,
+      "default_branch": "master",
+      "has_issues": true,
+      "has_wiki": true,
+      "has_discussions": false,
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "spdx_id": "Apache-2.0"
+      },
+      "skills_count": 0,
+      "skills_count_complete": true,
+      "repository_kind": "related",
+      "first_seen_date": "2026-11-17",
+      "first_seen_at": "2026-11-17T11:07:23Z",
+      "first_seen_is_baseline": false
+    },
+    {
+      "refresh_status": "fresh",
+      "metadata_checked_at": "2026-11-17T10:51:19Z",
+      "pending_reason": null,
+      "previous_names": [
+        "koloyaaa/academic-translation-skills",
+        "koloyaaa/foreign-academic-translator-skill"
+      ],
+      "rank": 373,
+      "repo": "Koloyaaa/academic-translation-toolkit",
+      "stars": 113,
+      "star_delta_1d": 0,
+      "star_delta_7d": 0,
+      "star_delta_30d": 0,
+      "trend_score": 42.62,
+      "trend": {
+        "id": "rising",
+        "zh": "持续增长",
+        "en": "Rising"
+      },
+      "category": {
+        "id": "discipline-specific",
+        "zh": "学科专项",
+        "en": "Discipline Specific"
+      },
+      "description": "【已有收入Skill库记录】一款可供境外留学 / 中外合办 / 外文文献的AI工具包，含多档位Skill库和基于此的相关Prompt库，把外语学案精准翻译成中文并一键导出 HTML/Word/Markdown ，内置 7 大学科词库做术语权威匹配与注译，支持插入不同强度的AI注解、课后习题、保存过往翻译喜好、在学案上做笔记并保存、提示词注入防御。",
+      "language": "Python",
+      "topics": [
+        "academic-tools",
+        "ai-agent-skill",
+        "chinese-translation",
+        "foreign-academic",
+        "foreign-exchange",
+        "skill",
+        "skills",
+        "study-skills",
+        "translation",
+        "university",
+        "university-course"
+      ],
+      "created_date": "2026-08-25",
+      "last_push_date": "2026-11-16",
+      "url": "https://github.com/Koloyaaa/academic-translation-toolkit",
+      "homepage": "",
+      "agents": [],
+      "precision_signals": [
+        "academic",
+        "admission:skill_candidate",
+        "readme_scope",
+        "skill",
+        "skills",
+        "文献"
+      ],
+      "stale": false,
+      "verifies_citations": false,
+      "forks": 4,
+      "open_issues": 0,
+      "watchers": 113,
+      "size_kb": 16459,
+      "default_branch": "main",
+      "has_issues": true,
+      "has_wiki": true,
+      "has_discussions": false,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT"
+      },
+      "skills_count": 25,
+      "skills_count_complete": true,
+      "repository_kind": "skill",
+      "first_seen_date": "2026-11-12",
+      "first_seen_at": "2026-11-12T03:33:40Z",
       "first_seen_is_baseline": false
     }
   ]
