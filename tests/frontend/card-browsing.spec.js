@@ -38,7 +38,7 @@ test("cards emphasize metrics, explain actions and align installation footers", 
   await expect(card.locator(".installation-actions")).toHaveCount(0);
   await expect(card.locator(".card-meta")).toHaveCount(0);
   await expect.poll(async () => {
-    const boxes = await cards.evaluateAll((es) => es.slice(0, 4).map((e) => e.getBoundingClientRect()));
+    const boxes = await cards.evaluateAll((es) => es.slice(0, 3).map((e) => e.getBoundingClientRect()));
     return Math.max(...boxes.map((x) => x.bottom)) - Math.min(...boxes.map((x) => x.bottom));
   }).toBeLessThan(2);
   await card.locator(".repo-title").click();

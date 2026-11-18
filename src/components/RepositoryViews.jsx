@@ -1,5 +1,6 @@
 import { ProjectFacts, GrowthValue } from "./ProjectFacts";
 import { Zhi1keAd } from "./Zhi1keAd";
+import { CommunityCard } from "./CommunityCard";
 import { EmptyResults } from "./EmptyResults";
 import { SearchHighlight } from "./SearchHighlight";
 import { Panel } from "./Panel";
@@ -150,7 +151,7 @@ export function RepositoryViews({
 }) {
   const rowSize = () =>
     matchMedia("(min-width: 1100px)").matches
-      ? 4
+      ? 3
       : matchMedia("(min-width: 600px)").matches
         ? 2
         : 1;
@@ -229,7 +230,14 @@ export function RepositoryViews({
     </a>
   );
   if (!items.length)
-    return <EmptyResults items={allItems} state={state} update={update} t={t} />;
+    return (
+      <>
+        <EmptyResults items={allItems} state={state} update={update} t={t} />
+        <div className="partner-support-block partner-support-compact">
+          <CommunityCard lang={state.lang} />
+        </div>
+      </>
+    );
   if (state.view === "card")
     return (
       <>
@@ -239,7 +247,7 @@ export function RepositoryViews({
               <Panel
                 data-testid="repo-card"
                 animated
-                motionOrder={index % 4}
+                motionOrder={index % 3}
                 className="repository-card"
                 tabIndex={0}
                 onClick={() => open(item)}
@@ -336,7 +344,38 @@ export function RepositoryViews({
                 </div>
               </Panel>
               {index === Math.min(adAfter, entries.length) - 1 && (
-                <Zhi1keAd t={t} />
+                <div className="partner-support-block">
+                  <div className="partner-support-header">
+                    <div className="partner-support-heading">
+                      <span className="partner-support-title">
+                        <span className="partner-shield-icon" aria-hidden="true">
+                          🛡
+                        </span>
+                        <strong>
+                          {state.lang === "zh"
+                            ? "合作伙伴与社群支持"
+                            : "Partner & Community Support"}
+                        </strong>
+                      </span>
+                      <span className="partner-support-subtitle">
+                        {state.lang === "zh"
+                          ? "感谢合作伙伴与各专业科研社群支持本站的长期维护与每日更新。"
+                          : "Thanks to our partners and research communities for supporting daily updates."}
+                      </span>
+                    </div>
+                    <span className="partner-thanks-pill" aria-hidden="true">
+                      <span className="partner-thanks-dot">♥</span>
+                      <span>
+                        <strong>THANKS</strong>
+                        <em>{state.lang === "zh" ? "感谢支持" : "Supported"}</em>
+                      </span>
+                    </span>
+                  </div>
+                  <div className="partner-support-grid">
+                    <Zhi1keAd t={t} />
+                    <CommunityCard lang={state.lang} />
+                  </div>
+                </div>
               )}
             </React.Fragment>
           ))}
@@ -372,6 +411,9 @@ export function RepositoryViews({
         />
       </DeferredFeature>
       {more}
+      <div className="partner-support-block partner-support-compact">
+        <CommunityCard lang={state.lang} />
+      </div>
     </>
   );
 }

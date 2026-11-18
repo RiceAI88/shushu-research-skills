@@ -172,7 +172,7 @@ test("scope and sorting remain clear without duplicate single-filter chips", asy
 });
 
 for (const [view, count] of [
-  ["card", 8],
+  ["card", 6],
   ["table", 8],
 ])
   test(`${view} sponsorship follows two rows and support is labelled`, async ({

@@ -32,20 +32,22 @@ test("reference palette, right-hand search and default cards give a compact firs
   );
   await expect(page.locator("body")).toHaveCSS(
     "background-color",
-    "rgb(251, 250, 248)",
+    "rgb(248, 250, 252)",
   );
+  await expect(page.locator(".portal-kpi-card")).toHaveCount(4);
   const title = await page.locator("h1").boundingBox();
   const search = await page.locator("#searchInput").boundingBox();
-  expect(search.x).toBeGreaterThan(title.x + title.width);
-  expect(search.y).toBeGreaterThan(title.y);
+  expect(search.y).toBeGreaterThan(title.y + title.height);
   expect(Math.abs(search.y - (await page.locator(".page-tabs").boundingBox()).y)).toBeLessThan(10);
   const first = await page.getByTestId("repo-card").first().boundingBox();
+  const kpiHeight = (await page.locator(".portal-kpi-grid").boundingBox()).height + 24;
+  const noticeHeight = (await page.locator(".top-notice-bar").boundingBox()).height + 16;
   // Daily discoveries may add up to three compact entries above the ranking.
-  expect(first.y).toBeLessThan(560 + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
-  expect(first.y + first.height).toBeLessThan(900 + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
+  expect(first.y).toBeLessThan(560 + kpiHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
+  expect(first.y + first.height).toBeLessThan(900 + kpiHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
   await expect(page.locator(".task-selection-indicator")).toHaveCSS(
     "background-color",
-    "rgb(74, 63, 191)",
+    "rgb(13, 159, 110)",
   );
   await expect(page.locator(".task-list [aria-pressed=true]")).toHaveCSS(
     "border-top-width",

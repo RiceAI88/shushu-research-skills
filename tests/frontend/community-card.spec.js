@@ -6,7 +6,7 @@ test("community QR sits beside the title and opens an accessible full image", as
   await expect(card).toBeVisible();
   const cardBox = await card.boundingBox();
   const titleBox = await page.locator(".hero-copy").boundingBox();
-  expect(cardBox.x).toBeGreaterThan(titleBox.x + titleBox.width - 1);
+  expect(cardBox.y).toBeGreaterThanOrEqual(titleBox.y + titleBox.height);
   await card.click();
   const dialog = page.getByRole("dialog", { name: "各专业科研 Skills 交流群" });
   await expect(dialog).toBeVisible();

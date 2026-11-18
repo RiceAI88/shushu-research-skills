@@ -9,7 +9,7 @@ for (const [theme, color] of [
   }) => {
     await page.goto(`./#view=card&theme=${theme}`);
     await expect(
-      page.locator(".hero > .hero-search .ant-input-prefix .anticon"),
+      page.locator(".hero .hero-search .ant-input-prefix .anticon"),
     ).toHaveCSS("color", color);
   });
 }

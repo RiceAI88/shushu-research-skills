@@ -8,7 +8,7 @@ import { DisciplineSelector } from "./components/DisciplineSelector";
 import { SlidingTaskList } from "./components/SlidingTaskList";
 import { Reveal, useSiteReducedMotion } from "./components/SiteMotion";
 import { DailyArrivals } from "./components/DailyArrivals";
-import { CommunityCard } from "./components/CommunityCard";
+import { triggerCommunityDialog } from "./components/CommunityCard";
 import { RechargeNotice } from "./components/RechargeNotice";
 import { RechargeAd } from "./components/RechargeAd";
 import { BackToTop } from "./components/BackToTop";
@@ -150,20 +150,20 @@ export default function App() {
           state.theme === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
         token: {
           motion: !reducedMotion,
-          colorPrimary: state.theme === "dark" ? "#B3AAEA" : "#4A3FBF",
-          colorLink: state.theme === "dark" ? "#B3AAEA" : "#4A3FBF",
-          colorLinkHover: state.theme === "dark" ? "#D5D0F5" : "#372E9D",
-          colorLinkActive: state.theme === "dark" ? "#B3AAEA" : "#372E9D",
+          colorPrimary: state.theme === "dark" ? "#34D399" : "#0D9F6E",
+          colorLink: state.theme === "dark" ? "#34D399" : "#0D9F6E",
+          colorLinkHover: state.theme === "dark" ? "#6EE7B7" : "#059669",
+          colorLinkActive: state.theme === "dark" ? "#34D399" : "#059669",
           fontFamily: FONT_FAMILY,
-          colorBgContainer: state.theme === "dark" ? "#211F32" : "#FFFFFF",
-          borderRadius: 10,
-          colorText: state.theme === "dark" ? "#EEECFA" : "#1E1B3A",
-          colorTextSecondary: state.theme === "dark" ? "#B8B3D0" : "#67638C",
-          colorBorder: state.theme === "dark" ? "#403B59" : "#E7E5F2",
-          colorBgLayout: state.theme === "dark" ? "#171523" : "#FBFAF8",
+          colorBgContainer: state.theme === "dark" ? "#162032" : "#FFFFFF",
+          borderRadius: 12,
+          colorText: state.theme === "dark" ? "#F1F5F9" : "#0F172A",
+          colorTextSecondary: state.theme === "dark" ? "#94A3B8" : "#64748B",
+          colorBorder: state.theme === "dark" ? "#26354D" : "#E2E8F0",
+          colorBgLayout: state.theme === "dark" ? "#0F172A" : "#F8FAFC",
         },
         components: {
-          Table: { headerBg: state.theme === "dark" ? "#29263B" : "#FFFFFF" },
+          Table: { headerBg: state.theme === "dark" ? "#1E293B" : "#FFFFFF" },
         },
       }}
     >
@@ -398,6 +398,44 @@ function Dashboard({ state, update }) {
         {t("skipToContent")}
       </a>
       <header className="site-header">
+        <div
+          className="top-notice-bar"
+          role="region"
+          aria-label={state.lang === "zh" ? "站点公告与快捷入口" : "Site announcements"}
+        >
+          <div className="top-notice-inner container">
+            <span className="top-notice-item">
+              <i className="notice-badge-dot" aria-hidden="true" />
+              {state.lang === "zh"
+                ? "开源收录：每日自动追踪 GitHub 科研 Skills"
+                : "Open directory: daily GitHub research Skills updates"}
+            </span>
+            <span className="top-notice-item top-notice-muted">
+              {state.lang === "zh"
+                ? "📌 性质说明：保留作者原始简介与可核验安装指引"
+                : "📌 Preserves original descriptions & verified install commands"}
+            </span>
+            <button
+              type="button"
+              className="top-notice-action"
+              onClick={triggerCommunityDialog}
+            >
+              {state.lang === "zh"
+                ? "💬 加入各专业科研交流群 ›"
+                : "💬 Join research community ›"}
+            </button>
+            <a
+              className="top-notice-partner"
+              href="https://zhi1ke.com?pic=6PEB"
+              target="_blank"
+              rel="sponsored noopener noreferrer"
+            >
+              {state.lang === "zh"
+                ? "✨ 合作伙伴：智一刻 AI 论文初稿生成 ↗"
+                : "✨ Partner: Zhi1ke AI paper outline ↗"}
+            </a>
+          </div>
+        </div>
         <Reveal
           as="nav"
           kind="quiet"
@@ -456,71 +494,146 @@ function Dashboard({ state, update }) {
         </Reveal>
         <section className="hero container">
           <div className="hero-copy">
+            <div className="hero-capsule">
+              <Button
+                className="beginner-entry"
+                onClick={() => setGuideSection("basics")}
+              >
+                {state.lang === "zh" ? "30 秒看懂 Skill" : "Skills in 30 seconds"}
+              </Button>
+              <span className="hero-capsule-sep" aria-hidden="true">
+                ·
+              </span>
+              <button
+                type="button"
+                className="hero-capsule-path"
+                onClick={() => setGuideSection("paths")}
+              >
+                {state.lang === "zh" ? "专业科研路径 ›" : "Research paths ›"}
+              </button>
+            </div>
             <Reveal as="h1" kind="hero" tabIndex={-1}>
               {state.lang === "zh" ? (
                 <>
-                  找到适合你专业的科研 Skills
+                  找到适合你专业的<em>科研 Skills</em>
                 </>
               ) : (
                 <>
-                  Find research Skills for your discipline
+                  Find research <em>Skills for your discipline</em>
                 </>
               )}
             </Reveal>
             <Reveal as="p" kind="hero" order={1} className="hero-subtitle">
               {t("heroSubtitle")}
             </Reveal>
-            <Button className="beginner-entry" onClick={()=>setGuideSection("basics")}>{state.lang === "zh" ? "30 秒看懂 Skill" : "Skills in 30 seconds"}</Button>
           </div>
-          <CommunityCard lang={state.lang} />
-          <div
-            className="page-tabs"
-            data-section={state.section}
-            role="tablist"
-            aria-label={t("pageViews")}
-          >
-            {["ranking", "insights"].map((section) => (
-              <Button
-                key={section}
-                role="tab"
-                id={`tab-${section}`}
-                aria-selected={state.section === section}
-                aria-controls={`panel-${section}`}
-                tabIndex={state.section === section ? 0 : -1}
-                onKeyDown={(event) => {
-                  if (
-                    ["ArrowLeft", "ArrowRight", "Home", "End"].includes(
-                      event.key,
-                    )
-                  ) {
-                    event.preventDefault();
-                    const next =
-                      event.key === "Home"
-                        ? "ranking"
-                        : event.key === "End"
-                          ? "insights"
-                          : section === "ranking"
+          <div className="hero-toolbar">
+            <div
+              className="page-tabs"
+              data-section={state.section}
+              role="tablist"
+              aria-label={t("pageViews")}
+            >
+              {["ranking", "insights"].map((section) => (
+                <Button
+                  key={section}
+                  role="tab"
+                  id={`tab-${section}`}
+                  aria-selected={state.section === section}
+                  aria-controls={`panel-${section}`}
+                  tabIndex={state.section === section ? 0 : -1}
+                  onKeyDown={(event) => {
+                    if (
+                      ["ArrowLeft", "ArrowRight", "Home", "End"].includes(
+                        event.key,
+                      )
+                    ) {
+                      event.preventDefault();
+                      const next =
+                        event.key === "Home"
+                          ? "ranking"
+                          : event.key === "End"
                             ? "insights"
-                            : "ranking";
-                    update((s) => ({ ...s, section: next }));
-                    document.getElementById(`tab-${next}`)?.focus();
-                  }
-                }}
-                onClick={() => update((s) => ({ ...s, section }))}
-              >
-                {t(section === "ranking" ? "tableTitle" : "insightsTitle")}
-              </Button>
-            ))}
+                            : section === "ranking"
+                              ? "insights"
+                              : "ranking";
+                      update((s) => ({ ...s, section: next }));
+                      document.getElementById(`tab-${next}`)?.focus();
+                    }
+                  }}
+                  onClick={() => update((s) => ({ ...s, section }))}
+                >
+                  {t(section === "ranking" ? "tableTitle" : "insightsTitle")}
+                </Button>
+              ))}
+            </div>
+            <SearchBox
+              inactive={stickySearchVisible}
+              inputRef={search}
+              state={state}
+              update={update}
+              items={visible}
+              taskOptions={taskOptions}
+              t={t}
+            />
           </div>
-          <SearchBox
-            inactive={stickySearchVisible}
-            inputRef={search}
-            state={state}
-            update={update}
-            items={visible}
-            taskOptions={taskOptions}
-            t={t}
-          />
+          <div
+            className="portal-kpi-grid"
+            data-testid="portal-kpi-grid"
+            aria-label={state.lang === "zh" ? "核心收录指标" : "Key directory metrics"}
+          >
+            <div className="portal-kpi-card">
+              <div className="portal-kpi-meta">
+                <span>{state.lang === "zh" ? "已收录 Skills" : "Listed Skills"}</span>
+                <strong>{fmt(scopeItems.length)}</strong>
+              </div>
+              <span className="portal-kpi-icon kpi-icon-blue" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+              </span>
+            </div>
+            <div className="portal-kpi-card">
+              <div className="portal-kpi-meta">
+                <span>{state.lang === "zh" ? "近期活跃维护" : "Active in 30d"}</span>
+                <strong>{fmt(recentCount)}</strong>
+              </div>
+              <span className="portal-kpi-icon kpi-icon-emerald" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3L12 3z" />
+                </svg>
+              </span>
+            </div>
+            <div className="portal-kpi-card">
+              <div className="portal-kpi-meta">
+                <span>{state.lang === "zh" ? "本周新增收录" : "New this week"}</span>
+                <strong>{fmt(newcomers)}</strong>
+              </div>
+              <span className="portal-kpi-icon kpi-icon-amber" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M19 8v6M22 11h-6" />
+                </svg>
+              </span>
+            </div>
+            <div className="portal-kpi-card">
+              <div className="portal-kpi-meta">
+                <span>{state.lang === "zh" ? "近 7 日净增 Stars" : "7-day net Stars"}</span>
+                <strong>
+                  {net7 > 0 ? "+" : ""}
+                  {fmt(net7)}
+                </strong>
+              </div>
+              <span className="portal-kpi-icon kpi-icon-purple" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                  <polyline points="16 7 22 7 22 13" />
+                </svg>
+              </span>
+            </div>
+          </div>
         </section>
       </header>
       <main
