@@ -1511,6 +1511,11 @@
       "first_seen_at": "2026-10-28T05:55:35Z",
       "first_seen_is_baseline": false
     },
+    "scodive/ai-agent-guide": {
+      "first_seen_date": "2026-11-18",
+      "first_seen_at": "2026-11-18T10:37:33Z",
+      "first_seen_is_baseline": false
+    },
     "scrapecreators/social-media-research-skills": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
@@ -1933,6 +1938,11 @@
     },
     "z-liu-xiugou/research-workbench-assistant": {
       "first_seen_date": "2026-09-28",
+      "first_seen_is_baseline": false
+    },
+    "zhangyehao/zotero-fulltext-assistant": {
+      "first_seen_date": "2026-11-18",
+      "first_seen_at": "2026-11-18T10:37:33Z",
       "first_seen_is_baseline": false
     },
     "zhaoyang97/paper-notes": {
