@@ -21,7 +21,7 @@ test('one scope entry retains independent common and related options',async({pag
 for(const width of [1280,390,320])test(`brand, useful card and beginner entry at ${width}px`,async({page})=>{
  await page.setViewportSize({width,height:950});
  await page.goto('./');
- await expect(page.locator('.brand')).toContainText('智一刻AI · 科研 Skills 导航');
+ await expect(page.locator('.brand')).toContainText('科研鼠鼠 · Skills 导航站');
  await expect(page.getByRole('button',{name:'30 秒看懂 Skill',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'30 秒看懂 Skill',exact:true}).click();
  const guide=page.getByRole('dialog',{name:'科研 Skills 入门',exact:true});
@@ -53,5 +53,5 @@ test('English brand and support entry never overlap on a narrow screen',async({p
 for(const lang of ['zh','en'])test(`runtime document title keeps the ${lang} public brand`,async({page})=>{
  await page.goto(`./#lang=${lang}`);
  await expect(page.locator('.brand')).toBeVisible();
- await expect(page).toHaveTitle(lang==='zh'?'智一刻AI · 科研 Skills 导航｜大学生与研究生科研工具':'Zhiyike AI · Research Skills Directory');
+ await expect(page).toHaveTitle(lang==='zh'?'科研鼠鼠 · Skills 导航站｜大学生与研究生科研工具':'Research Hamster · Skills Directory');
 });

@@ -134,7 +134,7 @@ README 会由采集脚本自动生成，静态介绍需修改 [`render_readme`](
 
 ## English
 
-**Zhiyike AI · Research Skills Directory** (Awesome Paper Research Skills) helps undergraduate and postgraduate students find GitHub research Skills by discipline, task and supported platform, from literature search and writing to figures, data analysis and scientific computing.
+**Research Hamster · Skills Directory** (Awesome Paper Research Skills) helps undergraduate and postgraduate students find GitHub research Skills by discipline, task and supported platform, from literature search and writing to figures, data analysis and scientific computing.
 
 [Open the dashboard](https://riceai88.github.io/awesome-paper-research-skills/en/) to choose a discipline and task, read the starter guide, explore discipline research paths, inspect installation requirements, save favorites, compare repositories and explore data insights. Descriptions stay in the repository author's original language.
 

@@ -4,9 +4,9 @@ test("full project name and concise ranking and data source explanation", async 
 }) => {
   await page.goto("./");
   await expect(page.locator(".brand")).toContainText(
-    "科研 Skills 导航",
+    "科研鼠鼠 · Skills 导航站",
   );
-  await expect(page.locator(".brand-mark")).toHaveText("ZAI");
+  await expect(page.locator(".brand-mark")).toHaveText("鼠");
   const notes = page.getByTestId("data-transparency");
   await expect(notes.locator("p")).toHaveCount(2);
   await expect(notes).toContainText("Stars");

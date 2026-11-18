@@ -78,7 +78,7 @@ class ReadmeTest(unittest.TestCase):
 
     def test_current_brand_disciplines_and_starter_guidance_are_generated(self):
         text = render_readme(dataset([entry("alpha", "skill")]))
-        self.assertTrue(text.startswith("# 智一刻AI · 科研 Skills 导航\n"))
+        self.assertTrue(text.startswith("# 科研鼠鼠 · Skills 导航站\n"))
         self.assertIn("Awesome Paper Research Skills", text)
         self.assertIn("面向大学生和研究生", text)
         self.assertIn("## 按专业找 Skills", text)
@@ -89,5 +89,5 @@ class ReadmeTest(unittest.TestCase):
             self.assertIn(f"#task={task}",text)
         for term in ["30 秒看懂 Skill", "专业路径", "收录范围", "Antigravity", "专业归属依据官方文档"]:
             self.assertIn(term,text)
-        self.assertIn("Zhiyike AI · Research Skills Directory",text)
+        self.assertIn("Research Hamster · Skills Directory",text)
         self.assertNotIn("后续将首页迁移至 React",text)

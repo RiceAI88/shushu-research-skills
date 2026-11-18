@@ -87,7 +87,7 @@ test.describe("metadata works without running application JavaScript", () => {
       await expect(
         page.locator('meta[property="og:image:height"]'),
       ).toHaveAttribute("content", "630");
-      const brand=lang==="zh" ? "智一刻AI · 科研 Skills 导航" : "Zhiyike AI · Research Skills Directory";
+      const brand=lang==="zh" ? "科研鼠鼠 · Skills 导航站" : "Research Hamster · Skills Directory";
       const title=lang==="zh" ? brand + "｜大学生与研究生科研工具" : brand;
       await expect(page).toHaveTitle(title);
       await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute("content", brand);

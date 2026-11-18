@@ -123,7 +123,7 @@ export default function App() {
     persistState(storage, state);
     document.documentElement.dataset.theme = state.theme;
     document.documentElement.lang = state.lang === "zh" ? "zh-CN" : "en";
-    document.title = state.lang === "zh" ? "智一刻AI · 科研 Skills 导航｜大学生与研究生科研工具" : "Zhiyike AI · Research Skills Directory";
+    document.title = state.lang === "zh" ? "科研鼠鼠 · Skills 导航站｜大学生与研究生科研工具" : "Research Hamster · Skills Directory";
     const hash = serializeState(state);
     if (location.hash !== hash)
       window.history.replaceState(
@@ -443,8 +443,8 @@ function Dashboard({ state, update }) {
           aria-label="Primary"
         >
           <a className="brand" href={base}>
-            <span className="brand-mark">ZAI</span>
-            <span>{state.lang === "zh" ? "智一刻AI · 科研 Skills 导航" : "Zhiyike AI · Research Skills Directory"}</span>
+            <span className="brand-mark">鼠</span>
+            <span>{state.lang === "zh" ? "科研鼠鼠 · Skills 导航站" : "Research Hamster · Skills Directory"}</span>
           </a>
           <Space size={8} wrap className="nav-actions">
             <Segmented
@@ -938,7 +938,7 @@ function Dashboard({ state, update }) {
       </main>
       <Reveal as="footer" className="site-footer container">
         <span>
-          {state.lang === "zh" ? "智一刻AI · 科研 Skills 导航" : "Zhiyike AI · Research Skills Directory"} · MIT ·{" "}
+          {state.lang === "zh" ? "科研鼠鼠 · Skills 导航站" : "Research Hamster · Skills Directory"} · MIT ·{" "}
           <a href={REPOSITORY_URL}>RiceAI88/awesome-paper-research-skills</a> ·{" "}
           {state.lang === "zh" ? "基于" : "Based on"}{" "}
           <a href="https://github.com/kael-odin/awesome-academic-research-skills">
