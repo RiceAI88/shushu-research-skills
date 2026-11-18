@@ -13,6 +13,8 @@ for (const file of [
   "og-cover-en.svg",
   "og-cover-en.png",
   "hero.svg",
+  "favicon.png",
+  "hamster-logo.png",
 ])
   await copyFile(`assets/${file}`, `dist/assets/${file}`);
 for (const file of [

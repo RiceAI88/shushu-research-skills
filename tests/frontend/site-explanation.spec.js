@@ -6,7 +6,10 @@ test("full project name and concise ranking and data source explanation", async 
   await expect(page.locator(".brand")).toContainText(
     "科研鼠鼠 · Skills 导航站",
   );
-  await expect(page.locator(".brand-mark")).toHaveText("鼠");
+  await expect(page.locator(".brand-mark img")).toHaveAttribute(
+    "src",
+    /hamster-logo\.png$/,
+  );
   const notes = page.getByTestId("data-transparency");
   await expect(notes.locator("p")).toHaveCount(2);
   await expect(notes).toContainText("Stars");

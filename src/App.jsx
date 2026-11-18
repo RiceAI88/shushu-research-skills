@@ -443,7 +443,14 @@ function Dashboard({ state, update }) {
           aria-label="Primary"
         >
           <a className="brand" href={base}>
-            <span className="brand-mark">鼠</span>
+            <span className="brand-mark">
+              <img
+                src={localFile("assets/hamster-logo.png")}
+                alt=""
+                width="36"
+                height="36"
+              />
+            </span>
             <span>{state.lang === "zh" ? "科研鼠鼠 · Skills 导航站" : "Research Hamster · Skills Directory"}</span>
           </a>
           <Space size={8} wrap className="nav-actions">
