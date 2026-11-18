@@ -31,7 +31,7 @@ for (const width of [1280,390,320]) test(`filter panel and honest counts at ${wi
 test('clear visitor copy and recommendation link',async({page})=>{
  await page.goto('./');
  await expect(page.locator('h1')).toHaveText('找到适合你专业的科研 Skills');
- await expect(page.locator('.brand')).toContainText('科研 Skills 导航');
+ await expect(page.locator('.brand')).toContainText('科研鼠鼠 · Skills 导航站');
  await expect(page.getByRole('link',{name:'推荐 Skill',exact:true})).toHaveAttribute('href',/issues\/new\?template=recommend-repo.yml/);
  await expect(page.locator('.community-card')).toContainText('交流使用经验，分享或推荐你所在专业的 Skills。');
  await expect(page.getByTestId('gpt-recharge-ad')).toHaveText(/支持本站/);
