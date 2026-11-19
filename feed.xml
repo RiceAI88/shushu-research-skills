@@ -5,47 +5,39 @@
     <link>https://riceai985.cc/</link>
     <description>每日自动更新的学术论文与科研 Agent Skill 排行榜 · Daily ranking of academic research agent skills on GitHub</description>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 18 Nov 2026 10:37:33 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2026 10:48:03 +0000</lastBuildDate>
     <atom:link href="https://riceai985.cc/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>baojie/shiji-kb (3,793★, +1/7d)</title>
+      <title>baojie/shiji-kb (3,794★, +1/7d)</title>
       <link>https://github.com/baojie/shiji-kb</link>
       <guid isPermaLink="false">https://riceai985.cc/#baojie/shiji-kb</guid>
       <description></description>
       <category>Deep Research</category>
-      <pubDate>Wed, 18 Nov 2026 10:37:33 +0000</pubDate>
+      <pubDate>Thu, 19 Nov 2026 10:48:03 +0000</pubDate>
     </item>
     <item>
-      <title>FreedomIntelligence/OpenClaw-Medical-Skills (3,113★, +0/7d)</title>
+      <title>FreedomIntelligence/OpenClaw-Medical-Skills (3,114★, +1/7d)</title>
       <link>https://github.com/FreedomIntelligence/OpenClaw-Medical-Skills</link>
       <guid isPermaLink="false">https://riceai985.cc/#FreedomIntelligence/OpenClaw-Medical-Skills</guid>
       <description>The largest open-source medical AI skills library for OpenClaw🦞.</description>
       <category>Discipline Specific</category>
-      <pubDate>Wed, 18 Nov 2026 10:37:33 +0000</pubDate>
+      <pubDate>Thu, 19 Nov 2026 10:48:03 +0000</pubDate>
     </item>
     <item>
-      <title>qwdwqfwq/topconf-paper-figure-gallery (1,881★, +12/7d)</title>
-      <link>https://github.com/qwdwqfwq/topconf-paper-figure-gallery</link>
-      <guid isPermaLink="false">https://riceai985.cc/#qwdwqfwq/topconf-paper-figure-gallery</guid>
-      <description>3,516 curated Figure 1 / teasers from ICLR, ICML, NeurIPS, CVPR, ACL, AAAI (2023-2026), with tier badges and FigureForge retrieval-augmented figure drafting</description>
-      <category>Discipline Specific</category>
-      <pubDate>Wed, 18 Nov 2026 10:37:33 +0000</pubDate>
-    </item>
-    <item>
-      <title>K-Dense-AI/k-dense-byok (1,453★, +2/7d)</title>
+      <title>K-Dense-AI/k-dense-byok (1,459★, +6/7d)</title>
       <link>https://github.com/K-Dense-AI/k-dense-byok</link>
       <guid isPermaLink="false">https://riceai985.cc/#K-Dense-AI/k-dense-byok</guid>
       <description>An AI co-scientist running on your desktop. Claude Science but better.</description>
       <category>General Research</category>
-      <pubDate>Wed, 18 Nov 2026 10:37:33 +0000</pubDate>
+      <pubDate>Thu, 19 Nov 2026 10:48:03 +0000</pubDate>
     </item>
     <item>
-      <title>917Dhj/DeepPaperNote (1,379★, +5/7d)</title>
+      <title>917Dhj/DeepPaperNote (1,386★, +7/7d)</title>
       <link>https://github.com/917Dhj/DeepPaperNote</link>
       <guid isPermaLink="false">https://riceai985.cc/#917Dhj/DeepPaperNote</guid>
       <description>Turn one dense paper into an Obsidian note worth keeping: read the way its field reads it, linked to the papers already in your vault, and aimed at your own research. Agent skills for Claude Code, Co…</description>
       <category>General Research</category>
-      <pubDate>Wed, 18 Nov 2026 10:37:33 +0000</pubDate>
+      <pubDate>Thu, 19 Nov 2026 10:48:03 +0000</pubDate>
     </item>
     <item>
       <title>matteocourthoud/awesome-causal-inference (1,214★, +0/7d)</title>
@@ -53,23 +45,31 @@
       <guid isPermaLink="false">https://riceai985.cc/#matteocourthoud/awesome-causal-inference</guid>
       <description>A curated list of causal inference libraries, resources, and applications.</description>
       <category>Deep Research</category>
-      <pubDate>Wed, 18 Nov 2026 10:37:33 +0000</pubDate>
+      <pubDate>Thu, 19 Nov 2026 10:48:03 +0000</pubDate>
     </item>
     <item>
-      <title>ClawBio/ClawBio (1,186★, +1/7d)</title>
+      <title>ClawBio/ClawBio (1,186★, +0/7d)</title>
       <link>https://github.com/ClawBio/ClawBio</link>
       <guid isPermaLink="false">https://riceai985.cc/#ClawBio/ClawBio</guid>
       <description>🦖 ClawBio - The first bioinformatics-native AI agent skill library. Local-first. Reproducible. Open. Free.</description>
       <category>Experiments</category>
-      <pubDate>Wed, 18 Nov 2026 10:37:33 +0000</pubDate>
+      <pubDate>Thu, 19 Nov 2026 10:48:03 +0000</pubDate>
     </item>
     <item>
-      <title>xuzhougeng/wisp-science (1,077★, +1/7d)</title>
+      <title>xuzhougeng/wisp-science (1,077★, +0/7d)</title>
       <link>https://github.com/xuzhougeng/wisp-science</link>
       <guid isPermaLink="false">https://riceai985.cc/#xuzhougeng/wisp-science</guid>
       <description>Open-source, local-first desktop AI research workbench for scientific computing with Python/R, MCP bioinformatics tools, SSH/WSL/GPU runtimes, and OpenAI/Anthropic models.</description>
       <category>General Research</category>
-      <pubDate>Wed, 18 Nov 2026 10:37:33 +0000</pubDate>
+      <pubDate>Thu, 19 Nov 2026 10:48:03 +0000</pubDate>
+    </item>
+    <item>
+      <title>instadeepai/nucleotide-transformer (943★, +0/7d)</title>
+      <link>https://github.com/instadeepai/nucleotide-transformer</link>
+      <guid isPermaLink="false">https://riceai985.cc/#instadeepai/nucleotide-transformer</guid>
+      <description>Foundation Models for Genomics &amp; Transcriptomics</description>
+      <category>Discipline Specific</category>
+      <pubDate>Thu, 19 Nov 2026 10:48:03 +0000</pubDate>
     </item>
   </channel>
 </rss>

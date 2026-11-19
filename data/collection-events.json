@@ -2628,5 +2628,31 @@
     "at": "2026-11-18T10:21:14Z",
     "repo": "zhangyehao/zotero-fulltext-assistant",
     "action": "added"
+  },
+  {
+    "at": "2026-11-19T10:30:08Z",
+    "repo": "brycewang-stanford/auto-research-skills",
+    "action": "renamed",
+    "to": "brycewang-stanford/free-research-crew"
+  },
+  {
+    "at": "2026-11-19T10:30:08Z",
+    "repo": "brycewang-stanford/free-research-crew",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T10:30:08Z",
+    "repo": "aloth/awesome-ai-agents",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T10:30:08Z",
+    "repo": "eldergenix/plato-scientific-research-autonomous-agent",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T10:30:08Z",
+    "repo": "fatalerror-i/thuwordthesis",
+    "action": "added"
   }
 ]

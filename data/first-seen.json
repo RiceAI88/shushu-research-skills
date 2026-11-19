@@ -185,6 +185,11 @@
       "first_seen_at": "2026-10-29T08:49:02Z",
       "first_seen_is_baseline": false
     },
+    "aloth/awesome-ai-agents": {
+      "first_seen_date": "2026-11-19",
+      "first_seen_at": "2026-11-19T10:48:03Z",
+      "first_seen_is_baseline": false
+    },
     "amberljc/llmsys-paperlist": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T08:55:06Z",
@@ -309,6 +314,10 @@
       "first_seen_is_baseline": true
     },
     "brycewang-stanford/awesome-journal-skills": {
+      "first_seen_date": "2026-08-27",
+      "first_seen_is_baseline": true
+    },
+    "brycewang-stanford/free-research-crew": {
       "first_seen_date": "2026-08-27",
       "first_seen_is_baseline": true
     },
@@ -599,6 +608,11 @@
       "first_seen_date": "2026-10-03",
       "first_seen_is_baseline": false
     },
+    "eldergenix/plato-scientific-research-autonomous-agent": {
+      "first_seen_date": "2026-11-19",
+      "first_seen_at": "2026-11-19T10:48:03Z",
+      "first_seen_is_baseline": false
+    },
     "epsilon617/codex-academic-skills": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
@@ -651,6 +665,11 @@
     "fangqian616/consensus-pipeline": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
+      "first_seen_is_baseline": false
+    },
+    "fatalerror-i/thuwordthesis": {
+      "first_seen_date": "2026-11-19",
+      "first_seen_at": "2026-11-19T10:48:03Z",
       "first_seen_is_baseline": false
     },
     "faust-donf/beamer-academic": {
