@@ -1544,7 +1544,7 @@ def render_month_report(
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{month} 月度报告 · Awesome Paper Research Skills</title>
+<title>{month} 月度报告 · 科研鼠鼠 · Skills 导航站</title>
 <link rel="stylesheet" href="../assets/styles.css" />
 <link rel="canonical" href="{SITE_URL}/reports/{month}.html" />
 </head>
@@ -1609,7 +1609,7 @@ def build_monthly_reports(history: dict[str, dict[str, dict[str, Any]]]) -> None
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>月度报告 · Awesome Paper Research Skills</title>
+<title>月度报告 · 科研鼠鼠 · Skills 导航站</title>
 <link rel="stylesheet" href="../assets/styles.css" />
 <link rel="canonical" href="{SITE_URL}/reports/" />
 </head>
@@ -1707,7 +1707,7 @@ def render_feed(data: dict[str, Any], window_snapshot: dict[str, Any] | None = N
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n'
         "  <channel>\n"
-        f"    <title>Awesome Paper Research Skills</title>\n"
+        f"    <title>科研鼠鼠 · Skills 导航站</title>\n"
         f"    <link>{SITE_URL}/</link>\n"
         "    <description>每日自动更新的学术论文与科研 Agent Skill 排行榜 · Daily ranking of academic research agent skills on GitHub</description>\n"
         f"    <language>{'zh-CN'}</language>\n"
@@ -1746,20 +1746,20 @@ def render_og_cover(data: dict[str, Any], lang: str = "zh") -> str:
     scope_label = "Skills only · Ranked by GitHub Stars" if lang == "en" else "仅统计 Skills · 按 GitHub Stars 排序"
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#FBFAF8"/>
-  <rect x="64" y="56" width="64" height="48" rx="4" fill="#4A3FBF"/>
+  <rect width="1200" height="630" fill="#F8FAFC"/>
+  <rect x="64" y="56" width="64" height="48" rx="8" fill="#0D9F6E"/>
   <text x="96" y="87" text-anchor="middle" font-family="{font}" font-size="18" font-weight="700" fill="#FFFFFF">鼠</text>
-  <text x="146" y="87" font-family="{font}" font-size="25" font-weight="600" fill="#1E1B3A">{brand}</text>
-  <line x1="64" y1="128" x2="1136" y2="128" stroke="#E7E5F2"/>
-  <text x="64" y="234" font-family="{font}" font-size="72" font-weight="700" fill="#1E1B3A">{title}</text>
-  <text x="64" y="324" font-family="{font}" font-size="72" font-weight="700" fill="#4A3FBF">{subtitle}</text>
-  <text x="68" y="384" font-family="{font}" font-size="25" fill="#67638C">{caption}</text>
-  <line x1="64" y1="426" x2="1136" y2="426" stroke="#E7E5F2"/>
-  <text x="68" y="475" font-family="{font}" font-size="24" fill="#1E1B3A">{count_label} · {scope_label}</text>
-  <text x="1136" y="475" text-anchor="end" font-family="{font}" font-size="20" fill="#67638C">Updated {generated}</text>
-  <text x="68" y="542" font-family="{font}" font-size="19" fill="#67638C">#1 {xml_escape(top_name)}</text>
-  <text x="1136" y="542" text-anchor="end" font-family="{font}" font-size="24" font-weight="600" fill="#4A3FBF">{xml_escape(top_stars)}</text>
-  <rect x="0" y="618" width="1200" height="12" fill="#4A3FBF"/>
+  <text x="146" y="87" font-family="{font}" font-size="25" font-weight="600" fill="#0F172A">{brand}</text>
+  <line x1="64" y1="128" x2="1136" y2="128" stroke="#E2E8F0"/>
+  <text x="64" y="234" font-family="{font}" font-size="72" font-weight="700" fill="#0F172A">{title}</text>
+  <text x="64" y="324" font-family="{font}" font-size="72" font-weight="700" fill="#0D9F6E">{subtitle}</text>
+  <text x="68" y="384" font-family="{font}" font-size="25" fill="#64748B">{caption}</text>
+  <line x1="64" y1="426" x2="1136" y2="426" stroke="#E2E8F0"/>
+  <text x="68" y="475" font-family="{font}" font-size="24" fill="#0F172A">{count_label} · {scope_label}</text>
+  <text x="1136" y="475" text-anchor="end" font-family="{font}" font-size="20" fill="#64748B">Updated {generated}</text>
+  <text x="68" y="542" font-family="{font}" font-size="19" fill="#64748B">#1 {xml_escape(top_name)}</text>
+  <text x="1136" y="542" text-anchor="end" font-family="{font}" font-size="24" font-weight="600" fill="#0D9F6E">{xml_escape(top_stars)}</text>
+  <rect x="0" y="618" width="1200" height="12" fill="#0D9F6E"/>
 </svg>
 """
 

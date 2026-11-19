@@ -585,7 +585,8 @@ class SharingAssetsTest(unittest.TestCase):
         import xml.etree.ElementTree as ET
         data = {"items": [{"repo": "sample/a&b<tool>", "stars": 1234,"repository_kind":"skill"}], "metadata": {"generated_at": "2026-10-25"}}
         zh = render_og_cover(data)
-        self.assertIn("#4A3FBF", zh)
+        self.assertIn("#0D9F6E", zh)
+        self.assertNotIn("#4A3FBF", zh)
         self.assertNotIn("#691eff", zh)
         en = render_og_cover(data, lang="en")
         self.assertIn("For your discipline", en)
