@@ -2654,5 +2654,345 @@
     "at": "2026-11-19T10:30:08Z",
     "repo": "fatalerror-i/thuwordthesis",
     "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "k-dense-ai/claude-scientific-writer",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "kgraph57/paper-writer-skill",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "pdfmathtranslate/pdfmathtranslate",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "poldrack/ai-peer-review",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "sakanaai/ai-scientist",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "sibyl-research-team/autoresearch-sibylsystem",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "smileformylove/xscientist",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "spark-to-paper-skills/spark-to-paper-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "thisislittlesky/waterpaper",
+    "action": "restored"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "11station/applied-linguistics-paper-writing",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "ai-4-phi/phillit",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "aixuexidelandawang-ui/historical-thesis-research-object",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "alibaba-damo-academy/scholarseed",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "alterlab-ieu/alterlab-academic-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "antigenomics/migec",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "argahv/sisyphus-academica",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "ashuigordon/stata-cli",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "awslabs/hcls-agent-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "bethww/lit-review",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "bis-med-it/marco-bis",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "brycewang-stanford/lit-review-agent-tools",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "chencore/paper-writing-skills-guide",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "chencore/research-skills-guide",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "chutj/sci-figure-gallery",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "costrict-plugins-repo/imbad0202-academic-research-skills-academic-research-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "daylily-huang/scholarflow",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "deborahbennet636-rgb/ir-paper-writing",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "deborahbennet636-rgb/law-paper-writing",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "dubaoxu/distillation-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "dvdsosa/scientific-writing-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "eimp-lab/hypoloom",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "fanbrowell/ai-paper-reviewer",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "geogeeklab/nature-reviewer-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "hanlulong/econ-paper-review-skill",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "heshamfs/materials-simulation-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "houlaisan/deai-academic-zh",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "jimmyraouf/academic-revision-checklist",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "juliaerror/econ-thesis-idea",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "kasabulanka2019/zotero-review-matrix-skill",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "lawrenceriver/figfox-gen-skill",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "ligphidonk/academic-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "lottshin/scholar-kit",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "maxwell2732/claudecode-research-harness-workflow",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "miciatefara58/academic-paper-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "moonlarry/awesome-llm-paper-wiki",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "mronkko/claude-academic-research",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "nullptr-dzf/dsh-academic-research-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "o0000-code/awesome-academic-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "patsnap/skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "pensivefei/deep-read-summarize",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "qinky1234-sys/chinese-academic-paper-skill",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "qinyan-ai/qinyan-academic-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "quzhiii/thesis-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "sagirimo/biodsh",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "saideao/paper-review-dashboard",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "scdenney/open-science-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "shiqiaoshangxue/aetheris",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "shuozhixu/academicwriting",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "siyunhao2025-beep/ku-academic",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "ssinder/bioinformatics-agent-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "stephenlzc/humanize-mba-text-skill",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "the-omics-os/lobster",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "torolex/research-os-studio",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "vncntvx/dsh-zotero",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "xiangyu-ge/sci-writing-geors",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "xingtaxueshu/literature-review-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "xlx777/ccg-scholar",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-19T14:16:09Z",
+    "repo": "yeyeqian/codex-thesis-review-skills",
+    "action": "added"
   }
 ]
