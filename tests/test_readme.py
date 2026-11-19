@@ -84,7 +84,7 @@ class ReadmeTest(unittest.TestCase):
         self.assertIn("## 按专业找 Skills", text)
         catalog=json.loads((Path(__file__).resolve().parents[1]/"config/disciplines.json").read_text())
         for group in catalog["disciplines"]:
-            self.assertIn(f"[{group['zh']}](https://riceai88.github.io/shushu-research-skills/#discipline={group['id']})",text)
+            self.assertIn(f"[{group['zh']}](https://riceai985.cc/#discipline={group['id']})",text)
         for task in ["analyze", "compute"]:
             self.assertIn(f"#task={task}",text)
         for term in ["30 秒看懂 Skill", "专业路径", "收录范围", "Antigravity", "专业归属依据官方文档"]:

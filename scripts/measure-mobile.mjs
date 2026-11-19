@@ -1,7 +1,7 @@
 import { chromium } from "@playwright/test";
 import { writeFile } from "node:fs/promises";
 const target =
-  process.argv[2] || "http://127.0.0.1:4173/shushu-research-skills/";
+  process.argv[2] || "http://127.0.0.1:4173/";
 const output = process.argv[3] || "/tmp/mobile-performance.json";
 const runs = [];
 const browser = await chromium.launch();

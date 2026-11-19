@@ -1,8 +1,8 @@
 import {test,expect} from './fixtures.js';
-const site='https://riceai88.github.io/shushu-research-skills/';
+const site='https://riceai985.cc/';
 for(const entry of ['', 'en/'])test(`footer has no public counter or Busuanzi requests at ${entry||'Chinese entry'}`,async({page})=>{
  await page.addInitScript(()=>Object.defineProperty(navigator,'webdriver',{get:()=>false}));
- await page.route('https://riceai88.github.io/**',async route=>{
+ await page.route('https://riceai985.cc/**',async route=>{
   const url=new URL(route.request().url());
   const response=await route.fetch({url:`http://127.0.0.1:4173${url.pathname}${url.search}`});
   await route.fulfill({response});

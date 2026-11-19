@@ -1,9 +1,9 @@
 import {test,expect} from './fixtures.js';
-const site='https://riceai88.github.io/shushu-research-skills/';
+const site='https://riceai985.cc/';
 const tracker='https://cloud.umami.is/script.js';
 async function productionPage(page,{automated=false}={}) {
  if(!automated)await page.addInitScript(()=>Object.defineProperty(navigator,'webdriver',{get:()=>false}));
- await page.route('https://riceai88.github.io/**',async route=>{
+ await page.route('https://riceai985.cc/**',async route=>{
   const url=new URL(route.request().url());
   const response=await route.fetch({url:`http://127.0.0.1:4173${url.pathname}${url.search}`});
   await route.fulfill({response});
@@ -22,7 +22,7 @@ for(const entry of ['', 'en/'])test(`Umami records one incoming channel and igno
  await page.getByRole('searchbox').fill('paper');await page.locator('.nav-actions').getByText(entry?'中文':'EN',{exact:true}).click();
  expect(await page.evaluate(()=>window.__analytics.length)).toBe(1);
  const payload=await page.evaluate(()=>window.__analytics[0]);
- expect(payload.url).toBe('/shushu-research-skills/'+entry+'?utm_source=douyin&utm_medium=video&utm_campaign=skills_nav');
+ expect(payload.url).toBe('/'+entry+'?utm_source=douyin&utm_medium=video&utm_campaign=skills_nav');
  expect(payload.url).not.toContain('#');
 });
 test('late tracker preserves the original campaign and failure leaves the ranking usable',async({page})=>{
@@ -33,7 +33,7 @@ test('late tracker preserves the original campaign and failure leaves the rankin
   await expect(page.getByTestId('repo-card').first()).toBeVisible();
   await page.getByRole('searchbox').fill('paper');release();
   await expect.poll(()=>page.evaluate(()=>window.__analytics?.length)).toBe(1);
-  expect((await page.evaluate(()=>window.__analytics[0])).url).toBe('/shushu-research-skills/?utm_source=wechat&utm_medium=group');
+  expect((await page.evaluate(()=>window.__analytics[0])).url).toBe('/?utm_source=wechat&utm_medium=group');
  } finally {release();}
  await page.route(tracker,route=>route.abort());await page.reload();
  await expect(page.getByTestId('repo-card').first()).toBeVisible();await page.getByRole('searchbox').fill('zotero');

@@ -23,6 +23,7 @@ for (const file of [
   "robots.txt",
   "CONTRIBUTING.md",
   "LICENSE",
+  "CNAME",
 ])
   await copyFile(file, `dist/${file}`);
 console.log("Public data, reports, SEO and supporting assets copied to dist.");

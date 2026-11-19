@@ -32,8 +32,8 @@ test("production site preserves both language entries and public data resources"
   for (const name of ["index.html", "en/index.html"]) {
     const html = await readFile("dist/" + name, "utf8");
     assert.match(html, /id="root"/);
-    assert.match(html, /\/shushu-research-skills\/assets\/[^" ]+\.js/);
-    assert.match(html, /\/shushu-research-skills\/data\/rankings\.js/);
+    assert.match(html, /\/assets\/[^" ]+\.js/);
+    assert.match(html, /\/data\/rankings\.js/);
     assert.doesNotMatch(html, /src="[^" ]*assets\/app\.js/);
     assert.match(html, /rel="canonical"/);
     assert.match(html, /og:image/);

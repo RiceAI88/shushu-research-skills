@@ -50,7 +50,7 @@ OG_COVER_PATH = ROOT / "assets" / "og-cover.svg"
 OG_COVER_PNG_PATH = ROOT / "assets" / "og-cover.png"
 
 # Canonical public URL (GitHub Pages). Used for sitemap / RSS / Open Graph.
-SITE_URL = "https://riceai88.github.io/shushu-research-skills"
+SITE_URL = "https://riceai985.cc"
 
 # How many days of history to retain on disk. Older snapshots are pruned so the
 # repo does not grow unboundedly over time.

@@ -6,7 +6,7 @@ export default defineConfig({
   use: {
     baseURL:
       process.env.SITE_URL ||
-      "http://127.0.0.1:4173/shushu-research-skills/",
+      "http://127.0.0.1:4173/",
     headless: true,
     launchOptions: process.env.PW_EXECUTABLE_PATH
       ? { executablePath: process.env.PW_EXECUTABLE_PATH }
@@ -17,7 +17,7 @@ export default defineConfig({
     ? undefined
     : {
         command: "npm run preview -- --port 4173",
-        url: "http://127.0.0.1:4173/shushu-research-skills/",
+        url: "http://127.0.0.1:4173/",
         reuseExistingServer: !process.env.CI,
       },
 });
