@@ -20,5 +20,5 @@
 复测命令：
 
 ```sh
-node scripts/measure-mobile.mjs http://127.0.0.1:4173/awesome-paper-research-skills/ /tmp/mobile-performance.json
+node scripts/measure-mobile.mjs http://127.0.0.1:4173/ /tmp/mobile-performance.json
 ```

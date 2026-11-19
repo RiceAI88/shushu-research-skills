@@ -34,7 +34,7 @@ academic-writing  daily-update  ranking  curated-list
 在同一个 About 面板里，把 Homepage 设为 GitHub Pages 地址：
 
 ```
-https://riceai88.github.io/awesome-paper-research-skills/
+https://riceai985.cc/
 ```
 
 这样仓库卡片右侧会显示一个可点击的可视化页面入口。
@@ -55,18 +55,18 @@ Settings → Branches → 给 `main` 加规则：要求 PR 通过测试再合并
 
 页面元数据随源码维护；榜单数据与分享封面由更新任务生成，发布构建会将当前数据写入页面：
 
-- `index.html`：`<meta name="description">`、`keywords`、`author`、canonical、Open Graph（`og:title/description/url/image/locale`）、Twitter Card、RSS `<link rel="alternate">`、`<link rel="sitemap">`、内联 SVG favicon、JSON-LD `ItemList` 与无 JavaScript 的前 20 名链接（发布构建写入 HTML）。
+- `index.html`：`<meta name="description">`、`keywords`、`author`、canonical、Open Graph（`og:title/description/url/image/locale`）、Twitter Card、RSS `<link rel="alternate">`、`<link rel="sitemap">`、favicon、JSON-LD `ItemList` 与无 JavaScript 的前 20 名链接（发布构建写入 HTML）。
 - `sitemap.xml`：首页 + 英文页 + 月报 + 数据端点 + 文档（仅规范 URL）。
 - `robots.txt`：允许全部抓取，指向 sitemap。
 - `feed.xml`：RSS 2.0 订阅源（每日新收录 + 趋势上升，RFC-822 日期）。
-- `assets/og-cover.svg` / `.png` 与 `assets/og-cover-en.svg` / `.png`：中英文 1200×630 暖色分享封面（每日刷新数字，PNG 由更新任务的 `cairosvg` 生成）；页面提供图片尺寸、类型及替代文本。
+- `assets/og-cover.svg` / `.png` 与 `assets/og-cover-en.svg` / `.png`：中英文 1200×630 翡翠绿主题分享封面（每日刷新数字，PNG 由更新任务的 `cairosvg` 生成）；页面提供图片尺寸、类型及替代文本。
 - `en/`：英文默认的独立镜像页（hreflang 双向标注、独立 canonical），覆盖英文搜索流量。
 
-如需进一步 SEO，可在 Pages 页面根目录加自定义域名（Settings → Pages → Custom domain）。
+已完成自定义域名 `https://riceai985.cc/` 绑定（根目录 `CNAME`）。
 
 ## 7. 推广（设置完成后）
 
 - 在相关仓库的 Issue / Discussions 里**适度**介绍（避免垃圾营销）。
 - 在知乎、小红书、V2EX、即刻、X 等平台发一条"我做了个每日自动更新的科研 Agent Skill 排行榜"。
 - 提交到 [awesome](https://github.com/sindresorhus/awesome) 列表的 `awesome-ai` / `awesome-claude-code` 等子列表（需符合它们的格式要求）。
-- 在被收录的高星仓库的 README/Discussion 里提一句"已收录到 awesome-paper-research-skills 榜单"（征得作者同意）。
+- 在被收录的高星仓库的 README/Discussion 里提一句"已收录到 shushu-research-skills（科研鼠鼠 · Skills 导航站）榜单"（征得作者同意）。
