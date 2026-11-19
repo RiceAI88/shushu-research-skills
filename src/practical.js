@@ -3,7 +3,7 @@ import editorial from "../config/editorial.json" with { type: "json" };
 import { safeExternalUrl } from "./domain.js";
 export const EDITORIAL_CONTENT = editorial;
 export const UPDATE_RUNS_URL =
-  "https://api.github.com/repos/RiceAI88/awesome-paper-research-skills/actions/workflows/update-rankings.yml/runs?branch=main&per_page=1";
+  "https://api.github.com/repos/RiceAI88/shushu-research-skills/actions/workflows/update-rankings.yml/runs?branch=main&per_page=1";
 export function installationFor(item, content = EDITORIAL_CONTENT) {
   const entry = content.installations?.[item.repo];
   const source = entry?.reviewed_at && safeExternalUrl(entry.source_url);

@@ -59,7 +59,7 @@ test.describe("metadata works without running application JavaScript", () => {
       request,
     }) => {
       await page.goto(lang === "en" ? "./en/" : "./");
-      const root = "https://riceai88.github.io/awesome-paper-research-skills/";
+      const root = "https://riceai88.github.io/shushu-research-skills/";
       const canonical = root + (lang === "en" ? "en/" : "");
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         "href",

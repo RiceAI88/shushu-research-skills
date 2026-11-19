@@ -35,7 +35,7 @@ export function DisciplineSelector({ items, visible, state, update }) {
         <button data-major="all" aria-pressed={state.major === 'all'} onClick={() => update(s => ({...s,major:'all'}))}>{zh ? `全部${group.zh}` : `All ${group.en}`}</button>
         {group.majors.map(m => <button key={m.id} data-major={m.id} aria-pressed={state.major === m.id} onClick={() => update(s => ({...s,major:m.id}))}>{m[lang]}</button>)}
       </div>}
-      {group && !specific && <p className="discipline-empty-note">{zh ? '当前条件下，本站尚无已核验专业归属的项目。这不代表没有相关 Skills，可在“收录范围”开启通用科研 Skills，或推荐你发现的项目。' : 'No projects with reviewed discipline labels match these filters yet. This does not mean no such Skills exist. Include general Skills or suggest a project.'} <a href="https://github.com/RiceAI88/awesome-paper-research-skills/issues/new?template=recommend-repo.yml" target="_blank" rel="noopener noreferrer">{zh ? "推荐项目 ↗" : "Suggest a project ↗"}</a></p>}
+      {group && !specific && <p className="discipline-empty-note">{zh ? '当前条件下，本站尚无已核验专业归属的项目。这不代表没有相关 Skills，可在“收录范围”开启通用科研 Skills，或推荐你发现的项目。' : 'No projects with reviewed discipline labels match these filters yet. This does not mean no such Skills exist. Include general Skills or suggest a project.'} <a href="https://github.com/RiceAI88/shushu-research-skills/issues/new?template=recommend-repo.yml" target="_blank" rel="noopener noreferrer">{zh ? "推荐项目 ↗" : "Suggest a project ↗"}</a></p>}
     </section>
   );
 }

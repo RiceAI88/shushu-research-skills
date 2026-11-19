@@ -1,4 +1,4 @@
-const SITE_URL='https://riceai88.github.io/awesome-paper-research-skills/';
+const SITE_URL='https://riceai88.github.io/shushu-research-skills/';
 
 const TRACKER_URL='https://cloud.umami.is/script.js';
 const WEBSITE_ID='f9eb8025-865b-4ddb-b00e-510bb13e56f5';

@@ -50,7 +50,7 @@ OG_COVER_PATH = ROOT / "assets" / "og-cover.svg"
 OG_COVER_PNG_PATH = ROOT / "assets" / "og-cover.png"
 
 # Canonical public URL (GitHub Pages). Used for sitemap / RSS / Open Graph.
-SITE_URL = "https://riceai88.github.io/awesome-paper-research-skills"
+SITE_URL = "https://riceai88.github.io/shushu-research-skills"
 
 # How many days of history to retain on disk. Older snapshots are pruned so the
 # repo does not grow unboundedly over time.
@@ -1195,7 +1195,7 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
 
 [![Skills](https://img.shields.io/badge/Skills-{len(skills)}-4f3bd8)](#skills-榜单)
 [![Updated](https://img.shields.io/badge/updated-{date_badge}-706b91)](#收录与更新)
-[![CI](https://github.com/RiceAI88/awesome-paper-research-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/RiceAI88/awesome-paper-research-skills/actions/workflows/ci.yml)
+[![CI](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-706b91)](LICENSE)
 
 [按专业找](#按专业找-skills) · [按任务找](#按科研任务找-skills) · [新手入门](#网站怎么用) · [今日新增](#今日新增-skills) · [Skills 榜单](#skills-榜单) · [科研相关项目](#科研相关项目) · [收录与更新](#收录与更新) · [推荐项目](CONTRIBUTING.md) · [English](#english)
@@ -1204,7 +1204,7 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
 
 *专业筛选界面示例；图片中的数量仅代表截图时的数据，最新结果以网站为准。*
 
-觉得有帮助，欢迎点一个 Star 🌟；有好用的 Skills，也欢迎[提交推荐](https://github.com/RiceAI88/awesome-paper-research-skills/issues/new?template=recommend-repo.yml)。
+觉得有帮助，欢迎点一个 Star 🌟；有好用的 Skills，也欢迎[提交推荐](https://github.com/RiceAI88/shushu-research-skills/issues/new?template=recommend-repo.yml)。
 
 ## 按专业找 Skills
 
@@ -1277,13 +1277,13 @@ Skills **{len(skills)}** · 科研相关项目 **{len(related)}** · 类型待�
 
 **怎样排名？** 主榜按 Stars 排序，增长来自历史快照；趋势分仅作辅助，也可在网站切换排序。完整规则、字段含义和历史数据说明见[排名方法](docs/methodology.md)，采集过程见[采集报告](data/collection-report.json)与[变更记录](data/collection-events.json)。
 
-**什么时候更新？** [Update rankings](https://github.com/RiceAI88/awesome-paper-research-skills/actions/workflows/update-rankings.yml) 计划每日 **北京时间 10:20（02:20 UTC）**运行。GitHub Actions 定时任务可能排队或延迟，计划时间不等于数据发布时间，也不保证每天都有新增。运行结果见 Actions；有仓库维护权限时，可在该工作流选择 **Run workflow** 手动触发。
+**什么时候更新？** [Update rankings](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/update-rankings.yml) 计划每日 **北京时间 10:20（02:20 UTC）**运行。GitHub Actions 定时任务可能排队或延迟，计划时间不等于数据发布时间，也不保证每天都有新增。运行结果见 Actions；有仓库维护权限时，可在该工作流选择 **Run workflow** 手动触发。
 
 README 会由采集脚本自动生成，静态介绍需修改 [`render_readme`](scripts/update_rankings.py)，再用已有数据重新生成；不要只改 README 后等待下一次采集覆盖。采集会同步维护榜单、首次收录记录、近 {HISTORY_RETENTION_DAYS} 天历史快照和订阅资产。
 
 ## 推荐项目与参与维护
 
-发现遗漏或分类错误，可[提交推荐 Issue](https://github.com/RiceAI88/awesome-paper-research-skills/issues/new?template=recommend-repo.yml)，附仓库链接、具体科研用途和 Skill／安装文档入口。也欢迎修正文档、核对安装信息、改进搜索和页面体验，详见[贡献指南](CONTRIBUTING.md)。
+发现遗漏或分类错误，可[提交推荐 Issue](https://github.com/RiceAI88/shushu-research-skills/issues/new?template=recommend-repo.yml)，附仓库链接、具体科研用途和 Skill／安装文档入口。也欢迎修正文档、核对安装信息、改进搜索和页面体验，详见[贡献指南](CONTRIBUTING.md)。
 
 开发者从[前端开发文档](docs/frontend-development.md)开始；安装记录与精选维护分别见[安装核验](docs/installation-audit.md)和[精选维护说明](docs/editorial-maintenance.md)。
 

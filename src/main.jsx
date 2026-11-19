@@ -16,7 +16,7 @@ class ErrorBoundary extends React.Component {
       <main style={{ padding: 32 }}>
         <h1>页面暂时无法显示 / Unable to display the page</h1>
         <p>请刷新页面后重试。 / Please refresh and try again.</p>
-        <a href="https://github.com/RiceAI88/awesome-paper-research-skills">
+        <a href="https://github.com/RiceAI88/shushu-research-skills">
           GitHub
         </a>
       </main>

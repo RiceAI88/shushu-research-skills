@@ -4,28 +4,28 @@
 
 **Awesome Paper Research Skills** 由 RiceAI88 整理维护，汇集 GitHub 上用于文献检索、论文阅读、写作、绘图、数据分析和科研计算的 Agent Skills。支持按专业、科研任务和适用平台筛选，并提供安装入口、使用条件与维护信息。科研相关工具、工作流与资料单独标注。
 
-### [打开科研 Skills 导航 →](https://riceai88.github.io/awesome-paper-research-skills/)
+### [打开科研 Skills 导航 →](https://riceai88.github.io/shushu-research-skills/)
 
 [![Skills](https://img.shields.io/badge/Skills-236-4f3bd8)](#skills-榜单)
 [![Updated](https://img.shields.io/badge/updated-2026--11--18-706b91)](#收录与更新)
-[![CI](https://github.com/RiceAI88/awesome-paper-research-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/RiceAI88/awesome-paper-research-skills/actions/workflows/ci.yml)
+[![CI](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-706b91)](LICENSE)
 
 [按专业找](#按专业找-skills) · [按任务找](#按科研任务找-skills) · [新手入门](#网站怎么用) · [今日新增](#今日新增-skills) · [Skills 榜单](#skills-榜单) · [科研相关项目](#科研相关项目) · [收录与更新](#收录与更新) · [推荐项目](CONTRIBUTING.md) · [English](#english)
 
-[![科研 Skills 导航：专业分类、科研任务与项目安装入口](assets/readme-dashboard.png)](https://riceai88.github.io/awesome-paper-research-skills/)
+[![科研 Skills 导航：专业分类、科研任务与项目安装入口](assets/readme-dashboard.png)](https://riceai88.github.io/shushu-research-skills/)
 
 *专业筛选界面示例；图片中的数量仅代表截图时的数据，最新结果以网站为准。*
 
-觉得有帮助，欢迎点一个 Star 🌟；有好用的 Skills，也欢迎[提交推荐](https://github.com/RiceAI88/awesome-paper-research-skills/issues/new?template=recommend-repo.yml)。
+觉得有帮助，欢迎点一个 Star 🌟；有好用的 Skills，也欢迎[提交推荐](https://github.com/RiceAI88/shushu-research-skills/issues/new?template=recommend-repo.yml)。
 
 ## 按专业找 Skills
 
 先选择学科门类，再选择具体专业和你想完成的科研任务：
 
-[理学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=science) · [工学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=engineering) · [医学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=medicine) · [农学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=agriculture) · [经济学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=economics) · [管理学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=management)
+[理学](https://riceai88.github.io/shushu-research-skills/#discipline=science) · [工学](https://riceai88.github.io/shushu-research-skills/#discipline=engineering) · [医学](https://riceai88.github.io/shushu-research-skills/#discipline=medicine) · [农学](https://riceai88.github.io/shushu-research-skills/#discipline=agriculture) · [经济学](https://riceai88.github.io/shushu-research-skills/#discipline=economics) · [管理学](https://riceai88.github.io/shushu-research-skills/#discipline=management)
 
-[法学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=law) · [文学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=literature) · [历史学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=history) · [哲学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=philosophy) · [教育学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=education) · [艺术学](https://riceai88.github.io/awesome-paper-research-skills/#discipline=arts)
+[法学](https://riceai88.github.io/shushu-research-skills/#discipline=law) · [文学](https://riceai88.github.io/shushu-research-skills/#discipline=literature) · [历史学](https://riceai88.github.io/shushu-research-skills/#discipline=history) · [哲学](https://riceai88.github.io/shushu-research-skills/#discipline=philosophy) · [教育学](https://riceai88.github.io/shushu-research-skills/#discipline=education) · [艺术学](https://riceai88.github.io/shushu-research-skills/#discipline=arts)
 
 专业归属依据官方文档，当前仍在补充；尚未核验专业归属的项目可在“全部”中浏览。选择专业后，可在“收录范围”中决定是否包含跨专业通用 Skills，以及科研相关项目。
 
@@ -33,14 +33,14 @@
 
 | 你想做什么 | 从这里开始 |
 |---|---|
-| 查找论文、检索参考文献 | [找文献](https://riceai88.github.io/awesome-paper-research-skills/#task=find) |
-| 阅读、总结或翻译论文 | [读论文](https://riceai88.github.io/awesome-paper-research-skills/#task=read) |
-| 整理写作思路、修改表达、处理 LaTeX | [写论文](https://riceai88.github.io/awesome-paper-research-skills/#task=write) |
-| 制作论文配图、图表和科研示意图 | [科研绘图](https://riceai88.github.io/awesome-paper-research-skills/#task=figures) |
-| 复现实验、运行评估与基准测试 | [实验复现](https://riceai88.github.io/awesome-paper-research-skills/#task=reproduce) |
-| 准备投稿、审稿与返修回复 | [投稿审稿](https://riceai88.github.io/awesome-paper-research-skills/#task=review) |
-| 数据处理、统计分析与计量研究 | [数据分析](https://riceai88.github.io/awesome-paper-research-skills/#task=analyze) |
-| 数值计算、仿真与数学建模 | [研究计算](https://riceai88.github.io/awesome-paper-research-skills/#task=compute) |
+| 查找论文、检索参考文献 | [找文献](https://riceai88.github.io/shushu-research-skills/#task=find) |
+| 阅读、总结或翻译论文 | [读论文](https://riceai88.github.io/shushu-research-skills/#task=read) |
+| 整理写作思路、修改表达、处理 LaTeX | [写论文](https://riceai88.github.io/shushu-research-skills/#task=write) |
+| 制作论文配图、图表和科研示意图 | [科研绘图](https://riceai88.github.io/shushu-research-skills/#task=figures) |
+| 复现实验、运行评估与基准测试 | [实验复现](https://riceai88.github.io/shushu-research-skills/#task=reproduce) |
+| 准备投稿、审稿与返修回复 | [投稿审稿](https://riceai88.github.io/shushu-research-skills/#task=review) |
+| 数据处理、统计分析与计量研究 | [数据分析](https://riceai88.github.io/shushu-research-skills/#task=analyze) |
+| 数值计算、仿真与数学建模 | [研究计算](https://riceai88.github.io/shushu-research-skills/#task=compute) |
 
 一个项目可以用于多个场景。网站默认只展示有 `SKILL.md` 文件证据的 Skills；需要科研工具或资料时，可在“收录范围”中打开“含科研相关项目”。
 
@@ -62,7 +62,7 @@
 
 - **[cjh-solver/MathModeling-Skills-Arsenal](https://github.com/cjh-solver/MathModeling-Skills-Arsenal)** — 面向数学建模竞赛的 AI Agent 技能集：读题建模、求解、可视化、论文写作与终稿评审。35 skills for CUMCM / MCM / ICM.
 
-[查看网站今日新增](https://riceai88.github.io/awesome-paper-research-skills/#today=skill) · 本节最多展示 5 个，完整列表见网站。初始导入的基线项目不计为今日新增。
+[查看网站今日新增](https://riceai88.github.io/shushu-research-skills/#today=skill) · 本节最多展示 5 个，完整列表见网站。初始导入的基线项目不计为今日新增。
 
 ## Skills 榜单
 
@@ -93,7 +93,7 @@ Skills **236** · 科研相关项目 **153** · 类型待核验 **2**
 | 19 | [synthetic-sciences/openscience](https://github.com/synthetic-sciences/openscience) | 4,395 | +28 | 平台见说明 | The open-source AI workbench for scientific research |
 | 20 | [jmiao24/Paper2Agent](https://github.com/jmiao24/Paper2Agent) | 4,048 | +41 | 平台见说明 | Paper2Agent is a multi-agent AI system that automatically transforms research papers into… |
 
-[浏览完整 Skills 榜单](https://riceai88.github.io/awesome-paper-research-skills/) · 简介保留仓库作者原文，仅截短展示；“—”表示零增量或暂缺可比较的历史记录，计算方式见[排名方法](docs/methodology.md)。
+[浏览完整 Skills 榜单](https://riceai88.github.io/shushu-research-skills/) · 简介保留仓库作者原文，仅截短展示；“—”表示零增量或暂缺可比较的历史记录，计算方式见[排名方法](docs/methodology.md)。
 
 ## 科研相关项目
 
@@ -112,7 +112,7 @@ Skills **236** · 科研相关项目 **153** · 类型待核验 **2**
 | 9 | [hoochanlon/hamuleite](https://github.com/hoochanlon/hamuleite) | 10,121 | +46 | 平台见说明 | 🌊深度整合全球顶尖学术、金融与教育资源：学术板块汇聚 JSTOR、Taylor & Francis、剑桥大学出版社等权威平台的论文，并接入 Z-Library 影子图书馆的海量电… |
 | 10 | [francescopace/espectre](https://github.com/francescopace/espectre) | 9,836 | +32 | 平台见说明 | Wi-Fi motion sensing platform for ESP32. C++ SDK, ESPHome, Native, and Matter frontends,… |
 
-[浏览科研相关项目](https://riceai88.github.io/awesome-paper-research-skills/#related=1)（打开后与 Skills 合并展示）。类型待核验项目不计入两张表，待文件证据确认后再归类；有 `SKILL.md` 也不等同于已通过安装测试。
+[浏览科研相关项目](https://riceai88.github.io/shushu-research-skills/#related=1)（打开后与 Skills 合并展示）。类型待核验项目不计入两张表，待文件证据确认后再归类；有 `SKILL.md` 也不等同于已通过安装测试。
 
 ## 收录与更新
 
@@ -122,13 +122,13 @@ Skills **236** · 科研相关项目 **153** · 类型待核验 **2**
 
 **怎样排名？** 主榜按 Stars 排序，增长来自历史快照；趋势分仅作辅助，也可在网站切换排序。完整规则、字段含义和历史数据说明见[排名方法](docs/methodology.md)，采集过程见[采集报告](data/collection-report.json)与[变更记录](data/collection-events.json)。
 
-**什么时候更新？** [Update rankings](https://github.com/RiceAI88/awesome-paper-research-skills/actions/workflows/update-rankings.yml) 计划每日 **北京时间 10:20（02:20 UTC）**运行。GitHub Actions 定时任务可能排队或延迟，计划时间不等于数据发布时间，也不保证每天都有新增。运行结果见 Actions；有仓库维护权限时，可在该工作流选择 **Run workflow** 手动触发。
+**什么时候更新？** [Update rankings](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/update-rankings.yml) 计划每日 **北京时间 10:20（02:20 UTC）**运行。GitHub Actions 定时任务可能排队或延迟，计划时间不等于数据发布时间，也不保证每天都有新增。运行结果见 Actions；有仓库维护权限时，可在该工作流选择 **Run workflow** 手动触发。
 
 README 会由采集脚本自动生成，静态介绍需修改 [`render_readme`](scripts/update_rankings.py)，再用已有数据重新生成；不要只改 README 后等待下一次采集覆盖。采集会同步维护榜单、首次收录记录、近 60 天历史快照和订阅资产。
 
 ## 推荐项目与参与维护
 
-发现遗漏或分类错误，可[提交推荐 Issue](https://github.com/RiceAI88/awesome-paper-research-skills/issues/new?template=recommend-repo.yml)，附仓库链接、具体科研用途和 Skill／安装文档入口。也欢迎修正文档、核对安装信息、改进搜索和页面体验，详见[贡献指南](CONTRIBUTING.md)。
+发现遗漏或分类错误，可[提交推荐 Issue](https://github.com/RiceAI88/shushu-research-skills/issues/new?template=recommend-repo.yml)，附仓库链接、具体科研用途和 Skill／安装文档入口。也欢迎修正文档、核对安装信息、改进搜索和页面体验，详见[贡献指南](CONTRIBUTING.md)。
 
 开发者从[前端开发文档](docs/frontend-development.md)开始；安装记录与精选维护分别见[安装核验](docs/installation-audit.md)和[精选维护说明](docs/editorial-maintenance.md)。
 
@@ -136,7 +136,7 @@ README 会由采集脚本自动生成，静态介绍需修改 [`render_readme`](
 
 **Research Hamster · Skills Directory** (Awesome Paper Research Skills) helps undergraduate and postgraduate students find GitHub research Skills by discipline, task and supported platform, from literature search and writing to figures, data analysis and scientific computing.
 
-[Open the dashboard](https://riceai88.github.io/awesome-paper-research-skills/en/) to choose a discipline and task, read the starter guide, explore discipline research paths, inspect installation requirements, save favorites, compare repositories and explore data insights. Descriptions stay in the repository author's original language.
+[Open the dashboard](https://riceai88.github.io/shushu-research-skills/en/) to choose a discipline and task, read the starter guide, explore discipline research paths, inspect installation requirements, save favorites, compare repositories and explore data insights. Descriptions stay in the repository author's original language.
 
 Discipline labels are based on official documentation; coverage is still being expanded. General research Skills and related projects can be included through the scope control. The default ranking contains repositories with detected `SKILL.md` files. Research-related tools, workflows and guides are separately labelled and can be included with a toggle; unverified types are excluded from both previews. File detection does not certify quality or successful installation.
 

@@ -946,7 +946,7 @@ function Dashboard({ state, update }) {
       <Reveal as="footer" className="site-footer container">
         <span>
           {state.lang === "zh" ? "科研鼠鼠 · Skills 导航站" : "Research Hamster · Skills Directory"} · MIT ·{" "}
-          <a href={REPOSITORY_URL}>RiceAI88/awesome-paper-research-skills</a> ·{" "}
+          <a href={REPOSITORY_URL}>RiceAI88/shushu-research-skills</a> ·{" "}
           {state.lang === "zh" ? "基于" : "Based on"}{" "}
           <a href="https://github.com/kael-odin/awesome-academic-research-skills">
             kael-odin

@@ -4,7 +4,7 @@
 
 ## 推荐一个项目
 
-最简单的方式是使用[推荐新仓库模板](https://github.com/RiceAI88/awesome-paper-research-skills/issues/new?labels=recommendation&template=recommend-repo.yml)提交 Issue，请附上：
+最简单的方式是使用[推荐新仓库模板](https://github.com/RiceAI88/shushu-research-skills/issues/new?labels=recommendation&template=recommend-repo.yml)提交 Issue，请附上：
 
 - GitHub 仓库链接。
 - 适合解决的科研任务，例如文献检索、论文阅读、科研绘图或实验复现。
@@ -78,7 +78,7 @@ npm ci
 npm run dev
 ```
 
-打开 Vite 输出地址下的 `/awesome-paper-research-skills/`；英文入口位于 `en/` 子路径。
+打开 Vite 输出地址下的 `/shushu-research-skills/`；英文入口位于 `en/` 子路径。
 
 | 修改内容 | 对应位置 |
 |---|---|

@@ -83,7 +83,7 @@ export const AGENT_PLATFORMS = [
 export const FONT_FAMILY =
   '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
 export const REPOSITORY_URL =
-  "https://github.com/RiceAI88/awesome-paper-research-skills";
+  "https://github.com/RiceAI88/shushu-research-skills";
 export function detectAgents(item) {
   if (Array.isArray(item.agents) && (item.agents.length || item.platforms_reviewed)) return item.agents;
   const text = [item.repo, item.description, ...(item.topics || [])]

@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
 export default defineConfig({
-  base: "/awesome-paper-research-skills/",
+  base: "/shushu-research-skills/",
   plugins: [react()],
   build: {
     rollupOptions: {

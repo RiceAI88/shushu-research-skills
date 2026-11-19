@@ -79,7 +79,7 @@ test("workflow status distinguishes success, failure, running, pending publicati
     conclusion: "success",
     run_started_at: "2026-10-24T10:00:00Z",
     html_url:
-      "https://github.com/RiceAI88/awesome-paper-research-skills/actions/runs/1",
+      "https://github.com/RiceAI88/shushu-research-skills/actions/runs/1",
   };
   assert.equal(classifyUpdateRun(base, "2026-10-24T10:05:00Z").kind, "success");
   assert.equal(

@@ -4,7 +4,7 @@ const ranking = JSON.parse(
   readFileSync(new URL("../../data/rankings.json", import.meta.url), "utf8"),
 );
 const api =
-  "https://api.github.com/repos/RiceAI88/awesome-paper-research-skills/actions/workflows/update-rankings.yml/runs**";
+  "https://api.github.com/repos/RiceAI88/shushu-research-skills/actions/workflows/update-rankings.yml/runs**";
 test("practical information, editorial reasons and history provenance are visible", async ({
   page,
 }) => {
@@ -75,7 +75,7 @@ for (const [name, run, kind] of [
             {
               id: 123,
               html_url:
-                "https://github.com/RiceAI88/awesome-paper-research-skills/actions/runs/123",
+                "https://github.com/RiceAI88/shushu-research-skills/actions/runs/123",
               ...run,
             },
           ],
