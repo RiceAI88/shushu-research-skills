@@ -79,7 +79,7 @@ class ReadmeTest(unittest.TestCase):
     def test_current_brand_disciplines_and_starter_guidance_are_generated(self):
         text = render_readme(dataset([entry("alpha", "skill")]))
         self.assertTrue(text.startswith("# 科研鼠鼠 · Skills 导航站\n"))
-        self.assertIn("Awesome Paper Research Skills", text)
+        self.assertIn("shushu-research-skills", text)
         self.assertIn("面向大学生和研究生", text)
         self.assertIn("## 按专业找 Skills", text)
         catalog=json.loads((Path(__file__).resolve().parents[1]/"config/disciplines.json").read_text())

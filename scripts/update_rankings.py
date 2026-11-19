@@ -1189,14 +1189,14 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
 
 **面向大学生和研究生，按专业找到适合自己的科研 Skills。**
 
-**Awesome Paper Research Skills** 由 RiceAI88 整理维护，汇集 GitHub 上用于文献检索、论文阅读、写作、绘图、数据分析和科研计算的 Agent Skills。支持按专业、科研任务和适用平台筛选，并提供安装入口、使用条件与维护信息。科研相关工具、工作流与资料单独标注。
+**科研鼠鼠 · Skills 导航站**（`shushu-research-skills`）由 RiceAI88 整理维护，汇集 GitHub 上用于文献检索、论文阅读、写作、绘图、数据分析和科研计算的 Agent Skills。支持按专业、科研任务和适用平台筛选，并提供安装入口、使用条件与维护信息。科研相关工具、工作流与资料单独标注。
 
 ### [打开科研 Skills 导航 →]({SITE_URL}/)
 
-[![Skills](https://img.shields.io/badge/Skills-{len(skills)}-4f3bd8)](#skills-榜单)
-[![Updated](https://img.shields.io/badge/updated-{date_badge}-706b91)](#收录与更新)
+[![Skills](https://img.shields.io/badge/Skills-{len(skills)}-0d9f6e)](#skills-榜单)
+[![Updated](https://img.shields.io/badge/updated-{date_badge}-64748b)](#收录与更新)
 [![CI](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-706b91)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-64748b)](LICENSE)
 
 [按专业找](#按专业找-skills) · [按任务找](#按科研任务找-skills) · [新手入门](#网站怎么用) · [今日新增](#今日新增-skills) · [Skills 榜单](#skills-榜单) · [科研相关项目](#科研相关项目) · [收录与更新](#收录与更新) · [推荐项目](CONTRIBUTING.md) · [English](#english)
 
@@ -1289,7 +1289,7 @@ README 会由采集脚本自动生成，静态介绍需修改 [`render_readme`](
 
 ## English
 
-**Research Hamster · Skills Directory** (Awesome Paper Research Skills) helps undergraduate and postgraduate students find GitHub research Skills by discipline, task and supported platform, from literature search and writing to figures, data analysis and scientific computing.
+**Research Hamster · Skills Directory** (`shushu-research-skills`) helps undergraduate and postgraduate students find GitHub research Skills by discipline, task and supported platform, from literature search and writing to figures, data analysis and scientific computing.
 
 [Open the dashboard]({SITE_URL}/en/) to choose a discipline and task, read the starter guide, explore discipline research paths, inspect installation requirements, save favorites, compare repositories and explore data insights. Descriptions stay in the repository author's original language.
 
