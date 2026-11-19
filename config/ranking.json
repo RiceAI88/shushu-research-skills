@@ -1,5 +1,5 @@
 {
-  "min_stars": 100,
+  "min_stars": 30,
   "max_results": 0,
   "exclude_repositories": [
     "RiceAI88/shushu-research-skills",
@@ -25,7 +25,26 @@
     "hanlulong/econ-writing-skill",
     "fcakyon/phd-skills",
     "OpenLAIR/dr-claw",
-    "tizzy916/humanities-writing-companion"
+    "tizzy916/humanities-writing-companion",
+    "aiming-lab/AutoResearchClaw",
+    "Companion-Inc/feynman",
+    "LearningCircuit/local-deep-research",
+    "Galaxy-Dawn/claude-scholar",
+    "mikubaka88/CCFA-Skills",
+    "K-Dense-AI/claude-scientific-writer",
+    "Spark-To-Paper-Skills/spark-to-paper-skills",
+    "ndpvt-web/latex-document-skill",
+    "Sibyl-Research-Team/AutoResearch-SibylSystem",
+    "kgraph57/paper-writer-skill",
+    "PDFMathTranslate/PDFMathTranslate",
+    "Leey21/awesome-ai-research-writing",
+    "SakanaAI/AI-Scientist",
+    "Future-House/paper-qa",
+    "54yyyu/zotero-mcp",
+    "papersgpt/papersgpt-for-zotero",
+    "InternScience/InternAgent",
+    "poldrack/ai-peer-review",
+    "smileformylove/XScientist"
   ],
   "search_queries": [
     "academic skill in:name,description,readme",
