@@ -4,7 +4,13 @@ import { readFileSync } from "node:fs";
 const items = JSON.parse(
   readFileSync(new URL("../../data/rankings.json", import.meta.url), "utf8"),
 ).items.filter((item) => ["skill", "related"].includes(item.repository_kind));
-const stale = items.find((item) => item.stale);
+const stale = items.find(
+  (item) =>
+    item.stale &&
+    items.filter((other) =>
+      other.repo.toLowerCase().includes(item.repo.toLowerCase()),
+    ).length === 1,
+);
 test("real charts render, filter by category, change window and open repository details", async ({
   page,
 }) => {

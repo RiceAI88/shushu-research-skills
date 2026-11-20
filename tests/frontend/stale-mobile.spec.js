@@ -1,8 +1,15 @@
 import { test, expect } from "./fixtures.js";
 import { readFileSync } from "node:fs";
-const stale = JSON.parse(
+const allItems = JSON.parse(
   readFileSync(new URL("../../data/rankings.json", import.meta.url), "utf8"),
-).items.find((i) => i.stale);
+).items.filter((i) => ["skill", "related"].includes(i.repository_kind));
+const stale = allItems.find(
+  (i) =>
+    i.stale &&
+    allItems.filter((other) =>
+      other.repo.toLowerCase().includes(i.repo.toLowerCase()),
+    ).length === 1,
+);
 test("neutral maintenance tag explains its rule on hover/focus without opening the repository", async ({
   page,
 }) => {

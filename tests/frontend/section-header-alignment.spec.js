@@ -29,6 +29,7 @@ test("section controls fit a narrow screen and retain scope switching", async ({
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("./");
   await page.getByRole("tab", { name: "数据洞察", exact: true }).click();
+  await expect(page.getByTestId("insights")).toBeVisible();
   await openScope(page);
   const toggle = page.getByTestId("insights").getByRole("switch",{name:"含科研相关项目",exact:true});
   await expect(toggle).toBeVisible();
