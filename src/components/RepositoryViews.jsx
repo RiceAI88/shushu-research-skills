@@ -327,7 +327,7 @@ export function RepositoryViews({
                     <GrowthValue {...{item,history,generatedAt,fmt}} lang={state.lang} withPeriod />
                   </div>
                 </div>
-                <SummaryText item={item} t={t} query={state.query} />
+                <SummaryText item={item} t={t} query={state.query} lang={state.lang} />
                 <ProjectFacts {...{item,state,t}} />
                 <div className="card-info-footer">
                   <PlatformTags item={item} t={t} compact />

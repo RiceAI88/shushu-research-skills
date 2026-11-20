@@ -1427,6 +1427,22 @@ def write_outputs(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
     write_seo_assets(data, window_snapshot=window_snapshot)
 
 
+def attach_curated_uses(items: list[dict[str, Any]]) -> None:
+    """Attach reviewed concise use summaries from config/discipline-sources.json."""
+    sources_path = ROOT / "config" / "discipline-sources.json"
+    sources = load_json(sources_path, {})
+    if not isinstance(sources, dict):
+        return
+    for item in items:
+        entry = sources.get(str(item.get("repo", "")).lower())
+        if not isinstance(entry, dict):
+            continue
+        if entry.get("use_zh"):
+            item["curated_use_zh"] = entry["use_zh"]
+        if entry.get("use_en"):
+            item["curated_use_en"] = entry["use_en"]
+
+
 def build_dataset(
     config: dict[str, Any],
     repos: list[dict[str, Any]],
@@ -1458,6 +1474,7 @@ def build_dataset(
         items = items[:max_results]
     for index, item in enumerate(items, start=1):
         item["rank"] = index
+    attach_curated_uses(items)
 
     if enrich_skills:
         enrich_skill_counts(items, token)

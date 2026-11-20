@@ -3419,3 +3419,30 @@ a:focus-visible,
     padding-right: 20px;
   }
 }
+
+/* Style A: left emerald-bar curated Chinese summary above English original description */
+.repository-card .practical-description.has-curated-use {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 8px 0;
+}
+.curated-use-line {
+  border-left: 3px solid var(--prs-primary);
+  padding-left: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--prs-text);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.repository-card .practical-description.has-curated-use .description-clamp {
+  color: var(--prs-muted);
+  font-size: 12.5px;
+  line-height: 19px;
+  height: 38px;
+  margin: 0;
+}

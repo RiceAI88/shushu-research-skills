@@ -7,9 +7,27 @@ import { AGENT_PLATFORMS, detectAgents, safeExternalUrl } from "../domain";
 import { EDITORIAL_CONTENT, installationFor, reviewedInstallSnapshot } from "../practical";
 import { useFeedback } from "./FeedbackProvider";
 import { copyText } from "../clipboard";
-export function SummaryText({ item, t, query = "", full = false }) {
+const HAS_CHINESE_RE = /[\u4e00-\u9fff]/;
+
+export function SummaryText({ item, t, query = "", full = false, lang = "" }) {
+  const showCuratedZh =
+    lang === "zh" &&
+    !full &&
+    Boolean(item.curated_use_zh) &&
+    !HAS_CHINESE_RE.test(item.description || "");
   return (
-    <div className="practical-description">
+    <div
+      className={`practical-description${showCuratedZh ? " has-curated-use" : ""}`}
+    >
+      {showCuratedZh && (
+        <div
+          className="curated-use-line"
+          data-testid="card-cn-summary"
+          title={item.curated_use_zh}
+        >
+          <SearchHighlight text={item.curated_use_zh} query={query} />
+        </div>
+      )}
       <p
         className={full ? "description-full" : "description-clamp"}
         title={full ? undefined : item.description}

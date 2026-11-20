@@ -230,6 +230,8 @@ export function filterItems(items, state) {
         [
           item.repo,
           item.description,
+          item.curated_use_zh,
+          item.curated_use_en,
           item.category?.zh,
           item.category?.en,
           item.trend?.zh,

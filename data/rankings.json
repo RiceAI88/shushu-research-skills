@@ -165,7 +165,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "科学数据分析、专业数据库与科研流程",
+      "curated_use_en": "Domain data analysis, scientific databases and workflows"
     },
     {
       "refresh_status": "fresh",
@@ -237,7 +239,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "文献到论文的科研流程",
+      "curated_use_en": "Literature-to-paper research workflows"
     },
     {
       "refresh_status": "fresh",
@@ -302,7 +306,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "论文表达与科研绘图",
+      "curated_use_en": "Scientific writing and figures"
     },
     {
       "refresh_status": "fresh",
@@ -825,7 +831,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "机器学习研究、实验与论文工作流",
+      "curated_use_en": "Machine learning research and experiment workflows"
     },
     {
       "refresh_status": "fresh",
@@ -1019,7 +1027,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "Codex 原生科研全流程（检索、写作、审稿与返修）",
+      "curated_use_en": "Codex-native full academic research pipeline (research, write, review, revise)"
     },
     {
       "refresh_status": "fresh",
@@ -1096,7 +1106,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "人工智能研究与工程实验",
+      "curated_use_en": "AI research and engineering experiments"
     },
     {
       "refresh_status": "fresh",
@@ -1164,7 +1176,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "科研选题、论文与研究规划",
+      "curated_use_en": "Research planning and paper workflows"
     },
     {
       "refresh_status": "fresh",
@@ -1399,7 +1413,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-27",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "用 Python 绘制论文图表",
+      "curated_use_en": "Python publication figures"
     },
     {
       "refresh_status": "fresh",
@@ -1950,7 +1966,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "研究论文写作与结构组织",
+      "curated_use_en": "Research paper writing and structure"
     },
     {
       "refresh_status": "fresh",
@@ -2088,7 +2106,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "科研论文配图与学术示意图自动生成",
+      "curated_use_en": "Automated academic paper illustration and schematic generation"
     },
     {
       "refresh_status": "fresh",
@@ -2362,7 +2382,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-27",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作原则与去除防御性表达",
+      "curated_use_en": "Academic paper writing principles to eliminate defensive prose"
     },
     {
       "refresh_status": "fresh",
@@ -2444,7 +2466,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "社交媒体数据挖掘、评论分析与商业传播研究",
+      "curated_use_en": "Social media research, comment mining, and competitive/communication analysis"
     },
     {
       "refresh_status": "fresh",
@@ -2636,7 +2660,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "数学建模与模型论文",
+      "curated_use_en": "Mathematical modelling and reporting"
     },
     {
       "refresh_status": "fresh",
@@ -2702,7 +2728,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "文献、写作、绘图与交付",
+      "curated_use_en": "Literature, writing and research delivery"
     },
     {
       "refresh_status": "fresh",
@@ -2765,7 +2793,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "学术写作、办公与科研计算",
+      "curated_use_en": "Academic writing, documents and computation"
     },
     {
       "refresh_status": "fresh",
@@ -2899,7 +2929,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-27",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "保留证据与作者声音的学术文字编辑",
+      "curated_use_en": "Evidence-preserving academic editing"
     },
     {
       "refresh_status": "fresh",
@@ -3333,7 +3365,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "社科实证建模、识别策略与复现审计",
+      "curated_use_en": "Empirical modelling, identification and replication audit"
     },
     {
       "refresh_status": "fresh",
@@ -3400,7 +3434,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "机器学习/NLP 论文写作规范、LaTeX 排版与终稿核查",
+      "curated_use_en": "ML/NLP paper writing checklist, LaTeX formatting and pre-submission checks"
     },
     {
       "refresh_status": "fresh",
@@ -3618,7 +3654,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "开源科研工作台：文献阅读、实验代码执行与写作记录",
+      "curated_use_en": "Open-source AI workbench for literature reading, running experiments and writing"
     },
     {
       "refresh_status": "fresh",
@@ -3818,7 +3856,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "将科研论文与代码库自动转化为交互式 MCP / Skill Agent",
+      "curated_use_en": "Automatically transform research papers and codebases into interactive MCP servers and skills"
     },
     {
       "refresh_status": "fresh",
@@ -4085,7 +4125,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-15",
       "first_seen_at": "2026-11-15T03:41:23Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "《史记》古籍知识图谱、史料溯源与人文知识工程技能",
+      "curated_use_en": "Shiji historical knowledge graph, textual provenance and classical-text engineering skills"
     },
     {
       "refresh_status": "fresh",
@@ -4221,7 +4263,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "按学科分流的论文写作流程",
+      "curated_use_en": "Discipline-routed research writing"
     },
     {
       "refresh_status": "fresh",
@@ -4423,7 +4467,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-03",
       "first_seen_at": "2026-11-03T03:54:51Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "基因组学与结构生物学研究",
+      "curated_use_en": "Genomics and structural biology research"
     },
     {
       "refresh_status": "fresh",
@@ -4648,7 +4694,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-29",
       "first_seen_at": "2026-10-29T03:21:50Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "本地 arXiv MCP 文献服务：LaTeX 原文按节精读与 BibTeX 提取",
+      "curated_use_en": "Local arXiv MCP server for original-LaTeX section reads, BibTeX and topic watches"
     },
     {
       "refresh_status": "fresh",
@@ -4714,7 +4762,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-27",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "办公软件（WPS/Office）、Zotero 与学术工作流 CLI / Skill 控制中心",
+      "curated_use_en": "AI agent control hub for WPS, MS Office, Zotero, SVG-to-PPTX and 27 academic skills"
     },
     {
       "refresh_status": "fresh",
@@ -4854,7 +4904,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-27",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨来源检索与获取学术论文",
+      "curated_use_en": "Search and retrieve academic papers"
     },
     {
       "refresh_status": "fresh",
@@ -4926,7 +4978,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-14",
       "first_seen_at": "2026-11-14T06:02:17Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "临床医学、基因组学、药物研发与生物信息学技能库",
+      "curated_use_en": "Curated medical AI skills for clinical research, genomics, drug discovery and bioinformatics"
     },
     {
       "refresh_status": "fresh",
@@ -4991,7 +5045,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-01",
       "first_seen_at": "2026-11-01T09:32:53Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "AI/ML 自主研究代理：从研究构想到论文级实验证据",
+      "curated_use_en": "AI/ML research agents from idea generation to paper-ready experimental evidence"
     },
     {
       "refresh_status": "fresh",
@@ -5062,7 +5118,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "国自然标书、SCI 论文、毕业论文与学术简历 LaTeX 模板与 AI Agent",
+      "curated_use_en": "Chinese research LaTeX templates and AI agent for NSFC grants, SCI papers and theses"
     },
     {
       "refresh_status": "fresh",
@@ -5133,7 +5191,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-31",
       "first_seen_at": "2026-10-31T03:03:15Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "每日自动抓取 arXiv 论文并生成 AI 摘要与个性化阅读页",
+      "curated_use_en": "Daily automated arXiv paper crawling with AI summaries and personalized highlights"
     },
     {
       "refresh_status": "fresh",
@@ -5819,7 +5879,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "通用科研写作与投稿辅助：文献检索、LaTeX PDF、图表与幻灯片生成",
+      "curated_use_en": "General-purpose scientific writer for literature search, LaTeX PDFs, schematics and slides"
     },
     {
       "refresh_status": "fresh",
@@ -6829,7 +6891,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "医学研究流程、数据分析与论文",
+      "curated_use_en": "Medical research workflows and writing"
     },
     {
       "refresh_status": "fresh",
@@ -6981,7 +7045,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-05",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "数学建模分析与编程",
+      "curated_use_en": "Mathematical modelling and coding"
     },
     {
       "refresh_status": "fresh",
@@ -7636,7 +7702,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "经济学与政治学研究工作流",
+      "curated_use_en": "Economics and political-science workflows"
     },
     {
       "refresh_status": "fresh",
@@ -7989,7 +8057,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-27",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "论文精读、图示与组会表达",
+      "curated_use_en": "Paper reading, figures and presentations"
     },
     {
       "refresh_status": "fresh",
@@ -8058,7 +8128,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "哲学论文规划与写作",
+      "curated_use_en": "Philosophy paper planning and writing"
     },
     {
       "refresh_status": "fresh",
@@ -8225,7 +8297,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "按学科与期刊组织的写作、投稿及研究规范 Skills",
+      "curated_use_en": "Discipline and journal-specific research and publication Skills"
     },
     {
       "refresh_status": "fresh",
@@ -9172,7 +9246,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "带引用的研究报告与来源评估",
+      "curated_use_en": "Citation-backed research and source evaluation"
     },
     {
       "refresh_status": "fresh",
@@ -9788,7 +9864,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-27",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "知网文献检索与信息整理",
+      "curated_use_en": "CNKI literature search and information management"
     },
     {
       "refresh_status": "fresh",
@@ -10553,7 +10631,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "人文社科论文选题、论证与文本评估",
+      "curated_use_en": "Humanities and social-science research writing"
     },
     {
       "refresh_status": "fresh",
@@ -10944,7 +11024,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-01",
       "first_seen_at": "2026-11-01T09:32:53Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科论文精读与方法分析",
+      "curated_use_en": "Cross-disciplinary paper reading and method analysis"
     },
     {
       "refresh_status": "fresh",
@@ -11214,7 +11296,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "论文目标期刊适配与写作规则",
+      "curated_use_en": "Journal-adaptive academic writing"
     },
     {
       "refresh_status": "fresh",
@@ -11740,7 +11824,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "经济学论文结构与学术写作",
+      "curated_use_en": "Economics paper structure and writing"
     },
     {
       "refresh_status": "fresh",
@@ -16724,7 +16810,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "医学文献、统计与投稿工作流",
+      "curated_use_en": "Medical literature, statistics and submission"
     },
     {
       "refresh_status": "fresh",
@@ -17143,7 +17231,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-03",
       "first_seen_at": "2026-11-03T03:54:51Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "医学选题、写作与审稿修回",
+      "curated_use_en": "Medical writing and peer-review revision"
     },
     {
       "refresh_status": "fresh",
@@ -18694,7 +18784,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-27",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "Stata 实证分析与可复现研究",
+      "curated_use_en": "Stata empirical and reproducible research"
     },
     {
       "refresh_status": "fresh",
@@ -20837,7 +20929,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "经济金融与社会科学研究流程",
+      "curated_use_en": "Economics, finance and social research workflows"
     },
     {
       "refresh_status": "fresh",
@@ -21474,7 +21568,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-10-10",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "经济学论文写作与修改",
+      "curated_use_en": "Economics manuscript writing and review"
     },
     {
       "refresh_status": "fresh",
@@ -21803,7 +21899,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "按学科组织论文与统计报告",
+      "curated_use_en": "Discipline-specific thesis and statistical reporting"
     },
     {
       "refresh_status": "fresh",
@@ -23254,7 +23352,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-28",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "参考文献真实性核验",
+      "curated_use_en": "Reference authenticity checking"
     },
     {
       "refresh_status": "fresh",
@@ -23385,7 +23485,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-28",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "医学插图与研究机制图",
+      "curated_use_en": "Medical illustration and mechanism figures"
     },
     {
       "refresh_status": "fresh",
@@ -23665,7 +23767,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-21",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "论文材料转可编辑学术汇报",
+      "curated_use_en": "Editable presentations from research materials"
     },
     {
       "refresh_status": "fresh",
@@ -23758,7 +23862,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-05",
       "first_seen_at": "2026-11-05T02:17:59Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "专业科研数据分析、数据库与研究工作流",
+      "curated_use_en": "Domain-specific research data and workflows"
     },
     {
       "refresh_status": "fresh",
@@ -24298,7 +24404,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-07",
       "first_seen_at": "2026-11-07T09:05:09Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "系统综述与 Meta 分析工作流",
+      "curated_use_en": "Systematic review and meta-analysis workflows"
     },
     {
       "refresh_status": "fresh",
@@ -24734,7 +24842,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-10-20",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "人文学术文献检索路线与核验",
+      "curated_use_en": "Humanities literature search and verification"
     },
     {
       "refresh_status": "fresh",
@@ -24805,7 +24915,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "生物医学论文精读与证据整理",
+      "curated_use_en": "Biomedical paper reading and evidence appraisal"
     },
     {
       "refresh_status": "fresh",
@@ -25003,7 +25115,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-28",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "专业科研示意图与机制插图",
+      "curated_use_en": "Discipline-aware scientific illustrations"
     },
     {
       "refresh_status": "fresh",
@@ -25873,7 +25987,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献综述、引用核验与同行评审",
+      "curated_use_en": "Literature reviews, citation checks and peer review"
     },
     {
       "refresh_status": "fresh",
@@ -26061,7 +26177,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-28",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "管理学研究、分析与写作",
+      "curated_use_en": "Management research workflows"
     },
     {
       "refresh_status": "fresh",
@@ -26921,7 +27039,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "理论物理论文、推导与计算",
+      "curated_use_en": "Theoretical physics papers and calculations"
     },
     {
       "refresh_status": "fresh",
@@ -27181,7 +27301,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献调研与综述整理",
+      "curated_use_en": "Literature surveys and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -27736,7 +27858,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "经济金融研究与计量分析",
+      "curated_use_en": "Economics, finance and econometrics"
     },
     {
       "refresh_status": "fresh",
@@ -28158,7 +28282,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-06",
       "first_seen_at": "2026-11-06T09:41:05Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "数学建模论文评审与修改建议",
+      "curated_use_en": "Mathematical modelling paper review"
     },
     {
       "refresh_status": "fresh",
