@@ -71,6 +71,11 @@
       "first_seen_at": "2026-10-28T05:55:35Z",
       "first_seen_is_baseline": false
     },
+    "academic-id/sapienai": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
     "accumulatemore/cv": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T08:55:06Z",
@@ -275,6 +280,11 @@
     },
     "aspi6246/claude-code-skills-for-academics": {
       "first_seen_date": "2026-09-27",
+      "first_seen_is_baseline": false
+    },
+    "athlonk8/cs329z": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
       "first_seen_is_baseline": false
     },
     "awesome-thesis/awesome-thesis": {
@@ -1024,6 +1034,11 @@
       "first_seen_at": "2026-11-19T14:34:30Z",
       "first_seen_is_baseline": false
     },
+    "hijkzzz/awesome-llm-strawberry": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
     "hilab-git/ssl4mis": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
@@ -1037,6 +1052,11 @@
     "hkcanan/katmer-code": {
       "first_seen_date": "2026-08-27",
       "first_seen_is_baseline": true
+    },
+    "hkustdial/deepseek-ducktor": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
     },
     "hkustdial/supervisor-skills": {
       "first_seen_date": "2026-08-27",
@@ -1102,6 +1122,11 @@
       "first_seen_at": "2026-10-27T16:05:57Z",
       "first_seen_is_baseline": false
     },
+    "icip-cas/pptagent": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
     "imalwayshere/open-detector": {
       "first_seen_date": "2026-11-13",
       "first_seen_at": "2026-11-13T02:37:43Z",
@@ -1138,6 +1163,11 @@
     "internscience/awesome-scientific-skills": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
+      "first_seen_is_baseline": false
+    },
+    "isaac-sim/isaaclab": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
       "first_seen_is_baseline": false
     },
     "jaechang-hits/sciagent-skills": {
@@ -1300,9 +1330,19 @@
       "first_seen_date": "2026-10-27",
       "first_seen_is_baseline": false
     },
+    "lancopku/pkuseg-python": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
     "landawang-star/mathematical-modeling-review": {
       "first_seen_date": "2026-11-06",
       "first_seen_at": "2026-11-06T09:41:05Z",
+      "first_seen_is_baseline": false
+    },
+    "larashero3-dotcom/lieflat-charts": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
       "first_seen_is_baseline": false
     },
     "larbare12/paperfactory-from-idea-to-manuscript": {
@@ -1564,6 +1604,11 @@
       "first_seen_at": "2026-11-20T04:33:21Z",
       "first_seen_is_baseline": false
     },
+    "ningzimu/codex-ppt-skill": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
     "norman-bury/research-writing-skill": {
       "first_seen_date": "2026-08-27",
       "first_seen_is_baseline": true
@@ -1820,9 +1865,19 @@
       "first_seen_at": "2026-11-19T14:34:30Z",
       "first_seen_is_baseline": false
     },
+    "sakanaai/ai-scientist-v2": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
     "samuelschmidgall/agentlaboratory": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
+      "first_seen_is_baseline": false
+    },
+    "sapientinc/praxist": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
       "first_seen_is_baseline": false
     },
     "scdenney/open-science-skills": {
@@ -2177,6 +2232,11 @@
     },
     "wp-a/nature-academic-search": {
       "first_seen_date": "2026-09-27",
+      "first_seen_is_baseline": false
+    },
+    "writerslogic/scrivener-mcp": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
       "first_seen_is_baseline": false
     },
     "wubing2023/paperspine": {

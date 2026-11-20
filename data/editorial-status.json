@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-20T07:16:49.641741Z",
+  "checked_at": "2026-11-20T10:38:21.069433Z",
   "repos": {
     "openags/paper-search-mcp": {
       "status": "current",
@@ -66,20 +66,20 @@
       ]
     },
     "Yuan1z0825/nature-skills": {
-      "status": "current",
-      "needs_review": false,
+      "status": "changed",
+      "needs_review": true,
       "baseline": {
         "README.md": "62f97382b481541e1e57c1bce7141cd5c1c25c1c"
       },
       "documents": [
         {
           "path": "README.md",
-          "status": "current",
+          "status": "changed",
           "reviewed_blob_sha": "62f97382b481541e1e57c1bce7141cd5c1c25c1c",
-          "current_blob_sha": "62f97382b481541e1e57c1bce7141cd5c1c25c1c",
+          "current_blob_sha": "238ff869d135eabc64a7bfafe69e62e246392543",
           "reviewed_url": "https://github.com/Yuan1z0825/nature-skills/blob/9bd1d0823f564752f0dcc701f9bd3a0001fffdc5/README.md",
-          "current_url": "https://github.com/Yuan1z0825/nature-skills/blob/9bd1d0823f564752f0dcc701f9bd3a0001fffdc5/README.md",
-          "diff_url": "https://github.com/Yuan1z0825/nature-skills/compare/9bd1d0823f564752f0dcc701f9bd3a0001fffdc5...9bd1d0823f564752f0dcc701f9bd3a0001fffdc5"
+          "current_url": "https://github.com/Yuan1z0825/nature-skills/blob/a65a8364b419e05f7d8d5d96842a1ff7e544b1bb/README.md",
+          "diff_url": "https://github.com/Yuan1z0825/nature-skills/compare/9bd1d0823f564752f0dcc701f9bd3a0001fffdc5...a65a8364b419e05f7d8d5d96842a1ff7e544b1bb"
         }
       ]
     }
