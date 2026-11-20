@@ -496,6 +496,11 @@
       "first_seen_at": "2026-11-14T06:02:17Z",
       "first_seen_is_baseline": false
     },
+    "clbustos/buhos": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T07:12:07Z",
+      "first_seen_is_baseline": false
+    },
     "clin-c/paper-skill": {
       "first_seen_date": "2026-09-28",
       "first_seen_is_baseline": false
@@ -1113,6 +1118,11 @@
     "imchong/robot_learning_paper_notebooks": {
       "first_seen_date": "2026-11-20",
       "first_seen_at": "2026-11-20T04:33:21Z",
+      "first_seen_is_baseline": false
+    },
+    "immersive-translate/immersive-translate": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T07:12:07Z",
       "first_seen_is_baseline": false
     },
     "imnmv/clauder": {
@@ -2224,6 +2234,11 @@
       "first_seen_at": "2026-11-19T14:34:30Z",
       "first_seen_is_baseline": false
     },
+    "xmu-xiaoma666/external-attention-pytorch": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T07:12:07Z",
+      "first_seen_is_baseline": false
+    },
     "xujingchen1996/research-app-toolkit": {
       "first_seen_date": "2026-10-14",
       "first_seen_is_baseline": false
@@ -2320,6 +2335,11 @@
       "first_seen_at": "2026-11-20T04:33:21Z",
       "first_seen_is_baseline": false
     },
+    "yzhao062/anomaly-detection-resources": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T07:12:07Z",
+      "first_seen_is_baseline": false
+    },
     "yzy1996/english-writing": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
@@ -2366,6 +2386,11 @@
     "zhpmatrix/paperreading": {
       "first_seen_date": "2026-11-03",
       "first_seen_at": "2026-11-03T09:53:13Z",
+      "first_seen_is_baseline": false
+    },
+    "zju-llms/foundations-of-llms": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T07:12:07Z",
       "first_seen_is_baseline": false
     },
     "zjunlp/sciatlas": {

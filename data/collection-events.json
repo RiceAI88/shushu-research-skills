@@ -3059,5 +3059,30 @@
     "at": "2026-11-20T04:14:48Z",
     "repo": "jiassia/manuweave",
     "action": "added"
+  },
+  {
+    "at": "2026-11-20T06:52:28Z",
+    "repo": "clbustos/buhos",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T06:52:28Z",
+    "repo": "immersive-translate/immersive-translate",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T06:52:28Z",
+    "repo": "zju-llms/foundations-of-llms",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T06:52:28Z",
+    "repo": "xmu-xiaoma666/external-attention-pytorch",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T06:52:28Z",
+    "repo": "yzhao062/anomaly-detection-resources",
+    "action": "added"
   }
 ]

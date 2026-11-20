@@ -5,15 +5,31 @@
     <link>https://riceai985.cc/</link>
     <description>每日自动更新的学术论文与科研 Agent Skill 排行榜 · Daily ranking of academic research agent skills on GitHub</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 20 Nov 2026 04:33:21 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Nov 2026 07:12:07 +0000</lastBuildDate>
     <atom:link href="https://riceai985.cc/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>PDFMathTranslate/PDFMathTranslate (38,541★, +5/7d)</title>
+      <title>PDFMathTranslate/PDFMathTranslate (38,544★, +3/7d)</title>
       <link>https://github.com/PDFMathTranslate/PDFMathTranslate</link>
       <guid isPermaLink="false">https://riceai985.cc/#PDFMathTranslate/PDFMathTranslate</guid>
       <description>[EMNLP 2025 Demo] PDF scientific paper translation with preserved formats - 基于 AI 完整保留排版的 PDF 文档全文双语翻译，支持 Google/DeepL/Ollama/OpenAI 等服务，提供 CLI/GUI/MCP/Docker/Zotero</description>
       <category>Discipline Specific</category>
-      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
+      <pubDate>Fri, 20 Nov 2026 07:12:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>immersive-translate/immersive-translate (19,846★, +0/7d)</title>
+      <link>https://github.com/immersive-translate/immersive-translate</link>
+      <guid isPermaLink="false">https://riceai985.cc/#immersive-translate/immersive-translate</guid>
+      <description>沉浸式双语网页翻译扩展 , 支持输入框翻译， 鼠标悬停翻译， PDF, Epub, 字幕文件, TXT 文件翻译 - Immersive Dual Web Page Translation Extension</description>
+      <category>Deep Research</category>
+      <pubDate>Fri, 20 Nov 2026 07:12:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>ZJU-LLMs/Foundations-of-LLMs (18,627★, +0/7d)</title>
+      <link>https://github.com/ZJU-LLMs/Foundations-of-LLMs</link>
+      <guid isPermaLink="false">https://riceai985.cc/#ZJU-LLMs/Foundations-of-LLMs</guid>
+      <description>A book for Learning the Foundations of LLMs</description>
+      <category>Deep Research</category>
+      <pubDate>Fri, 20 Nov 2026 07:12:07 +0000</pubDate>
     </item>
     <item>
       <title>SakanaAI/AI-Scientist (15,026★, +0/7d)</title>
@@ -21,55 +37,39 @@
       <guid isPermaLink="false">https://riceai985.cc/#SakanaAI/AI-Scientist</guid>
       <description>The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery 🧑‍🔬</description>
       <category>Deep Research</category>
-      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
+      <pubDate>Fri, 20 Nov 2026 07:12:07 +0000</pubDate>
     </item>
     <item>
-      <title>baojie/shiji-kb (3,797★, +3/7d)</title>
+      <title>xmu-xiaoma666/External-Attention-pytorch (12,182★, +0/7d)</title>
+      <link>https://github.com/xmu-xiaoma666/External-Attention-pytorch</link>
+      <guid isPermaLink="false">https://riceai985.cc/#xmu-xiaoma666/External-Attention-pytorch</guid>
+      <description>🍀 Pytorch implementation of various Attention Mechanisms, MLP, Re-parameter, Convolution, which is helpful to further understand papers.⭐⭐⭐</description>
+      <category>Literature Review</category>
+      <pubDate>Fri, 20 Nov 2026 07:12:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>yzhao062/anomaly-detection-resources (9,455★, +0/7d)</title>
+      <link>https://github.com/yzhao062/anomaly-detection-resources</link>
+      <guid isPermaLink="false">https://riceai985.cc/#yzhao062/anomaly-detection-resources</guid>
+      <description>Anomaly detection related books, papers, videos, and toolboxes. Last update late 2025 for LLM and VLM works!</description>
+      <category>Deep Research</category>
+      <pubDate>Fri, 20 Nov 2026 07:12:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>baojie/shiji-kb (3,798★, +1/7d)</title>
       <link>https://github.com/baojie/shiji-kb</link>
       <guid isPermaLink="false">https://riceai985.cc/#baojie/shiji-kb</guid>
       <description></description>
       <category>Deep Research</category>
-      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
+      <pubDate>Fri, 20 Nov 2026 07:12:07 +0000</pubDate>
     </item>
     <item>
-      <title>FreedomIntelligence/OpenClaw-Medical-Skills (3,115★, +1/7d)</title>
+      <title>FreedomIntelligence/OpenClaw-Medical-Skills (3,115★, +0/7d)</title>
       <link>https://github.com/FreedomIntelligence/OpenClaw-Medical-Skills</link>
       <guid isPermaLink="false">https://riceai985.cc/#FreedomIntelligence/OpenClaw-Medical-Skills</guid>
       <description>The largest open-source medical AI skills library for OpenClaw🦞.</description>
       <category>Discipline Specific</category>
-      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
-    </item>
-    <item>
-      <title>K-Dense-AI/claude-scientific-writer (2,588★, +3/7d)</title>
-      <link>https://github.com/K-Dense-AI/claude-scientific-writer</link>
-      <guid isPermaLink="false">https://riceai985.cc/#K-Dense-AI/claude-scientific-writer</guid>
-      <description>A general purpose scientific writer</description>
-      <category>General Research</category>
-      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
-    </item>
-    <item>
-      <title>K-Dense-AI/k-dense-byok (1,462★, +2/7d)</title>
-      <link>https://github.com/K-Dense-AI/k-dense-byok</link>
-      <guid isPermaLink="false">https://riceai985.cc/#K-Dense-AI/k-dense-byok</guid>
-      <description>An AI co-scientist running on your desktop. Claude Science but better.</description>
-      <category>General Research</category>
-      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
-    </item>
-    <item>
-      <title>917Dhj/DeepPaperNote (1,412★, +16/7d)</title>
-      <link>https://github.com/917Dhj/DeepPaperNote</link>
-      <guid isPermaLink="false">https://riceai985.cc/#917Dhj/DeepPaperNote</guid>
-      <description>Turn one dense paper into an Obsidian note worth keeping: read the way its field reads it, linked to the papers already in your vault, and aimed at your own research. Agent skills for Claude Code, Co…</description>
-      <category>General Research</category>
-      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
-    </item>
-    <item>
-      <title>matteocourthoud/awesome-causal-inference (1,214★, +0/7d)</title>
-      <link>https://github.com/matteocourthoud/awesome-causal-inference</link>
-      <guid isPermaLink="false">https://riceai985.cc/#matteocourthoud/awesome-causal-inference</guid>
-      <description>A curated list of causal inference libraries, resources, and applications.</description>
-      <category>Deep Research</category>
-      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
+      <pubDate>Fri, 20 Nov 2026 07:12:07 +0000</pubDate>
     </item>
   </channel>
 </rss>
