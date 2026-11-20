@@ -76,7 +76,7 @@ Skills **293** · 科研相关项目 **167** · 类型待核验 **2**
 
 | # | 仓库 | Stars | 近 7 日 | 适用平台 | 作者原文简介 |
 |---:|---|---:|---:|---|---|
-| 1 | [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) | 57,819 | +964 | Claude Code/Codex/Cursor | Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by… |
+| 1 | [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) | 57,819 | +964 | Claude Code/Codex/Cursor/Antigravity | Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by… |
 | 2 | [Imbad0202/academic-research-skills](https://github.com/Imbad0202/academic-research-skills) | 57,720 | +1,175 | Claude Code | Academic Research Skills for Claude Code: research → write → review → revise → finalize |
 | 3 | [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) | 54,217 | +990 | Codex | 符合nature论文学术表达和科研绘图的Skill |
 | 4 | [wanshuiyin/Auto-claude-code-research-in-sleep](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) | 19,464 | +413 | Claude Code/Codex/MCP | ARIS ⚔️ (Auto-Research-In-Sleep) — Lightweight Markdown-only skills for autonomous ML res… |
@@ -85,17 +85,17 @@ Skills **293** · 科研相关项目 **167** · 类型待核验 **2**
 | 7 | [HKUSTDial/Supervisor-Skills](https://github.com/HKUSTDial/Supervisor-Skills) | 12,984 | +677 | 平台见说明 | 将博导十年科研经验炼化为可直接调用的 AI 技能。从 Idea 构思到论文投稿，你的 AI 科研副导师。 |
 | 8 | [ChenLiu-1996/figures4papers](https://github.com/ChenLiu-1996/figures4papers) | 12,284 | +1,247 | 平台见说明 | My Python scripts to make high-quality figures for publications in top AI conferences and… |
 | 9 | [Master-cai/Research-Paper-Writing-Skills](https://github.com/Master-cai/Research-Paper-Writing-Skills) | 8,439 | +159 | Claude Code/Codex/Gemini | Skill package for ML/CV/NLP paper writing, curated and adapted from Prof. Peng Sida's ope… |
-| 10 | [dwzhu-pku/PaperBanana](https://github.com/dwzhu-pku/PaperBanana) | 7,671 | +44 | 平台见说明 | PaperBanana: Automating Academic Illustration For AI Scientists |
+| 10 | [dwzhu-pku/PaperBanana](https://github.com/dwzhu-pku/PaperBanana) | 7,671 | +44 | Gemini | PaperBanana: Automating Academic Illustration For AI Scientists |
 | 11 | [Adkid-Zephyr/anti-defensive-writing-Skill](https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill) | 6,788 | +940 | 平台见说明 | 极致轻量｜阻止论文的防御性写作 \| Anti-defensive writing for academic papers — 学术写作原则 Skill + prompt pack… |
-| 12 | [ScrapeCreators/social-media-research-skills](https://github.com/ScrapeCreators/social-media-research-skills) | 6,749 | +477 | Claude Code/Codex/Cursor/Gemini | AI agent skills for social media research. Outlier posts, comment mining, competitor tear… |
+| 12 | [ScrapeCreators/social-media-research-skills](https://github.com/ScrapeCreators/social-media-research-skills) | 6,749 | +477 | Claude Code/Codex/Cursor/Gemini/Windsurf/MCP | AI agent skills for social media research. Outlier posts, comment mining, competitor tear… |
 | 13 | [jihe520/MathModelAgent](https://github.com/jihe520/MathModelAgent) | 6,375 | +56 | 平台见说明 | 🤖📐专为数学建模设计的 Agent & skills ,自动完成数学建模，生成一份完整的可以直接提交的论文。 An Agent Designed for Mathematical… |
-| 14 | [WUBING2023/PaperSpine](https://github.com/WUBING2023/PaperSpine) | 6,356 | +88 | 平台见说明 | Open-source AI for Science Skill for research agents. Review literature, run analyses, ma… |
+| 14 | [WUBING2023/PaperSpine](https://github.com/WUBING2023/PaperSpine) | 6,356 | +88 | Codex | Open-source AI for Science Skill for research agents. Review literature, run analyses, ma… |
 | 15 | [zLanqing/codex-claude-academic-skills](https://github.com/zLanqing/codex-claude-academic-skills) | 6,122 | +227 | Claude Code/Codex | 本仓库包含三个面向学术科研人员的Skills，覆盖从文献阅读、论文写作到科学计算的完整研究工作流。office-academic-skill 负责论文阅读报告与学术 PPT/Wo… |
 | 16 | [AIScientists-Dev/academic-humanizer](https://github.com/AIScientists-Dev/academic-humanizer) | 5,605 | +1,169 | Claude Code/Codex | Strip AI-writing tells from papers and grant proposals (NSF/NIH), while keeping scholarly… |
 | 17 | [brycewang-stanford/Auto-Empirical-Research-Skills](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | 5,069 | +64 | 平台见说明 | 🔬 A curated collection of 23,000+ agent skills for empirical research across 8 social sci… |
-| 18 | [MLNLP-World/Paper-Writing-Tips](https://github.com/MLNLP-World/Paper-Writing-Tips) | 4,715 | +8 | 平台见说明 | MLNLP社区用来帮助大家避免论文投稿小错误的整理仓库。 Paper Writing Tips |
-| 19 | [synthetic-sciences/openscience](https://github.com/synthetic-sciences/openscience) | 4,398 | +29 | 平台见说明 | The open-source AI workbench for scientific research |
-| 20 | [jmiao24/Paper2Agent](https://github.com/jmiao24/Paper2Agent) | 4,059 | +47 | 平台见说明 | Paper2Agent is a multi-agent AI system that automatically transforms research papers into… |
+| 18 | [MLNLP-World/Paper-Writing-Tips](https://github.com/MLNLP-World/Paper-Writing-Tips) | 4,715 | +8 | Claude Code | MLNLP社区用来帮助大家避免论文投稿小错误的整理仓库。 Paper Writing Tips |
+| 19 | [synthetic-sciences/openscience](https://github.com/synthetic-sciences/openscience) | 4,398 | +29 | MCP | The open-source AI workbench for scientific research |
+| 20 | [jmiao24/Paper2Agent](https://github.com/jmiao24/Paper2Agent) | 4,059 | +47 | Claude Code/Codex/Gemini/MCP | Paper2Agent is a multi-agent AI system that automatically transforms research papers into… |
 
 [浏览完整 Skills 榜单](https://riceai985.cc/) · 简介保留仓库作者原文，仅截短展示；“—”表示零增量或暂缺可比较的历史记录，计算方式见[排名方法](docs/methodology.md)。
 

@@ -134,7 +134,8 @@
       "agents": [
         "claude-code",
         "codex",
-        "cursor"
+        "cursor",
+        "antigravity"
       ],
       "precision_signals": [
         "agent skill",
@@ -1515,7 +1516,12 @@
       "last_push_date": "2026-07-19",
       "url": "https://github.com/datawhalechina/Agent-Learning-Hub",
       "homepage": "https://datawhalechina.github.io/Agent-Learning-Hub/",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "gemini",
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_academic_signal",
@@ -1637,7 +1643,9 @@
       "last_push_date": "2026-11-12",
       "url": "https://github.com/dwzhu-pku/PaperBanana",
       "homepage": "https://dwzhu-pku.github.io/PaperBanana/",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -1777,7 +1785,9 @@
         "claude-code",
         "codex",
         "cursor",
-        "gemini"
+        "gemini",
+        "windsurf",
+        "mcp"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -1970,7 +1980,9 @@
       "last_push_date": "2026-11-17",
       "url": "https://github.com/WUBING2023/PaperSpine",
       "homepage": "https://wubing2023.github.io/PaperSpine/v6/",
-      "agents": [],
+      "agents": [
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "literature",
@@ -2316,7 +2328,9 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/wdcpclover/ai4paper",
       "homepage": "https://ai4paper.pro",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:related",
@@ -2461,7 +2475,9 @@
       "last_push_date": "2026-11-15",
       "url": "https://github.com/google-research/paper-orchestra",
       "homepage": "https://yiwen-song.github.io/paper_orchestra/",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "assistant",
@@ -2526,7 +2542,9 @@
       "last_push_date": "2026-09-26",
       "url": "https://github.com/MLNLP-World/Paper-Writing-Tips",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -2742,7 +2760,9 @@
       "last_push_date": "2026-11-18",
       "url": "https://github.com/synthetic-sciences/openscience",
       "homepage": "https://openscience.sh",
-      "agents": [],
+      "agents": [
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_high_confidence_academic_signal",
@@ -2938,7 +2958,12 @@
       "last_push_date": "2026-09-17",
       "url": "https://github.com/jmiao24/Paper2Agent",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "gemini",
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -3006,7 +3031,10 @@
       "last_push_date": "2026-10-11",
       "url": "https://github.com/km1994/nlp_paper_study",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "gemini",
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -3534,7 +3562,10 @@
       "last_push_date": "2026-11-10",
       "url": "https://github.com/google-deepmind/science-skills",
       "homepage": "https://antigravity.google/use-cases/science",
-      "agents": [],
+      "agents": [
+        "gemini",
+        "antigravity"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "grounding",
@@ -3614,7 +3645,10 @@
       "last_push_date": "2026-11-16",
       "url": "https://github.com/DSXiangLi/DecryptPrompt",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "opencode",
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -3754,6 +3788,9 @@
       "url": "https://github.com/blazickjp/arxiv-mcp-server",
       "homepage": "https://www.pulsemcp.com/servers/blazickjp-arxiv-mcp-server",
       "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
         "mcp"
       ],
       "precision_signals": [
@@ -4096,7 +4133,9 @@
       "last_push_date": "2026-09-16",
       "url": "https://github.com/EvoMap/AutoResearch",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_high_confidence_academic_signal",
@@ -4502,7 +4541,9 @@
       "url": "https://github.com/Haojae/scipilot-figure-skill",
       "homepage": "",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "codex",
+        "cursor"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -4777,6 +4818,9 @@
       "url": "https://github.com/poco-ai/Agentero",
       "homepage": "https://agentero.app",
       "agents": [
+        "claude-code",
+        "codex",
+        "opencode",
         "mcp"
       ],
       "precision_signals": [
@@ -4916,7 +4960,10 @@
       "last_push_date": "2026-11-11",
       "url": "https://github.com/K-Dense-AI/claude-scientific-writer",
       "homepage": "https://k-dense.ai",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "cursor"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -5464,7 +5511,10 @@
       "last_push_date": "2026-07-10",
       "url": "https://github.com/c-narcissus/paper-framework-figure-studio-pro",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "codex",
+        "cursor"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_high_confidence_academic_signal",
@@ -5722,7 +5772,9 @@
       "last_push_date": "2026-08-28",
       "url": "https://github.com/chi111i/BypassAIGC",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "admission:related",
         "missing_skill_signal",
@@ -6223,7 +6275,9 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/qwdwqfwq/topconf-paper-figure-gallery",
       "homepage": "https://qwdwqfwq.github.io/topconf-paper-figure-gallery/",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:related",
@@ -6365,7 +6419,9 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/steven-jianhao-li/zotero-AI-Butler",
       "homepage": "https://github.com/steven-jianhao-li/zotero-AI-Butler/releases",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:related",
@@ -6725,7 +6781,8 @@
       "homepage": "https://psantanna.com/claude-code-my-workflow/",
       "agents": [
         "claude-code",
-        "codex"
+        "codex",
+        "antigravity"
       ],
       "precision_signals": [
         "academic",
@@ -7224,6 +7281,7 @@
       "url": "https://github.com/K-Dense-AI/k-dense-byok",
       "homepage": "https://arxiv.org/abs/2610.00074",
       "agents": [
+        "gemini",
         "mcp"
       ],
       "precision_signals": [
@@ -7547,7 +7605,9 @@
       "last_push_date": "2026-11-01",
       "url": "https://github.com/xunbu/docutranslate",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -7607,7 +7667,13 @@
       "last_push_date": "2026-11-02",
       "url": "https://github.com/huangkiki/dailypaper-skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "opencode",
+        "cursor",
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "agent skill",
@@ -7750,7 +7816,10 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/xianshang33/llm-paper-daily",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -7811,7 +7880,13 @@
       "last_push_date": "2026-11-16",
       "url": "https://github.com/handsome-rich/Awesome-Auto-Research-Tools",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "opencode",
+        "gemini",
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -7947,6 +8022,8 @@
       "url": "https://github.com/cookjohn/zotero-mcp",
       "homepage": "",
       "agents": [
+        "cursor",
+        "gemini",
         "mcp"
       ],
       "precision_signals": [
@@ -8034,7 +8111,11 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/Oleafly/Oleafly",
       "homepage": "https://oleafly.com",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -8363,7 +8444,9 @@
       "last_push_date": "2026-08-22",
       "url": "https://github.com/Spark-To-Paper-Skills/spark-to-paper-skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "paper",
@@ -8715,7 +8798,12 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/ClawBio/ClawBio",
       "homepage": "https://clawbio.github.io/ClawBio/",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "agent skill",
@@ -8921,6 +9009,8 @@
       "url": "https://github.com/xuzhougeng/wisp-science",
       "homepage": "http://wispscience.com/",
       "agents": [
+        "claude-code",
+        "codex",
         "mcp"
       ],
       "precision_signals": [
@@ -8986,7 +9076,11 @@
       "last_push_date": "2026-11-02",
       "url": "https://github.com/CRui5in/paper-ppt-agent",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "latex",
@@ -9409,7 +9503,9 @@
       "last_push_date": "2026-06-28",
       "url": "https://github.com/d6t/d6tflow",
       "homepage": "https://d6tflow.readthedocs.io/en/latest/",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_high_confidence_academic_signal",
@@ -9473,7 +9569,9 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/harbor-framework/terminal-bench-science",
       "homepage": "https://www.terminal-bench-science.ai",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_high_confidence_academic_signal",
@@ -9544,7 +9642,9 @@
       "last_push_date": "2026-11-02",
       "url": "https://github.com/instadeepai/nucleotide-transformer",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "discipline_research",
@@ -9737,7 +9837,12 @@
       "last_push_date": "2026-11-07",
       "url": "https://github.com/limouren2000/llms-dev-study",
       "homepage": "https://limouren2000.github.io/llms-dev-study/",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -9795,7 +9900,12 @@
       "last_push_date": "2026-11-07",
       "url": "https://github.com/labarba/sciwrite",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "agent skill",
@@ -9915,7 +10025,11 @@
       "last_push_date": "2026-09-14",
       "url": "https://github.com/Rss3208/Visiomaster",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -9974,7 +10088,9 @@
       "last_push_date": "2026-11-15",
       "url": "https://github.com/FeijiangHan/PaperForge",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_high_confidence_academic_signal",
@@ -10240,7 +10356,10 @@
       "last_push_date": "2026-05-15",
       "url": "https://github.com/WantongC/journal-adapt-writing-skill",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -10389,7 +10508,8 @@
       "agents": [
         "claude-code",
         "cursor",
-        "cline"
+        "cline",
+        "antigravity"
       ],
       "precision_signals": [
         "claude code",
@@ -10577,7 +10697,9 @@
       "last_push_date": "2026-05-25",
       "url": "https://github.com/SiriusFzh/NovaForge",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "latex",
@@ -10845,6 +10967,9 @@
       "url": "https://github.com/hanlulong/awesome-ai-for-economists",
       "homepage": "https://openecon.ai",
       "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
         "mcp"
       ],
       "precision_signals": [
@@ -10911,7 +11036,10 @@
       "last_push_date": "2026-09-05",
       "url": "https://github.com/ustc-ai4science/academic-search",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -11460,7 +11588,9 @@
       "last_push_date": "2026-11-16",
       "url": "https://github.com/QJHWC/PaperForge",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -12059,7 +12189,14 @@
       "last_push_date": "2026-08-13",
       "url": "https://github.com/InternScience/Awesome-Scientific-Skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
+        "gemini",
+        "antigravity",
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -12397,7 +12534,10 @@
       "last_push_date": "2026-11-12",
       "url": "https://github.com/bahayonghang/academic-writing-skills",
       "homepage": "https://bahayonghang.github.io/academic-writing-skills/",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -12545,7 +12685,9 @@
       "last_push_date": "2026-09-24",
       "url": "https://github.com/damonwan1/AutoScholarLoop",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "codex"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -12776,7 +12918,11 @@
       "last_push_date": "2026-11-04",
       "url": "https://github.com/federicodeponte/opendraft",
       "homepage": "https://opendraft.xyz",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -12853,7 +12999,9 @@
       "last_push_date": "2026-10-28",
       "url": "https://github.com/AaronGIG/pdf2zh-desktop",
       "homepage": "https://aarongig.github.io/pdf2zh-desktop/",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:related",
@@ -12996,6 +13144,7 @@
       "url": "https://github.com/SPThole/CoexistAI",
       "homepage": "",
       "agents": [
+        "gemini",
         "mcp"
       ],
       "precision_signals": [
@@ -13197,7 +13346,11 @@
       "last_push_date": "2026-10-26",
       "url": "https://github.com/donghuixin/AI-Vibe-Writing-Skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -13621,7 +13774,10 @@
       "last_push_date": "2026-10-13",
       "url": "https://github.com/datawhalechina/happy-figure",
       "homepage": "http://datawhalechina.github.io/happy-figure/",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -13681,7 +13837,9 @@
       "last_push_date": "2026-07-12",
       "url": "https://github.com/Gostyan/docx-skill-4-cn-paper",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "opencode"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "paper",
@@ -13762,7 +13920,12 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/Yeti-791/Awesome-Offensive-AI-Agentic-Landscape",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "opencode",
+        "gemini",
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -14251,7 +14414,8 @@
       "agents": [
         "claude-code",
         "codex",
-        "gemini"
+        "gemini",
+        "antigravity"
       ],
       "precision_signals": [
         "academic",
@@ -14323,6 +14487,8 @@
       "url": "https://github.com/eust-w/opengeniemaster",
       "homepage": "",
       "agents": [
+        "claude-code",
+        "codex",
         "mcp"
       ],
       "precision_signals": [
@@ -14384,7 +14550,11 @@
       "last_push_date": "2026-11-12",
       "url": "https://github.com/WenyuChiou/academic-writing-skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "opencode"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -14447,7 +14617,9 @@
       "last_push_date": "2026-09-29",
       "url": "https://github.com/xiejhhhhhh/Draftpaper_loop",
       "homepage": "https://xiejhhhhhh.github.io/Draftpaper_loop/support/",
-      "agents": [],
+      "agents": [
+        "codex"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -14511,7 +14683,8 @@
       "url": "https://github.com/lingzhi227/agent-research-skills",
       "homepage": "",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "mcp"
       ],
       "precision_signals": [
         "academic",
@@ -14579,7 +14752,8 @@
       "homepage": "",
       "agents": [
         "claude-code",
-        "codex"
+        "codex",
+        "gemini"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -14656,7 +14830,8 @@
       "url": "https://github.com/jamditis/claude-skills-journalism",
       "homepage": "https://skills.amditis.tech/",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "codex"
       ],
       "precision_signals": [
         "academic",
@@ -14846,7 +15021,10 @@
       "last_push_date": "2026-11-13",
       "url": "https://github.com/chengyi-ai/cy-carousel-skill",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_academic_signal",
@@ -14905,7 +15083,10 @@
       "last_push_date": "2026-11-15",
       "url": "https://github.com/Chenruishuo/posterly",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -15103,6 +15284,7 @@
       "url": "https://github.com/gulucaptain/Best-Paper-Writing-Skill",
       "homepage": "",
       "agents": [
+        "claude-code",
         "codex"
       ],
       "precision_signals": [
@@ -15231,7 +15413,9 @@
       "last_push_date": "2026-11-18",
       "url": "https://github.com/scverse/rapids-singlecell",
       "homepage": "https://rapids-singlecell.scverse.org/",
-      "agents": [],
+      "agents": [
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "discipline_research",
@@ -15530,7 +15714,10 @@
       "url": "https://github.com/jaechang-hits/SciAgent-Skills",
       "homepage": "https://omicshorizon.ai/en/",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "codex",
+        "cursor",
+        "windsurf"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -15805,7 +15992,9 @@
       "url": "https://github.com/redbaronyyyyy-eng/humanizer-zh-academic",
       "homepage": "",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "gemini",
+        "antigravity"
       ],
       "precision_signals": [
         "academic",
@@ -16009,6 +16198,8 @@
       "url": "https://github.com/brycewang-stanford/StatsPAI",
       "homepage": "https://brycewang-stanford.github.io/StatsPAI/",
       "agents": [
+        "claude-code",
+        "cursor",
         "mcp"
       ],
       "precision_signals": [
@@ -16089,7 +16280,9 @@
       "agents": [
         "claude-code",
         "codex",
+        "cursor",
         "gemini",
+        "antigravity",
         "mcp"
       ],
       "precision_signals": [
@@ -16458,7 +16651,14 @@
       "last_push_date": "2026-11-15",
       "url": "https://github.com/mylc2010/sci-translation-skill",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "opencode",
+        "cursor",
+        "windsurf",
+        "antigravity"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -16779,7 +16979,14 @@
       "last_push_date": "2026-11-11",
       "url": "https://github.com/skyming/awesome-ai-agent",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "opencode",
+        "cursor",
+        "cline",
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -16964,7 +17171,9 @@
       "last_push_date": "2026-11-12",
       "url": "https://github.com/scverse/liana",
       "homepage": "http://liana.readthedocs.io/",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "discipline_research",
@@ -17304,7 +17513,10 @@
       "last_push_date": "2026-04-04",
       "url": "https://github.com/ymx10086/ResearchClaw",
       "homepage": "https://ymx10086.github.io/ResearchClaw/",
-      "agents": [],
+      "agents": [
+        "gemini",
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "assistant",
@@ -17500,7 +17712,9 @@
       "last_push_date": "2026-08-14",
       "url": "https://github.com/N-allpass/modex-mh-agent",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -17840,7 +18054,9 @@
       "last_push_date": "2026-11-17",
       "url": "https://github.com/NVIDIA-BioNeMo/nvMolKit",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "cursor"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "discipline_research",
@@ -17966,7 +18182,8 @@
       "url": "https://github.com/Fchaubard/autoresearcherUI",
       "homepage": "",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "gemini"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -18187,6 +18404,10 @@
       "agents": [
         "claude-code",
         "codex",
+        "opencode",
+        "cursor",
+        "gemini",
+        "cline",
         "mcp"
       ],
       "precision_signals": [
@@ -18251,7 +18472,11 @@
       "last_push_date": "2026-10-14",
       "url": "https://github.com/yunshenwuchuxun/latex-paper-skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -18314,7 +18539,14 @@
       "last_push_date": "2026-04-27",
       "url": "https://github.com/Haimbeau1o/thesis-optimizer",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
+        "gemini",
+        "windsurf",
+        "antigravity"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -18393,7 +18625,9 @@
       "homepage": "",
       "agents": [
         "claude-code",
-        "opencode"
+        "codex",
+        "opencode",
+        "cursor"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -18526,7 +18760,9 @@
       "last_push_date": "2026-10-15",
       "url": "https://github.com/toddmaustin/research-prompts",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_strong_academic_signal",
@@ -18650,7 +18886,11 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/Dictation354/paper-fetch-skill",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "antigravity"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "doi",
@@ -19013,7 +19253,11 @@
       "last_push_date": "2026-10-08",
       "url": "https://github.com/dream-rec/dreampaper",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -19074,7 +19318,10 @@
       "last_push_date": "2026-06-15",
       "url": "https://github.com/Deepshare-Official/CCF-Figure",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -19500,7 +19747,10 @@
       "last_push_date": "2026-11-18",
       "url": "https://github.com/NVIDIA/nvalchemi-toolkit",
       "homepage": "https://nvidia.github.io/nvalchemi-toolkit/",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "discipline_research",
@@ -20005,7 +20255,10 @@
       "homepage": "https://o0000-code.github.io/paper-search-pro/",
       "agents": [
         "claude-code",
-        "codex"
+        "codex",
+        "opencode",
+        "cursor",
+        "windsurf"
       ],
       "precision_signals": [
         "academic",
@@ -20307,7 +20560,10 @@
       "url": "https://github.com/helloo1568/slidemuse",
       "homepage": "https://github.com/helloo1568/slidemuse",
       "agents": [
-        "codex"
+        "claude-code",
+        "codex",
+        "opencode",
+        "gemini"
       ],
       "precision_signals": [
         "academic",
@@ -20690,7 +20946,9 @@
       "last_push_date": "2026-11-11",
       "url": "https://github.com/ozrwayne/rw-research-skill",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "literature",
@@ -20819,7 +21077,9 @@
       "last_push_date": "2026-11-16",
       "url": "https://github.com/paperseek/paperseek",
       "homepage": "https://docs.paperseek.app/",
-      "agents": [],
+      "agents": [
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -21003,7 +21263,9 @@
       "last_push_date": "2026-07-24",
       "url": "https://github.com/ArcInstitute/SRAgent",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "manuscript",
@@ -21248,7 +21510,10 @@
       "last_push_date": "2026-11-11",
       "url": "https://github.com/Renaissance-Mind/DrawAI",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -21383,7 +21648,8 @@
       "url": "https://github.com/joshzyj/open-scholar-skill",
       "homepage": "",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "codex"
       ],
       "precision_signals": [
         "academic",
@@ -21463,7 +21729,10 @@
       "last_push_date": "2026-10-19",
       "url": "https://github.com/vanthree31/PaperLens",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "cursor",
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -21529,7 +21798,9 @@
       "homepage": "",
       "agents": [
         "claude-code",
-        "codex"
+        "codex",
+        "cursor",
+        "gemini"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -21664,7 +21935,9 @@
       "last_push_date": "2026-11-16",
       "url": "https://github.com/AI4Scientist/awesome-autoresearch",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "assistant",
@@ -21799,7 +22072,10 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/dr-dumpling/PaperSearch",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -21862,7 +22138,10 @@
       "last_push_date": "2026-06-03",
       "url": "https://github.com/BAIKEMARK/happy-figure-skill",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "agent skill",
@@ -21926,6 +22205,7 @@
       "url": "https://github.com/moonlarry/codex-paper-skills",
       "homepage": "",
       "agents": [
+        "claude-code",
         "codex"
       ],
       "precision_signals": [
@@ -22304,7 +22584,12 @@
       "last_push_date": "2026-03-25",
       "url": "https://github.com/CurryTang/Amadeus",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "gemini",
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -22368,7 +22653,10 @@
       "last_push_date": "2026-11-02",
       "url": "https://github.com/ChicagoHAI/OpenAIReview",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -22508,7 +22796,10 @@
       "last_push_date": "2026-10-22",
       "url": "https://github.com/zjunlp/SciAtlas",
       "homepage": "http://sciatlas.openkg.cn/",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "literature review",
@@ -22937,8 +23228,10 @@
       "agents": [
         "claude-code",
         "codex",
+        "opencode",
         "cursor",
-        "gemini"
+        "gemini",
+        "windsurf"
       ],
       "precision_signals": [
         "academic",
@@ -23062,7 +23355,11 @@
       "last_push_date": "2026-11-15",
       "url": "https://github.com/ChicagoHAI/NeuriCo",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_academic_signal",
@@ -23272,7 +23569,10 @@
       "last_push_date": "2026-07-05",
       "url": "https://github.com/poldrack/ai-peer-review",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -23506,6 +23806,7 @@
       "url": "https://github.com/Visterainer/aidea-zotero",
       "homepage": "",
       "agents": [
+        "codex",
         "gemini"
       ],
       "precision_signals": [
@@ -23577,7 +23878,10 @@
       "last_push_date": "2026-11-11",
       "url": "https://github.com/Gaoyuan-0423/biomedical-paper-reader",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "codex",
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "paper",
@@ -24035,7 +24339,12 @@
       "last_push_date": "2026-11-02",
       "url": "https://github.com/saideao/research-idea-review",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "gemini",
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "literature",
@@ -24222,7 +24531,9 @@
       "last_push_date": "2026-11-10",
       "url": "https://github.com/allenai/asta-bench",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "literature search",
@@ -24367,7 +24678,10 @@
       "agents": [
         "claude-code",
         "codex",
-        "cursor"
+        "cursor",
+        "gemini",
+        "windsurf",
+        "mcp"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -24762,6 +25076,8 @@
         "codex",
         "cursor",
         "gemini",
+        "windsurf",
+        "antigravity",
         "mcp"
       ],
       "precision_signals": [
@@ -25018,7 +25334,9 @@
       "last_push_date": "2026-06-03",
       "url": "https://github.com/AI4Scientist/nano-scientist",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -25306,7 +25624,9 @@
       "last_push_date": "2026-11-17",
       "url": "https://github.com/PouriaRouzrokh/LatteReview",
       "homepage": "https://pouriarouzrokh.github.io/LatteReview",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -25527,7 +25847,14 @@
       "last_push_date": "2026-11-18",
       "url": "https://github.com/Koloyaaa/academic-translation-toolkit",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "opencode",
+        "cursor",
+        "gemini",
+        "cline"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -25659,7 +25986,9 @@
       "last_push_date": "2026-11-08",
       "url": "https://github.com/fangqian616/consensus-pipeline",
       "homepage": "https://consensus-pipeline.streamlit.app/",
-      "agents": [],
+      "agents": [
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -25723,7 +26052,10 @@
       "last_push_date": "2026-10-15",
       "url": "https://github.com/tririver/arc",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -25915,7 +26247,8 @@
       "url": "https://github.com/SNL-UCSB/literature-survey-skill",
       "homepage": "",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "mcp"
       ],
       "precision_signals": [
         "academic",
@@ -25981,7 +26314,9 @@
       "last_push_date": "2026-05-19",
       "url": "https://github.com/larbare12/paperfactory-from-idea-to-manuscript",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "manuscript",
@@ -26455,6 +26790,9 @@
       "url": "https://github.com/Aryan-Pardeshi/CiteProof-AI-MCP",
       "homepage": "https://citeproof.top/",
       "agents": [
+        "claude-code",
+        "cursor",
+        "windsurf",
         "mcp"
       ],
       "precision_signals": [
@@ -26750,6 +27088,7 @@
       "url": "https://github.com/cjh-solver/MathModeling-Skills-Arsenal",
       "homepage": "",
       "agents": [
+        "claude-code",
         "codex"
       ],
       "precision_signals": [
@@ -26829,7 +27168,9 @@
       "last_push_date": "2026-10-28",
       "url": "https://github.com/frianasoa/Ze-Notes",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "admission:related",
         "literature review",
@@ -26957,7 +27298,11 @@
       "last_push_date": "2026-11-06",
       "url": "https://github.com/spectrum527/academic-automation-skill",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "codex",
+        "opencode",
+        "cursor"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -27284,6 +27629,11 @@
       "url": "https://github.com/aloth/awesome-ai-agents",
       "homepage": "https://aloth.github.io/awesome-ai-agents/",
       "agents": [
+        "claude-code",
+        "codex",
+        "opencode",
+        "cursor",
+        "gemini",
         "mcp"
       ],
       "precision_signals": [
@@ -27348,7 +27698,9 @@
       "last_push_date": "2026-11-16",
       "url": "https://github.com/Scodive/AI-Agent-Guide",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -27408,7 +27760,9 @@
       "last_push_date": "2026-10-07",
       "url": "https://github.com/flycalm/mineru-pdf-translate",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "readme_scope",
@@ -27469,7 +27823,9 @@
       "url": "https://github.com/Dubaoxu/distillation-skills",
       "homepage": "",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "codex",
+        "mcp"
       ],
       "precision_signals": [
         "academic",
@@ -27608,7 +27964,12 @@
       "last_push_date": "2026-03-13",
       "url": "https://github.com/qinyan-ai/qinyan-academic-skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -27670,7 +28031,10 @@
       "last_push_date": "2026-03-19",
       "url": "https://github.com/LigphiDonk/academic-skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -27816,7 +28180,9 @@
       "homepage": "https://www.skills.sh/heshamfs/materials-simulation-skills",
       "agents": [
         "claude-code",
-        "codex"
+        "codex",
+        "cursor",
+        "antigravity"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -27893,7 +28259,8 @@
       "homepage": "https://www.xingta.cc",
       "agents": [
         "claude-code",
-        "codex"
+        "codex",
+        "cursor"
       ],
       "precision_signals": [
         "academic",
@@ -28019,7 +28386,9 @@
       "last_push_date": "2026-11-12",
       "url": "https://github.com/bis-med-it/marco-BIS",
       "homepage": "https://www.bis.org/",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "assistant",
@@ -28087,7 +28456,10 @@
       "last_push_date": "2026-10-29",
       "url": "https://github.com/JimmyRaoUF/academic-revision-checklist",
       "homepage": "https://nanjierao.github.io",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -28315,7 +28687,12 @@
       "last_push_date": "2026-06-16",
       "url": "https://github.com/moonlarry/awesome-llm-paper-wiki",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "gemini",
+        "mcp"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -28392,7 +28769,10 @@
       "last_push_date": "2026-11-11",
       "url": "https://github.com/awslabs/hcls-agent-skills",
       "homepage": "https://a.co/04jW8Au5",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "agent skill",
@@ -28465,7 +28845,13 @@
       "last_push_date": "2026-10-10",
       "url": "https://github.com/argahv/sisyphus-academica",
       "homepage": "https://argahv.github.io/sisyphus-academica/",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "opencode",
+        "cursor",
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -28528,7 +28914,11 @@
       "last_push_date": "2026-04-06",
       "url": "https://github.com/chencore/research-skills-guide",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "paper",
@@ -28608,7 +28998,9 @@
       "url": "https://github.com/ssinder/bioinformatics-agent-skills",
       "homepage": "https://ssinder.github.io/bioinformatics-agent-skills/",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "codex",
+        "cursor"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -28684,7 +29076,8 @@
       "url": "https://github.com/O0000-code/awesome-academic-skills",
       "homepage": "",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "mcp"
       ],
       "precision_signals": [
         "academic",
@@ -28912,7 +29305,10 @@
       "last_push_date": "2026-11-18",
       "url": "https://github.com/sagirimo/BioDSH",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "discipline_research",
@@ -28988,7 +29384,9 @@
       "url": "https://github.com/kgraph57/paper-writer-skill",
       "homepage": "https://kgraph57.github.io/paper-writer-skill/",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "codex",
+        "cursor"
       ],
       "precision_signals": [
         "academic",
@@ -29063,7 +29461,10 @@
       "last_push_date": "2026-07-08",
       "url": "https://github.com/stephenlzc/humanize-mba-text-skill",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "opencode"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -29125,7 +29526,9 @@
       "last_push_date": "2026-11-09",
       "url": "https://github.com/costrict-plugins-repo/imbad0202-academic-research-skills-academic-research-skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -29204,7 +29607,10 @@
       "last_push_date": "2026-11-03",
       "url": "https://github.com/Xiangyu-Ge/sci-writing-geors",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -29422,7 +29828,8 @@
       "agents": [
         "claude-code",
         "codex",
-        "gemini"
+        "gemini",
+        "mcp"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -29485,7 +29892,12 @@
       "last_push_date": "2026-11-05",
       "url": "https://github.com/Daylily-Huang/ScholarFlow",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
+        "antigravity"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -29648,6 +30060,8 @@
       "homepage": "https://brycewang-stanford.github.io/lit-review-agent-tools/",
       "agents": [
         "claude-code",
+        "codex",
+        "gemini",
         "mcp"
       ],
       "precision_signals": [
@@ -29722,7 +30136,11 @@
       "last_push_date": "2026-11-12",
       "url": "https://github.com/the-omics-os/lobster",
       "homepage": "https://www.lobsterbio.com/",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "cursor",
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "discipline_research",
@@ -29801,7 +30219,10 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/FanBroWell/AI-paper-reviewer",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "codex",
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -30029,7 +30450,10 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/alibaba-damo-academy/ScholarSeed",
       "homepage": "https://scholarseed.damo.alibaba.com/",
-      "agents": [],
+      "agents": [
+        "codex",
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -30093,7 +30517,9 @@
       "last_push_date": "2026-10-21",
       "url": "https://github.com/patsnap/skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -30227,7 +30653,9 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/AI-4-Phi/PhilLit",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -30418,7 +30846,10 @@
       "last_push_date": "2026-11-08",
       "url": "https://github.com/toRolex/Research-OS-Studio",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_strong_academic_signal",
@@ -30480,7 +30911,9 @@
       "last_push_date": "2026-11-18",
       "url": "https://github.com/juliaError/Econ-thesis-idea",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "codex"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -30613,7 +31046,9 @@
       "url": "https://github.com/ThisIsLittleSky/WaterPaper",
       "homepage": "",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "codex",
+        "cursor"
       ],
       "precision_signals": [
         "academic",
@@ -30754,7 +31189,10 @@
       "url": "https://github.com/dvdsosa/scientific-writing-skills",
       "homepage": "",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "codex",
+        "cursor",
+        "gemini"
       ],
       "precision_signals": [
         "academic",
@@ -30900,7 +31338,9 @@
       "last_push_date": "2026-11-18",
       "url": "https://github.com/LawrenceRiver/FigFox-Gen-skill",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "codex"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -31052,7 +31492,12 @@
       "last_push_date": "2026-11-15",
       "url": "https://github.com/saideao/paper-review-dashboard",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
+        "gemini"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "missing_skill_signal",
@@ -31113,7 +31558,9 @@
       "last_push_date": "2026-11-17",
       "url": "https://github.com/shuozhixu/academicwriting",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "gemini"
+      ],
       "precision_signals": [
         "academic",
         "admission:related",
@@ -31239,7 +31686,8 @@
       "url": "https://github.com/kasabulanka2019/zotero-review-matrix-skill",
       "homepage": "",
       "agents": [
-        "codex"
+        "codex",
+        "mcp"
       ],
       "precision_signals": [
         "admission:skill_candidate",
@@ -31303,7 +31751,12 @@
       "last_push_date": "2026-10-23",
       "url": "https://github.com/miciatefara58/academic-paper-skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
+        "mcp"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -31368,7 +31821,13 @@
       "last_push_date": "2026-11-18",
       "url": "https://github.com/lottshin/scholar-kit",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code",
+        "codex",
+        "cursor",
+        "gemini",
+        "antigravity"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -31495,6 +31954,9 @@
       "homepage": "",
       "agents": [
         "claude-code",
+        "codex",
+        "gemini",
+        "antigravity",
         "mcp"
       ],
       "precision_signals": [
@@ -31565,7 +32027,9 @@
       "last_push_date": "2026-08-27",
       "url": "https://github.com/nullptr-DZF/dsh-academic-research-skills",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "academic",
         "admission:skill_candidate",
@@ -31628,7 +32092,9 @@
       "last_push_date": "2026-11-19",
       "url": "https://github.com/EIMP-Lab/Hypoloom",
       "homepage": "",
-      "agents": [],
+      "agents": [
+        "claude-code"
+      ],
       "precision_signals": [
         "admission:skill_candidate",
         "experiment",

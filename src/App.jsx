@@ -89,7 +89,6 @@ const sourceItems = Array.isArray(dataset.items)
           90 * 86400000,
     }))
   : [];
-const historyData = window.ACADEMIC_SKILLS_HISTORY || { series: {} };
 let storage;
 try {
   storage = window.localStorage;
@@ -174,6 +173,19 @@ export default function App() {
   );
 }
 function Dashboard({ state, update }) {
+  const [historyData, setHistoryData] = useState(
+    () => window.ACADEMIC_SKILLS_HISTORY || { series: {} },
+  );
+  useEffect(() => {
+    const syncHistory = () => {
+      if (window.ACADEMIC_SKILLS_HISTORY) {
+        setHistoryData(window.ACADEMIC_SKILLS_HISTORY);
+      }
+    };
+    syncHistory();
+    window.addEventListener("ars-history-loaded", syncHistory);
+    return () => window.removeEventListener("ars-history-loaded", syncHistory);
+  }, []);
   const [today, setToday] = useState(() => beijingDay());
   useEffect(() => {
     const sync = () => setToday(beijingDay());

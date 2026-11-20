@@ -117,8 +117,10 @@
     >
     <script src="%BASE_URL%data/rankings.js"></script>
     <script
+      async
       src="%BASE_URL%data/history.js"
-      onerror="window.ACADEMIC_SKILLS_HISTORY={series:{}};"
+      onload="window.dispatchEvent(new Event('ars-history-loaded'));"
+      onerror="window.ACADEMIC_SKILLS_HISTORY={series:{}};window.dispatchEvent(new Event('ars-history-loaded'));"
     ></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>

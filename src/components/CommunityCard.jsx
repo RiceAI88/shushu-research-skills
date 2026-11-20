@@ -51,6 +51,8 @@ export function CommunityCard({ lang }) {
         }
         width="660"
         height="1024"
+        loading="lazy"
+        decoding="async"
       />
       <p>
         {zh
@@ -100,7 +102,7 @@ export function CommunityCard({ lang }) {
         </span>
         <span className="community-qr-padding" aria-hidden="true">
           <span className="community-qr-crop">
-            <img src={qrImage} alt="" width="660" height="1024" />
+            <img src={qrImage} alt="" width="660" height="1024" loading="lazy" decoding="async" />
           </span>
         </span>
       </button>

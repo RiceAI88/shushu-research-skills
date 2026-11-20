@@ -14,6 +14,7 @@ import html
 import json
 import math
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -920,7 +921,7 @@ def collect_repositories(config: dict[str, Any], token: str | None) -> collectio
         response = github_request(f"/repos/{name}/readme", token)
         if response.get("encoding") != "base64":
             raise ValueError("Unsupported README encoding")
-        return {"text": base64.b64decode(response.get("content", "")).decode("utf-8", errors="replace")[:16000],
+        return {"text": base64.b64decode(response.get("content", "")).decode("utf-8", errors="replace")[:8000],
                 "sha": response.get("sha"), "path": response.get("path")}
     verifier = discovery.ReadmeVerifier(cache, readme, now=now,
         budget=int(config.get("discovery", {}).get("readme_budget", 120)))
@@ -960,8 +961,14 @@ def collect_repositories(config: dict[str, Any], token: str | None) -> collectio
     def priority(repo):
         old = entries.get(repo["nameWithOwner"].lower(), {}).get("metadata", {}).get("_readme_evidence", {})
         corpus = text_corpus(repo)
-        # Relevant unreviewed candidates first; cached decisions cost no API requests.
-        return (bool(old.get("checked_at")), not (any(term in corpus for term in discovery.ACADEMIC) or discovery.DISCIPLINE_PURPOSE.search(corpus)), old.get("checked_at", ""), repo["nameWithOwner"].lower())
+        # Relevant high-star unreviewed candidates first; cached decisions cost no API requests.
+        return (
+            bool(old.get("checked_at")),
+            not (any(term in corpus for term in discovery.ACADEMIC) or discovery.DISCIPLINE_PURPOSE.search(corpus)),
+            -int(repo.get("stargazerCount") or 0),
+            old.get("checked_at", ""),
+            repo["nameWithOwner"].lower(),
+        )
     result = collection.collect({**config, "search_queries": list(specs)}, catalog=catalog, previous_items=previous,
         known_names=list(registry), fetch=fetch, search=search, eligible=eligible, prioritize=priority,
         now=now.replace(microsecond=0).isoformat().replace("+00:00", "Z"))
@@ -982,7 +989,13 @@ def write_collection_state(result: collection.CollectionResult, data=None) -> No
     COLLECTION_REPORT_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if report["fatal"]:
         return
-    CATALOG_PATH.write_text(json.dumps(result.catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    for entry in result.catalog.get("repositories", {}).values():
+        meta = entry.get("metadata") if isinstance(entry, dict) else None
+        ev = meta.get("_readme_evidence") if isinstance(meta, dict) else None
+        if isinstance(ev, dict) and isinstance(ev.get("text"), str) and len(ev["text"]) > 8000:
+            ev["text"] = ev["text"][:8000]
+    # Compact JSON keeps repository-catalog.json ~40% smaller and avoids huge git diffs.
+    CATALOG_PATH.write_text(json.dumps(result.catalog, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     events = load_json(COLLECTION_EVENTS_PATH, [])
     events.extend({"at": report["generated_at"], **event} for event in report["changes"])
     COLLECTION_EVENTS_PATH.write_text(json.dumps(events[-1000:], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -1024,16 +1037,39 @@ AGENT_PLATFORMS = [
     ("cursor", ["cursor"]),
     ("gemini", ["gemini"]),
     ("cline", ["cline"]),
+    ("windsurf", ["windsurf"]),
+    ("antigravity", ["antigravity"]),
     ("mcp", ["mcp"]),
 ]
 
+AGENT_README_PATTERNS = [
+    ("claude-code", re.compile(r"\bclaude[- ]code\b|\bclaude\s+code\s+skill", re.I)),
+    ("codex", re.compile(r"\bcodex\b", re.I)),
+    ("opencode", re.compile(r"\bopen[- ]?code\b", re.I)),
+    ("cursor", re.compile(r"\bcursor\b", re.I)),
+    ("gemini", re.compile(r"\bgemini(?:[- ]cli)?\b", re.I)),
+    ("cline", re.compile(r"\bcline\b", re.I)),
+    ("windsurf", re.compile(r"\bwindsurf\b", re.I)),
+    ("antigravity", re.compile(r"\bantigravity\b", re.I)),
+    ("mcp", re.compile(r"\bmcp\b|model context protocol", re.I)),
+]
+
+README_BIBLIOGRAPHY_RE = re.compile(
+    r"^#{1,6}\s+(?:references|bibliography|acknowledg\w*|credits|related projects|参考文献|致谢|相关项目)\b",
+    re.I | re.M,
+)
+
 
 def detect_agents(repo: dict[str, Any]) -> list[str]:
-    """Return the list of target-agent platform ids inferred from the repo corpus."""
+    """Return the list of target-agent platform ids inferred from the repo corpus and README evidence."""
     corpus = text_corpus(repo)
+    evidence = repo.get("_readme_evidence")
+    readme_text = ""
+    if isinstance(evidence, dict) and evidence.get("status") == "verified" and isinstance(evidence.get("text"), str):
+        readme_text = README_BIBLIOGRAPHY_RE.split(evidence["text"], maxsplit=1)[0][:8000]
     found: list[str] = []
-    for platform_id, terms in AGENT_PLATFORMS:
-        if any(term in corpus for term in terms):
+    for (platform_id, terms), (_, pattern) in zip(AGENT_PLATFORMS, AGENT_README_PATTERNS):
+        if any(term in corpus for term in terms) or (readme_text and pattern.search(readme_text)):
             found.append(platform_id)
     return found
 
@@ -1111,6 +1147,7 @@ _AGENT_LABELS = {
     "cursor": "Cursor",
     "gemini": "Gemini",
     "cline": "Cline",
+    "windsurf": "Windsurf",
     "antigravity": "Antigravity",
     "mcp": "MCP",
 }

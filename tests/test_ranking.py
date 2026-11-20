@@ -404,6 +404,18 @@ class RankingRulesTest(unittest.TestCase):
         }
         self.assertEqual(detect_agents(repo), [])
 
+    def test_detect_agents_from_readme_evidence_with_word_boundaries(self):
+        repo = {
+            "nameWithOwner": "example/science-skills",
+            "description": "Skills for scientific workflows",
+            "repositoryTopics": {"nodes": []},
+            "_readme_evidence": {
+                "status": "verified",
+                "text": "Works with Claude Code, Antigravity and Windsurf. Avoids decline in quality.\n## References\nMCP paper\n",
+            },
+        }
+        self.assertEqual(detect_agents(repo), ["claude-code", "windsurf", "antigravity"])
+
     def test_agents_field_in_ranked_output(self):
         """rank_repositories must include the structured `agents` list on each
         item so the frontend can filter without re-inferring from text."""
