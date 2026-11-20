@@ -19,17 +19,31 @@ export function claimNoticeSlot(storage, now = Date.now()) {
   return true;
 }
 
+export const NOTICE_DELAY_MS = 12000;
+
 export function RechargeNotice({ lang }) {
   const [open,setOpen] = useState(false);
   const zh = lang === "zh";
   useEffect(() => {
-    let storage = null;
-    try {
-      storage = window.localStorage;
-    } catch {
-      storage = null;
+    const delay =
+      typeof window !== "undefined" && Number.isFinite(window.__ARS_NOTICE_DELAY_MS)
+        ? window.__ARS_NOTICE_DELAY_MS
+        : NOTICE_DELAY_MS;
+    const trigger = () => {
+      let storage = null;
+      try {
+        storage = window.localStorage;
+      } catch {
+        storage = null;
+      }
+      if (claimNoticeSlot(storage)) setOpen(true);
+    };
+    if (delay <= 0) {
+      trigger();
+      return undefined;
     }
-    if (claimNoticeSlot(storage)) setOpen(true);
+    const timer = window.setTimeout(trigger, delay);
+    return () => window.clearTimeout(timer);
   }, []);
   const close = () => setOpen(false);
   return (

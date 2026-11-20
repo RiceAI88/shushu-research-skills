@@ -7,10 +7,13 @@ import { AGENT_PLATFORMS, detectAgents, safeExternalUrl } from "../domain";
 import { EDITORIAL_CONTENT, installationFor, reviewedInstallSnapshot } from "../practical";
 import { useFeedback } from "./FeedbackProvider";
 import { copyText } from "../clipboard";
-export function SummaryText({ item, t, query = "" }) {
+export function SummaryText({ item, t, query = "", full = false }) {
   return (
     <div className="practical-description">
-      <p className="description-clamp" title={item.description}>
+      <p
+        className={full ? "description-full" : "description-clamp"}
+        title={full ? undefined : item.description}
+      >
         <SearchHighlight
           text={item.description || t("noDescription")}
           query={query}
@@ -19,9 +22,39 @@ export function SummaryText({ item, t, query = "" }) {
     </div>
   );
 }
+export function dedupePlatformLabels(rawLabels) {
+  const unique = [];
+  const seenLower = new Set();
+  for (const label of rawLabels) {
+    const clean = String(label || "").trim();
+    if (!clean) continue;
+    const lower = clean.toLowerCase();
+    if (seenLower.has(lower)) continue;
+    seenLower.add(lower);
+    unique.push(clean);
+  }
+  // Drop shorter generic labels when a more specific official name is already present
+  // (e.g. "Gemini" when "Gemini CLI" is listed, or "Antigravity" when "Google Antigravity" is listed).
+  return unique.filter((label) => {
+    const lower = label.toLowerCase();
+    return !unique.some((other) => {
+      const otherLower = other.toLowerCase();
+      if (otherLower === lower || otherLower.length <= lower.length) return false;
+      return (
+        otherLower.startsWith(lower + " ") ||
+        otherLower.endsWith(" " + lower)
+      );
+    });
+  });
+}
 export function PlatformTags({ item, t, compact = false }) {
   const agents = detectAgents(item);
-  const labels = [...new Set([...agents.map(id=>AGENT_PLATFORMS.find(agent=>agent.id===id)?.label||id), ...(item.documented_platform_names||[])])];
+  const labels = dedupePlatformLabels([
+    ...agents.map(
+      (id) => AGENT_PLATFORMS.find((agent) => agent.id === id)?.label || id,
+    ),
+    ...(item.documented_platform_names || []),
+  ]);
   if (compact) {
     return (
       <Tooltip title={labels.join(" · ") || t("platformUnspecifiedHint")}>
@@ -213,6 +246,11 @@ export function InstallationActions({
             {installation.command}
           </pre>
         </div>
+      )}
+      {details && hideExtras && installation[`context_${lang}`] && (
+        <p className="installation-context-inline">
+          {installation[`context_${lang}`]}
+        </p>
       )}
       <Space size={[4, 6]} wrap>
         {!details && <CopyInstallButton item={item} t={t} iconOnly={compact} />}

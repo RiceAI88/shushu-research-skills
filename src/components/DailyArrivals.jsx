@@ -9,7 +9,8 @@ export function DailyArrivals({ items, state, update, t }) {
   const related = scoped.filter(item => item.new_today && item.repository_kind === 'related');
   const choose = kind => update(s => ({ ...s, query: '', task: 'all', category: 'all', agent: 'all',
     favOnly: false, newOnly: false, includeRelated: kind === 'related' ? true : s.includeRelated, todayOnly: s.todayOnly === kind ? '' : kind }));
-  return <Reveal as="section" className="daily-arrivals" data-testid="daily-arrivals" aria-labelledby="daily-arrivals-title">
+  const isQuiet = !skills.length && !related.length && !state.todayOnly;
+  return <Reveal as="section" className={`daily-arrivals${isQuiet ? ' daily-arrivals-quiet' : ''}`} data-testid="daily-arrivals" aria-labelledby="daily-arrivals-title">
     <div className="daily-arrivals-heading">
       <div className="daily-arrivals-title">
         <h2 id="daily-arrivals-title">{t('dailySkills')} <strong data-testid="daily-skill-count">{skills.length}</strong></h2>

@@ -601,7 +601,27 @@ function Dashboard({ state, update }) {
             data-testid="portal-kpi-grid"
             aria-label={state.lang === "zh" ? "核心收录指标" : "Key directory metrics"}
           >
-            <div className="portal-kpi-card">
+            <button
+              type="button"
+              className={`portal-kpi-card portal-kpi-btn${!state.newOnly && !state.todayOnly && state.sort === "rank" && state.task === "all" && state.discipline === "all" && !state.query ? " is-active" : ""}`}
+              title={state.lang === "zh" ? "查看全部收录并重置筛选" : "Show all listed Skills and reset filters"}
+              onClick={() =>
+                update((s) => ({
+                  ...s,
+                  section: "ranking",
+                  query: "",
+                  task: "all",
+                  category: "all",
+                  agent: "all",
+                  favOnly: false,
+                  newOnly: false,
+                  todayOnly: "",
+                  discipline: "all",
+                  major: "all",
+                  sort: "rank",
+                }))
+              }
+            >
               <div className="portal-kpi-meta">
                 <span>{state.lang === "zh" ? "已收录 Skills" : "Listed Skills"}</span>
                 <strong>{fmt(scopeItems.length)}</strong>
@@ -612,8 +632,20 @@ function Dashboard({ state, update }) {
                   <polyline points="9 22 9 12 15 12 15 22" />
                 </svg>
               </span>
-            </div>
-            <div className="portal-kpi-card">
+            </button>
+            <button
+              type="button"
+              className={`portal-kpi-card portal-kpi-btn${state.sort === "updated" ? " is-active" : ""}`}
+              aria-pressed={state.sort === "updated"}
+              title={state.lang === "zh" ? "按最近更新排序" : "Sort by most recently updated"}
+              onClick={() =>
+                update((s) => ({
+                  ...s,
+                  section: "ranking",
+                  sort: s.sort === "updated" ? "rank" : "updated",
+                }))
+              }
+            >
               <div className="portal-kpi-meta">
                 <span>{state.lang === "zh" ? "近期活跃维护" : "Active in 30d"}</span>
                 <strong>{fmt(recentCount)}</strong>
@@ -623,8 +655,21 @@ function Dashboard({ state, update }) {
                   <path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3L12 3z" />
                 </svg>
               </span>
-            </div>
-            <div className="portal-kpi-card">
+            </button>
+            <button
+              type="button"
+              className={`portal-kpi-card portal-kpi-btn${state.newOnly ? " is-active" : ""}`}
+              aria-pressed={state.newOnly}
+              title={state.lang === "zh" ? "筛选本周新收录项目" : "Filter Skills added this week"}
+              onClick={() =>
+                update((s) => ({
+                  ...s,
+                  section: "ranking",
+                  todayOnly: "",
+                  newOnly: !s.newOnly,
+                }))
+              }
+            >
               <div className="portal-kpi-meta">
                 <span>{state.lang === "zh" ? "本周新增收录" : "New this week"}</span>
                 <strong>{fmt(newcomers)}</strong>
@@ -636,8 +681,20 @@ function Dashboard({ state, update }) {
                   <path d="M19 8v6M22 11h-6" />
                 </svg>
               </span>
-            </div>
-            <div className="portal-kpi-card">
+            </button>
+            <button
+              type="button"
+              className={`portal-kpi-card portal-kpi-btn${state.sort === "growth" ? " is-active" : ""}`}
+              aria-pressed={state.sort === "growth"}
+              title={state.lang === "zh" ? "按近 7 日 Stars 上升最快排序" : "Sort by fastest 7-day Stars growth"}
+              onClick={() =>
+                update((s) => ({
+                  ...s,
+                  section: "ranking",
+                  sort: s.sort === "growth" ? "rank" : "growth",
+                }))
+              }
+            >
               <div className="portal-kpi-meta">
                 <span>{state.lang === "zh" ? "近 7 日净增 Stars" : "7-day net Stars"}</span>
                 <strong>
@@ -651,7 +708,7 @@ function Dashboard({ state, update }) {
                   <polyline points="16 7 22 7 22 13" />
                 </svg>
               </span>
-            </div>
+            </button>
           </div>
         </section>
       </header>

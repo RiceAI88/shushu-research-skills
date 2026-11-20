@@ -4,7 +4,11 @@ import { test as base, expect } from "@playwright/test";
 export const test = base.extend({
   showEntryNotice: [false, { option: true }],
   page: async ({ page, showEntryNotice }, use) => {
-    if (!showEntryNotice) {
+    if (showEntryNotice) {
+      await page.addInitScript(() => {
+        window.__ARS_NOTICE_DELAY_MS = 0;
+      });
+    } else {
       await page.addInitScript(() => {
         // Use the current test clock with a small margin: getItem runs after claimNoticeSlot captures now.
         const getItem = Storage.prototype.getItem;

@@ -41,6 +41,22 @@ export function RepositoryDrawer({
     const target = position >= 0 && items[position + offset];
     if (target) update((previous) => ({ ...previous, repo: target.repo }));
   };
+  useEffect(() => {
+    if (!item) return;
+    const onKeyDown = (event) => {
+      if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
+      if (event.target?.closest?.('input,select,textarea,pre,[contenteditable="true"]')) return;
+      if (event.key === "ArrowLeft" && position > 0) {
+        event.preventDefault();
+        navigate(-1);
+      } else if (event.key === "ArrowRight" && position >= 0 && position < items.length - 1) {
+        event.preventDefault();
+        navigate(1);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [item?.repo, position, items.length]);
   const message = useFeedback();
   const copy = async (text) => {
     try {
@@ -202,7 +218,7 @@ export function RepositoryDrawer({
     >
       {item && (
         <div ref={contentRef} className="drawer-content" key={item.repo}>
-          <SummaryText item={item} t={t} />
+          <SummaryText item={item} t={t} full />
           <div className="drawer-platforms">
             <span>{t("drAgent")}</span>
             <PlatformTags item={item} t={t} />
