@@ -603,7 +603,7 @@ function Dashboard({ state, update }) {
           >
             <button
               type="button"
-              className={`portal-kpi-card portal-kpi-btn${!state.newOnly && !state.todayOnly && state.sort === "rank" && state.task === "all" && state.discipline === "all" && !state.query ? " is-active" : ""}`}
+              className="portal-kpi-card portal-kpi-btn"
               title={state.lang === "zh" ? "查看全部收录并重置筛选" : "Show all listed Skills and reset filters"}
               onClick={() =>
                 update((s) => ({
