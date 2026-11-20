@@ -600,5 +600,29 @@
       "openclaw"
     ],
     "reviewed_at": "2026-11-14"
+  },
+  "baojie/shiji-kb": {
+    "tasks": [
+      "find",
+      "read",
+      "analyze"
+    ],
+    "platform_names": [
+      "Claude Code"
+    ],
+    "reviewed_at": "2026-11-20"
+  },
+  "K-Dense-AI/claude-scientific-writer": {
+    "tasks": [
+      "find",
+      "read",
+      "write",
+      "figures",
+      "review"
+    ],
+    "platform_names": [
+      "Claude Code"
+    ],
+    "reviewed_at": "2026-11-20"
   }
 }

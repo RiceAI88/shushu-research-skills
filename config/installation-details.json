@@ -910,5 +910,37 @@
     "notes": "仅核对官方文档，未执行安装或运行实测。官方说明安装与脚本测试不代表全部客户端端到端实测；copilot/openclaw无现有目录id。",
     "source_commit": "eb3222762ba10e6aa04f9c343c8c47a2927ea1dd",
     "source_snapshot_url": "https://github.com/huangkiki/dailypaper-skills/blob/eb3222762ba10e6aa04f9c343c8c47a2927ea1dd/README.md"
+  },
+  "baojie/shiji-kb": {
+    "environment_zh": "在线版支持任意浏览器直接访问；本地脚本与技能复现需 Python 3 与 Git（作者在 README 中记录采用 Claude Code 协作）。",
+    "environment_en": "Online reader works in any browser; local rendering and skill reuse require Python 3 and Git (README notes Claude Code collaboration).",
+    "dependencies_zh": "克隆仓库后执行 pip install -r requirements.txt；可选运行 python3 wiki/server/serve.py wiki/public 8000 启动本地 Wiki。",
+    "dependencies_en": "Clone the repository and run pip install -r requirements.txt; optionally run python3 wiki/server/serve.py wiki/public 8000 for the local wiki.",
+    "source_blob_sha": "de268d6e696d41bab0cdc7de631e09faf065b960",
+    "reviewed_at": "2026-11-20",
+    "source_url": "https://github.com/baojie/shiji-kb/blob/main/README.md",
+    "source_quote": "git clone https://github.com/baojie/shiji-kb.git && cd shiji-kb && pip install -r requirements.txt",
+    "tasks_source_url": "https://github.com/baojie/shiji-kb/blob/main/README.md",
+    "tasks_source_blob_sha": "de268d6e696d41bab0cdc7de631e09faf065b960",
+    "tasks_quote": "学术研究者：矛盾检测、史料溯源、系统化推理；总控SKILL + 14个元技能 + 89个管线技能。",
+    "notes": "仅官方文档核对，未安装或运行实测。",
+    "source_commit": "6b836e3fac1b900ccc6e9299fd6896c0e18ec132",
+    "source_snapshot_url": "https://github.com/baojie/shiji-kb/blob/6b836e3fac1b900ccc6e9299fd6896c0e18ec132/README.md"
+  },
+  "K-Dense-AI/claude-scientific-writer": {
+    "environment_zh": "支持 Claude Code 插件或 Python 3.10+ 命令行/API；也支持源码克隆后使用 uv sync 安装。",
+    "environment_en": "Supports Claude Code plugin or Python 3.10+ CLI/API; also supports source install via uv sync.",
+    "dependencies_zh": "Python 3.10+、ANTHROPIC_API_KEY（必需）、Parallel CLI 登录或 PARALLEL_API_KEY、LaTeX 发行版（pdflatex/bibtex/latexmk）；AI 绘图可选 OPENROUTER_API_KEY，Office/媒体转换可选 LibreOffice 与 FFmpeg。",
+    "dependencies_en": "Python 3.10+, ANTHROPIC_API_KEY (required), parallel-cli login or PARALLEL_API_KEY, and a LaTeX distribution (pdflatex/bibtex/latexmk); optional OPENROUTER_API_KEY, LibreOffice, and FFmpeg.",
+    "source_blob_sha": "abeb70d685fcf9f3d429bcaf00b476016937e3bf",
+    "reviewed_at": "2026-11-20",
+    "source_url": "https://github.com/K-Dense-AI/claude-scientific-writer/blob/main/README.md",
+    "source_quote": "Python 3.10 or newer; ANTHROPIC_API_KEY (required); pip install scientific-writer",
+    "tasks_source_url": "https://github.com/K-Dense-AI/claude-scientific-writer/blob/main/README.md",
+    "tasks_source_blob_sha": "abeb70d685fcf9f3d429bcaf00b476016937e3bf",
+    "tasks_quote": "A general purpose scientific writer; schematics, figures, slides, and infographics; LaTeX distribution for PDF generation.",
+    "notes": "仅官方文档核对，未安装或运行实测。",
+    "source_commit": "9820740d252800ecf0b8fc066ffb5bf9659f4a51",
+    "source_snapshot_url": "https://github.com/K-Dense-AI/claude-scientific-writer/blob/9820740d252800ecf0b8fc066ffb5bf9659f4a51/README.md"
   }
 }

@@ -430,5 +430,140 @@
     "source_sha": "471a27234bef8583f392895d1bf0c0ae6664343d",
     "reviewed_at": "2026-11-14",
     "review_kind": "documentation_only"
+  },
+  "imbad0202/academic-research-skills-codex": {
+    "use_zh": "Codex 原生科研全流程（检索、写作、审稿与返修）",
+    "use_en": "Codex-native full academic research pipeline (research, write, review, revise)",
+    "source_quote": "ARS-Codex is the Codex-native sibling of Academic Research Skills (ARS) for Claude Code. This repository vendors the ARS workflow content as a single Codex skill.",
+    "source_url": "https://github.com/Imbad0202/academic-research-skills-codex/blob/main/README.md",
+    "source_sha": "53d233cb3b91e739e091218d44cd911f5e0a617c",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "dwzhu-pku/paperbanana": {
+    "use_zh": "科研论文配图与学术示意图自动生成",
+    "use_en": "Automated academic paper illustration and schematic generation",
+    "source_quote": "PaperBanana is intended to be a fully open-source project dedicated to facilitating academic illustration for all researchers.",
+    "source_url": "https://github.com/dwzhu-pku/PaperBanana/blob/main/README.md",
+    "source_sha": "5db3583ca598db4e0c05fef59143ed06d3d3d1a1",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "adkid-zephyr/anti-defensive-writing-skill": {
+    "use_zh": "学术论文写作原则与去除防御性表达",
+    "use_en": "Academic paper writing principles to eliminate defensive prose",
+    "source_quote": "极致轻量｜阻止论文的防御性写作 | Anti-defensive writing for academic papers — 学术写作原则 Skill + prompt pack",
+    "source_url": "https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill/blob/main/README.md",
+    "source_sha": "c203049dda4b61fb4564820f2677a5d3fa9dfe77",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "scrapecreators/social-media-research-skills": {
+    "use_zh": "社交媒体数据挖掘、评论分析与商业传播研究",
+    "use_en": "Social media research, comment mining, and competitive/communication analysis",
+    "source_quote": "Practical AI agent skills for social media research. These skills help agents find outlier posts, mine comments, summarize transcripts, tear down competitors, analyze ad libraries, and turn public social data into useful business artifacts.",
+    "source_url": "https://github.com/ScrapeCreators/social-media-research-skills/blob/main/README.md",
+    "source_sha": "e091165b832ec255f978aed55884ad2e34ac7f0c",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "mlnlp-world/paper-writing-tips": {
+    "use_zh": "机器学习/NLP 论文写作规范、LaTeX 排版与终稿核查",
+    "use_en": "ML/NLP paper writing checklist, LaTeX formatting and pre-submission checks",
+    "source_quote": "论文写作 Skill：将本项目的写作规范整理为可复用的 AI skill，辅助检查 LaTeX 排版、公式、图表、引用和学术表达。",
+    "source_url": "https://github.com/MLNLP-World/Paper-Writing-Tips/blob/main/README.md",
+    "source_sha": "a8a166096da691e96f852c8db22f821594245994",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "synthetic-sciences/openscience": {
+    "use_zh": "开源科研工作台：文献阅读、实验代码执行与写作记录",
+    "use_en": "Open-source AI workbench for literature reading, running experiments and writing",
+    "source_quote": "The open-source AI workbench for scientific research. Give it a goal. It reads the literature, writes and runs the code, runs the experiments, and writes up what it found, with every step on the record.",
+    "source_url": "https://github.com/synthetic-sciences/openscience/blob/main/README.md",
+    "source_sha": "b588e88188b7dd217e497b27aefe496490d5119a",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "jmiao24/paper2agent": {
+    "use_zh": "将科研论文与代码库自动转化为交互式 MCP / Skill Agent",
+    "use_en": "Automatically transform research papers and codebases into interactive MCP servers and skills",
+    "source_quote": "Paper2Agent is a multi-agent AI system that automatically transforms research papers into interactive AI agents. Paper2Agent coordinates parallel specialist agents to turn scientific papers into reliable MCP servers and skills.",
+    "source_url": "https://github.com/jmiao24/Paper2Agent/blob/main/README.md",
+    "source_sha": "0f3f7cdc7858a35e52be85fff5395f9df8e2df64",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "baojie/shiji-kb": {
+    "use_zh": "《史记》古籍知识图谱、史料溯源与人文知识工程技能",
+    "use_en": "Shiji historical knowledge graph, textual provenance and classical-text engineering skills",
+    "source_quote": "用AI将《史记》57万字转化为可交互、可探索的知识图谱；适合学术研究者用于矛盾检测、史料溯源、系统化推理，并提供14个元技能与89个管线技能。",
+    "source_url": "https://github.com/baojie/shiji-kb/blob/main/README.md",
+    "source_sha": "de268d6e696d41bab0cdc7de631e09faf065b960",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "blazickjp/arxiv-mcp-server": {
+    "use_zh": "本地 arXiv MCP 文献服务：LaTeX 原文按节精读与 BibTeX 提取",
+    "use_en": "Local arXiv MCP server for original-LaTeX section reads, BibTeX and topic watches",
+    "source_quote": "A local MCP server for agent literature work. The differentiator is original-LaTeX section reads, BibTeX from arXiv metadata, and topic watches.",
+    "source_url": "https://github.com/blazickjp/arxiv-mcp-server/blob/main/README.md",
+    "source_sha": "828f218ee9023bbb6544967a56f203ae97e3110a",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "yb2460/harness-anything": {
+    "use_zh": "办公软件（WPS/Office）、Zotero 与学术工作流 CLI / Skill 控制中心",
+    "use_en": "AI agent control hub for WPS, MS Office, Zotero, SVG-to-PPTX and 27 academic skills",
+    "source_quote": "AI Agent 工具集 —— 办公 + 设计 + 学术 全栈操控：WPS, MS Office, Zotero, Photoshop, 47 CLI commands, 27 academic skills, SVG-to-PPTX.",
+    "source_url": "https://github.com/yb2460/harness-anything/blob/master/README.md",
+    "source_sha": "da8a258cc4853c155d2e8d121c6695d9777ac3fc",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "freedomintelligence/openclaw-medical-skills": {
+    "use_zh": "临床医学、基因组学、药物研发与生物信息学技能库",
+    "use_en": "Curated medical AI skills for clinical research, genomics, drug discovery and bioinformatics",
+    "source_quote": "OpenClaw Medical Skills is a curated collection of 869 AI agent skills covering the full spectrum of biomedical and clinical research: Clinical, Genomics, Drug Discovery, Bioinformatics, Medical Devices.",
+    "source_url": "https://github.com/FreedomIntelligence/OpenClaw-Medical-Skills/blob/main/README.md",
+    "source_sha": "5eb30e293cf0384e937de750e23732b367937deb",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "evomap/autoresearch": {
+    "use_zh": "AI/ML 自主研究代理：从研究构想到论文级实验证据",
+    "use_en": "AI/ML research agents from idea generation to paper-ready experimental evidence",
+    "source_quote": "AI/ML research agents from idea to paper-ready evidence. From Idea to Paper-Ready Evidence.",
+    "source_url": "https://github.com/EvoMap/AutoResearch/blob/main/README.md",
+    "source_sha": "55ba8811d503590181c739aca4d45e37eae98e6c",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "huangwb8/chineseresearchlatex": {
+    "use_zh": "国自然标书、SCI 论文、毕业论文与学术简历 LaTeX 模板与 AI Agent",
+    "use_en": "Chinese research LaTeX templates and AI agent for NSFC grants, SCI papers and theses",
+    "source_quote": "打造最适合中国研究者的科研文档 AI Agent，让天下没有难写的国自然标书、SCI 论文、毕业论文、学术简历。",
+    "source_url": "https://github.com/huangwb8/ChineseResearchLaTeX/blob/main/README.md",
+    "source_sha": "c08fa9fde77cff00e0cd91cd39004ce2beccf4ab",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "dw-dengwei/daily-arxiv-ai-enhanced": {
+    "use_zh": "每日自动抓取 arXiv 论文并生成 AI 摘要与个性化阅读页",
+    "use_en": "Daily automated arXiv paper crawling with AI summaries and personalized highlights",
+    "source_quote": "Automatically crawl arXiv papers daily and summarize them using AI. Daily paper crawling with DeepSeek-powered summaries and personalized paper highlighting.",
+    "source_url": "https://github.com/dw-dengwei/daily-arXiv-ai-enhanced/blob/main/README.md",
+    "source_sha": "ad0594d958a3decabed9a82909a1761d6ddb2871",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
+  },
+  "k-dense-ai/claude-scientific-writer": {
+    "use_zh": "通用科研写作与投稿辅助：文献检索、LaTeX PDF、图表与幻灯片生成",
+    "use_en": "General-purpose scientific writer for literature search, LaTeX PDFs, schematics and slides",
+    "source_quote": "A general purpose scientific writer supporting literature search, LaTeX PDF generation, schematics, figures, slides, and infographics.",
+    "source_url": "https://github.com/K-Dense-AI/claude-scientific-writer/blob/main/README.md",
+    "source_sha": "abeb70d685fcf9f3d429bcaf00b476016937e3bf",
+    "reviewed_at": "2026-11-20",
+    "review_kind": "documentation_only"
   }
 }

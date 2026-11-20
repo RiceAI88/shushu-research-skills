@@ -218,18 +218,18 @@
       "context_zh": "在 Claude Code 会话内依次执行；新安装用 /ars-plan 或 /ars-lit-review 检查。",
       "context_en": "Run both slash commands inside Claude Code; check discovery with /ars-plan or /ars-lit-review.",
       "source_url": "https://github.com/Imbad0202/academic-research-skills/blob/main/README.md",
-      "reviewed_at": "2026-11-14",
+      "reviewed_at": "2026-11-20",
       "command": "/plugin marketplace add Imbad0202/academic-research-skills\n/plugin install academic-research-skills",
-      "source_blob_sha": "07f68bd6e80adb96b63cd07c8bf7d0de7addc010"
+      "source_blob_sha": "f69d6797419171d323bb7689716fdf08231c0188"
     },
     "Yuan1z0825/nature-skills": {
       "mode": "command",
       "context_zh": "在终端为当前项目 Codex 仅安装 nature-figure；reader/paper2ppt/polishing/writing 等技能需同时保留 nature-shared。",
       "context_en": "Run in a terminal to install only nature-figure for Codex in the current project; reader/paper2ppt/polishing/writing also need nature-shared.",
       "source_url": "https://github.com/Yuan1z0825/nature-skills/blob/main/README.md",
-      "reviewed_at": "2026-11-14",
+      "reviewed_at": "2026-11-20",
       "command": "npx skills add Yuan1z0825/nature-skills --agent codex --skill nature-figure --yes --copy",
-      "source_blob_sha": "3fd61766da94bfbe7e61a73ebda1b5b7fad28463"
+      "source_blob_sha": "62f97382b481541e1e57c1bce7141cd5c1c25c1c"
     },
     "zsyggg/paper-craft-skills": {
       "mode": "command",
@@ -641,6 +641,23 @@
       "source_url": "https://github.com/huangkiki/dailypaper-skills/blob/main/README.md",
       "reviewed_at": "2026-11-14",
       "command": "git clone https://github.com/huangkiki/dailypaper-skills.git\ncd dailypaper-skills\npython3 install.py --agent codex"
+    },
+    "baojie/shiji-kb": {
+      "mode": "guide",
+      "context_zh": "可先在线阅读史记知识图谱；本地构建或复用古籍知识工程 SKILL 需按 README 克隆仓库并安装 Python 依赖。",
+      "context_en": "Browse the Shiji knowledge graph online first; clone the repository and install Python requirements to render locally or reuse the 103 knowledge-engineering skills.",
+      "source_url": "https://github.com/baojie/shiji-kb/blob/main/README.md",
+      "reviewed_at": "2026-11-20",
+      "source_blob_sha": "de268d6e696d41bab0cdc7de631e09faf065b960"
+    },
+    "K-Dense-AI/claude-scientific-writer": {
+      "mode": "command",
+      "context_zh": "通过 PyPI 安装 CLI/API，或在 Claude Code 中按 README 指南作为插件安装；需配置 ANTHROPIC_API_KEY。",
+      "context_en": "Install the CLI/API from PyPI or install as a Claude Code plugin per the README; requires ANTHROPIC_API_KEY.",
+      "source_url": "https://github.com/K-Dense-AI/claude-scientific-writer/blob/main/README.md",
+      "reviewed_at": "2026-11-20",
+      "command": "pip install scientific-writer",
+      "source_blob_sha": "abeb70d685fcf9f3d429bcaf00b476016937e3bf"
     }
   },
   "featured": [

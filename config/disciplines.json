@@ -738,6 +738,151 @@
       "common": false,
       "reviewed_at": "2026-11-14",
       "evidence": true
+    },
+    "imbad0202/academic-research-skills-codex": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "dwzhu-pku/paperbanana": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "adkid-zephyr/anti-defensive-writing-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "scrapecreators/social-media-research-skills": {
+      "disciplines": [
+        "management",
+        "law"
+      ],
+      "majors": [
+        "business",
+        "sociology"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "mlnlp-world/paper-writing-tips": {
+      "disciplines": [],
+      "majors": [
+        "computer-science",
+        "ai"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "synthetic-sciences/openscience": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "jmiao24/paper2agent": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "baojie/shiji-kb": {
+      "disciplines": [
+        "history",
+        "literature"
+      ],
+      "majors": [
+        "history",
+        "literature"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "blazickjp/arxiv-mcp-server": {
+      "disciplines": [
+        "science",
+        "engineering"
+      ],
+      "majors": [
+        "computer-science",
+        "ai",
+        "physics",
+        "mathematics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "yb2460/harness-anything": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "freedomintelligence/openclaw-medical-skills": {
+      "disciplines": [
+        "medicine"
+      ],
+      "majors": [
+        "clinical",
+        "pharmacy",
+        "bioinformatics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "evomap/autoresearch": {
+      "disciplines": [],
+      "majors": [
+        "computer-science",
+        "ai"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "huangwb8/chineseresearchlatex": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "dw-dengwei/daily-arxiv-ai-enhanced": {
+      "disciplines": [
+        "science",
+        "engineering"
+      ],
+      "majors": [
+        "computer-science",
+        "ai",
+        "physics",
+        "mathematics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
+    },
+    "k-dense-ai/claude-scientific-writer": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-20",
+      "evidence": true
     }
   }
 }

@@ -25,33 +25,33 @@
       ]
     },
     "Imbad0202/academic-research-skills": {
-      "reviewed_at": "2026-10-25",
+      "reviewed_at": "2026-11-20",
       "documents": [
         {
           "path": "README.md",
           "ref": "main",
-          "blob_sha": "64627eda97188c2c2e9de4d2cb8174a45fa877f4",
-          "reviewed_commit": "09a5d0b15c7b50a20d9fc68d5947bb9897f438b5",
-          "source_url": "https://github.com/Imbad0202/academic-research-skills/blob/09a5d0b15c7b50a20d9fc68d5947bb9897f438b5/README.md"
+          "blob_sha": "f69d6797419171d323bb7689716fdf08231c0188",
+          "reviewed_commit": "23807f987024f2e038d12fd9e4e5d2a7cc228674",
+          "source_url": "https://github.com/Imbad0202/academic-research-skills/blob/23807f987024f2e038d12fd9e4e5d2a7cc228674/README.md"
         },
         {
           "path": "docs/SETUP.md",
           "ref": "main",
-          "blob_sha": "a4445ca1b8ee558364f5770ee11250b2fb81ed94",
-          "reviewed_commit": "09a5d0b15c7b50a20d9fc68d5947bb9897f438b5",
-          "source_url": "https://github.com/Imbad0202/academic-research-skills/blob/09a5d0b15c7b50a20d9fc68d5947bb9897f438b5/docs/SETUP.md"
+          "blob_sha": "3b32de8c6c35362ccaa626aa9ae327eccf16aea1",
+          "reviewed_commit": "23807f987024f2e038d12fd9e4e5d2a7cc228674",
+          "source_url": "https://github.com/Imbad0202/academic-research-skills/blob/23807f987024f2e038d12fd9e4e5d2a7cc228674/docs/SETUP.md"
         }
       ]
     },
     "Yuan1z0825/nature-skills": {
-      "reviewed_at": "2026-10-25",
+      "reviewed_at": "2026-11-20",
       "documents": [
         {
           "path": "README.md",
           "ref": "main",
-          "blob_sha": "3e038d2f64f279e65c8d19465b351a6cae0f3ba6",
-          "reviewed_commit": "8f28a61d42c2b251d224cdb0a59229df9879a68e",
-          "source_url": "https://github.com/Yuan1z0825/nature-skills/blob/8f28a61d42c2b251d224cdb0a59229df9879a68e/README.md"
+          "blob_sha": "62f97382b481541e1e57c1bce7141cd5c1c25c1c",
+          "reviewed_commit": "9bd1d0823f564752f0dcc701f9bd3a0001fffdc5",
+          "source_url": "https://github.com/Yuan1z0825/nature-skills/blob/9bd1d0823f564752f0dcc701f9bd3a0001fffdc5/README.md"
         }
       ]
     }
