@@ -610,7 +610,8 @@
   box-shadow: 0 4px 16px rgba(245, 158, 11, 0.08);
 }
 [data-theme="dark"] .repository-card:has(.medal-1) {
-  border-color: #78350f;
+  border-color: rgba(251, 191, 36, 0.36);
+  box-shadow: 0 4px 20px rgba(251, 191, 36, 0.08);
 }
 .repository-card:hover {
   border-color: #6ee7b7;
@@ -3071,9 +3072,14 @@ a:focus-visible,
   padding: 16px 0;
   margin-bottom: 16px;
 }
-.guide-tabs [aria-pressed="true"] {
-  background: var(--prs-tint);
+.beginner-guide .guide-tabs button[aria-pressed="true"] {
+  background: var(--prs-primary);
   border-color: var(--prs-primary);
+  color: #ffffff;
+  font-weight: 600;
+}
+[data-theme="dark"] .beginner-guide .guide-tabs button[aria-pressed="true"] {
+  color: #06281e;
 }
 .guide-basics h3 {
   font-size: 16px;
@@ -3459,4 +3465,35 @@ a:focus-visible,
   line-height: 19px;
   height: 38px;
   margin: 0;
+}
+
+/* Style unification: Table view curated Chinese summary & refined dark-mode medal/badge */
+.ranking-table .practical-description.has-curated-use {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 3px;
+}
+.ranking-table .curated-use-line {
+  font-size: 12px;
+  line-height: 17px;
+  height: 17px;
+  padding-left: 6px;
+  border-left-width: 2px;
+}
+.ranking-table .practical-description.has-curated-use .description-clamp {
+  font-size: 12px;
+  line-height: 17px;
+  -webkit-line-clamp: 1;
+  color: var(--prs-muted);
+  margin: 0;
+}
+[data-theme="dark"] .medal-1 {
+  color: #fcd34d;
+  background: rgba(251, 191, 36, 0.16);
+}
+[data-theme="dark"] .repository-card .install-mode-command {
+  background: rgba(16, 185, 129, 0.16);
+  color: #6ee7b7;
+  border-color: rgba(52, 211, 153, 0.28);
 }

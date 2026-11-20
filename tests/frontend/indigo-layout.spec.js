@@ -80,6 +80,7 @@ for (const width of [1280, 390])
   test(`one full-width advertisement follows the second row at ${width}px`, async ({
     page,
   }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setViewportSize({ width, height: 1160 });
     await page.goto("./#related=1&view=card");
     const ad = page.getByTestId("zhi1ke-ad");

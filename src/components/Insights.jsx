@@ -186,8 +186,8 @@ export default function Insights({
   );
   const colors = useMemo(() => createColorMaps(allItems), [allItems]);
   const dark = state.theme === "dark";
-  const muted = dark ? "#B8B3D0" : "#67638C",
-    grid = dark ? "#403B59" : "#E7E5F2";
+  const muted = dark ? "#94A3B8" : "#64748B",
+    grid = dark ? "#1E293B" : "#E2E8F0";
   const fmt = (value) =>
     new Intl.NumberFormat(state.lang === "zh" ? "zh-CN" : "en-US").format(
       value,
@@ -274,8 +274,8 @@ export default function Insights({
   const latest = new Map(data.trends.map((p) => [p.repo, p]));
   const trendDomain = data.trendRepos.map((item) => item.repo);
   const trendRange = dark
-    ? ["#B3AAEA", "#C1C3D3", "#73CBB6"]
-    : ["#4A3FBF", "#67638C", "#0E7C66"];
+    ? ["#34D399", "#38BDF8", "#FBBF24"]
+    : ["#0D9F6E", "#0284C7", "#D97706"];
   const trendDashes = [[], [7, 4], [2, 4]];
   const trendStyles = Object.fromEntries(
     trendDomain.map((repo, index) => [
@@ -425,11 +425,11 @@ export default function Insights({
                     fill: (datum) =>
                       datum.repo === data.growth[0]?.repo
                         ? dark
-                          ? "#B3AAEA"
-                          : "#6856CD"
+                          ? "#34D399"
+                          : "#0D9F6E"
                         : dark
-                          ? "#9589D7"
-                          : "#9487DE",
+                          ? "#10B981"
+                          : "#6EE7B7",
                   }}
                   tooltip={{
                     title: "repo",
@@ -557,11 +557,11 @@ export default function Insights({
                     fill: (datum) =>
                       state.task === datum.id
                         ? dark
-                          ? "#B3AAEA"
-                          : "#4A3FBF"
+                          ? "#34D399"
+                          : "#0D9F6E"
                         : dark
-                          ? "#80789E"
-                          : "#B3AEC9",
+                          ? "#475569"
+                          : "#CBD5E1",
                   }}
                   tooltip={{
                     title: "label",
@@ -784,9 +784,9 @@ export default function Insights({
                   }}
                   shapeField={() => "point"}
                   style={{
-                    fill: () => (dark ? "#B3AAEA" : "#6856CD"),
+                    fill: () => (dark ? "#34D399" : "#0D9F6E"),
                     fillOpacity: (datum) => (datum.highlight ? 0.95 : 0.25),
-                    stroke: () => (dark ? "#B3AAEA" : "#6856CD"),
+                    stroke: () => (dark ? "#34D399" : "#0D9F6E"),
                     r: (datum) => (datum.highlight ? 4 : 2.5),
                     lineWidth: 0.5,
                   }}
@@ -810,7 +810,7 @@ export default function Insights({
               </div>
               <div className="scatter-legend">
                 <span>
-                  <i style={{ background: dark ? "#B3AAEA" : "#6856CD" }} />
+                  <i style={{ background: dark ? "#34D399" : "#0D9F6E" }} />
                   {state.lang === "zh"
                     ? "深色：近 7 日增长前 3 · 浅色：其他项目"
                     : "Dark: top 3 by 7-day growth · Faint: other projects"}

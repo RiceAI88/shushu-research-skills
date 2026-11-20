@@ -113,7 +113,7 @@ export default function RepositoryTable({
         <div className="table-repository">
           {link(item)}
           <div className="table-description-line">
-            <SummaryText item={item} t={t} query={state.query} />
+            <SummaryText item={item} t={t} query={state.query} lang={state.lang} />
             {item.stale && (
               <Tooltip
                 title={t("staleReason")}
