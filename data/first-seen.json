@@ -307,6 +307,11 @@
       "first_seen_at": "2026-10-27T16:05:57Z",
       "first_seen_is_baseline": false
     },
+    "benboerba620/ai-signal": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T04:33:21Z",
+      "first_seen_is_baseline": false
+    },
     "bethww/lit-review": {
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
@@ -558,6 +563,11 @@
     "d6t/d6tflow": {
       "first_seen_date": "2026-10-30",
       "first_seen_at": "2026-10-30T02:03:55Z",
+      "first_seen_is_baseline": false
+    },
+    "daidaij/websearch-mcpserver": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T04:33:21Z",
       "first_seen_is_baseline": false
     },
     "damonwan1/autoscholarloop": {
@@ -1100,6 +1110,11 @@
       "first_seen_date": "2026-08-27",
       "first_seen_is_baseline": true
     },
+    "imchong/robot_learning_paper_notebooks": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T04:33:21Z",
+      "first_seen_is_baseline": false
+    },
     "imnmv/clauder": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
@@ -1137,6 +1152,11 @@
     "jiaaqiliu/awesome-vla-robotics": {
       "first_seen_date": "2026-11-14",
       "first_seen_at": "2026-11-14T06:02:17Z",
+      "first_seen_is_baseline": false
+    },
+    "jiassia/manuweave": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T04:33:21Z",
       "first_seen_is_baseline": false
     },
     "jihe520/mathmodelagent": {
@@ -1529,6 +1549,11 @@
       "first_seen_at": "2026-10-27T16:17:18Z",
       "first_seen_is_baseline": false
     },
+    "neuromechanist/research-skills": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T04:33:21Z",
+      "first_seen_is_baseline": false
+    },
     "norman-bury/research-writing-skill": {
       "first_seen_date": "2026-08-27",
       "first_seen_is_baseline": true
@@ -1734,6 +1759,11 @@
     "rayxbuilds/deep-learning-papers-reading-roadmap": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
+      "first_seen_is_baseline": false
+    },
+    "rayxbuilds/machine-learning-papers": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T04:33:21Z",
       "first_seen_is_baseline": false
     },
     "realxiaoze/humanoid-motion-intelligence": {
@@ -2285,6 +2315,11 @@
       "first_seen_at": "2026-10-28T05:55:35Z",
       "first_seen_is_baseline": false
     },
+    "yzbbds520/awesome-literature-review": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T04:33:21Z",
+      "first_seen_is_baseline": false
+    },
     "yzy1996/english-writing": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
@@ -2292,6 +2327,16 @@
     },
     "z-liu-xiugou/research-workbench-assistant": {
       "first_seen_date": "2026-09-28",
+      "first_seen_is_baseline": false
+    },
+    "zehchou/cn-economics-thesis-workflow-skill": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T04:33:21Z",
+      "first_seen_is_baseline": false
+    },
+    "zhangligong0826/law-paper-writing": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T04:33:21Z",
       "first_seen_is_baseline": false
     },
     "zhangyehao/zotero-fulltext-assistant": {

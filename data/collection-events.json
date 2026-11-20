@@ -2994,5 +2994,70 @@
     "at": "2026-11-19T14:16:09Z",
     "repo": "yeyeqian/codex-thesis-review-skills",
     "action": "added"
+  },
+  {
+    "at": "2026-11-20T04:14:48Z",
+    "repo": "nvidia-bionemo/nvmolkit",
+    "action": "removed",
+    "reasons": [
+      "missing_skill_signal",
+      "missing_academic_signal",
+      "missing_readme_academic_scope"
+    ]
+  },
+  {
+    "at": "2026-11-20T04:14:48Z",
+    "repo": "ygidtu/trackplot",
+    "action": "removed",
+    "reasons": [
+      "missing_skill_signal",
+      "missing_academic_signal",
+      "missing_readme_academic_scope"
+    ]
+  },
+  {
+    "at": "2026-11-20T04:14:48Z",
+    "repo": "zehchou/cn-economics-thesis-workflow-skill",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T04:14:48Z",
+    "repo": "benboerba620/ai-signal",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T04:14:48Z",
+    "repo": "rayxbuilds/machine-learning-papers",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T04:14:48Z",
+    "repo": "zhangligong0826/law-paper-writing",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T04:14:48Z",
+    "repo": "neuromechanist/research-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T04:14:48Z",
+    "repo": "imchong/robot_learning_paper_notebooks",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T04:14:48Z",
+    "repo": "yzbbds520/awesome-literature-review",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T04:14:48Z",
+    "repo": "daidaij/websearch-mcpserver",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-20T04:14:48Z",
+    "repo": "jiassia/manuweave",
+    "action": "added"
   }
 ]

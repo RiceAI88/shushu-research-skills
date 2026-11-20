@@ -5,87 +5,71 @@
     <link>https://riceai985.cc/</link>
     <description>每日自动更新的学术论文与科研 Agent Skill 排行榜 · Daily ranking of academic research agent skills on GitHub</description>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 19 Nov 2026 14:34:30 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Nov 2026 04:33:21 +0000</lastBuildDate>
     <atom:link href="https://riceai985.cc/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>google-research/paper-orchestra (4,850★, +4660/7d)</title>
-      <link>https://github.com/google-research/paper-orchestra</link>
-      <guid isPermaLink="false">https://riceai985.cc/#google-research/paper-orchestra</guid>
-      <description>PaperOrchestra is a multi-agent framework for automated AI research paper writing.</description>
-      <category>Paper Writing</category>
-      <pubDate>Thu, 19 Nov 2026 14:34:30 +0000</pubDate>
-    </item>
-    <item>
-      <title>ChenLiu-1996/figures4papers (12,284★, +1247/7d)</title>
-      <link>https://github.com/ChenLiu-1996/figures4papers</link>
-      <guid isPermaLink="false">https://riceai985.cc/#ChenLiu-1996/figures4papers</guid>
-      <description>My Python scripts to make high-quality figures for publications in top AI conferences and journals.</description>
+      <title>PDFMathTranslate/PDFMathTranslate (38,541★, +5/7d)</title>
+      <link>https://github.com/PDFMathTranslate/PDFMathTranslate</link>
+      <guid isPermaLink="false">https://riceai985.cc/#PDFMathTranslate/PDFMathTranslate</guid>
+      <description>[EMNLP 2025 Demo] PDF scientific paper translation with preserved formats - 基于 AI 完整保留排版的 PDF 文档全文双语翻译，支持 Google/DeepL/Ollama/OpenAI 等服务，提供 CLI/GUI/MCP/Docker/Zotero</description>
       <category>Discipline Specific</category>
-      <pubDate>Thu, 19 Nov 2026 14:34:30 +0000</pubDate>
+      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
     </item>
     <item>
-      <title>Imbad0202/academic-research-skills (57,720★, +1175/7d)</title>
-      <link>https://github.com/Imbad0202/academic-research-skills</link>
-      <guid isPermaLink="false">https://riceai985.cc/#Imbad0202/academic-research-skills</guid>
-      <description>Academic Research Skills for Claude Code: research → write → review → revise → finalize</description>
-      <category>Paper Writing</category>
-      <pubDate>Thu, 19 Nov 2026 14:34:30 +0000</pubDate>
-    </item>
-    <item>
-      <title>AIScientists-Dev/academic-humanizer (5,605★, +1169/7d)</title>
-      <link>https://github.com/AIScientists-Dev/academic-humanizer</link>
-      <guid isPermaLink="false">https://riceai985.cc/#AIScientists-Dev/academic-humanizer</guid>
-      <description>Strip AI-writing tells from papers and grant proposals (NSF/NIH), while keeping scholarly voice and tying claims to evidence. A skill for Claude Code, Codex, and MorphMind.</description>
-      <category>General Research</category>
-      <pubDate>Thu, 19 Nov 2026 14:34:30 +0000</pubDate>
-    </item>
-    <item>
-      <title>Yuan1z0825/nature-skills (54,217★, +990/7d)</title>
-      <link>https://github.com/Yuan1z0825/nature-skills</link>
-      <guid isPermaLink="false">https://riceai985.cc/#Yuan1z0825/nature-skills</guid>
-      <description>符合nature论文学术表达和科研绘图的Skill</description>
+      <title>SakanaAI/AI-Scientist (15,026★, +0/7d)</title>
+      <link>https://github.com/SakanaAI/AI-Scientist</link>
+      <guid isPermaLink="false">https://riceai985.cc/#SakanaAI/AI-Scientist</guid>
+      <description>The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery 🧑‍🔬</description>
       <category>Deep Research</category>
-      <pubDate>Thu, 19 Nov 2026 14:34:30 +0000</pubDate>
+      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
     </item>
     <item>
-      <title>K-Dense-AI/scientific-agent-skills (57,819★, +964/7d)</title>
-      <link>https://github.com/K-Dense-AI/scientific-agent-skills</link>
-      <guid isPermaLink="false">https://riceai985.cc/#K-Dense-AI/scientific-agent-skills</guid>
-      <description>Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 250,000+ scientists worldwide. 177 ready-to-use validated skills plus 100+ scientific databases covering biolo…</description>
+      <title>baojie/shiji-kb (3,797★, +3/7d)</title>
+      <link>https://github.com/baojie/shiji-kb</link>
+      <guid isPermaLink="false">https://riceai985.cc/#baojie/shiji-kb</guid>
+      <description></description>
+      <category>Deep Research</category>
+      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>FreedomIntelligence/OpenClaw-Medical-Skills (3,115★, +1/7d)</title>
+      <link>https://github.com/FreedomIntelligence/OpenClaw-Medical-Skills</link>
+      <guid isPermaLink="false">https://riceai985.cc/#FreedomIntelligence/OpenClaw-Medical-Skills</guid>
+      <description>The largest open-source medical AI skills library for OpenClaw🦞.</description>
       <category>Discipline Specific</category>
-      <pubDate>Thu, 19 Nov 2026 14:34:30 +0000</pubDate>
+      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
     </item>
     <item>
-      <title>Adkid-Zephyr/anti-defensive-writing-Skill (6,788★, +940/7d)</title>
-      <link>https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill</link>
-      <guid isPermaLink="false">https://riceai985.cc/#Adkid-Zephyr/anti-defensive-writing-Skill</guid>
-      <description>极致轻量｜阻止论文的防御性写作 | Anti-defensive writing for academic papers — 学术写作原则 Skill + prompt pack (CN/EN)</description>
-      <category>Paper Writing</category>
-      <pubDate>Thu, 19 Nov 2026 14:34:30 +0000</pubDate>
-    </item>
-    <item>
-      <title>HKUSTDial/Supervisor-Skills (12,984★, +677/7d)</title>
-      <link>https://github.com/HKUSTDial/Supervisor-Skills</link>
-      <guid isPermaLink="false">https://riceai985.cc/#HKUSTDial/Supervisor-Skills</guid>
-      <description>将博导十年科研经验炼化为可直接调用的 AI 技能。从 Idea 构思到论文投稿，你的 AI 科研副导师。</description>
-      <category>Discipline Specific</category>
-      <pubDate>Thu, 19 Nov 2026 14:34:30 +0000</pubDate>
-    </item>
-    <item>
-      <title>wdcpclover/ai4paper (5,289★, +482/7d)</title>
-      <link>https://github.com/wdcpclover/ai4paper</link>
-      <guid isPermaLink="false">https://riceai985.cc/#wdcpclover/ai4paper</guid>
-      <description>Zotero AI 插件(Zotero AI plugin):PDF 全文翻译(双语对照,尽量保持排版)· 划词翻译 · 文库知识库问答 · AI 精读 · 列表直显期刊分区 / 影响因子 · 2.4 亿文献检索一键入库 · 适配 Zotero 7–10 · 免安装网页版 app.ai4paper.pro</description>
+      <title>K-Dense-AI/claude-scientific-writer (2,588★, +3/7d)</title>
+      <link>https://github.com/K-Dense-AI/claude-scientific-writer</link>
+      <guid isPermaLink="false">https://riceai985.cc/#K-Dense-AI/claude-scientific-writer</guid>
+      <description>A general purpose scientific writer</description>
       <category>General Research</category>
-      <pubDate>Thu, 19 Nov 2026 14:34:30 +0000</pubDate>
+      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
     </item>
     <item>
-      <title>ScrapeCreators/social-media-research-skills (6,749★, +477/7d)</title>
-      <link>https://github.com/ScrapeCreators/social-media-research-skills</link>
-      <guid isPermaLink="false">https://riceai985.cc/#ScrapeCreators/social-media-research-skills</guid>
-      <description>AI agent skills for social media research. Outlier posts, comment mining, competitor teardowns, ad libraries &amp; trends across TikTok, Instagram, YouTube, Reddit, X, LinkedIn &amp; more. Powered by ScrapeC…</description>
+      <title>K-Dense-AI/k-dense-byok (1,462★, +2/7d)</title>
+      <link>https://github.com/K-Dense-AI/k-dense-byok</link>
+      <guid isPermaLink="false">https://riceai985.cc/#K-Dense-AI/k-dense-byok</guid>
+      <description>An AI co-scientist running on your desktop. Claude Science but better.</description>
       <category>General Research</category>
-      <pubDate>Thu, 19 Nov 2026 14:34:30 +0000</pubDate>
+      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>917Dhj/DeepPaperNote (1,412★, +16/7d)</title>
+      <link>https://github.com/917Dhj/DeepPaperNote</link>
+      <guid isPermaLink="false">https://riceai985.cc/#917Dhj/DeepPaperNote</guid>
+      <description>Turn one dense paper into an Obsidian note worth keeping: read the way its field reads it, linked to the papers already in your vault, and aimed at your own research. Agent skills for Claude Code, Co…</description>
+      <category>General Research</category>
+      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>matteocourthoud/awesome-causal-inference (1,214★, +0/7d)</title>
+      <link>https://github.com/matteocourthoud/awesome-causal-inference</link>
+      <guid isPermaLink="false">https://riceai985.cc/#matteocourthoud/awesome-causal-inference</guid>
+      <description>A curated list of causal inference libraries, resources, and applications.</description>
+      <category>Deep Research</category>
+      <pubDate>Fri, 20 Nov 2026 04:33:21 +0000</pubDate>
     </item>
   </channel>
 </rss>
