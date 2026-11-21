@@ -1038,6 +1038,10 @@ function Dashboard({ state, update }) {
               t,
               fmt,
             }}
+            onOpenGuide={() => {
+              update((s) => ({ ...s, repo: null }));
+              setGuideSection("basics");
+            }}
           />
         </DeferredFeature>
       )}

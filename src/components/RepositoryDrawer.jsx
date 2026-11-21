@@ -15,16 +15,16 @@ import { useFeedback } from "./FeedbackProvider";
 import { copyText } from "../clipboard";
 import {
   SummaryText,
-  PlatformTags,
-  InstallationActions,
   InstallationRequirements,
 } from "./PracticalInfo";
+import { SkillUsageGuide } from "./SkillUsageGuide";
 export function RepositoryDrawer({
   item,
   items,
   state,
   update,
   toggleCompare,
+  onOpenGuide,
   t,
   fmt,
 }) {
@@ -219,16 +219,12 @@ export function RepositoryDrawer({
       {item && (
         <div ref={contentRef} className="drawer-content" key={item.repo}>
           <SummaryText item={item} t={t} lang={state.lang} full />
-          <div className="drawer-platforms">
-            <span>{t("drAgent")}</span>
-            <PlatformTags item={item} t={t} />
-          </div>
-          <InstallationActions
+          <SkillUsageGuide
             item={item}
             lang={state.lang}
             t={t}
-            details
-            hideExtras
+            detailsInfo={installationDetails[item.repo]}
+            onOpenGuide={onOpenGuide}
           />
           <dl className="drawer-health">
             <div>

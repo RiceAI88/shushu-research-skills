@@ -1,0 +1,146 @@
+{
+  "K-Dense-AI/scientific-agent-skills": {
+    "scenario_zh": "科学数据分析与文献综述",
+    "scenario_en": "Scientific analysis & literature review",
+    "prompt_zh": "请使用已安装的 scientific-agent-skills，基于当前目录下的【experiment_data.csv】做一次探索性统计分析，对比对照组和实验组的显著性差异，并输出一张可直接用于期刊投稿的高清图表及完整 Python 代码。",
+    "prompt_en": "Use scientific-agent-skills to run an exploratory statistical analysis on [experiment_data.csv] in this folder, test group significance, and output a publication-ready figure with reproducible Python code.",
+    "output_zh": "自动选择对应科学分析技能，产出统计检验结果、可复现脚本与高清图表。",
+    "output_en": "Selects the relevant scientific skill to produce statistical test results, reproducible scripts, and publication-ready figures."
+  },
+  "Imbad0202/academic-research-skills": {
+    "scenario_zh": "文献调研 → 论文初稿全流程",
+    "scenario_en": "End-to-end literature to manuscript",
+    "prompt_zh": "请调用 academic-research-skills，围绕主题【多模态大模型在医学影像分割中的小样本泛化】先做一轮近 3 年核心文献脉络梳理，列出 5 个主要研究缺口，并起草一份包含引言与方法框架的论文大纲。",
+    "prompt_en": "Use academic-research-skills to survey key papers from the past 3 years on [few-shot generalization of multimodal LLMs in medical imaging], list 5 research gaps, and draft a structured paper outline.",
+    "output_zh": "按科研阶段输出文献脉络表、研究空白总结与结构化论文大纲。",
+    "output_en": "Produces a structured literature map, research gap summary, and manuscript outline."
+  },
+  "Yuan1z0825/nature-skills": {
+    "scenario_zh": "Nature 风格科研绘图与学术润色",
+    "scenario_en": "Nature-style figures & academic polishing",
+    "prompt_zh": "请使用 nature-figure 技能，读取当前目录下的【ablation_results.csv】，绘制一张符合 Nature 子刊排版规范的多子图对比折线图（色盲友好配色、Arial 字体、300 DPI PDF 输出），并附上可直接运行的脚本。",
+    "prompt_en": "Use the nature-figure skill to plot [ablation_results.csv] as a multi-panel Nature-style line figure with colorblind-safe colors, clean typography, and 300 DPI PDF export.",
+    "output_zh": "输出符合顶刊视觉规范的配色、版式与高清矢量图表脚本。",
+    "output_en": "Generates top-journal visual styling, figure script, and high-DPI vector output."
+  },
+  "wanshuiyin/Auto-claude-code-research-in-sleep": {
+    "scenario_zh": "机器学习实验设计与消融规划",
+    "scenario_en": "ML experiment & ablation planning",
+    "prompt_zh": "请按照 ARIS 研究工作流，阅读当前目录下的【baseline.py】和实验日志，针对【验证集精度停滞】提出 3 个可验证的改进假设，并设计包含控制变量与评估指标的消融实验清单。",
+    "prompt_en": "Following the ARIS research workflow, inspect [baseline.py] and logs in this folder, propose 3 testable hypotheses for [validation plateau], and draft a controlled ablation plan.",
+    "output_zh": "生成结构化研究假设、实验优先级与可执行消融方案。",
+    "output_en": "Produces structured hypotheses, experiment priorities, and a runnable ablation checklist."
+  },
+  "Imbad0202/academic-research-skills-codex": {
+    "scenario_zh": "Codex 科研写作与审稿返修",
+    "scenario_en": "Codex writing & revision workflow",
+    "prompt_zh": "请使用 academic-research-skills-codex 检查当前目录下的【manuscript.tex】与审稿意见【reviewers.md】，逐条整理审稿人核心关切，并给出中肯礼貌的 Point-by-Point Rebuttal 草稿与正文修改建议。",
+    "prompt_en": "Use academic-research-skills-codex to review [manuscript.tex] against [reviewers.md], categorize every reviewer concern, and draft a point-by-point rebuttal with manuscript edits.",
+    "output_zh": "输出逐条对应审稿意见的回复框架与具体段落修改建议。",
+    "output_en": "Outputs a point-by-point rebuttal draft paired with targeted manuscript revisions."
+  },
+  "Orchestra-Research/AI-Research-SKILLs": {
+    "scenario_zh": "AI 工程实验与复现脚手架",
+    "scenario_en": "AI research engineering & reproduction",
+    "prompt_zh": "请从 AI-Research-SKILLs 中选择合适技能，帮我为当前目录的【PyTorch 训练代码】检查数据泄漏风险、补充随机种子固定与评测脚本，并整理一份可复现的实验运行说明。",
+    "prompt_en": "Select the relevant skill from AI-Research-SKILLs to audit [my PyTorch training repo] for data leakage, add deterministic seeding and evaluation scripts, and document reproduction steps.",
+    "output_zh": "给出代码审查要点、复现配置补丁与标准化实验文档。",
+    "output_en": "Provides audit findings, reproducibility fixes, and standardized run instructions."
+  },
+  "HKUSTDial/Supervisor-Skills": {
+    "scenario_zh": "科研选题评估与博导视角评审",
+    "scenario_en": "Topic vetting & advisor-style review",
+    "prompt_zh": "请以 Supervisor-Skills 的博导评审视角，审阅我这份开题想法：【用轻量图神经网络预测高校实验室能耗峰值】。请直白指出选题的创新点短板、最可能被审稿人拒稿的 3 个硬伤，以及更稳妥的实验切入点。",
+    "prompt_en": "Using Supervisor-Skills from a doctoral advisor perspective, critique my proposal on [lightweight GNNs for campus energy peak forecasting]: point out novelty gaps, top 3 rejection risks, and a stronger experiment scope.",
+    "output_zh": "输出直击痛点的选题诊断报告、拒稿风险清单与研究收敛建议。",
+    "output_en": "Delivers a candid advisor critique, rejection risk list, and actionable scoping advice."
+  },
+  "ChenLiu-1996/figures4papers": {
+    "scenario_zh": "顶会/顶刊 Python 论文配图",
+    "scenario_en": "Conference/journal Python paper figures",
+    "prompt_zh": "请使用 scientific-figure-making 技能，将当前目录下的【metrics.csv】画成一张双栏宽度的分组柱状图（含误差棒与显著性标记），严格匹配顶会论文排版字号，输出 Python 绘图代码并导出为 PDF/SVG。",
+    "prompt_en": "Use the scientific-figure-making skill to turn [metrics.csv] into a double-column grouped bar chart with error bars and significance markers, exporting clean Python code plus PDF/SVG.",
+    "output_zh": "生成排版比例精确的 Python 绘图脚本与高清矢量论文插图。",
+    "output_en": "Produces publication-proportioned Python plotting scripts and vector PDF/SVG figures."
+  },
+  "Master-cai/Research-Paper-Writing-Skills": {
+    "scenario_zh": "CS / AI 论文结构与 Introduction 打磨",
+    "scenario_en": "ML/CV/NLP paper structure & Introduction",
+    "prompt_zh": "请使用 Research-Paper-Writing-Skills 审阅当前目录下的【intro_draft.tex】，按顶会论文逻辑检查“问题引出 → 现有方法局限 → 本文核心洞察 → 贡献列表”的衔接是否紧密，并给出逐段重写建议。",
+    "prompt_en": "Use Research-Paper-Writing-Skills to review [intro_draft.tex] for logical flow from problem motivation to limitations, key insight, and contributions, with paragraph-level rewrites.",
+    "output_zh": "产出逻辑断层诊断与结构紧致、论点鲜明的改写版本。",
+    "output_en": "Delivers structural gap analysis and tighter paragraph-level rewrites."
+  },
+  "ningzimu/codex-ppt-skill": {
+    "scenario_zh": "组会 / 答辩学术 PPT 自动生成",
+    "scenario_en": "Lab meeting & defense slide deck",
+    "prompt_zh": "请使用 codex-ppt-skill，基于当前目录下的论文草稿【paper.pdf】，提炼一份 10 页的组会汇报 PPT 大纲与每页视觉构图方案（包含背景痛点、方法流程图、核心实验对比和局限讨论），并生成 PPTX 文件。",
+    "prompt_en": "Use codex-ppt-skill to turn [paper.pdf] into a 10-slide research presentation outline with visual layout specs covering motivation, method diagram, main results, and limitations, then generate the PPTX.",
+    "output_zh": "输出结构清晰的答辩/组会幻灯片脚本与图文混排 PPT 文件。",
+    "output_en": "Generates a clear academic deck plan and visually composed PPTX slides."
+  },
+  "dwzhu-pku/PaperBanana": {
+    "scenario_zh": "学术方法框架图与示意图生成",
+    "scenario_en": "Academic method diagram generation",
+    "prompt_zh": "请使用 PaperBanana，根据我这段方法描述：【输入多光谱图像经特征金字塔编码，与文本提示做跨模态注意力融合后输出病灶分割掩码】，生成一张结构清晰、适合放在论文 Section 3 的模型整体架构示意图。",
+    "prompt_en": "Use PaperBanana to generate a clean Section 3 architecture diagram from this method description: [multispectral image enters an FPN encoder, fuses with text prompts via cross-attention, and outputs lesion masks].",
+    "output_zh": "自动拆解模块关系与数据流向，生成论文级学术架构示意图。",
+    "output_en": "Decomposes modules and data flow into a publication-style academic schematic."
+  },
+  "larashero3-dotcom/lieflat-charts": {
+    "scenario_zh": "交互式数据可视化图表",
+    "scenario_en": "Interactive HTML data visualization",
+    "prompt_zh": "请使用 lieflat-charts 读取当前目录的【survey_data.csv】，制作一个可交互筛选各年份与分组指标的 HTML 数据看板，支持悬停查看精确数值与一键导出图片。",
+    "prompt_en": "Use lieflat-charts to turn [survey_data.csv] into an interactive HTML chart view with year/group filtering, hover tooltips, and image export.",
+    "output_zh": "生成美观、可直接用浏览器打开汇报的交互式 HTML 图表页。",
+    "output_en": "Produces a polished standalone HTML interactive visualization ready for demos."
+  },
+  "Adkid-Zephyr/anti-defensive-writing-Skill": {
+    "scenario_zh": "消除学术写作中的“防御性表达”",
+    "scenario_en": "Remove defensive academic writing",
+    "prompt_zh": "请使用 anti-defensive-writing 技能通读我的论文段落【discussion_draft.md】，标出所有过度铺垫、自我削弱或逃避主论点的“防御性句子”，并改成论点直接、证据扎实、不卑不亢的学术表达。",
+    "prompt_en": "Use anti-defensive-writing on [discussion_draft.md] to flag hedging or overly defensive phrasing and rewrite each sentence into direct, evidence-backed academic prose.",
+    "output_zh": "列出每处防御性表述的问题原因与前后改写对照表。",
+    "output_en": "Lists flagged defensive phrases with explanations and direct before/after rewrites."
+  },
+  "ScrapeCreators/social-media-research-skills": {
+    "scenario_zh": "社媒传播数据与评论主题分析",
+    "scenario_en": "Social media & comment research",
+    "prompt_zh": "请使用 social-media-research-skills，对当前目录收集的【comments_sample.csv】进行高互动帖特征拆解与评论情感/主题聚类，总结受众最关注的前 5 个痛点并给出代表性原话摘录。",
+    "prompt_en": "Use social-media-research-skills on [comments_sample.csv] to identify outlier engagement patterns, cluster comment themes, and summarize the top 5 audience concerns with representative quotes.",
+    "output_zh": "输出爆款特征分析、评论主题分布与带原文佐证的研究摘要。",
+    "output_en": "Produces outlier patterns, comment clusters, and quote-backed research summaries."
+  },
+  "jihe520/MathModelAgent": {
+    "scenario_zh": "数学建模全流程与竞赛论文撰写",
+    "scenario_en": "Mathematical modeling & paper drafting",
+    "prompt_zh": "请使用 MathModelAgent 阅读当前目录的赛题【problem.pdf】与附件数据【data.xlsx】，先完成问题重述、模型假设与符号说明，再给出问题一的数学模型构建、Python 求解代码及结果灵敏度分析。",
+    "prompt_en": "Use MathModelAgent on [problem.pdf] and [data.xlsx] to outline assumptions and notation, formulate the mathematical model for Problem 1, run Python solvers, and perform sensitivity analysis.",
+    "output_zh": "输出完整建模思路、可运行求解代码、图表与规范竞赛论文段落。",
+    "output_en": "Produces modeling formulation, executable solver scripts, charts, and paper sections."
+  },
+  "WUBING2023/PaperSpine": {
+    "scenario_zh": "文献检索、分析与论文交付流水线",
+    "scenario_en": "Literature, analysis & manuscript pipeline",
+    "prompt_zh": "请使用 PaperSpine 围绕我的课题【绿色氢能催化剂寿命衰减机理】，先梳理近 5 年高引综述的核心分类体系，再帮我设计实验数据整理表格与论文 Results 部分的写作骨架。",
+    "prompt_en": "Use PaperSpine on [degradation mechanisms of green hydrogen catalysts] to map taxonomy from recent reviews and draft a data summary table plus Results section skeleton.",
+    "output_zh": "产出文献分类表、数据汇总模板与结构化论文写作骨架。",
+    "output_en": "Delivers a literature taxonomy, analysis table template, and Results section skeleton."
+  },
+  "zLanqing/codex-claude-academic-skills": {
+    "scenario_zh": "论文精读报告与学术文档/计算",
+    "scenario_en": "Paper reading reports & academic computing",
+    "prompt_zh": "请使用 office-academic-skill 精读当前目录下的【target_paper.pdf】，输出一份结构化文献阅读笔记（研究问题、核心方法、关键实验结论、方法局限与对我课题的启发），并整理为可直接汇报的提纲。",
+    "prompt_en": "Use office-academic-skill to read [target_paper.pdf] and produce a structured reading report covering research question, method, key findings, limitations, and takeaways for my project.",
+    "output_zh": "产出条理清晰的论文精读报告与组会汇报要点提纲。",
+    "output_en": "Generates a structured paper reading report and presentation bullet points."
+  },
+  "AIScientists-Dev/academic-humanizer": {
+    "scenario_zh": "去除 AI 腔调、保留学术原声",
+    "scenario_en": "De-AI academic prose while preserving evidence",
+    "prompt_zh": "请使用 academic-humanizer 润色我这段英文摘要【abstract_draft.txt】：去除高频 AI 套话与过度工整的排比句，严格保留所有实验数值、专业术语与引用标记，并列出逐句修改说明。",
+    "prompt_en": "Use academic-humanizer to polish [abstract_draft.txt]: remove formulaic AI phrasing while strictly preserving every number, technical term, and citation, and show a sentence-by-sentence change log.",
+    "output_zh": "输出自然克制的学术英文改写稿，以及零篡改数据的逐句对照说明。",
+    "output_en": "Delivers natural scholarly rewrites with a sentence-by-sentence change log preserving all facts."
+  }
+}
