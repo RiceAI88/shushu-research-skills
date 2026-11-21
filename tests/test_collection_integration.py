@@ -35,6 +35,15 @@ class CollectionIntegrationTest(unittest.TestCase):
             self.assertEqual(item['repository_kind'], expected)
             self.assertEqual(item['skills_count_complete'], not tree['truncated'])
 
+    def test_unchanged_push_date_reuses_previous_verified_skill_counts(self):
+        item = {'repo': 'a/research', 'last_push_date': '2026-11-20'}
+        previous = {'a/research': {'last_push_date': '2026-11-20', 'skills_count': 5, 'skills_count_complete': True, 'repository_kind': 'skill'}}
+        with patch.object(updater, 'github_request') as req:
+            updater.enrich_skill_counts([item], None, previous_snapshot=previous)
+            req.assert_not_called()
+        self.assertEqual(item['skills_count'], 5)
+        self.assertEqual(item['repository_kind'], 'skill')
+
     def test_history_bootstrap_preserves_auxiliary_metadata_on_request_failure(self):
         raw = collection.cached_metadata({'repo': 'a/research', 'stars': 100, 'forks': 9, 'open_issues': 3, 'watchers': 8, 'size_kb': 20, 'has_issues': True, 'license': {'spdx_id': 'MIT'}, 'homepage': 'https://example.org'})
         self.assertEqual(raw['forksCount'], 9)

@@ -166,5 +166,77 @@
         "task_en": "Polish academic manuscripts and grant proposals"
       }
     ]
+  },
+  {
+    "id": "humanities-history",
+    "title_zh": "文史与人文论证",
+    "title_en": "Literature & historical humanities",
+    "audience_zh": "文学、历史学、语言学与艺术人文学者",
+    "audience_en": "Literature, history, linguistics and humanities scholars",
+    "steps": [
+      {
+        "repo": "baojie/shiji-kb",
+        "task_zh": "检索古籍史料、年代索引与知识图谱溯源",
+        "task_en": "Trace classical historical records and knowledge graphs"
+      },
+      {
+        "repo": "tizzy916/humanities-writing-companion",
+        "task_zh": "构建长篇人文学术问题意识与论证结构",
+        "task_en": "Develop long-form humanities thesis questions and arguments"
+      },
+      {
+        "repo": "Imbad0202/academic-research-skills",
+        "task_zh": "梳理学术脉络、修订章节与规范引文格式",
+        "task_en": "Synthesize literature, revise chapters and format citations"
+      }
+    ]
+  },
+  {
+    "id": "law-politics",
+    "title_zh": "法学与政治学科研",
+    "title_en": "Law & political science research",
+    "audience_zh": "法学、政治学与国际关系研究者",
+    "audience_en": "Law, political science and international relations researchers",
+    "steps": [
+      {
+        "repo": "openags/paper-search-mcp",
+        "task_zh": "跨库检索学术文献与英文判例/理论前沿",
+        "task_en": "Search academic literature and theoretical references"
+      },
+      {
+        "repo": "deborahbennet636-rgb/law-paper-writing",
+        "task_zh": "搭建法学教义/比较法框架、整理学说综述与法条案例引注",
+        "task_en": "Structure doctrinal/comparative frameworks, legal citations and journal fit"
+      },
+      {
+        "repo": "Adkid-Zephyr/anti-defensive-writing-Skill",
+        "task_zh": "消除防御性套话、强化论证判断力与证据边界",
+        "task_en": "Remove defensive hedging and sharpen argumentative clarity"
+      }
+    ]
+  },
+  {
+    "id": "engineering-simulation",
+    "title_zh": "工学仿真与实验复现",
+    "title_en": "Engineering simulation & reproduction",
+    "audience_zh": "机械机器人、材料与工程计算研究者",
+    "audience_en": "Robotics, mechanical, materials and engineering researchers",
+    "steps": [
+      {
+        "repo": "isaac-sim/IsaacLab",
+        "task_zh": "搭建机器人强化学习与多物理场传感器 GPU 仿真环境",
+        "task_en": "Build GPU-accelerated robotics learning and physics simulation environments"
+      },
+      {
+        "repo": "sapientinc/PRAXIST",
+        "task_zh": "接管可运行实验代码、管理多智能体评测契约与迭代复现",
+        "task_en": "Coordinate reproducible experiment evaluation and multi-generation synthesis"
+      },
+      {
+        "repo": "ChenLiu-1996/figures4papers",
+        "task_zh": "绘制双栏论文对比实验图表与高清矢量插图",
+        "task_en": "Plot publication-ready experimental comparison figures"
+      }
+    ]
   }
 ]

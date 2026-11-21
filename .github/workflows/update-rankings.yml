@@ -52,10 +52,25 @@ jobs:
 
       - name: Commit updated rankings
         id: commit
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: update academic research skill rankings"
-          file_pattern: data/repository-catalog.json data/collection-report.json data/collection-events.json README.md data/first-seen.json data/editorial-status.json data/rankings.json data/rankings.js data/history.js data/rankings.csv data/history/*.json sitemap.xml feed.xml assets/og-cover.svg assets/og-cover.png assets/og-cover-en.svg assets/og-cover-en.png reports/*.html
+        run: |
+          git config user.name "RiceAI88"
+          git config user.email "275014869+RiceAI88@users.noreply.github.com"
+          git add data/repository-catalog.json data/collection-report.json data/collection-events.json README.md data/first-seen.json data/editorial-status.json data/rankings.json data/rankings.js data/history.js data/rankings.csv data/history/*.json sitemap.xml feed.xml assets/og-cover.svg assets/og-cover.png assets/og-cover-en.svg assets/og-cover-en.png reports/*.html
+          if git diff --cached --quiet; then
+            echo "changes_detected=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "chore: update academic research skill rankings"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              echo "changes_detected=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Push rejected (remote main advanced during collection); rebasing and retrying ($attempt/3)..."
+            git fetch origin main
+            git rebase -X theirs origin/main
+          done
+          exit 1
 
       - name: Redeploy GitHub Pages
         # The auto-commit uses GITHUB_TOKEN, whose pushes do NOT trigger other
@@ -80,6 +95,34 @@ jobs:
           path: data/collection-report.json
           if-no-files-found: ignore
           retention-days: 30
+
+      - name: Close failure issue on recovery
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'auto-update-failure',
+              per_page: 5,
+            });
+            for (const issue of existing.data) {
+              const runLink = `[run #${context.runId}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`;
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `Resolved by successful ranking update at ${new Date().toISOString()} (${runLink}).`,
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed',
+              });
+            }
 
       - name: Notify on failure
         if: failure()

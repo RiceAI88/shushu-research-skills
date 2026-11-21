@@ -279,6 +279,9 @@ NEGATIVE_TERMS = [
     "fitness",
     "meal",
     "travel",
+    "mirror of",
+    "phd, mres, mphil applications",
+    "水论文skill",
 ]
 
 # Signals that a repository verifies the citations/references it produces —
@@ -961,10 +964,17 @@ def collect_repositories(config: dict[str, Any], token: str | None) -> collectio
     def priority(repo):
         old = entries.get(repo["nameWithOwner"].lower(), {}).get("metadata", {}).get("_readme_evidence", {})
         corpus = text_corpus(repo)
-        # Relevant high-star unreviewed candidates first; cached decisions cost no API requests.
+        has_skill = any(term in corpus for term in SKILL_TERMS) or any(term in corpus for term in discovery.CAPABILITY)
+        has_academic = (
+            any(term in corpus for term in ACADEMIC_TERMS)
+            or any(term in corpus for term in discovery.ACADEMIC)
+            or bool(discovery.DISCIPLINE_PURPOSE.search(corpus))
+        )
+        # Relevant high-star unreviewed candidates with BOTH skill + academic signals first; cached decisions cost no API requests.
         return (
             bool(old.get("checked_at")),
-            not (any(term in corpus for term in discovery.ACADEMIC) or discovery.DISCIPLINE_PURPOSE.search(corpus)),
+            not (has_skill and has_academic),
+            not has_academic,
             -int(repo.get("stargazerCount") or 0),
             old.get("checked_at", ""),
             repo["nameWithOwner"].lower(),
@@ -1122,9 +1132,31 @@ def count_skill_files(full_name: str, branch: str, token: str | None) -> int | N
     return count if count or not data.get("truncated") else None
 
 
-def enrich_skill_counts(items: list[dict[str, Any]], token: str | None) -> None:
-    """Identify project type from file evidence; zero in a truncated tree is unknown."""
+def enrich_skill_counts(
+    items: list[dict[str, Any]],
+    token: str | None,
+    previous_snapshot: dict[str, Any] | None = None,
+) -> None:
+    """Identify project type from file evidence; zero in a truncated tree is unknown.
+
+    Reuses verified skill counts from ``previous_snapshot`` when a repository's
+    ``last_push_date`` has not changed, saving ~450 GitHub Core API requests per
+    daily run and preventing rate-limit exhaustion under GITHUB_TOKEN (1000/hr).
+    """
+    prev_map = previous_snapshot if isinstance(previous_snapshot, dict) else {}
     for item in items:
+        prev = prev_map.get(item.get("repo", "")) if isinstance(prev_map, dict) else None
+        if (
+            isinstance(prev, dict)
+            and item.get("last_push_date")
+            and item.get("last_push_date") == prev.get("last_push_date")
+            and prev.get("skills_count_complete") is True
+            and prev.get("repository_kind") in ("skill", "related")
+        ):
+            item["skills_count"] = prev.get("skills_count")
+            item["skills_count_complete"] = True
+            item["repository_kind"] = prev["repository_kind"]
+            continue
         count, complete = None, False
         if item.get("refresh_status") != "pending":
             try:
@@ -1132,7 +1164,9 @@ def enrich_skill_counts(items: list[dict[str, Any]], token: str | None) -> None:
                 count = count_skill_files_in_tree(tree.get("tree") or [])
                 complete = not tree.get("truncated", False)
             except (urllib.error.URLError, TimeoutError, OSError):
-                pass
+                if isinstance(prev, dict) and prev.get("repository_kind") in ("skill", "related"):
+                    count = prev.get("skills_count")
+                    complete = bool(prev.get("skills_count_complete"))
             time.sleep(0.15)
         item["skills_count"] = count
         item["skills_count_complete"] = complete
@@ -1199,15 +1233,19 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
             return False
 
     today_skills = [item for item in skills if added_today(item)]
+    editorial_platforms = load_json(ROOT / "config" / "editorial.json", {}).get("platforms", {})
+    if not isinstance(editorial_platforms, dict):
+        editorial_platforms = {}
 
     def preview_rows(entries: list[dict[str, Any]], limit: int) -> str:
         rows = []
         for position, item in enumerate(entries[:limit], 1):
             delta = item.get("star_delta_7d") or 0
             growth = f"{delta:+,}" if delta else "—"
+            agents = item.get("agents") or editorial_platforms.get(item.get("repo", ""), [])
             rows.append(
                 f"| {position} | [{markdown_escape(item['repo'])}]({item['url']}) "
-                f"| {item['stars']:,} | {growth} | {markdown_escape(agents_to_label(item.get('agents', [])))} "
+                f"| {item['stars']:,} | {growth} | {markdown_escape(agents_to_label(agents))} "
                 f"| {markdown_escape(truncate(item.get('description', ''), 90)) or '仓库未提供简介'} |"
             )
         return "\n".join(rows)
@@ -1404,10 +1442,33 @@ def render_csv(items: list[dict[str, Any]]) -> None:
             )
 
 
+_BACKEND_ONLY_JS_FIELDS = frozenset({
+    "default_branch",
+    "has_discussions",
+    "has_issues",
+    "has_wiki",
+    "metadata_checked_at",
+    "pending_reason",
+    "previous_names",
+    "size_kb",
+    "star_delta_1d",
+    "watchers",
+})
+
+
 def render_data_js(data: dict[str, Any]) -> str:
-    # Compact separators: these files are machine-consumed by the dashboard;
-    # indenting them tripled the transfer size of history.js for no benefit.
-    payload = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+    # Compact separators and strip backend-only collection metadata not read by
+    # the web dashboard (full fields remain in data/rankings.json).
+    slim_data = {
+        **data,
+        "items": [
+            {k: v for k, v in item.items() if k not in _BACKEND_ONLY_JS_FIELDS}
+            if isinstance(item, dict)
+            else item
+            for item in data.get("items", [])
+        ],
+    }
+    payload = json.dumps(slim_data, ensure_ascii=False, separators=(",", ":"))
     return f"window.ACADEMIC_SKILLS_RANKINGS={payload};\n"
 
 
@@ -1417,6 +1478,8 @@ def render_history_js(history_payload: dict[str, Any]) -> str:
 
 
 def write_outputs(data: dict[str, Any], window_snapshot: dict[str, Any] | None = None) -> None:
+    if isinstance(data.get("items"), list):
+        attach_curated_uses(data["items"])
     DATA_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     DATA_JS_PATH.write_text(render_data_js(data), encoding="utf-8")
     history = load_history_snapshots()
@@ -1477,7 +1540,7 @@ def build_dataset(
     attach_curated_uses(items)
 
     if enrich_skills:
-        enrich_skill_counts(items, token)
+        enrich_skill_counts(items, token, previous_snapshot=previous)
 
     generated_at = now.replace(microsecond=0).isoformat().replace("+00:00", "Z")
     data = {

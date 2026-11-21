@@ -46,6 +46,8 @@ test("website build excludes development code and keeps monthly report assets", 
     "node_modules",
     "assets/app.js",
     "docs/superpowers",
+    "data/repository-catalog.json",
+    "data/history",
   ])
     await assert.rejects(access("dist/" + name));
   const report = await readFile("dist/reports/index.html", "utf8");

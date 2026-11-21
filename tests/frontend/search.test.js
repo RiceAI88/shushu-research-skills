@@ -107,5 +107,10 @@ test("highlight preserves source text and case, merges overlaps, treats regex ch
 test("task suggestions correspond to known intent and do not infer tasks for arbitrary names", () => {
   assert.ok(suggestedTaskIds("润色").includes("write"));
   assert.ok(suggestedTaskIds("figure").includes("figures"));
+  assert.ok(suggestedTaskIds("幻灯片").includes("figures"));
+  assert.ok(suggestedTaskIds("单细胞").includes("analyze"));
+  assert.ok(suggestedTaskIds("数学建模").includes("compute"));
+  assert.ok(suggestedTaskIds("文献综述").includes("find"));
+  assert.ok(suggestedTaskIds("返修").includes("review"));
   assert.deepEqual(suggestedTaskIds("owner/exact-repo"), []);
 });

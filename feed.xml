@@ -8,7 +8,15 @@
     <lastBuildDate>Sat, 21 Nov 2026 10:15:45 +0000</lastBuildDate>
     <atom:link href="https://riceai985.cc/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>PDFMathTranslate/PDFMathTranslate (38,572★, +6/7d)</title>
+      <title>scutan90/DeepLearning-500-questions (57,727★, +0/7d)</title>
+      <link>https://github.com/scutan90/DeepLearning-500-questions</link>
+      <guid isPermaLink="false">https://riceai985.cc/#scutan90/DeepLearning-500-questions</guid>
+      <description>深度学习500问，以问答形式对常用的概率知识、线性代数、机器学习、深度学习、计算机视觉等热点问题进行阐述，以帮助自己及有需要的读者。 全书分为18个章节，50余万字。由于水平有限，书中不妥之处恳请广大读者批评指正。 未完待续............ 如有意合作，联系scutjy2015@163.com 版权所有，违权必究 Tan 2018.06</description>
+      <category>Deep Research</category>
+      <pubDate>Sat, 21 Nov 2026 10:15:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>PDFMathTranslate/PDFMathTranslate (38,572★, +0/7d)</title>
       <link>https://github.com/PDFMathTranslate/PDFMathTranslate</link>
       <guid isPermaLink="false">https://riceai985.cc/#PDFMathTranslate/PDFMathTranslate</guid>
       <description>[EMNLP 2025 Demo] PDF scientific paper translation with preserved formats - 基于 AI 完整保留排版的 PDF 文档全文双语翻译，支持 Google/DeepL/Ollama/OpenAI 等服务，提供 CLI/GUI/MCP/Docker/Zotero</description>
@@ -16,7 +24,15 @@
       <pubDate>Sat, 21 Nov 2026 10:15:45 +0000</pubDate>
     </item>
     <item>
-      <title>immersive-translate/immersive-translate (19,860★, +2/7d)</title>
+      <title>Leey21/awesome-ai-research-writing (36,211★, +0/7d)</title>
+      <link>https://github.com/Leey21/awesome-ai-research-writing</link>
+      <guid isPermaLink="false">https://riceai985.cc/#Leey21/awesome-ai-research-writing</guid>
+      <description>Elevate your AI research writing, no more tedious polishing ✨</description>
+      <category>Paper Writing</category>
+      <pubDate>Sat, 21 Nov 2026 10:15:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>immersive-translate/immersive-translate (19,860★, +0/7d)</title>
       <link>https://github.com/immersive-translate/immersive-translate</link>
       <guid isPermaLink="false">https://riceai985.cc/#immersive-translate/immersive-translate</guid>
       <description>沉浸式双语网页翻译扩展 , 支持输入框翻译， 鼠标悬停翻译， PDF, Epub, 字幕文件, TXT 文件翻译 - Immersive Dual Web Page Translation Extension</description>
@@ -32,11 +48,19 @@
       <pubDate>Sat, 21 Nov 2026 10:15:45 +0000</pubDate>
     </item>
     <item>
-      <title>SakanaAI/AI-Scientist (15,029★, +2/7d)</title>
+      <title>SakanaAI/AI-Scientist (15,029★, +0/7d)</title>
       <link>https://github.com/SakanaAI/AI-Scientist</link>
       <guid isPermaLink="false">https://riceai985.cc/#SakanaAI/AI-Scientist</guid>
       <description>The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery 🧑‍🔬</description>
       <category>Deep Research</category>
+      <pubDate>Sat, 21 Nov 2026 10:15:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>aiming-lab/AutoResearchClaw (14,913★, +0/7d)</title>
+      <link>https://github.com/aiming-lab/AutoResearchClaw</link>
+      <guid isPermaLink="false">https://riceai985.cc/#aiming-lab/AutoResearchClaw</guid>
+      <description>Fully autonomous &amp; self-evolving research from idea to paper. Chat an Idea. Get a Paper. 🦞</description>
+      <category>General Research</category>
       <pubDate>Sat, 21 Nov 2026 10:15:45 +0000</pubDate>
     </item>
     <item>
@@ -45,30 +69,6 @@
       <guid isPermaLink="false">https://riceai985.cc/#xmu-xiaoma666/External-Attention-pytorch</guid>
       <description>🍀 Pytorch implementation of various Attention Mechanisms, MLP, Re-parameter, Convolution, which is helpful to further understand papers.⭐⭐⭐</description>
       <category>Literature Review</category>
-      <pubDate>Sat, 21 Nov 2026 10:15:45 +0000</pubDate>
-    </item>
-    <item>
-      <title>yzhao062/anomaly-detection-resources (9,457★, +0/7d)</title>
-      <link>https://github.com/yzhao062/anomaly-detection-resources</link>
-      <guid isPermaLink="false">https://riceai985.cc/#yzhao062/anomaly-detection-resources</guid>
-      <description>Anomaly detection related books, papers, videos, and toolboxes. Last update late 2025 for LLM and VLM works!</description>
-      <category>Deep Research</category>
-      <pubDate>Sat, 21 Nov 2026 10:15:45 +0000</pubDate>
-    </item>
-    <item>
-      <title>isaac-sim/IsaacLab (8,693★, +3/7d)</title>
-      <link>https://github.com/isaac-sim/IsaacLab</link>
-      <guid isPermaLink="false">https://riceai985.cc/#isaac-sim/IsaacLab</guid>
-      <description>Unified framework for robot learning with multi-physics/renderer support</description>
-      <category>Discipline Specific</category>
-      <pubDate>Sat, 21 Nov 2026 10:15:45 +0000</pubDate>
-    </item>
-    <item>
-      <title>ningzimu/codex-ppt-skill (8,078★, +4/7d)</title>
-      <link>https://github.com/ningzimu/codex-ppt-skill</link>
-      <guid isPermaLink="false">https://riceai985.cc/#ningzimu/codex-ppt-skill</guid>
-      <description>GPT-Image-2 PPT Generator Skill for Creating Image-Based PowerPoint Presentations in Codex and Other Skill-Compatible Agents</description>
-      <category>Deep Research</category>
       <pubDate>Sat, 21 Nov 2026 10:15:45 +0000</pubDate>
     </item>
   </channel>

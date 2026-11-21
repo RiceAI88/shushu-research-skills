@@ -74,8 +74,10 @@
       "\"paper writing\"",
       "\"literature review\"",
       "\"research workflow\"",
-      "\"科研\"",
-      "\"论文\""
+      "\"科研\" \"skill\"",
+      "\"论文\" \"skill\"",
+      "\"科研\" \"agent\"",
+      "\"论文\" \"agent\""
     ],
     "readme_budget": 280,
     "discipline_queries": [
@@ -97,8 +99,16 @@
       "\"art history\" \"skill\"",
       "\"agronomy\" \"skill\"",
       "\"crop\" \"research\" \"skill\"",
+      "\"archaeology\" \"skill\"",
+      "\"veterinary\" \"skill\"",
+      "\"remote sensing\" \"skill\"",
+      "\"academic poster\" \"skill\"",
+      "\"mathematical modeling\" \"skill\"",
       "\"文学\" \"skill\"",
-      "\"史料\" \"skill\""
+      "\"史料\" \"skill\"",
+      "\"古籍\" \"skill\"",
+      "\"法学\" \"skill\"",
+      "\"计量\" \"skill\""
     ]
   }
 }

@@ -2528,6 +2528,346 @@
     "zyhsechub/chinese-thesis-workbench-skill": {
       "first_seen_date": "2026-09-27",
       "first_seen_is_baseline": false
+    },
+    "scutan90/DeepLearning-500-questions": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Leey21/awesome-ai-research-writing": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "aiming-lab/AutoResearchClaw": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Dod-o/Statistical-Learning-Method_Code": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Companion-Inc/feynman": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Future-House/paper-qa": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "HKUDS/AI-Researcher": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "MARKTECHPOST-AI-MEDIA-INC/AI-Agents-Projects-Tutorials": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "52CV/CV-Surveys": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "wuyoscar/AISafetyHot": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "PKU-DAIR/AutoSci": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "InternScience/InternAgent": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "tsinghua-fib-lab/AgentSociety": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "OpenRaiser/NanoResearch": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "mattprusak/autoresearch-genealogy": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "BaiShuanghao/Awesome-Robotics-Manipulation": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "bitzhangcy/Neural-PDE-Solver": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "yzlin286-wq/Deepscient": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "luwill/research-skills": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "https-deeplearning-ai/agentic-ai-public": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "ZimoLiao/scholaraio": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "XMUDeepLIT/Awesome-Self-Evolving-Agents": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "qwwzdyj/AIA-Academic-Illustrator-": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Lylll9436/Paper-Polish-Workflow-skill": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "MLNLP-World/MyArxiv": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "ysyecust/lecture-to-notes": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Rimagination/good-question": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "ZJU-REAL/Polaris": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "yzhao062/anywhere-agents": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Socialpranker/deepdive": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "jing1312/nature-figure-skill": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "nengong/download-anything": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "zzp1221/Research-Assistant-Agent": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "skJack/research-workflow": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "jadense-ai/jadense-in-zotero": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "DrCatHicks/informed-patient": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "OpenRaiser/PaperFlow": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Golden2002/legal-research-skill": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "SGloria/research-paper-pipeline": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Rimagination/good-story": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "THUROI0787/absent-author": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Francis1998/scholar-rag-agent": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "jiankang1991/nsfc-benzi-audit": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "snipp-zha/Paper-to-patent-Skill": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "YihongT/CoAutoResearch": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Rimagination/easyplot": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "GRIND-Lab-Core/night_owl_research_agent": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "frypan05/philosopher-OKF": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "DingyangLyu/MatClaw": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "CZ600/AutoDocxProofread": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "swaruplab/operon": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "fazal0055/zotero-ceravin-research-desk": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "xyzlll506/paperwalk": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "FUNFUN412/skill-find-papers": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "zengrong233/awesome-ai-research-writing-skill": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "givemotion/givemotion": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "HKUSTDial/Ducktor": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "calkit/calkit": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "lisresearchgroup/math-rsi": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "Zaoqu-Liu/ScienceClaw": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "wanghao9610/STAR": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "russellbrenner/jurisd": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "blurryface13/asteria-agent": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "PigeonDan1/paper_claw": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "kaust-ark/ARK": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "KeWang0622/MRFoundry": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "uw-ssec/savvy": {
+      "first_seen_date": "2026-11-20",
+      "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "LLMBook-zh/LLMBook-zh.github.io": {
+      "first_seen_date": "2026-11-21",
+      "first_seen_at": "2026-11-21T10:15:45Z",
+      "first_seen_is_baseline": false
     }
   }
 }

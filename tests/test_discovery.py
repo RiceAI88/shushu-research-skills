@@ -198,3 +198,36 @@ class HumanitiesResearchAdmissionTest(unittest.TestCase):
     def test_generic_design_philosophy_does_not_become_humanities_research(self):
         text = '# Software design philosophy\nA Claude Code skill for building software and architecture.\n## Usage\nInput code and output a design.'
         self.assertFalse(is_academic_skill_repo(repo(_readme_evidence={'status':'verified','text':text}))[0])
+
+    def test_low_min_stars_includes_30_to_99_star_band(self):
+        plan = discovery.search_plan({'min_stars': 30, 'search_queries': [], 'discovery': {'queries': [], 'discipline_queries': ['"archaeology" "skill"']}}, NOW)
+        self.assertTrue(any('stars:30..99' in p['query'] and p['strategy'] == 'star_band' for p in plan))
+
+    def test_badge_wall_intro_reads_first_section_prose_without_borrowing_bullet_lists(self):
+        badge_wall = (
+            '# PaperWritingKit\n'
+            '[![CI](https://img.shields.io/badge/ci-pass-green)](https://example.org)\n'
+            '> Make AI Writing Better\n'
+            '## Why this project\n'
+            'We open-source agent skills and workflows for academic paper writing, literature review, and manuscript polishing in Claude Code.\n'
+        )
+        self.assertTrue(is_academic_skill_repo(repo(description='Elevate your AI research writing', _readme_evidence={'status': 'verified', 'text': badge_wall}))[0])
+        bullet_only = (
+            '# GeneralKit\n'
+            '> Do more\n'
+            '## Tools\n'
+            '- Academic paper writing skill for Claude Code\n'
+        )
+        self.assertFalse(is_academic_skill_repo(repo(description='General kit', _readme_evidence={'status': 'verified', 'text': bullet_only}))[0])
+
+    def test_mirrors_applications_creator_marketing_and_substring_antithesis_are_excluded(self):
+        rejected_cases = [
+            ('costrict-plugins mirror of imbad0202-academic-research-skills (auto-generated)', '# Academic Research Skills\nAgent skills for academic paper writing.'),
+            ('Research Application Toolkit - Claude Code plugin for PhD, MRes, MPhil applications', '# PhD Application Toolkit\nAgent skills for PhD, MRes, MPhil applications and academic CV.'),
+            ('AI agent skills for YouTube research. Outlier videos, niche finding', '# YouTube Research Skills\nAgent skills for YouTube research. Outlier videos and literature tags.'),
+            ('图文轮播 Skill（cy-carousel）：给一个选题，查证、找素材、排版', '# 图文轮播 Skill\n给一个选题，论文素材排版生成封面＋10 页。'),
+            ('水论文skill一句话出论文：多角度选题、大纲写作', '# 水论文skill\n一句话出论文的 Claude Code skill。'),
+            ('AI Skills for Antithesis Users', '# Antithesis Skills\nAntithesis workflow and agent skills for testing.'),
+        ]
+        for desc, text in rejected_cases:
+            self.assertFalse(is_academic_skill_repo(repo(description=desc, _readme_evidence={'status': 'verified', 'text': text}))[0], desc)

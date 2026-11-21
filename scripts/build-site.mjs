@@ -1,7 +1,12 @@
 import { cp, mkdir, copyFile, readdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
-const dirs = ["data", "reports"];
-for (const dir of dirs) await cp(dir, `dist/${dir}`, { recursive: true });
+await cp("reports", "dist/reports", { recursive: true });
+await mkdir("dist/data", { recursive: true });
+for (const entry of await readdir("data", { withFileTypes: true })) {
+  if (entry.isFile() && entry.name !== "repository-catalog.json") {
+    await copyFile(`data/${entry.name}`, `dist/data/${entry.name}`);
+  }
+}
 await mkdir("dist/docs", { recursive: true });
 for (const file of await readdir("docs"))
   if (file.endsWith(".md")) await copyFile(`docs/${file}`, `dist/docs/${file}`);

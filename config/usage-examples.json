@@ -142,5 +142,45 @@
     "prompt_en": "Use academic-humanizer to polish [abstract_draft.txt]: remove formulaic AI phrasing while strictly preserving every number, technical term, and citation, and show a sentence-by-sentence change log.",
     "output_zh": "输出自然克制的学术英文改写稿，以及零篡改数据的逐句对照说明。",
     "output_en": "Delivers natural scholarly rewrites with a sentence-by-sentence change log preserving all facts."
+  },
+  "isaac-sim/IsaacLab": {
+    "scenario_zh": "机器人强化学习与物理传感器仿真",
+    "scenario_en": "Robot reinforcement learning & physics simulation",
+    "prompt_zh": "请基于当前目录下的 Isaac Lab 环境配置，帮我检查四足机器人运动控制任务【locomotion_env_cfg.py】的观测空间、奖励函数权重与接触传感器配置，并给出使用 RSL RL 启动训练与评估的命令。",
+    "prompt_en": "Inspect [locomotion_env_cfg.py] in this Isaac Lab workspace, review the quadruped observation space, reward weights, and contact sensor settings, and provide the RSL RL training and evaluation commands.",
+    "output_zh": "输出仿真环境参数诊断、奖励项调优建议与可执行的训练/评测命令。",
+    "output_en": "Provides environment configuration diagnostics, reward tuning advice, and runnable training/evaluation commands."
+  },
+  "sapientinc/PRAXIST": {
+    "scenario_zh": "自主演进实验接管与多智能体科研循环",
+    "scenario_en": "Autonomous research takeover & multi-peer loop",
+    "prompt_zh": "请调用 $praxist-takeover 接管当前目录的可运行科研项目：先核验基线脚本与评估指标路径，不下载新数据集；在保持现有约束的前提下优化核心指标【val_score】，建立包含协议完整性检查与证据保留通道的 task harness，就绪检查通过后向我汇报运行计划。",
+    "prompt_en": "Invoke $praxist-takeover on the current runnable research project: verify the baseline and evaluation path without downloading new datasets, build a task harness to optimize [val_score] with protocol-integrity checks, and report the execution plan after readiness checks pass.",
+    "output_zh": "自动完成基线评估核验、构建实验评测契约（task harness）并输出可监控的多代科研运行方案。",
+    "output_en": "Verifies baseline evaluation, constructs a durable task harness, and reports a monitorable multi-generation research plan."
+  },
+  "icip-cas/PPTAgent": {
+    "scenario_zh": "视觉审阅与可编辑学术汇报 PPTX 生成",
+    "scenario_en": "Visually reviewed editable academic PPTX",
+    "prompt_zh": "请使用 pptagent 技能，根据当前目录下的论文与实验结果【paper.md】，制作一份 8 页 16:9 学术组会汇报幻灯片（涵盖研究动机、方法框架、主实验对比与消融结论），对渲染页面进行视觉版式审阅后导出可编辑的【presentation.pptx】。",
+    "prompt_en": "Use the pptagent skill to create an 8-slide 16:9 academic presentation from [paper.md] covering motivation, method architecture, main results, and ablations; visually review the rendered slides and export an editable [presentation.pptx].",
+    "output_zh": "经过多轮生成与视觉审阅修正，交付版式整洁、元素可在 PowerPoint 中直接编辑的 `.pptx` 文件。",
+    "output_en": "Generates, visually reviews, and exports a clean, directly editable `.pptx` slide deck."
+  },
+  "aiming-lab/AutoResearchClaw": {
+    "scenario_zh": "从研究想法到实验与论文初稿的端到端自演进科研",
+    "scenario_en": "Autonomous idea-to-paper research workflow",
+    "prompt_zh": "请使用 AutoResearchClaw 围绕研究主题【小样本表格数据上的对比学习正则化】开展文献调研、提炼核心假设、设计基线对比实验并输出结构化论文初稿。",
+    "prompt_en": "Use AutoResearchClaw on [contrastive regularization for few-shot tabular learning] to survey literature, formulate testable hypotheses, design baseline comparisons, and draft a structured manuscript.",
+    "output_zh": "自动串联文献检索、实验假设设计、代码验证与论文各章节草稿。",
+    "output_en": "Coordinates literature survey, hypothesis formulation, experiment validation, and manuscript drafting."
+  },
+  "Companion-Inc/feynman": {
+    "scenario_zh": "文献综述、论文代码一致性审计与审稿评审",
+    "scenario_en": "Literature synthesis, paper-code audit & peer review",
+    "prompt_zh": "请使用 feynman 的 /lit 与 /audit 工作流，围绕【扩散模型在蛋白质构象生成中的最新进展】梳理学术共识与争议，并核对当前目录下论文初稿的核心结论与公开代码实现是否一致。",
+    "prompt_en": "Use feynman's /lit and /audit workflows on [diffusion models for protein conformation generation] to synthesize consensus and open questions, and verify manuscript claims against the code.",
+    "output_zh": "产出带引用核验的文献对比矩阵、论文-代码一致性审计报告与分级修改建议。",
+    "output_en": "Produces citation-checked literature synthesis, paper-to-code audit findings, and prioritized revision notes."
   }
 }

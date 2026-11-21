@@ -201,6 +201,40 @@
       "cursor",
       "gemini",
       "opencode"
+    ],
+    "isaac-sim/IsaacLab": [],
+    "ningzimu/codex-ppt-skill": [
+      "codex",
+      "claude-code"
+    ],
+    "larashero3-dotcom/lieflat-charts": [
+      "claude-code",
+      "codex"
+    ],
+    "sapientinc/PRAXIST": [
+      "codex",
+      "claude-code"
+    ],
+    "icip-cas/PPTAgent": [
+      "claude-code",
+      "codex",
+      "opencode",
+      "mcp"
+    ],
+    "tizzy916/humanities-writing-companion": [
+      "claude-code"
+    ],
+    "deborahbennet636-rgb/law-paper-writing": [
+      "claude-code"
+    ],
+    "aiming-lab/AutoResearchClaw": [
+      "claude-code",
+      "codex"
+    ],
+    "Companion-Inc/feynman": [
+      "codex",
+      "opencode",
+      "claude-code"
     ]
   },
   "installations": {
@@ -658,6 +692,83 @@
       "reviewed_at": "2026-11-20",
       "command": "pip install scientific-writer",
       "source_blob_sha": "abeb70d685fcf9f3d429bcaf00b476016937e3bf"
+    },
+    "isaac-sim/IsaacLab": {
+      "mode": "manual",
+      "context_zh": "按官方安装文档在本地或云端 GPU 环境部署；默认 main 分支面向 Isaac Sim 6.2，支持 Newton、OVRTX、OVPhysX 与 Isaac Sim 多物理与渲染后端。",
+      "context_en": "Follow the official installation documentation for local or cloud GPU deployment; the main branch targets Isaac Sim 6.2 and supports Newton, OVRTX, OVPhysX and Isaac Sim backends.",
+      "source_url": "https://github.com/isaac-sim/IsaacLab/blob/main/README.md",
+      "reviewed_at": "2026-11-21",
+      "source_blob_sha": "22163ba1314417b186584e1df5e138c0ad2cd6fa"
+    },
+    "ningzimu/codex-ppt-skill": {
+      "mode": "command",
+      "command": "npx -y skills@latest add ningzimu/codex-ppt-skill --skill codex-ppt --agent codex --global",
+      "context_zh": "在终端执行可安装到 Codex 全局 skills 目录（安装后需重启 Codex）；README 另提供 `--agent claude-code`、`openclaw skills install codex-ppt` 及软链接安装方式。",
+      "context_en": "Run in terminal to install into Codex global skills (restart Codex afterward); README also provides `--agent claude-code`, `openclaw skills install codex-ppt` and symlink commands.",
+      "source_url": "https://github.com/ningzimu/codex-ppt-skill/blob/main/README.md",
+      "reviewed_at": "2026-11-21",
+      "source_blob_sha": "24c799af0568a4b30a89d24658dea7b43a023d0e"
+    },
+    "larashero3-dotcom/lieflat-charts": {
+      "mode": "command",
+      "command": "npx skills add https://github.com/larashero3-dotcom/lieflat-charts --skill lieflat-charts",
+      "context_zh": "在终端执行一条命令安装到 AI Agent，或将仓库克隆至 `~/.claude/skills/lieflat-charts`（Codex 为 `~/.codex/skills/lieflat-charts`）。",
+      "context_en": "Run in terminal to install via skills CLI, or clone the repository into `~/.claude/skills/lieflat-charts` (`~/.codex/skills/lieflat-charts` for Codex).",
+      "source_url": "https://github.com/larashero3-dotcom/lieflat-charts/blob/main/README.md",
+      "reviewed_at": "2026-11-21",
+      "source_blob_sha": "548351a9e522af6f16d9067f54ec390b674c3781"
+    },
+    "sapientinc/PRAXIST": {
+      "mode": "command",
+      "command": "python3 -m pip install --index-url https://pypi.org/simple \"praxist[agents,codex]\" && praxist setup --interactive --install-skills codex",
+      "context_zh": "在终端安装 Python 运行时并启动交互式配置向导以注册 Codex 技能；之后在已有可运行科研项目根目录启动 Codex 并调用 `$praxist-takeover`。",
+      "context_en": "Run in terminal to install the Python runtime and launch the interactive setup wizard for Codex skills; then open Codex in a runnable research project root and invoke `$praxist-takeover`.",
+      "source_url": "https://github.com/sapientinc/PRAXIST/blob/main/README.md",
+      "reviewed_at": "2026-11-21",
+      "source_blob_sha": "02cc74376362a396d6e4dab8784de9063adcef7a"
+    },
+    "icip-cas/PPTAgent": {
+      "mode": "command",
+      "command": "git clone https://github.com/icip-cas/PPTAgent.git\ncd PPTAgent/skills/pptagent\nuv venv --python 3.12 .venv\nuv pip install --python .venv/bin/python -r requirements.txt\n.venv/bin/python -m playwright install --with-deps chromium\n.venv/bin/python scripts/install.py --client claude",
+      "context_zh": "先安装系统依赖（npm、libreoffice；macOS 另需 Google Chrome），克隆仓库并进入 `skills/pptagent` 创建 Python 3.12 虚拟环境；注册命令中 `--client` 可选 `claude`、`codex` 或 `opencode`。",
+      "context_en": "Install system dependencies (npm, libreoffice; plus Google Chrome on macOS), clone the repo and set up the Python 3.12 venv inside `skills/pptagent`; pass `--client claude`, `codex` or `opencode` to `scripts/install.py`.",
+      "source_url": "https://github.com/icip-cas/PPTAgent/blob/main/README.md",
+      "reviewed_at": "2026-11-21",
+      "source_blob_sha": "0224de36bb99f84e55144055beb3a7fd351be7a9"
+    },
+    "tizzy916/humanities-writing-companion": {
+      "mode": "manual",
+      "context_zh": "按官方 README 将仓库技能目录放入 Claude Code 或其他支持开放 SKILL.md 格式的 AI Agent skills 目录即可调用。",
+      "context_en": "Copy the repository skill folder into Claude Code or any open SKILL.md-compatible AI Agent skills directory as described in the official README.",
+      "source_url": "https://github.com/tizzy916/humanities-writing-companion/blob/main/README.md",
+      "reviewed_at": "2026-11-21",
+      "source_blob_sha": "eaaf9eacf7064008ecb246d5a218ee9867f9bd80"
+    },
+    "deborahbennet636-rgb/law-paper-writing": {
+      "mode": "manual",
+      "context_zh": "按官方 README 把仓库文件夹放入 `~/.claude/skills/law-paper-writing/`，在 Claude Code 撰写中文法学论文时即可调用；配套核查脚本也可在本地 Python 运行。",
+      "context_en": "Place the repository folder into `~/.claude/skills/law-paper-writing/` for automatic use in Claude Code, or run the bundled check scripts locally with Python.",
+      "source_url": "https://github.com/deborahbennet636-rgb/law-paper-writing/blob/main/README.md",
+      "reviewed_at": "2026-11-21",
+      "source_blob_sha": "ffa4832cd0b9c3ec1b55930dad96f89d86b68f2f"
+    },
+    "aiming-lab/AutoResearchClaw": {
+      "mode": "manual",
+      "context_zh": "按官方 README 配置 OpenClaw 或本地 Python 科研代理环境，即可通过对话从研究想法推进至实验与论文成稿。",
+      "context_en": "Follow the official README to configure OpenClaw or the local Python research agent workflow from research idea to manuscript.",
+      "source_url": "https://github.com/aiming-lab/AutoResearchClaw/blob/main/README.md",
+      "reviewed_at": "2026-11-21",
+      "source_blob_sha": "9432200b83239d1e9088f133689c0a912175f232"
+    },
+    "Companion-Inc/feynman": {
+      "mode": "command",
+      "command": "curl -fsSL https://feynman.is/install | bash\nfeynman setup",
+      "context_zh": "在 macOS/Linux 终端执行安装脚本（或用 `npm install -g @companion-ai/feynman`），随后运行 `feynman setup` 登录模型提供商；官方另提供 Codex 与 OpenCode 独立 skills 包。",
+      "context_en": "Run the installer script on macOS/Linux (or `npm install -g @companion-ai/feynman`), then run `feynman setup`; a skills-only bundle for Codex and OpenCode is also available.",
+      "source_url": "https://github.com/Companion-Inc/feynman/blob/main/README.md",
+      "reviewed_at": "2026-11-21",
+      "source_blob_sha": "8005465d6bd2e33b647517e0055381a6c27463fb"
     }
   },
   "featured": [

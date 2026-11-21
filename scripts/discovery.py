@@ -9,18 +9,19 @@ QUERIES = [
 ]
 ACADEMIC = [
     'academic', 'research paper', 'research papers', 'paper writing', 'paper review',
-    'literature review', 'literature search', 'literature discovery', 'peer review',
+    'literature review', 'literature survey', 'literature search', 'literature discovery', 'peer review',
     'scientific research', 'scientific writing', 'research workflow', 'research guide',
     'research starter', 'phd', 'thesis', 'manuscript', 'reference manager',
     'scientific plotting', 'publication figures', 'bibliometric', 'scientometric', 'science mapping', 'academic poster', 'paper reading', 'paper management', 'citation management',
     '科研', '学术', '论文', '文献检索', '文献阅读', '文献综述', '实验复现',
 ]
 TASK_PURPOSE = re.compile(
-    r'(?:paper|academic|thesis|scientific) (?:writing|reading|review|management|search|draft|translation|plotting|poster|figure|workflow|template)'
-    r'|literature (?:review|search|discovery|management|retrieval)|reference manager|citation (?:management|check|verif)|manuscript|dissertation|latex'
-    r'|research workflow|scientific agent|ai scientist|autonomous research|scientific experiment|laboratory workflow|experiment automation|bibliometric|scientometric|science mapping|academic conference poster|publication figures|学术翻译|科研组图|科研插图|学术插图|科研可视化|(?:agent skills?|skill[.]md).{0,100}(?:academic|scientific|科研|学术)'
-    r'|(?:academic|scientific).{0,50}skills?'
-    r'|(?:write|read|review|search|manage|draft|translat)[a-z]*.{0,25}(?:research papers?|academic papers?|literature)'
+    r'\b(?:paper|academic|thesis|scientific) (?:writing|reading|review|management|search|discovery|analysis|draft|translation|plotting|poster|figure|workflow|template|literature|documents?)'
+    r'|\bresearch (?:writing|poster|figure|papers?|workflow|template)'
+    r'|literature (?:review|surveys?|search|discovery|management|retrieval)|reference manager|citation (?:management|check|verif)|manuscript|dissertation|latex'
+    r'|research workflow|scientific agent|ai scientist|ai research agent|autonomous research|from idea to paper|poster generation from papers|editable research figures|scientific experiment|laboratory workflow|experiment automation|bibliometric|scientometric|science mapping|academic conference poster|publication figures|学术翻译|科研组图|科研插图|学术插图|科研可视化|(?:agent skills?|skill[.]md).{0,100}(?:academic|scientific|科研|学术)'
+    r'|\b(?:academic|scientific).{0,50}skills?'
+    r'|\b(?:write|read|review|search|manage|draft|translat)[a-z]*.{0,25}(?:research papers?|academic papers?|literature)'
     r'|做科研|写论文|读论文|论文写作|学术写作|论文阅读|论文润色|论文翻译|论文管理|论文检索|论文配图|科研绘图|科学绘图|科研入门|科研工作流|文献|实验复现|毕业论文|学位论文', re.I)
 
 # Specific research tasks can be relevant without saying "paper writing".
@@ -29,10 +30,21 @@ DISCIPLINE_PURPOSE = re.compile(
     r'computational (?:chemistry|physics)|theoretical[ -]physics|econometric|causal inference|'
     r'clinical (?:trial|research)|systematic review|meta[ -]analysis|materials? (?:science|simulation)|'
     r'legal (?:research|case analysis)|historical (?:research|source analysis)|'
-    r'linguistic (?:research|corpus analysis)|educational research|agricultural research|'
+    r'linguistic (?:research|corpus analysis)|educational (?:research|technology)|agricultural research|'
+    r'veterinary research|archaeolog(?:y|ical) research|cultural heritage research|remote sensing|earth observation|'
+    r'genealog(?:y|ical) research|archival research|'
     r'humanities (?:research|scholars|writing)|(?:philosophical|literary) research|'
     r'单细胞|转录组|生物信息|分子对接|计算化学|理论物理|计量经济|因果推断|临床研究|'
-    r'材料研究|法律研究|法学研究|案例研究|历史文献研究|语料分析|教育研究|农业研究', re.I)
+    r'材料研究|法律研究|法学研究|案例研究|历史文献研究|语料分析|教育研究|农业研究|'
+    r'兽医|考古|文物|遥感|地球科学|教育技术|谱系|档案考证', re.I)
+
+NONRESEARCH_PURPOSE = re.compile(
+    r'gameplay|mobile game|手游|碧蓝航线|AI资讯|资讯日报|信息源|信息茧房|高性价比人生|海外留学|'
+    r'phd admission|phd(?:,?\s*mres)?(?:,?\s*mphil)?\s+applications?|graduate school applications?|留学申请|scholarships?|'
+    r'youtube research\.\s*outlier videos|图文轮播\s*skill|小红书(?:爆款|起号|运营)|短视频(?:起号|带货)|'
+    r'水论文\s*skill\s*一句话出论文|恋爱军师|\bmirror of\b|\(auto[ -]generated\)',
+    re.I,
+)
 
 CAPABILITY = ['skill', 'agent skill', 'skill.md', 'claude code', 'codex', 'opencode', 'mcp', 'workflow', 'skills', '技能']
 RELATED = ['tool', 'guide', 'handbook', 'starter', 'workflow', 'assistant', 'agent',
@@ -48,7 +60,7 @@ def search_plan(config, now):
     for q in queries:
         q += ' in:name,description,readme'
         plan.append({'query': f'{q} stars:>={minimum} pushed:>={cutoff}', 'sort':'updated', 'max_pages':1, 'strategy':'recent'})
-        for low, high in [(100,499),(500,1999),(2000,9999),(10000,None)]:
+        for low, high in [(30,99),(100,499),(500,1999),(2000,9999),(10000,None)]:
             low = max(low, minimum)
             if high is not None and low > high:
                 continue
@@ -65,6 +77,16 @@ def readme_scope(text):
     return text[:8000].lower()
 
 
+def _clean_intro_section(section, *, strip_bullets=False):
+    # Linked tools are references, not a declaration of this project's purpose.
+    section = re.sub(r'!?\[[^\]]*\]\([^)]*\)', '', section)
+    section = re.sub(r'<a\b[^>]*>.*?</a>', '', section, flags=re.S)
+    section = re.sub(r'^\s*(?:[-*+] |\d+[.)] ).*https?://.*$', '', section, flags=re.M)
+    if strip_bullets:
+        section = re.sub(r'^\s*(?:[-*+] |\d+[.)] |\||#).*$', '', section, flags=re.M)
+    return section
+
+
 def readme_admission(repo):
     evidence = repo.get('_readme_evidence', {})
     if evidence.get('status') != 'verified':
@@ -73,15 +95,17 @@ def readme_admission(repo):
         return False, ['readme_'+evidence.get('status','unverified')]
     text = readme_scope(evidence.get('text', ''))
     academic = [word for word in ACADEMIC if word in text]
-    intro = re.split(r'^#{2,6}\s+', text, maxsplit=1, flags=re.M)[0][:2500]
-    # Linked tools are references, not a declaration of this project's purpose.
-    intro = re.sub(r'!?\[[^\]]*\]\([^)]*\)', '', intro)
-    intro = re.sub(r'<a\b[^>]*>.*?</a>', '', intro, flags=re.S)
-    intro = re.sub(r'^\s*(?:[-*+] |\d+[.)] ).*https?://.*$', '', intro, flags=re.M)
+    sections = re.split(r'^#{2,6}\s+', text, maxsplit=2, flags=re.M)
+    intro = _clean_intro_section(sections[0][:2500])
+    # When the block before the first ## is just a badge wall or a short 1-line
+    # slogan (<60 chars of prose), include non-bullet prose from the first section.
+    prose_only = " ".join(re.sub(r'<[^>]+>', ' ', re.sub(r'^\s*#[^\n]*', '', intro, flags=re.M)).split())
+    if len(prose_only) < 60 and len(sections) > 1:
+        intro = (intro + '\n' + _clean_intro_section(sections[1][:1500], strip_bullets=True))[:2500]
     topics = repo.get('repositoryTopics', {}).get('nodes', [])
     declared = ' '.join([(repo.get('description') or '')[:500], *(n.get('topic', {}).get('name', '') for n in topics)]).lower()
     purpose = (intro + ' ' + (repo.get('description') or '')[:500]).replace('-', ' ')
-    if re.search(r'gameplay|mobile game|手游|碧蓝航线|AI资讯|资讯日报|高性价比人生|海外留学|phd admission|scholarships?', purpose, re.I):
+    if NONRESEARCH_PURPOSE.search(purpose):
         return False, ['nonresearch_primary_purpose']
     focused = bool(TASK_PURPOSE.search(purpose) or re.search(r'academic papers?|research papers?|学术论文|论文|文献', purpose))
     domain_skill = bool(DISCIPLINE_PURPOSE.search(purpose) and

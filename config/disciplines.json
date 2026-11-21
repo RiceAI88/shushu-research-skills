@@ -883,6 +883,554 @@
       "common": true,
       "reviewed_at": "2026-11-20",
       "evidence": true
+    },
+    "isaac-sim/isaaclab": {
+      "disciplines": [
+        "engineering"
+      ],
+      "majors": [
+        "mechanical",
+        "ai",
+        "computer-science"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "ningzimu/codex-ppt-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "larashero3-dotcom/lieflat-charts": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "sapientinc/praxist": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "icip-cas/pptagent": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "ligphidonk/academic-figure-generator": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "haojae/scipilot-figure-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "wxyhgk/retain-pdf": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "poco-ai/agentero": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "hughyau/academicforge": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "weizhena/deep-research-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "llmsresearch/paperbanana": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "kiterlin/anti-defensive-writing": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "tsingyuai/scientify": {
+      "disciplines": [
+        "science",
+        "engineering"
+      ],
+      "majors": [
+        "physics",
+        "ai",
+        "computer-science"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "juliye2025/evil-read-arxiv": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "mims-harvard/tooluniverse": {
+      "disciplines": [
+        "science",
+        "medicine",
+        "engineering"
+      ],
+      "majors": [
+        "biology",
+        "chemistry",
+        "bioinformatics",
+        "ai"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "xiangyu-ge/sci-writing-geors": {
+      "disciplines": [
+        "science",
+        "agriculture"
+      ],
+      "majors": [
+        "geoscience",
+        "biology",
+        "agronomy",
+        "forestry"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "tizzy916/humanities-writing-companion": {
+      "disciplines": [
+        "history",
+        "philosophy",
+        "literature",
+        "arts"
+      ],
+      "majors": [
+        "history",
+        "philosophy",
+        "literature",
+        "arts"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "ai-4-phi/phillit": {
+      "disciplines": [
+        "philosophy"
+      ],
+      "majors": [
+        "philosophy"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "11station/applied-linguistics-paper-writing": {
+      "disciplines": [
+        "literature",
+        "education"
+      ],
+      "majors": [
+        "linguistics",
+        "education"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "deborahbennet636-rgb/law-paper-writing": {
+      "disciplines": [
+        "law"
+      ],
+      "majors": [
+        "law"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "zhangligong0826/law-paper-writing": {
+      "disciplines": [
+        "law"
+      ],
+      "majors": [
+        "law"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "deborahbennet636-rgb/ir-paper-writing": {
+      "disciplines": [
+        "law"
+      ],
+      "majors": [
+        "politics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "aixuexidelandawang-ui/historical-thesis-research-object": {
+      "disciplines": [
+        "history"
+      ],
+      "majors": [
+        "history"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "scdenney/open-science-skills": {
+      "disciplines": [
+        "law",
+        "literature",
+        "history"
+      ],
+      "majors": [
+        "politics",
+        "sociology",
+        "history",
+        "literature"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "heshamfs/materials-simulation-skills": {
+      "disciplines": [
+        "engineering"
+      ],
+      "majors": [
+        "materials"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "nvidia/nvalchemi-toolkit": {
+      "disciplines": [
+        "science",
+        "engineering"
+      ],
+      "majors": [
+        "chemistry",
+        "physics",
+        "materials"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "zehchou/cn-economics-thesis-workflow-skill": {
+      "disciplines": [
+        "economics"
+      ],
+      "majors": [
+        "economics",
+        "finance"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "bis-med-it/marco-bis": {
+      "disciplines": [
+        "economics"
+      ],
+      "majors": [
+        "economics",
+        "finance"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "juliaerror/econ-thesis-idea": {
+      "disciplines": [
+        "economics"
+      ],
+      "majors": [
+        "economics",
+        "finance"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "hanlulong/econ-paper-review-skill": {
+      "disciplines": [
+        "economics"
+      ],
+      "majors": [
+        "economics",
+        "finance"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "brycewang-stanford/statspai": {
+      "disciplines": [
+        "economics",
+        "science"
+      ],
+      "majors": [
+        "economics",
+        "finance",
+        "statistics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "clawbio/clawbio": {
+      "disciplines": [
+        "medicine",
+        "science"
+      ],
+      "majors": [
+        "bioinformatics",
+        "biology"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "xjtulyc/medgeclaw": {
+      "disciplines": [
+        "medicine",
+        "science"
+      ],
+      "majors": [
+        "bioinformatics",
+        "clinical",
+        "pharmacy",
+        "biology"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "jaechang-hits/sciagent-skills": {
+      "disciplines": [
+        "medicine",
+        "science"
+      ],
+      "majors": [
+        "bioinformatics",
+        "biology",
+        "chemistry",
+        "pharmacy",
+        "statistics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "yushui2022/mathmodel-skill": {
+      "disciplines": [
+        "science"
+      ],
+      "majors": [
+        "mathematics",
+        "statistics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "cjh-solver/mathmodeling-skills-arsenal": {
+      "disciplines": [
+        "science"
+      ],
+      "majors": [
+        "mathematics",
+        "statistics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "alterlab-ieu/alterlab-academic-skills": {
+      "disciplines": [
+        "medicine",
+        "science",
+        "economics",
+        "law"
+      ],
+      "majors": [
+        "bioinformatics",
+        "chemistry",
+        "clinical",
+        "statistics",
+        "economics",
+        "finance",
+        "sociology"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "aiming-lab/autoresearchclaw": {
+      "disciplines": [
+        "engineering"
+      ],
+      "majors": [
+        "computer-science",
+        "ai"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "companion-inc/feynman": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "jordan-gibbs/hyperresearch": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "pku-dair/autosci": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "tsinghua-fib-lab/agentsociety": {
+      "disciplines": [
+        "law",
+        "engineering"
+      ],
+      "majors": [
+        "sociology",
+        "computer-science",
+        "ai"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "openraiser/nanoresearch": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "ysyecust/lecture-to-notes": {
+      "disciplines": [
+        "education"
+      ],
+      "majors": [
+        "educational-technology",
+        "education"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "golden2002/legal-research-skill": {
+      "disciplines": [
+        "law"
+      ],
+      "majors": [
+        "law"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "russellbrenner/jurisd": {
+      "disciplines": [
+        "law"
+      ],
+      "majors": [
+        "law"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "dingyanglyu/matclaw": {
+      "disciplines": [
+        "engineering"
+      ],
+      "majors": [
+        "materials"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "swaruplab/operon": {
+      "disciplines": [
+        "medicine",
+        "science"
+      ],
+      "majors": [
+        "bioinformatics",
+        "biology"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "lisresearchgroup/math-rsi": {
+      "disciplines": [
+        "science"
+      ],
+      "majors": [
+        "mathematics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-21",
+      "evidence": true
     }
   }
 }

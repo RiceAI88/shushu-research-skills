@@ -624,5 +624,113 @@
       "Claude Code"
     ],
     "reviewed_at": "2026-11-20"
+  },
+  "isaac-sim/IsaacLab": {
+    "tasks": [
+      "reproduce",
+      "compute"
+    ],
+    "platform_names": [
+      "NVIDIA Isaac Sim"
+    ],
+    "reviewed_at": "2026-11-21"
+  },
+  "ningzimu/codex-ppt-skill": {
+    "tasks": [
+      "write",
+      "figures"
+    ],
+    "platform_names": [
+      "Codex",
+      "Claude Code",
+      "OpenClaw",
+      "Hermes Agent"
+    ],
+    "reviewed_at": "2026-11-21"
+  },
+  "larashero3-dotcom/lieflat-charts": {
+    "tasks": [
+      "figures",
+      "analyze"
+    ],
+    "platform_names": [
+      "Claude Code",
+      "Codex"
+    ],
+    "reviewed_at": "2026-11-21"
+  },
+  "sapientinc/PRAXIST": {
+    "tasks": [
+      "find",
+      "reproduce",
+      "compute"
+    ],
+    "platform_names": [
+      "Codex",
+      "Claude Code"
+    ],
+    "reviewed_at": "2026-11-21"
+  },
+  "icip-cas/PPTAgent": {
+    "tasks": [
+      "write",
+      "figures"
+    ],
+    "platform_names": [
+      "Claude Code",
+      "Codex CLI",
+      "OpenCode"
+    ],
+    "reviewed_at": "2026-11-21"
+  },
+  "tizzy916/humanities-writing-companion": {
+    "tasks": [
+      "read",
+      "write",
+      "review"
+    ],
+    "platform_names": [
+      "Claude Code",
+      "Claude Agent SDK"
+    ],
+    "reviewed_at": "2026-11-21"
+  },
+  "deborahbennet636-rgb/law-paper-writing": {
+    "tasks": [
+      "write",
+      "review"
+    ],
+    "platform_names": [
+      "Claude Code"
+    ],
+    "reviewed_at": "2026-11-21"
+  },
+  "aiming-lab/AutoResearchClaw": {
+    "tasks": [
+      "find",
+      "write",
+      "reproduce"
+    ],
+    "platform_names": [
+      "OpenClaw",
+      "Claude Code",
+      "Codex"
+    ],
+    "reviewed_at": "2026-11-21"
+  },
+  "Companion-Inc/feynman": {
+    "tasks": [
+      "find",
+      "read",
+      "write",
+      "reproduce",
+      "review"
+    ],
+    "platform_names": [
+      "Feynman CLI",
+      "Codex",
+      "OpenCode"
+    ],
+    "reviewed_at": "2026-11-21"
   }
 }
