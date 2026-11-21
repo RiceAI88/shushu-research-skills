@@ -1066,6 +1066,11 @@
       "first_seen_date": "2026-09-07",
       "first_seen_is_baseline": false
     },
+    "hoper-j/ai-guide-and-demos-zh_cn": {
+      "first_seen_date": "2026-11-21",
+      "first_seen_at": "2026-11-21T07:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "houlaisan/deai-academic-zh": {
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
@@ -1219,6 +1224,11 @@
     "jmiao24/paper2agent": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
+      "first_seen_is_baseline": false
+    },
+    "jordan-gibbs/hyperresearch": {
+      "first_seen_date": "2026-11-21",
+      "first_seen_at": "2026-11-21T07:00:33Z",
       "first_seen_is_baseline": false
     },
     "joshzyj/open-scholar-skill": {
@@ -1522,6 +1532,11 @@
       "first_seen_at": "2026-11-14T06:02:17Z",
       "first_seen_is_baseline": false
     },
+    "mental2008/awesome-papers": {
+      "first_seen_date": "2026-11-21",
+      "first_seen_at": "2026-11-21T07:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "miciatefara58/academic-paper-skills": {
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
@@ -1672,6 +1687,11 @@
       "first_seen_at": "2026-10-27T16:05:57Z",
       "first_seen_is_baseline": false
     },
+    "opendilab/awesome-rlhf": {
+      "first_seen_date": "2026-11-21",
+      "first_seen_at": "2026-11-21T07:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "openjiuwen-ai/sciencediscovery": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
@@ -1709,6 +1729,11 @@
       "first_seen_at": "2026-10-28T05:55:35Z",
       "first_seen_is_baseline": false
     },
+    "paper2poster/paper2poster": {
+      "first_seen_date": "2026-11-21",
+      "first_seen_at": "2026-11-21T07:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "paperdebugger/paperdebugger": {
       "first_seen_date": "2026-09-27",
       "first_seen_is_baseline": false
@@ -1726,6 +1751,11 @@
     "pdfmathtranslate/pdfmathtranslate": {
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
+      "first_seen_is_baseline": false
+    },
+    "peacefulj/ssci-sci-skills": {
+      "first_seen_date": "2026-11-21",
+      "first_seen_at": "2026-11-21T07:00:33Z",
       "first_seen_is_baseline": false
     },
     "pedrohcgs/claude-code-my-workflow": {
@@ -1883,6 +1913,11 @@
     "scdenney/open-science-skills": {
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
+      "first_seen_is_baseline": false
+    },
+    "scitex-ai/scitex-python": {
+      "first_seen_date": "2026-11-21",
+      "first_seen_at": "2026-11-21T07:00:33Z",
       "first_seen_is_baseline": false
     },
     "scodive/ai-agent-guide": {
@@ -2189,6 +2224,11 @@
     "voltagent/awesome-ai-agent-papers": {
       "first_seen_date": "2026-08-27",
       "first_seen_is_baseline": true
+    },
+    "w00t3k/awesome-cellular-hacking": {
+      "first_seen_date": "2026-11-21",
+      "first_seen_at": "2026-11-21T07:00:33Z",
+      "first_seen_is_baseline": false
     },
     "wanshuiyin/auto-claude-code-research-in-sleep": {
       "first_seen_date": "2026-08-27",
