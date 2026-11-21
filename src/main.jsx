@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import { SiteMotion } from "./components/SiteMotion";
 import "antd/dist/reset.css";
+import "./styles/tokens.css";
 import "./styles.css";
 import "./indigo.css";
 class ErrorBoundary extends React.Component {

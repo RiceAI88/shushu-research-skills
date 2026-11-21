@@ -1,0 +1,35 @@
+// 统一明暗主题设计令牌：同时供 Ant Design ConfigProvider 与图表组件复用
+export const THEME_TOKENS = {
+  light: {
+    primary: "#0D9F6E",
+    primaryStrong: "#059669",
+    primaryHover: "#047857",
+    link: "#0D9F6E",
+    linkHover: "#059669",
+    linkActive: "#047857",
+    bgLayout: "#F8FAFC",
+    bgContainer: "#FFFFFF",
+    tableHeaderBg: "#FFFFFF",
+    text: "#0F172A",
+    textSecondary: "#64748B",
+    border: "#E2E8F0",
+    // 高区分度图表对比三色组（翠绿 / 天蓝 / 琥珀）
+    chartSeries: ["#0D9F6E", "#0284C7", "#D97706"],
+  },
+  dark: {
+    primary: "#34D399",
+    primaryStrong: "#34D399",
+    primaryHover: "#6EE7B7",
+    onPrimary: "#06281E",
+    link: "#34D399",
+    linkHover: "#6EE7B7",
+    linkActive: "#34D399",
+    bgLayout: "#0B111E",
+    bgContainer: "#111A2C",
+    tableHeaderBg: "#162032",
+    text: "#F1F5F9",
+    textSecondary: "#94A3B8",
+    border: "#1E293B",
+    chartSeries: ["#34D399", "#38BDF8", "#FBBF24"],
+  },
+};

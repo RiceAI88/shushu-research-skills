@@ -1,5 +1,5 @@
 import {Modal} from 'antd';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CloseOutlined, ArrowUpOutlined } from "@ant-design/icons";
 
 export const NOTICE_STORAGE_KEY = "prs-recharge-notice-shown-v2";
@@ -21,22 +21,41 @@ export function claimNoticeSlot(storage, now = Date.now()) {
 
 export const NOTICE_DELAY_MS = 12000;
 
-export function RechargeNotice({ lang }) {
+export function RechargeNotice({ lang, busy = false }) {
   const [open,setOpen] = useState(false);
+  const [ready,setReady] = useState(false);
+  const busyRef = useRef(busy);
+  busyRef.current = busy;
   const zh = lang === "zh";
+  const canShowNow = () => {
+    if (busyRef.current) return false;
+    const active = document.activeElement;
+    if (active && active.closest?.('input,textarea,select,[contenteditable="true"]'))
+      return false;
+    if (document.querySelector("dialog[open]")) return false;
+    return true;
+  };
+  const tryOpen = () => {
+    let storage = null;
+    try {
+      storage = window.localStorage;
+    } catch {
+      storage = null;
+    }
+    if (claimNoticeSlot(storage)) setOpen(true);
+  };
   useEffect(() => {
     const delay =
       typeof window !== "undefined" && Number.isFinite(window.__ARS_NOTICE_DELAY_MS)
         ? window.__ARS_NOTICE_DELAY_MS
         : NOTICE_DELAY_MS;
     const trigger = () => {
-      let storage = null;
-      try {
-        storage = window.localStorage;
-      } catch {
-        storage = null;
+      if (canShowNow()) {
+        tryOpen();
+      } else {
+        // 用户正忙（正在输入或查看抽屉/弹窗），暂缓至空闲后再决定展示
+        setReady(true);
       }
-      if (claimNoticeSlot(storage)) setOpen(true);
     };
     if (delay <= 0) {
       trigger();
@@ -45,6 +64,21 @@ export function RechargeNotice({ lang }) {
     const timer = window.setTimeout(trigger, delay);
     return () => window.clearTimeout(timer);
   }, []);
+  useEffect(() => {
+    if (!ready || open || busy) return;
+    const check = () => {
+      if (canShowNow()) {
+        setReady(false);
+        tryOpen();
+      }
+    };
+    const timer = window.setTimeout(check, 600);
+    window.addEventListener("focusout", check);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("focusout", check);
+    };
+  }, [ready, open, busy]);
   const close = () => setOpen(false);
   return (
     <Modal

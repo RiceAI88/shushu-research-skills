@@ -1,5 +1,6 @@
 import React from "react";
 import { Empty } from "antd";
+import { THEME_TOKENS } from "../tokens";
 export function Sparkline({ repo, history, width = 100, height = 28, label }) {
   const pad = 3;
   const points = (history?.series?.[repo] || [])
@@ -86,25 +87,30 @@ export function Sparkline({ repo, history, width = 100, height = 28, label }) {
   );
 }
 
-export function ComparisonChart({ repos, history, t }) {
-  const colors = [
-    "var(--prs-primary)",
-    "var(--prs-secondary)",
-    "var(--prs-deep)",
-  ];
-  const series = repos
-    .map((repo) => history?.series?.[repo] || [])
-    .map((points) =>
-      points.length
-        ? points.map(
-            (p) =>
-              ((p.stars - (points[0].stars || 1)) / (points[0].stars || 1)) *
-              100,
-          )
-        : [],
-    );
-  const all = series.flat();
-  if (!all.length)
+export function ComparisonChart({ repos, history, theme = "light", t }) {
+  // 复用统一设计令牌中的高区分度对比三色组（翠绿 / 天蓝 / 琥珀）
+  const colors = (THEME_TOKENS[theme] || THEME_TOKENS.light).chartSeries;
+  const dashes = [undefined, "7 4", "2 4"];
+  const series = repos.map((repo) => {
+    const points = (history?.series?.[repo] || [])
+      .filter(
+        (point) =>
+          Number.isFinite(Date.parse(point.date)) &&
+          Number.isFinite(point.stars) &&
+          point.stars >= 0,
+      )
+      .sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+    if (!points.length) return [];
+    const base = points[0].stars || 1;
+    return points.map((p) => ({
+      date: p.date,
+      time: Date.parse(p.date),
+      stars: p.stars,
+      pct: ((p.stars - base) / base) * 100,
+    }));
+  });
+  const allPoints = series.flat();
+  if (!allPoints.length)
     return (
       <Empty
         image={Empty.PRESENTED_IMAGE_SIMPLE}
@@ -112,12 +118,29 @@ export function ComparisonChart({ repos, history, t }) {
       />
     );
   const w = 640,
-    h = 300,
-    pad = 40,
-    min = Math.min(0, ...all),
-    max = Math.max(0, ...all),
+    h = 260,
+    padLeft = 54,
+    padRight = 24,
+    padTop = 20,
+    padBottom = 34;
+  const values = allPoints.map((p) => p.pct);
+  const min = Math.min(0, ...values),
+    max = Math.max(0, ...values),
     range = max - min || 1;
-  const y = (v) => h - pad - ((v - min) / range) * (h - pad * 2);
+  const times = allPoints.map((p) => p.time);
+  const minTime = Math.min(...times),
+    maxTime = Math.max(...times),
+    timeRange = maxTime - minTime || 1;
+  const x = (time) =>
+    maxTime === minTime
+      ? (padLeft + w - padRight) / 2
+      : padLeft + ((time - minTime) / timeRange) * (w - padLeft - padRight);
+  const y = (v) =>
+    h - padBottom - ((v - min) / range) * (h - padTop - padBottom);
+  const fmtPct = (v) => `${v > 0 ? "+" : ""}${Math.round(v * 10) / 10}%`;
+  const startDate = new Date(minTime).toISOString().slice(0, 10);
+  const endDate = new Date(maxTime).toISOString().slice(0, 10);
+  const yTicks = [...new Set([max, 0, min])];
   return (
     <div>
       <svg
@@ -126,45 +149,82 @@ export function ComparisonChart({ repos, history, t }) {
         role="img"
         aria-label={t("compareTitle")}
       >
-        <line
-          x1={pad}
-          y1={y(0)}
-          x2={w - pad}
-          y2={y(0)}
-          stroke="var(--prs-border)"
-          strokeDasharray="4 4"
-        />
-        {series.map((values, index) =>
-          values.length > 1 ? (
-            <polyline
-              key={repos[index]}
-              points={values
-                .map(
-                  (v, i) =>
-                    `${pad + (i / (values.length - 1)) * (w - pad * 2)},${y(v)}`,
-                )
-                .join(" ")}
-              fill="none"
-              stroke={colors[index]}
-              strokeWidth="2"
+        {yTicks.map((tick) => (
+          <g key={tick}>
+            <line
+              x1={padLeft}
+              y1={y(tick)}
+              x2={w - padRight}
+              y2={y(tick)}
+              stroke="var(--prs-border)"
+              strokeDasharray={tick === 0 ? "4 4" : "2 3"}
             />
-          ) : values.length === 1 ? (
-            <circle
-              key={repos[index]}
-              cx={pad}
-              cy={y(values[0])}
-              r="3"
-              fill={colors[index]}
-            />
-          ) : null,
+            <text
+              x={padLeft - 8}
+              y={y(tick) + 4}
+              textAnchor="end"
+              fontSize="11"
+              fill="var(--prs-muted)"
+            >
+              {fmtPct(tick)}
+            </text>
+          </g>
+        ))}
+        <text
+          x={padLeft}
+          y={h - 10}
+          textAnchor="start"
+          fontSize="11"
+          fill="var(--prs-muted)"
+        >
+          {startDate}
+        </text>
+        {endDate !== startDate && (
+          <text
+            x={w - padRight}
+            y={h - 10}
+            textAnchor="end"
+            fontSize="11"
+            fill="var(--prs-muted)"
+          >
+            {endDate}
+          </text>
         )}
+        {series.map((pts, index) => {
+          const color = colors[index % colors.length];
+          const dash = dashes[index % dashes.length];
+          if (!pts.length) return null;
+          const last = pts.at(-1);
+          return (
+            <g key={repos[index]}>
+              {pts.length > 1 && (
+                <polyline
+                  points={pts.map((p) => `${x(p.time)},${y(p.pct)}`).join(" ")}
+                  fill="none"
+                  stroke={color}
+                  strokeWidth="2.2"
+                  strokeDasharray={dash}
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                />
+              )}
+              <circle cx={x(last.time)} cy={y(last.pct)} r="3.5" fill={color}>
+                <title>
+                  {`${repos[index]} · ${last.date} · ${fmtPct(last.pct)} (${last.stars.toLocaleString()} Stars)`}
+                </title>
+              </circle>
+            </g>
+          );
+        })}
       </svg>
       <div className="comparison-legend">
         {repos.map((repo, i) => (
           <span key={repo}>
-            <i style={{ background: colors[i] }} />
+            <i style={{ background: colors[i % colors.length] }} />
             {repo}
-            {!series[i].length ? ` · ${t("noHistory")}` : ""}
+            {!series[i].length
+              ? ` · ${t("noHistory")}`
+              : ` (${fmtPct(series[i].at(-1).pct)})`}
           </span>
         ))}
       </div>

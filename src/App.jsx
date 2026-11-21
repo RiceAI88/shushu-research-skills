@@ -60,6 +60,7 @@ import {
   serializeState,
 } from "./domain";
 import { translations } from "./i18n";
+import { THEME_TOKENS } from "./tokens";
 import { enrichItem, editorialPicks } from "./practical";
 import { ViewportEditorialPicks } from "./components/ViewportEditorialPicks";
 import { UpdateStatus } from "./components/UpdateStatus";
@@ -141,6 +142,7 @@ export default function App() {
     addEventListener("hashchange", change);
     return () => removeEventListener("hashchange", change);
   }, []);
+  const tokens = THEME_TOKENS[state.theme] || THEME_TOKENS.light;
   return (
     <ConfigProvider
       locale={state.lang === "zh" ? zhCN : enUS}
@@ -149,20 +151,20 @@ export default function App() {
           state.theme === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
         token: {
           motion: !reducedMotion,
-          colorPrimary: state.theme === "dark" ? "#34D399" : "#0D9F6E",
-          colorLink: state.theme === "dark" ? "#34D399" : "#0D9F6E",
-          colorLinkHover: state.theme === "dark" ? "#6EE7B7" : "#059669",
-          colorLinkActive: state.theme === "dark" ? "#34D399" : "#059669",
+          colorPrimary: tokens.primary,
+          colorLink: tokens.link,
+          colorLinkHover: tokens.linkHover,
+          colorLinkActive: tokens.linkActive,
           fontFamily: FONT_FAMILY,
-          colorBgContainer: state.theme === "dark" ? "#162032" : "#FFFFFF",
+          colorBgContainer: tokens.bgContainer,
           borderRadius: 12,
-          colorText: state.theme === "dark" ? "#F1F5F9" : "#0F172A",
-          colorTextSecondary: state.theme === "dark" ? "#94A3B8" : "#64748B",
-          colorBorder: state.theme === "dark" ? "#26354D" : "#E2E8F0",
-          colorBgLayout: state.theme === "dark" ? "#0F172A" : "#F8FAFC",
+          colorText: tokens.text,
+          colorTextSecondary: tokens.textSecondary,
+          colorBorder: tokens.border,
+          colorBgLayout: tokens.bgLayout,
         },
         components: {
-          Table: { headerBg: state.theme === "dark" ? "#1E293B" : "#FFFFFF" },
+          Table: { headerBg: tokens.tableHeaderBg },
         },
       }}
     >
@@ -684,14 +686,14 @@ function Dashboard({ state, update }) {
             </button>
             <button
               type="button"
-              className={`portal-kpi-card portal-kpi-btn${state.sort === "growth" ? " is-active" : ""}`}
-              aria-pressed={state.sort === "growth"}
+              className={`portal-kpi-card portal-kpi-btn${state.sort === "delta7" ? " is-active" : ""}`}
+              aria-pressed={state.sort === "delta7"}
               title={state.lang === "zh" ? "按近 7 日 Stars 上升最快排序" : "Sort by fastest 7-day Stars growth"}
               onClick={() =>
                 update((s) => ({
                   ...s,
                   section: "ranking",
-                  sort: s.sort === "growth" ? "rank" : "growth",
+                  sort: s.sort === "delta7" ? "rank" : "delta7",
                 }))
               }
             >
@@ -1068,7 +1070,10 @@ function Dashboard({ state, update }) {
         </div>
       )}
       <BeginnerDialog section={guideSection} lang={state.lang} items={items} t={t} onClose={()=>setGuideSection(null)} onOpenRepo={repo=>update(s=>({...s,repo}))} />
-      <RechargeNotice lang={state.lang} />
+      <RechargeNotice
+        lang={state.lang}
+        busy={Boolean(state.repo || compareOpen || guideSection)}
+      />
       <BackToTop
         label={t("backToTop")}
         comparisonOpen={state.compare.length > 0}
@@ -1078,9 +1083,11 @@ function Dashboard({ state, update }) {
           <ComparisonDialog
             open={compareOpen}
             onClose={() => setCompareOpen(false)}
+            onRemove={toggleCompare}
             repos={state.compare}
             items={items}
             lang={state.lang}
+            theme={state.theme}
             history={historyData}
             t={t}
           />

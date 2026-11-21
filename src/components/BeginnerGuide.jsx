@@ -1,13 +1,31 @@
 import requirements from "../../config/installation-details.json" with {type:"json"};
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import paths from '../../config/research-paths.json' with {type:'json'};
 import {installationFor} from '../practical';
 import {detectAgents,AGENT_PLATFORMS} from '../domain';
 import {copyText} from '../clipboard';
+import {useFeedback} from './FeedbackProvider';
 export default function BeginnerGuide({initialSection='basics',lang,items,onClose,onOpenRepo}) {
  const zh=lang==='zh',[section,setSection]=useState(initialSection),[copied,setCopied]=useState('');
+ const [failedRepo,setFailedRepo]=useState('');
+ const timerRef=useRef(null);
+ const message=useFeedback();
+ useEffect(()=>()=>clearTimeout(timerRef.current),[]);
  const close=onClose;
  const byRepo=new Map(items.map(i=>[i.repo,i]));
+ const handleCopy=async(repo,command)=>{
+  try{
+   await copyText(command);
+   setFailedRepo('');
+   setCopied(repo);
+   message.success(zh?'已复制安装命令':'Install command copied');
+   clearTimeout(timerRef.current);
+   timerRef.current=setTimeout(()=>setCopied(''),2000);
+  }catch{
+   setFailedRepo(repo);
+   message.error(zh?'复制失败，请手动选择命令':'Copy failed; please select manually');
+  }
+ };
  return <>
   <div className="guide-tabs"><button type="button" aria-pressed={section==='basics'} onClick={()=>setSection('basics')}>{zh?'30 秒看懂 Skill':'Skills in 30 seconds'}</button><button type="button" aria-pressed={section==='paths'} onClick={()=>setSection('paths')}>{zh?'专业科研路径':'Discipline research paths'}</button></div>
   {section==='basics'?<section className="guide-basics">
@@ -17,7 +35,7 @@ export default function BeginnerGuide({initialSection='basics',lang,items,onClos
    <button type="button" className="guide-primary" onClick={()=>setSection('paths')}>{zh?'按专业看看怎么用 →':'Explore research paths →'}</button>
   </section>:<section className="guide-paths"><p>{zh?'按科研任务选择步骤，不必全部安装。每一步列出前置工具和已核对的安装方式；核对文档不代表已在你的设备上实测。':'Choose the steps you need; you do not have to install every tool. Prerequisites and reviewed instructions are listed per step. Documentation review is not a test on your device.'}</p><div className="research-path-grid">{paths.map(path=><article key={path.id} data-research-path={path.id}><h3>{path[`title_${lang}`]}</h3><p>{path[`audience_${lang}`]}</p><ol>{path.steps.filter(step=>byRepo.has(step.repo)).map(step=>{
     const item=byRepo.get(step.repo),installation=installationFor(item);const platforms=[...new Set([...detectAgents(item).map(id=>AGENT_PLATFORMS.find(a=>a.id===id)?.label||id),...(item.documented_platform_names||[])])];
-    return <li key={step.repo}><strong>{step[`task_${lang}`]}</strong><button type="button" className="guide-project" onClick={()=>{close();onOpenRepo(item.repo);}}>{item.repo} ↗</button><details><summary>{zh?'工具与安装说明':'Tools and installation'}</summary><p>{zh?'宿主：':'Host: '}{platforms.join(' / ')||(zh?'见项目说明':'See project docs')}</p><p>{installation[`context_${lang}`]}</p><p><strong>{zh?"环境：":"Environment: "}</strong>{requirements[item.repo]?.[`environment_${lang}`]||(zh?"见官方说明":"See official documentation")}</p><p><strong>{zh?"依赖：":"Dependencies: "}</strong>{requirements[item.repo]?.[`dependencies_${lang}`]||(zh?"见官方说明":"See official documentation")}</p>{installation.command && <><pre>{installation.command}</pre><button type="button" onClick={async()=>{try{await copyText(installation.command);setCopied(item.repo);}catch{setCopied('error');}}}>{copied===item.repo?(zh?'已复制':'Copied'):(zh?'复制命令':'Copy command')}</button></>}<a href={installation.source_url} target="_blank" rel="noopener noreferrer">{zh?'官方安装说明 ↗':'Official instructions ↗'}</a>{installation.reviewed_at && <small>{zh?'文档核对：':'Reviewed: '}{installation.reviewed_at}</small>}{copied==='error'&&<p role="status">{zh?'复制失败，请手动选择命令。':'Copy failed; please select the command manually.'}</p>}</details></li>;
+    return <li key={step.repo}><strong>{step[`task_${lang}`]}</strong><button type="button" className="guide-project" onClick={()=>{close();onOpenRepo(item.repo);}}>{item.repo} ↗</button><details><summary>{zh?'工具与安装说明':'Tools and installation'}</summary><p>{zh?'宿主：':'Host: '}{platforms.join(' / ')||(zh?'见项目说明':'See project docs')}</p><p>{installation[`context_${lang}`]}</p><p><strong>{zh?"环境：":"Environment: "}</strong>{requirements[item.repo]?.[`environment_${lang}`]||(zh?"见官方说明":"See official documentation")}</p><p><strong>{zh?"依赖：":"Dependencies: "}</strong>{requirements[item.repo]?.[`dependencies_${lang}`]||(zh?"见官方说明":"See official documentation")}</p>{installation.command && <><pre>{installation.command}</pre><button type="button" onClick={()=>handleCopy(item.repo,installation.command)}>{copied===item.repo?(zh?'已复制':'Copied'):(zh?'复制命令':'Copy command')}</button></>}<a href={installation.source_url} target="_blank" rel="noopener noreferrer">{zh?'官方安装说明 ↗':'Official instructions ↗'}</a>{installation.reviewed_at && <small>{zh?'文档核对：':'Reviewed: '}{installation.reviewed_at}</small>}{failedRepo===item.repo&&<p role="status">{zh?'复制失败，请手动选择命令。':'Copy failed; please select the command manually.'}</p>}</details></li>;
    })}</ol></article>)}</div></section>}
  </>;
 }

@@ -1,5 +1,9 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { SearchHighlight } from "./SearchHighlight";
+const QUICK_KEYWORDS = {
+  zh: ["论文写作", "文献综述", "Zotero", "LaTeX", "科研绘图", "审稿"],
+  en: ["paper writing", "literature review", "Zotero", "LaTeX", "figures", "peer review"],
+};
 export default function SearchSuggestions({
   state,
   update,
@@ -51,6 +55,7 @@ export default function SearchSuggestions({
       ]
     : [];
   const open = focused && expanded && options.length > 0;
+  const showQuickPicks = focused && expanded && !q;
   const activeOption = open && options[active];
   useEffect(() => {
     if (open && active >= 0)
@@ -157,10 +162,16 @@ export default function SearchSuggestions({
                     )}
                   </small>
                 </div>
-                {option.item?.description && (
+                {(state.lang === "zh" && option.item?.curated_use_zh
+                  ? option.item.curated_use_zh
+                  : option.item?.description) && (
                   <div className="search-option-description">
                     <SearchHighlight
-                      text={option.item.description}
+                      text={
+                        state.lang === "zh" && option.item?.curated_use_zh
+                          ? option.item.curated_use_zh
+                          : option.item.description
+                      }
                       query={state.query}
                     />
                   </div>
@@ -170,6 +181,31 @@ export default function SearchSuggestions({
           </ul>
           <div className="search-suggestion-hint">
             {t("searchSuggestionHint")}
+          </div>
+        </div>
+      )}
+      {showQuickPicks && (
+        <div
+          className="search-popup search-quick-picks"
+          onPointerDown={(event) => event.preventDefault()}
+        >
+          <span className="search-quick-label">
+            {state.lang === "zh" ? "热门科研场景" : "Popular searches"}
+          </span>
+          <div className="search-quick-list">
+            {(QUICK_KEYWORDS[state.lang] || QUICK_KEYWORDS.zh).map((word) => (
+              <button
+                key={word}
+                type="button"
+                className="search-quick-chip"
+                onClick={() => {
+                  update((previous) => ({ ...previous, query: word }));
+                  expand();
+                }}
+              >
+                {word}
+              </button>
+            ))}
           </div>
         </div>
       )}

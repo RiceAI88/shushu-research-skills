@@ -1,17 +1,26 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { CloseOutlined } from "@ant-design/icons";
 import qrImage from "../../assets/research-community-2026-11-14.jpg";
 
+const COMMUNITY_EVENT = "ars-open-community";
+
+// 通过自定义事件触发社群弹窗，避免依赖页面上的 DOM 选择器
 export function triggerCommunityDialog() {
-  const card = document.querySelector(".community-card");
-  if (card) {
-    card.click();
-  }
+  window.dispatchEvent(new CustomEvent(COMMUNITY_EVENT));
 }
 
 export function CommunityCard({ lang }) {
   const dialog = useRef(null);
+  useEffect(() => {
+    const open = () => {
+      if (dialog.current && !dialog.current.open) {
+        dialog.current.showModal();
+      }
+    };
+    window.addEventListener(COMMUNITY_EVENT, open);
+    return () => window.removeEventListener(COMMUNITY_EVENT, open);
+  }, []);
   const zh = lang === "zh";
   const title = zh ? "各专业科研 Skills 交流群" : "Research Skills Community";
   const modal = (

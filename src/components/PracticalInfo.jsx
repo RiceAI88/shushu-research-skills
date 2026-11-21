@@ -12,7 +12,6 @@ const HAS_CHINESE_RE = /[\u4e00-\u9fff]/;
 export function SummaryText({ item, t, query = "", full = false, lang = "" }) {
   const showCuratedZh =
     lang === "zh" &&
-    !full &&
     Boolean(item.curated_use_zh) &&
     !HAS_CHINESE_RE.test(item.description || "");
   return (
@@ -23,7 +22,7 @@ export function SummaryText({ item, t, query = "", full = false, lang = "" }) {
         <div
           className="curated-use-line"
           data-testid="card-cn-summary"
-          title={item.curated_use_zh}
+          title={full ? undefined : item.curated_use_zh}
         >
           <SearchHighlight text={item.curated_use_zh} query={query} />
         </div>

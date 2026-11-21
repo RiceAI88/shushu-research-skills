@@ -149,17 +149,14 @@ export function RepositoryViews({
   fmt,
   history,
 }) {
-  const rowSize = () =>
-    matchMedia("(min-width: 1100px)").matches
-      ? 3
-      : matchMedia("(min-width: 600px)").matches
-        ? 2
-        : 1;
-  const [adAfter, setAdAfter] = useState(() => rowSize() * 2);
+  // 桌面 3 列展示 6 张后插入，平板 2 列或移动端单列展示 4 张后插入，避免移动端刚看 2 张就被大区块打断
+  const adSlotCount = () =>
+    matchMedia("(min-width: 1100px)").matches ? 6 : 4;
+  const [adAfter, setAdAfter] = useState(adSlotCount);
   useEffect(() => {
     const wide = matchMedia("(min-width: 1100px)"),
       medium = matchMedia("(min-width: 600px)");
-    const sync = () => setAdAfter(rowSize() * 2);
+    const sync = () => setAdAfter(adSlotCount());
     wide.addEventListener("change", sync);
     medium.addEventListener("change", sync);
     return () => {

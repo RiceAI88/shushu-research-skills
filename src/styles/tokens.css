@@ -1,0 +1,50 @@
+/* 统一设计令牌（Emerald Portal 主题，与 src/tokens.js 保持单一来源一致） */
+:root {
+  --prs-primary: #0d9f6e;
+  --prs-primary-strong: #059669;
+  --prs-primary-hover: #047857;
+  --prs-on-primary-dark: #06281e;
+  --prs-emerald: #10b981;
+  --prs-secondary: #059669;
+  --prs-deep: #0284c7;
+  --prs-bg: #f8fafc;
+  --prs-tint: #ecfdf5;
+  --prs-panel: #ffffff;
+  --prs-text: #0f172a;
+  --prs-body: #334155;
+  --prs-muted: #64748b;
+  --prs-border: #e2e8f0;
+  --prs-pill-dark: #0f172a;
+  --prs-tag-bg: #f1f5f9;
+  --prs-tag-text: #334155;
+  --prs-shadow: none;
+  --prs-shadow-sm: 0 3px 14px rgba(15, 23, 42, 0.08);
+  --prs-shadow-md: 0 6px 20px rgba(15, 23, 42, 0.12);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+[data-theme="dark"] {
+  --prs-primary: #34d399;
+  --prs-primary-strong: #34d399;
+  --prs-primary-hover: #6ee7b7;
+  --prs-on-primary-dark: #06281e;
+  --prs-emerald: #10b981;
+  --prs-secondary: #6ee7b7;
+  --prs-deep: #38bdf8;
+  --prs-bg: #0b111e;
+  --prs-tint: #132a26;
+  --prs-panel: #111a2c;
+  --prs-text: #f1f5f9;
+  --prs-body: #cbd5e1;
+  --prs-muted: #94a3b8;
+  --prs-border: #1e293b;
+  --prs-pill-dark: #34d399;
+  --prs-tag-bg: #1e293b;
+  --prs-tag-text: #cbd5e1;
+  --prs-shadow: none;
+  --prs-shadow-sm: 0 3px 14px rgba(0, 0, 0, 0.28);
+  --prs-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.36);
+}

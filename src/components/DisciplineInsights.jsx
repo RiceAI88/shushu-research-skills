@@ -38,7 +38,7 @@ export function DisciplineCoverage({ items, state, update, t }) {
         <table className="discipline-matrix"><thead><tr><th>{zh ? '专业' : 'Discipline'}</th>{tasks.map(task=><th key={task.id}>{t(TASK_LABEL_KEYS[task.id])}</th>)}</tr></thead>
           <tbody>{rows.map(d=><tr key={d.id}><th scope="row">{d[state.lang]}</th>{tasks.map(task=>{
             const count=cells.find(c=>c.discipline===d.id&&c.task===task.id).count;
-            return <td key={task.id}><button className={!count?'matrix-zero':''} style={{'--cell-strength':count ? .12+.75*count/max : 0, color: count/max > .55 ? '#fff' : 'var(--prs-text)'}} aria-label={`${d[state.lang]} · ${t(TASK_LABEL_KEYS[task.id])} · ${count}`} onClick={()=>choose(d.id,task.id)}>{count}</button></td>;
+            return <td key={task.id}><button className={!count?'matrix-zero':''} style={{'--cell-strength':count ? .12+.75*count/max : 0, color: count/max > .55 ? (state.theme === 'dark' ? '#06281e' : '#fff') : 'var(--prs-text)'}} aria-label={`${d[state.lang]} · ${t(TASK_LABEL_KEYS[task.id])} · ${count}`} onClick={()=>choose(d.id,task.id)}>{count}</button></td>;
           })}</tr>)}</tbody>
         </table>
       </div>

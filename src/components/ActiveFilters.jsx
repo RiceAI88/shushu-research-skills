@@ -42,9 +42,12 @@ export function ActiveFilters({ state, update, t, empty }) {
     ]);
   if (state.newOnly) conditions.push(["newOnly", t("statNewWeek")]);
   if (state.favOnly) conditions.push(["favOnly", t("favoritesOnly")]);
-  // Keep a reset for week filters and insight-only day filters whose source control is hidden.
+  // 当来源控件隐藏在弹窗中或不可见时，即使仅有单一筛选条件也保留可见状态与一键清除入口。
   const needsReset =
-    state.newOnly || (state.section === "insights" && state.todayOnly);
+    state.newOnly ||
+    state.agent !== "all" ||
+    state.favOnly ||
+    (state.section === "insights" && state.todayOnly);
   if (!conditions.length || (conditions.length === 1 && !empty && !needsReset))
     return null;
   return (

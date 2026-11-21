@@ -10,6 +10,7 @@ import { Bar, Line, Scatter } from "@ant-design/plots";
 import { Renderer as SVGRenderer } from "@antv/g-svg";
 import { Button, Empty, Select, Tooltip } from "antd";
 import { buildInsightData, createColorMaps } from "../insights";
+import { THEME_TOKENS } from "../tokens";
 import {
   FONT_FAMILY,
   RESEARCH_TASKS,
@@ -186,8 +187,9 @@ export default function Insights({
   );
   const colors = useMemo(() => createColorMaps(allItems), [allItems]);
   const dark = state.theme === "dark";
-  const muted = dark ? "#94A3B8" : "#64748B",
-    grid = dark ? "#1E293B" : "#E2E8F0";
+  const themeTokens = THEME_TOKENS[state.theme] || THEME_TOKENS.light;
+  const muted = themeTokens.textSecondary,
+    grid = themeTokens.border;
   const fmt = (value) =>
     new Intl.NumberFormat(state.lang === "zh" ? "zh-CN" : "en-US").format(
       value,
@@ -273,9 +275,7 @@ export default function Insights({
     catRange = Object.values(colors.categories);
   const latest = new Map(data.trends.map((p) => [p.repo, p]));
   const trendDomain = data.trendRepos.map((item) => item.repo);
-  const trendRange = dark
-    ? ["#34D399", "#38BDF8", "#FBBF24"]
-    : ["#0D9F6E", "#0284C7", "#D97706"];
+  const trendRange = themeTokens.chartSeries;
   const trendDashes = [[], [7, 4], [2, 4]];
   const trendStyles = Object.fromEntries(
     trendDomain.map((repo, index) => [
@@ -578,7 +578,7 @@ export default function Insights({
                     onClick={() => category(c.id)}
                     aria-pressed={state.task === c.id}
                   >
-                    <i style={{ background: dark ? "#80789E" : "#B3AEC9" }} />
+                    <i style={{ background: dark ? "#34D399" : "#0D9F6E" }} />
                     <span>{c.label}</span>
                     <b>{c.count}</b>
                   </button>

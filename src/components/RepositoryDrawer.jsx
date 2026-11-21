@@ -218,7 +218,7 @@ export function RepositoryDrawer({
     >
       {item && (
         <div ref={contentRef} className="drawer-content" key={item.repo}>
-          <SummaryText item={item} t={t} full />
+          <SummaryText item={item} t={t} lang={state.lang} full />
           <div className="drawer-platforms">
             <span>{t("drAgent")}</span>
             <PlatformTags item={item} t={t} />
@@ -259,12 +259,6 @@ export function RepositoryDrawer({
           <DisciplineEvidence item={item} state={state} />
           <details className="drawer-more">
             <summary>{t("moreRepositoryDetails")}</summary>
-            {item.description && (
-              <section className="drawer-full-description">
-                <h3>{t("drDescription")}</h3>
-                <p>{item.description}</p>
-              </section>
-            )}
             <InstallationRequirements
               item={item}
               lang={state.lang}

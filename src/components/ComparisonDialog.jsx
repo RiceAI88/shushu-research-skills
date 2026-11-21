@@ -24,12 +24,16 @@ const labels = {
 export default function ComparisonDialog({
   open,
   onClose,
+  onRemove,
   repos,
   items = [],
   lang = "zh",
+  theme = "light",
   history,
   t,
 }) {
+  const fmt = (value) =>
+    new Intl.NumberFormat(lang === "zh" ? "zh-CN" : "en-US").format(value || 0);
   const selected = repos
     .map((repo) => items.find((item) => item.repo === repo))
     .filter(Boolean);
@@ -134,20 +138,59 @@ export default function ComparisonDialog({
           <thead>
             <tr>
               <th scope="col">{t("compareTitle")}</th>
-              {selected.map((item) => (
-                <th scope="col" key={item.repo}>
-                  <a
-                    href={
-                      safeExternalUrl(item.url) ||
-                      `https://github.com/${item.repo}`
-                    }
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {item.repo} ↗
-                  </a>
-                </th>
-              ))}
+              {selected.map((item) => {
+                const license =
+                  item.license?.spdx_id && item.license.spdx_id !== "NOASSERTION"
+                    ? item.license.spdx_id
+                    : item.license?.name || "";
+                const delta = item.star_delta_7d || 0;
+                return (
+                  <th scope="col" key={item.repo}>
+                    <div className="comparison-col-header">
+                      <a
+                        href={
+                          safeExternalUrl(item.url) ||
+                          `https://github.com/${item.repo}`
+                        }
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {item.repo} ↗
+                      </a>
+                      {onRemove && (
+                        <button
+                          type="button"
+                          className="comparison-remove-btn"
+                          aria-label={
+                            lang === "zh"
+                              ? `从对比移除 ${item.repo}`
+                              : `Remove ${item.repo} from comparison`
+                          }
+                          onClick={() => onRemove(item.repo)}
+                        >
+                          ×
+                        </button>
+                      )}
+                    </div>
+                    <div className="comparison-col-metrics">
+                      <span>★ {fmt(item.stars)}</span>
+                      {delta !== 0 && (
+                        <span className="comparison-col-delta">
+                          {lang === "zh" ? "7日 " : "7d "}
+                          {delta > 0 ? "+" : ""}
+                          {fmt(delta)}
+                        </span>
+                      )}
+                      {license && <span>{license}</span>}
+                    </div>
+                    {lang === "zh" && item.curated_use_zh && (
+                      <div className="comparison-col-summary">
+                        {item.curated_use_zh}
+                      </div>
+                    )}
+                  </th>
+                );
+              })}
             </tr>
           </thead>
           <tbody>
@@ -164,7 +207,7 @@ export default function ComparisonDialog({
       </div>
       <h3>{t("compareGrowth")}</h3>
       <p className="muted">{t("compareHint")}</p>
-      <ComparisonChart repos={repos} history={history} t={t} />
+      <ComparisonChart repos={repos} history={history} theme={theme} t={t} />
     </Modal>
   );
 }
