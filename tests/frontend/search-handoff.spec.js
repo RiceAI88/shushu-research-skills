@@ -1,8 +1,8 @@
 import { test, expect } from "./fixtures.js";
 
 for (const [theme, color] of [
-  ["light", "rgb(151, 145, 172)"],
-  ["dark", "rgb(170, 164, 196)"],
+  ["light", "rgb(100, 116, 139)"],
+  ["dark", "rgb(148, 163, 184)"],
 ]) {
   test(`search icon uses the softer theme color in ${theme} mode`, async ({
     page,

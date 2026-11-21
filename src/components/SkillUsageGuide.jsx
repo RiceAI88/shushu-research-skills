@@ -212,8 +212,8 @@ export function SkillUsageGuide({
                       : "📝 Research prompt template"}
                 </span>
                 <Button
-                  type="primary"
                   size="small"
+                  className="usage-copy-prompt-btn"
                   icon={
                     copiedKey === "usage-prompt" ? (
                       <CheckOutlined aria-hidden="true" />

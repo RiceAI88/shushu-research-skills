@@ -143,7 +143,7 @@ export default function BeginnerGuide({
               </div>
             </div>
             <h3>
-              {zh ? "上手前注意这 3 点" : "3 things to know before starting"}
+              {zh ? "先准备哪些工具与注意事项？" : "What to prepare & 3 things to know"}
             </h3>
             <ul>
               <li>

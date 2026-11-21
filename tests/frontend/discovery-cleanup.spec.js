@@ -5,7 +5,7 @@ for (const width of [1280,390,320]) test(`filter panel and honest counts at ${wi
  page.on('request',r=>{if(/\/assets\/FilterControls-.*\.js$/.test(r.url()))filterRequests.push(r.url());});
  await page.goto('./#discipline=science');
  expect(filterRequests).toHaveLength(0);
- await expect(page.locator('[data-discipline="science"]')).toHaveText('理学');
+ await expect(page.locator('[data-discipline="science"]')).toHaveText(/^理学\d+$/);
  await expect(page.locator('.discipline-selector-heading')).toContainText(/当前结果 \d+：专业适用 \d+ ＋ 通用 \d+/);
  await expect(page.locator('#agentFilter')).not.toBeVisible();
  const trigger=page.getByRole('button',{name:/^筛选/});

@@ -54,7 +54,7 @@ export function DisciplineSelector({ items, visible, state, update }) {
               <span>{zh ? '包含通用' : 'Include general'}</span>
               <ScopeSwitch
                 checked={state.includeCommon !== false}
-                aria-label={zh ? '在专业结果中包含通用科研 Skills' : 'Include general research Skills in discipline results'}
+                aria-label={zh ? '混排跨专业通用工具' : 'Show cross-disciplinary tools'}
                 onChange={(includeCommon) => update((s) => ({ ...s, includeCommon }))}
               />
             </label>

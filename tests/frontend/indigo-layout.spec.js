@@ -91,11 +91,12 @@ for (const width of [1280, 390])
       }),
     );
     const firstRow = boxes.filter((r) => Math.abs(r.top - boxes[0].top) < 2);
+    const cardsBeforeAd = Math.max(firstRow.length * 2, 4);
     const box = await ad.boundingBox();
     expect(box.y).toBeGreaterThanOrEqual(
-      Math.max(...boxes.slice(0, firstRow.length * 2).map((r) => r.bottom)),
+      Math.max(...boxes.slice(0, cardsBeforeAd).map((r) => r.bottom)),
     );
-    expect(box.y + box.height).toBeLessThanOrEqual(boxes[firstRow.length * 2].top);
+    expect(box.y + box.height).toBeLessThanOrEqual(boxes[cardsBeforeAd].top);
     await expect(ad).toHaveCSS("border-style", "dashed");
     await expect(ad.getByRole("link")).toHaveAttribute(
       "href",
