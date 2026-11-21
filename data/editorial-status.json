@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-21T07:04:54.648434Z",
+  "checked_at": "2026-11-21T10:20:08.181009Z",
   "repos": {
     "openags/paper-search-mcp": {
       "status": "current",
@@ -51,8 +51,8 @@
           "reviewed_blob_sha": "f69d6797419171d323bb7689716fdf08231c0188",
           "current_blob_sha": "f543e550df25dccba1c38fb1b797f722bd51139f",
           "reviewed_url": "https://github.com/Imbad0202/academic-research-skills/blob/23807f987024f2e038d12fd9e4e5d2a7cc228674/README.md",
-          "current_url": "https://github.com/Imbad0202/academic-research-skills/blob/d473358897231abd14837033f6f4952171892b91/README.md",
-          "diff_url": "https://github.com/Imbad0202/academic-research-skills/compare/23807f987024f2e038d12fd9e4e5d2a7cc228674...d473358897231abd14837033f6f4952171892b91"
+          "current_url": "https://github.com/Imbad0202/academic-research-skills/blob/00315dfea67cba974583debae32b77bdce659301/README.md",
+          "diff_url": "https://github.com/Imbad0202/academic-research-skills/compare/23807f987024f2e038d12fd9e4e5d2a7cc228674...00315dfea67cba974583debae32b77bdce659301"
         },
         {
           "path": "docs/SETUP.md",
@@ -60,8 +60,8 @@
           "reviewed_blob_sha": "3b32de8c6c35362ccaa626aa9ae327eccf16aea1",
           "current_blob_sha": "3b32de8c6c35362ccaa626aa9ae327eccf16aea1",
           "reviewed_url": "https://github.com/Imbad0202/academic-research-skills/blob/23807f987024f2e038d12fd9e4e5d2a7cc228674/docs/SETUP.md",
-          "current_url": "https://github.com/Imbad0202/academic-research-skills/blob/d473358897231abd14837033f6f4952171892b91/docs/SETUP.md",
-          "diff_url": "https://github.com/Imbad0202/academic-research-skills/compare/23807f987024f2e038d12fd9e4e5d2a7cc228674...d473358897231abd14837033f6f4952171892b91"
+          "current_url": "https://github.com/Imbad0202/academic-research-skills/blob/00315dfea67cba974583debae32b77bdce659301/docs/SETUP.md",
+          "diff_url": "https://github.com/Imbad0202/academic-research-skills/compare/23807f987024f2e038d12fd9e4e5d2a7cc228674...00315dfea67cba974583debae32b77bdce659301"
         }
       ]
     },
