@@ -42,6 +42,16 @@ test("stage quick-picks, shared toolkit pack banner, and zero-CLI Web AI guide w
   await page.getByTestId("repo-card").first().click();
   const drawer = page.getByRole("dialog");
   await expect(drawer).toBeVisible();
+  const centerDelta = await drawer
+    .locator(".drawer-platforms")
+    .evaluate((el) => {
+      const label = el.querySelector(":scope > span")?.getBoundingClientRect();
+      const tag = el.querySelector(".ant-tag")?.getBoundingClientRect();
+      return Math.abs(
+        label.top + label.height / 2 - (tag.top + tag.height / 2),
+      );
+    });
+  expect(centerDelta).toBeLessThan(1);
   await expect(drawer.getByTestId("setup-thresholds")).toBeVisible();
   await expect(drawer.getByTestId("share-peer-btn")).toBeVisible();
   const webHelper = drawer.getByTestId("web-ai-helper");
