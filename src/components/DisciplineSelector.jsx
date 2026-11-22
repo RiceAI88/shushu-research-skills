@@ -1,7 +1,6 @@
 import { ActionPopover } from "./ActionPopover";
 import { ScopeSwitch } from "./ScopeSwitch";
 import React, {useRef, useLayoutEffect} from "react";
-import { Tooltip } from "antd";
 import { DISCIPLINES, disciplineCounts, disciplineFit, professionLabel, selectedDiscipline, uniqueRepositories } from "../disciplines";
 
 export function DisciplineSelector({ items, visible, state, update }) {
@@ -63,10 +62,10 @@ export function DisciplineSelector({ items, visible, state, update }) {
       </div>
       <div ref={navigation} className="discipline-options" role="group" aria-label={zh ? '学科门类' : 'Disciplines'}>
         <span className="discipline-row-label">{zh ? '学科门类' : 'Discipline'}</span>
-        <button data-discipline="all" aria-pressed={!group} onClick={() => choose('all')}>{zh ? '全部' : 'All'}</button>
-        {DISCIPLINES.map(d => <Tooltip key={d.id} title={zh ? `已核对专业适用 ${counts[d.id]} 个，不含通用项目；同一仓库可属于多个专业。` : `${counts[d.id]} reviewed specialized repositories, excluding general tools; a repository can cover multiple disciplines.`}>
-          <button data-discipline={d.id} className={counts[d.id] ? '' : 'discipline-zero'} aria-pressed={state.discipline === d.id} onClick={() => choose(d.id)}>{d[lang]}<span aria-hidden="true">{counts[d.id]}</span></button>
-        </Tooltip>)}
+        <button type="button" data-discipline="all" aria-pressed={!group} onClick={() => choose('all')}>{zh ? '全部' : 'All'}</button>
+        {DISCIPLINES.map(d => (
+          <button key={d.id} type="button" data-discipline={d.id} className={counts[d.id] ? '' : 'discipline-zero'} aria-pressed={state.discipline === d.id} onClick={() => choose(d.id)}>{d[lang]}<span aria-hidden="true">{counts[d.id]}</span></button>
+        ))}
       </div>
       {group && <div className="discipline-majors" role="group" aria-label={zh ? '具体专业' : 'Majors'}>
         <span className="discipline-row-label">{zh ? '具体专业' : 'Major'}</span>
