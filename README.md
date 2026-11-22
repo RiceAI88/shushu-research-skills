@@ -6,7 +6,7 @@
 
 ### [打开科研 Skills 导航 →](https://riceai985.cc/)
 
-[![Skills](https://img.shields.io/badge/Skills-348-0d9f6e)](#skills-榜单)
+[![Skills](https://img.shields.io/badge/Skills-347-0d9f6e)](#skills-榜单)
 [![Updated](https://img.shields.io/badge/updated-2026--11--21-64748b)](#收录与更新)
 [![CI](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-64748b)](LICENSE)
@@ -69,7 +69,7 @@
 
 ## Skills 榜单
 
-Skills **348** · 科研相关项目 **206** · 类型待核验 **3**
+Skills **347** · 科研相关项目 **206** · 类型待核验 **3**
 
 更新时间：**2026-11-21 18:15 UTC+8**。以下为 Skills 前 20 名，按 Stars 降序排列；同 Stars 时依次按趋势分和仓库名排序，筛选项目类型后重新编号。Stars 与增长反映关注度，不代表科研质量、安装兼容性或推荐保证。
 
@@ -125,7 +125,7 @@ Skills **348** · 科研相关项目 **206** · 类型待核验 **3**
 
 **怎样排名？** 主榜按 Stars 排序，增长来自历史快照；趋势分仅作辅助，也可在网站切换排序。完整规则、字段含义和历史数据说明见[排名方法](docs/methodology.md)，采集过程见[采集报告](data/collection-report.json)与[变更记录](data/collection-events.json)。
 
-**什么时候更新？** [Update rankings](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/update-rankings.yml) 计划每日 **北京时间 10:20（02:20 UTC）**运行。GitHub Actions 定时任务可能排队或延迟，计划时间不等于数据发布时间，也不保证每天都有新增。运行结果见 Actions；有仓库维护权限时，可在该工作流选择 **Run workflow** 手动触发。
+**什么时候更新？** [Update rankings](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/update-rankings.yml) 计划每日 **北京时间 10:00（02:00 UTC）**运行。GitHub Actions 定时任务可能排队或延迟，计划时间不等于数据发布时间，也不保证每天都有新增。运行结果见 Actions；有仓库维护权限时，可在该工作流选择 **Run workflow** 手动触发。
 
 README 会由采集脚本自动生成，静态介绍需修改 [`render_readme`](scripts/update_rankings.py)，再用已有数据重新生成；不要只改 README 后等待下一次采集覆盖。采集会同步维护榜单、首次收录记录、近 60 天历史快照和订阅资产。
 

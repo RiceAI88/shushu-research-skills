@@ -2,7 +2,7 @@ name: Update rankings
 
 on:
   schedule:
-    - cron: "20 2 * * *"
+    - cron: "0 2 * * *"
   workflow_dispatch:
 
 permissions:
@@ -28,7 +28,31 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Check if already updated today
+        id: gate
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "run_needed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          python - <<'EOF'
+          import json, os
+          from datetime import datetime, timezone, timedelta
+          beijing = timezone(timedelta(hours=8))
+          today_bj = datetime.now(beijing).date()
+          try:
+              gen = json.load(open("data/rankings.json"))["metadata"]["generated_at"]
+              last_bj = datetime.fromisoformat(gen.replace("Z", "+00:00")).astimezone(beijing).date()
+              needed = "false" if last_bj >= today_bj else "true"
+          except Exception:
+              needed = "true"
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"run_needed={needed}\n")
+          print(f"Schedule check: today_bj={today_bj}, run_needed={needed}")
+          EOF
+
       - name: Install OG cover rendering deps
+        if: steps.gate.outputs.run_needed == 'true'
         # cairosvg rasterizes assets/og-cover.svg into the PNG that social
         # crawlers actually display (OG/Twitter cards do not render SVG).
         # Noto CJK fonts are needed or the Chinese headline turns into tofu.
@@ -38,24 +62,36 @@ jobs:
           pip install cairosvg
 
       - name: Update ranking data
+        if: steps.gate.outputs.run_needed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/update_rankings.py
 
       - name: Check curated source documents
+        if: steps.gate.outputs.run_needed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/check_editorial_docs.py
 
       - name: Run tests
+        if: steps.gate.outputs.run_needed == 'true'
         run: python -m unittest discover -s tests -v
 
       - name: Commit updated rankings
+        if: steps.gate.outputs.run_needed == 'true'
         id: commit
         run: |
           git config user.name "RiceAI88"
           git config user.email "275014869+RiceAI88@users.noreply.github.com"
-          git add data/repository-catalog.json data/collection-report.json data/collection-events.json README.md data/first-seen.json data/editorial-status.json data/rankings.json data/rankings.js data/history.js data/rankings.csv data/history/*.json sitemap.xml feed.xml assets/og-cover.svg assets/og-cover.png assets/og-cover-en.svg assets/og-cover-en.png reports/*.html
+          # 通配符必须加引号交给 git pathspec 匹配；由 shell 展开会漏掉
+          # 按 60 天保留期删除的历史快照，导致删除无法提交、rebase 被未暂存改动阻断。
+          paths=(
+            data/repository-catalog.json data/collection-report.json data/collection-events.json
+            README.md data/first-seen.json data/editorial-status.json data/rankings.json
+            data/rankings.js data/history.js data/rankings.csv 'data/history/*.json'
+            sitemap.xml feed.xml 'assets/og-cover*' 'reports/*.html'
+          )
+          git add -A -- "${paths[@]}"
           if git diff --cached --quiet; then
             echo "changes_detected=false" >> "$GITHUB_OUTPUT"
             exit 0
@@ -68,7 +104,10 @@ jobs:
             fi
             echo "Push rejected (remote main advanced during collection); rebasing and retrying ($attempt/3)..."
             git fetch origin main
-            git rebase -X theirs origin/main
+            # autostash 兜住范围外的临时改动；冲突无法自动解决时中止本次 rebase，避免下一轮卡在进行中的 rebase。
+            if ! git rebase --autostash -X theirs origin/main; then
+              git rebase --abort || true
+            fi
           done
           exit 1
 

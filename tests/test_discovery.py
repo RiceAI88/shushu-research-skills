@@ -227,6 +227,7 @@ class HumanitiesResearchAdmissionTest(unittest.TestCase):
             ('AI agent skills for YouTube research. Outlier videos, niche finding', '# YouTube Research Skills\nAgent skills for YouTube research. Outlier videos and literature tags.'),
             ('图文轮播 Skill（cy-carousel）：给一个选题，查证、找素材、排版', '# 图文轮播 Skill\n给一个选题，论文素材排版生成封面＋10 页。'),
             ('水论文skill一句话出论文：多角度选题、大纲写作', '# 水论文skill\n一句话出论文的 Claude Code skill。'),
+            ('AI Safety HOT: daily AI safety news, papers and incidents in one place', '# AI Safety HOT\nDaily AI safety news, papers and incidents with agent skills.'),
             ('AI Skills for Antithesis Users', '# Antithesis Skills\nAntithesis workflow and agent skills for testing.'),
         ]
         for desc, text in rejected_cases:

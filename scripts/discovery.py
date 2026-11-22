@@ -39,7 +39,7 @@ DISCIPLINE_PURPOSE = re.compile(
     r'兽医|考古|文物|遥感|地球科学|教育技术|谱系|档案考证', re.I)
 
 NONRESEARCH_PURPOSE = re.compile(
-    r'gameplay|mobile game|手游|碧蓝航线|AI资讯|资讯日报|信息源|信息茧房|高性价比人生|海外留学|'
+    r'gameplay|mobile game|手游|碧蓝航线|AI资讯|资讯日报|daily ai safety news|信息源|信息茧房|高性价比人生|海外留学|'
     r'phd admission|phd(?:,?\s*mres)?(?:,?\s*mphil)?\s+applications?|graduate school applications?|留学申请|scholarships?|'
     r'youtube research\.\s*outlier videos|图文轮播\s*skill|小红书(?:爆款|起号|运营)|短视频(?:起号|带货)|'
     r'水论文\s*skill\s*一句话出论文|恋爱军师|\bmirror of\b|\(auto[ -]generated\)',

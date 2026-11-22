@@ -3,6 +3,9 @@ for (const width of [1440, 390]) {
   test(`task text/count are centered and owner/title rows have consistent baselines at ${width}px`, async ({
     page,
   }) => {
+    // 卡片入场动画使用 transform，getBoundingClientRect 会把动画中途的缩放计入尺寸，
+    // 关闭动画后再测量布局几何，避免偶发的高度不一致误报。
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setViewportSize({ width, height: 1000 });
     await page.goto("./#view=card");
     await expect(page.getByTestId("repo-card")).toHaveCount(30);

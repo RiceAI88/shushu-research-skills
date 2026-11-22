@@ -4,7 +4,8 @@
   "exclude_repositories": [
     "RiceAI88/shushu-research-skills",
     "RiceAI88/awesome-paper-research-skills",
-    "kael-odin/awesome-academic-research-skills"
+    "kael-odin/awesome-academic-research-skills",
+    "wuyoscar/AISafetyHot"
   ],
   "seed_repositories": [
     "LAMDA-NeSy/Research-Starter-Kit",
