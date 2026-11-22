@@ -55,10 +55,13 @@ import {
   FONT_FAMILY,
   persistState,
   REPOSITORY_URL,
+  RESEARCH_STAGES,
   RESEARCH_TASKS,
   restoreState,
   serializeState,
 } from "./domain";
+import { copyText } from "./clipboard";
+import { buildPackUrl, formatPackShareText } from "./shareText";
 import { translations } from "./i18n";
 import { THEME_TOKENS } from "./tokens";
 import { enrichItem, editorialPicks } from "./practical";
@@ -299,6 +302,8 @@ function Dashboard({ state, update }) {
       state.discipline,
       state.major,
       state.includeCommon,
+      state.stage,
+      state.pack,
     ],
   );
   const selected =
@@ -390,6 +395,34 @@ function Dashboard({ state, update }) {
     a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
+  async function shareFavoritesPack(onlyUrl = false) {
+    const byRepo = new Map(items.map((i) => [i.repo, i]));
+    const favItems = state.favorites
+      .map((r) => byRepo.get(r))
+      .filter(Boolean);
+    if (!favItems.length) return;
+    const text = onlyUrl
+      ? buildPackUrl(
+          favItems.map((i) => i.repo),
+          { lang: state.lang },
+        )
+      : formatPackShareText(favItems, { lang: state.lang });
+    try {
+      await copyText(text);
+      message.success(
+        onlyUrl
+          ? state.lang === "zh"
+            ? "已复制专属收藏清单链接"
+            : "Toolkit share link copied"
+          : state.lang === "zh"
+            ? "已复制收藏清单安利文案与专属链接，可直接发给同门！"
+            : "Toolkit share card & link copied!",
+      );
+    } catch {
+      message.error(t("copyFailed"));
+    }
+  }
+  const activeStageObj = RESEARCH_STAGES.find((s) => s.id === state.stage);
   const recentCount = recentlyUpdatedCount(
     scopeItems,
     dataset.metadata?.generated_at,
@@ -620,6 +653,9 @@ function Dashboard({ state, update }) {
                   todayOnly: "",
                   discipline: "all",
                   major: "all",
+                  stage: "",
+                  pack: [],
+                  packTitle: "",
                   sort: "rank",
                 }))
               }
@@ -723,6 +759,53 @@ function Dashboard({ state, update }) {
         }}
       >
         <DisciplineSelector items={disciplineItems} visible={visible} state={state} update={update} />
+        <section
+          className="stage-quick-bar"
+          data-testid="stage-quick-bar"
+          aria-label={state.lang === "zh" ? "论文阶段急救包" : "Research stage quick-picks"}
+        >
+          <div className="stage-quick-row">
+            <span className="stage-quick-label">
+              {state.lang === "zh" ? "急救场景" : "Quick stage"}
+            </span>
+            <div className="stage-pill-list">
+              {RESEARCH_STAGES.map((stage) => {
+                const active = state.stage === stage.id;
+                return (
+                  <button
+                    key={stage.id}
+                    type="button"
+                    className={`stage-pill${active ? " is-active" : ""}`}
+                    data-stage={stage.id}
+                    aria-pressed={active}
+                    title={stage[`hint_${state.lang}`]}
+                    onClick={() =>
+                      update((s) => ({
+                        ...s,
+                        section: "ranking",
+                        stage: active ? "" : stage.id,
+                      }))
+                    }
+                  >
+                    {stage[state.lang]}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          {activeStageObj && (
+            <p className="stage-quick-hint" data-testid="stage-quick-hint">
+              <span>{activeStageObj[`hint_${state.lang}`]}</span>
+              <button
+                type="button"
+                className="stage-clear-inline"
+                onClick={() => update((s) => ({ ...s, stage: "" }))}
+              >
+                {state.lang === "zh" ? "退出场景" : "Clear stage"}
+              </button>
+            </p>
+          )}
+        </section>
         <section
           ref={filterRef}
           className="filters"
@@ -936,6 +1019,18 @@ function Dashboard({ state, update }) {
                 </section>
               </div>
               <Space wrap size={8}>
+                {state.favorites.length > 0 && (
+                  <Button
+                    size="small"
+                    className="share-pack-trigger"
+                    data-testid="share-favorites-pack"
+                    onClick={() => shareFavoritesPack(false)}
+                  >
+                    {state.lang === "zh"
+                      ? `📦 分享清单 (${state.favorites.length})`
+                      : `📦 Share pack (${state.favorites.length})`}
+                  </Button>
+                )}
                 <ScopeControl {...{state,update,relatedCount}} />
                 <Button type="link" onClick={()=>setGuideSection("paths")}>{state.lang === "zh" ? "专业路径" : "Research paths"}</Button>
                 <details className="export-menu">
@@ -945,6 +1040,20 @@ function Dashboard({ state, update }) {
                     role="group"
                     aria-label={t("exportMenu")}
                   >
+                    <button
+                      type="button"
+                      disabled={!state.favorites.length}
+                      onClick={() => shareFavoritesPack(false)}
+                    >
+                      {state.lang === "zh" ? "复制收藏清单文案" : "Copy toolkit card"}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={!state.favorites.length}
+                      onClick={() => shareFavoritesPack(true)}
+                    >
+                      {state.lang === "zh" ? "复制收藏清单链接" : "Copy toolkit link"}
+                    </button>
                     <button
                       type="button"
                       disabled={!state.favorites.length}
@@ -968,6 +1077,82 @@ function Dashboard({ state, update }) {
                 </details>
               </Space>
             </div>
+            {state.pack?.length > 0 && (
+              <div
+                className="shared-pack-banner"
+                data-testid="pack-banner"
+                role="region"
+                aria-label={state.lang === "zh" ? "同门分享工具包" : "Shared toolkit"}
+              >
+                <div className="shared-pack-copy">
+                  <strong>
+                    📦{" "}
+                    {state.packTitle ||
+                      (state.lang === "zh"
+                        ? "同门分享的科研 Skills 工具包"
+                        : "Shared Research Skills Toolkit")}
+                  </strong>
+                  <span>
+                    {state.lang === "zh"
+                      ? `共匹配 ${visible.length} 款实用科研项目`
+                      : `${visible.length} curated repositories`}
+                  </span>
+                </div>
+                <div className="shared-pack-actions">
+                  <Button
+                    size="small"
+                    type="primary"
+                    data-testid="save-pack-to-favorites"
+                    onClick={() => {
+                      update((s) => ({
+                        ...s,
+                        favorites: [...new Set([...s.favorites, ...s.pack])],
+                      }));
+                      message.success(
+                        state.lang === "zh"
+                          ? "已将该清单全部加入我的收藏"
+                          : "Saved all toolkit items to favorites",
+                      );
+                    }}
+                  >
+                    {state.lang === "zh" ? "⭐ 一键收入我的收藏" : "⭐ Save all"}
+                  </Button>
+                  <Button
+                    size="small"
+                    data-testid="reshare-pack"
+                    onClick={async () => {
+                      try {
+                        await copyText(
+                          formatPackShareText(visible, {
+                            lang: state.lang,
+                            title: state.packTitle,
+                          }),
+                        );
+                        message.success(
+                          state.lang === "zh"
+                            ? "已复制工具包文案，可继续转发"
+                            : "Toolkit card copied",
+                        );
+                      } catch {
+                        message.error(t("copyFailed"));
+                      }
+                    }}
+                  >
+                    {state.lang === "zh" ? "转发给同门" : "Reshare"}
+                  </Button>
+                  <Button
+                    size="small"
+                    type="link"
+                    data-testid="exit-pack"
+                    onClick={() =>
+                      update((s) => ({ ...s, pack: [], packTitle: "" }))
+                    }
+                  >
+                    {state.lang === "zh" ? "查看全部榜单" : "View all Skills"}
+                  </Button>
+                </div>
+              </div>
+            )}
             {(visible.length > 0 || !items.length || state.todayOnly) && (
               <DailyArrivals {...{ items, state, update, t }} />
             )}

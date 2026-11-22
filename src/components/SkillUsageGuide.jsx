@@ -5,8 +5,11 @@ import { installationFor } from "../practical";
 import {
   aiInstallPromptFor,
   classifyInstallLocation,
+  deriveSetupThresholds,
   usagePromptFor,
+  webChatPromptFor,
 } from "../usageGuide";
+import { safeExternalUrl } from "../domain";
 import { PlatformTags, InstallationActions } from "./PracticalInfo";
 import { useFeedback } from "./FeedbackProvider";
 import { copyText } from "../clipboard";
@@ -38,8 +41,11 @@ export function SkillUsageGuide({
   const installation = installationFor(item);
   const location = classifyInstallLocation(installation, lang);
   const aiInstallPrompt = aiInstallPromptFor(item, installation, lang);
+  const webPrompt = webChatPromptFor(item, lang);
+  const thresholds = deriveSetupThresholds(item, installation, detailsInfo, lang);
   const example = usagePromptFor(item, lang);
   const isReference = installation.mode === "reference";
+  const repoUrl = safeExternalUrl(item?.url);
   const envText = detailsInfo[`environment_${lang}`];
   const depText = detailsInfo[`dependencies_${lang}`];
 
@@ -62,6 +68,23 @@ export function SkillUsageGuide({
       data-testid="skill-usage-guide"
       aria-label={zh ? "快速上手指南" : "Quick start guide"}
     >
+      {thresholds.length > 0 && (
+        <div
+          className="setup-threshold-strip"
+          data-testid="setup-thresholds"
+          aria-label={zh ? "环境与使用门槛提示" : "Setup threshold hints"}
+        >
+          {thresholds.map((badge) => (
+            <span
+              key={badge.id}
+              className={`threshold-pill threshold-${badge.tone}`}
+            >
+              {badge.label}
+            </span>
+          ))}
+        </div>
+      )}
+
       {/* 第 1 步：准备 AI Agent 与运行环境 */}
       <div className="usage-step">
         <div className="usage-step-header">
@@ -171,6 +194,69 @@ export function SkillUsageGuide({
                       ? "复制让 AI 帮你装"
                       : "Copy AI install prompt"}
                 </Button>
+              </div>
+            </details>
+          )}
+          {!isReference && item.repository_kind === "skill" && (
+            <details
+              className="ai-install-helper web-ai-helper"
+              data-testid="web-ai-helper"
+            >
+              <summary>
+                <span aria-hidden="true">🌐</span>
+                <span>
+                  {zh
+                    ? "没装命令行工具？在网页版 DeepSeek / Kimi / ChatGPT 直接用"
+                    : "No CLI tool installed? Use directly in Web AI chat"}
+                </span>
+              </summary>
+              <div className="ai-install-helper-body">
+                <p className="web-ai-steps">
+                  {zh
+                    ? "1）进入项目 GitHub 仓库打开 SKILL.md（或在 skills/ 目录下选一个子技能 .md 文件）复制内容；2）打开任意网页版 AI，复制下方引导词并粘贴 SKILL.md 即可直接使用："
+                    : "1) Open SKILL.md (or a sub-skill .md under skills/) in the GitHub repo and copy its text; 2) Paste it with the wrapper prompt below into any Web AI chat:"}
+                </p>
+                <p className="usage-prompt-text">{webPrompt}</p>
+                <div className="web-ai-actions">
+                  <Button
+                    size="small"
+                    icon={
+                      copiedKey === "web-ai" ? (
+                        <CheckOutlined aria-hidden="true" />
+                      ) : (
+                        <CopyOutlined aria-hidden="true" />
+                      )
+                    }
+                    data-testid="copy-web-ai-prompt"
+                    onClick={() =>
+                      handleCopy(
+                        "web-ai",
+                        webPrompt,
+                        zh
+                          ? "已复制网页版 AI 引导词"
+                          : "Web AI wrapper prompt copied",
+                      )
+                    }
+                  >
+                    {copiedKey === "web-ai"
+                      ? zh
+                        ? "已复制引导词"
+                        : "Copied"
+                      : zh
+                        ? "复制网页版引导词"
+                        : "Copy Web AI prompt"}
+                  </Button>
+                  {repoUrl && (
+                    <a
+                      className="web-ai-repo-link"
+                      href={repoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {zh ? "去仓库找 SKILL.md ↗" : "Find SKILL.md in repo ↗"}
+                    </a>
+                  )}
+                </div>
               </div>
             </details>
           )}

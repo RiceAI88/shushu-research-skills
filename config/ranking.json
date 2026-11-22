@@ -109,7 +109,19 @@
       "\"史料\" \"skill\"",
       "\"古籍\" \"skill\"",
       "\"法学\" \"skill\"",
-      "\"计量\" \"skill\""
+      "\"计量\" \"skill\"",
+      "\"forestry\" \"research\" \"skill\"",
+      "\"ecology\" \"research\" \"skill\"",
+      "\"plant science\" \"skill\"",
+      "\"qualitative research\" \"skill\"",
+      "\"meta-analysis\" \"skill\"",
+      "\"stata\" \"skill\"",
+      "\"business research\" \"skill\"",
+      "\"scientific illustration\" \"skill\"",
+      "\"农学\" \"skill\"",
+      "\"教育\" \"论文\" \"skill\"",
+      "\"管理\" \"实证\" \"skill\"",
+      "\"哲学\" \"论文\" \"skill\""
     ]
   }
 }

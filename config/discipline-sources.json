@@ -1015,5 +1015,482 @@
     "source_sha": "8a1d65998ecee339c40a022649ffca5e2c61ed9a",
     "reviewed_at": "2026-11-21",
     "review_kind": "documentation_only"
+  },
+  "pangenomeai/academic-skills-food-nutrition": {
+    "use_zh": "食品营养与农业科学文献综述、写作与投稿辅助",
+    "use_en": "Food, nutrition and agricultural science literature review and manuscript skills",
+    "source_quote": "AI research assistant for food, nutrition and agricultural science — Claude Code, Codex, MiniMax Agent, OpenClaw, and Grok Build skills",
+    "source_url": "https://github.com/PangenomeAI/academic-skills-food-nutrition/blob/main/README.md",
+    "source_sha": "49a4f4aa1fd15a2c224ff81449dfa61a95b25357",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "limi124/remote-sensing-research-radar": {
+    "use_zh": "遥感大数据、地理空间 AI 与生态环境前沿追踪",
+    "use_en": "Remote sensing big data and geospatial AI frontier tracking",
+    "source_quote": "A Codex skill for tracking research frontiers in geospatial AI, remote sensing big data, and transferable computer vision",
+    "source_url": "https://github.com/limi124/remote-sensing-research-radar/blob/main/README.md",
+    "source_sha": "fbe6b99218e0083a81e6b0b372b44a2bf91953ce",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "grind-lab-core/night_owl_research_agent": {
+    "use_zh": "地球科学、遥感与地理信息（GIS）自动化科研助手",
+    "use_en": "Automated research agent for geoscience, remote sensing and GIS",
+    "source_quote": "A fully automatic, domain-aware AI research agent for Geoscientists, Remote Sensing researchers, and GIScientists",
+    "source_url": "https://github.com/GRIND-Lab-Core/night_owl_research_agent/blob/main/README.md",
+    "source_sha": "082f33f0cf5b3dc19438ddb4b38e7316352e1043",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "stevetangent/goose-bio-skills": {
+    "use_zh": "生物信息学与生物统计单任务科研技能集",
+    "use_en": "Focused bioinformatics and biostatistics skills with scientific boundaries",
+    "source_quote": "Goose Bio Skills is a focused collection of one-job Agent Skills for common bioinformatics and biostatistics tasks.",
+    "source_url": "https://github.com/SteveTangent/goose-bio-skills/blob/main/README.md",
+    "source_sha": "5c5075b92861c7000f79b32ee1fe963f5ca20c47",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "instadeepai/nucleotide-transformer": {
+    "use_zh": "基因组学与转录组学基础模型与序列分析",
+    "use_en": "Foundation models for genomics and transcriptomics sequence analysis",
+    "source_quote": "A hub for InstaDeep's cutting-edge deep learning models and research for genomics, originating from the Nucleotide Transformer",
+    "source_url": "https://github.com/instadeepai/nucleotide-transformer/blob/main/README.md",
+    "source_sha": "456898f425418755271119371720cebfa78266ef",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "paper2poster/paper2poster": {
+    "use_zh": "将学术论文自动转化为多模态会议海报（Poster）",
+    "use_en": "Multimodal academic conference poster generation from scientific papers",
+    "source_quote": "Paper2Poster: Multimodal Poster Automation from Scientific Papers",
+    "source_url": "https://github.com/Paper2Poster/Paper2Poster/blob/main/README.md",
+    "source_sha": "32965f3f9eced7392d77abfa4ef94cdbd5c4a582",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "chenruishuo/posterly": {
+    "use_zh": "将论文排版渲染为印刷级学术会议海报 PDF",
+    "use_en": "Render papers into print-ready conference posters via HTML/CSS and Chromium",
+    "source_quote": "posterly turns a paper into a print-ready conference poster at the exact canvas size you set — ICML, NeurIPS, ICLR, CVPR",
+    "source_url": "https://github.com/Chenruishuo/posterly/blob/main/README.md",
+    "source_sha": "682c3e4fab7af406d01db63a3a750e4f3a066009",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "leon-gittech/skill2poster": {
+    "use_zh": "将论文内容生成为 A0 尺寸可校验学术海报",
+    "use_en": "Turn research papers into accurate A0 HTML/PDF academic posters",
+    "source_quote": "Skill2Poster 是一个 skill-driven 的学术海报生成工作流，用来把论文内容转成视觉质量较高、信息准确、可检查的 academic poster。",
+    "source_url": "https://github.com/LEON-gittech/Skill2Poster/blob/main/README.md",
+    "source_sha": "105f1a5833d9ed836f991d949f02e30aa5571287",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "yjz211/vivid-illustration-skill": {
+    "use_zh": "内置百余套模板与配色的科研数据图与架构图生成",
+    "use_en": "Scientific data charts, SVG architecture diagrams, and color palettes",
+    "source_quote": "Vivid Illustration Skill 面向论文、数学建模、系统设计与实验报告，提供 148 个数据图模板、196 套统一 SVG 架构资产和 7 套配色。",
+    "source_url": "https://github.com/yjz211/vivid-illustration-skill/blob/main/README.md",
+    "source_sha": "201f2c25aae6eeaccbb7e54e1cdd4a561b2605ad",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "pengjunchi0/codex-visio-paper-figure-skill": {
+    "use_zh": "将参考图或架构图还原为 Visio 原生可编辑论文配图",
+    "use_en": "Convert reference diagrams into native editable Microsoft Visio (.vsdx) figures",
+    "source_quote": "面向科研论文配图工作流的 Codex Skill。它用于把参考图片、截图或生成图还原为 Microsoft Visio .vsdx 原生可编辑图形",
+    "source_url": "https://github.com/pengjunchi0/codex-visio-paper-figure-skill/blob/main/README.md",
+    "source_sha": "c18143aa20e1750a3e7550011e13fff9ab07fa50",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "rss3208/visiomaster": {
+    "use_zh": "将流程图与模块图拆解重建为可编辑 Visio 图纸",
+    "use_en": "Rebuild flowcharts and module diagrams into editable Visio shapes and connectors",
+    "source_quote": "用于把 GPT、Gemini 等 AI 生成的流程图/学术示意图，以及已有的流程图、架构图、论文模块图，重建为可编辑的 Microsoft Visio",
+    "source_url": "https://github.com/Rss3208/Visiomaster/blob/main/README.md",
+    "source_sha": "b25c9f030e095e51182e5ccff2079c08f8d3ef39",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "exsinger-hub/sivia": {
+    "use_zh": "将科研论文转化为科学概览插图与可编辑演示页",
+    "use_en": "Turn research papers into scientific visual overviews and editable slides",
+    "source_quote": "Paper → Scientific Overview → Editable PowerPoint",
+    "source_url": "https://github.com/exsinger-hub/Sivia/blob/main/README.md",
+    "source_sha": "7dbfb511df8dbb45bfe8f2f40f036caa745437b7",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "helloo1568/slidemuse": {
+    "use_zh": "将论文、报告与讲义生成风格统一的可编辑学术演示 PPTX",
+    "use_en": "Turn papers, reports, and notes into visually consistent editable PPTX decks",
+    "source_quote": "将 PDF、论文、报告与笔记制作成风格统一的图片 PPT，按需还原为可编辑 PPTX。用于工作汇报、教学培训、学术分享、竞赛答辩",
+    "source_url": "https://github.com/helloo1568/slidemuse/blob/main/README.md",
+    "source_sha": "9dafa597f339135141d7c1c2ac6e3076d93c931b",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "hrdzhu/modelviz-skill": {
+    "use_zh": "面向数学建模与科研写作的多模板智能选图与可视化",
+    "use_en": "Template-guided scientific and mathematical modeling chart generation",
+    "source_quote": "从自然语言需求和真实数据出发，自动完成选图、模板适配、绘图生成、质量检查与有限自动修复。",
+    "source_url": "https://github.com/hrdZhu/modelviz-skill/blob/main/README.md",
+    "source_sha": "2d0d0a1245b7ef004a42503da30b47235b4d81a9",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "givemotion/givemotion": {
+    "use_zh": "用代码驱动生成科研演示动画与学术科普讲解视频",
+    "use_en": "Code-to-video engine for scientific animations and presentation videos",
+    "source_quote": "Ask your AI agent for a video and get a finished MP4. givemotion is a free, open-source (MIT) video engine",
+    "source_url": "https://github.com/givemotion/givemotion/blob/main/README.md",
+    "source_sha": "983f81aa276674420c8d671eda509fec28c1b661",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "alchaincyf/huashu-report": {
+    "use_zh": "按顶级智库与咨询规范撰写机构级行业与研究报告",
+    "use_en": "Institutional-grade research reports and data whitepapers workflow",
+    "source_quote": "装上之后，你的 agent 做行业报告、白皮书、年度调研、数据洞察和 arXiv 论文时，会按研究员 / 编辑 / 信息设计师 / 数据可视化师四个角色依次工作",
+    "source_url": "https://github.com/alchaincyf/huashu-report/blob/master/README.md",
+    "source_sha": "760b39783376c293663691b368540669308dcbdc",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "dylantmoore/stata-skill": {
+    "use_zh": "规范编写 Stata 数据清洗、面板回归与因果推断代码",
+    "use_en": "Idiomatic Stata code for data management, econometrics, and causal inference",
+    "source_quote": "Stata — A comprehensive reference that tells Claude how to use Stata. Covers core syntax, data management, econometrics",
+    "source_url": "https://github.com/dylantmoore/stata-skill/blob/main/README.md",
+    "source_sha": "82ea28dc85f2f9abd032d2ec546348633960a0dc",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "sepinetam/mcp-for-stata": {
+    "use_zh": "在 AI Agent 中安全调用本机 Stata 执行实证计量分析",
+    "use_en": "MCP server and CLI for running local Stata empirical workflows from AI agents",
+    "source_quote": "MCP-for-Stata is an safety first open-source MCP server and CLI tool with Skills lets any AI agent you use invoke local Stata",
+    "source_url": "https://github.com/SepineTam/mcp-for-stata/blob/master/README.md",
+    "source_sha": "a89e60cd3b78427b7da2488aad1061f282b45338",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "ashuigordon/stata-cli": {
+    "use_zh": "支持运行 .do 脚本与查看回归结果的 Stata 命令行技能",
+    "use_en": "Agent-native Stata CLI via PyStata for empirical .do scripts and diagnostics",
+    "source_quote": "An agent-native command-line interface for Stata via PyStata. Let Codex, Claude Code, Cursor, and other coding agents run .do files",
+    "source_url": "https://github.com/ashuiGordon/stata-cli/blob/main/README.md",
+    "source_sha": "1932c8ded316f484c69de3871270ef4c3065a139",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "jonasweinert/econagentskills": {
+    "use_zh": "遵循 DIME 规范的计量经济学数据处理、分析与论文写作",
+    "use_en": "Econometrics research skills for data cleaning, regression analysis, and writing",
+    "source_quote": "Opinionated agent skills for econometrics research, built to make Claude Code, Cursor, Codex, and Gemini CLI behave like a competent RA",
+    "source_url": "https://github.com/JonasWeinert/EconAgentSkills/blob/main/README.md",
+    "source_sha": "92d2f5c1c5d32686145da96252f562ce86fa864b",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "1793065778/econ-empirical-paper-ppt-skill": {
+    "use_zh": "将经管类长篇实证论文拆解转化为组会与课堂汇报 PPT 蓝图",
+    "use_en": "Turn empirical economics and business papers into structured presentation blueprints",
+    "source_quote": "目标是把一篇经管类实证论文整理成一套可继续制作 PPT 的中文学术汇报蓝图。它适合课堂汇报、组会汇报、文献分享、开题或答辩预演",
+    "source_url": "https://github.com/1793065778/econ-empirical-paper-ppt-skill/blob/main/README.md",
+    "source_sha": "ebf5c5775e6ef8ed032df3e061b53e42fe6cb198",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "ryyyyyyy233/jf-writing-skill": {
+    "use_zh": "参照《Journal of Finance》范式的金融经济学论文写作指南",
+    "use_en": "Journal of Finance style reference for academic writing in financial economics",
+    "source_quote": "A Journal of Finance style reference for academic writing in financial economics. Distilled from 144 JF papers",
+    "source_url": "https://github.com/Ryyyyyyy233/JF-Writing-Skill/blob/main/README.md",
+    "source_sha": "1104c40c52c986fe1c445dea2021d5101ddaefdc",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "mronkko/claude-academic-research": {
+    "use_zh": "面向实证与管理学研究的引文核验、系统综述与 Zotero 协同",
+    "use_en": "Empirical integrity, MCP-grounded citations, systematic reviews, and Zotero tools",
+    "source_quote": "Academic research plugins for AI agents: MCP-grounded citations, empirical integrity, systematic reviews, Zotero operations",
+    "source_url": "https://github.com/mronkko/claude-academic-research/blob/main/README.md",
+    "source_sha": "c8f448b83bbce2678fb6efecfb073651463c66e4",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "peacefulj/ssci-sci-skills": {
+    "use_zh": "覆盖 SSCI / SCI 论文选题、可判定规则审查与返修工作台",
+    "use_en": "SSCI/SCI academic writing rule auditing and full-lifecycle manuscript review",
+    "source_quote": "把 academic-writing skill（学术论文写作决策 + 审查知识库）包装成的独立 Web 应用——覆盖论文从选题到投稿返修的完整生命周期。",
+    "source_url": "https://github.com/peacefulj/SSCI-SCI-skills/blob/main/README.md",
+    "source_sha": "6731818d9b54bae61bafbd592f5a7d667edb260d",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "drchronx/ai-agent-research-starter-kit": {
+    "use_zh": "面向零基础学生的 AI Agent 科研训练、文献与统计全流程教学包",
+    "use_en": "Step-by-step teaching kit for deploying AI agents across academic research workflows",
+    "source_quote": "面向科研训练、论文写作和学术工作流自动化的 AI Agent 教学与部署资料包。从零基础入门、Agent 环境配置、Skills 使用，到真实文献检索",
+    "source_url": "https://github.com/Drchronx/ai-agent-research-starter-kit/blob/main/README.md",
+    "source_sha": "2cd64e5ae01ae15a4dc614185b01efcfb472febd",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "yipng05-max/-skills": {
+    "use_zh": "涵盖社科与通用科研选题、研究设计、文献综述与硕博论文写作",
+    "use_en": "Comprehensive academic skills for topic selection, research design, and thesis writing",
+    "source_quote": "学术志联合创始人一平博士的公开 skills 仓库，涵盖学术科研各领域，包含论文选题、研究设计、研究方法、文献检索与核查、文献阅读、文献综述",
+    "source_url": "https://github.com/yipng05-max/-skills/blob/main/README.md",
+    "source_sha": "49283f408b74d7bdb8d2b0d52549dbcd678cdc7c",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "lunarxuan/paper-reading-tutor": {
+    "use_zh": "导读式论文精读助手：梳理整体论证地图、研究设计与证据边界",
+    "use_en": "Guided academic paper reading tutor mapping arguments, methods, and evidence limits",
+    "source_quote": "它的目标不是简单复述摘要，而是建立论文的整体论证地图，再根据论文自身的研究类型和实验结构，解释作者做了什么、为什么这样做",
+    "source_url": "https://github.com/LunarXuan/paper-reading-tutor/blob/main/README.md",
+    "source_sha": "16af57661e58e25951ba3b91f61ce279beb6b8fe",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "hkustdial/ducktor": {
+    "use_zh": "在 AI 辅助科研中补齐方法论训练与导师式认知提问闭环",
+    "use_en": "Mentorship and research methodology feedback loop plugin for student researchers",
+    "source_quote": "面向 AI 科研时代的「方法论与认知闭环」插件",
+    "source_url": "https://github.com/HKUSTDial/Ducktor/blob/main/README.md",
+    "source_sha": "3304c5c42f3400108ff7cf224ba430b110cbdd4b",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "koloyaaa/academic-translation-toolkit": {
+    "use_zh": "将英法等外文课程讲义与文献精准译为带术语标注的中文学案",
+    "use_en": "Translate foreign-language lecture handouts into annotated Chinese study guides",
+    "source_quote": "本项目将英语、法语等外文讲义整理成中文学案，支持术语标注、公式、表格、注释和章末测验。",
+    "source_url": "https://github.com/Koloyaaa/academic-translation-toolkit/blob/main/README.md",
+    "source_sha": "604c6a028a5a0141b9b087a793d96ec5e9124741",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "yeyeqian/codex-thesis-review-skills": {
+    "use_zh": "硕士与博士学位论文盲审前整体性审查与模拟评阅",
+    "use_en": "Pre-submission integrity audit and mock blind review for master's and PhD theses",
+    "source_quote": "本仓库包含两个用于硕士、博士学位论文审核的 Codex Skill（技能），可用于送审前、答辩前或模拟盲审场景。",
+    "source_url": "https://github.com/YeyeQian/codex-thesis-review-skills/blob/main/README.md",
+    "source_sha": "c57b4f0325e195448698b54a06fae63b7e73c0c4",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "faust-donf/beamer-academic": {
+    "use_zh": "从学位论文一键生成高质量 LaTeX Beamer 毕业答辩幻灯片",
+    "use_en": "Generate LaTeX Beamer thesis defense slides directly from manuscripts",
+    "source_quote": "Drop your thesis in, get defense slides out. AI Skill for Claude Code / Codex · 13 Layouts",
+    "source_url": "https://github.com/Faust-Donf/beamer-academic/blob/main/README.md",
+    "source_sha": "91e349093eb921bbb42e901baaa143d93981f77f",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "zouchenzhen/thesis-defense-pptx-skill": {
+    "use_zh": "按学校 PPTX 模板将本硕博毕业论文生成可编辑答辩演示文稿",
+    "use_en": "Generate editable thesis-defense PPTX decks reusing university PowerPoint templates",
+    "source_quote": "一个用于生成本科/研究生毕业论文答辩 PPT 的 Codex/Agent Skill。能够从本地论文 PDF/LaTeX 项目和指定 .pptx 模板出发，生成可编辑的正式答辩 PPTX",
+    "source_url": "https://github.com/zouchenzhen/thesis-defense-pptx-skill/blob/main/README.md",
+    "source_sha": "e3674e0f8512cf1799fcafdcd76a86326afd0ef2",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "frypan05/philosopher-okf": {
+    "use_zh": "将复杂概念与理论拆解为论文式单页深度精讲研读讲义",
+    "use_en": "Explain complex philosophical or theoretical topics as clean paper-style study pages",
+    "source_quote": "One folder that teaches any model how to explain any topic as a single, white, research-paper-style HTML page",
+    "source_url": "https://github.com/frypan05/philosopher-OKF/blob/main/README.md",
+    "source_sha": "7fc00a1beb640e433710c7e3b43955da45cc9332",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "nealcaren/social-data-analysis": {
+    "use_zh": "面向社会学与社会科学的定量与质性数据收集分析技能集",
+    "use_en": "Quantitative and qualitative sociological and social-science data analysis plugins",
+    "source_quote": "A Claude Code plugin marketplace with skills for collecting and analyzing data in sociology and related social sciences.",
+    "source_url": "https://github.com/nealcaren/social-data-analysis/blob/main/README.md",
+    "source_sha": "cb38e205017c97884661f2378ec37e8837ed258b",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "mingfenghong/css-research-skills": {
+    "use_zh": "计算社会科学（CSS）因果推断、文本挖掘与社会网络分析",
+    "use_en": "Computational social science workflows for causal inference, text-as-data, and networks",
+    "source_quote": "Turn a social-science question into an inspectable analysis across causal inference, text as data, agent-based modelling, and network",
+    "source_url": "https://github.com/MingfengHong/css-research-skills/blob/main/README.md",
+    "source_sha": "5b337b013d2b43b9c000a4cf3cf25b92b629cfec",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "lensback940701/evidence-bound-press-conference-revision-skill": {
+    "use_zh": "面向社科论文的证据边界控制与去防御性学术改写",
+    "use_en": "Evidence-bound academic revision skill for social-science manuscripts",
+    "source_quote": "Evidence-Bound Press-Conference Revision: Contribution-forward academic revision without overclaiming.",
+    "source_url": "https://github.com/lensback940701/Evidence-Bound-Press-Conference-Revision-Skill/blob/main/README.md",
+    "source_sha": "dea42d0bbea40c6e446413233f6dd5cd37942ae9",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "jamditis/claude-skills-journalism": {
+    "use_zh": "面向新闻传播、媒介研究与档案核查的事实核验与学术写作",
+    "use_en": "Fact verification, archival FOIA research, data journalism, and academic writing",
+    "source_quote": "A collection of Agent Skills for journalists, researchers, academics, media professionals, and communications practitioners.",
+    "source_url": "https://github.com/jamditis/claude-skills-journalism/blob/master/README.md",
+    "source_sha": "ef4d5d13dc7eaec2aa15fe96481f5aa7e388e324",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "neu-zha/legal-ai-skills": {
+    "use_zh": "支持北大法宝检索、法学引注核验与法律文书 DOCX 处理",
+    "use_en": "Chinese legal research, PKULaw MCP retrieval, citation checking, and DOCX workflows",
+    "source_quote": "一组可开源复用的 AI agent skills，面向法律检索、北大法宝 MCP、法学引注核验、Word/DOCX 文书处理和法律写作事实核查。",
+    "source_url": "https://github.com/NEU-ZHA/legal-ai-skills/blob/main/README.md",
+    "source_sha": "aaa5f5401d02bd715d27d8c234bb46d495fd04d5",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "fedec65/bettercallclaude": {
+    "use_zh": "法律检索、判例策略分析与严谨法律文书起草工作流",
+    "use_en": "Structured legal research, case analysis, and legal document drafting skills",
+    "source_quote": "BetterCallClaude provides a structured methodology for handling legal work with AI assistance.",
+    "source_url": "https://github.com/fedec65/bettercallclaude/blob/main/README.md",
+    "source_sha": "284ee5ae678a482bd57af662b4edecd49211d44c",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "neuroaihub/awesome_cognitive_and_neuroscience_skills": {
+    "use_zh": "认知科学、心理学与神经科学实验方法与数据分析技能集",
+    "use_en": "Methodological skills for cognitive science, psychology, and neuroscience research",
+    "source_quote": "Skills that encode expert methodological knowledge for cognitive science and neuroscience research.",
+    "source_url": "https://github.com/NeuroAIHub/awesome_cognitive_and_neuroscience_skills/blob/master/README.md",
+    "source_sha": "a82880c9c4a3691b531250e8bbc6df22e8727679",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "cooleava1-gif/materials-science-skills": {
+    "use_zh": "材料科学文献精读、引文核验、配图与审稿回复全流程技能包",
+    "use_en": "Full-cycle materials science skill bundle for deep reading, figures, and writing",
+    "source_quote": "A full-cycle materials-science research skill bundle for AI coding agents: routing, deep-reading cards, citation and reference verification",
+    "source_url": "https://github.com/cooleava1-gif/Materials-Science-Skills/blob/main/README.md",
+    "source_sha": "348a1af2a109e7839fb1ab18cb5ff482dd88c7c2",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "jianzushen/computational-chemistry-skill": {
+    "use_zh": "计算化学、量子化学与分子/材料界面模拟任务拆解与分析",
+    "use_en": "Computational chemistry, quantum chemistry, and materials simulation workflow",
+    "source_quote": "该 Skill 适用于计算化学、量子化学、材料模拟、体相、表面、缺陷、吸附、界面和分子模拟研究。",
+    "source_url": "https://github.com/jianzushen/Computational-chemistry-skill/blob/main/README.md",
+    "source_sha": "9eb05ba0a423a7cd7320062f39b43e252cbd5f3a",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "gostyan/docx-skill-4-cn-paper": {
+    "use_zh": "按中文高校规范编辑或转换课程论文、毕业设计与数模 Word 文档",
+    "use_en": "Format Chinese course papers, theses, and modeling reports in Word (.docx)",
+    "source_quote": "中文学术文档风格排版Skill：用于 AI Agent 按照规定格式编辑 Word 文档或将 Markdown 转换为 docx，适用中文课程论文、毕业设计论文",
+    "source_url": "https://github.com/Gostyan/docx-skill-4-cn-paper/blob/main/README.md",
+    "source_sha": "38b098440dee6f345c57bd3b30481c599a818a09",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "qinky1234-sys/chinese-academic-paper-skill": {
+    "use_zh": "免装命令行也可用的中文论文文献矩阵与文献综述框架整理",
+    "use_en": "Chinese literature review matrix and synthesis prompt generator (works in web browser)",
+    "source_quote": "一个面向中文论文文献综述前期整理的开源工具。没有 Codex 也能先用网页版，填写论文题目和文献资料，生成可复制的文献阅读整理提示词。",
+    "source_url": "https://github.com/qinky1234-sys/chinese-academic-paper-skill/blob/main/README.md",
+    "source_sha": "cf334716726b1e0fa65c2ee0f62a077b0164afbb",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "cynicalight/neoread": {
+    "use_zh": "本地优先的学术专著 EPUB 与论文 PDF 双语对照批注阅读器",
+    "use_en": "Local-first EPUB book and PDF paper reader with bilingual view, notes, and AI Q&A",
+    "source_quote": "一个本地优先的 EPUB / PDF AI 阅读器，用于阅读电子书与论文、对照译文、记录批注，以及结合原文向 AI 提问。",
+    "source_url": "https://github.com/cynicalight/NeoRead/blob/main/README.md",
+    "source_sha": "3344535a46fbbbc4374cc4354703cec87e45673b",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "edwardxlai/easyread": {
+    "use_zh": "本地 PDF 英文论文双语对照翻译、划线记笔记与边读边问 AI",
+    "use_en": "Local PDF paper reader with side-by-side translation, highlighting, and AI Q&A",
+    "source_quote": "让你更舒服地读论文。导入 PDF，第一段译好就能开始读。遇到难句，展开原文或对照 PDF，在段落旁划线、记笔记、问 AI。",
+    "source_url": "https://github.com/Edwardxlai/easyread/blob/main/README.md",
+    "source_sha": "bf4b677973d7797e0842117490b51979ea7d3ebf",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "redbaronyyyyy-eng/humanizer-zh-academic": {
+    "use_zh": "优化中文期刊与毕业论文机械化表达、降低 AIGC 痕迹的改写技能",
+    "use_en": "Refine formulaic AI phrasing in Chinese academic papers and theses",
+    "source_quote": "humanizer-zh-academic 是一个专为 Claude Code 设计的 Skill，用于降低中文学术写作（论文、期刊文章、毕业论文等）的 AIGC 检测率",
+    "source_url": "https://github.com/redbaronyyyyy-eng/humanizer-zh-academic/blob/main/README.md",
+    "source_sha": "84fb4b8c524feae63886dba291c1eda64bd38b31",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "mylc2010/sci-translation-skill": {
+    "use_zh": "保留证据与专业术语一致性的学术论文中译英及译稿审校",
+    "use_en": "Evidence-preserving Chinese-to-English academic manuscript translation and review",
+    "source_quote": "面向计算机、医学及其他理工科论文的中译英与译稿审校工作流。目标：减少术语漂移、技术失真、遗漏和格式损坏",
+    "source_url": "https://github.com/mylc2010/sci-translation-skill/blob/main/README.md",
+    "source_sha": "fd3f7f47f432f94589af40e927124413cb0bdfa5",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "leonchaox/qinyan-academic-skills": {
+    "use_zh": "含 180+ 子技能的多语种文献调研、Nature 风格写作与审稿套件",
+    "use_en": "Multilingual library of 180+ academic skills for literature, writing, and review",
+    "source_quote": "187 installable AI agent skills for academic research, featuring a first-party Nature-style suite for scientific writing",
+    "source_url": "https://github.com/LeonChaoX/qinyan-academic-skills/blob/main/README.md",
+    "source_sha": "bb4fb9b23dd73c31ad21408bdb8365e1924ec1fe",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "crui5in/paper-ppt-agent": {
+    "use_zh": "上传论文 PDF 或 LaTeX 源码自动提炼并生成可编辑学术汇报 PPT",
+    "use_en": "Multi-agent generator turning paper PDFs or LaTeX sources into editable PowerPoint decks",
+    "source_quote": "基于多智能体协作的学术论文演示文稿自动生成工具。上传论文 PDF 或 TeX 源码，由 AI 完成内容提炼、结构规划、版式设计，最终输出可编辑的 PowerPoint 文件。",
+    "source_url": "https://github.com/CRui5in/paper-ppt-agent/blob/master/README.md",
+    "source_sha": "9235a2fee1a32f45f4806001ce1e696ce8c51c78",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "quzhan51496/paper2anything": {
+    "use_zh": "将学术论文 PDF 转化为组会幻灯片、会议海报与学术科普图文",
+    "use_en": "Turn academic paper PDFs into slides, conference posters, and dissemination posts",
+    "source_quote": "A skills pack that turns an academic paper PDF into any of several promotional artifacts, covering the main forms of paper dissemination",
+    "source_url": "https://github.com/QuZhan51496/paper2anything/blob/main/README.md",
+    "source_sha": "d2c446a59b89f806df16fe9306f3add1af8a3db6",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "deathcats4/scholar-ppt-cn": {
+    "use_zh": "将论文、研究报告与课题资料转化为规范可编辑的中文学术 PPT",
+    "use_en": "Turn papers and research materials into structured, editable Chinese academic PPTX",
+    "source_quote": "把论文、报告、资料，变成一套体面、规范、可编辑的中文学术 PPT。",
+    "source_url": "https://github.com/deathcats4/scholar-ppt-cn/blob/main/README.md",
+    "source_sha": "e256516e838394d21d70981de28025646ac16bac",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
+  },
+  "hang-jin/editaplot": {
+    "use_zh": "联动本机 Origin / OriginPro 生成曲线与坐标可二次编辑的科研图",
+    "use_en": "Drive local Origin/OriginPro from Codex to create editable scientific plots",
+    "source_quote": "把表格和想表达的问题告诉 Codex，它会先说明每列的用途，等你确认后，再调用本机 Origin 绘图和检查结果。",
+    "source_url": "https://github.com/hang-jin/editaplot/blob/main/README.md",
+    "source_sha": "b3de064f997a3f4d7185c82b9f614eaf4604a6cb",
+    "reviewed_at": "2026-11-22",
+    "review_kind": "documentation_only"
   }
 }

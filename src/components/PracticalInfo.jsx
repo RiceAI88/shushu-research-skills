@@ -1,10 +1,9 @@
 import React from "react";
 import { SearchHighlight } from "./SearchHighlight";
-import { EditorialReviewNotice } from "./EditorialReviewNotice";
 import { Button, Space, Tag, Tooltip } from "antd";
 import { CopyOutlined, ExportOutlined } from "@ant-design/icons";
 import { AGENT_PLATFORMS, detectAgents, safeExternalUrl } from "../domain";
-import { EDITORIAL_CONTENT, installationFor, reviewedInstallSnapshot } from "../practical";
+import { EDITORIAL_CONTENT, installationFor } from "../practical";
 import { useFeedback } from "./FeedbackProvider";
 import { copyText } from "../clipboard";
 const HAS_CHINESE_RE = /[\u4e00-\u9fff]/;
@@ -172,68 +171,11 @@ export function CopyInstallButton({
   );
 }
 
-export function InstallationRequirements({ item, lang, t, detailsInfo = {} }) {
-  const installation = installationFor(item);
-  return (
-    <div className="installation-evidence">
-      {installation[`context_${lang}`] && (
-        <p className="installation-context">
-          {installation[`context_${lang}`]}
-        </p>
-      )}
-      {installation.mode === "docs" && !installation.reviewed_at && <p>{t("installUnreviewedHint")}</p>}
-      {(detailsInfo[`environment_${lang}`] ||
-        detailsInfo[`dependencies_${lang}`]) && (
-        <dl className="install-requirements">
-          <div>
-            <dt>{t("installEnvironment")}</dt>
-            <dd data-testid="install-environment">
-              {detailsInfo[`environment_${lang}`] || "—"}
-            </dd>
-          </div>
-          <div>
-            <dt>{t("installDependencies")}</dt>
-            <dd data-testid="install-dependencies">
-              {detailsInfo[`dependencies_${lang}`] || "—"}
-            </dd>
-          </div>
-        </dl>
-      )}
-      <EditorialReviewNotice repo={item.repo} t={t} lang={lang} details />
-      {installation.reviewed_at && (
-        <div className="installation-review">
-          <small>
-            {t("docsChecked")} {installation.reviewed_at}
-          </small>
-          {reviewedInstallSnapshot(item,detailsInfo) && (
-            <a
-              href={reviewedInstallSnapshot(item,detailsInfo)}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {t("installSnapshot")}
-            </a>
-          )}
-          {(detailsInfo.additional_sources || [])
-            .map(source => safeExternalUrl(typeof source === "string" ? source : source.source_url))
-            .filter(Boolean)
-            .map((url, index) => (
-              <a key={url} href={url} target="_blank" rel="noreferrer">
-                {t("installMoreDocs")} {index + 1}
-              </a>
-            ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export function InstallationActions({
   item,
   lang,
   t,
   details = false,
-  detailsInfo = {},
   compact = false,
   hideExtras = false,
 }) {
@@ -292,9 +234,6 @@ export function InstallationActions({
             )}
         </Button>
       </Space>
-      {details && !hideExtras && (
-        <InstallationRequirements {...{ item, lang, t, detailsInfo }} />
-      )}
     </div>
   );
 }

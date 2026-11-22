@@ -2555,7 +2555,7 @@ a:focus-visible,
 .discipline-majors {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 .discipline-majors {
@@ -2568,7 +2568,7 @@ a:focus-visible,
 }
 .discipline-options button,
 .discipline-majors button {
-  padding: 5px 14px;
+  padding: 5px 11px;
   border: 1px solid var(--prs-border);
   border-radius: 999px;
   background: var(--prs-panel);

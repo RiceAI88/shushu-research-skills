@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-14",
+  "reviewed_at": "2026-11-22",
   "count_unit": "unique_repositories",
   "disciplines": [
     {
@@ -1430,6 +1430,676 @@
       ],
       "common": false,
       "reviewed_at": "2026-11-21",
+      "evidence": true
+    },
+    "pangenomeai/academic-skills-food-nutrition": {
+      "disciplines": [
+        "agriculture",
+        "medicine"
+      ],
+      "majors": [
+        "agronomy",
+        "public-health"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "limi124/remote-sensing-research-radar": {
+      "disciplines": [
+        "science",
+        "agriculture"
+      ],
+      "majors": [
+        "geoscience",
+        "forestry",
+        "agronomy"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "grind-lab-core/night_owl_research_agent": {
+      "disciplines": [
+        "science",
+        "agriculture"
+      ],
+      "majors": [
+        "geoscience",
+        "forestry"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "stevetangent/goose-bio-skills": {
+      "disciplines": [
+        "medicine",
+        "science",
+        "agriculture"
+      ],
+      "majors": [
+        "bioinformatics",
+        "biology",
+        "agronomy"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "instadeepai/nucleotide-transformer": {
+      "disciplines": [
+        "science",
+        "medicine",
+        "agriculture"
+      ],
+      "majors": [
+        "biology",
+        "bioinformatics",
+        "agronomy"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "paper2poster/paper2poster": {
+      "disciplines": [
+        "arts"
+      ],
+      "majors": [
+        "design"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "chenruishuo/posterly": {
+      "disciplines": [
+        "arts"
+      ],
+      "majors": [
+        "design"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "leon-gittech/skill2poster": {
+      "disciplines": [
+        "arts"
+      ],
+      "majors": [
+        "design"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "yjz211/vivid-illustration-skill": {
+      "disciplines": [
+        "arts"
+      ],
+      "majors": [
+        "design"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "pengjunchi0/codex-visio-paper-figure-skill": {
+      "disciplines": [
+        "arts",
+        "engineering"
+      ],
+      "majors": [
+        "design",
+        "computer-science"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "rss3208/visiomaster": {
+      "disciplines": [
+        "arts",
+        "engineering"
+      ],
+      "majors": [
+        "design",
+        "computer-science"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "exsinger-hub/sivia": {
+      "disciplines": [
+        "arts"
+      ],
+      "majors": [
+        "design"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "helloo1568/slidemuse": {
+      "disciplines": [
+        "arts",
+        "education"
+      ],
+      "majors": [
+        "design",
+        "educational-technology"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "hrdzhu/modelviz-skill": {
+      "disciplines": [
+        "arts",
+        "science"
+      ],
+      "majors": [
+        "design",
+        "mathematics"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "givemotion/givemotion": {
+      "disciplines": [
+        "arts",
+        "education"
+      ],
+      "majors": [
+        "design",
+        "arts",
+        "educational-technology"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "alchaincyf/huashu-report": {
+      "disciplines": [
+        "management",
+        "economics"
+      ],
+      "majors": [
+        "business",
+        "information-management",
+        "economics",
+        "finance"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "dylantmoore/stata-skill": {
+      "disciplines": [
+        "economics",
+        "management",
+        "law"
+      ],
+      "majors": [
+        "economics",
+        "finance",
+        "business",
+        "sociology"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "sepinetam/mcp-for-stata": {
+      "disciplines": [
+        "economics",
+        "management"
+      ],
+      "majors": [
+        "economics",
+        "finance",
+        "business"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "ashuigordon/stata-cli": {
+      "disciplines": [
+        "economics",
+        "management"
+      ],
+      "majors": [
+        "economics",
+        "finance",
+        "business"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "jonasweinert/econagentskills": {
+      "disciplines": [
+        "economics",
+        "management"
+      ],
+      "majors": [
+        "economics",
+        "finance",
+        "business"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "1793065778/econ-empirical-paper-ppt-skill": {
+      "disciplines": [
+        "economics",
+        "management"
+      ],
+      "majors": [
+        "economics",
+        "finance",
+        "business"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "ryyyyyyy233/jf-writing-skill": {
+      "disciplines": [
+        "economics",
+        "management"
+      ],
+      "majors": [
+        "finance",
+        "economics",
+        "business"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "mronkko/claude-academic-research": {
+      "disciplines": [
+        "management",
+        "economics"
+      ],
+      "majors": [
+        "business",
+        "information-management",
+        "economics"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "peacefulj/ssci-sci-skills": {
+      "disciplines": [
+        "management",
+        "economics",
+        "education"
+      ],
+      "majors": [
+        "business",
+        "economics",
+        "education"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "drchronx/ai-agent-research-starter-kit": {
+      "disciplines": [
+        "education"
+      ],
+      "majors": [
+        "educational-technology",
+        "education"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "yipng05-max/-skills": {
+      "disciplines": [
+        "education",
+        "management",
+        "law"
+      ],
+      "majors": [
+        "education",
+        "business",
+        "sociology"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "lunarxuan/paper-reading-tutor": {
+      "disciplines": [
+        "education"
+      ],
+      "majors": [
+        "education",
+        "educational-technology"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "hkustdial/ducktor": {
+      "disciplines": [
+        "education"
+      ],
+      "majors": [
+        "educational-technology",
+        "education"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "koloyaaa/academic-translation-toolkit": {
+      "disciplines": [
+        "education",
+        "literature"
+      ],
+      "majors": [
+        "education",
+        "linguistics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "yeyeqian/codex-thesis-review-skills": {
+      "disciplines": [
+        "education"
+      ],
+      "majors": [
+        "education"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "faust-donf/beamer-academic": {
+      "disciplines": [
+        "education"
+      ],
+      "majors": [
+        "educational-technology"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "zouchenzhen/thesis-defense-pptx-skill": {
+      "disciplines": [
+        "education"
+      ],
+      "majors": [
+        "educational-technology"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "frypan05/philosopher-okf": {
+      "disciplines": [
+        "philosophy",
+        "education"
+      ],
+      "majors": [
+        "philosophy",
+        "education"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "nealcaren/social-data-analysis": {
+      "disciplines": [
+        "law",
+        "management",
+        "education"
+      ],
+      "majors": [
+        "sociology",
+        "politics",
+        "business",
+        "education"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "mingfenghong/css-research-skills": {
+      "disciplines": [
+        "law",
+        "management"
+      ],
+      "majors": [
+        "sociology",
+        "politics",
+        "information-management"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "lensback940701/evidence-bound-press-conference-revision-skill": {
+      "disciplines": [
+        "law",
+        "management",
+        "literature"
+      ],
+      "majors": [
+        "sociology",
+        "politics",
+        "business",
+        "linguistics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "jamditis/claude-skills-journalism": {
+      "disciplines": [
+        "literature",
+        "law",
+        "history"
+      ],
+      "majors": [
+        "literature",
+        "politics",
+        "history"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "neu-zha/legal-ai-skills": {
+      "disciplines": [
+        "law"
+      ],
+      "majors": [
+        "law"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "fedec65/bettercallclaude": {
+      "disciplines": [
+        "law"
+      ],
+      "majors": [
+        "law"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "neuroaihub/awesome_cognitive_and_neuroscience_skills": {
+      "disciplines": [
+        "science",
+        "medicine"
+      ],
+      "majors": [
+        "psychology",
+        "biology"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "cooleava1-gif/materials-science-skills": {
+      "disciplines": [
+        "engineering",
+        "science"
+      ],
+      "majors": [
+        "materials",
+        "chemistry",
+        "physics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "jianzushen/computational-chemistry-skill": {
+      "disciplines": [
+        "science",
+        "engineering"
+      ],
+      "majors": [
+        "chemistry",
+        "materials"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "gostyan/docx-skill-4-cn-paper": {
+      "disciplines": [
+        "literature",
+        "history",
+        "philosophy",
+        "law",
+        "education",
+        "management"
+      ],
+      "majors": [
+        "literature",
+        "history",
+        "philosophy",
+        "law",
+        "education",
+        "business"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "qinky1234-sys/chinese-academic-paper-skill": {
+      "disciplines": [
+        "literature",
+        "history",
+        "philosophy",
+        "education"
+      ],
+      "majors": [
+        "literature",
+        "history",
+        "philosophy",
+        "education"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "cynicalight/neoread": {
+      "disciplines": [
+        "literature",
+        "history",
+        "philosophy"
+      ],
+      "majors": [
+        "literature",
+        "history",
+        "philosophy"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "edwardxlai/easyread": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "redbaronyyyyy-eng/humanizer-zh-academic": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "mylc2010/sci-translation-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "leonchaox/qinyan-academic-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "crui5in/paper-ppt-agent": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "quzhan51496/paper2anything": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "deathcats4/scholar-ppt-cn": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "hang-jin/editaplot": {
+      "disciplines": [
+        "science",
+        "engineering"
+      ],
+      "majors": [
+        "physics",
+        "chemistry",
+        "materials"
+      ],
+      "common": true,
+      "reviewed_at": "2026-11-22",
       "evidence": true
     }
   }

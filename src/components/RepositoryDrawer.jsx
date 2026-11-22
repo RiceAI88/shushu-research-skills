@@ -13,10 +13,9 @@ import {
 import { QualityBadges, RepositoryActions } from "./RepositoryViews";
 import { useFeedback } from "./FeedbackProvider";
 import { copyText } from "../clipboard";
-import {
-  SummaryText,
-  InstallationRequirements,
-} from "./PracticalInfo";
+import { formatShareCardText } from "../shareText";
+import { SummaryText } from "./PracticalInfo";
+import { InstallationRequirements } from "./InstallationRequirements";
 import { SkillUsageGuide } from "./SkillUsageGuide";
 export function RepositoryDrawer({
   item,
@@ -76,6 +75,24 @@ export function RepositoryDrawer({
   const markdown = item
     ? `| ${item.rank} | [${item.repo}](${item.url}) | ${item.stars.toLocaleString()}${delta ? ` (${delta > 0 ? "+" : ""}${delta})` : ""} | ${category} | ${agentNames.join(" · ") || t("agentGeneral")} | ${item.last_push_date || ""} |`
     : "";
+  const sharePeerCard = async () => {
+    if (!item) return;
+    const text = formatShareCardText(item, {
+      lang: state.lang,
+      tasks: category,
+      agents: agentNames.slice(0, 4).join(" / "),
+    });
+    try {
+      await copyText(text);
+      message.success(
+        state.lang === "zh"
+          ? "已复制安利文案，可直接粘贴到微信群或小红书"
+          : "Recommendation card copied to clipboard",
+      );
+    } catch {
+      message.error(t("copyFailed"));
+    }
+  };
   const feedback = item
     ? `${REPOSITORY_URL}/issues/new?title=${encodeURIComponent("Information issue: " + item.repo)}&body=${encodeURIComponent(`Repository: **${item.repo}** (${item.url})\n\nIncorrect or outdated information:\n\nSuggested correction and source:\n`)}`
     : "";
@@ -183,6 +200,12 @@ export function RepositoryDrawer({
                 labels
                 context="detail"
               />
+              <Button
+                data-testid="share-peer-btn"
+                onClick={sharePeerCard}
+              >
+                {state.lang === "zh" ? "分享给同门" : "Share pick"}
+              </Button>
               <Button
                 icon={<ExportOutlined aria-hidden="true" />}
                 href={safeExternalUrl(item.url) || undefined}

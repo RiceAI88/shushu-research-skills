@@ -1290,7 +1290,7 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
 
 [法学]({SITE_URL}/#discipline=law) · [文学]({SITE_URL}/#discipline=literature) · [历史学]({SITE_URL}/#discipline=history) · [哲学]({SITE_URL}/#discipline=philosophy) · [教育学]({SITE_URL}/#discipline=education) · [艺术学]({SITE_URL}/#discipline=arts)
 
-专业归属依据官方文档（目前已覆盖 110+ 个项目的专业档案与中文导读，持续补充中）；尚未核验专业归属的项目可在“全部”中浏览。选择学科门类后可直观查看各门类数量，并通过栏内“包含通用”开关或工具栏“收录范围”决定是否合并展示跨专业通用 Skills 及科研相关项目。
+专业归属依据官方文档（目前已覆盖 160+ 个项目的专业档案，全站 Skills 100% 配备中文导读，持续补充中）；尚未核验专业归属的项目可在“全部”中浏览。选择学科门类后可直观查看各门类数量，并通过栏内“包含通用”开关或工具栏“收录范围”决定是否合并展示跨专业通用 Skills 及科研相关项目。
 
 ## 按科研任务找 Skills
 
@@ -1309,13 +1309,14 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
 
 ## 网站怎么用
 
-- **第一次接触 Skill**：先点网站首屏的“30 秒看懂 Skill”，了解 Skill 是什么、需要搭配哪些 AI Agent（如 Claude Code、Codex、Cursor、Antigravity 等），以及账号、费用与依赖要求。
+- **第一次接触 Skill**：先点网站首屏的“30 秒看懂 Skill”，了解 Skill 是什么、需要搭配哪些 AI Agent（如 Claude Code、Codex、Cursor、Antigravity 等）；没装命令行工具的同学也可查看“在网页版 DeepSeek / Kimi / ChatGPT 直接用”的零门槛方法。
+- **论文阶段急救速配**：支持一键切换“本科毕设起步 / 开题文献综述 / 顶刊配图流程图 / 问卷与实证计量 / 组会 PPT 与海报 / 润色改写与返修” 6 大高频场景，解决多项目选择困难。
 - **按专业和任务查找**：选择学科门类、具体专业与科研任务，支持中文意图词搜索（如“润色”“降重”“画流程图”“跑实验”“计量”），并可按专业适用优先、Stars、上升最快或最新收录排序。
 - **沿专业路径上手**：首屏“专业科研路径”或工具栏“专业路径”提供覆盖理工农医、经管法、人文社科的 10 条串联科研路径，列出每一步的工具、环境、依赖与安装来源，按需选用不必全部安装。
-- **3 步快速上手与提示词案例**：点击卡片打开详情，按“准备 AI Agent 与环境 → 安装 Skill（自动标注在系统终端或 AI Agent 对话框执行，支持复制‘让 AI 帮你装’提示词）→ 复制双语科研提示词开用”三步上手；已核对项目提供官方文档来源与核对记录，文档核对不等于已执行安装或运行实测。
+- **3 步快速上手与门槛提示**：点击卡片打开详情，顶部直观标出环境门槛小标签（如纯规则文档、需本地 Python、需 GPU、自备外部 API Key），并按“准备环境 → 安装 Skill（区分终端与对话框执行，附‘让 AI 帮你装’与网页版 AI 引导词）→ 复制双语科研提示词开用”三步上手；已核对项目提供官方文档来源与核对记录，文档核对不等于已执行安装或运行实测。
 - **筛选适用 AI Agent**：按 Claude Code、Codex、Antigravity、Cursor、OpenClaw、MCP 等适用 AI Agent 筛选；不同项目支持的客户端不同，安装前以官方文档为准。
 - **发现新项目**：查看“今日新增”，也可按近 7 日增长、趋势或最近更新排序。
-- **收藏与对比**：收藏感兴趣的项目，加入对比后比较任务、安装方式、依赖和维护状态；收藏保存在当前浏览器。
+- **收藏、对比与同门分享**：收藏感兴趣的项目后，可一键生成“课题组专属收藏清单（`#pack=...`）”或单项目微信群/小红书安利文案发给同门，对方打开即可一键收入收藏；收藏保存在当前浏览器。
 - **观察趋势**：切换到“数据洞察”，查看专业分布、专业与场景覆盖及内容缺口；展开更多图表可看 Stars 增长与规模比较，筛选条件与榜单联动。
 - **分享与订阅**：复制当前筛选链接，或使用 [RSS](feed.xml)、[月报](reports/)、[JSON](data/rankings.json) 和 [CSV](data/rankings.csv)。
 
@@ -1492,19 +1493,27 @@ def write_outputs(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
 
 
 def attach_curated_uses(items: list[dict[str, Any]]) -> None:
-    """Attach reviewed concise use summaries from config/discipline-sources.json."""
-    sources_path = ROOT / "config" / "discipline-sources.json"
-    sources = load_json(sources_path, {})
+    """Attach reviewed concise use summaries from config/discipline-sources.json and config/curated-uses.json."""
+    sources = load_json(ROOT / "config" / "discipline-sources.json", {})
+    extra_uses = load_json(ROOT / "config" / "curated-uses.json", {})
     if not isinstance(sources, dict):
-        return
+        sources = {}
+    if not isinstance(extra_uses, dict):
+        extra_uses = {}
     for item in items:
-        entry = sources.get(str(item.get("repo", "")).lower())
-        if not isinstance(entry, dict):
-            continue
-        if entry.get("use_zh"):
-            item["curated_use_zh"] = entry["use_zh"]
-        if entry.get("use_en"):
-            item["curated_use_en"] = entry["use_en"]
+        key = str(item.get("repo", "")).lower()
+        entry = sources.get(key)
+        fallback = extra_uses.get(key)
+        if isinstance(fallback, dict):
+            if fallback.get("use_zh"):
+                item["curated_use_zh"] = fallback["use_zh"]
+            if fallback.get("use_en"):
+                item["curated_use_en"] = fallback["use_en"]
+        if isinstance(entry, dict):
+            if entry.get("use_zh"):
+                item["curated_use_zh"] = entry["use_zh"]
+            if entry.get("use_en"):
+                item["curated_use_en"] = entry["use_en"]
 
 
 def build_dataset(

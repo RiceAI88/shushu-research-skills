@@ -43,6 +43,136 @@ export const RESEARCH_TASKS = [
 
 ];
 
+// 论文阶段急救包：面向学生高频场景的精选锚点 + 规则筛选
+export const RESEARCH_STAGES = [
+  {
+    id: "undergrad",
+    zh: "🎓 本科毕设起步",
+    en: "🎓 Thesis starter",
+    hint_zh: "从选题、读英文文献到中文 Word / LaTeX 论文排版成稿的高频入门组合",
+    hint_en: "Starter Skills from scoping and reading papers to Word/LaTeX thesis formatting",
+    featured: [
+      "Gostyan/docx-skill-4-cn-paper",
+      "Imbad0202/academic-research-skills",
+      "Edwardxlai/easyread",
+      "HKUSTDial/Supervisor-Skills",
+      "alfonso0512/research-writing-skill",
+      "zouchenzhen/thesis-defense-pptx-skill",
+    ],
+    pattern:
+      /\b(?:thesis|undergraduate|starter|beginner|docx|word|course[- ]paper|easyread)\b|毕设|毕业论文|课程论文|开题|入门|全文翻译|论文排版/i,
+  },
+  {
+    id: "proposal",
+    zh: "📚 开题文献综述",
+    en: "📚 Lit review",
+    hint_zh: "多源论文检索、Zotero 文献管理、精读笔记与可核验引文综述",
+    hint_en: "Multi-source paper search, Zotero workflows, synthesis, and verified citations",
+    featured: [
+      "K-Dense-AI/scientific-agent-skills",
+      "cheneternity/Zotero-Analytical-Workflow-Skills",
+      "wp-a/nature-academic-search",
+      "stephenlzc/AI-Powered-Literature-Review-Skills",
+      "199-biotechnologies/claude-deep-research-skill",
+      "jordan-gibbs/hyperresearch",
+    ],
+    pattern:
+      /\b(?:literature[- ](?:review|survey|search)|systematic[- ]review|zotero|bibliometric|citation|deep[- ]research|pubmed|arxiv)\b|文献综述|开题|文献检索|引文核验|系统性综述|文献管理/i,
+  },
+  {
+    id: "figures",
+    zh: "🎨 顶刊配图/流程图",
+    en: "🎨 Figures & charts",
+    hint_zh: "Nature/顶会风格数据图、架构图及 Visio / Origin 可编辑配图",
+    hint_en: "Publication charts, architecture diagrams, and editable Visio/Origin figures",
+    featured: [
+      "ChenLiu-1996/figures4papers",
+      "dwzhu-pku/PaperBanana",
+      "pengjunchi0/codex-visio-paper-figure-skill",
+      "hang-jin/editaplot",
+      "larashero3-dotcom/lieflat-charts",
+      "yjz211/vivid-illustration-skill",
+    ],
+    tasks: ["figures"],
+  },
+  {
+    id: "empirical",
+    zh: "📊 问卷与实证计量",
+    en: "📊 Stats & metrics",
+    hint_zh: "Stata / R / Python 回归检验、问卷统计、元分析与数学建模",
+    hint_en: "Stata/R/Python econometrics, survey stats, meta-analysis, and math modeling",
+    featured: [
+      "jihe520/MathModelAgent",
+      "hanlulong/econ-writing-skill",
+      "dylantmoore/stata-skill",
+      "alchaincyf/huashu-report",
+      "peacefulj/SSCI-SCI-skills",
+      "K-Dense-AI/scientific-agent-skills",
+    ],
+    pattern:
+      /\b(?:econometric|stata|causal|regression|panel[- ]data|survey|questionnaire|meta[- ]analysis|spss|mathematical[- ]model|ssci)\b|计量|实证|回归|问卷|统计检验|元分析|数学建模|因果推断/i,
+  },
+  {
+    id: "slides",
+    zh: "🎤 组会 PPT / 海报",
+    en: "🎤 Slides & posters",
+    hint_zh: "把论文 PDF 或 LaTeX 转成组会汇报、毕业答辩 PPT 与学术会议海报",
+    hint_en: "Turn paper PDFs or LaTeX into lab-meeting slides, defense decks, and posters",
+    featured: [
+      "ningzimu/codex-ppt-skill",
+      "Paper2Poster/Paper2Poster",
+      "icip-cas/PPTAgent",
+      "CRui5in/paper-ppt-agent",
+      "QuZhan51496/paper2anything",
+      "zouchenzhen/thesis-defense-pptx-skill",
+    ],
+    pattern:
+      /\b(?:ppt|pptx|powerpoint|slides?|deck|poster|beamer|presentation|keynote)\b|组会|答辩|幻灯片|演示文稿|学术海报|汇报/i,
+  },
+  {
+    id: "rebuttal",
+    zh: "✍️ 润色改写与返修",
+    en: "✍️ Polish & rebuttal",
+    hint_zh: "消除防御性与 AI 腔表达、语法润色、模拟审稿自查与 Rebuttal 回复",
+    hint_en: "Academic polishing, anti-defensive writing, mock peer review, and rebuttal",
+    featured: [
+      "Yuan1z0825/nature-skills",
+      "Adkid-Zephyr/anti-defensive-writing-Skill",
+      "Master-cai/Research-Paper-Writing-Skills",
+      "Moonlit-Pages/AIGC-Detector-Rewriter-Skill",
+      "MLNLP-World/Paper-Rebuttal-Tips",
+      "LimHyungTae/awesome-claudecode-paper-proofreading",
+    ],
+    tasks: ["review"],
+    pattern:
+      /\b(?:proofread|polish|rebuttal|peer[- ]review|referee|revision|revise|anti[- ]defensive|rewrit|humaniz)\b|润色|降重|改写|防御性写作|审稿|返修|投稿自查/i,
+  },
+];
+
+export function matchesResearchStage(item, stage) {
+  if (!stage) return true;
+  if (stage.featured?.includes(item.repo)) return true;
+  if (
+    stage.tasks?.some((tid) => {
+      const task = RESEARCH_TASKS.find((entry) => entry.id === tid);
+      return task && matchesResearchTask(item, task);
+    })
+  )
+    return true;
+  if (stage.pattern) {
+    return stage.pattern.test(
+      [
+        item.repo,
+        item.description,
+        item.curated_use_zh,
+        item.curated_use_en,
+        ...(item.topics || []),
+      ].join(" "),
+    );
+  }
+  return false;
+}
+
 export const TASK_LABEL_KEYS = {
   analyze: "taskAnalyze",
   compute: "taskCompute",
@@ -95,6 +225,25 @@ export function detectAgents(item) {
 }
 const valid = (value, allowed, fallback) =>
   allowed.includes(value) ? value : fallback;
+const REPO_SLUG_RE = /^[A-Za-z0-9][A-Za-z0-9_.-]*\/[A-Za-z0-9][A-Za-z0-9_.-]*$/;
+function parsePackRepos(raw, items) {
+  if (!raw) return [];
+  const byLower = new Map(items.map((i) => [i.repo.toLowerCase(), i.repo]));
+  const hasCatalog = byLower.size > 0;
+  const seen = new Set();
+  const out = [];
+  for (const part of String(raw).split(",")) {
+    const clean = part.trim();
+    if (!REPO_SLUG_RE.test(clean)) continue;
+    const lower = clean.toLowerCase();
+    if (seen.has(lower)) continue;
+    if (hasCatalog && !byLower.has(lower)) continue;
+    seen.add(lower);
+    out.push(hasCatalog ? byLower.get(lower) : clean);
+    if (out.length >= 20) break;
+  }
+  return out;
+}
 export function restoreState(storage, hash = "", defaults = {}, items = []) {
   const get = (key) => {
     try {
@@ -115,6 +264,7 @@ export function restoreState(storage, hash = "", defaults = {}, items = []) {
   };
   const p = new URLSearchParams(hash.replace(/^#/, ""));
   const repositories = new Set(items.map((i) => i.repo));
+  const pack = parsePackRepos(p.get("pack"), items);
   return {
     query: p.get("q") || "",
     includeRelated: p.get("related") === "1" || p.get("today") === "related",
@@ -123,6 +273,9 @@ export function restoreState(storage, hash = "", defaults = {}, items = []) {
     discipline: valid(p.get("discipline"), DISCIPLINES.map(d => d.id), "all"),
     major: valid(p.get("major"), DISCIPLINES.find(d => d.id === p.get("discipline"))?.majors.map(m => m.id) || [], "all"),
     includeCommon: p.get("common") !== "0",
+    stage: valid(p.get("stage"), RESEARCH_STAGES.map((s) => s.id), ""),
+    pack,
+    packTitle: pack.length ? (p.get("packTitle") || "").trim().slice(0, 40) : "",
     task: valid(
       p.get("task") ||
         {
@@ -185,6 +338,11 @@ export function serializeState(state) {
   if (state.discipline && state.discipline !== "all") p.set("discipline", state.discipline);
   if (state.major && state.major !== "all") p.set("major", state.major);
   if (state.includeCommon === false) p.set("common", "0");
+  if (state.stage) p.set("stage", state.stage);
+  if (Array.isArray(state.pack) && state.pack.length) {
+    p.set("pack", state.pack.join(","));
+    if (state.packTitle) p.set("packTitle", state.packTitle);
+  }
   if (state.includeRelated) p.set("related", "1");
   if (state.favOnly) p.set("fav", "1");
   if (state.newOnly) p.set("new", "1");
@@ -206,20 +364,29 @@ export function filterItems(items, state) {
   const q = state.query.trim();
   const search = createSearch(q);
   const task = RESEARCH_TASKS.find((t) => t.id === state.task);
+  const stage = RESEARCH_STAGES.find((s) => s.id === state.stage);
+  const packIndex =
+    Array.isArray(state.pack) && state.pack.length
+      ? new Map(state.pack.map((r, i) => [r.toLowerCase(), i]))
+      : null;
   const result = items.filter((item) => {
+    if (packIndex && !packIndex.has(item.repo.toLowerCase())) return false;
     if (!matchesDiscipline(item, state)) return false;
     if (
+      !packIndex &&
       state.includeRelated !== undefined &&
       item.repository_kind !== "skill" &&
       !(state.includeRelated && item.repository_kind === "related")
     )
       return false;
+    if (packIndex && item.repository_kind === "unknown") return false;
     if (state.newOnly && !item.new_this_week) return false;
     if (
       state.todayOnly &&
       (!item.new_today || item.repository_kind !== state.todayOnly)
     )
       return false;
+    if (stage && !matchesResearchStage(item, stage)) return false;
     if (task && !matchesResearchTask(item, task)) return false;
     if (state.agent !== "all" && !detectAgents(item).includes(state.agent))
       return false;
@@ -264,9 +431,21 @@ export function filterItems(items, state) {
   };
   return result
     .sort((a,b) => {
+      if (packIndex && state.sort === "rank") {
+        return packIndex.get(a.repo.toLowerCase()) - packIndex.get(b.repo.toLowerCase());
+      }
       if (state.sort === 'fit' && state.discipline && state.discipline !== 'all') {
         const priority = Number(disciplineFit(a,state) !== 'specific') - Number(disciplineFit(b,state) !== 'specific');
         if (priority) return priority;
+      }
+      if (stage && state.sort === "rank" && stage.featured?.length) {
+        const ai = stage.featured.indexOf(a.repo);
+        const bi = stage.featured.indexOf(b.repo);
+        if (ai !== -1 || bi !== -1) {
+          if (ai === -1) return 1;
+          if (bi === -1) return -1;
+          return ai - bi;
+        }
       }
       return (sorts[state.sort] || ranks)(a,b);
     })

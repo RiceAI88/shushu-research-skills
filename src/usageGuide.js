@@ -213,3 +213,113 @@ export function usagePromptFor(item, lang = "zh") {
     output: template[zh ? "output_zh" : "output_en"],
   };
 }
+
+/**
+ * 基于公开元数据与已核验安装说明，提炼诚实的环境门槛小标签（绝不凭空臆测）
+ */
+export function deriveSetupThresholds(
+  item,
+  installation = {},
+  detailsInfo = {},
+  lang = "zh",
+) {
+  const zh = lang === "zh";
+  const badges = [];
+  const langName = String(item?.language || "");
+  const envText = `${detailsInfo?.environment_zh || ""} ${detailsInfo?.environment_en || ""}`;
+  const depText = `${detailsInfo?.dependencies_zh || ""} ${detailsInfo?.dependencies_en || ""}`;
+  const cmdText = String(installation?.command || "");
+  const combined = `${envText} ${depText} ${cmdText} ${(item?.topics || []).join(" ")}`;
+
+  if (installation?.mode === "reference") {
+    badges.push({
+      id: "reference",
+      tone: "easy",
+      label: zh ? "🟢 在线查阅 · 免装环境" : "🟢 Zero-install reference",
+    });
+    return badges;
+  }
+
+  const needsGpu = /\b(?:gpu|cuda|nvidia|vram|isaac[- ]sim)\b/i.test(combined);
+  const needsPython =
+    langName === "Python" ||
+    langName === "Jupyter Notebook" ||
+    /\b(?:python\s*3|pip\s+install|uv\s+(?:pip|run|tool)|conda|pytorch)\b/i.test(combined);
+  const needsR =
+    langName === "R" || /\b(?:rscript|cran|bioconductor|stata)\b/i.test(combined);
+  const needsNodeCli = /\b(?:npx\s+|npm\s+install|nodejs|node\.js)\b/i.test(combined);
+  const isPureDocSkill =
+    item?.repository_kind === "skill" &&
+    !needsGpu &&
+    !needsPython &&
+    !needsR &&
+    (!langName || ["Markdown", "TeX", "HTML"].includes(langName));
+
+  if (isPureDocSkill) {
+    badges.push({
+      id: "web-friendly",
+      tone: "easy",
+      label: zh
+        ? "🟢 纯规则文档 · 网页版 AI 也可直用"
+        : "🟢 Prompt rules · Works in Web AI chat",
+    });
+  } else if (needsGpu) {
+    badges.push({
+      id: "gpu",
+      tone: "heavy",
+      label: zh ? "🖥️ 需本地或云端 GPU" : "🖥️ Requires GPU environment",
+    });
+  } else if (needsPython) {
+    badges.push({
+      id: "python",
+      tone: "medium",
+      label: zh ? "🐍 需本地 Python 环境" : "🐍 Local Python environment",
+    });
+  } else if (needsR) {
+    badges.push({
+      id: "stats-env",
+      tone: "medium",
+      label: zh ? "📊 需 R / Stata 统计环境" : "📊 R / Stata environment",
+    });
+  } else if (needsNodeCli) {
+    badges.push({
+      id: "node-cli",
+      tone: "easy",
+      label: zh ? "📦 支持 npx / 终端快速安装" : "📦 Quick npx / CLI install",
+    });
+  } else if (item?.repository_kind === "skill") {
+    badges.push({
+      id: "skill-md",
+      tone: "easy",
+      label: zh
+        ? "📄 含 SKILL.md · 支持网页版 AI 借鉴"
+        : "📄 Has SKILL.md · Reusable in Web AI",
+    });
+  }
+
+  if (
+    /\b(?:api[_ -]?key|openai_api|anthropic_api|gemini_api|serpapi|tavily|semantic[- ]scholar[- ]api|zotero[- ]api)\b|外部\s*API|自备\s*API/i.test(
+      combined,
+    )
+  ) {
+    badges.push({
+      id: "api-key",
+      tone: "warn",
+      label: zh ? "🔑 按需自备外部 API Key" : "🔑 External API key optional/needed",
+    });
+  }
+
+  return badges;
+}
+
+/**
+ * 为不装命令行的学生生成“粘贴 SKILL.md 到网页版 DeepSeek / Kimi / ChatGPT”的引导词
+ */
+export function webChatPromptFor(item, lang = "zh") {
+  const shortName = String(item?.repo || "").split("/").pop() || "Skill";
+  const example = usagePromptFor(item, lang);
+  if (lang === "zh") {
+    return `我将把开源科研项目 ${shortName} 的 SKILL.md 规范粘贴在下方。请你严格按照这份规范中的步骤、格式和学术严谨性要求扮演科研助手（若规范中涉及本地命令行脚本，请改为直接输出可运行代码或文字结果）。\n\n【此处粘贴你从仓库 SKILL.md 复制的内容】\n\n---\n我的具体科研需求：\n${example.prompt}`;
+  }
+  return `Below I am pasting the SKILL.md instructions from the open-source research skill "${shortName}". Please follow its workflow, structure, and academic rigor strictly (if a step mentions running local CLI scripts, output runnable code or direct text instead).\n\n[Paste the contents of SKILL.md from the repository here]\n\n---\nMy research task:\n${example.prompt}`;
+}

@@ -119,6 +119,18 @@ export default function BeginnerGuide({
                 </p>
               </div>
             </div>
+            <div className="guide-web-fallback" data-testid="guide-web-fallback">
+              <strong>
+                {zh
+                  ? "💡 没装命令行工具 / 没有海外账号？网页版 AI 照样直接用！"
+                  : "💡 No CLI tool installed yet? Use Skills in any Web AI chat!"}
+              </strong>
+              <p>
+                {zh
+                  ? "许多文献综述、论文润色、审稿回复类 Skill 的核心就是一份开源的 SKILL.md 规范文档。即使你只用网页版 DeepSeek、Kimi、豆包、Claude 或 ChatGPT，只需点开卡片详情中的“在网页版 AI 直接用”，把仓库里的 SKILL.md 复制粘贴进对话框，就能立即获得同款学术规范效果。"
+                  : "Many writing, literature review, and peer-review Skills are plain Markdown rulebooks (SKILL.md). Even without a CLI agent, open 'Use directly in Web AI chat' inside any Skill drawer, paste SKILL.md into Claude, ChatGPT, or DeepSeek web chat, and start right away."}
+              </p>
+            </div>
             <div className="guide-demo-box">
               <div className="guide-demo-title">
                 {zh
