@@ -7,9 +7,30 @@ test("stage quick-picks, shared toolkit pack banner, and zero-CLI Web AI guide w
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("./");
 
-  // 1. 论文阶段急救包筛选
+  // 1. 论文阶段急救包对齐与筛选
   const stageBar = page.getByTestId("stage-quick-bar");
   await expect(stageBar).toBeVisible();
+  const stageAlignment = await page.evaluate(() => {
+    const discLabel = document
+      .querySelector(".discipline-row-label")
+      .getBoundingClientRect();
+    const stageLabel = document
+      .querySelector(".stage-quick-label")
+      .getBoundingClientRect();
+    const firstPill = document
+      .querySelector(".stage-pill")
+      .getBoundingClientRect();
+    return {
+      leftDelta: Math.abs(discLabel.left - stageLabel.left),
+      centerYDelta: Math.abs(
+        stageLabel.top +
+          stageLabel.height / 2 -
+          (firstPill.top + firstPill.height / 2),
+      ),
+    };
+  });
+  expect(stageAlignment.leftDelta).toBeLessThan(1);
+  expect(stageAlignment.centerYDelta).toBeLessThan(1);
   await stageBar.locator('[data-stage="slides"]').click();
   await expect(page).toHaveURL(/#.*stage=slides/);
   await expect(page.getByTestId("stage-quick-hint")).toBeVisible();
@@ -63,4 +84,22 @@ test("stage quick-picks, shared toolkit pack banner, and zero-CLI Web AI guide w
   // 4. 30 秒看懂 Skill 弹窗包含零命令行网页版兜底说明
   await page.locator(".beginner-entry").click();
   await expect(page.getByTestId("guide-web-fallback")).toBeVisible();
+});
+
+test("switching from card view to table view shows animated skeleton instead of plain loading text", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.route("**/assets/RepositoryTable-*.js", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 350));
+    await route.continue();
+  });
+  await page.goto("./#view=card");
+  await expect(page.getByTestId("repo-card").first()).toBeVisible();
+  await page
+    .getByRole("radio", { name: "表格", exact: true })
+    .locator("..")
+    .click();
+  await expect(page.getByTestId("table-loading-skeleton")).toBeVisible();
+  await expect(page.locator(".ant-table-row").first()).toBeVisible();
 });

@@ -771,6 +771,7 @@ function Dashboard({ state, update }) {
             <div className="stage-pill-list">
               {RESEARCH_STAGES.map((stage) => {
                 const active = state.stage === stage.id;
+                const [icon, ...labelParts] = stage[state.lang].split(" ");
                 return (
                   <button
                     key={stage.id}
@@ -787,7 +788,12 @@ function Dashboard({ state, update }) {
                       }))
                     }
                   >
-                    {stage[state.lang]}
+                    <span className="stage-pill-icon" aria-hidden="true">
+                      {icon}
+                    </span>
+                    <span className="stage-pill-text">
+                      {labelParts.join(" ")}
+                    </span>
                   </button>
                 );
               })}

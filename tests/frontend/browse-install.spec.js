@@ -25,8 +25,8 @@ test("dense table bounds scenes, omits empty tags and supports header sorting", 
   const heights = await rows.evaluateAll((nodes) =>
     nodes.slice(0, 8).map((node) => node.getBoundingClientRect().height),
   );
-  expect(Math.max(...heights)).toBeLessThanOrEqual(64);
-  expect(Math.min(...heights)).toBeGreaterThanOrEqual(56);
+  expect(Math.max(...heights)).toBeLessThanOrEqual(88);
+  expect(Math.min(...heights)).toBeGreaterThanOrEqual(80);
   await expect(
     page.getByRole("columnheader", { name: "场景", exact: true }),
   ).toBeVisible();

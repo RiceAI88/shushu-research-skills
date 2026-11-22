@@ -1795,16 +1795,19 @@ a:focus-visible,
 }
 .ranking-table .ant-table-tbody > tr.ant-table-row > td,
 .ranking-table.ant-table-wrapper .ant-table-tbody > tr.ant-table-row > td.ant-table-cell {
-  height: 60px;
-  padding: 4px 10px;
+  height: 84px;
+  padding: 12px 14px;
   box-sizing: border-box;
   overflow: hidden;
 }
 .ranking-table .ant-table-thead > tr > th {
-  padding: 10px;
+  padding: 12px 14px;
   white-space: nowrap;
 }
 .table-repository {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   min-width: 0;
 }
 .table-repository .repo-name {
@@ -1825,7 +1828,7 @@ a:focus-visible,
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 13px;
-  line-height: 18px;
+  line-height: 20px;
 }
 .ranking-table .card-platforms {
   display: block;
@@ -2543,7 +2546,7 @@ a:focus-visible,
 
 /* Discipline-first discovery (styled with reference dark-slate active pill) */
 .discipline-selector {
-  margin: 0 0 20px;
+  margin: 0 0 12px;
   padding: 20px 24px;
   border: 1px solid var(--prs-border);
   border-radius: 16px;
@@ -3796,22 +3799,22 @@ a:focus-visible,
 .ranking-table .practical-description.has-curated-use {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  margin-top: 1px;
+  gap: 3px;
+  margin-top: 0;
 }
 .ranking-table .curated-use-line {
-  font-size: 12px;
-  line-height: 15px;
-  height: 15px;
-  max-height: 15px;
+  font-size: 12.5px;
+  line-height: 18px;
+  height: 18px;
+  max-height: 18px;
   -webkit-line-clamp: 1;
-  padding-left: 6px;
+  padding-left: 7px;
   border-left-width: 2px;
 }
 .ranking-table .practical-description.has-curated-use .description-clamp {
-  font-size: 11.5px;
-  line-height: 15px;
-  height: 15px;
+  font-size: 12px;
+  line-height: 18px;
+  height: 18px;
   -webkit-line-clamp: 1;
   color: var(--prs-muted);
   margin: 0;

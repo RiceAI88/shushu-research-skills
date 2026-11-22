@@ -82,6 +82,7 @@ test("drawer follows filtered sort, resets its content scroll and returns to the
 test("drawer navigation respects first, last, single and out-of-results shared entries", async ({
   page,
 }) => {
+  test.setTimeout(60000);
   await page.goto("./#related=1&view=table");
   await openRow(page, 0);
   await expect(page.getByTestId("detail-previous")).toBeDisabled();

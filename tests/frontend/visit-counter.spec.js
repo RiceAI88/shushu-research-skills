@@ -3,9 +3,13 @@ const site='https://riceai985.cc/';
 for(const entry of ['', 'en/'])test(`footer has no public counter or Busuanzi requests at ${entry||'Chinese entry'}`,async({page})=>{
  await page.addInitScript(()=>Object.defineProperty(navigator,'webdriver',{get:()=>false}));
  await page.route('https://riceai985.cc/**',async route=>{
-  const url=new URL(route.request().url());
-  const response=await route.fetch({url:`http://127.0.0.1:4173${url.pathname}${url.search}`});
-  await route.fulfill({response});
+  try {
+   const url=new URL(route.request().url());
+   const response=await route.fetch({url:`http://127.0.0.1:4173${url.pathname}${url.search}`});
+   await route.fulfill({response});
+  } catch {
+   /* Ignore in-flight lazy chunk fetches aborted when the page closes at test end. */
+  }
  });
  let requests=0;
  await page.route('https://busuanzi.9420.ltd/api',route=>{requests++;return route.fulfill({json:{success:true,data:{page_pv:100,page_uv:50}}});});

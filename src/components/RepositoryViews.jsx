@@ -136,6 +136,37 @@ export function RepositoryActions({
     </Space>
   );
 }
+function TableLoadingFallback({ lang }) {
+  const zh = lang === "zh";
+  return (
+    <div
+      className="table-loading-shell"
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+      data-testid="table-loading-skeleton"
+    >
+      <div className="table-loading-indicator">
+        <span className="table-loading-spinner" aria-hidden="true" />
+        <span>{zh ? "正在切换列表视图…" : "Switching to table view…"}</span>
+      </div>
+      <div className="table-loading-rows" aria-hidden="true">
+        {Array.from({ length: 6 }, (_, idx) => (
+          <div key={idx} className="table-loading-row">
+            <span className="skel-block skel-rank" />
+            <div className="skel-repo-col">
+              <span className="skel-block skel-title" />
+              <span className="skel-block skel-sub" />
+            </div>
+            <span className="skel-block skel-pill" />
+            <span className="skel-block skel-pill" />
+            <span className="skel-block skel-metric" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 export function RepositoryViews({
   generatedAt,
   items,
@@ -382,7 +413,10 @@ export function RepositoryViews({
     );
   return (
     <>
-      <DeferredFeature t={t}>
+      <DeferredFeature
+        t={t}
+        loadingFallback={<TableLoadingFallback lang={state.lang} />}
+      >
         <RepositoryTable
           onReady={onReady}
           className="ranking-table"
@@ -391,7 +425,7 @@ export function RepositoryViews({
           badges={(item) => <QualityBadges item={item} t={t} />}
           dataSource={entries}
           pagination={false}
-          scroll={{ x: 1180 }}
+          scroll={{ x: 1220 }}
           tableLayout="fixed"
           sticky={{ offsetHeader: filterHeight }}
           size="middle"

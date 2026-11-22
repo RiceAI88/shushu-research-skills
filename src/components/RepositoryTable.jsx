@@ -108,7 +108,7 @@ export default function RepositoryTable({
     {
       title: t("repo"),
       key: "repo",
-      width: 320,
+      width: 360,
       render: (_, item) => (
         <div className="table-repository">
           {link(item)}
