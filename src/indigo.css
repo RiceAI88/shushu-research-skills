@@ -1939,7 +1939,7 @@ a:focus-visible,
   min-width: 0;
 }
 .card-rank-group .install-mode {
-  max-width: 92px;
+  max-width: 120px;
   padding-inline: 6px;
   margin: 0;
   font-size: 11.5px;
@@ -3587,7 +3587,7 @@ a:focus-visible,
     padding-inline: 8px;
   }
   .card-rank-group .install-mode {
-    max-width: 72px;
+    max-width: 112px;
   }
   .beginner-guide .ant-modal-container {
     padding: 0;

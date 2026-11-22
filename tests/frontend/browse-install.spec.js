@@ -60,7 +60,7 @@ test("cards expose install mode and copy, keep actions visible and maintenance i
     .getByTestId("repo-card")
     .filter({ hasText: commandRepo.split("/")[1] })
     .first();
-  await expect(card.getByTestId("installation-mode")).toHaveText("命令安装");
+  await expect(card.getByTestId("installation-mode")).toHaveText("查看项目说明");
   expect(
     await card
       .locator(".card-actions")

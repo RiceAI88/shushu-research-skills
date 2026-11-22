@@ -274,7 +274,7 @@ export function RepositoryViews({
                         </span>
                       </Tooltip>
                     )}
-                    <InstallationMode item={item} t={t} short />
+                    <InstallationMode item={item} t={t} short cardEntry />
                   </div>
                   <div
                     className={`card-actions${state.favorites.includes(item.repo) || state.compare.includes(item.repo) ? " has-selection" : ""}`}

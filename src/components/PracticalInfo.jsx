@@ -106,7 +106,17 @@ export function PlatformTags({ item, t, compact = false }) {
     </Tooltip>
   );
 }
-export function InstallationMode({ item, t, short = false }) {
+export function InstallationMode({ item, t, short = false, cardEntry = false }) {
+  if (cardEntry) {
+    return (
+      <Tag
+        className="install-mode install-mode-entry"
+        data-testid="installation-mode"
+      >
+        {t("installPendingShort")}
+      </Tag>
+    );
+  }
   const installation = installationFor(item);
   const label = t(
     {
