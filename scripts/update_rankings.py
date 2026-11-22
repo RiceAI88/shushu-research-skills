@@ -1178,6 +1178,7 @@ _AGENT_LABELS = {
     "claude-code": "Claude Code",
     "codex": "Codex",
     "opencode": "OpenCode",
+    "openclaw": "OpenClaw",
     "cursor": "Cursor",
     "gemini": "Gemini",
     "cline": "Cline",
@@ -1250,7 +1251,7 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
             )
         return "\n".join(rows)
 
-    table_header = "| # | 仓库 | Stars | 近 7 日 | 适用平台 | 作者原文简介 |\n|---:|---|---:|---:|---|---|"
+    table_header = "| # | 仓库 | Stars | 近 7 日 | 适用 AI Agent | 作者原文简介 |\n|---:|---|---:|---:|---|---|"
     skill_table = table_header + "\n" + preview_rows(skills, 20) if skills else "暂无已确认类型的 Skills。"
     related_table = table_header + "\n" + preview_rows(related, 10) if related else "暂无科研相关项目。"
     today_lines = [
@@ -1264,7 +1265,7 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
 
 **面向大学生和研究生，按专业找到适合自己的科研 Skills。**
 
-**科研鼠鼠 · Skills 导航站**（`shushu-research-skills`）由 RiceAI88 整理维护，汇集 GitHub 上用于文献检索、论文阅读、写作、绘图、数据分析和科研计算的 Agent Skills。支持按专业、科研任务和适用平台筛选，并提供安装入口、使用条件与维护信息。科研相关工具、工作流与资料单独标注。
+**科研鼠鼠 · Skills 导航站**（`shushu-research-skills`）由 RiceAI88 整理维护，汇集 GitHub 上用于文献检索、论文阅读、写作、绘图、实验复现、投稿审稿、数据分析和研究计算的 Agent Skills。支持按 12 个学科门类与具体专业、8 类科研任务和适用 AI Agent 筛选，提供中文一句话导读、3 步快速上手指引（标注终端或 AI Agent 对话框执行位置、一键复制安装与双语提示词案例）、10 条专业科研路径与维护状态参考。科研相关工具、工作流与学习资料单独标注。
 
 ### [打开科研 Skills 导航 →]({SITE_URL}/)
 
@@ -1289,7 +1290,7 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
 
 [法学]({SITE_URL}/#discipline=law) · [文学]({SITE_URL}/#discipline=literature) · [历史学]({SITE_URL}/#discipline=history) · [哲学]({SITE_URL}/#discipline=philosophy) · [教育学]({SITE_URL}/#discipline=education) · [艺术学]({SITE_URL}/#discipline=arts)
 
-专业归属依据官方文档，当前仍在补充；尚未核验专业归属的项目可在“全部”中浏览。选择专业后，可在“收录范围”中决定是否包含跨专业通用 Skills，以及科研相关项目。
+专业归属依据官方文档（目前已覆盖 110+ 个项目的专业档案与中文导读，持续补充中）；尚未核验专业归属的项目可在“全部”中浏览。选择学科门类后可直观查看各门类数量，并通过栏内“包含通用”开关或工具栏“收录范围”决定是否合并展示跨专业通用 Skills 及科研相关项目。
 
 ## 按科研任务找 Skills
 
@@ -1304,16 +1305,16 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
 | 数据处理、统计分析与计量研究 | [数据分析]({SITE_URL}/#task=analyze) |
 | 数值计算、仿真与数学建模 | [研究计算]({SITE_URL}/#task=compute) |
 
-一个项目可以用于多个场景。网站默认只展示有 `SKILL.md` 文件证据的 Skills；需要科研工具或资料时，可在“收录范围”中打开“含科研相关项目”。
+一个项目可以用于多个场景。网站默认只展示有 `SKILL.md` 文件证据的 Skills；需要科研工具或学习资料时，可在“收录范围”中打开“含科研相关项目”。
 
 ## 网站怎么用
 
-- **第一次接触 Skill**：先点网站首屏的“30 秒看懂 Skill”，了解 Skill 是什么、需要哪些宿主工具，以及账号、费用与依赖要求。
-- **按专业和任务查找**：选择学科门类、具体专业与科研任务，再按平台、Stars、上升最快或最新收录筛选排序；“专业适用优先”是独立的排序选项。
-- **沿专业路径上手**：工具栏的“专业路径”按已核对项目串联任务步骤，列出每一步的工具、环境、依赖与安装来源，不必全部安装。
+- **第一次接触 Skill**：先点网站首屏的“30 秒看懂 Skill”，了解 Skill 是什么、需要搭配哪些 AI Agent（如 Claude Code、Codex、Cursor、Antigravity 等），以及账号、费用与依赖要求。
+- **按专业和任务查找**：选择学科门类、具体专业与科研任务，支持中文意图词搜索（如“润色”“降重”“画流程图”“跑实验”“计量”），并可按专业适用优先、Stars、上升最快或最新收录排序。
+- **沿专业路径上手**：首屏“专业科研路径”或工具栏“专业路径”提供覆盖理工农医、经管法、人文社科的 10 条串联科研路径，列出每一步的工具、环境、依赖与安装来源，按需选用不必全部安装。
+- **3 步快速上手与提示词案例**：点击卡片打开详情，按“准备 AI Agent 与环境 → 安装 Skill（自动标注在系统终端或 AI Agent 对话框执行，支持复制‘让 AI 帮你装’提示词）→ 复制双语科研提示词开用”三步上手；已核对项目提供官方文档来源与核对记录，文档核对不等于已执行安装或运行实测。
+- **筛选适用 AI Agent**：按 Claude Code、Codex、Antigravity、Cursor、OpenClaw、MCP 等适用 AI Agent 筛选；不同项目支持的客户端不同，安装前以官方文档为准。
 - **发现新项目**：查看“今日新增”，也可按近 7 日增长、趋势或最近更新排序。
-- **找到适合的平台**：搜索关键词，按 Claude Code、Codex、Antigravity、Cursor、MCP 等适用平台筛选；不同项目支持的平台不同，安装前以官方文档为准。
-- **查看使用条件**：点击卡片打开详情，查看安装入口、适用任务、必要依赖与维护信息；已核对项目提供文档来源与核对记录，文档核对不等于已执行安装或运行实测。
 - **收藏与对比**：收藏感兴趣的项目，加入对比后比较任务、安装方式、依赖和维护状态；收藏保存在当前浏览器。
 - **观察趋势**：切换到“数据洞察”，查看专业分布、专业与场景覆盖及内容缺口；展开更多图表可看 Stars 增长与规模比较，筛选条件与榜单联动。
 - **分享与订阅**：复制当前筛选链接，或使用 [RSS](feed.xml)、[月报](reports/)、[JSON](data/rankings.json) 和 [CSV](data/rankings.csv)。
@@ -1338,7 +1339,7 @@ Skills **{len(skills)}** · 科研相关项目 **{len(related)}** · 类型待�
 
 ## 科研相关项目
 
-以下为科研工具、工作流和资料等相关项目的前 10 名，独立按 Stars 顺序展示，不混入上方 Skills 排名。
+以下为科研工具、工作流和学习资料等相关项目的前 10 名，独立按 Stars 顺序展示，不混入上方 Skills 排名。
 
 {related_table}
 
@@ -1348,7 +1349,7 @@ Skills **{len(skills)}** · 科研相关项目 **{len(related)}** · 类型待�
 
 **数据从哪里来？** 使用 GitHub API 获取仓库公开信息，通过热门搜索、最近更新搜索、Stars 区间搜索和维护者推荐发现候选；新候选读取 README 核验其自身科研用途，已有项目独立复查。搜索与核验有预算和覆盖限制，不保证收齐 GitHub 上所有科研 Skills。
 
-**哪些项目会收录？** 当前 Stars 门槛为 **{metadata['min_stars']}**，排除 fork、归档和明确无关项目。Skills／科研工作流与科研相关工具／指南采用分轨准入；检测默认分支的 `SKILL.md` 文件后标注类型。暂时请求失败时保留此前合格项目的缓存并标记待核验，不因跌出搜索结果就直接移除。
+**哪些项目会收录？** 当前 Stars 门槛为 **{metadata['min_stars']}**，排除 fork、归档、自动搬运镜像及与学术研究无关的通用开发／营销工具。Skills／科研工作流与科研相关工具／学习资料采用分轨准入，读取仓库文档核验学术研究证据，并检测默认分支的 `SKILL.md` 文件后标注类型。暂时请求失败时保留此前合格项目的缓存并标记待核验，不因跌出搜索结果就直接移除。
 
 **怎样排名？** 主榜按 Stars 排序，增长来自历史快照；趋势分仅作辅助，也可在网站切换排序。完整规则、字段含义和历史数据说明见[排名方法](docs/methodology.md)，采集过程见[采集报告](data/collection-report.json)与[变更记录](data/collection-events.json)。
 
@@ -1364,13 +1365,13 @@ README 会由采集脚本自动生成，静态介绍需修改 [`render_readme`](
 
 ## English
 
-**Research Hamster · Skills Directory** (`shushu-research-skills`) helps undergraduate and postgraduate students find GitHub research Skills by discipline, task and supported platform, from literature search and writing to figures, data analysis and scientific computing.
+**Research Hamster · Skills Directory** (`shushu-research-skills`) helps undergraduate and postgraduate students find GitHub research Skills by discipline, task and supported AI Agent, from literature search and writing to figures, data analysis and scientific computing.
 
-[Open the dashboard]({SITE_URL}/en/) to choose a discipline and task, read the starter guide, explore discipline research paths, inspect installation requirements, save favorites, compare repositories and explore data insights. Descriptions stay in the repository author's original language.
+[Open the dashboard]({SITE_URL}/en/) to choose a discipline and task, read the starter guide, follow 10 discipline research paths, use the 3-step quick-start with copyable prompt examples, inspect installation requirements, save favorites, compare repositories and explore data insights. Curated summaries are paired with the repository author's original description.
 
-Discipline labels are based on official documentation; coverage is still being expanded. General research Skills and related projects can be included through the scope control. The default ranking contains repositories with detected `SKILL.md` files. Research-related tools, workflows and guides are separately labelled and can be included with a toggle; unverified types are excluded from both previews. File detection does not certify quality or successful installation.
+Discipline labels are based on official documentation; coverage is still being expanded. General research Skills and related projects can be included through the inline toggle or scope control. The default ranking contains repositories with detected `SKILL.md` files. Research-related tools, workflows and learning materials are separately labelled and can be included with a toggle; unverified types are excluded from both previews. File detection does not certify quality or successful installation.
 
-Candidates are discovered through popular, recently updated and star-banded searches, then reviewed against README evidence. The main ranking uses Stars; daily arrivals mean first inclusion on this site, measured by the Beijing calendar day. The scheduled daily refresh may be delayed and does not guarantee new entries every day. Search coverage is bounded.
+Candidates are discovered through popular, recently updated and star-banded searches, then reviewed against README evidence while filtering out mirrors and non-academic noise. The main ranking uses Stars; daily arrivals mean first inclusion on this site, measured by the Beijing calendar day. The scheduled daily refresh runs at 10:00 UTC+8 (02:00 UTC), may be delayed, and does not guarantee new entries every day. Search coverage is bounded.
 
 [Methodology](docs/methodology.md) · [Contributing](CONTRIBUTING.md) · [JSON](data/rankings.json) · [CSV](data/rankings.csv) · [RSS](feed.xml)
 
@@ -1378,7 +1379,7 @@ Candidates are discovered through popular, recently updated and star-banded sear
 
 本项目基于 [kael-odin/awesome-academic-research-skills](https://github.com/kael-odin/awesome-academic-research-skills) 导入并进行后续改版，感谢原作者 [kael-odin](https://github.com/kael-odin) 的开源贡献。
 
-本仓库由 RiceAI88 独立维护，已将首页迁移至 React，并增加专业分类、科研任务筛选、入门指南与专业路径、项目类型区分、今日新增、项目对比、数据洞察与采集核验机制。保留原项目的 MIT 许可证和版权声明；不代表原作者或与原作者存在隶属关系。早期导入的历史快照不代表本站当时已运行。
+本仓库由 RiceAI88 独立维护，已将首页迁移至 React，并增加专业分类、科研任务筛选、3 步上手指引与 10 条专业路径、项目类型区分、今日新增、项目对比、数据洞察与分轨采集核验机制。保留原项目的 MIT 许可证和版权声明；不代表原作者或与原作者存在隶属关系。早期导入的历史快照不代表本站当时已运行。
 
 ## License
 
