@@ -32,7 +32,7 @@ test("reference palette, right-hand search and default cards give a compact firs
   );
   await expect(page.locator("body")).toHaveCSS(
     "background-color",
-    "rgb(248, 250, 252)",
+    "rgb(244, 247, 250)",
   );
   await expect(page.locator(".portal-kpi-card")).toHaveCount(4);
   const title = await page.locator("h1").boundingBox();

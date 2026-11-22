@@ -7,7 +7,7 @@ export function ProjectFacts({item,state,t}) {
  const range=fit?.kind==='common'?(zh?'跨专业通用':'Cross-disciplinary'):fit?.labels.length?`${zh?'专业适用':'For'} · ${fit.labels.slice(0,2).join(' / ')}${fit.labels.length>2?` +${fit.labels.length-2}`:''}`:null;
  const taskText=tasks.length?tasks.join(' · '):(zh?'未分类':'Unclassified');
  return <div className="project-facts">
-  <div className="project-fit-line">{range && <span className="discipline-card-fit" title={fit.labels?.join(' / ')}>{range}</span>}<span data-testid="card-tasks" className="card-tasks" title={taskText}>{zh?'适合：':'Tasks: '}{taskText}</span></div>
+  <div className="project-fit-line">{range && <span className={`discipline-card-fit fit-${fit.kind}`} title={fit.labels?.join(' / ')}>{range}</span>}<span data-testid="card-tasks" className="card-tasks" title={taskText}>{zh?'适合：':'Tasks: '}{taskText}</span></div>
   <div className="project-facts-meta"><time data-testid="card-updated" dateTime={item.last_push_date} title={`${zh?'最近提交日期':'Last push date'}: ${item.last_push_date||'—'} (UTC)`}>{updateDateLabel(item.last_push_date,state.lang)}</time>{level && <Tooltip trigger={['hover','focus','click']} title={`${level.quote} · ${level.source_url}`}><span className="learner-level" tabIndex={0} onClick={e=>e.stopPropagation()}>{level.levels.map(id=>({undergraduate:zh?'本科':'Undergrad',postgraduate:zh?'硕博':'Postgrad',doctoral:zh?'博士':'PhD',masters:zh?'硕士':'Master'}[id])).filter(Boolean).join(' / ')}</span></Tooltip>}</div>
  </div>;
 }

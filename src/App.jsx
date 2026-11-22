@@ -115,6 +115,15 @@ const taskLabels = {
   reproduce: "taskReproduce",
   review: "taskReview",
 };
+// 急救场景单色线性图标路径，替代跨系统画风不一的彩色 Emoji
+const STAGE_ICON_PATHS = {
+  undergrad: "M22 10L12 5 2 10l10 5 10-5zM6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5",
+  proposal: "M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15z",
+  figures: "M3 3v18h18M7 16l4-5 4 3 5-7",
+  empirical: "M18 20V10M12 20V4M6 20v-6",
+  slides: "M2 3h20v14H2zM8 21h8M12 17v4",
+  rebuttal: "M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z",
+};
 const localFile = (name) => base + name;
 const landingHash = window.__ARS_INITIAL_HASH || "";
 export default function App() {
@@ -809,7 +818,18 @@ function Dashboard({ state, update }) {
                     }
                   >
                     <span className="stage-pill-icon" aria-hidden="true">
-                      {icon}
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d={STAGE_ICON_PATHS[stage.id] || ""} />
+                      </svg>
                     </span>
                     <span className="stage-pill-text">
                       {labelParts.join(" ")}

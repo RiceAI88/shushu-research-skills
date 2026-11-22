@@ -149,39 +149,41 @@ export function RepositoryDrawer({
     <Drawer
       title={
         item ? (
-          <div>
+          <div className="drawer-header-wrap">
             <div className="drawer-eyebrow">
               {t("drEyebrow")} #{item.rank}
               {category && ` · ${category}`}
             </div>
-            <span className="drawer-repo">{item.repo}</span>
-            <nav className="detail-navigation" aria-label={t("drBrowse")}>
-              <Button
-                size="small"
-                data-testid="detail-previous"
-                disabled={position <= 0}
-                onClick={() => navigate(-1)}
-              >
-                {t("drPrevious")}
-              </Button>
-              <span
-                className="detail-position"
-                data-testid="detail-position"
-                aria-live="polite"
-              >
-                {position >= 0
-                  ? `${position + 1} / ${items.length}`
-                  : t("drOutsideResults")}
-              </span>
-              <Button
-                size="small"
-                data-testid="detail-next"
-                disabled={position < 0 || position >= items.length - 1}
-                onClick={() => navigate(1)}
-              >
-                {t("drNext")}
-              </Button>
-            </nav>
+            <div className="drawer-title-bar">
+              <span className="drawer-repo">{item.repo}</span>
+              <nav className="detail-navigation" aria-label={t("drBrowse")}>
+                <Button
+                  size="small"
+                  data-testid="detail-previous"
+                  disabled={position <= 0}
+                  onClick={() => navigate(-1)}
+                >
+                  {t("drPrevious")}
+                </Button>
+                <span
+                  className="detail-position"
+                  data-testid="detail-position"
+                  aria-live="polite"
+                >
+                  {position >= 0
+                    ? `${position + 1} / ${items.length}`
+                    : t("drOutsideResults")}
+                </span>
+                <Button
+                  size="small"
+                  data-testid="detail-next"
+                  disabled={position < 0 || position >= items.length - 1}
+                  onClick={() => navigate(1)}
+                >
+                  {t("drNext")}
+                </Button>
+              </nav>
+            </div>
           </div>
         ) : (
           ""

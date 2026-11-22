@@ -7,7 +7,7 @@ export const THEME_TOKENS = {
     link: "#0D9F6E",
     linkHover: "#059669",
     linkActive: "#047857",
-    bgLayout: "#F8FAFC",
+    bgLayout: "#F4F7FA",
     bgContainer: "#FFFFFF",
     tableHeaderBg: "#FFFFFF",
     text: "#0F172A",
