@@ -4,13 +4,16 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 
 from scripts.update_rankings import (
+    attach_curated_uses,
     classify_repo,
     compute_trend_score,
     count_skill_files_in_tree,
+    dedupe_unforked_clones,
     detect_agents,
     agents_to_label,
     find_window_snapshot,
     is_academic_skill_repo,
+    is_paper_collection_repo,
     is_stale,
     rank_repositories,
     render_data_js,
@@ -19,6 +22,7 @@ from scripts.update_rankings import (
     render_month_report,
     render_sitemap,
     render_og_cover,
+    synthesize_chinese_use_fallback,
     verifies_citations,
 )
 
@@ -498,9 +502,14 @@ class RankingRulesTest(unittest.TestCase):
         """Sitemap URLs must be canonical: fragments like '#english' are not
         allowed by the sitemap protocol and are stripped by crawlers."""
         sitemap = render_sitemap(self._feed_fixture())
+        locs = re.findall(r"<loc>([^<]+)</loc>", sitemap)
 
-        for loc in re.findall(r"<loc>([^<]+)</loc>", sitemap):
+        for loc in locs:
             self.assertNotIn("#", loc)
+        self.assertIn("https://riceai985.cc/disciplines/medicine/", locs)
+        self.assertIn("https://riceai985.cc/disciplines/economics/", locs)
+        self.assertIn("https://riceai985.cc/topics/figures/", locs)
+        self.assertIn("https://riceai985.cc/topics/write/", locs)
 
     def test_data_js_is_minified(self):
         """The machine-consumed .js payloads must use compact separators;
@@ -585,6 +594,83 @@ class RankingRulesTest(unittest.TestCase):
         self.assertIn("example/b", report)  # newcomer
         self.assertIn("example/a", report)  # riser +30
         self.assertIn("example/gone", report)  # dropped
+
+    def test_dedupe_unforked_clones_drops_copycats_and_keeps_independent_same_name_repos(self):
+        items = [
+            {
+                "repo": "K-Dense-AI/scientific-agent-skills",
+                "stars": 58000,
+                "description": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 250,000+ scientists worldwide.",
+            },
+            {
+                "repo": "Tyche-MKR/scientific-agent-skills",
+                "stars": 89,
+                "description": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 190,000+ scientists worldwide.",
+            },
+            {
+                "repo": "franklee16/scientific-agent-skills",
+                "stars": 120,
+                "description": "Empirical economics workflow skills for Stata panel regressions and causal inference.",
+            },
+        ]
+        deduped = dedupe_unforked_clones(items)
+        self.assertEqual(
+            [i["repo"] for i in deduped],
+            ["K-Dense-AI/scientific-agent-skills", "franklee16/scientific-agent-skills"],
+        )
+
+    def test_paper_collection_repo_reclassified_without_touching_real_skills(self):
+        self.assertTrue(
+            is_paper_collection_repo(
+                {
+                    "repo": "Awesome3DGS/3D-Gaussian-Splatting-Papers",
+                    "description": "3D高斯论文，持续更新，欢迎交流讨论。",
+                }
+            )
+        )
+        self.assertFalse(
+            is_paper_collection_repo(
+                {
+                    "repo": "Yila-AI/awesome-research-skills",
+                    "description": "Open-source Agent Skills for planning, drafting, and polishing SCI/SSCI papers.",
+                }
+            )
+        )
+
+    def test_attach_curated_uses_synthesizes_chinese_fallback_for_uncurated_english_items(self):
+        unseen_skill = {
+            "repo": "new-lab/zotero-scRNA-skill",
+            "repository_kind": "skill",
+            "description": "Agent skill for single-cell RNA-seq data analysis, Zotero reference management, and publication figures.",
+            "topics": ["single-cell", "zotero"],
+        }
+        curated_skill = {
+            "repo": "K-Dense-AI/scientific-agent-skills",
+            "repository_kind": "skill",
+            "description": "Turn any AI agent into an AI Scientist.",
+            "topics": [],
+        }
+        zh_native = {
+            "repo": "demo/cn-skill",
+            "repository_kind": "skill",
+            "description": "面向中文毕业论文排版的开源技能",
+            "topics": [],
+        }
+        batch = [unseen_skill, curated_skill, zh_native]
+        attach_curated_uses(batch)
+        self.assertIn("单细胞转录组", unseen_skill["curated_use_zh"])
+        self.assertIn("Zotero", unseen_skill["curated_use_zh"])
+        self.assertEqual(
+            curated_skill["curated_use_zh"],
+            "科学数据分析、专业数据库与科研流程",
+        )
+        self.assertNotIn("curated_use_zh", zh_native)
+        self.assertIn(
+            "工具与资料",
+            synthesize_chinese_use_fallback(
+                {"repo": "demo/en-guide", "repository_kind": "related", "description": "Systematic review guide"}
+            ),
+        )
 
 
 class SharingAssetsTest(unittest.TestCase):

@@ -732,5 +732,29 @@
       "OpenCode"
     ],
     "reviewed_at": "2026-11-21"
+  },
+  "jordan-gibbs/hyperresearch": {
+    "tasks": [
+      "find",
+      "read",
+      "write"
+    ],
+    "platform_names": [
+      "Claude Code",
+      "OpenAI Codex",
+      "MCP"
+    ],
+    "reviewed_at": "2026-11-22"
+  },
+  "Paper2Poster/Paper2Poster": {
+    "tasks": [
+      "figures",
+      "read"
+    ],
+    "platform_names": [
+      "Claude Code",
+      "Codex"
+    ],
+    "reviewed_at": "2026-11-22"
   }
 }

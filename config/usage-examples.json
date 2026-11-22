@@ -182,5 +182,61 @@
     "prompt_en": "Use feynman's /lit and /audit workflows on [diffusion models for protein conformation generation] to synthesize consensus and open questions, and verify manuscript claims against the code.",
     "output_zh": "产出带引用核验的文献对比矩阵、论文-代码一致性审计报告与分级修改建议。",
     "output_en": "Produces citation-checked literature synthesis, paper-to-code audit findings, and prioritized revision notes."
+  },
+  "jordan-gibbs/hyperresearch": {
+    "scenario_zh": "多源深度调研与交叉核验",
+    "scenario_en": "Multi-source deep research & synthesis",
+    "prompt_zh": "请调用 /hyperresearch 围绕研究问题【你的具体研究课题与时间范围】开展深度文献与证据调研，拆解子问题检索原始文献，标注正反方分歧点，并在 research/notes/ 下生成带可核验出处的结构化综述报告。",
+    "prompt_en": "Run /hyperresearch on [your specific research question and timeframe] to decompose sub-questions, gather primary literature, surface conflicting evidence, and synthesize a cited report under research/notes/.",
+    "output_zh": "自动拆解问题检索多源文献，产出带正反证据核对与本地 Markdown 笔记的深度综述。",
+    "output_en": "Decomposes queries across sources and produces a verified, cited Markdown research synthesis."
+  },
+  "Paper2Poster/Paper2Poster": {
+    "scenario_zh": "论文一键转学术会议海报",
+    "scenario_en": "Academic conference poster from paper",
+    "prompt_zh": "请使用 Paper2Poster 技能读取当前目录下的论文【paper.pdf】，提炼研究动机、核心方法图、主要实验表格与结论，帮我规划并生成一份适合【NeurIPS / CVPR / 学术年会】展示的宽屏学术海报（Poster）版式与内容。",
+    "prompt_en": "Use the Paper2Poster skill on [paper.pdf] in this folder to extract motivation, core architecture figures, key tables, and conclusions into a conference poster layout for [NeurIPS / CVPR / symposium].",
+    "output_zh": "从论文 PDF 自动提炼图文要点并生成结构平衡的会议海报版面。",
+    "output_en": "Extracts key text, figures, and tables from your PDF into a balanced conference poster layout."
+  },
+  "brycewang-stanford/Auto-Empirical-Research-Skills": {
+    "scenario_zh": "社科经管实证计量与稳健性检验",
+    "scenario_en": "Econometrics & causal inference pipeline",
+    "prompt_zh": "请使用 Auto-Empirical-Research-Skills 读取当前目录下的面板数据【panel_data.csv】，针对核心解释变量【X】与被解释变量【Y】执行双向固定效应与 DID 平行趋势检验，输出稳健标准误回归表（LaTeX 三线表）及可复现代码。",
+    "prompt_en": "Use Auto-Empirical-Research-Skills on [panel_data.csv] to run two-way fixed effects and DID parallel-trend diagnostics for [X] on [Y], outputting publication-ready LaTeX regression tables and code.",
+    "output_zh": "完成因果识别诊断、稳健性检验并输出可直接放入论文的期刊级三线表。",
+    "output_en": "Runs causal identification diagnostics, robustness checks, and exports journal-style regression tables."
+  },
+  "MLNLP-World/Paper-Writing-Tips": {
+    "scenario_zh": "LaTeX 论文排版、公式与图表规范自查",
+    "scenario_en": "LaTeX formatting, math & figure audit",
+    "prompt_zh": "请调用 paper-writing 技能逐节检查当前目录下的【@main.tex】，重点排查公式标点与编号、缩写首次定义、中英文空格、图表标题位置及参考文献格式不统一之处，按严重程度列出具体行号与修改建议。",
+    "prompt_en": "Use the paper-writing skill to audit [@main.tex] for equation punctuation, acronym definitions, figure/table caption conventions, and bibliography consistency, listing line numbers and fixes.",
+    "output_zh": "输出精确到行号的 LaTeX 公式、排版与顶会写作规范问题清单。",
+    "output_en": "Produces a line-by-line audit of LaTeX math, typography, and conference formatting issues."
+  },
+  "synthetic-sciences/openscience": {
+    "scenario_zh": "端到端课题文献调研与实验验证",
+    "scenario_en": "End-to-end research & experiment workbench",
+    "prompt_zh": "围绕研究目标【简述你的科学假设或实验对比任务】，请先检索相关基线方法并梳理评估指标，随后在本地编写并运行最小可复现实验脚本，记录定量实验结果并整理成带引用的实验分析简报。",
+    "prompt_en": "For the research goal [describe your hypothesis or benchmark task], review relevant baselines, write and run a minimal reproducible experiment locally, and summarize quantitative findings with citations.",
+    "output_zh": "串联文献检索、本地实验脚本运行与带证据链的结果汇报。",
+    "output_en": "Connects literature review, local experiment execution, and cited result reporting."
+  },
+  "jmiao24/Paper2Agent": {
+    "scenario_zh": "将前沿方法论文转化为可调用的科研工具",
+    "scenario_en": "Turn a methods paper into a callable MCP/Skill",
+    "prompt_zh": "请使用 /paper2agent 读取论文【论文标题或官方代码仓库链接】，解析其核心算法输入输出接口与复现环境依赖，将其封装为我可以在本地直接调用来跑自己数据的 MCP 工具与 Skill。",
+    "prompt_en": "Use /paper2agent on [paper title or official GitHub repo URL] to wrap its core computational method and dependencies into a reusable local MCP server and skill for my own dataset.",
+    "output_zh": "自动将论文配套代码封装为可直接在对话中调用的 MCP 服务与科研技能。",
+    "output_en": "Transforms paper codebases into reusable MCP tools and skills callable on your own data."
+  },
+  "baojie/shiji-kb": {
+    "scenario_zh": "古籍史料知识图谱检索与人物事件考据",
+    "scenario_en": "Classical text knowledge graph & historiography",
+    "prompt_zh": "请基于《史记》知识库检索与【历史人物/事件，如：商鞅变法】相关的本纪、世家与列传原文段落，梳理关键人物关系网络与时间脉络，并逐条标注对应的篇名与原文出处以便核对。",
+    "prompt_en": "Query the Shiji knowledge base for passages across annals and biographies related to [historical figure/event], map the entity relationships and timeline, and cite exact chapter titles and original text.",
+    "output_zh": "输出跨篇目互证的原文引文、人物事件关系梳理与可核查史料出处。",
+    "output_en": "Delivers cross-referenced classical passages, entity timelines, and verifiable chapter citations."
   }
 }

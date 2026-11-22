@@ -927,12 +927,12 @@
     "review_kind": "documentation_only"
   },
   "jordan-gibbs/hyperresearch": {
-    "use_zh": "面向 Claude Code 与 Codex 的证据驱动深度研究技能：检索学术论文、临床试验与经济数据并构建可溯源知识库",
-    "use_en": "Evidence-driven deep research skill for Claude Code and Codex searching scholarly papers, clinical trials and economic data",
-    "source_quote": "The Most Powerful Deep Research Harness: a deep research skill for Claude Code and OpenAI Codex",
+    "use_zh": "多源证据收集、交叉核验与深度研究报告生成",
+    "use_en": "Multi-source evidence gathering, verification, and deep research synthesis",
+    "source_quote": "Hyperresearch turns Claude Code into a deep research agent, and it runs in OpenAI Codex too.",
     "source_url": "https://github.com/jordan-gibbs/hyperresearch/blob/main/README.md",
     "source_sha": "d0d8041b0979a32ac1e8bb2ef57f7fbd720d8f59",
-    "reviewed_at": "2026-11-21",
+    "reviewed_at": "2026-11-22",
     "review_kind": "documentation_only"
   },
   "pku-dair/autosci": {

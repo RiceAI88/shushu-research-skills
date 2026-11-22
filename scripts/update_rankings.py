@@ -1132,6 +1132,80 @@ def count_skill_files(full_name: str, branch: str, token: str | None) -> int | N
     return count if count or not data.get("truncated") else None
 
 
+_PAPER_LIST_NAME_RE = re.compile(
+    r"(?:^|[-_/])(?:awesome[-_].*papers|.*[-_]papers|paper[-_]list|reading[-_]list)$",
+    re.IGNORECASE,
+)
+_PAPER_LIST_DESC_RE = re.compile(
+    r"(?:论文合集|论文列表|论文汇总|持续更新.*论文|高斯论文|curated\s+list\s+of\s+.*papers)",
+    re.IGNORECASE,
+)
+_SKILL_IDENTITY_RE = re.compile(
+    r"\b(?:skill|skills|agent|agents|mcp|plugin|plugins|cli|workflow|workflows|toolkit)\b|技能|智能体|工作流|插件",
+    re.IGNORECASE,
+)
+
+
+def is_paper_collection_repo(item: dict[str, Any]) -> bool:
+    """Detect paper reading lists that happen to include a stray SKILL.md."""
+    slug = str(item.get("repo") or "").split("/")[-1]
+    desc = str(item.get("description") or "")
+    combined = f"{slug} {desc}"
+    if _SKILL_IDENTITY_RE.search(combined):
+        return False
+    return bool(_PAPER_LIST_NAME_RE.search(slug) or _PAPER_LIST_DESC_RE.search(desc))
+
+
+def dedupe_unforked_clones(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Drop low-star non-fork copycat clones that duplicate a popular original."""
+    stop_words = {
+        "the", "and", "for", "with", "into", "from", "that", "this", "your",
+        "any", "used", "open", "source", "agent", "agents", "skill", "skills",
+    }
+
+    def norm_desc(text: str) -> str:
+        lowered = re.sub(r"\d[\d,+.]*", "#", (text or "").strip().lower())
+        return re.sub(r"\s+", " ", lowered)
+
+    def desc_tokens(text: str) -> set[str]:
+        raw = re.findall(r"[a-z]{3,}|[\u4e00-\u9fff]{2,}", norm_desc(text))
+        return {tok for tok in raw if tok not in stop_words}
+
+    ordered = sorted(items, key=lambda x: (-int(x.get("stars") or 0), str(x.get("repo") or "").lower()))
+    kept: list[dict[str, Any]] = []
+    anchors: list[tuple[str, str, int, str, set[str]]] = []
+
+    for candidate in ordered:
+        repo = str(candidate.get("repo") or "")
+        parts = repo.lower().split("/", 1)
+        owner = parts[0] if len(parts) == 2 else ""
+        short = parts[1] if len(parts) == 2 else repo.lower()
+        stars = int(candidate.get("stars") or 0)
+        ndesc = norm_desc(candidate.get("description") or "")
+        tokens = desc_tokens(candidate.get("description") or "")
+
+        is_clone = False
+        if stars < 500:
+            for a_owner, a_short, a_stars, a_ndesc, a_tokens in anchors:
+                if a_owner == owner or a_stars < max(500, stars * 5):
+                    continue
+                if len(ndesc) >= 30 and ndesc[:70] == a_ndesc[:70]:
+                    is_clone = True
+                    break
+                if short == a_short and len(tokens) >= 6 and len(a_tokens) >= 6:
+                    overlap = len(tokens & a_tokens) / max(1, len(tokens | a_tokens))
+                    if overlap >= 0.70:
+                        is_clone = True
+                        break
+        if not is_clone:
+            kept.append(candidate)
+            if stars >= 500:
+                anchors.append((owner, short, stars, ndesc, tokens))
+
+    index_by_repo = {item.get("repo"): item for item in kept}
+    return [item for item in items if item.get("repo") in index_by_repo]
+
+
 def enrich_skill_counts(
     items: list[dict[str, Any]],
     token: str | None,
@@ -1145,6 +1219,11 @@ def enrich_skill_counts(
     """
     prev_map = previous_snapshot if isinstance(previous_snapshot, dict) else {}
     for item in items:
+        if is_paper_collection_repo(item):
+            item["skills_count"] = 0
+            item["skills_count_complete"] = True
+            item["repository_kind"] = "related"
+            continue
         prev = prev_map.get(item.get("repo", "")) if isinstance(prev_map, dict) else None
         if (
             isinstance(prev, dict)
@@ -1492,8 +1571,78 @@ def write_outputs(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
     write_seo_assets(data, window_snapshot=window_snapshot)
 
 
+_HAS_ZH_RE = re.compile(r"[\u4e00-\u9fff]")
+
+_FALLBACK_DOMAINS: list[tuple[re.Pattern[str], str]] = [
+    (re.compile(r"\b(?:single[- ]cell|scrna)\b", re.I), "单细胞转录组"),
+    (re.compile(r"\b(?:genomics?|transcriptom|proteom|omics|bioinformatics|computational[- ]biology|ncbi|sra)\b", re.I), "生物信息与组学"),
+    (re.compile(r"\b(?:clinical|medical|healthcare|pubmed|prisma|evidence[- ]based[- ]medicine|mri|neuroimaging)\b", re.I), "临床与生物医学"),
+    (re.compile(r"\b(?:drug[- ]discovery|molecular|protein|peptide)\b", re.I), "分子建模与药物发现"),
+    (re.compile(r"\b(?:econometrics?|stata|causal[- ]inference|panel[- ]data|financial[- ]economics)\b", re.I), "计量经济与因果推断"),
+    (re.compile(r"\b(?:legal|law|case[- ]law|pkulaw)\b", re.I), "法学检索与文书"),
+    (re.compile(r"\b(?:sociolog|social[- ]science|qualitative|computational[- ]social)\b", re.I), "社会科学实证分析"),
+    (re.compile(r"\b(?:remote[- ]sensing|geoscience|gis|earth[- ]science)\b", re.I), "遥感与地球科学"),
+    (re.compile(r"\b(?:agricult|agronom|crop|forestry|ecology|nutrition)\b", re.I), "农林生态与营养科学"),
+    (re.compile(r"\b(?:materials[- ]science|crystal|dft)\b", re.I), "材料科学与计算"),
+    (re.compile(r"\b(?:quantum[- ]chemistry|computational[- ]chemistry)\b", re.I), "计算化学与模拟"),
+    (re.compile(r"\b(?:robotics|embodied[- ]ai|autonomous[- ]driving)\b", re.I), "机器人与具身智能"),
+    (re.compile(r"\b(?:psychology|cognitive|neuroscience)\b", re.I), "认知与神经科学"),
+    (re.compile(r"\b(?:histor|archaeolog|archival)\b", re.I), "历史文献与档案"),
+    (re.compile(r"\b(?:philosoph|ethics)\b", re.I), "哲学与理论研读"),
+]
+
+_FALLBACK_ACTIONS: list[tuple[re.Pattern[str], str]] = [
+    (re.compile(r"\bposters?\b", re.I), "学术海报生成"),
+    (re.compile(r"\b(?:pptx?|powerpoint|slides?|beamer|presentations?)\b", re.I), "学术汇报 PPT 制作"),
+    (re.compile(r"\b(?:zotero|endnote|bibtex|reference[- ]manag)\b", re.I), "Zotero 与参考文献管理"),
+    (re.compile(r"\b(?:originpro|originlab|visio)\b", re.I), "可编辑科研图表制作"),
+    (re.compile(r"\b(?:figures?|plots?|plotting|charts?|diagrams?|visuali[sz]|illustrations?)\b", re.I), "科研配图与数据可视化"),
+    (re.compile(r"\b(?:systematic[- ]review|meta[- ]analysis|literature[- ]survey|literature[- ]review)\b", re.I), "系统性文献综述"),
+    (re.compile(r"\b(?:literature[- ]search|paper[- ]search|paper[- ]discovery|arxiv|openalex|semantic[- ]scholar|paper[- ]retrieval)\b", re.I), "多源文献检索与追踪"),
+    (re.compile(r"\b(?:citation[- ]verif|verified[- ]citations?|citeproof|hallucinat)\b", re.I), "真实引文核验"),
+    (re.compile(r"\b(?:rebuttal|peer[- ]review|paper[- ]review|reviewer|pre[- ]submission)\b", re.I), "模拟审稿与返修回复"),
+    (re.compile(r"\b(?:de[- ]ai|humaniz|anti[- ]defensive|proofread|polish)\b", re.I), "学术润色与表达优化"),
+    (re.compile(r"\btranslat(?:e|ion|or|ing)\b", re.I), "学术论文双语翻译"),
+    (re.compile(r"\b(?:latex|typst|overleaf|docx)\b", re.I), "论文排版与格式处理"),
+    (re.compile(r"\b(?:paper[- ]writing|academic[- ]writing|scientific[- ]writing|manuscript|thesis|dissertation)\b", re.I), "学术论文起草与写作"),
+    (re.compile(r"\b(?:reproduc|benchmark|ablation|experiment)\b", re.I), "实验设计与复现评测"),
+    (re.compile(r"\b(?:paper[- ]reading|reading|summari[sz]|obsidian|notes?)\b", re.I), "论文精读与研究笔记"),
+    (re.compile(r"\b(?:data[- ]analysis|statistical|statistics|regression)\b", re.I), "统计检验与数据分析"),
+    (re.compile(r"\b(?:simulation|scientific[- ]computing|numerical|mathematical[- ]model)\b", re.I), "科学计算与数学建模"),
+]
+
+
+def synthesize_chinese_use_fallback(item: dict[str, Any]) -> str:
+    """Synthesize a concise, grounded Chinese one-line summary for uncurated pure-English entries."""
+    haystack = " ".join(
+        [
+            str(item.get("repo") or ""),
+            str(item.get("description") or ""),
+            " ".join(item.get("topics") or []),
+        ]
+    )
+    domain = next((label for pat, label in _FALLBACK_DOMAINS if pat.search(haystack)), "")
+    actions: list[str] = []
+    for pat, label in _FALLBACK_ACTIONS:
+        if pat.search(haystack) and label not in actions:
+            actions.append(label)
+        if len(actions) >= 3:
+            break
+
+    is_related = item.get("repository_kind") == "related"
+    suffix = "工具与资料" if is_related else "技能"
+    if domain and actions:
+        return f"{domain}：{'、'.join(actions[:2])}{suffix}"
+    if actions:
+        joined = "、".join(actions)
+        return f"支持{joined}的科研{suffix}"
+    if domain:
+        return f"面向{domain}的科研辅助{suffix}"
+    return "面向学术文献与科研工作流的开源资源" if is_related else "面向学术研究工作流的 AI Agent 辅助技能"
+
+
 def attach_curated_uses(items: list[dict[str, Any]]) -> None:
-    """Attach reviewed concise use summaries from config/discipline-sources.json and config/curated-uses.json."""
+    """Attach reviewed concise use summaries from config files, with automated Chinese fallback."""
     sources = load_json(ROOT / "config" / "discipline-sources.json", {})
     extra_uses = load_json(ROOT / "config" / "curated-uses.json", {})
     if not isinstance(sources, dict):
@@ -1514,6 +1663,8 @@ def attach_curated_uses(items: list[dict[str, Any]]) -> None:
                 item["curated_use_zh"] = entry["use_zh"]
             if entry.get("use_en"):
                 item["curated_use_en"] = entry["use_en"]
+        if not item.get("curated_use_zh") and not _HAS_ZH_RE.search(str(item.get("description") or "")):
+            item["curated_use_zh"] = synthesize_chinese_use_fallback(item)
 
 
 def build_dataset(
@@ -1542,15 +1693,16 @@ def build_dataset(
         excluded_repositories=excluded_repositories,
         now=now,
     )
+    items = dedupe_unforked_clones(items)
     max_results = int(config.get("max_results", 100))
     if max_results > 0:
         items = items[:max_results]
     for index, item in enumerate(items, start=1):
         item["rank"] = index
-    attach_curated_uses(items)
 
     if enrich_skills:
         enrich_skill_counts(items, token, previous_snapshot=previous)
+    attach_curated_uses(items)
 
     generated_at = now.replace(microsecond=0).isoformat().replace("+00:00", "Z")
     data = {
@@ -1767,12 +1919,41 @@ def xml_escape(value: str) -> str:
     )
 
 
+SEO_DISCIPLINE_IDS = (
+    "science",
+    "engineering",
+    "medicine",
+    "agriculture",
+    "economics",
+    "management",
+    "law",
+    "literature",
+    "history",
+    "philosophy",
+    "education",
+    "arts",
+)
+
+SEO_TOPIC_IDS = (
+    "find",
+    "read",
+    "write",
+    "figures",
+    "reproduce",
+    "review",
+    "analyze",
+    "compute",
+)
+
+
 def render_sitemap(data: dict[str, Any]) -> str:
-    """Generate sitemap.xml covering the dashboard, README, and data endpoints."""
+    """Generate sitemap.xml covering the dashboard, static topic/discipline landing pages, and data endpoints."""
     lastmod = (data.get("metadata", {}).get("generated_at") or "")[:10]
     urls = [
         ("", lastmod, "1.0", "daily"),
         ("en/", lastmod, "0.9", "daily"),
+        *[(f"disciplines/{did}/", lastmod, "0.8", "daily") for did in SEO_DISCIPLINE_IDS],
+        *[(f"topics/{tid}/", lastmod, "0.8", "daily") for tid in SEO_TOPIC_IDS],
         ("reports/", lastmod, "0.6", "weekly"),
         ("data/rankings.json", lastmod, "0.5", "daily"),
         ("data/rankings.csv", lastmod, "0.4", "daily"),

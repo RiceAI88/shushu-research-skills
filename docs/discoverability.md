@@ -56,7 +56,8 @@ Settings → Branches → 给 `main` 加规则：要求 PR 通过测试再合并
 页面元数据随源码维护；榜单数据与分享封面由更新任务生成，发布构建会将当前数据写入页面：
 
 - `index.html`：`<meta name="description">`、`keywords`、`author`、canonical、Open Graph（`og:title/description/url/image/locale`）、Twitter Card、RSS `<link rel="alternate">`、`<link rel="sitemap">`、favicon、JSON-LD `ItemList` 与无 JavaScript 的前 20 名链接（发布构建写入 HTML）。
-- `sitemap.xml`：首页 + 英文页 + 月报 + 数据端点 + 文档（仅规范 URL）。
+- `sitemap.xml`：首页 + 英文页 + 12 个学科门类静态页（`/disciplines/<id>/`）+ 8 个科研任务静态页（`/topics/<id>/`）+ 月报 + 数据端点 + 文档（共 28 条规范 URL，不含 `#` 片段）。
+- `disciplines/<id>/` 与 `topics/<id>/`：构建阶段由 `scripts/build-site.mjs` 生成 20 个独立静态 HTML 落地页，覆盖各学科门类与“找文献 / 读论文 / 写论文 / 科研绘图 / 实验复现 / 投稿审稿 / 数据分析 / 研究计算”搜索长尾词，包含专属 JSON-LD `ItemList`、无 JS 榜单正文与前端预筛选水合。
 - `robots.txt`：允许全部抓取，指向 sitemap。
 - `feed.xml`：RSS 2.0 订阅源（每日新收录 + 趋势上升，RFC-822 日期）。
 - `assets/og-cover.svg` / `.png` 与 `assets/og-cover-en.svg` / `.png`：中英文 1200×630 翡翠绿主题分享封面（每日刷新数字，PNG 由更新任务的 `cairosvg` 生成）；页面提供图片尺寸、类型及替代文本。

@@ -57,3 +57,41 @@ test("website build excludes development code and keeps monthly report assets", 
   const original = JSON.parse(await readFile("data/rankings.json", "utf8"));
   assert.deepEqual(data, original);
 });
+
+test("static SEO discipline and topic landing pages carry self-canonical metadata, filtered JSON-LD, and versioned data", async () => {
+  const rankingsHash = createHash("sha256")
+    .update(await readFile("dist/data/rankings.js"))
+    .digest("hex")
+    .slice(0, 12);
+  for (const [slug, expectedSeed, expectedKeyword] of [
+    ["disciplines/medicine", "#discipline=medicine&sort=fit", "医学"],
+    ["disciplines/economics", "#discipline=economics&sort=fit", "经济学"],
+    ["topics/figures", "#task=figures", "科研绘图"],
+    ["topics/write", "#task=write", "论文写作"],
+  ]) {
+    const html = await readFile(`dist/${slug}/index.html`, "utf8");
+    assert.ok(
+      html.includes(`rel="canonical" href="https://riceai985.cc/${slug}/"`),
+      `${slug}: missing self-canonical`,
+    );
+    assert.doesNotMatch(html, /hreflang="/);
+    assert.ok(html.includes(expectedKeyword), `${slug}: missing topic title keyword`);
+    assert.ok(
+      html.includes(`window.__ARS_INITIAL_HASH=${JSON.stringify(expectedSeed)}`),
+      `${slug}: missing initial state seed`,
+    );
+    assert.ok(
+      html.includes(`/data/rankings.js?v=${rankingsHash}"`),
+      `${slug}: must reference root-relative versioned rankings.js`,
+    );
+    const ldMatch = html.match(
+      /<script type="application\/ld\+json" id="ld-json">([\s\S]*?)<\/script>/,
+    );
+    assert.ok(ldMatch, `${slug}: missing JSON-LD`);
+    const ld = JSON.parse(ldMatch[1]);
+    assert.equal(ld["@type"], "ItemList");
+    assert.equal(ld.url, `https://riceai985.cc/${slug}/`);
+    assert.ok(ld.itemListElement.length > 0, `${slug}: empty ItemList`);
+    assert.match(html, /<noscript><section><h1>/);
+  }
+});

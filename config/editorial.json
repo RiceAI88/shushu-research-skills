@@ -235,6 +235,15 @@
       "codex",
       "opencode",
       "claude-code"
+    ],
+    "jordan-gibbs/hyperresearch": [
+      "claude-code",
+      "codex",
+      "mcp"
+    ],
+    "Paper2Poster/Paper2Poster": [
+      "claude-code",
+      "codex"
     ]
   },
   "installations": {
@@ -769,6 +778,24 @@
       "source_url": "https://github.com/Companion-Inc/feynman/blob/main/README.md",
       "reviewed_at": "2026-11-21",
       "source_blob_sha": "8005465d6bd2e33b647517e0055381a6c27463fb"
+    },
+    "jordan-gibbs/hyperresearch": {
+      "mode": "command",
+      "command": "npx skills add jordan-gibbs/hyperresearch -a claude-code",
+      "context_zh": "支持通过 skills.sh 快速安装 deep-research 入口技能，也可使用 pip install hyperresearch 安装完整多步检索管线。",
+      "context_en": "Install the bootstrap deep-research skill via skills.sh, or run pip install hyperresearch for the full CLI pipeline.",
+      "source_url": "https://github.com/jordan-gibbs/hyperresearch/blob/main/README.md",
+      "source_blob_sha": "d0d8041b0979a32ac1e8bb2ef57f7fbd720d8f59",
+      "reviewed_at": "2026-11-22"
+    },
+    "Paper2Poster/Paper2Poster": {
+      "mode": "manual",
+      "command": null,
+      "context_zh": "仓库在 skills/ 目录提供免依赖轻量 Skill 可直接放入 Codex / Claude，完整多模态海报渲染流水线支持本地 Python 或 Docker 部署。",
+      "context_en": "Provides a lightweight dependency-free skill in skills/ for Codex/Claude, plus a full poster rendering pipeline via Python or Docker.",
+      "source_url": "https://github.com/Paper2Poster/Paper2Poster/blob/main/README.md",
+      "source_blob_sha": "32965f3f9eced7392d77abfa4ef94cdbd5c4a582",
+      "reviewed_at": "2026-11-22"
     }
   },
   "featured": [

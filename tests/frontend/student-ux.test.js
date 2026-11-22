@@ -118,14 +118,60 @@ test("shareText formats peer recommendation cards and lab toolkit packs cleanly"
   assert.match(packText, /2\. two/);
 });
 
-test("every published Skill has Chinese card readability via description or curated_use_zh", () => {
+test("every published Skill and related project has Chinese card readability, and Top 30 Skills have tailored prompts", () => {
   const rankings = JSON.parse(
     readFileSync(new URL("../../data/rankings.json", import.meta.url), "utf8"),
   );
+  const examples = JSON.parse(
+    readFileSync(
+      new URL("../../config/usage-examples.json", import.meta.url),
+      "utf8",
+    ),
+  );
   const hasZh = /[\u4e00-\u9fff]/;
-  const skills = rankings.items.filter((i) => i.repository_kind === "skill");
-  const missing = skills.filter(
+  const visible = rankings.items.filter((i) =>
+    ["skill", "related"].includes(i.repository_kind),
+  );
+  const missing = visible.filter(
     (i) => !hasZh.test(i.description || "") && !hasZh.test(i.curated_use_zh || ""),
   );
   assert.deepEqual(missing.map((i) => i.repo), []);
+
+  const top30Skills = rankings.items
+    .filter((i) => i.repository_kind === "skill")
+    .slice(0, 30);
+  const missingTop30Examples = top30Skills
+    .filter((i) => !examples[i.repo])
+    .map((i) => i.repo);
+  assert.deepEqual(missingTop30Examples, []);
+});
+
+test("output-previews.json maps to real ranked repositories with complete bilingual fields", () => {
+  const rankings = JSON.parse(
+    readFileSync(new URL("../../data/rankings.json", import.meta.url), "utf8"),
+  );
+  const previews = JSON.parse(
+    readFileSync(
+      new URL("../../config/output-previews.json", import.meta.url),
+      "utf8",
+    ),
+  );
+  const knownRepos = new Set(rankings.items.map((i) => i.repo.toLowerCase()));
+  const entries = Object.entries(previews);
+  assert.ok(entries.length >= 25);
+
+  for (const [repo, p] of entries) {
+    assert.ok(knownRepos.has(repo.toLowerCase()), `Unknown preview repo: ${repo}`);
+    assert.ok(["before_after", "deliverable"].includes(p.mode), `${repo}: invalid mode`);
+    assert.ok(p.label_zh && p.label_en, `${repo}: missing label`);
+    assert.ok(p.takeaway_zh && p.takeaway_en, `${repo}: missing takeaway`);
+    if (p.mode === "before_after") {
+      assert.ok(p.before_zh && p.after_zh && p.before_en && p.after_en, `${repo}: incomplete diff`);
+    } else {
+      assert.ok(p.input_zh && p.input_en, `${repo}: missing input`);
+      assert.ok(Array.isArray(p.steps_zh) && p.steps_zh.length >= 2, `${repo}: missing steps_zh`);
+      assert.ok(Array.isArray(p.steps_en) && p.steps_en.length >= 2, `${repo}: missing steps_en`);
+      assert.ok(Array.isArray(p.artifacts) && p.artifacts.length >= 1, `${repo}: missing artifacts`);
+    }
+  }
 });

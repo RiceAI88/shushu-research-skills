@@ -120,6 +120,37 @@ test.describe("metadata works without running application JavaScript", () => {
       expect(bytes.readUInt32BE(16)).toBe(1200);
       expect(bytes.readUInt32BE(20)).toBe(630);
     });
+
+  for (const [slug, hashSeed, expectedKeyword] of [
+    ["disciplines/medicine/", "#discipline=medicine&sort=fit", "医学"],
+    ["topics/figures/", "#task=figures", "科研绘图"],
+  ]) {
+    test(`${slug} exposes topic-specific canonical metadata and filtered structured ranking without JS`, async ({
+      page,
+    }) => {
+      await page.goto("./" + slug);
+      const canonical = "https://riceai985.cc/" + slug;
+      const expectedItems = filterItems(
+        data.items,
+        restoreState(null, hashSeed, {}, data.items),
+      );
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+        "href",
+        canonical,
+      );
+      await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+        "content",
+        canonical,
+      );
+      await expect(page).toHaveTitle(new RegExp(expectedKeyword));
+      const schema = JSON.parse(await page.locator("#ld-json").textContent());
+      expect(schema.url).toBe(canonical);
+      expect(schema.numberOfItems).toBe(expectedItems.length);
+      expect(schema.itemListElement.map((i) => i.name)).toEqual(
+        expectedItems.slice(0, 20).map((i) => i.repo),
+      );
+    });
+  }
 });
 
 test("running application preserves the canonical default Skills structured list",async({page})=>{

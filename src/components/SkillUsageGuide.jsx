@@ -11,6 +11,7 @@ import {
 } from "../usageGuide";
 import { safeExternalUrl } from "../domain";
 import { PlatformTags, InstallationActions } from "./PracticalInfo";
+import { OutputPreviewCard } from "./OutputPreviewCard";
 import { useFeedback } from "./FeedbackProvider";
 import { copyText } from "../clipboard";
 
@@ -84,6 +85,8 @@ export function SkillUsageGuide({
           ))}
         </div>
       )}
+
+      <OutputPreviewCard item={item} lang={lang} />
 
       {/* 第 1 步：准备 AI Agent 与运行环境 */}
       <div className="usage-step">

@@ -6,7 +6,7 @@
 
 ### [打开科研 Skills 导航 →](https://riceai985.cc/)
 
-[![Skills](https://img.shields.io/badge/Skills-431-0d9f6e)](#skills-榜单)
+[![Skills](https://img.shields.io/badge/Skills-429-0d9f6e)](#skills-榜单)
 [![Updated](https://img.shields.io/badge/updated-2026--11--22-64748b)](#收录与更新)
 [![CI](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-64748b)](LICENSE)
@@ -59,19 +59,19 @@
 
 ## 今日新增 Skills
 
-新增 Skills **85** · 按本次更新时间所在的北京时间自然日统计 · “新增”指本站首次收录，不是仓库刚创建。
+新增 Skills **83** · 按本次更新时间所在的北京时间自然日统计 · “新增”指本站首次收录，不是仓库刚创建。
 
-- **[Awesome3DGS/3D-Gaussian-Splatting-Papers](https://github.com/Awesome3DGS/3D-Gaussian-Splatting-Papers)** — 3D高斯论文，持续更新，欢迎交流讨论。
 - **[limi124/remote-sensing-research-radar](https://github.com/limi124/remote-sensing-research-radar)** — Remote Sensing Research Radar is a Codex skill designed for tracking research frontiers i…
 - **[LEON-gittech/Skill2Poster](https://github.com/LEON-gittech/Skill2Poster)** — Codex skills for academic poster generation: turn paper content into accurate A0 HTML/PDF…
 - **[caofan85-lab/research-paper-daily-push](https://github.com/caofan85-lab/research-paper-daily-push)** — 可配置的 Codex Skill：每日检索、证据复核、评分、中文总结、微信推送、去重与研究记忆。
 - **[YuanZHAO321/Scientific-Writing-zh](https://github.com/YuanZHAO321/Scientific-Writing-zh)** — 一个 Claude Code skill —— 一份可用的科研写作教练(中文)。
+- **[ZongziForu/cn-law-hub](https://github.com/ZongziForu/cn-law-hub)** — 中国法条与法律法规检索 Agent Skill｜Chinese legal research Agent Skill for retrieving and verifying C…
 
 [查看网站今日新增](https://riceai985.cc/#today=skill) · 本节最多展示 5 个，完整列表见网站。初始导入的基线项目不计为今日新增。
 
 ## Skills 榜单
 
-Skills **431** · 科研相关项目 **229** · 类型待核验 **2**
+Skills **429** · 科研相关项目 **230** · 类型待核验 **2**
 
 更新时间：**2026-11-22 15:41 UTC+8**。以下为 Skills 前 20 名，按 Stars 降序排列；同 Stars 时依次按趋势分和仓库名排序，筛选项目类型后重新编号。Stars 与增长反映关注度，不代表科研质量、安装兼容性或推荐保证。
 

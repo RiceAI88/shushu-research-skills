@@ -1068,5 +1068,33 @@
     "tasks_source_blob_sha": "8005465d6bd2e33b647517e0055381a6c27463fb",
     "tasks_quote": "/deepresearch <topic> Planned investigation with parallel researchers and citation checks | /lit <topic or lab> Literature review | /review <paper or draft> Critique with severity levels | /audit <paper> Paper claims compared with its public code | /replicate <paper>",
     "notes": "仅官方文档核对，未安装或运行实测。"
+  },
+  "jordan-gibbs/hyperresearch": {
+    "environment_zh": "Claude Code 或 OpenAI Codex CLI；本地完整管线需 Python 3.10+。",
+    "environment_en": "Claude Code or OpenAI Codex CLI; Python 3.10+ for the local CLI harness.",
+    "dependencies_zh": "网页抓取默认可用 crawl4ai；若使用 Exa、Tavily、Serply 等外部检索后端需自备对应 API Key。",
+    "dependencies_en": "Uses crawl4ai for local fetching; optional search backends (Exa, Tavily, Serply) require API keys.",
+    "source_blob_sha": "d0d8041b0979a32ac1e8bb2ef57f7fbd720d8f59",
+    "reviewed_at": "2026-11-22",
+    "source_url": "https://github.com/jordan-gibbs/hyperresearch/blob/main/README.md",
+    "source_quote": "Works in Claude Code and OpenAI Codex: same pipeline, same vault. npx skills add jordan-gibbs/hyperresearch -a claude-code",
+    "tasks_source_url": "https://github.com/jordan-gibbs/hyperresearch/blob/main/README.md",
+    "tasks_source_blob_sha": "d0d8041b0979a32ac1e8bb2ef57f7fbd720d8f59",
+    "tasks_quote": "Hyperresearch turns Claude Code into a deep research agent, and it runs in OpenAI Codex too.",
+    "notes": "仅官方文档核对，未安装或运行实测。"
+  },
+  "Paper2Poster/Paper2Poster": {
+    "environment_zh": "轻量 Skill 模式仅需 Codex 或 Claude Code；完整海报渲染支持 Linux / Docker 与 Python 环境。",
+    "environment_en": "Lightweight skill works in Codex or Claude Code; full rendering pipeline runs on Python or Docker.",
+    "dependencies_zh": "完整本地渲染需安装 requirements.txt、LibreOffice 与 Poppler（或直接使用官方 Docker 镜像）及多模态模型 API / vLLM。",
+    "dependencies_en": "Full local rendering requires requirements.txt, LibreOffice, Poppler (or Docker), plus VLM/LLM API or local vLLM.",
+    "source_blob_sha": "32965f3f9eced7392d77abfa4ef94cdbd5c4a582",
+    "reviewed_at": "2026-11-22",
+    "source_url": "https://github.com/Paper2Poster/Paper2Poster/blob/main/README.md",
+    "source_quote": "We provide a lightweight skill (without the need of dependency) in skills/ for AI agents such as Codex or Claude",
+    "tasks_source_url": "https://github.com/Paper2Poster/Paper2Poster/blob/main/README.md",
+    "tasks_source_blob_sha": "32965f3f9eced7392d77abfa4ef94cdbd5c4a582",
+    "tasks_quote": "Paper2Poster: Multimodal Poster Automation from Scientific Papers",
+    "notes": "仅官方文档核对，未安装或运行实测。"
   }
 }

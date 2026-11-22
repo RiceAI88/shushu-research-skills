@@ -116,29 +116,49 @@ const taskLabels = {
   review: "taskReview",
 };
 const localFile = (name) => base + name;
+const landingHash = window.__ARS_INITIAL_HASH || "";
 export default function App() {
   const reducedMotion=useSiteReducedMotion();
   const items = sourceItems;
+  const landingSeed = useMemo(
+    () => (landingHash ? restoreState(null, landingHash, defaults, items) : null),
+    [items],
+  );
   const [state, update] = useState(() =>
-    restoreState(storage, location.hash, defaults, items),
+    restoreState(storage, location.hash || landingHash, defaults, items),
   );
   useEffect(() => {
     persistState(storage, state);
     document.documentElement.dataset.theme = state.theme;
     document.documentElement.lang = state.lang === "zh" ? "zh-CN" : "en";
-    document.title = state.lang === "zh" ? "科研鼠鼠 · Skills 导航站｜大学生与研究生科研工具" : "Research Hamster · Skills Directory";
+    const matchesLanding =
+      landingSeed &&
+      state.lang === "zh" &&
+      state.discipline === landingSeed.discipline &&
+      state.task === landingSeed.task;
+    document.title =
+      matchesLanding && window.__ARS_CUSTOM_TITLE
+        ? window.__ARS_CUSTOM_TITLE
+        : state.lang === "zh"
+          ? "科研鼠鼠 · Skills 导航站｜大学生与研究生科研工具"
+          : "Research Hamster · Skills Directory";
     const hash = serializeState(state);
-    if (location.hash !== hash)
+    const seedSerialized = landingSeed
+      ? serializeState(restoreState(storage, landingHash, defaults, items))
+      : "";
+    const nextHash =
+      landingSeed && !location.hash && hash === seedSerialized ? "" : hash;
+    if (location.hash !== nextHash)
       window.history.replaceState(
         null,
         "",
-        location.pathname + location.search + hash,
+        location.pathname + location.search + nextHash,
       );
-  }, [state]);
+  }, [state, landingSeed]);
   useEffect(() => {
     const change = () =>
       update((previous) => ({
-        ...restoreState(storage, location.hash, defaults, items),
+        ...restoreState(storage, location.hash || landingHash, defaults, items),
         favorites: previous.favorites,
         compare: previous.compare,
       }));
@@ -1203,7 +1223,7 @@ function Dashboard({ state, update }) {
             />
           )}
         </div>
-        <DataTransparency t={t} base={base} />
+        <DataTransparency t={t} base={base} lang={state.lang} />
       </main>
       <Reveal as="footer" className="site-footer container">
         <span>
