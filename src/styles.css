@@ -1911,6 +1911,16 @@ body:has(.back-to-top) .shushu-bot-panel { bottom: calc(156px + env(safe-area-in
 .shushu-pack-btn { width: 100%; padding: 7px 10px; border-radius: 8px; border: 1px dashed var(--prs-primary); background: var(--prs-tint); color: var(--prs-primary); font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
 [data-theme="dark"] .shushu-pack-btn { background: rgba(16, 185, 129, 0.14); }
 
+.shushu-bot-promo { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 14px; border-top: 1px solid var(--prs-border); background: linear-gradient(90deg, var(--prs-tint) 0%, var(--prs-panel) 100%); text-decoration: none; font-size: 12px; transition: background-color 0.15s ease; }
+[data-theme="dark"] .shushu-bot-promo { background: linear-gradient(90deg, rgba(16, 185, 129, 0.14) 0%, var(--prs-panel) 100%); }
+.shushu-bot-promo:hover { background: var(--prs-tint); }
+[data-theme="dark"] .shushu-bot-promo:hover { background: rgba(16, 185, 129, 0.22); }
+.shushu-bot-promo-main { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.shushu-bot-promo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--prs-primary); box-shadow: 0 0 0 2.5px rgba(13, 159, 110, 0.18); flex: 0 0 auto; }
+.shushu-bot-promo-main strong { color: var(--prs-text); font-weight: 600; white-space: nowrap; }
+.shushu-bot-promo-main em { font-style: normal; padding: 1px 6px; border-radius: 999px; background: rgba(13, 159, 110, 0.12); color: var(--prs-primary); font-size: 11px; font-weight: 600; white-space: nowrap; }
+.shushu-bot-promo-cta { flex: 0 0 auto; color: var(--prs-primary); font-weight: 600; white-space: nowrap; }
+
 .shushu-bot-input-row { display: flex; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--prs-border); background: var(--prs-panel); }
 .shushu-bot-input-row input { flex: 1 1 auto; min-width: 0; height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--prs-border); background: var(--prs-bg); color: var(--prs-text); font: inherit; font-size: 13px; outline: none; }
 .shushu-bot-input-row input:focus { border-color: var(--prs-primary); }

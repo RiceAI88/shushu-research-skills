@@ -174,6 +174,10 @@ test("Shushu AI advisor lazy-loads on demand, answers with grounded picks, and o
 
   const panel = page.getByTestId("shushu-bot-panel");
   await expect(panel).toBeVisible();
+  await expect(panel.getByTestId("shushu-bot-promo")).toHaveAttribute(
+    "href",
+    "https://catfk.com/shop/1991",
+  );
   await panel.locator(".shushu-bot-starter-btn").first().click();
 
   await expect(panel.getByTestId("shushu-msg-assistant")).toContainText(

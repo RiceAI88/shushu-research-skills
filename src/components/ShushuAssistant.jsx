@@ -234,6 +234,25 @@ export default function ShushuAssistant({
         )}
       </div>
 
+      <a
+        className="shushu-bot-promo"
+        data-testid="shushu-bot-promo"
+        href="https://catfk.com/shop/1991"
+        target="_blank"
+        rel="sponsored noopener noreferrer"
+      >
+        <span className="shushu-bot-promo-main">
+          <span className="shushu-bot-promo-dot" aria-hidden="true" />
+          <strong>
+            {zh ? "本站自营 · GPT / Codex 正规代充" : "Official GPT / Codex Top-up"}
+          </strong>
+          <em>{zh ? "有账单 · 可开发票报销" : "Invoices available"}</em>
+        </span>
+        <span className="shushu-bot-promo-cta">
+          {zh ? "去看看 ↗" : "Details ↗"}
+        </span>
+      </a>
+
       <form
         className="shushu-bot-input-row"
         onSubmit={(e) => {
