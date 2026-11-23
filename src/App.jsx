@@ -9,7 +9,6 @@ import { SlidingTaskList } from "./components/SlidingTaskList";
 import { Reveal, useSiteReducedMotion } from "./components/SiteMotion";
 import { DailyArrivals } from "./components/DailyArrivals";
 import { triggerCommunityDialog } from "./components/CommunityCard";
-import { RechargeNotice } from "./components/RechargeNotice";
 import { RechargeAd } from "./components/RechargeAd";
 import { BackToTop } from "./components/BackToTop";
 import { SearchBox } from "./components/SearchBox";
@@ -79,6 +78,11 @@ const RepositoryDrawer = lazy(() =>
 );
 const FilterControls = lazy(() => import("./components/FilterControls"));
 const ComparisonDialog = lazy(() => import("./components/ComparisonDialog"));
+const RechargeNotice = lazy(() =>
+  import("./components/RechargeNotice").then((m) => ({
+    default: m.RechargeNotice,
+  })),
+);
 import { ViewportInsights } from "./components/ViewportInsights";
 
 const dataset = window.ACADEMIC_SKILLS_RANKINGS || {};
@@ -1305,7 +1309,7 @@ function Dashboard({ state, update }) {
         </div>
       )}
       <BeginnerDialog section={guideSection} lang={state.lang} items={items} t={t} onClose={()=>setGuideSection(null)} onOpenRepo={repo=>update(s=>({...s,repo}))} />
-      <RechargeNotice
+      <DeferredRechargeNotice
         lang={state.lang}
         busy={Boolean(state.repo || compareOpen || guideSection)}
       />
@@ -1329,5 +1333,29 @@ function Dashboard({ state, update }) {
         </DeferredFeature>
       )}
     </div>
+  );
+}
+
+// 延迟 12 秒后再按需加载代充提示弹窗，减轻移动端首屏 JS 体积
+function DeferredRechargeNotice({ lang, busy }) {
+  const [ready, setReady] = useState(() => Number(window.__ARS_NOTICE_DELAY_MS) === 0);
+  useEffect(() => {
+    try {
+      const last = Number(localStorage.getItem("prs-recharge-notice-shown-v2"));
+      if (Number.isFinite(last) && last > 0 && Date.now() - last >= 0 && Date.now() - last < 12 * 3600000)
+        return undefined;
+    } catch {
+      /* storage blocked */
+    }
+    if (ready) return undefined;
+    const ms = Number.isFinite(window.__ARS_NOTICE_DELAY_MS) ? window.__ARS_NOTICE_DELAY_MS : 12000;
+    const timer = setTimeout(() => setReady(true), ms);
+    return () => clearTimeout(timer);
+  }, [ready]);
+  if (!ready) return null;
+  return (
+    <React.Suspense fallback={null}>
+      <RechargeNotice lang={lang} busy={busy} immediate />
+    </React.Suspense>
   );
 }

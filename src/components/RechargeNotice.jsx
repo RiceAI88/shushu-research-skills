@@ -21,7 +21,7 @@ export function claimNoticeSlot(storage, now = Date.now()) {
 
 export const NOTICE_DELAY_MS = 12000;
 
-export function RechargeNotice({ lang, busy = false }) {
+export function RechargeNotice({ lang, busy = false, immediate = false }) {
   const [open,setOpen] = useState(false);
   const [ready,setReady] = useState(false);
   const busyRef = useRef(busy);
@@ -45,8 +45,9 @@ export function RechargeNotice({ lang, busy = false }) {
     if (claimNoticeSlot(storage)) setOpen(true);
   };
   useEffect(() => {
-    const delay =
-      typeof window !== "undefined" && Number.isFinite(window.__ARS_NOTICE_DELAY_MS)
+    const delay = immediate
+      ? 0
+      : typeof window !== "undefined" && Number.isFinite(window.__ARS_NOTICE_DELAY_MS)
         ? window.__ARS_NOTICE_DELAY_MS
         : NOTICE_DELAY_MS;
     const trigger = () => {

@@ -2080,6 +2080,15 @@ a:focus-visible,
   border-bottom: 1px solid var(--prs-border);
   font-size: 13px;
 }
+.install-command-title {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.install-command-title .ant-tag {
+  margin: 0;
+}
 .install-command-block .install-command {
   margin: 0;
   padding: 14px;
@@ -2641,6 +2650,11 @@ a:focus-visible,
 }
 .discipline-options button[aria-pressed="true"] span {
   color: #fff;
+}
+[data-theme="dark"] .discipline-options button:not([aria-pressed="true"]),
+[data-theme="dark"] .discipline-majors button:not([aria-pressed="true"]) {
+  background: rgba(30, 41, 59, 0.65);
+  border-color: rgba(148, 163, 184, 0.22);
 }
 [data-theme="dark"] .discipline-options button[aria-pressed="true"],
 [data-theme="dark"] .discipline-options button[aria-pressed="true"] span {
@@ -3713,16 +3727,17 @@ a:focus-visible,
 }
 @media (max-width: 760px) {
   .site-nav {
-    gap: 6px;
-    padding-block: 8px;
+    gap: 4px 6px;
+    padding-block: 6px;
   }
   .nav-actions {
     width: 100%;
     flex-wrap: nowrap !important;
+    justify-content: space-between;
     overflow-x: auto;
     scrollbar-width: none;
-    gap: 4px !important;
-    padding-bottom: 2px;
+    gap: 2px !important;
+    padding-bottom: 0;
   }
   .nav-actions::-webkit-scrollbar {
     display: none;
@@ -3730,44 +3745,70 @@ a:focus-visible,
   .nav-actions .ant-space-item {
     flex: 0 0 auto;
   }
+  .nav-actions .ant-segmented-item-label {
+    padding-inline: 7px !important;
+    font-size: 11.5px;
+    min-height: 24px;
+    line-height: 24px;
+  }
   .nav-actions .ant-btn {
-    font-size: 12px;
-    padding-inline: 7px;
-    height: 28px;
+    font-size: 11.5px;
+    padding-inline: 5px;
+    gap: 3px;
+    height: 26px;
   }
   .hero {
-    padding: 10px 0 10px;
-    gap: 8px;
+    padding: 6px 0 8px;
+    gap: 6px;
+  }
+  .hero-capsule {
+    margin-bottom: 4px;
+    padding: 2px 10px;
   }
   .hero h1 {
-    font-size: 22px;
+    font-size: 21px;
   }
   .hero-subtitle {
     font-size: 12px;
-    margin-top: 4px;
+    line-height: 1.4;
+    margin-top: 2px;
   }
   .portal-kpi-grid {
     gap: 6px;
   }
   .portal-kpi-card {
-    padding: 7px 10px;
-    border-radius: 10px;
+    padding: 5px 8px;
+    border-radius: 9px;
   }
   .portal-kpi-meta span {
-    font-size: 11px;
+    font-size: 10.5px;
   }
   .portal-kpi-meta strong {
-    font-size: 15px;
+    font-size: 14px;
   }
   .portal-kpi-icon {
-    flex: 0 0 24px;
-    width: 24px;
-    height: 24px;
-    border-radius: 7px;
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
   }
   .discipline-selector {
-    padding: 10px 12px;
-    margin-bottom: 10px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+  }
+  .discipline-selector-heading {
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+  .discipline-selector h2 {
+    font-size: 15.5px;
+  }
+  .filters,
+  .filters:has(.sticky-search-slot) {
+    margin-bottom: 8px;
+  }
+  .ranking-header {
+    padding-bottom: 8px;
   }
   .discipline-options,
   .task-list {

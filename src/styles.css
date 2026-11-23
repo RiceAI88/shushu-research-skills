@@ -1594,6 +1594,7 @@ h1 em {
 .stage-pill-text { display: inline-flex; align-items: center; line-height: 20px; }
 .stage-pill:hover { border-color: var(--prs-primary); color: var(--prs-primary); }
 .stage-pill.is-active { border-color: var(--prs-primary); background: var(--prs-tint); color: var(--prs-primary); font-weight: 600; }
+[data-theme="dark"] .stage-pill:not(.is-active) { background: rgba(30, 41, 59, 0.65); border-color: rgba(148, 163, 184, 0.22); }
 [data-theme="dark"] .stage-pill.is-active { background: rgba(16, 185, 129, 0.22); }
 .stage-quick-hint { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 10px 0 0; padding-top: 8px; border-top: 1px dashed var(--prs-border); font-size: 12.5px; color: var(--prs-muted); }
 .stage-clear-inline { border: 0; background: transparent; color: var(--prs-primary); font: inherit; font-size: 12.5px; cursor: pointer; padding: 0; white-space: nowrap; }

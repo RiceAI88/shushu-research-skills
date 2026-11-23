@@ -197,9 +197,11 @@ export function InstallationActions({
         if (event.target.closest("button,a")) event.stopPropagation();
       }}
     >
-      <div className="installation-status">
-        <InstallationMode item={item} t={t} short={compact} />
-      </div>
+      {!(details && installation.command) && (
+        <div className="installation-status">
+          <InstallationMode item={item} t={t} short={compact} />
+        </div>
+      )}
       {!compact && !details && installation[`context_${lang}`] && (
         <div className="installation-context">
           {installation[`context_${lang}`]}
@@ -208,7 +210,10 @@ export function InstallationActions({
       {details && installation.command && (
         <div className="install-command-block">
           <div className="install-command-heading">
-            <span>{t("installCommandHeading")}</span>
+            <span className="install-command-title">
+              <span>{t("installCommandHeading")}</span>
+              <InstallationMode item={item} t={t} short={compact} />
+            </span>
             <CopyInstallButton item={item} t={t} primary />
           </div>
           <pre className="install-command" tabIndex={0}>
