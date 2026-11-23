@@ -12,6 +12,11 @@ import {
   formatPackShareText,
   formatShareCardText,
 } from "../../src/shareText.js";
+import {
+  askShushuAssistant,
+  buildLocalAdvisorReply,
+  retrieveAssistantCandidates,
+} from "../../src/assistantEngine.js";
 
 const mkItem = (repo, extra = {}) => ({
   repo,
@@ -174,4 +179,36 @@ test("output-previews.json maps to real ranked repositories with complete biling
       assert.ok(Array.isArray(p.artifacts) && p.artifacts.length >= 1, `${repo}: missing artifacts`);
     }
   }
+});
+
+test("assistantEngine retrieves domain-relevant Skills and falls back to local advisor cleanly", async () => {
+  const rankings = JSON.parse(
+    readFileSync(new URL("../../data/rankings.json", import.meta.url), "utf8"),
+  );
+  const candidates = retrieveAssistantCandidates(
+    "本科毕设不会敲命令行，写论文和 Word 排版用哪个？",
+    rankings.items,
+    6,
+  );
+  assert.ok(candidates.length > 0);
+  assert.ok(
+    candidates.some((c) => c.repo === "Gostyan/docx-skill-4-cn-paper"),
+    "Should surface Chinese Word thesis formatting Skill for undergrad docx query",
+  );
+
+  const localText = buildLocalAdvisorReply(
+    "不会编程想用网页版排版毕业论文",
+    candidates,
+    "zh",
+  );
+  assert.match(localText, /SKILL\.md/);
+
+  const res = await askShushuAssistant({
+    query: "经管实证 DID 回归推荐",
+    items: rankings.items,
+    lang: "zh",
+    apiEndpoint: "local-only",
+  });
+  assert.equal(res.source, "local-advisor");
+  assert.equal(res.picks.length, 3);
 });

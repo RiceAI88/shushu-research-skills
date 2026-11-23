@@ -143,3 +143,40 @@ test("static SEO topic landing page hydrates pre-filtered state cleanly and draw
   );
   await expect(deliverablePreview).toContainText("conference_poster_A0.pptx");
 });
+
+test("Shushu AI advisor lazy-loads on demand, answers with grounded picks, and opens detail drawer", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 1440, height: 920 });
+  await page.route("https://bot.riceai985.cc/**", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        reply:
+          "针对本科毕业论文排版，推荐 **Gostyan/docx-skill-4-cn-paper** 处理高校 Word 格式规范，搭配 **Edwardxlai/easyread** 精读英文文献。",
+        provider: "zhipu-glm-4-flash",
+      }),
+    }),
+  );
+
+  await page.goto("./");
+  const trigger = page.getByTestId("shushu-bot-trigger");
+  await expect(trigger).toBeVisible();
+  await trigger.click();
+
+  const panel = page.getByTestId("shushu-bot-panel");
+  await expect(panel).toBeVisible();
+  await panel.locator(".shushu-bot-starter-btn").first().click();
+
+  await expect(panel.getByTestId("shushu-msg-assistant")).toContainText(
+    "docx-skill-4-cn-paper",
+  );
+  const firstPick = panel.getByTestId("shushu-pick-card").first();
+  await expect(firstPick).toBeVisible();
+  await firstPick.click();
+
+  await expect(page.getByTestId("shushu-bot-panel")).toHaveCount(0);
+  await expect(page.getByRole("dialog")).toContainText("docx-skill-4-cn-paper");
+});

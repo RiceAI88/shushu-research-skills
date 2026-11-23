@@ -78,6 +78,7 @@ const RepositoryDrawer = lazy(() =>
 );
 const FilterControls = lazy(() => import("./components/FilterControls"));
 const ComparisonDialog = lazy(() => import("./components/ComparisonDialog"));
+const ShushuAssistant = lazy(() => import("./components/ShushuAssistant"));
 const RechargeNotice = lazy(() =>
   import("./components/RechargeNotice").then((m) => ({
     default: m.RechargeNotice,
@@ -245,6 +246,8 @@ function Dashboard({ state, update }) {
   const message = useFeedback();
   const [compareOpen, setCompareOpen] = useState(false);
   const [guideSection, setGuideSection] = useState(null);
+  const [botOpen, setBotOpen] = useState(false);
+  const [botRequested, setBotRequested] = useState(false);
   const [drawerRequested, setDrawerRequested] = useState(Boolean(state.repo));
   const [comparisonRequested, setComparisonRequested] = useState(false);
   useEffect(() => {
@@ -1311,8 +1314,50 @@ function Dashboard({ state, update }) {
       <BeginnerDialog section={guideSection} lang={state.lang} items={items} t={t} onClose={()=>setGuideSection(null)} onOpenRepo={repo=>update(s=>({...s,repo}))} />
       <DeferredRechargeNotice
         lang={state.lang}
-        busy={Boolean(state.repo || compareOpen || guideSection)}
+        busy={Boolean(state.repo || compareOpen || guideSection || botOpen)}
       />
+      {!state.repo && (
+        <button
+          type="button"
+          className={`shushu-bot-fab${botOpen ? " is-open" : ""}${state.compare.length > 0 ? " above-comparison" : ""}`}
+          data-testid="shushu-bot-trigger"
+          aria-expanded={botOpen}
+          onClick={() => {
+            setBotRequested(true);
+            setBotOpen((v) => !v);
+          }}
+        >
+          <span className="shushu-bot-fab-dot" aria-hidden="true">鼠</span>
+          <span>{state.lang === "zh" ? "AI 选工具" : "Ask AI"}</span>
+        </button>
+      )}
+      {(botOpen || botRequested) && (
+        <DeferredFeature t={t}>
+          <ShushuAssistant
+            open={botOpen}
+            onClose={() => setBotOpen(false)}
+            items={items}
+            lang={state.lang}
+            onOpenRepo={(repo) => {
+              setBotOpen(false);
+              update((s) => ({ ...s, repo }));
+            }}
+            onApplyPack={(repos, packTitle) =>
+              update((s) => ({
+                ...s,
+                section: "ranking",
+                pack: repos,
+                packTitle,
+                query: "",
+                task: "all",
+                discipline: "all",
+                major: "all",
+                stage: "",
+              }))
+            }
+          />
+        </DeferredFeature>
+      )}
       <BackToTop
         label={t("backToTop")}
         comparisonOpen={state.compare.length > 0}

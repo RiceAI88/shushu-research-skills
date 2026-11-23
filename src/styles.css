@@ -1706,3 +1706,70 @@ h1 em {
 [data-theme="dark"] .preview-artifact-chip { background: rgba(16, 185, 129, 0.16); border-color: rgba(52, 211, 153, 0.35); color: #6ee7b7; }
 .output-preview-takeaway { margin: 0; padding-top: 6px; border-top: 1px dashed var(--prs-border); font-size: 12px; line-height: 1.55; color: var(--prs-muted); }
 .output-preview-takeaway strong { color: var(--prs-text); }
+
+/* 鼠鼠 AI 选工具顾问（右下角悬浮触发胶囊 + 站内联动对话窗） */
+.shushu-bot-fab { position: fixed; right: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 35; display: inline-flex; align-items: center; gap: 7px; height: 42px; padding: 0 15px 0 11px; border-radius: 999px; border: 1px solid rgba(13, 159, 110, 0.35); background: var(--prs-primary); color: #ffffff; box-shadow: 0 8px 24px rgba(13, 159, 110, 0.28); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: transform 0.16s ease, box-shadow 0.16s ease, bottom 0.18s ease; }
+[data-theme="dark"] .shushu-bot-fab { background: #10b981; color: #052e16; border-color: rgba(110, 231, 183, 0.4); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45); }
+.shushu-bot-fab:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(13, 159, 110, 0.36); }
+.shushu-bot-fab-dot { width: 22px; height: 22px; border-radius: 50%; background: rgba(255, 255, 255, 0.22); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+[data-theme="dark"] .shushu-bot-fab-dot { background: rgba(5, 46, 22, 0.18); }
+body:has(.back-to-top) .shushu-bot-fab { bottom: calc(74px + env(safe-area-inset-bottom, 0px)); }
+.shushu-bot-fab.above-comparison { bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+body:has(.back-to-top) .shushu-bot-fab.above-comparison { bottom: calc(210px + env(safe-area-inset-bottom, 0px)); }
+
+.shushu-bot-panel { position: fixed; right: 24px; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); z-index: 920; width: min(392px, calc(100vw - 24px)); height: min(540px, calc(100vh - 110px)); display: flex; flex-direction: column; border-radius: 18px; border: 1px solid var(--prs-border); background: var(--prs-panel); box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16); overflow: hidden; }
+body:has(.back-to-top) .shushu-bot-panel { bottom: calc(126px + env(safe-area-inset-bottom, 0px)); }
+[data-theme="dark"] .shushu-bot-panel { box-shadow: 0 20px 52px rgba(0, 0, 0, 0.55); }
+.shushu-bot-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--prs-border); background: linear-gradient(180deg, var(--prs-tint) 0%, var(--prs-panel) 100%); }
+[data-theme="dark"] .shushu-bot-header { background: linear-gradient(180deg, rgba(16, 185, 129, 0.14) 0%, var(--prs-panel) 100%); }
+.shushu-bot-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.shushu-bot-avatar { flex: 0 0 30px; width: 30px; height: 30px; border-radius: 9px; background: var(--prs-primary); color: #fff; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+[data-theme="dark"] .shushu-bot-avatar { color: #052e16; }
+.shushu-bot-brand h2 { margin: 0; font-size: 14.5px; font-weight: 700; line-height: 1.25; color: var(--prs-text); }
+.shushu-bot-brand span { display: block; font-size: 11px; color: var(--prs-muted); margin-top: 2px; }
+.shushu-bot-header-actions { display: inline-flex; align-items: center; gap: 6px; }
+.shushu-bot-icon-btn { border: 1px solid var(--prs-border); background: var(--prs-panel); color: var(--prs-muted); border-radius: 999px; padding: 2px 8px; font: inherit; font-size: 11.5px; cursor: pointer; }
+.shushu-bot-icon-btn:hover { border-color: var(--prs-primary); color: var(--prs-primary); }
+.shushu-bot-close { width: 26px; height: 26px; border: 0; border-radius: 8px; background: transparent; color: var(--prs-muted); font-size: 20px; line-height: 1; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.shushu-bot-close:hover { background: var(--prs-tag-bg); color: var(--prs-text); }
+
+.shushu-bot-body { flex: 1 1 auto; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+.shushu-bot-welcome p { margin: 0 0 10px; font-size: 13px; line-height: 1.6; color: var(--prs-body); }
+.shushu-bot-starters { display: flex; flex-direction: column; gap: 7px; }
+.shushu-bot-starter-btn { text-align: left; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--prs-border); background: var(--prs-bg); color: var(--prs-body); font: inherit; font-size: 12.5px; line-height: 1.45; cursor: pointer; transition: border-color 0.15s ease, color 0.15s ease; }
+.shushu-bot-starter-btn:hover { border-color: var(--prs-primary); color: var(--prs-primary); background: var(--prs-tint); }
+
+.shushu-bot-messages { display: flex; flex-direction: column; gap: 12px; }
+.shushu-msg { display: flex; flex-direction: column; gap: 8px; }
+.shushu-msg-user { align-items: flex-end; }
+.shushu-msg-assistant { align-items: flex-start; }
+.shushu-msg-bubble { max-width: 92%; padding: 9px 12px; border-radius: 12px; font-size: 13px; line-height: 1.6; word-break: break-word; }
+.shushu-msg-bubble p { margin: 0; }
+.shushu-msg-bubble p + p { margin-top: 6px; }
+.shushu-msg-bubble code { padding: 1px 5px; border-radius: 4px; background: rgba(13, 159, 110, 0.1); color: var(--prs-primary); font-size: 12px; }
+.shushu-msg-user .shushu-msg-bubble { background: var(--prs-primary); color: #ffffff; border-bottom-right-radius: 4px; }
+[data-theme="dark"] .shushu-msg-user .shushu-msg-bubble { background: #10b981; color: #052e16; font-weight: 500; }
+.shushu-msg-assistant .shushu-msg-bubble { background: var(--prs-bg); border: 1px solid var(--prs-border); color: var(--prs-text); border-bottom-left-radius: 4px; }
+.shushu-msg-loading { display: inline-flex; align-items: center; gap: 8px; color: var(--prs-muted); }
+
+.shushu-msg-picks { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+.shushu-pick-card { width: 100%; text-align: left; padding: 9px 11px; border-radius: 10px; border: 1px solid rgba(13, 159, 110, 0.28); background: var(--prs-panel); cursor: pointer; display: flex; flex-direction: column; gap: 4px; transition: border-color 0.15s ease, transform 0.15s ease; }
+.shushu-pick-card:hover { border-color: var(--prs-primary); transform: translateX(2px); }
+.shushu-pick-main { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.shushu-pick-main strong { font-size: 13px; color: var(--prs-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.shushu-pick-stars { flex: 0 0 auto; font-size: 11.5px; color: var(--prs-muted); font-variant-numeric: tabular-nums; }
+.shushu-pick-card p { margin: 0; font-size: 12px; line-height: 1.45; color: var(--prs-body); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.shushu-pick-cta { font-size: 11.5px; font-weight: 600; color: var(--prs-primary); }
+.shushu-pack-btn { width: 100%; padding: 7px 10px; border-radius: 8px; border: 1px dashed var(--prs-primary); background: var(--prs-tint); color: var(--prs-primary); font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
+[data-theme="dark"] .shushu-pack-btn { background: rgba(16, 185, 129, 0.14); }
+
+.shushu-bot-input-row { display: flex; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--prs-border); background: var(--prs-panel); }
+.shushu-bot-input-row input { flex: 1 1 auto; min-width: 0; height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--prs-border); background: var(--prs-bg); color: var(--prs-text); font: inherit; font-size: 13px; outline: none; }
+.shushu-bot-input-row input:focus { border-color: var(--prs-primary); }
+.shushu-bot-input-row button { flex: 0 0 auto; height: 34px; padding: 0 14px; border-radius: 999px; border: 0; background: var(--prs-primary); color: #ffffff; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+[data-theme="dark"] .shushu-bot-input-row button { color: #052e16; }
+.shushu-bot-input-row button:disabled { opacity: 0.45; cursor: not-allowed; }
+@media (max-width: 560px) {
+  .shushu-bot-fab { right: 16px; height: 38px; padding: 0 12px 0 9px; font-size: 12.5px; }
+  .shushu-bot-panel { right: 12px; left: 12px; width: auto; height: min(500px, calc(100vh - 100px)); }
+}
