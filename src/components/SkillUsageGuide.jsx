@@ -6,10 +6,13 @@ import {
   aiInstallPromptFor,
   classifyInstallLocation,
   deriveSetupThresholds,
+  directWebPromptFor,
+  drawerSupportHintsFor,
   usagePromptFor,
   webChatPromptFor,
 } from "../usageGuide";
 import { safeExternalUrl } from "../domain";
+import { trackEvent } from "../analytics";
 import { PlatformTags, InstallationActions } from "./PracticalInfo";
 import { OutputPreviewCard } from "./OutputPreviewCard";
 import { useFeedback } from "./FeedbackProvider";
@@ -42,8 +45,10 @@ export function SkillUsageGuide({
   const installation = installationFor(item);
   const location = classifyInstallLocation(installation, lang);
   const aiInstallPrompt = aiInstallPromptFor(item, installation, lang);
+  const directWebPrompt = directWebPromptFor(item, lang);
   const webPrompt = webChatPromptFor(item, lang);
   const thresholds = deriveSetupThresholds(item, installation, detailsInfo, lang);
+  const supportHints = drawerSupportHintsFor(item, installation, thresholds);
   const example = usagePromptFor(item, lang);
   const isReference = installation.mode === "reference";
   const repoUrl = safeExternalUrl(item?.url);
@@ -125,6 +130,31 @@ export function SkillUsageGuide({
                 </p>
               )}
             </div>
+          )}
+          {supportHints.needsAgentAccess && (
+            <p className="usage-support-tip" data-testid="drawer-recharge-tip">
+              <span aria-hidden="true">💡</span>
+              <span>
+                {zh
+                  ? "还没有 Codex / GPT Plus 额度或海外卡？可查看 "
+                  : "Need GPT / Codex access or an invoice? See "}
+                <a
+                  href="https://catfk.com/shop/1991"
+                  target="_blank"
+                  rel="sponsored noopener noreferrer"
+                  onClick={() =>
+                    trackEvent("click_recharge", {
+                      slot: "drawer_setup",
+                      repo: item?.repo,
+                    })
+                  }
+                >
+                  {zh
+                    ? "本站自营正规代充（支持开发票报销）↗"
+                    : "official top-up (invoices available) ↗"}
+                </a>
+              </span>
+            </p>
           )}
         </div>
       </div>
@@ -209,18 +239,50 @@ export function SkillUsageGuide({
                 <span aria-hidden="true">🌐</span>
                 <span>
                   {zh
-                    ? "没装命令行工具？在网页版 DeepSeek / Kimi / ChatGPT 直接用"
-                    : "No CLI tool installed? Use directly in Web AI chat"}
+                    ? "没装命令行或打不开 GitHub？网页版 DeepSeek / Kimi / ChatGPT 直接用"
+                    : "No CLI or GitHub blocked? Use directly in Web AI chat"}
                 </span>
               </summary>
               <div className="ai-install-helper-body">
                 <p className="web-ai-steps">
                   {zh
-                    ? "1）进入项目 GitHub 仓库打开 SKILL.md（或在 skills/ 目录下选一个子技能 .md 文件）复制内容；2）打开任意网页版 AI，复制下方引导词并粘贴 SKILL.md 即可直接使用："
-                    : "1) Open SKILL.md (or a sub-skill .md under skills/) in the GitHub repo and copy its text; 2) Paste it with the wrapper prompt below into any Web AI chat:"}
+                    ? "⚡ 免进 GitHub 极速用法（校园网推荐）：直接复制下方提炼好的完整科研规范指令，粘贴进 DeepSeek / Kimi / Claude / Gemini 即可开用："
+                    : "⚡ Zero-GitHub instant mode: copy the complete structured research prompt below and paste it straight into any Web AI chat:"}
                 </p>
-                <p className="usage-prompt-text">{webPrompt}</p>
+                <p className="usage-prompt-text">
+                  {renderPromptWithPlaceholders(directWebPrompt)}
+                </p>
                 <div className="web-ai-actions">
+                  <Button
+                    type="primary"
+                    size="small"
+                    icon={
+                      copiedKey === "direct-web" ? (
+                        <CheckOutlined aria-hidden="true" />
+                      ) : (
+                        <CopyOutlined aria-hidden="true" />
+                      )
+                    }
+                    data-testid="copy-direct-web-prompt"
+                    onClick={() => {
+                      trackEvent("copy_direct_web_prompt", { repo: item?.repo });
+                      handleCopy(
+                        "direct-web",
+                        directWebPrompt,
+                        zh
+                          ? "已复制免 GitHub 完整网页版指令"
+                          : "Complete Web AI prompt copied",
+                      );
+                    }}
+                  >
+                    {copiedKey === "direct-web"
+                      ? zh
+                        ? "已复制，去网页版 AI 粘贴即可"
+                        : "Copied—paste into Web AI"
+                      : zh
+                        ? "一键复制完整指令（免开 GitHub）"
+                        : "Copy complete prompt (no GitHub needed)"}
+                  </Button>
                   <Button
                     size="small"
                     icon={
@@ -246,8 +308,8 @@ export function SkillUsageGuide({
                         ? "已复制引导词"
                         : "Copied"
                       : zh
-                        ? "复制网页版引导词"
-                        : "Copy Web AI prompt"}
+                        ? "复制 SKILL.md 拼接引导词"
+                        : "Copy SKILL.md wrapper"}
                   </Button>
                   {repoUrl && (
                     <a
@@ -341,6 +403,31 @@ export function SkillUsageGuide({
                 ? "提示：首次使用建议先拿一小份公开示例材料试跑；AI 生成的文献引用、统计数值与代码结果请务必自行核验。"
                 : "Tip: Test on a small public sample first, and always verify generated citations, statistics, and code."}
             </p>
+            {supportHints.isPaperWritingFlow && (
+              <div className="usage-zhi1ke-tip" data-testid="drawer-zhi1ke-tip">
+                <span aria-hidden="true">✨</span>
+                <span>
+                  {zh
+                    ? "赶时间不想自己折腾环境？可用合作工作台 "
+                    : "Short on time? Try partner studio "}
+                  <a
+                    href="https://zhi1ke.com?pic=6PEB"
+                    target="_blank"
+                    rel="sponsored noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("click_zhi1ke", {
+                        slot: "drawer_writing",
+                        repo: item?.repo,
+                      })
+                    }
+                  >
+                    {zh
+                      ? "智一刻 AI 一键生成开题与论文初稿（免费无限改稿 · 不达标直接退）↗"
+                      : "Zhi1ke AI for instant outlines & first drafts (free unlimited revisions) ↗"}
+                  </a>
+                </span>
+              </div>
+            )}
           </div>
         </div>
       )}

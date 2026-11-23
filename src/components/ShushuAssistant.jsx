@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { askShushuAssistant } from "../assistantEngine.js";
 import { HamsterMascot } from "./HamsterMascot.jsx";
+import { trackEvent } from "../analytics.js";
 
 const QUICK_QUESTIONS = {
   zh: [
@@ -240,6 +241,7 @@ export default function ShushuAssistant({
         href="https://catfk.com/shop/1991"
         target="_blank"
         rel="sponsored noopener noreferrer"
+        onClick={() => trackEvent("click_recharge", { slot: "assistant" })}
       >
         <span className="shushu-bot-promo-main">
           <span className="shushu-bot-promo-dot" aria-hidden="true" />

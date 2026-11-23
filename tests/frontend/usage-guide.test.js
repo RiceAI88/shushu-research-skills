@@ -4,9 +4,12 @@ import {
   classifyInstallLocation,
   aiInstallPromptFor,
   deriveSetupThresholds,
+  directWebPromptFor,
+  drawerSupportHintsFor,
   usagePromptFor,
   webChatPromptFor,
 } from "../../src/usageGuide.js";
+import { outputPreviewFor } from "../../src/outputPreviewData.js";
 
 test("classifyInstallLocation distinguishes terminal, host chat, repo-local terminal, manual, docs and reference", () => {
   assert.equal(
@@ -110,4 +113,41 @@ test("webChatPromptFor builds a zero-CLI wrapper around SKILL.md", () => {
   );
   assert.match(zhPrompt, /SKILL\.md/);
   assert.match(zhPrompt, /paper-polisher/);
+});
+
+test("directWebPromptFor generates self-contained zero-GitHub instructions and outputPreviewFor covers new repos", () => {
+  const direct = directWebPromptFor(
+    {
+      repo: "newlab/fresh-writing-skill",
+      repository_kind: "skill",
+      curated_use_zh: "学术论文段落逻辑润色",
+      description: "Academic paper writing and polishing skill",
+      category: { id: "paper-writing" },
+    },
+    "zh",
+  );
+  assert.match(direct, /fresh-writing-skill/);
+  assert.doesNotMatch(direct, /此处粘贴你从仓库/);
+
+  const preview = outputPreviewFor({
+    repo: "newlab/fresh-writing-skill",
+    repository_kind: "skill",
+    description: "Academic paper writing and manuscript polishing",
+  });
+  assert.ok(preview);
+  assert.equal(preview.isCurated, false);
+  assert.equal(preview.mode, "before_after");
+
+  const hints = drawerSupportHintsFor(
+    {
+      repo: "newlab/fresh-writing-skill",
+      repository_kind: "skill",
+      agents: ["codex"],
+      description: "Academic writing skill",
+    },
+    { mode: "command", command: "npx skills add newlab/fresh-writing-skill" },
+    [],
+  );
+  assert.equal(hints.needsAgentAccess, true);
+  assert.equal(hints.isPaperWritingFlow, true);
 });

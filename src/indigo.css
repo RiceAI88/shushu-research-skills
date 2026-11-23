@@ -1193,15 +1193,41 @@
   }
 }
 @media (max-width: 640px) {
+  .daily-arrivals {
+    padding: 8px 12px;
+    margin: 2px 0 10px;
+  }
+  .daily-arrivals-title > span {
+    display: none;
+  }
+  .daily-arrivals-list {
+    margin-top: 6px;
+    padding-bottom: 2px;
+  }
+  .partner-top-strip {
+    margin: 0 0 12px;
+  }
   .sponsor-banner,
   .sponsor-banner.sponsor-banner-jade {
     flex-direction: column;
     align-items: stretch;
-    padding: 14px 16px 14px 18px;
-    gap: 12px;
+    padding: 11px 13px 11px 16px;
+    gap: 7px;
   }
   .sponsor-main {
     flex: 0 0 auto;
+    gap: 5px;
+  }
+  .sponsor-copy {
+    font-size: 12.5px;
+    line-height: 1.42;
+  }
+  .sponsor-guarantees {
+    gap: 6px;
+  }
+  .sponsor-badge {
+    padding: 2px 8px;
+    font-size: 11.5px;
   }
   .sponsor-subbrand {
     display: none;
@@ -1211,7 +1237,8 @@
   }
   .sponsor-cta {
     width: 100%;
-    min-height: 38px;
+    min-height: 34px;
+    font-size: 13px;
   }
 }
 .ranking-section > .panel-body > .sponsor-banner {
@@ -4646,4 +4673,113 @@ a:focus-visible,
   .usage-step {
     padding: 1px 0 16px 32px;
   }
+}
+
+/* 详情抽屉场景化帮扶入口（第 1 步环境准备 & 第 3 步论文写作备选） */
+.usage-support-tip {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 7px 11px;
+  border-radius: 10px;
+  background: rgba(13, 159, 110, 0.06);
+  border: 1px solid rgba(13, 159, 110, 0.2);
+  color: var(--prs-muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.usage-support-tip a {
+  color: var(--prs-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.usage-support-tip a:hover {
+  text-decoration: underline;
+}
+.usage-zhi1ke-tip {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 9px 12px;
+  border-radius: 11px;
+  background: linear-gradient(95deg, rgba(47, 158, 91, 0.08) 0%, rgba(254, 243, 199, 0.35) 100%);
+  border: 1px solid rgba(56, 161, 105, 0.26);
+  color: var(--prs-text);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+[data-theme="dark"] .usage-zhi1ke-tip {
+  background: linear-gradient(95deg, rgba(47, 158, 91, 0.16) 0%, rgba(245, 158, 11, 0.1) 100%);
+  border-color: rgba(72, 187, 120, 0.3);
+}
+.usage-zhi1ke-tip a {
+  color: #1c6b3d;
+  font-weight: 650;
+  text-decoration: none;
+}
+[data-theme="dark"] .usage-zhi1ke-tip a {
+  color: #86efac;
+}
+.usage-zhi1ke-tip a:hover {
+  text-decoration: underline;
+}
+
+/* 学科选择器顶部：上次浏览专业与回访上新提醒条 */
+.returning-discipline-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 11px;
+  background: var(--prs-tint);
+  border: 1px solid rgba(13, 159, 110, 0.24);
+  font-size: 12.5px;
+  color: var(--prs-text);
+}
+.returning-discipline-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.returning-discipline-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.returning-discipline-apply {
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--prs-primary);
+  background: var(--prs-primary);
+  color: #ffffff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+[data-theme="dark"] .returning-discipline-apply {
+  color: #052e16;
+}
+.returning-discipline-dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+  color: var(--prs-muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+.returning-discipline-dismiss:hover {
+  background: rgba(15, 23, 42, 0.08);
+  color: var(--prs-text);
 }

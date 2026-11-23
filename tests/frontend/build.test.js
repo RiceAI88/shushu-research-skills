@@ -95,3 +95,27 @@ test("static SEO discipline and topic landing pages carry self-canonical metadat
     assert.match(html, /<noscript><section><h1>/);
   }
 });
+
+test("static SEO skill detail pages render SoftwareSourceCode JSON-LD and initial drawer seed", async () => {
+  const html = await readFile(
+    "dist/skills/Yuan1z0825/nature-skills/index.html",
+    "utf8",
+  );
+  assert.ok(
+    html.includes(
+      'rel="canonical" href="https://riceai985.cc/skills/Yuan1z0825/nature-skills/"',
+    ),
+  );
+  assert.ok(
+    html.includes(
+      'window.__ARS_INITIAL_HASH="#repo=Yuan1z0825%2Fnature-skills"',
+    ),
+  );
+  const ldMatch = html.match(
+    /<script type="application\/ld\+json" id="ld-json">([\s\S]*?)<\/script>/,
+  );
+  assert.ok(ldMatch);
+  const ld = JSON.parse(ldMatch[1]);
+  assert.equal(ld["@type"], "SoftwareSourceCode");
+  assert.equal(ld.name, "Yuan1z0825/nature-skills");
+});

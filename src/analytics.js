@@ -25,3 +25,11 @@ export function startAnalytics() {
  },{once:true});
  document.head.append(script);
 }
+
+// 记录核心转化按钮与工具复制行为（兼容 Umami v2 函数式事件负载）
+export function trackEvent(name, data = {}) {
+ if (typeof window === 'undefined' || navigator.webdriver) return;
+ try {
+  Promise.resolve(window.umami?.track(props => ({ ...props, name, data }))).catch(() => {});
+ } catch { /* ignore */ }
+}

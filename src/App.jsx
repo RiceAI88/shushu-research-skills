@@ -8,9 +8,9 @@ import { DisciplineSelector } from "./components/DisciplineSelector";
 import { SlidingTaskList } from "./components/SlidingTaskList";
 import { Reveal, useSiteReducedMotion } from "./components/SiteMotion";
 import { DailyArrivals } from "./components/DailyArrivals";
-import { CommunityDialog, triggerCommunityDialog } from "./components/CommunityCard";
 import { RechargeAd } from "./components/RechargeAd";
 import { BackToTop } from "./components/BackToTop";
+import { trackEvent } from "./analytics";
 import { SearchBox } from "./components/SearchBox";
 import { Panel } from "./components/Panel";
 import React, {
@@ -78,6 +78,7 @@ const RepositoryDrawer = lazy(() =>
 );
 const FilterControls = lazy(() => import("./components/FilterControls"));
 const ComparisonDialog = lazy(() => import("./components/ComparisonDialog"));
+const CommunityDialog = lazy(() => import("./components/CommunityCard"));
 const ShushuAssistant = lazy(() => import("./components/ShushuAssistant"));
 const RoamingMascot = lazy(() => import("./components/RoamingMascot"));
 const RechargeNotice = lazy(() =>
@@ -150,7 +151,8 @@ export default function App() {
       landingSeed &&
       state.lang === "zh" &&
       state.discipline === landingSeed.discipline &&
-      state.task === landingSeed.task;
+      state.task === landingSeed.task &&
+      state.repo === landingSeed.repo;
     document.title =
       matchesLanding && window.__ARS_CUSTOM_TITLE
         ? window.__ARS_CUSTOM_TITLE
@@ -249,6 +251,7 @@ function Dashboard({ state, update }) {
   const [guideSection, setGuideSection] = useState(null);
   const [botOpen, setBotOpen] = useState(false);
   const [botRequested, setBotRequested] = useState(false);
+  const [communityRequested, setCommunityRequested] = useState(false);
   const [petRoam, setPetRoam] = useState(() => {
     try {
       if (window.__ARS_FORCE_ROAM) return true;
@@ -534,7 +537,14 @@ function Dashboard({ state, update }) {
             <button
               type="button"
               className="top-notice-action"
-              onClick={triggerCommunityDialog}
+              onClick={() => {
+                trackEvent("open_community_qr", { slot: "top_notice" });
+                if (communityRequested) {
+                  window.dispatchEvent(new CustomEvent("ars-open-community"));
+                } else {
+                  setCommunityRequested(true);
+                }
+              }}
             >
               {state.lang === "zh"
                 ? "💬 加入各专业科研交流群 ›"
@@ -545,6 +555,7 @@ function Dashboard({ state, update }) {
               href="https://zhi1ke.com?pic=6PEB"
               target="_blank"
               rel="sponsored noopener noreferrer"
+              onClick={() => trackEvent("click_zhi1ke", { slot: "top_notice" })}
             >
               {state.lang === "zh"
                 ? "✨ 合作伙伴：智一刻 AI 论文初稿生成 ↗"
@@ -1449,7 +1460,11 @@ function Dashboard({ state, update }) {
           />
         </DeferredFeature>
       )}
-      <CommunityDialog lang={state.lang} />
+      {communityRequested && (
+        <React.Suspense fallback={null}>
+          <CommunityDialog lang={state.lang} openOnMount />
+        </React.Suspense>
+      )}
       <BackToTop
         label={t("backToTop")}
         comparisonOpen={state.compare.length > 0}

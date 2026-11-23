@@ -1,4 +1,5 @@
 import React from "react";
+import { trackEvent } from "../analytics";
 
 export function RechargeAd({ t }) {
   return (
@@ -13,6 +14,7 @@ export function RechargeAd({ t }) {
         target="_blank"
         rel="sponsored noopener noreferrer"
         title={t("rechargeSummary")}
+        onClick={() => trackEvent("click_recharge", { slot: "header" })}
       >
         <span className="support-card-heading">
           <strong>{t("rechargeSupport")}</strong>

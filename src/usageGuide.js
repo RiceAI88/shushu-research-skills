@@ -312,6 +312,150 @@ export function deriveSetupThresholds(
   return badges;
 }
 
+// 各科研任务的免 GitHub 网页版 AI 核心执行规范（解决校园网打不开 GitHub 的痛点）
+const DIRECT_WEB_RULES = {
+  find: {
+    zh: [
+      "仅列出来源可核验的真实学术论文（提供准确英文/中文标题、作者、年份、期刊/会议名，不确定 DOI 时明确标注“待核实”而非编造）",
+      "按研究流派或方法路线分组归纳，并提炼每篇文献解决的核心痛点与局限性",
+      "在末尾总结当前研究空白（Research Gap）及 2～3 个可切入的选题方向",
+    ],
+    en: [
+      "Cite only verifiable papers (exact title, authors, year, venue; mark uncertain DOIs explicitly instead of fabricating)",
+      "Group studies by methodological lineage and summarize each paper's core contribution and limitation",
+      "Conclude with concrete research gaps and 2–3 actionable scoping angles",
+    ],
+  },
+  read: {
+    zh: [
+      "严格区分“原文明确实验数据”与“延伸推论”，保留关键公式符号与评价指标数值",
+      "按【核心问题与假设 → 方法机制拆解 → 主实验与消融结论 → 局限性与启发】四段式输出",
+      "将专业术语保留英文原词对照，避免生硬机翻导致概念失真",
+    ],
+    en: [
+      "Strictly separate explicit empirical findings from interpretation, preserving notation and metric values",
+      "Structure into: Problem & Hypothesis → Mechanism → Main & Ablation Results → Limitations",
+      "Keep key technical terms precise for lab-meeting or review synthesis",
+    ],
+  },
+  write: {
+    zh: [
+      "剔除“总而言之/值得注意的是/delves into/paving the way”等高频 AI 套话与空泛形容词，使用克制、量化的学术句式",
+      "严禁篡改原稿中的实验数值、样本量、统计显著性与引用标签（如 \\cite{}）",
+      "输出【原句 → 严谨改写建议 → 修改理由】三列对照，便于逐句审阅采纳",
+    ],
+    en: [
+      "Eliminate LLM clichés ('delves into', 'in the realm of', vague superlatives) in favor of bounded, quantified claims",
+      "Never alter empirical numbers, sample sizes, p-values, or citation keys",
+      "Present side-by-side Original → Revised → Rationale entries for author review",
+    ],
+  },
+  figures: {
+    zh: [
+      "采用色盲友好学术配色（如 Okabe-Ito / Nature 低饱和色板），无衬线字体（Arial / Helvetica），去除多余背景网格线",
+      "输出完整可独立运行的 Python（Matplotlib/Seaborn）或 R（ggplot2）脚本，默认导出 300 DPI PDF/SVG 矢量格式",
+      "明确标注坐标轴物理量与单位、误差棒含义（SD / SEM / 95% CI）及子图排版尺寸",
+    ],
+    en: [
+      "Use colorblind-safe Okabe-Ito palettes, clean Arial/Helvetica typography, and minimal chartjunk",
+      "Output self-contained Python (Matplotlib/Seaborn) or R (ggplot2) code exporting 300 DPI PDF/SVG vector files",
+      "Specify axis units, error-bar definitions (SD / SEM / 95% CI), and journal column dimensions",
+    ],
+  },
+  analyze: {
+    zh: [
+      "先输出数据质控步骤（样本量、缺失值、异常值与正态性/同方差检验），再匹配统计或计量模型",
+      "汇报效应量、标准误/置信区间与精确 p 值，避免把简单相关性直接表述为因果结论",
+      "提供带完整注释与固定随机种子的 Python / R / Stata 可复现分析代码",
+    ],
+    en: [
+      "Audit sample size, missingness, outliers, and distributional assumptions before model estimation",
+      "Report effect sizes, standard errors / CIs, and exact p-values without overclaiming causality",
+      "Provide commented, seed-pinned Python / R / Stata code",
+    ],
+  },
+  compute: {
+    zh: [
+      "明确列出控制方程、初始/边界条件、量纲单位与离散化参数设置",
+      "编写模块化可运行数值计算脚本，并包含网格/步长收敛性与数值稳定性自检",
+      "输出关键物理量/指标随参数变化的汇总表与可视化绘图代码",
+    ],
+    en: [
+      "State governing equations, boundary conditions, units, and discretization parameters explicitly",
+      "Provide modular runnable simulation code with step-size / convergence sanity checks",
+      "Include parameter-sweep summary outputs and diagnostic plot code",
+    ],
+  },
+  reproduce: {
+    zh: [
+      "梳理完整的依赖版本、随机种子固定项、数据预处理顺序与训练/评估超参数清单",
+      "拆分出最小可运行基线（Baseline）命令与逐模块消融实验（Ablation）对照表",
+      "指出常见复现偏差来源（数据泄漏、评测切分不一致、精度设置等）及排查方法",
+    ],
+    en: [
+      "Pin package versions, random seeds, preprocessing order, and evaluation hyperparameters",
+      "Separate minimal baseline commands from systematic ablation configurations",
+      "Highlight common reproduction pitfalls (leakage, split mismatch, precision) and checks",
+    ],
+  },
+  review: {
+    zh: [
+      "按顶会/SCI 期刊审稿标准，区分决定录用的【核心硬伤 Major】与【表达细节 Minor】",
+      "若撰写 Rebuttal 回复信，采用“礼貌致谢 → 定位审稿人关切 → 补充证据/实验编号 → 正文修订位置”结构",
+      "保持客观建设性语气，对短期无法补跑的实验诚实说明边界与替代验证方案",
+    ],
+    en: [
+      "Separate Major methodological/empirical flaws from Minor presentation issues",
+      "For rebuttals, follow: Polite acknowledgement → Core answer → New evidence/table ref → Manuscript diff location",
+      "Maintain a constructive tone and state honest scope boundaries where new runs are infeasible",
+    ],
+  },
+};
+
+/**
+ * 为不装命令行或打不开 GitHub 的学生生成“免进 GitHub 一键直接粘贴可用”的完整网页版指令
+ */
+export function directWebPromptFor(item, lang = "zh") {
+  const zh = lang === "zh";
+  const shortName = String(item?.repo || "").split("/").pop() || "Skill";
+  const matchedTask = RESEARCH_TASKS.find((task) =>
+    matchesResearchTask(item, task),
+  );
+  const taskId = matchedTask?.id || "write";
+  const rules = (DIRECT_WEB_RULES[taskId] || DIRECT_WEB_RULES.write)[zh ? "zh" : "en"];
+  const example = usagePromptFor(item, lang);
+  const summary = zh
+    ? item?.curated_use_zh || item?.description || example.scenario
+    : item?.description || example.scenario;
+  const numbered = rules.map((r, i) => `${i + 1}. ${r}`).join("\n");
+
+  if (zh) {
+    return `请你现在扮演开源科研技能【${shortName}】（核心定位：${summary}）的专业学术助手，严格遵循以下学术执行规范协助我完成任务：\n${numbered}\n\n---\n我的具体科研需求（请按上述规范直接输出结果或可运行代码）：\n${example.prompt}`;
+  }
+  return `Act as a specialized academic research assistant modeled on the open-source skill "${shortName}" (focus: ${summary}). Follow these execution rules strictly:\n${numbered}\n\n---\nMy research task (deliver structured academic output or runnable code directly):\n${example.prompt}`;
+}
+
+/**
+ * 判断详情抽屉中是否展示温和的场景化帮扶入口（Codex/GPT 环境准备 & 论文提纲免折腾备选）
+ */
+export function drawerSupportHintsFor(item, installation = {}, thresholds = []) {
+  const isReference = installation?.mode === "reference";
+  const agents = Array.isArray(item?.agents) ? item.agents : [];
+  const needsAgentAccess =
+    !isReference &&
+    (item?.repository_kind === "skill" ||
+      agents.some((a) => ["codex", "claude-code", "cursor"].includes(a)) ||
+      thresholds.some((b) => b.id === "api-key"));
+  const isPaperWritingFlow =
+    !isReference &&
+    RESEARCH_TASKS.some(
+      (task) =>
+        ["find", "read", "write", "review"].includes(task.id) &&
+        matchesResearchTask(item, task),
+    );
+  return { needsAgentAccess, isPaperWritingFlow };
+}
+
 /**
  * 为不装命令行的学生生成“粘贴 SKILL.md 到网页版 DeepSeek / Kimi / ChatGPT”的引导词
  */

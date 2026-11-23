@@ -2123,14 +2123,33 @@ SEO_TOPIC_IDS = (
 )
 
 
+SEO_SKILL_DETAIL_LIMIT = 120
+_VALID_REPO_SLUG_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
+
+
+def seo_skill_repos(data: dict[str, Any]) -> list[str]:
+    """Return deterministic Top N verified skill slugs for static SEO pages and sitemap.xml."""
+    repos: list[str] = []
+    for item in data.get("items", []):
+        if not isinstance(item, dict) or item.get("repository_kind") != "skill":
+            continue
+        repo = str(item.get("repo") or "").strip()
+        if _VALID_REPO_SLUG_RE.match(repo) and ".." not in repo:
+            repos.append(repo)
+            if len(repos) >= SEO_SKILL_DETAIL_LIMIT:
+                break
+    return repos
+
+
 def render_sitemap(data: dict[str, Any]) -> str:
-    """Generate sitemap.xml covering the dashboard, static topic/discipline landing pages, and data endpoints."""
+    """Generate sitemap.xml covering the dashboard, static topic/discipline/skill landing pages, and data endpoints."""
     lastmod = (data.get("metadata", {}).get("generated_at") or "")[:10]
     urls = [
         ("", lastmod, "1.0", "daily"),
         ("en/", lastmod, "0.9", "daily"),
         *[(f"disciplines/{did}/", lastmod, "0.8", "daily") for did in SEO_DISCIPLINE_IDS],
         *[(f"topics/{tid}/", lastmod, "0.8", "daily") for tid in SEO_TOPIC_IDS],
+        *[(f"skills/{repo}/", lastmod, "0.7", "weekly") for repo in seo_skill_repos(data)],
         ("reports/", lastmod, "0.6", "weekly"),
         ("data/rankings.json", lastmod, "0.5", "daily"),
         ("data/rankings.csv", lastmod, "0.4", "daily"),

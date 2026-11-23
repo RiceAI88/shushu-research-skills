@@ -1,17 +1,7 @@
 import React from "react";
-import outputPreviews from "../../config/output-previews.json" with { type: "json" };
+import { outputPreviewFor } from "../outputPreviewData";
 
-const PREVIEW_LOOKUP = new Map(
-  Object.entries(outputPreviews).map(([repo, entry]) => [
-    repo.toLowerCase(),
-    entry,
-  ]),
-);
-
-export function outputPreviewFor(item) {
-  const key = String(item?.repo || "").toLowerCase();
-  return PREVIEW_LOOKUP.get(key) || null;
-}
+export { outputPreviewFor };
 
 // 详情抽屉产出效果预览卡：按需随 RepositoryDrawer 懒加载，不影响移动端首屏体积
 export function OutputPreviewCard({ item, lang = "zh" }) {
@@ -35,7 +25,13 @@ export function OutputPreviewCard({ item, lang = "zh" }) {
           <strong>{label}</strong>
         </span>
         <span className="output-preview-badge">
-          {zh ? "典型效果示意 · 依据官方文档" : "Workflow preview · From docs"}
+          {preview.isCurated
+            ? zh
+              ? "典型效果示意 · 依据官方文档"
+              : "Workflow preview · From docs"
+            : zh
+              ? "典型场景示意 · 按任务类型匹配"
+              : "Typical workflow · Task-matched"}
         </span>
       </div>
 

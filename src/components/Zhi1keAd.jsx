@@ -1,5 +1,6 @@
 import React from "react";
 import { Reveal } from "./SiteMotion";
+import { trackEvent } from "../analytics";
 import logo from "../assets/zhi1ke-logo.png";
 
 const destination = "https://zhi1ke.com?pic=6PEB";
@@ -73,6 +74,7 @@ export function Zhi1keAd({ t, lang = "zh" }) {
           href={destination}
           target="_blank"
           rel="sponsored noopener noreferrer"
+          onClick={() => trackEvent("click_zhi1ke", { slot: "ranking_banner" })}
         >
           <span>{t("sponsorAction")}</span>
           <span className="sponsor-cta-arrow" aria-hidden="true">↗</span>

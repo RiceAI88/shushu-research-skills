@@ -190,3 +190,44 @@ test("Shushu AI advisor lazy-loads on demand, answers with grounded picks, and o
   await expect(page.getByTestId("shushu-bot-panel")).toHaveCount(0);
   await expect(page.getByRole("dialog")).toContainText("docx-skill-4-cn-paper");
 });
+
+test("static skill SEO page, auto preview for new repos, direct web prompt, and returning discipline memory work end to end", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 1440, height: 960 });
+
+  // 1. 直接访问独立静态项目 SEO 落地页，自动打开详情抽屉且保持无 hash 干净地址
+  await page.goto("./skills/Yuan1z0825/nature-skills/");
+  await expect(page).toHaveTitle(/nature-skills/);
+  expect(new URL(page.url()).hash).toBe("");
+  const drawer = page.getByRole("dialog");
+  await expect(drawer).toContainText("Yuan1z0825/nature-skills");
+  await expect(drawer.getByTestId("drawer-recharge-tip")).toBeVisible();
+
+  // 2. 打开未手动配置的新收录写作类 Skill，自动生成使用前后示意卡 + 免开 GitHub 完整指令 + 写作备选提示
+  await page.goto("./#repo=YuanZHAO321%2FScientific-Writing-zh");
+  await expect(drawer).toContainText("YuanZHAO321/Scientific-Writing-zh");
+  const autoPreview = drawer.getByTestId("output-preview-card");
+  await expect(autoPreview).toBeVisible();
+  await expect(autoPreview).toContainText("典型场景示意");
+  await drawer.getByTestId("web-ai-helper").locator("summary").click();
+  await expect(drawer.getByTestId("copy-direct-web-prompt")).toBeVisible();
+  await expect(drawer.getByTestId("drawer-zhi1ke-tip")).toBeVisible();
+
+  // 3. 选择“经济学”后重新访问首页，展示上次浏览专业提示并支持一键切回
+  await page.goto("./");
+  await page.locator('[data-discipline="economics"]').click();
+  await expect(page.locator('[data-discipline="economics"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.goto("./");
+  const hint = page.getByTestId("returning-discipline-hint");
+  await expect(hint).toContainText("经济学");
+  await hint.locator(".returning-discipline-apply").click();
+  await expect(page.locator('[data-discipline="economics"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+});

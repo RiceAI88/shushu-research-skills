@@ -359,3 +359,114 @@ for (const page of landingPages) {
   await writeFile(`${outDir}/index.html`, html);
 }
 console.log(`Generated ${landingPages.length} static SEO discipline & topic landing pages.`);
+
+// 为前 120 个热门验证 Skill 生成独立静态 SEO 落地页 (/skills/<owner>/<repo>/)，承接长尾名称检索
+const VALID_REPO_SLUG = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
+const seoSkillItems = ranking.items
+  .filter(
+    (item) =>
+      item?.repository_kind === "skill" &&
+      VALID_REPO_SLUG.test(String(item.repo || "")) &&
+      !String(item.repo || "").includes(".."),
+  )
+  .slice(0, 120);
+
+for (const item of seoSkillItems) {
+  let html = rawZhTemplate;
+  for (const [script, version] of Object.entries(dataVersions)) {
+    html = html.replace(`data/${script}.js"`, `data/${script}.js?v=${version}"`);
+  }
+  html = html.replaceAll(
+    `assets/og-cover.png"`,
+    `assets/og-cover.png?v=${zhCoverVersion}"`,
+  );
+
+  const slug = `skills/${item.repo}`;
+  const canonicalUrl = `${SITE_ORIGIN}/${slug}/`;
+  const shortName = item.repo.split("/").pop();
+  const zhUse = item.curated_use_zh || "开源学术科研 AI Skill";
+  const starsText = Number(item.stars || 0).toLocaleString("en-US");
+  const agentsText =
+    Array.isArray(item.agents) && item.agents.length > 0
+      ? item.agents.join(" / ")
+      : "Claude Code / Codex / 网页版 AI";
+  const pageTitle = `${shortName}（${item.repo}）：${zhUse}｜安装教程与用法 · 科研鼠鼠`;
+  const rawDesc = `${item.repo}（★${starsText}）：${zhUse}。支持 ${agentsText}，提供三步安装命令、免命令行网页版 AI 用法与科研提示词案例。${item.description || ""}`;
+  const pageDesc = rawDesc.slice(0, 155);
+  const pageKeywords = `${shortName}, ${item.repo}, ${zhUse}, 科研 Skill, 安装教程, 怎么用, Claude Code, Codex, 科研鼠鼠`;
+  const initialHash = `#repo=${encodeURIComponent(item.repo)}`;
+
+  html = html.replace(/\s*<link\b[^>]*\bhreflang="[^"]+"[^>]*>/g, "");
+  html = html.replace(
+    /<link\b[^>]*\brel="canonical"[^>]*>/,
+    `<link rel="canonical" href="${escapeHtml(canonicalUrl)}" />`,
+  );
+  html = html.replace(
+    /<title>[\s\S]*?<\/title>/,
+    `<title>${escapeHtml(pageTitle)}</title>`,
+  );
+  html = html.replace(
+    /<meta\b[^>]*\bname="description"[^>]*>/,
+    `<meta name="description" content="${escapeHtml(pageDesc)}" />`,
+  );
+  html = html.replace(
+    /<meta\b[^>]*\bname="keywords"[^>]*>/,
+    `<meta name="keywords" content="${escapeHtml(pageKeywords)}" />`,
+  );
+  html = html.replace(
+    /<meta\b[^>]*\bproperty="og:url"[^>]*>/,
+    `<meta property="og:url" content="${escapeHtml(canonicalUrl)}" />`,
+  );
+  html = html.replace(
+    /<meta\b[^>]*\bproperty="og:title"[^>]*>/,
+    `<meta property="og:title" content="${escapeHtml(pageTitle)}" />`,
+  );
+  html = html.replace(
+    /<meta\b[^>]*\bproperty="og:description"[^>]*>/,
+    `<meta property="og:description" content="${escapeHtml(pageDesc)}" />`,
+  );
+  html = html.replace(
+    /<meta\b[^>]*\bname="twitter:title"[^>]*>/,
+    `<meta name="twitter:title" content="${escapeHtml(pageTitle)}" />`,
+  );
+  html = html.replace(
+    /<meta\b[^>]*\bname="twitter:description"[^>]*>/,
+    `<meta name="twitter:description" content="${escapeHtml(pageDesc)}" />`,
+  );
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    name: item.repo,
+    url: canonicalUrl,
+    codeRepository: safeExternalUrl(item.url) || undefined,
+    description: pageDesc,
+    programmingLanguage: item.language || "Markdown",
+    license:
+      item.license?.spdx_id && item.license.spdx_id !== "NOASSERTION"
+        ? item.license.spdx_id
+        : undefined,
+  };
+  const json = JSON.stringify(schema).replace(/</g, "\\u003c");
+  html = html.replace(
+    /(<script type="application\/ld\+json" id="ld-json">)[\s\S]*?(<\/script>)/,
+    (_, open, close) => open + json + close,
+  );
+
+  html = html.replace(
+    /<noscript\s*>[\s\S]*?<\/noscript\s*>/,
+    () =>
+      `<noscript><article><h1>${escapeHtml(item.repo)} — ${escapeHtml(zhUse)}</h1><p>GitHub Stars：${escapeHtml(starsText)} · 适用平台：${escapeHtml(agentsText)}</p><p>${escapeHtml(item.description || "")}</p><p><a href="${escapeHtml(safeExternalUrl(item.url) || "#")}">访问 GitHub 原仓库</a> · <a href="/">返回科研鼠鼠 · Skills 导航站总榜</a></p><nav aria-label="全站科研专题导航"><p>${crossNavLinks}</p></nav></article></noscript>`,
+  );
+
+  const bootScript = `<script>window.__ARS_INITIAL_HASH=${JSON.stringify(initialHash)};window.__ARS_CUSTOM_TITLE=${JSON.stringify(pageTitle)};</script>`;
+  html = html.replace(
+    /(<script\s+src="\/data\/rankings\.js)/,
+    `${bootScript}\n    $1`,
+  );
+
+  const outDir = `dist/${slug}`;
+  await mkdir(outDir, { recursive: true });
+  await writeFile(`${outDir}/index.html`, html);
+}
+console.log(`Generated ${seoSkillItems.length} static SEO skill detail pages.`);
