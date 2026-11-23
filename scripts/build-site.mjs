@@ -21,6 +21,7 @@ for (const file of [
   "hero.svg",
   "favicon.png",
   "hamster-logo.png",
+  "shushu-mascot.svg",
 ])
   await copyFile(`assets/${file}`, `dist/assets/${file}`);
 for (const file of [

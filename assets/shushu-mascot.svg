@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <style>
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    @keyframes tailWag {
+      0%, 100% { transform: rotate(-7deg); }
+      50% { transform: rotate(9deg); }
+    }
+    @keyframes earL {
+      0%, 78%, 100% { transform: rotate(0deg); }
+      82% { transform: rotate(-10deg); }
+      86% { transform: rotate(4deg); }
+      90% { transform: rotate(-7deg); }
+    }
+    @keyframes earR {
+      0%, 64%, 100% { transform: rotate(0deg); }
+      68% { transform: rotate(9deg); }
+      73% { transform: rotate(-3deg); }
+      77% { transform: rotate(6deg); }
+    }
+    @keyframes blink {
+      0%, 91%, 97%, 100% { opacity: 0; transform: scaleY(0.1); }
+      93%, 95% { opacity: 1; transform: scaleY(1); }
+    }
+    @keyframes eyeLook {
+      0%, 35%, 100% { transform: translate(0, 0); }
+      42%, 62% { transform: translate(-1.8px, -0.6px); }
+      70%, 88% { transform: translate(1.8px, 0.4px); }
+    }
+    @keyframes ledPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    .body-bob { transform-origin: 60px 90px; animation: bob 2.8s ease-in-out infinite; }
+    .tail { transform-origin: 30px 88px; animation: tailWag 2.3s ease-in-out infinite; }
+    .ear-l { transform-origin: 42px 44px; animation: earL 3.8s ease-in-out infinite; }
+    .ear-r { transform-origin: 82px 46px; animation: earR 4.5s ease-in-out infinite; }
+    .eyelid { transform-origin: 66px 46px; opacity: 0; animation: blink 4.2s infinite; }
+    .pupils { animation: eyeLook 6.5s ease-in-out infinite; }
+    .led { animation: ledPulse 2s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .body-bob, .tail, .ear-l, .ear-r, .eyelid, .pupils, .led { animation: none; }
+    }
+  </style>
+
+  <polygon points="66,10 110,88 18,92" fill="#0c3b2e" stroke="#34d399" stroke-width="3.5" stroke-linejoin="round"/>
+
+  <g class="body-bob">
+    <g class="tail">
+      <path d="M28 92 C10 84, 10 60, 24 54 C30 51, 28 60, 22 65 C17 70, 20 81, 32 86 Z" fill="#f4979c" stroke="#1e242b" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <rect x="22" y="72" width="18" height="24" rx="5" transform="rotate(-12 31 84)" fill="#8f7e5e" stroke="#1e242b" stroke-width="3.6"/>
+    <line x1="23" y1="82" x2="38" y2="79" stroke="#1e242b" stroke-width="2.6"/>
+
+    <path d="M34 72 C34 62, 80 62, 82 74 L86 102 L30 102 Z" fill="#2d3540" stroke="#1e242b" stroke-width="3.8" stroke-linejoin="round"/>
+
+    <g class="ear-r">
+      <circle cx="89" cy="39" r="17" fill="#9ca5af" stroke="#1e242b" stroke-width="3.8"/>
+      <circle cx="90" cy="41" r="11" fill="#f7a3a6"/>
+    </g>
+
+    <g class="ear-l">
+      <circle cx="32" cy="35" r="20" fill="#9ca5af" stroke="#1e242b" stroke-width="3.8"/>
+      <circle cx="31" cy="36" r="13.5" fill="#f7a3a6"/>
+    </g>
+
+    <g>
+      <path d="M35 46 C35 25, 85 25, 87 48 C90 65, 79 76, 62 76 C43 76, 33 65, 35 46 Z" fill="#9ca5af" stroke="#1e242b" stroke-width="3.8" stroke-linejoin="round"/>
+      <path d="M38 56 C44 50, 56 54, 65 56 C74 54, 83 52, 86 58 C84 70, 74 75, 61 75 C46 75, 38 68, 38 56 Z" fill="#f8fafc"/>
+
+      <path d="M40 36 C44 21, 74 20, 82 34 Z" fill="#9e9072" stroke="#1e242b" stroke-width="3.6" stroke-linejoin="round"/>
+      <path d="M52 33 C66 29, 89 32, 95 40 C83 41, 67 39, 52 35 Z" fill="#83765b" stroke="#1e242b" stroke-width="3.4" stroke-linejoin="round"/>
+
+      <ellipse cx="57" cy="51" rx="6.2" ry="5.5" fill="#1e242b"/>
+      <ellipse cx="76" cy="52" rx="4.8" ry="4.6" fill="#1e242b"/>
+      <g class="pupils">
+        <circle cx="58.5" cy="50" r="2.2" fill="#ffffff"/>
+        <circle cx="77" cy="51" r="1.8" fill="#ffffff"/>
+      </g>
+      <path d="M49 44 L64 48 M71 48 L82 45" stroke="#1e242b" stroke-width="3.2" stroke-linecap="round"/>
+      <rect class="eyelid" x="48" y="43" width="36" height="14" rx="4" fill="#9ca5af"/>
+
+      <polygon points="66,57 72,57 69,61.5" fill="#f27885"/>
+      <rect x="63.5" y="64" width="5.5" height="5" rx="1.2" fill="#ffffff" stroke="#1e242b" stroke-width="2"/>
+      <line x1="66.3" y1="64" x2="66.3" y2="69" stroke="#1e242b" stroke-width="1.6"/>
+      <path d="M59 62.5 Q65 66 72 63" fill="none" stroke="#1e242b" stroke-width="2.5" stroke-linecap="round"/>
+
+      <g stroke="#1e242b" stroke-width="2" stroke-linecap="round">
+        <line x1="43" y1="58" x2="52" y2="60"/>
+        <line x1="42" y1="63" x2="51" y2="63"/>
+        <line x1="81" y1="59" x2="91" y2="58"/>
+        <line x1="81" y1="63" x2="90" y2="64"/>
+      </g>
+
+      <path d="M36 44 C38 24, 64 20, 74 26" fill="none" stroke="#1e242b" stroke-width="4.2" stroke-linecap="round"/>
+      <rect x="29" y="41" width="13" height="19" rx="4.5" transform="rotate(10 35 50)" fill="#756b54" stroke="#1e242b" stroke-width="3.6"/>
+      <path d="M37 58 Q45 68 56 69" fill="none" stroke="#1e242b" stroke-width="3.6" stroke-linecap="round"/>
+      <rect x="53" y="66" width="8" height="5.5" rx="2.5" fill="#1e242b"/>
+      <circle class="led" cx="57" cy="68.7" r="1.7" fill="#34d399"/>
+    </g>
+
+    <g>
+      <path d="M52 74 L68 74 L72 78 L98 78 L92 108 L46 108 Z" fill="#5eead4" stroke="#1e242b" stroke-width="3.8" stroke-linejoin="round"/>
+      <polygon points="48,100 93,100 91,108 46,108" fill="#0d9f6e"/>
+      <text x="69" y="94.5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="900" font-style="italic" fill="#0f172a">Skills</text>
+
+      <ellipse cx="50" cy="94" rx="7.5" ry="6.5" fill="#2d3540" stroke="#1e242b" stroke-width="3.2"/>
+      <circle cx="55" cy="92" r="2.6" fill="#ffffff" stroke="#1e242b" stroke-width="1.8"/>
+      <circle cx="55" cy="96" r="2.6" fill="#ffffff" stroke="#1e242b" stroke-width="1.8"/>
+
+      <ellipse cx="94" cy="94" rx="6.8" ry="6" fill="#2d3540" stroke="#1e242b" stroke-width="3.2"/>
+      <circle cx="89.5" cy="92" r="2.4" fill="#ffffff" stroke="#1e242b" stroke-width="1.8"/>
+      <circle cx="89.5" cy="96" r="2.4" fill="#ffffff" stroke="#1e242b" stroke-width="1.8"/>
+    </g>
+  </g>
+</svg>

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { askShushuAssistant } from "../assistantEngine.js";
+import { HamsterMascot } from "./HamsterMascot.jsx";
 
 const QUICK_QUESTIONS = {
   zh: [
@@ -98,8 +99,8 @@ export default function ShushuAssistant({
     >
       <header className="shushu-bot-header">
         <div className="shushu-bot-brand">
-          <span className="shushu-bot-avatar" aria-hidden="true">
-            鼠
+          <span className="shushu-bot-avatar shushu-bot-mascot-avatar" aria-hidden="true">
+            <HamsterMascot mode={loading ? "thinking" : "idle"} size={42} />
           </span>
           <div>
             <h2 id="shushu-bot-title">

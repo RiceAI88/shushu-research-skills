@@ -1319,16 +1319,30 @@ function Dashboard({ state, update }) {
       {!state.repo && (
         <button
           type="button"
-          className={`shushu-bot-fab${botOpen ? " is-open" : ""}${state.compare.length > 0 ? " above-comparison" : ""}`}
+          className={`shushu-bot-fab shushu-mascot-fab${botOpen ? " is-open" : ""}${state.compare.length > 0 ? " above-comparison" : ""}`}
           data-testid="shushu-bot-trigger"
+          aria-label={state.lang === "zh" ? "打开鼠鼠 AI 选工具顾问" : "Open Hamster AI Skill Advisor"}
           aria-expanded={botOpen}
           onClick={() => {
             setBotRequested(true);
             setBotOpen((v) => !v);
           }}
         >
-          <span className="shushu-bot-fab-dot" aria-hidden="true">鼠</span>
-          <span>{state.lang === "zh" ? "AI 选工具" : "Ask AI"}</span>
+          <span className="shushu-mascot-speech" aria-hidden="true">
+            {state.lang === "zh" ? "找工具？问问鼠鼠！" : "Need a Skill? Ask me!"}
+          </span>
+          <span className="shushu-mascot-stage" aria-hidden="true">
+            <img
+              className="hamster-mascot"
+              src={localFile("assets/shushu-mascot.svg")}
+              width="66"
+              height="66"
+              alt=""
+            />
+          </span>
+          <span className="shushu-mascot-plate">
+            {state.lang === "zh" ? "AI 选工具" : "Ask AI"}
+          </span>
         </button>
       )}
       {(botOpen || botRequested) && (
