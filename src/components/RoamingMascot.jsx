@@ -69,8 +69,11 @@ export default function RoamingMascot({
   roaming,
   botOpen,
   lang = "zh",
+  onPreloadBot,
   onOpenBot,
 }) {
+  const active = Boolean(roaming && !botOpen);
+  const [rendered, setRendered] = useState(active);
   const [pos, setPos] = useState(() => ({
     x: typeof window !== "undefined" ? Math.max(80, window.innerWidth - 130) : 800,
     y: typeof window !== "undefined" ? Math.max(120, window.innerHeight - 86) : 600,
@@ -79,6 +82,23 @@ export default function RoamingMascot({
   const [facing, setFacing] = useState(-1);
   const [quote, setQuote] = useState("");
   const [hovered, setHovered] = useState(false);
+  const prefersReduced =
+    typeof window !== "undefined" &&
+    Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
+
+  useEffect(() => {
+    if (active) {
+      setRendered(true);
+      return undefined;
+    }
+    if (!rendered) return undefined;
+    if (prefersReduced) {
+      setRendered(false);
+      return undefined;
+    }
+    const timer = setTimeout(() => setRendered(false), 180);
+    return () => clearTimeout(timer);
+  }, [active, rendered, prefersReduced]);
 
   const posRef = useRef(pos);
   posRef.current = pos;
@@ -189,7 +209,8 @@ export default function RoamingMascot({
     };
   }, [roaming, botOpen, lang]);
 
-  if (!roaming || botOpen) return null;
+  if (!active && (!rendered || prefersReduced)) return null;
+  const isLeaving = !active;
 
   const bubbleAlignLeft = pos.x > (typeof window !== "undefined" ? window.innerWidth - 220 : 900);
   const bubbleBelow = pos.y < 110;
@@ -202,7 +223,7 @@ export default function RoamingMascot({
 
   return (
     <div
-      className="roaming-mascot-layer"
+      className={`roaming-mascot-layer${isLeaving ? " is-leaving" : ""}`}
       data-testid="roaming-mascot"
       style={{
         transform: `translate3d(${Math.round(pos.x - 36)}px, ${Math.round(pos.y - 42)}px, 0)`,
@@ -210,9 +231,10 @@ export default function RoamingMascot({
     >
       <button
         type="button"
-        className="roaming-mascot-actor"
+        className={`roaming-mascot-actor${isLeaving ? " is-leaving" : " is-entering"}`}
         aria-label={lang === "zh" ? "点击科研鼠鼠提问选工具" : "Ask roaming Hamster AI"}
         onMouseEnter={() => {
+          onPreloadBot?.();
           setHovered(true);
           setMode("jump");
         }}

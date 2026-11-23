@@ -1824,36 +1824,59 @@ h1 em {
 .hamster-mascot.mascot-sleep .zzz-2 { animation: mascot-zzz-float 2.2s 0.9s ease-out infinite; }
 
 /* 全屏自由漫游层（外层 pointer-events: none 不遮挡页面阅读，仅鼠鼠本体可点击/拖拽） */
+@keyframes roaming-actor-in {
+  0% { opacity: 0; transform: translateY(10px) scale(0.75); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes roaming-actor-out {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(8px) scale(0.78); }
+}
+@keyframes shushu-panel-in {
+  0% { opacity: 0; transform: translateY(14px) scale(0.92); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes shushu-panel-out {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(10px) scale(0.95); }
+}
 .roaming-mascot-layer { position: fixed; left: 0; top: 0; z-index: 860; pointer-events: none; will-change: transform; }
-.roaming-mascot-actor { position: relative; padding: 0; border: 0; background: transparent; cursor: grab; pointer-events: auto; touch-action: none; user-select: none; }
-.roaming-mascot-actor:active { cursor: grabbing; }
-.roaming-mascot-bubble { position: absolute; left: 50%; bottom: calc(100% + 4px); transform: translateX(-50%); padding: 5px 11px; border-radius: 10px; background: var(--prs-panel); color: var(--prs-text); border: 1px solid rgba(13, 159, 110, 0.4); box-shadow: 0 8px 22px rgba(15, 23, 42, 0.14); font-size: 12px; font-weight: 600; white-space: nowrap; pointer-events: none; }
+.roaming-mascot-actor { position: relative; padding: 0; border: 0; background: transparent; cursor: grab; pointer-events: auto; touch-action: none; user-select: none; transform-origin: center bottom; transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1); }
+.roaming-mascot-actor.is-entering { animation: roaming-actor-in 0.26s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.roaming-mascot-actor.is-leaving { pointer-events: none; animation: roaming-actor-out 0.18s cubic-bezier(0.4, 0, 1, 1) forwards; }
+.roaming-mascot-actor:active { cursor: grabbing; transform: scale(0.95); }
+.roaming-mascot-bubble { position: absolute; left: 50%; bottom: calc(100% + 4px); transform: translateX(-50%); padding: 5px 11px; border-radius: 10px; background: var(--prs-panel); color: var(--prs-text); border: 1px solid rgba(13, 159, 110, 0.4); box-shadow: 0 8px 22px rgba(15, 23, 42, 0.14); font-size: 12px; font-weight: 600; white-space: nowrap; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; }
 .roaming-mascot-bubble.align-right { left: auto; right: 0; transform: none; }
 .roaming-mascot-bubble.place-below { bottom: auto; top: calc(100% + 4px); }
 
 /* 右下角小窝停靠桩与“回窝/放风”控宠开关 */
-.shushu-mascot-dock { position: fixed; right: 20px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 35; display: inline-flex; align-items: flex-end; gap: 6px; transition: bottom 0.18s ease; }
+.shushu-mascot-dock { position: fixed; right: 20px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 35; display: inline-flex; align-items: flex-end; gap: 0; transition: bottom 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
 body:has(.back-to-top) .shushu-mascot-dock { bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
 .shushu-mascot-dock.above-comparison { bottom: calc(92px + env(safe-area-inset-bottom, 0px)); }
 body:has(.back-to-top) .shushu-mascot-dock.above-comparison { bottom: calc(206px + env(safe-area-inset-bottom, 0px)); }
 
-.shushu-mascot-fab { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0; padding: 0; border: 0; background: transparent; cursor: pointer; }
-.shushu-mascot-stage { display: block; line-height: 0; transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.shushu-mascot-plate { margin-top: -8px; padding: 3px 12px; border-radius: 999px; background: var(--prs-primary); color: #ffffff; border: 1.5px solid #ffffff; box-shadow: 0 4px 12px rgba(13, 159, 110, 0.32); font-size: 12px; font-weight: 700; line-height: 1.45; white-space: nowrap; letter-spacing: 0.01em; }
+.shushu-mascot-fab { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0; padding: 0; border: 0; background: transparent; cursor: pointer; transform-origin: center bottom; transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1); }
+.shushu-mascot-fab:active { transform: scale(0.95); }
+.shushu-mascot-stage { display: block; line-height: 0; max-height: 66px; opacity: 1; transform: translateY(0) scale(1); transform-origin: center bottom; transition: max-height 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1); }
+.shushu-mascot-fab.is-roaming-away .shushu-mascot-stage { max-height: 0; opacity: 0; transform: translateY(12px) scale(0.65); pointer-events: none; }
+.shushu-mascot-plate { position: relative; z-index: 1; margin-top: -8px; padding: 3px 12px; border-radius: 999px; background: var(--prs-primary); color: #ffffff; border: 1.5px solid #ffffff; box-shadow: 0 4px 12px rgba(13, 159, 110, 0.32); font-size: 12px; font-weight: 700; line-height: 1.45; white-space: nowrap; letter-spacing: 0.01em; transition: margin-top 0.32s cubic-bezier(0.22, 1, 0.36, 1), padding 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, background-color 0.2s ease; }
 .shushu-mascot-fab.is-roaming-away .shushu-mascot-plate { margin-top: 0; padding: 5px 13px; }
 [data-theme="dark"] .shushu-mascot-plate { background: #10b981; color: #052e16; border-color: #0f172a; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5); }
-.shushu-roam-toggle { height: 26px; padding: 0 9px; border-radius: 999px; border: 1px solid var(--prs-border); background: var(--prs-panel); color: var(--prs-muted); box-shadow: var(--prs-shadow-sm); font: inherit; font-size: 11px; font-weight: 600; cursor: pointer; transition: border-color 0.15s ease, color 0.15s ease; }
+.shushu-roam-toggle { height: 26px; max-width: 68px; margin-left: 6px; padding: 0 9px; border-radius: 999px; border: 1px solid var(--prs-border); background: var(--prs-panel); color: var(--prs-muted); box-shadow: var(--prs-shadow-sm); font: inherit; font-size: 11px; font-weight: 600; white-space: nowrap; overflow: hidden; box-sizing: border-box; cursor: pointer; opacity: 1; visibility: visible; transform: translateX(0) scale(1); transform-origin: right center; transition: max-width 0.3s cubic-bezier(0.22, 1, 0.36, 1), margin-left 0.3s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-width 0.24s ease, opacity 0.2s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.15s ease, color 0.15s ease, visibility 0s; }
 .shushu-roam-toggle:hover { border-color: var(--prs-primary); color: var(--prs-primary); }
-.shushu-mascot-speech { position: absolute; right: 0; bottom: calc(100% + 6px); padding: 5px 11px; border-radius: 10px; background: var(--prs-panel); color: var(--prs-text); border: 1px solid rgba(13, 159, 110, 0.35); box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12); font-size: 12px; font-weight: 600; white-space: nowrap; opacity: 0; transform: translateY(6px) scale(0.95); pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; }
+.shushu-roam-toggle.is-hidden { max-width: 0; margin-left: 0; padding-inline: 0; border-width: 0; opacity: 0; visibility: hidden; pointer-events: none; transform: translateX(6px) scale(0.85); transition: max-width 0.3s cubic-bezier(0.22, 1, 0.36, 1), margin-left 0.3s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-width 0.24s ease, opacity 0.18s ease, transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s 0.3s; }
+.shushu-mascot-speech { position: absolute; right: 0; bottom: calc(100% + 6px); padding: 5px 11px; border-radius: 10px; background: var(--prs-panel); color: var(--prs-text); border: 1px solid rgba(13, 159, 110, 0.35); box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12); font-size: 12px; font-weight: 600; white-space: nowrap; opacity: 0; transform: translateY(6px) scale(0.95); pointer-events: none; transition: opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1), transform 0.22s cubic-bezier(0.22, 1, 0.36, 1); }
 .shushu-mascot-speech::after { content: ""; position: absolute; right: 24px; bottom: -5px; width: 8px; height: 8px; background: var(--prs-panel); border-right: 1px solid rgba(13, 159, 110, 0.35); border-bottom: 1px solid rgba(13, 159, 110, 0.35); transform: rotate(45deg); }
-.shushu-mascot-fab:hover .shushu-mascot-stage,
-.shushu-mascot-fab.is-open .shushu-mascot-stage { transform: translateY(-5px) scale(1.07); }
+.shushu-mascot-fab:not(.is-roaming-away):hover .shushu-mascot-stage,
+.shushu-mascot-fab.is-open .shushu-mascot-stage { transform: translateY(-4px) scale(1.05); }
 @media (hover: hover) {
   .shushu-mascot-fab:hover:not(.is-open) .shushu-mascot-speech { opacity: 1; transform: translateY(0) scale(1); }
 }
 .shushu-mascot-fab:focus-visible { outline: 2px solid var(--prs-primary); outline-offset: 4px; border-radius: 16px; }
 
-.shushu-bot-panel { position: fixed; right: 24px; bottom: calc(104px + env(safe-area-inset-bottom, 0px)); z-index: 920; width: min(392px, calc(100vw - 24px)); height: min(540px, calc(100vh - 130px)); display: flex; flex-direction: column; border-radius: 18px; border: 1px solid var(--prs-border); background: var(--prs-panel); box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16); overflow: hidden; }
+.shushu-bot-panel { position: fixed; right: 24px; bottom: calc(104px + env(safe-area-inset-bottom, 0px)); z-index: 920; width: min(392px, calc(100vw - 24px)); height: min(540px, calc(100vh - 130px)); display: flex; flex-direction: column; border-radius: 18px; border: 1px solid var(--prs-border); background: var(--prs-panel); box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16); overflow: hidden; transform-origin: calc(100% - 36px) calc(100% + 12px); will-change: transform, opacity; transition: bottom 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
+.shushu-bot-panel.is-open { animation: shushu-panel-in 0.26s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.shushu-bot-panel.is-closing { pointer-events: none; animation: shushu-panel-out 0.19s cubic-bezier(0.4, 0, 1, 1) forwards; }
 body:has(.back-to-top) .shushu-bot-panel { bottom: calc(156px + env(safe-area-inset-bottom, 0px)); }
 [data-theme="dark"] .shushu-bot-panel { box-shadow: 0 20px 52px rgba(0, 0, 0, 0.55); }
 .shushu-bot-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--prs-border); background: linear-gradient(180deg, var(--prs-tint) 0%, var(--prs-panel) 100%); }
@@ -1871,7 +1894,16 @@ body:has(.back-to-top) .shushu-bot-panel { bottom: calc(156px + env(safe-area-in
   .hamster-mascot .mascot-leg-front,
   .hamster-mascot .mascot-leg-back,
   .hamster-mascot .mascot-cheeks,
-  .hamster-mascot .mascot-snack-prop { animation: none !important; }
+  .hamster-mascot .mascot-snack-prop,
+  .roaming-mascot-actor,
+  .shushu-bot-panel { animation: none !important; }
+  .shushu-mascot-dock,
+  .shushu-mascot-fab,
+  .shushu-mascot-stage,
+  .shushu-mascot-plate,
+  .shushu-roam-toggle,
+  .shushu-mascot-speech,
+  .shushu-bot-panel { transition: none !important; }
 }
 .shushu-bot-brand h2 { margin: 0; font-size: 14.5px; font-weight: 700; line-height: 1.25; color: var(--prs-text); }
 .shushu-bot-brand span { display: block; font-size: 11px; color: var(--prs-muted); margin-top: 2px; }
@@ -1929,6 +1961,7 @@ body:has(.back-to-top) .shushu-bot-panel { bottom: calc(156px + env(safe-area-in
 .shushu-bot-input-row button:disabled { opacity: 0.45; cursor: not-allowed; }
 @media (max-width: 560px) {
   .shushu-mascot-dock { right: 12px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
+  .shushu-mascot-stage { max-height: 54px; }
   .shushu-mascot-fab .hamster-mascot { width: 54px; height: 54px; }
   .shushu-bot-panel { right: 12px; left: 12px; width: auto; bottom: calc(92px + env(safe-area-inset-bottom, 0px)); height: min(500px, calc(100vh - 110px)); }
 }

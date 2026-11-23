@@ -231,3 +231,30 @@ test("static skill SEO page, auto preview for new repos, direct web prompt, and 
     "true",
   );
 });
+
+test("Shushu mascot trigger transitions smoothly without DOM snap under standard motion", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.setViewportSize({ width: 1280, height: 860 });
+  await page.goto("./");
+
+  const trigger = page.getByTestId("shushu-bot-trigger");
+  const roamToggle = page.getByTestId("shushu-roam-toggle");
+  await expect(trigger.locator(".shushu-mascot-stage")).toHaveCount(1);
+  await expect(roamToggle).toBeVisible();
+
+  // 悬停预热并点击：控宠胶囊保持挂载平滑收起，对话框带入场与退场动画
+  await trigger.hover();
+  await trigger.click();
+
+  const panel = page.getByTestId("shushu-bot-panel");
+  await expect(panel).toBeVisible();
+  await expect(panel).toHaveClass(/is-open/);
+  await expect(roamToggle).toHaveCount(1);
+  await expect(roamToggle).toHaveClass(/is-hidden/);
+
+  await trigger.click();
+  await expect(panel).toHaveCount(0);
+  await expect(roamToggle).toBeVisible();
+});

@@ -41,11 +41,29 @@ export default function ShushuAssistant({
   onApplyPack,
 }) {
   const zh = lang === "zh";
+  const [rendered, setRendered] = useState(open);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
   const listRef = useRef(null);
   const inputRef = useRef(null);
+  const prefersReduced =
+    typeof window !== "undefined" &&
+    Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
+
+  useEffect(() => {
+    if (open) {
+      setRendered(true);
+      return undefined;
+    }
+    if (!rendered) return undefined;
+    if (prefersReduced) {
+      setRendered(false);
+      return undefined;
+    }
+    const timer = setTimeout(() => setRendered(false), 195);
+    return () => clearTimeout(timer);
+  }, [open, rendered, prefersReduced]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -66,7 +84,8 @@ export default function ShushuAssistant({
     }
   }, [messages, loading]);
 
-  if (!open) return null;
+  if (!open && (!rendered || prefersReduced)) return null;
+  const isClosing = !open;
 
   const submitQuestion = async (rawText) => {
     const q = String(rawText ?? input).trim();
@@ -92,7 +111,7 @@ export default function ShushuAssistant({
 
   return (
     <section
-      className="shushu-bot-panel"
+      className={`shushu-bot-panel${isClosing ? " is-closing" : " is-open"}`}
       role="dialog"
       aria-modal="false"
       aria-labelledby="shushu-bot-title"

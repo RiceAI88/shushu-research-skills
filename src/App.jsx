@@ -1370,6 +1370,8 @@ function Dashboard({ state, update }) {
             data-testid="shushu-bot-trigger"
             aria-label={state.lang === "zh" ? "打开鼠鼠 AI 选工具顾问" : "Open Hamster AI Skill Advisor"}
             aria-expanded={botOpen}
+            onPointerEnter={() => setBotRequested(true)}
+            onFocus={() => setBotRequested(true)}
             onClick={() => {
               setBotRequested(true);
               setBotOpen((v) => !v);
@@ -1378,46 +1380,44 @@ function Dashboard({ state, update }) {
             <span className="shushu-mascot-speech" aria-hidden="true">
               {state.lang === "zh" ? "找工具？问问鼠鼠！" : "Need a Skill? Ask me!"}
             </span>
-            {!(petRoam && roamLoaded && !botOpen) && (
-              <span className="shushu-mascot-stage" aria-hidden="true">
-                <img
-                  className="hamster-mascot"
-                  src={localFile("assets/shushu-mascot.svg")}
-                  width="66"
-                  height="66"
-                  alt=""
-                />
-              </span>
-            )}
+            <span className="shushu-mascot-stage" aria-hidden="true">
+              <img
+                className="hamster-mascot"
+                src={localFile("assets/shushu-mascot.svg")}
+                width="66"
+                height="66"
+                alt=""
+              />
+            </span>
             <span className="shushu-mascot-plate">
               {state.lang === "zh" ? "鼠鼠 AI 选工具" : "Hamster AI"}
             </span>
           </button>
-          {!botOpen && (
-            <button
-              type="button"
-              className="shushu-roam-toggle"
-              data-testid="shushu-roam-toggle"
-              title={
-                petRoam
-                  ? state.lang === "zh"
-                    ? "让鼠鼠回右下角安静待着"
-                    : "Dock mascot to corner"
-                  : state.lang === "zh"
-                    ? "放出鼠鼠在页面自由漫游"
-                    : "Let mascot roam around"
-              }
-              onClick={togglePetRoam}
-            >
-              {petRoam
+          <button
+            type="button"
+            className={`shushu-roam-toggle${botOpen ? " is-hidden" : ""}`}
+            data-testid="shushu-roam-toggle"
+            tabIndex={botOpen ? -1 : 0}
+            aria-hidden={botOpen || undefined}
+            title={
+              petRoam
                 ? state.lang === "zh"
-                  ? "回窝"
-                  : "Dock"
+                  ? "让鼠鼠回右下角安静待着"
+                  : "Dock mascot to corner"
                 : state.lang === "zh"
-                  ? "放风"
-                  : "Roam"}
-            </button>
-          )}
+                  ? "放出鼠鼠在页面自由漫游"
+                  : "Let mascot roam around"
+            }
+            onClick={togglePetRoam}
+          >
+            {petRoam
+              ? state.lang === "zh"
+                ? "回窝"
+                : "Dock"
+              : state.lang === "zh"
+                ? "放风"
+                : "Roam"}
+          </button>
         </div>
       )}
       {roamLoaded && !state.repo && (
@@ -1426,6 +1426,7 @@ function Dashboard({ state, update }) {
             roaming={petRoam}
             botOpen={botOpen}
             lang={state.lang}
+            onPreloadBot={() => setBotRequested(true)}
             onOpenBot={() => {
               setBotRequested(true);
               setBotOpen(true);
@@ -1434,7 +1435,7 @@ function Dashboard({ state, update }) {
         </React.Suspense>
       )}
       {(botOpen || botRequested) && (
-        <DeferredFeature t={t}>
+        <DeferredFeature t={t} loadingFallback={null}>
           <ShushuAssistant
             open={botOpen}
             onClose={() => setBotOpen(false)}
