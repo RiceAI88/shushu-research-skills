@@ -1,6 +1,5 @@
 import { ProjectFacts, GrowthValue } from "./ProjectFacts";
 import { Zhi1keAd } from "./Zhi1keAd";
-import { CommunityCard } from "./CommunityCard";
 import { EmptyResults } from "./EmptyResults";
 import { SearchHighlight } from "./SearchHighlight";
 import { Panel } from "./Panel";
@@ -180,21 +179,6 @@ export function RepositoryViews({
   fmt,
   history,
 }) {
-  // 桌面 3 列展示 6 张后插入，平板 2 列或移动端单列展示 4 张后插入，避免移动端刚看 2 张就被大区块打断
-  const adSlotCount = () =>
-    matchMedia("(min-width: 1100px)").matches ? 6 : 4;
-  const [adAfter, setAdAfter] = useState(adSlotCount);
-  useEffect(() => {
-    const wide = matchMedia("(min-width: 1100px)"),
-      medium = matchMedia("(min-width: 600px)");
-    const sync = () => setAdAfter(adSlotCount());
-    wide.addEventListener("change", sync);
-    medium.addEventListener("change", sync);
-    return () => {
-      wide.removeEventListener("change", sync);
-      medium.removeEventListener("change", sync);
-    };
-  }, []);
   useEffect(() => {
     if (state.view === "card" || !items.length) onReady?.(state.view);
   }, [state.view, items.length, onReady]);
@@ -259,16 +243,17 @@ export function RepositoryViews({
   );
   if (!items.length)
     return (
-      <>
-        <EmptyResults items={allItems} state={state} update={update} t={t} />
-        <div className="partner-support-block partner-support-compact">
-          <CommunityCard lang={state.lang} />
-        </div>
-      </>
+      <EmptyResults items={allItems} state={state} update={update} t={t} />
     );
+  const partnerStrip = (
+    <div className="partner-top-strip">
+      <Zhi1keAd t={t} lang={state.lang} />
+    </div>
+  );
   if (state.view === "card")
     return (
       <>
+        {partnerStrip}
         <div className="repository-grid">
           {entries.map((item, index) => (
             <React.Fragment key={item.repo}>
@@ -374,42 +359,6 @@ export function RepositoryViews({
                   )}
                 </div>
               </Panel>
-              {index === Math.min(adAfter, entries.length) - 1 && (
-                <div className="partner-support-block">
-                  <div className="partner-support-header">
-                    <div className="partner-support-heading">
-                      <span className="partner-support-title">
-                        <span className="partner-shield-icon" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                          </svg>
-                        </span>
-                        <strong>
-                          {state.lang === "zh"
-                            ? "合作伙伴与社群支持"
-                            : "Partner & Community Support"}
-                        </strong>
-                      </span>
-                      <span className="partner-support-subtitle">
-                        {state.lang === "zh"
-                          ? "感谢合作伙伴与各专业科研社群支持本站的长期维护与每日更新。"
-                          : "Thanks to our partners and research communities for supporting daily updates."}
-                      </span>
-                    </div>
-                    <span className="partner-thanks-pill" aria-hidden="true">
-                      <span className="partner-thanks-dot">♥</span>
-                      <span>
-                        <strong>THANKS</strong>
-                        <em>{state.lang === "zh" ? "感谢支持" : "Supported"}</em>
-                      </span>
-                    </span>
-                  </div>
-                  <div className="partner-support-grid">
-                    <Zhi1keAd t={t} />
-                    <CommunityCard lang={state.lang} />
-                  </div>
-                </div>
-              )}
             </React.Fragment>
           ))}
         </div>
@@ -418,6 +367,7 @@ export function RepositoryViews({
     );
   return (
     <>
+      {partnerStrip}
       <DeferredFeature
         t={t}
         loadingFallback={<TableLoadingFallback lang={state.lang} />}
@@ -447,9 +397,6 @@ export function RepositoryViews({
         />
       </DeferredFeature>
       {more}
-      <div className="partner-support-block partner-support-compact">
-        <CommunityCard lang={state.lang} />
-      </div>
     </>
   );
 }

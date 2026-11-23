@@ -13,6 +13,8 @@ for (const [width, view] of [
     await expect(ad).toHaveCount(1);
     await expect(ad).not.toContainText("广告");
     await expect(ad).toContainText("从一个题目，到一篇论文初稿。");
+    await expect(ad).toContainText("免费无限改稿");
+    await expect(ad).toContainText("重复率AI率不达标直接退");
     const link = ad.getByRole("link", { name: /免费生成提纲/ });
     const url = new URL(await link.getAttribute("href"));
     expect(url.origin).toBe("https://zhi1ke.com");
@@ -43,7 +45,7 @@ for (const [width, view] of [
         .getBoundingClientRect().top,
     }));
     expect(positions.adTop).toBeGreaterThanOrEqual(positions.heading);
-    expect(positions.adTop).toBeGreaterThan(positions.first);
+    expect(positions.adBottom).toBeLessThanOrEqual(positions.first);
     await page
       .getByRole("searchbox")
       .fill("K-Dense-AI/scientific-agent-skills");

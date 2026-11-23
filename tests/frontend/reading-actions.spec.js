@@ -13,6 +13,12 @@ for (const width of [1024, 1280, 1440]) {
     const row = page.locator(".ant-table-row").first();
     await expect(row).toBeVisible();
     await row.scrollIntoViewIfNeeded();
+    await page.evaluate(() => {
+      const r = document.querySelector(".ant-table-row")?.getBoundingClientRect();
+      if (r && r.bottom > window.innerHeight - 160) {
+        window.scrollBy({ top: 240, behavior: "instant" });
+      }
+    });
     for (const scroll of [0, 500]) {
       await page.locator(".ant-table-body").evaluate((element, x) => {
         element.scrollLeft = x;

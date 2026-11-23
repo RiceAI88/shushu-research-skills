@@ -19,7 +19,7 @@ test("compact first screen groups stats below controls and exposes visitor copy"
     .locator(".statistics")
     .evaluate((e) => e.getBoundingClientRect().top);
   expect(statsY).toBeGreaterThanOrEqual(filterY - 2);
-  const adHeight = (await page.getByTestId("zhi1ke-ad").boundingBox()).height + 14;
+  const adHeight = (await page.locator(".partner-top-strip").boundingBox()).height + 16;
   expect(
     (await page.getByTestId("repo-card").first().boundingBox()).y,
   ).toBeLessThan(760 + adHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
@@ -182,7 +182,7 @@ test("mobile ranking stays compact apart from the approved leading ad, with task
   expect(await pills.evaluate((el) => el.scrollWidth > el.clientWidth)).toBe(
     true,
   );
-  const adHeight = (await page.getByTestId("zhi1ke-ad").boundingBox()).height + 14;
+  const adHeight = (await page.locator(".partner-top-strip").boundingBox()).height + 16;
   expect(
     (await page.getByTestId("repo-card").first().boundingBox()).y,
   ).toBeLessThan(760 + adHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);

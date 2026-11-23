@@ -8,7 +8,7 @@ import { DisciplineSelector } from "./components/DisciplineSelector";
 import { SlidingTaskList } from "./components/SlidingTaskList";
 import { Reveal, useSiteReducedMotion } from "./components/SiteMotion";
 import { DailyArrivals } from "./components/DailyArrivals";
-import { triggerCommunityDialog } from "./components/CommunityCard";
+import { CommunityDialog, triggerCommunityDialog } from "./components/CommunityCard";
 import { RechargeAd } from "./components/RechargeAd";
 import { BackToTop } from "./components/BackToTop";
 import { SearchBox } from "./components/SearchBox";
@@ -1449,6 +1449,7 @@ function Dashboard({ state, update }) {
           />
         </DeferredFeature>
       )}
+      <CommunityDialog lang={state.lang} />
       <BackToTop
         label={t("backToTop")}
         comparisonOpen={state.compare.length > 0}
@@ -1472,10 +1473,15 @@ function Dashboard({ state, update }) {
   );
 }
 
-// 延迟 12 秒后再按需加载代充提示弹窗，减轻移动端首屏 JS 体积
+// 默认隐藏进站代充弹窗（仅在显式注入 window.__ARS_NOTICE_DELAY_MS 时启用，便于随时恢复）
 function DeferredRechargeNotice({ lang, busy }) {
-  const [ready, setReady] = useState(() => Number(window.__ARS_NOTICE_DELAY_MS) === 0);
+  const explicitDelay =
+    typeof window !== "undefined" && Number.isFinite(window.__ARS_NOTICE_DELAY_MS)
+      ? window.__ARS_NOTICE_DELAY_MS
+      : null;
+  const [ready, setReady] = useState(() => explicitDelay === 0);
   useEffect(() => {
+    if (explicitDelay === null) return undefined;
     try {
       const last = Number(localStorage.getItem("prs-recharge-notice-shown-v2"));
       if (Number.isFinite(last) && last > 0 && Date.now() - last >= 0 && Date.now() - last < 12 * 3600000)
@@ -1484,11 +1490,10 @@ function DeferredRechargeNotice({ lang, busy }) {
       /* storage blocked */
     }
     if (ready) return undefined;
-    const ms = Number.isFinite(window.__ARS_NOTICE_DELAY_MS) ? window.__ARS_NOTICE_DELAY_MS : 12000;
-    const timer = setTimeout(() => setReady(true), ms);
+    const timer = setTimeout(() => setReady(true), explicitDelay);
     return () => clearTimeout(timer);
-  }, [ready]);
-  if (!ready) return null;
+  }, [ready, explicitDelay]);
+  if (!ready || explicitDelay === null) return null;
   return (
     <React.Suspense fallback={null}>
       <RechargeNotice lang={lang} busy={busy} immediate />

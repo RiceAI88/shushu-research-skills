@@ -8,24 +8,6 @@ import {
 } from "./PracticalInfo";
 import { sceneLabelsFor } from "../domain";
 import { Sparkline } from "./TrendCharts";
-import { Zhi1keAd } from "./Zhi1keAd";
-const AdContext = createContext(null);
-function SponsoredRow(props) {
-  const t = useContext(AdContext);
-  const { "data-sponsor-after": after, ...rowProps } = props;
-  return (
-    <>
-      <tr {...rowProps} />
-      {after && (
-        <tr className="table-sponsor-row">
-          <td colSpan={8}>
-            <Zhi1keAd t={t} />
-          </td>
-        </tr>
-      )}
-    </>
-  );
-}
 function SceneTags({ item, t }) {
   const labels = sceneLabelsFor(item, t);
   if (!labels.length) return <span className="scene-unclassified">{t("sceneUnclassified")}</span>;
@@ -188,19 +170,5 @@ export default function RepositoryTable({
       render: (_, item) => actions(item),
     },
   ];
-  const originalRow = props.onRow;
-  return (
-    <AdContext.Provider value={t}>
-      <Table
-        {...props}
-        components={{ body: { row: SponsoredRow } }}
-        columns={columns}
-        onRow={(item, index) => ({
-          ...originalRow?.(item, index),
-          "data-sponsor-after":
-            index === Math.min(8, props.dataSource.length) - 1,
-        })}
-      />
-    </AdContext.Provider>
-  );
+  return <Table {...props} columns={columns} />;
 }

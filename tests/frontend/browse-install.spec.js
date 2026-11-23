@@ -171,28 +171,31 @@ test("scope and sorting remain clear without duplicate single-filter chips", asy
   await expect(page).toHaveURL(/sort=newest/);
 });
 
-for (const [view, count] of [
-  ["card", 6],
-  ["table", 8],
-])
-  test(`${view} sponsorship follows two rows and support is labelled`, async ({
+for (const view of ["card", "table"])
+  test(`${view} sponsorship precedes ranked entries and support is labelled`, async ({
     page,
   }) => {
     await page.goto(`./#view=${view}`);
     await expect(page.getByTestId("gpt-recharge-ad")).not.toContainText("广告");
     const ad = page.getByTestId("zhi1ke-ad");
     await expect(ad).toHaveCount(1);
-    const result = await page.evaluate((view) => {
+    const entrySelector =
+      view === "card" ? '[data-testid="repo-card"]' : ".ant-table-row";
+    await expect(page.locator(entrySelector).first()).toBeVisible();
+    const result = await page.evaluate((selector) => {
       const ad = document
         .querySelector('[data-testid="zhi1ke-ad"]')
         .getBoundingClientRect();
-      return [
-        ...document.querySelectorAll(
-          view === "card" ? '[data-testid="repo-card"]' : ".ant-table-row",
-        ),
-      ].filter((el) => el.getBoundingClientRect().bottom <= ad.top).length;
-    }, view);
-    expect(result).toBe(count);
+      const first = document.querySelector(selector).getBoundingClientRect();
+      return {
+        beforeAd: [...document.querySelectorAll(selector)].filter(
+          (el) => el.getBoundingClientRect().bottom <= ad.top,
+        ).length,
+        adAboveFirst: ad.bottom <= first.top + 1,
+      };
+    }, entrySelector);
+    expect(result.beforeAd).toBe(0);
+    expect(result.adAboveFirst).toBe(true);
     await page.getByTestId("load-more").click();
     await expect(ad).toHaveCount(1);
   });

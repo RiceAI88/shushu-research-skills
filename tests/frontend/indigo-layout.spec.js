@@ -42,9 +42,10 @@ test("reference palette, right-hand search and default cards give a compact firs
   const first = await page.getByTestId("repo-card").first().boundingBox();
   const kpiHeight = (await page.locator(".portal-kpi-grid").boundingBox()).height + 24;
   const noticeHeight = (await page.locator(".top-notice-bar").boundingBox()).height + 16;
-  // Daily discoveries may add up to three compact entries above the ranking.
-  expect(first.y).toBeLessThan(560 + kpiHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
-  expect(first.y + first.height).toBeLessThan(900 + kpiHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
+  const partnerHeight = (await page.locator(".partner-top-strip").boundingBox()).height + 16;
+  // Daily discoveries and top partner strip precede the first ranked card.
+  expect(first.y).toBeLessThan(560 + kpiHeight + noticeHeight + partnerHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
+  expect(first.y + first.height).toBeLessThan(900 + kpiHeight + noticeHeight + partnerHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
   await expect(page.locator(".task-selection-indicator")).toHaveCSS(
     "background-color",
     "rgb(13, 159, 110)",
@@ -77,27 +78,23 @@ test("cards separate owner and project and put compact metadata on one aligned f
 });
 
 for (const width of [1280, 390])
-  test(`one full-width advertisement follows the second row at ${width}px`, async ({
+  test(`one distinct advertisement precedes the first row at ${width}px`, async ({
     page,
   }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setViewportSize({ width, height: 1160 });
     await page.goto("./#related=1&view=card");
     const ad = page.getByTestId("zhi1ke-ad");
-    const boxes = await page.getByTestId("repo-card").evaluateAll((es) =>
-      es.slice(0, 9).map((e) => {
-        const r = e.getBoundingClientRect();
-        return { top: r.top, bottom: r.bottom };
-      }),
-    );
-    const firstRow = boxes.filter((r) => Math.abs(r.top - boxes[0].top) < 2);
-    const cardsBeforeAd = Math.max(firstRow.length * 2, 4);
+    const headingBottom = await page
+      .locator(".ranking-header")
+      .evaluate((e) => e.getBoundingClientRect().bottom);
+    const firstCardTop = await page
+      .getByTestId("repo-card")
+      .first()
+      .evaluate((e) => e.getBoundingClientRect().top);
     const box = await ad.boundingBox();
-    expect(box.y).toBeGreaterThanOrEqual(
-      Math.max(...boxes.slice(0, cardsBeforeAd).map((r) => r.bottom)),
-    );
-    expect(box.y + box.height).toBeLessThanOrEqual(boxes[cardsBeforeAd].top);
-    await expect(ad).toHaveCSS("border-style", "dashed");
+    expect(box.y).toBeGreaterThanOrEqual(headingBottom - 1);
+    expect(box.y + box.height).toBeLessThanOrEqual(firstCardTop + 1);
     await expect(ad.getByRole("link")).toHaveAttribute(
       "href",
       "https://zhi1ke.com?pic=6PEB",

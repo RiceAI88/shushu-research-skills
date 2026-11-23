@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { CloseOutlined } from "@ant-design/icons";
-import qrImage from "../../assets/research-community-2026-11-14.jpg";
+import qrImage from "../../assets/research-community-2026-11-30.jpg";
 
 const COMMUNITY_EVENT = "ars-open-community";
 
-// 通过自定义事件触发社群弹窗，避免依赖页面上的 DOM 选择器
+// 通过自定义事件触发社群二维码弹窗，仅保留弹窗本体，不在页面外露展示二维码卡片
 export function triggerCommunityDialog() {
   window.dispatchEvent(new CustomEvent(COMMUNITY_EVENT));
 }
 
-export function CommunityCard({ lang }) {
+export function CommunityDialog({ lang }) {
   const dialog = useRef(null);
   useEffect(() => {
     const open = () => {
@@ -55,8 +55,8 @@ export function CommunityCard({ lang }) {
         src={qrImage}
         alt={
           zh
-            ? "AI科研交流群1 微信入群二维码，11月21日前有效"
-            : "WeChat group QR code, valid before November 21"
+            ? "AI科研交流群1 微信入群二维码，11月30日前有效"
+            : "WeChat group QR code, valid before November 30"
         }
         width="660"
         height="1024"
@@ -70,52 +70,7 @@ export function CommunityCard({ lang }) {
       </p>
     </dialog>
   );
-  return (
-    <>
-      <button
-        type="button"
-        className="community-card"
-        aria-label={
-          zh
-            ? "加入各专业科研 Skills 交流群，点击放大二维码"
-            : "Join AI Research Community, enlarge QR code"
-        }
-        aria-haspopup="dialog"
-        onClick={() => dialog.current.showModal()}
-      >
-        <span className="community-card-copy">
-          <span className="community-card-header-line">
-            <strong>
-              {zh ? (
-                <>
-                  加入各专业
-                  <br className="community-title-break" />
-                  科研 Skills 交流群
-                </>
-              ) : (
-                "Join our cross-discipline Skills community"
-              )}
-            </strong>
-            <span className="community-card-eyebrow">
-              {zh ? "一起发现好用的科研 Skills" : "Discover useful research Skills"}
-            </span>
-          </span>
-          <span>
-            {zh
-              ? "交流使用经验，分享或推荐你所在专业的 Skills。"
-              : "Share experiences and recommend Skills for your discipline."}
-          </span>
-          <span className="community-card-hint">
-            {zh ? "微信扫码入群 · 点击放大 ↗" : "Scan with WeChat · Enlarge ↗"}
-          </span>
-        </span>
-        <span className="community-qr-padding" aria-hidden="true">
-          <span className="community-qr-crop">
-            <img src={qrImage} alt="" width="660" height="1024" loading="lazy" decoding="async" />
-          </span>
-        </span>
-      </button>
-      {typeof document !== "undefined" ? createPortal(modal, document.body) : modal}
-    </>
-  );
+  return typeof document !== "undefined"
+    ? createPortal(modal, document.body)
+    : modal;
 }
