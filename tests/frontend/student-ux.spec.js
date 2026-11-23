@@ -162,9 +162,15 @@ test("Shushu AI advisor lazy-loads on demand, answers with grounded picks, and o
   );
 
   await page.goto("./");
-  const trigger = page.getByTestId("shushu-bot-trigger");
-  await expect(trigger).toBeVisible();
-  await trigger.click();
+  // 验证可一键放出全屏漫游鼠鼠桌宠，鼠鼠真实跑动且点击可打开对话框
+  await page.getByTestId("shushu-roam-toggle").click();
+  const roamer = page.getByTestId("roaming-mascot");
+  await expect(roamer).toBeVisible();
+  const startTransform = await roamer.evaluate((el) => el.style.transform);
+  await expect
+    .poll(() => roamer.evaluate((el) => el.style.transform))
+    .not.toBe(startTransform);
+  await roamer.locator("button").click();
 
   const panel = page.getByTestId("shushu-bot-panel");
   await expect(panel).toBeVisible();

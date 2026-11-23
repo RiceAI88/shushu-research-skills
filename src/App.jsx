@@ -79,6 +79,7 @@ const RepositoryDrawer = lazy(() =>
 const FilterControls = lazy(() => import("./components/FilterControls"));
 const ComparisonDialog = lazy(() => import("./components/ComparisonDialog"));
 const ShushuAssistant = lazy(() => import("./components/ShushuAssistant"));
+const RoamingMascot = lazy(() => import("./components/RoamingMascot"));
 const RechargeNotice = lazy(() =>
   import("./components/RechargeNotice").then((m) => ({
     default: m.RechargeNotice,
@@ -248,6 +249,38 @@ function Dashboard({ state, update }) {
   const [guideSection, setGuideSection] = useState(null);
   const [botOpen, setBotOpen] = useState(false);
   const [botRequested, setBotRequested] = useState(false);
+  const [petRoam, setPetRoam] = useState(() => {
+    try {
+      if (window.__ARS_FORCE_ROAM) return true;
+      if (storage?.getItem("ars-pet-roam") === "1") return true;
+      if (storage?.getItem("ars-pet-roam") === "0") return false;
+      return (
+        !navigator.webdriver &&
+        !matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        window.innerWidth >= 640
+      );
+    } catch {
+      return false;
+    }
+  });
+  const [roamLoaded, setRoamLoaded] = useState(() => Boolean(window.__ARS_FORCE_ROAM));
+  useEffect(() => {
+    if (!petRoam || roamLoaded) return undefined;
+    const timer = setTimeout(() => setRoamLoaded(true), 850);
+    return () => clearTimeout(timer);
+  }, [petRoam, roamLoaded]);
+  const togglePetRoam = () => {
+    setRoamLoaded(true);
+    setPetRoam((prev) => {
+      const next = !prev;
+      try {
+        storage?.setItem("ars-pet-roam", next ? "1" : "0");
+      } catch {
+        /* ignore */
+      }
+      return next;
+    });
+  };
   const [drawerRequested, setDrawerRequested] = useState(Boolean(state.repo));
   const [comparisonRequested, setComparisonRequested] = useState(false);
   useEffect(() => {
@@ -1317,33 +1350,77 @@ function Dashboard({ state, update }) {
         busy={Boolean(state.repo || compareOpen || guideSection || botOpen)}
       />
       {!state.repo && (
-        <button
-          type="button"
-          className={`shushu-bot-fab shushu-mascot-fab${botOpen ? " is-open" : ""}${state.compare.length > 0 ? " above-comparison" : ""}`}
-          data-testid="shushu-bot-trigger"
-          aria-label={state.lang === "zh" ? "打开鼠鼠 AI 选工具顾问" : "Open Hamster AI Skill Advisor"}
-          aria-expanded={botOpen}
-          onClick={() => {
-            setBotRequested(true);
-            setBotOpen((v) => !v);
-          }}
+        <div
+          className={`shushu-mascot-dock${botOpen ? " is-open" : ""}${state.compare.length > 0 ? " above-comparison" : ""}`}
         >
-          <span className="shushu-mascot-speech" aria-hidden="true">
-            {state.lang === "zh" ? "找工具？问问鼠鼠！" : "Need a Skill? Ask me!"}
-          </span>
-          <span className="shushu-mascot-stage" aria-hidden="true">
-            <img
-              className="hamster-mascot"
-              src={localFile("assets/shushu-mascot.svg")}
-              width="66"
-              height="66"
-              alt=""
-            />
-          </span>
-          <span className="shushu-mascot-plate">
-            {state.lang === "zh" ? "AI 选工具" : "Ask AI"}
-          </span>
-        </button>
+          <button
+            type="button"
+            className={`shushu-bot-fab shushu-mascot-fab${botOpen ? " is-open" : ""}${petRoam && roamLoaded && !botOpen ? " is-roaming-away" : ""}`}
+            data-testid="shushu-bot-trigger"
+            aria-label={state.lang === "zh" ? "打开鼠鼠 AI 选工具顾问" : "Open Hamster AI Skill Advisor"}
+            aria-expanded={botOpen}
+            onClick={() => {
+              setBotRequested(true);
+              setBotOpen((v) => !v);
+            }}
+          >
+            <span className="shushu-mascot-speech" aria-hidden="true">
+              {state.lang === "zh" ? "找工具？问问鼠鼠！" : "Need a Skill? Ask me!"}
+            </span>
+            {!(petRoam && roamLoaded && !botOpen) && (
+              <span className="shushu-mascot-stage" aria-hidden="true">
+                <img
+                  className="hamster-mascot"
+                  src={localFile("assets/shushu-mascot.svg")}
+                  width="66"
+                  height="66"
+                  alt=""
+                />
+              </span>
+            )}
+            <span className="shushu-mascot-plate">
+              {state.lang === "zh" ? "鼠鼠 AI 选工具" : "Hamster AI"}
+            </span>
+          </button>
+          {!botOpen && (
+            <button
+              type="button"
+              className="shushu-roam-toggle"
+              data-testid="shushu-roam-toggle"
+              title={
+                petRoam
+                  ? state.lang === "zh"
+                    ? "让鼠鼠回右下角安静待着"
+                    : "Dock mascot to corner"
+                  : state.lang === "zh"
+                    ? "放出鼠鼠在页面自由漫游"
+                    : "Let mascot roam around"
+              }
+              onClick={togglePetRoam}
+            >
+              {petRoam
+                ? state.lang === "zh"
+                  ? "回窝"
+                  : "Dock"
+                : state.lang === "zh"
+                  ? "放风"
+                  : "Roam"}
+            </button>
+          )}
+        </div>
+      )}
+      {roamLoaded && !state.repo && (
+        <React.Suspense fallback={null}>
+          <RoamingMascot
+            roaming={petRoam}
+            botOpen={botOpen}
+            lang={state.lang}
+            onOpenBot={() => {
+              setBotRequested(true);
+              setBotOpen(true);
+            }}
+          />
+        </React.Suspense>
       )}
       {(botOpen || botRequested) && (
         <DeferredFeature t={t}>
