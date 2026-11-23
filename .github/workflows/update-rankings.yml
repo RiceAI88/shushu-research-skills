@@ -87,7 +87,7 @@ jobs:
           # 按 60 天保留期删除的历史快照，导致删除无法提交、rebase 被未暂存改动阻断。
           paths=(
             data/repository-catalog.json data/collection-report.json data/collection-events.json
-            README.md data/first-seen.json data/editorial-status.json data/rankings.json
+            README.md README_EN.md data/first-seen.json data/editorial-status.json data/rankings.json
             data/rankings.js data/history.js data/rankings.csv 'data/history/*.json'
             sitemap.xml feed.xml 'assets/og-cover*' 'reports/*.html'
           )

@@ -39,6 +39,7 @@ DATA_JS_PATH = ROOT / "data" / "rankings.js"
 HISTORY_JS_PATH = ROOT / "data" / "history.js"
 CSV_PATH = ROOT / "data" / "rankings.csv"
 README_PATH = ROOT / "README.md"
+README_EN_PATH = ROOT / "README_EN.md"
 HISTORY_DIR = ROOT / "data" / "history"
 FIRST_SEEN_PATH = ROOT / "data" / "first-seen.json"
 CATALOG_PATH = ROOT / "data" / "repository-catalog.json"
@@ -1267,10 +1268,10 @@ _AGENT_LABELS = {
 }
 
 
-def agents_to_label(agent_ids: list[str]) -> str:
+def agents_to_label(agent_ids: list[str], fallback: str = "平台见说明") -> str:
     """Render platform labels without treating missing metadata as universal support."""
     labels = [_AGENT_LABELS.get(aid, aid) for aid in agent_ids if aid]
-    return "/".join(labels) if labels else "平台见说明"
+    return "/".join(labels) if labels else fallback
 
 
 def is_newcomer(item: dict[str, Any], window_snapshot: dict[str, Any] | None) -> bool:
@@ -1280,12 +1281,8 @@ def is_newcomer(item: dict[str, Any], window_snapshot: dict[str, Any] | None) ->
     return item["repo"] not in window_snapshot
 
 
-def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None = None) -> str:
-    """Render the visitor guide and type-separated previews from published data.
-
-    window_snapshot is retained for callers shared with the RSS generator;
-    README arrivals use persistent first-seen records instead of snapshot absence.
-    """
+# 提取中英文 README 共用的统计、今日新增与榜单表格行渲染逻辑
+def _prepare_readme_context(data: dict[str, Any]) -> dict[str, Any]:
     items = data["items"]
     metadata = data["metadata"]
     skills = [item for item in items if item.get("repository_kind") == "skill"]
@@ -1294,7 +1291,8 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
     beijing = timezone(timedelta(hours=8))
     generated = parse_datetime(metadata["generated_at"])
     generated_day = generated.astimezone(beijing).date() if generated else None
-    updated = generated.astimezone(beijing).strftime("%Y-%m-%d %H:%M UTC+8") if generated else "更新时间待确认"
+    updated_zh = generated.astimezone(beijing).strftime("%Y-%m-%d %H:%M UTC+8") if generated else "更新时间待确认"
+    updated_en = generated.astimezone(beijing).strftime("%Y-%m-%d %H:%M UTC+8") if generated else "Pending confirmation"
 
     def added_today(item: dict[str, Any]) -> bool:
         if not generated_day or item.get("first_seen_is_baseline"):
@@ -1317,7 +1315,12 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
     if not isinstance(editorial_platforms, dict):
         editorial_platforms = {}
 
-    def preview_rows(entries: list[dict[str, Any]], limit: int) -> str:
+    def preview_rows(
+        entries: list[dict[str, Any]],
+        limit: int,
+        agent_fallback: str,
+        empty_desc: str,
+    ) -> str:
         rows = []
         for position, item in enumerate(entries[:limit], 1):
             delta = item.get("star_delta_7d") or 0
@@ -1325,22 +1328,60 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
             agents = item.get("agents") or editorial_platforms.get(item.get("repo", ""), [])
             rows.append(
                 f"| {position} | [{markdown_escape(item['repo'])}]({item['url']}) "
-                f"| {item['stars']:,} | {growth} | {markdown_escape(agents_to_label(agents))} "
-                f"| {markdown_escape(truncate(item.get('description', ''), 90)) or '仓库未提供简介'} |"
+                f"| {item['stars']:,} | {growth} | {markdown_escape(agents_to_label(agents, agent_fallback))} "
+                f"| {markdown_escape(truncate(item.get('description', ''), 90)) or empty_desc} |"
             )
         return "\n".join(rows)
 
+    return {
+        "metadata": metadata,
+        "skills": skills,
+        "related": related,
+        "pending_count": pending_count,
+        "today_skills": today_skills,
+        "updated_zh": updated_zh,
+        "updated_en": updated_en,
+        "date_badge": metadata["generated_at"][:10].replace("-", "--"),
+        "preview_rows": preview_rows,
+    }
+
+
+def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None = None) -> str:
+    """Render the visitor guide and type-separated previews from published data.
+
+    window_snapshot is retained for callers shared with the RSS generator;
+    README arrivals use persistent first-seen records instead of snapshot absence.
+    """
+    ctx = _prepare_readme_context(data)
+    metadata = ctx["metadata"]
+    skills = ctx["skills"]
+    related = ctx["related"]
+    pending_count = ctx["pending_count"]
+    today_skills = ctx["today_skills"]
+    updated = ctx["updated_zh"]
+    date_badge = ctx["date_badge"]
+    preview_rows = ctx["preview_rows"]
+
     table_header = "| # | 仓库 | Stars | 近 7 日 | 适用 AI Agent | 作者原文简介 |\n|---:|---|---:|---:|---|---|"
-    skill_table = table_header + "\n" + preview_rows(skills, 20) if skills else "暂无已确认类型的 Skills。"
-    related_table = table_header + "\n" + preview_rows(related, 10) if related else "暂无科研相关项目。"
+    skill_table = (
+        table_header + "\n" + preview_rows(skills, 20, "平台见说明", "仓库未提供简介")
+        if skills
+        else "暂无已确认类型的 Skills。"
+    )
+    related_table = (
+        table_header + "\n" + preview_rows(related, 10, "平台见说明", "仓库未提供简介")
+        if related
+        else "暂无科研相关项目。"
+    )
     today_lines = [
         f"- **[{markdown_escape(item['repo'])}]({item['url']})** — {markdown_escape(truncate(item.get('description', ''), 90)) or '仓库未提供简介'}"
         for item in today_skills[:5]
     ]
     daily_block = "\n".join(today_lines) if today_lines else "本次更新日暂无新收录的 Skills，已有项目的 Stars 和维护数据仍会刷新。"
-    date_badge = metadata["generated_at"][:10].replace("-", "--")
 
     return f"""# 科研鼠鼠 · Skills 导航站
+
+**简体中文** · **[English (README_EN.md)](README_EN.md)**
 
 **面向大学生和研究生，按专业找到适合自己的科研 Skills。**
 
@@ -1353,7 +1394,7 @@ def render_readme(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
 [![CI](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-64748b)](LICENSE)
 
-[按专业找](#按专业找-skills) · [按任务找](#按科研任务找-skills) · [新手入门](#网站怎么用) · [今日新增](#今日新增-skills) · [Skills 榜单](#skills-榜单) · [科研相关项目](#科研相关项目) · [收录与更新](#收录与更新) · [推荐项目](CONTRIBUTING.md) · [English](#english)
+[按专业找](#按专业找-skills) · [按任务找](#按科研任务找-skills) · [新手入门](#网站怎么用) · [今日新增](#今日新增-skills) · [Skills 榜单](#skills-榜单) · [科研相关项目](#科研相关项目) · [收录与更新](#收录与更新) · [推荐项目](CONTRIBUTING.md) · [English](README_EN.md)
 
 [![科研 Skills 导航：专业分类、科研任务与项目安装入口](assets/readme-dashboard.png)]({SITE_URL}/)
 
@@ -1445,6 +1486,8 @@ README 会由采集脚本自动生成，静态介绍需修改 [`render_readme`](
 
 ## English
 
+**[Read Full English README (README_EN.md) →](README_EN.md)** · **[Open English Dashboard →]({SITE_URL}/en/)**
+
 **Research Hamster · Skills Directory** (`shushu-research-skills`) helps undergraduate and postgraduate students find GitHub research Skills by discipline, task and supported AI Agent, from literature search and writing to figures, data analysis and scientific computing.
 
 [Open the dashboard]({SITE_URL}/en/) to choose a discipline and task, read the starter guide, follow 10 discipline research paths, use the 3-step quick-start with copyable prompt examples, inspect installation requirements, save favorites, compare repositories and explore data insights. Curated summaries are paired with the repository author's original description.
@@ -1453,7 +1496,7 @@ Discipline labels are based on official documentation; coverage is still being e
 
 Candidates are discovered through popular, recently updated and star-banded searches, then reviewed against README evidence while filtering out mirrors and non-academic noise. The main ranking uses Stars; daily arrivals mean first inclusion on this site, measured by the Beijing calendar day. The scheduled daily refresh runs at 10:00 UTC+8 (02:00 UTC), may be delayed, and does not guarantee new entries every day. Search coverage is bounded.
 
-[Methodology](docs/methodology.md) · [Contributing](CONTRIBUTING.md) · [JSON](data/rankings.json) · [CSV](data/rankings.csv) · [RSS](feed.xml)
+[English README](README_EN.md) · [Methodology](docs/methodology.md) · [Contributing](CONTRIBUTING.md) · [JSON](data/rankings.json) · [CSV](data/rankings.csv) · [RSS](feed.xml)
 
 ## 来源与致谢
 
@@ -1464,6 +1507,139 @@ Candidates are discovered through popular, recently updated and star-banded sear
 ## License
 
 [MIT](LICENSE)
+"""
+
+
+# 自动生成独立英文版 README_EN.md，保持每日榜单与新增数据同步刷新
+def render_readme_en(data: dict[str, Any], window_snapshot: dict[str, Any] | None = None) -> str:
+    """Render the full standalone English README (README_EN.md) from published data."""
+    ctx = _prepare_readme_context(data)
+    metadata = ctx["metadata"]
+    skills = ctx["skills"]
+    related = ctx["related"]
+    pending_count = ctx["pending_count"]
+    today_skills = ctx["today_skills"]
+    updated = ctx["updated_en"]
+    date_badge = ctx["date_badge"]
+    preview_rows = ctx["preview_rows"]
+
+    table_header = "| # | Repository | Stars | 7d Growth | Supported AI Agents | Author Description |\n|---:|---|---:|---:|---|---|"
+    skill_table = (
+        table_header + "\n" + preview_rows(skills, 20, "See repo docs", "No description provided")
+        if skills
+        else "No verified Skills yet."
+    )
+    related_table = (
+        table_header + "\n" + preview_rows(related, 10, "See repo docs", "No description provided")
+        if related
+        else "No research-related projects yet."
+    )
+    today_lines = [
+        f"- **[{markdown_escape(item['repo'])}]({item['url']})** — {markdown_escape(truncate(item.get('description', ''), 90)) or 'No description provided'}"
+        for item in today_skills[:5]
+    ]
+    daily_block = (
+        "\n".join(today_lines)
+        if today_lines
+        else "No newly included Skills for this update day; Star counts and maintenance status for existing entries are still refreshed."
+    )
+
+    return f"""# Research Hamster · Skills Directory
+
+**[简体中文 (README.md)](README.md)** · **English**
+
+**Find open-source academic research Agent Skills on GitHub — organized by university discipline, research task, and AI Agent.**
+
+**Research Hamster · Skills Directory** (`shushu-research-skills`), curated and maintained by RiceAI88, indexes open-source GitHub Agent Skills for literature search, paper reading, academic writing, publication figures, experiment reproduction, peer review, statistical/econometric analysis, and scientific computing. Filter across **12 academic disciplines**, **8 research tasks**, and **supported AI Agents** (Claude Code, Codex, Cursor, Antigravity, Gemini, MCP, and Web AI). Each entry pairs the repository author's original description with environment prerequisite tags, a 3-step quick-start guide, and maintenance health indicators.
+
+### [Open English Research Skills Directory →]({SITE_URL}/en/)
+
+[![Skills](https://img.shields.io/badge/Skills-{len(skills)}-0d9f6e)](#top-research-skills)
+[![Updated](https://img.shields.io/badge/updated-{date_badge}-64748b)](#collection--methodology)
+[![CI](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-64748b)](LICENSE)
+
+[By Discipline](#browse-by-discipline) · [By Task](#browse-by-research-task) · [How to Use](#how-to-use) · [New Today](#new-skills-today) · [Top Skills](#top-research-skills) · [Related Tools](#research-related-projects) · [Methodology](#collection--methodology) · [Submit a Repo](https://github.com/RiceAI88/shushu-research-skills/issues/new?template=recommend-repo.yml) · [简体中文](README.md)
+
+[![Research Skills Directory Dashboard](assets/readme-dashboard.png)]({SITE_URL}/en/)
+
+*If this directory saves you time, please consider giving it a Star 🌟 or [recommending a repository](https://github.com/RiceAI88/shushu-research-skills/issues/new?template=recommend-repo.yml).*
+
+## Browse by Discipline
+
+Choose your academic division first, then narrow down by major and research task:
+
+[Sciences]({SITE_URL}/en/#discipline=science) · [Engineering]({SITE_URL}/en/#discipline=engineering) · [Medicine]({SITE_URL}/en/#discipline=medicine) · [Agriculture]({SITE_URL}/en/#discipline=agriculture) · [Economics]({SITE_URL}/en/#discipline=economics) · [Management]({SITE_URL}/en/#discipline=management)
+
+[Law & social studies]({SITE_URL}/en/#discipline=law) · [Languages & literature]({SITE_URL}/en/#discipline=literature) · [History]({SITE_URL}/en/#discipline=history) · [Philosophy]({SITE_URL}/en/#discipline=philosophy) · [Education]({SITE_URL}/en/#discipline=education) · [Arts]({SITE_URL}/en/#discipline=arts)
+
+Discipline classifications are grounded in official repository documentation (160+ curated profiles and growing). Cross-discipline general research Skills and broader academic tools can be toggled inline via the scope selector.
+
+## Browse by Research Task
+
+| What do you want to accomplish? | Jump to |
+|---|---|
+| Search papers & verify citations | [Literature Search]({SITE_URL}/en/#task=find) |
+| Read, summarize, or translate papers | [Paper Reading]({SITE_URL}/en/#task=read) |
+| Structure manuscripts, polish academic prose, or edit LaTeX | [Academic Writing]({SITE_URL}/en/#task=write) |
+| Generate publication-grade plots, schematics & posters | [Figures & Plots]({SITE_URL}/en/#task=figures) |
+| Reproduce experiments, benchmarks & evaluations | [Reproducibility]({SITE_URL}/en/#task=reproduce) |
+| Prepare submissions, peer-review checks & rebuttals | [Submission & Review]({SITE_URL}/en/#task=review) |
+| Run statistical analysis, econometrics & qualitative coding | [Data Analysis]({SITE_URL}/en/#task=analyze) |
+| Numerical simulation, modeling & scientific computing | [Scientific Computing]({SITE_URL}/en/#task=compute) |
+
+By default, the directory lists repositories with verified `SKILL.md` evidence. Enable **"Include related tools"** in the toolbar to also browse standalone research workflows, utilities, and open textbooks.
+
+## How to Use
+
+- **New to Agent Skills?** Click **"Understand Skills in 30s"** on the hero banner to see how Skills work with CLI/IDE agents (Claude Code, Codex, Cursor, Antigravity) — plus a **zero-CLI fallback guide** for pasting `SKILL.md` rules directly into web chat apps (ChatGPT, Claude.ai, DeepSeek, Kimi).
+- **6 High-Frequency Research Presets**: One-click scenario filters for *Undergraduate Thesis Starter*, *Proposal & Literature Review*, *Journal Figures & Flowcharts*, *Surveys & Econometrics*, *Group Meeting Slides & Posters*, and *Polishing & Rebuttal*.
+- **10 Curated Discipline Workflows**: Step-by-step toolchains across STEM, Medicine, Economics/Law, and Humanities showing prerequisites and verified source links.
+- **3-Step Quick-Start & Output Previews**: Open any repository drawer to view environment badges (Pure Markdown, Local Python, GPU, External API Key), Before/After deliverable previews, copyable install commands, and bilingual research prompts.
+- **Built-in AI Skill Advisor**: Click the animated Research Hamster assistant in the bottom-right corner to ask for tailored tool recommendations in natural language.
+- **Shareable Lab Packs & Open Data**: Bookmark favorites into a shareable `#pack=...` URL for labmates, explore live **Data Insights**, or subscribe via [RSS](feed.xml), [Monthly Reports](reports/), [JSON](data/rankings.json), and [CSV](data/rankings.csv).
+
+## New Skills Today
+
+New Skills **{len(today_skills)}** · Measured by the Beijing calendar day (`UTC+8`) of first inclusion in this directory (not repository creation date).
+
+{daily_block}
+
+[View all daily arrivals on the web →]({SITE_URL}/en/#today=skill) · Up to 5 entries are previewed here; baseline imports are excluded from daily arrivals.
+
+## Top Research Skills
+
+Verified Skills **{len(skills)}** · Related Academic Projects **{len(related)}** · Pending Verification **{pending_count}**
+
+Last updated: **{updated}**. Below are the Top 20 verified Skills ranked by GitHub Stars (tie-broken by trend score and repository name). Star counts and 7-day deltas reflect community attention, not peer-reviewed quality or installation guarantees.
+
+{skill_table}
+
+[Browse the full interactive ranking →]({SITE_URL}/en/) · Descriptions preserve each author's original summary; see [Methodology](docs/methodology.md) for scoring details.
+
+## Research-Related Projects
+
+Top 10 standalone academic tools, frameworks, and learning resources (tracked separately from `SKILL.md` repositories):
+
+{related_table}
+
+[Browse with related projects enabled →]({SITE_URL}/en/#related=1)
+
+## Collection & Methodology
+
+- **Discovery & Verification**: Public GitHub API queries across popular, recently updated, and star-banded repositories, combined with maintainer/community submissions. Candidates must meet the **{metadata['min_stars']}-star** threshold, show explicit academic/scientific intent in README documentation, and pass mirror/clone deduplication.
+- **Two-Track Classification**: Default-branch trees are inspected for `SKILL.md` definitions to separate native Agent Skills from general academic tools. Transient API failures preserve previously verified entries in a pending state rather than dropping them.
+- **Daily Schedule**: [Update rankings](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/update-rankings.yml) runs daily around **02:00 UTC (10:00 UTC+8)** and regenerates both [`README.md`](README.md) and [`README_EN.md`](README_EN.md) via `render_readme` / `render_readme_en` in [`scripts/update_rankings.py`](scripts/update_rankings.py). See [Collection Report](data/collection-report.json) and [Collection Events](data/collection-events.json) for audit logs.
+
+## Contributing
+
+Found a missing research Skill or an inaccurate discipline tag? [Open a Recommendation Issue](https://github.com/RiceAI88/shushu-research-skills/issues/new?template=recommend-repo.yml) or read [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## Credits & License
+
+Originally seeded from [kael-odin/awesome-academic-research-skills](https://github.com/kael-odin/awesome-academic-research-skills) with gratitude to [kael-odin](https://github.com/kael-odin), and independently rebuilt and maintained by RiceAI88 with React interactive filtering, discipline taxonomy, 3-step onboarding guides, two-track verification, and automated daily snapshots.
+
+Released under the [MIT License](LICENSE).
 """
 
 
@@ -1568,6 +1744,7 @@ def write_outputs(data: dict[str, Any], window_snapshot: dict[str, Any] | None =
     build_monthly_reports(history)
     render_csv(data["items"])
     README_PATH.write_text(render_readme(data, window_snapshot=window_snapshot), encoding="utf-8")
+    README_EN_PATH.write_text(render_readme_en(data, window_snapshot=window_snapshot), encoding="utf-8")
     write_seo_assets(data, window_snapshot=window_snapshot)
 
 

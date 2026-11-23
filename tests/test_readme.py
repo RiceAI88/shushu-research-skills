@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 import unittest
 
-from scripts.update_rankings import render_readme
+from scripts.update_rankings import render_readme, render_readme_en
 
 
 def entry(name, kind, **extra):
@@ -90,4 +90,18 @@ class ReadmeTest(unittest.TestCase):
         for term in ["30 秒看懂 Skill", "专业路径", "收录范围", "Antigravity", "专业归属依据官方文档"]:
             self.assertIn(term,text)
         self.assertIn("Research Hamster · Skills Directory",text)
+        self.assertIn("[English (README_EN.md)](README_EN.md)", text)
         self.assertNotIn("后续将首页迁移至 React",text)
+
+    def test_english_readme_renders_bilingual_switch_disciplines_and_tables(self):
+        data = dataset([entry("tool", "related", stars=500, agents=[]), entry("alpha", "skill")])
+        text = render_readme_en(data)
+        self.assertTrue(text.startswith("# Research Hamster · Skills Directory\n"))
+        self.assertIn("[简体中文 (README.md)](README.md)", text)
+        self.assertIn("https://riceai985.cc/en/", text)
+        self.assertIn("Verified Skills **1** · Related Academic Projects **1**", text)
+        self.assertIn("| 1 | [example/alpha]", text)
+        self.assertIn("| See repo docs |", text)
+        catalog = json.loads((Path(__file__).resolve().parents[1] / "config/disciplines.json").read_text())
+        for group in catalog["disciplines"]:
+            self.assertIn(f"[{group['en']}](https://riceai985.cc/en/#discipline={group['id']})", text)

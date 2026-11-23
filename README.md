@@ -1,5 +1,7 @@
 # 科研鼠鼠 · Skills 导航站
 
+**简体中文** · **[English (README_EN.md)](README_EN.md)**
+
 **面向大学生和研究生，按专业找到适合自己的科研 Skills。**
 
 **科研鼠鼠 · Skills 导航站**（`shushu-research-skills`）由 RiceAI88 整理维护，汇集 GitHub 上用于文献检索、论文阅读、写作、绘图、实验复现、投稿审稿、数据分析和研究计算的 Agent Skills。支持按 12 个学科门类与具体专业、8 类科研任务和适用 AI Agent 筛选，提供中文一句话导读、3 步快速上手指引（标注终端或 AI Agent 对话框执行位置、一键复制安装与双语提示词案例）、10 条专业科研路径与维护状态参考。科研相关工具、工作流与学习资料单独标注。
@@ -11,7 +13,7 @@
 [![CI](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/RiceAI88/shushu-research-skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-64748b)](LICENSE)
 
-[按专业找](#按专业找-skills) · [按任务找](#按科研任务找-skills) · [新手入门](#网站怎么用) · [今日新增](#今日新增-skills) · [Skills 榜单](#skills-榜单) · [科研相关项目](#科研相关项目) · [收录与更新](#收录与更新) · [推荐项目](CONTRIBUTING.md) · [English](#english)
+[按专业找](#按专业找-skills) · [按任务找](#按科研任务找-skills) · [新手入门](#网站怎么用) · [今日新增](#今日新增-skills) · [Skills 榜单](#skills-榜单) · [科研相关项目](#科研相关项目) · [收录与更新](#收录与更新) · [推荐项目](CONTRIBUTING.md) · [English](README_EN.md)
 
 [![科研 Skills 导航：专业分类、科研任务与项目安装入口](assets/readme-dashboard.png)](https://riceai985.cc/)
 
@@ -139,6 +141,8 @@ README 会由采集脚本自动生成，静态介绍需修改 [`render_readme`](
 
 ## English
 
+**[Read Full English README (README_EN.md) →](README_EN.md)** · **[Open English Dashboard →](https://riceai985.cc/en/)**
+
 **Research Hamster · Skills Directory** (`shushu-research-skills`) helps undergraduate and postgraduate students find GitHub research Skills by discipline, task and supported AI Agent, from literature search and writing to figures, data analysis and scientific computing.
 
 [Open the dashboard](https://riceai985.cc/en/) to choose a discipline and task, read the starter guide, follow 10 discipline research paths, use the 3-step quick-start with copyable prompt examples, inspect installation requirements, save favorites, compare repositories and explore data insights. Curated summaries are paired with the repository author's original description.
@@ -147,7 +151,7 @@ Discipline labels are based on official documentation; coverage is still being e
 
 Candidates are discovered through popular, recently updated and star-banded searches, then reviewed against README evidence while filtering out mirrors and non-academic noise. The main ranking uses Stars; daily arrivals mean first inclusion on this site, measured by the Beijing calendar day. The scheduled daily refresh runs at 10:00 UTC+8 (02:00 UTC), may be delayed, and does not guarantee new entries every day. Search coverage is bounded.
 
-[Methodology](docs/methodology.md) · [Contributing](CONTRIBUTING.md) · [JSON](data/rankings.json) · [CSV](data/rankings.csv) · [RSS](feed.xml)
+[English README](README_EN.md) · [Methodology](docs/methodology.md) · [Contributing](CONTRIBUTING.md) · [JSON](data/rankings.json) · [CSV](data/rankings.csv) · [RSS](feed.xml)
 
 ## 来源与致谢
 
