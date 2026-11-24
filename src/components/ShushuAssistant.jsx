@@ -18,6 +18,55 @@ const QUICK_QUESTIONS = {
   ],
 };
 
+const SESSION_CHAT_KEY = "ars-shushu-chat-v1";
+
+function loadSessionMessages() {
+  try {
+    if (typeof window === "undefined") return [];
+    const raw = window.sessionStorage?.getItem(SESSION_CHAT_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.slice(-12) : [];
+  } catch {
+    return [];
+  }
+}
+
+// 根据最近一轮提问生成保留学科上下文的一键追问胶囊
+function buildFollowUpChips(messages, lang = "zh") {
+  const zh = lang === "zh";
+  const userMsgs = messages.filter((m) => m.role === "user");
+  const baseTopic = String(userMsgs[0]?.text || "").slice(0, 64);
+  const lastUser = String(userMsgs[userMsgs.length - 1]?.text || "");
+  if (!baseTopic) return [];
+
+  const chips = [];
+  if (!/免命令行|网页版|不会敲命令|零基础|no[- ]?cli|web/i.test(lastUser)) {
+    chips.push({
+      label: zh ? "🟢 只要免命令行网页版能用的" : "🟢 Zero-CLI / Web AI only",
+      query: zh
+        ? `${baseTopic}，要求零基础免命令行、网页版 AI 直接能用`
+        : `${baseTopic}, zero-CLI and usable directly in Web AI`,
+    });
+  }
+  if (!/润色|去ai|降重|polish|humaniz/i.test(lastUser)) {
+    chips.push({
+      label: zh ? "✍️ 配套推荐论文润色降 AI 味工具" : "✍️ Add academic polishing Skills",
+      query: zh
+        ? `${baseTopic}，顺便推荐学术论文润色、去除 AI 味与排版工具`
+        : `${baseTopic}, plus academic writing polish and formatting Skills`,
+    });
+  } else {
+    chips.push({
+      label: zh ? "📊 配套推荐顶刊配图与流程图工具" : "📊 Add figure & diagram Skills",
+      query: zh
+        ? `${baseTopic}，顺便推荐顶刊统计配图与架构流程图工具`
+        : `${baseTopic}, plus publication plots and architecture diagram Skills`,
+    });
+  }
+  return chips.slice(0, 2);
+}
+
 // 轻量渲染回复中的 **加粗** 与 `代码` 标记
 function renderFormattedLine(line) {
   const tokens = String(line || "").split(/(\*\*[^*]+\*\*|`[^`]+`)/g);
@@ -44,7 +93,7 @@ export default function ShushuAssistant({
   const [rendered, setRendered] = useState(open);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(loadSessionMessages);
   const listRef = useRef(null);
   const inputRef = useRef(null);
   const prefersReduced =
@@ -79,6 +128,19 @@ export default function ShushuAssistant({
   }, [open, onClose]);
 
   useEffect(() => {
+    try {
+      if (typeof window === "undefined") return;
+      if (messages.length === 0) {
+        window.sessionStorage?.removeItem(SESSION_CHAT_KEY);
+      } else {
+        window.sessionStorage?.setItem(
+          SESSION_CHAT_KEY,
+          JSON.stringify(messages.slice(-12)),
+        );
+      }
+    } catch {
+      /* ignore quota / privacy mode */
+    }
     if (listRef.current) {
       listRef.current.scrollTop = listRef.current.scrollHeight;
     }
@@ -86,12 +148,15 @@ export default function ShushuAssistant({
 
   if (!open && (!rendered || prefersReduced)) return null;
   const isClosing = !open;
+  const followUps = !loading && messages.length > 0 ? buildFollowUpChips(messages, lang) : [];
 
-  const submitQuestion = async (rawText) => {
+  const submitQuestion = async (rawText, displayLabel = "", mode = "custom") => {
     const q = String(rawText ?? input).trim();
     if (!q || loading) return;
+    const shown = String(displayLabel || q).trim();
     setInput("");
-    setMessages((prev) => [...prev, { role: "user", text: q }]);
+    trackEvent("ask_shushu", { mode: rawText ? mode : "custom" });
+    setMessages((prev) => [...prev, { role: "user", text: shown }]);
     setLoading(true);
     try {
       const res = await askShushuAssistant({ query: q, items, lang });
@@ -169,7 +234,7 @@ export default function ShushuAssistant({
                   key={q}
                   type="button"
                   className="shushu-bot-starter-btn"
-                  onClick={() => submitQuestion(q)}
+                  onClick={() => submitQuestion(q, "", "starter")}
                 >
                   {q}
                 </button>
@@ -201,6 +266,7 @@ export default function ShushuAssistant({
                         className="shushu-pick-card"
                         data-testid="shushu-pick-card"
                         onClick={() => {
+                          trackEvent("open_shushu_pick", { repo: pick.repo });
                           onOpenRepo?.(pick.repo);
                         }}
                       >
@@ -236,6 +302,22 @@ export default function ShushuAssistant({
                     )}
                   </div>
                 )}
+                {msg.role === "assistant" &&
+                  idx === messages.length - 1 &&
+                  followUps.length > 0 && (
+                    <div className="shushu-followups" data-testid="shushu-followups">
+                      {followUps.map((chip) => (
+                        <button
+                          key={chip.label}
+                          type="button"
+                          className="shushu-followup-chip"
+                          onClick={() => submitQuestion(chip.query, chip.label, "followup")}
+                        >
+                          {chip.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
               </div>
             ))}
             {loading && (

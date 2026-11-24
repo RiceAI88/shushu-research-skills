@@ -1,13 +1,34 @@
 // 生成适合课题组微信群、QQ 群与小红书分享的纯文本安利卡片与工具包文案
 
 const SITE_DEFAULT_ORIGIN = "https://riceai985.cc";
+const VALID_SKILL_SLUG = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
 
 function resolveBaseOrigin(origin) {
   if (origin && /^https?:\/\//.test(origin)) return origin.replace(/\/+$/, "");
   if (typeof window !== "undefined" && window.location?.origin) {
-    return (window.location.origin + window.location.pathname).replace(/\/+$/, "");
+    return window.location.origin.replace(/\/+$/, "");
   }
   return SITE_DEFAULT_ORIGIN;
+}
+
+/**
+ * 构建单个项目的专属分享链接：已验证中文 Skill 优先使用静态独立落地页 /skills/<owner>/<repo>/
+ * 便于微信、飞书、小红书等解析专属标题卡片，并避免子路由拼接错位
+ */
+export function buildSkillShareUrl(item, { origin = "", lang = "zh" } = {}) {
+  const base = resolveBaseOrigin(origin);
+  const repo = String(item?.repo || "").trim();
+  if (!repo) return `${base}/`;
+  if (
+    lang === "zh" &&
+    item?.repository_kind !== "related" &&
+    VALID_SKILL_SLUG.test(repo) &&
+    !repo.includes("..")
+  ) {
+    return `${base}/skills/${repo}/`;
+  }
+  const prefix = lang === "en" ? "/en/" : "/";
+  return `${base}${prefix}#repo=${encodeURIComponent(repo)}`;
 }
 
 function briefSummary(item, lang) {
@@ -32,8 +53,7 @@ export function formatShareCardText(
   item,
   { lang = "zh", origin = "", tasks = "", agents = "" } = {},
 ) {
-  const base = resolveBaseOrigin(origin);
-  const url = `${base}/#repo=${encodeURIComponent(item.repo)}`;
+  const url = buildSkillShareUrl(item, { origin, lang });
   const stars = Number(item.stars || 0).toLocaleString(
     lang === "zh" ? "zh-CN" : "en-US",
   );

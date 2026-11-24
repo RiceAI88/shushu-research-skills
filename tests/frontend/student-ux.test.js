@@ -9,6 +9,7 @@ import {
 } from "../../src/domain.js";
 import {
   buildPackUrl,
+  buildSkillShareUrl,
   formatPackShareText,
   formatShareCardText,
 } from "../../src/shareText.js";
@@ -102,7 +103,13 @@ test("shareText formats peer recommendation cards and lab toolkit packs cleanly"
   );
   assert.match(card, /scientific-agent-skills/);
   assert.match(card, /科学数据分析/);
-  assert.match(card, /https:\/\/riceai985\.cc\/#repo=K-Dense-AI%2Fscientific-agent-skills/);
+  assert.match(card, /https:\/\/riceai985\.cc\/skills\/K-Dense-AI\/scientific-agent-skills\//);
+
+  const relatedUrl = buildSkillShareUrl(
+    { repo: "SomeOrg/related-tool", repository_kind: "related" },
+    { origin: "https://riceai985.cc", lang: "zh" },
+  );
+  assert.equal(relatedUrl, "https://riceai985.cc/#repo=SomeOrg%2Frelated-tool");
 
   const packUrl = buildPackUrl(["a/one", "b/two"], {
     origin: "https://riceai985.cc",

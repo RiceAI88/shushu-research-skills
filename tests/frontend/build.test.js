@@ -22,6 +22,8 @@ test("production site preserves both language entries and public data resources"
     "data/history.js",
     "feed.xml",
     "sitemap.xml",
+    "llms.txt",
+    "llms-full.txt",
     "robots.txt",
     "reports/index.html",
     "assets/styles.css",
@@ -118,4 +120,10 @@ test("static SEO skill detail pages render SoftwareSourceCode JSON-LD and initia
   const ld = JSON.parse(ldMatch[1]);
   assert.equal(ld["@type"], "SoftwareSourceCode");
   assert.equal(ld.name, "Yuan1z0825/nature-skills");
+
+  const indexHtml = await readFile("dist/index.html", "utf8");
+  assert.match(indexHtml, /href="\/skills\/[^"]+\/"/);
+  const llms = await readFile("dist/llms.txt", "utf8");
+  assert.match(llms, /https:\/\/riceai985\.cc\/skills\//);
+  assert.match(llms, /llms-full\.txt/);
 });

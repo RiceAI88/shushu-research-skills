@@ -1476,6 +1476,10 @@ function Dashboard({ state, update }) {
             open={compareOpen}
             onClose={() => setCompareOpen(false)}
             onRemove={toggleCompare}
+            onOpenRepo={(repo) => {
+              setCompareOpen(false);
+              update((s) => ({ ...s, repo }));
+            }}
             repos={state.compare}
             items={items}
             lang={state.lang}

@@ -1942,6 +1942,12 @@ body:has(.back-to-top) .shushu-bot-panel { bottom: calc(156px + env(safe-area-in
 .shushu-pick-cta { font-size: 11.5px; font-weight: 600; color: var(--prs-primary); }
 .shushu-pack-btn { width: 100%; padding: 7px 10px; border-radius: 8px; border: 1px dashed var(--prs-primary); background: var(--prs-tint); color: var(--prs-primary); font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
 [data-theme="dark"] .shushu-pack-btn { background: rgba(16, 185, 129, 0.14); }
+.shushu-followups { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; margin-top: 2px; }
+.shushu-followup-chip { padding: 5px 10px; border-radius: 999px; border: 1px solid rgba(13, 159, 110, 0.3); background: var(--prs-panel); color: var(--prs-body); font: inherit; font-size: 11.5px; line-height: 1.35; cursor: pointer; transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease; }
+.shushu-followup-chip:hover { border-color: var(--prs-primary); color: var(--prs-primary); background: var(--prs-tint); }
+.comparison-thresholds { display: flex; flex-wrap: wrap; gap: 5px; }
+.comparison-open-guide-btn { margin-top: 7px; padding: 3px 9px; border-radius: 999px; border: 1px solid rgba(13, 159, 110, 0.32); background: var(--prs-tint); color: var(--prs-primary); font: inherit; font-size: 11.5px; font-weight: 600; cursor: pointer; transition: border-color 0.15s ease, background-color 0.15s ease; }
+.comparison-open-guide-btn:hover { border-color: var(--prs-primary); }
 
 .shushu-bot-promo { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 14px; border-top: 1px solid var(--prs-border); background: linear-gradient(90deg, var(--prs-tint) 0%, var(--prs-panel) 100%); text-decoration: none; font-size: 12px; transition: background-color 0.15s ease; }
 [data-theme="dark"] .shushu-bot-promo { background: linear-gradient(90deg, rgba(16, 185, 129, 0.14) 0%, var(--prs-panel) 100%); }

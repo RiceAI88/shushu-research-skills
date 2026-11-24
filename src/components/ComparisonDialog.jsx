@@ -10,6 +10,7 @@ import {
   safeExternalUrl,
 } from "../domain";
 import { installationFor } from "../practical";
+import { deriveSetupThresholds } from "../usageGuide";
 import installationDetails from "../../config/installation-details.json";
 const labels = {
   analyze:"taskAnalyze",
@@ -25,6 +26,7 @@ export default function ComparisonDialog({
   open,
   onClose,
   onRemove,
+  onOpenRepo,
   repos,
   items = [],
   lang = "zh",
@@ -61,9 +63,29 @@ export default function ComparisonDialog({
     ],
     [
       "installEnvironment",
-      (item) =>
-        installationDetails[item.repo]?.[`environment_${lang}`] ||
-        t("compareUnknown"),
+      (item) => {
+        const curatedEnv = installationDetails[item.repo]?.[`environment_${lang}`];
+        if (curatedEnv) return curatedEnv;
+        const thresholds = deriveSetupThresholds(
+          item,
+          installationFor(item),
+          lang,
+          installationDetails[item.repo],
+        );
+        if (!thresholds.length) return t("compareUnknown");
+        return (
+          <div className="comparison-thresholds" data-testid="comparison-thresholds">
+            {thresholds.map((b) => (
+              <span
+                key={b.id}
+                className={`threshold-badge threshold-${b.tone || "easy"}`}
+              >
+                {b.label}
+              </span>
+            ))}
+          </div>
+        );
+      },
     ],
     [
       "installDependencies",
@@ -187,6 +209,18 @@ export default function ComparisonDialog({
                       <div className="comparison-col-summary">
                         {item.curated_use_zh}
                       </div>
+                    )}
+                    {onOpenRepo && (
+                      <button
+                        type="button"
+                        className="comparison-open-guide-btn"
+                        data-testid="comparison-open-guide"
+                        onClick={() => onOpenRepo(item.repo)}
+                      >
+                        {lang === "zh"
+                          ? "查看 3 步安装与提示词 ›"
+                          : "Setup & prompt guide ›"}
+                      </button>
                     )}
                   </th>
                 );

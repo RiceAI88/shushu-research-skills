@@ -2123,7 +2123,7 @@ SEO_TOPIC_IDS = (
 )
 
 
-SEO_SKILL_DETAIL_LIMIT = 120
+SEO_SKILL_DETAIL_LIMIT = 600
 _VALID_REPO_SLUG_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 
 
@@ -2147,6 +2147,8 @@ def render_sitemap(data: dict[str, Any]) -> str:
     urls = [
         ("", lastmod, "1.0", "daily"),
         ("en/", lastmod, "0.9", "daily"),
+        ("llms.txt", lastmod, "0.7", "daily"),
+        ("llms-full.txt", lastmod, "0.6", "daily"),
         *[(f"disciplines/{did}/", lastmod, "0.8", "daily") for did in SEO_DISCIPLINE_IDS],
         *[(f"topics/{tid}/", lastmod, "0.8", "daily") for tid in SEO_TOPIC_IDS],
         *[(f"skills/{repo}/", lastmod, "0.7", "weekly") for repo in seo_skill_repos(data)],

@@ -183,12 +183,20 @@ test("Shushu AI advisor lazy-loads on demand, answers with grounded picks, and o
   await expect(panel.getByTestId("shushu-msg-assistant")).toContainText(
     "docx-skill-4-cn-paper",
   );
+  await expect(panel.getByTestId("shushu-followups")).toBeVisible();
   const firstPick = panel.getByTestId("shushu-pick-card").first();
   await expect(firstPick).toBeVisible();
   await firstPick.click();
 
   await expect(page.getByTestId("shushu-bot-panel")).toHaveCount(0);
   await expect(page.getByRole("dialog")).toContainText("docx-skill-4-cn-paper");
+
+  // 刷新页面后重新打开鼠鼠，会话级记忆依然保留刚才推荐的记录
+  await page.goto("./");
+  await page.getByTestId("shushu-bot-trigger").click();
+  await expect(
+    page.getByTestId("shushu-bot-panel").getByTestId("shushu-msg-assistant"),
+  ).toContainText("docx-skill-4-cn-paper");
 });
 
 test("static skill SEO page, auto preview for new repos, direct web prompt, and returning discipline memory work end to end", async ({

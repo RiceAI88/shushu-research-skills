@@ -60,6 +60,12 @@ const escapeHtml = (value = "") =>
         char
       ],
   );
+const VALID_REPO_SLUG = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
+const hasStaticSkillPage = (item) =>
+  item?.repository_kind === "skill" &&
+  VALID_REPO_SLUG.test(String(item.repo || "")) &&
+  !String(item.repo || "").includes("..");
+
 const defaultItems = filterItems(ranking.items, restoreState(null, "", {}, ranking.items));
 const top = defaultItems.slice(0, 20);
 for (const [file, lang] of [
@@ -85,7 +91,10 @@ for (const [file, lang] of [
       "@type": "ListItem",
       position: index + 1,
       name: item.repo,
-      url: safeExternalUrl(item.url) || undefined,
+      url:
+        lang === "zh" && hasStaticSkillPage(item)
+          ? `https://riceai985.cc/skills/${item.repo}/`
+          : safeExternalUrl(item.url) || undefined,
     })),
   };
   const json = JSON.stringify(schema).replace(/</g, "\\u003c");
@@ -102,15 +111,22 @@ for (const [file, lang] of [
       ? "按 GitHub Stars 排序，默认仅展示 Skills。启用 JavaScript 可按专业、任务和平台筛选，查看安装指引与增长趋势。"
       : "Ranked by GitHub Stars; Skills only by default. Enable JavaScript to browse by discipline, task and platform, with installation guidance and growth trends.";
   const list = top
-    .map(
-      (item) =>
-        `<li><a href="${escapeHtml(safeExternalUrl(item.url) || "#")}">${escapeHtml(item.repo)}</a><p>${escapeHtml(item.description)}</p></li>`,
-    )
+    .map((item) => {
+      const ghUrl = escapeHtml(safeExternalUrl(item.url) || "#");
+      if (lang === "zh" && hasStaticSkillPage(item)) {
+        return `<li><a href="/skills/${escapeHtml(item.repo)}/">${escapeHtml(item.repo)}</a>（<a href="${ghUrl}">GitHub</a>）<p>${escapeHtml(item.curated_use_zh || item.description)}</p></li>`;
+      }
+      return `<li><a href="${ghUrl}">${escapeHtml(item.repo)}</a><p>${escapeHtml(item.description)}</p></li>`;
+    })
     .join("");
+  const extraNav =
+    lang === "zh"
+      ? `<p><a href="/llms.txt">AI 搜索引擎索引 (llms.txt)</a> · <a href="/llms-full.txt">完整收录库索引 (llms-full.txt)</a></p>`
+      : `<p><a href="/llms.txt">AI Search Index (llms.txt)</a> · <a href="/llms-full.txt">Full Skill Catalog (llms-full.txt)</a></p>`;
   html = html.replace(
     /<noscript\s*>[\s\S]*?<\/noscript\s*>/,
     () =>
-      `<noscript><section><h1>${title}</h1><p>${hint}</p><ol>${list}</ol></section></noscript>`,
+      `<noscript><section><h1>${title}</h1><p>${hint}</p><ol>${list}</ol>${extraNav}</section></noscript>`,
   );
   const cover = `og-cover${lang === "en" ? "-en" : ""}.png`;
   const coverVersion = createHash("sha256").update(await readFile(`dist/assets/${cover}`)).digest("hex").slice(0, 12);
@@ -317,7 +333,9 @@ for (const page of landingPages) {
       position: index + 1,
       name: item.repo,
       description: item.curated_use_zh || item.description || undefined,
-      url: safeExternalUrl(item.url) || undefined,
+      url: hasStaticSkillPage(item)
+        ? `${SITE_ORIGIN}/skills/${item.repo}/`
+        : safeExternalUrl(item.url) || undefined,
     })),
   };
   const json = JSON.stringify(schema).replace(/</g, "\\u003c");
@@ -331,7 +349,14 @@ for (const page of landingPages) {
       const zhSummary = item.curated_use_zh
         ? `<strong>${escapeHtml(item.curated_use_zh)}</strong> — `
         : "";
-      return `<li><a href="${escapeHtml(safeExternalUrl(item.url) || "#")}">${escapeHtml(item.repo)}</a>（★${Number(item.stars || 0).toLocaleString("en-US")}）<p>${zhSummary}${escapeHtml(item.description || "")}</p></li>`;
+      const ghUrl = escapeHtml(safeExternalUrl(item.url) || "#");
+      const primaryHref = hasStaticSkillPage(item)
+        ? `/skills/${escapeHtml(item.repo)}/`
+        : ghUrl;
+      const ghSuffix = hasStaticSkillPage(item)
+        ? ` · <a href="${ghUrl}">GitHub</a>`
+        : "";
+      return `<li><a href="${primaryHref}">${escapeHtml(item.repo)}</a>（★${Number(item.stars || 0).toLocaleString("en-US")}${ghSuffix}）<p>${zhSummary}${escapeHtml(item.description || "")}</p></li>`;
     })
     .join("");
 
@@ -360,18 +385,13 @@ for (const page of landingPages) {
 }
 console.log(`Generated ${landingPages.length} static SEO discipline & topic landing pages.`);
 
-// 为前 120 个热门验证 Skill 生成独立静态 SEO 落地页 (/skills/<owner>/<repo>/)，承接长尾名称检索
-const VALID_REPO_SLUG = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
+// 为全部已验证 Skill（上限 600）生成独立静态 SEO 落地页 (/skills/<owner>/<repo>/)，承接长尾名称检索并打通站内内链闭环
 const seoSkillItems = ranking.items
-  .filter(
-    (item) =>
-      item?.repository_kind === "skill" &&
-      VALID_REPO_SLUG.test(String(item.repo || "")) &&
-      !String(item.repo || "").includes(".."),
-  )
-  .slice(0, 120);
+  .filter((item) => hasStaticSkillPage(item))
+  .slice(0, 600);
 
-for (const item of seoSkillItems) {
+for (let idx = 0; idx < seoSkillItems.length; idx++) {
+  const item = seoSkillItems[idx];
   let html = rawZhTemplate;
   for (const [script, version] of Object.entries(dataVersions)) {
     html = html.replace(`data/${script}.js"`, `data/${script}.js?v=${version}"`);
@@ -453,10 +473,16 @@ for (const item of seoSkillItems) {
     (_, open, close) => open + json + close,
   );
 
+  // 相邻同榜单静态 Skill 互链，确保全量项目页形成无孤岛网状爬虫路径
+  const peerLinks = Array.from({ length: Math.min(6, Math.max(0, seoSkillItems.length - 1)) }, (_, offset) => {
+    const peer = seoSkillItems[(idx + offset + 1) % seoSkillItems.length];
+    return `<a href="/skills/${escapeHtml(peer.repo)}/">${escapeHtml(peer.repo)}</a>`;
+  }).join(" · ");
+
   html = html.replace(
     /<noscript\s*>[\s\S]*?<\/noscript\s*>/,
     () =>
-      `<noscript><article><h1>${escapeHtml(item.repo)} — ${escapeHtml(zhUse)}</h1><p>GitHub Stars：${escapeHtml(starsText)} · 适用平台：${escapeHtml(agentsText)}</p><p>${escapeHtml(item.description || "")}</p><p><a href="${escapeHtml(safeExternalUrl(item.url) || "#")}">访问 GitHub 原仓库</a> · <a href="/">返回科研鼠鼠 · Skills 导航站总榜</a></p><nav aria-label="全站科研专题导航"><p>${crossNavLinks}</p></nav></article></noscript>`,
+      `<noscript><article><h1>${escapeHtml(item.repo)} — ${escapeHtml(zhUse)}</h1><p>GitHub Stars：${escapeHtml(starsText)} · 适用平台：${escapeHtml(agentsText)}</p><p>${escapeHtml(item.description || "")}</p><p><a href="${escapeHtml(safeExternalUrl(item.url) || "#")}">访问 GitHub 原仓库</a> · <a href="/">返回科研鼠鼠 · Skills 导航站总榜</a></p><p>更多已验证科研 Skills：${peerLinks}</p><nav aria-label="全站科研专题导航"><p>${crossNavLinks}</p></nav></article></noscript>`,
   );
 
   const bootScript = `<script>window.__ARS_INITIAL_HASH=${JSON.stringify(initialHash)};window.__ARS_CUSTOM_TITLE=${JSON.stringify(pageTitle)};</script>`;
@@ -470,3 +496,70 @@ for (const item of seoSkillItems) {
   await writeFile(`${outDir}/index.html`, html);
 }
 console.log(`Generated ${seoSkillItems.length} static SEO skill detail pages.`);
+
+// 生成标准 /llms.txt 与 /llms-full.txt，方便 DeepSeek、Kimi、Perplexity、ChatGPT Search 等大模型检索引用
+const generatedDay = String(ranking.metadata?.generated_at || "").slice(0, 10) || "latest";
+const disciplineLines = DISCIPLINES.map(
+  (d) =>
+    `- [${d.zh}专业科研 AI Skills (${d.en})](${SITE_ORIGIN}/disciplines/${d.id}/): 覆盖 ${(d.majors || []).map((m) => m.zh).join("、")}`,
+).join("\n");
+const topicLines = TOPIC_SEO_SPECS.map(
+  (spec) => `- [${spec.label}：${spec.h1}](${SITE_ORIGIN}/topics/${spec.id}/): ${spec.description}`,
+).join("\n");
+const top50Lines = seoSkillItems
+  .slice(0, 50)
+  .map((item, i) => {
+    const stars = Number(item.stars || 0).toLocaleString("en-US");
+    const summary = item.curated_use_zh || item.description || "开源学术科研 AI Skill";
+    const agents = Array.isArray(item.agents) && item.agents.length > 0 ? item.agents.join("/") : "通用 Agent";
+    return `${i + 1}. [${item.repo}](${SITE_ORIGIN}/skills/${item.repo}/) (★${stars} · ${agents}): ${summary}`;
+  })
+  .join("\n");
+
+const llmsTxt = `# 科研鼠鼠 · Skills 导航站 (Research Hamster · Academic AI Skills Directory)
+
+> 面向本科生、研究生与科研人员，收录并每日更新 ${seoSkillItems.length} 个经过核验的 GitHub 开源学术科研 AI Skills（支持 Claude Code、Codex、Gemini CLI、Cursor、OpenCode 及免命令行网页版 AI），覆盖 12 大学科门类与文献检索、论文精读、学术写作润色、科研绘图、数据分析、科学计算、实验复现、投稿审稿全流程。数据快照日期：${generatedDay}。
+
+## 核心入口与结构化数据
+- [中文总榜首页](${SITE_ORIGIN}/): 按 12 大学科、8 大科研任务与论文阶段筛选全部科研 Skills
+- [English Directory](${SITE_ORIGIN}/en/): Bilingual directory of verified open-source academic research AI Skills
+- [完整大模型索引 (llms-full.txt)](${SITE_ORIGIN}/llms-full.txt): 全部 ${seoSkillItems.length} 个已验证科研 Skills 的完整说明、星标、适用平台与专属教程页链接
+- [JSON 榜单数据接口](${SITE_ORIGIN}/data/rankings.json): 每日自动更新的结构化仓库元数据
+- [RSS 订阅源](${SITE_ORIGIN}/feed.xml): 新收录科研 Skills 动态订阅
+
+## 按 12 大学科门类查找
+${disciplineLines}
+
+## 按 8 大科研任务查找
+${topicLines}
+
+## 热门验证科研 Skills Top 50
+${top50Lines}
+`;
+
+const fullCatalogLines = seoSkillItems
+  .map((item, i) => {
+    const stars = Number(item.stars || 0).toLocaleString("en-US");
+    const delta = item.star_delta_7d ? ` (7d ${item.star_delta_7d > 0 ? "+" : ""}${item.star_delta_7d})` : "";
+    const zhSummary = item.curated_use_zh || item.description || "";
+    const enSummary = item.description || "";
+    const agents = Array.isArray(item.agents) && item.agents.length > 0 ? item.agents.join(", ") : "Claude Code, Codex, Web AI";
+    return `### ${i + 1}. ${item.repo}
+- 教程与提示词页: ${SITE_ORIGIN}/skills/${item.repo}/
+- GitHub 仓库: ${safeExternalUrl(item.url) || `https://github.com/${item.repo}`}
+- Stars: ${stars}${delta} | 语言: ${item.language || "Markdown"} | 适用平台: ${agents}
+- 中文用途: ${zhSummary}
+- English Description: ${enSummary}`;
+  })
+  .join("\n\n");
+
+const llmsFullTxt = `# 科研鼠鼠 · Skills 导航站 — 全量已验证科研 AI Skills 索引 (llms-full.txt)
+
+> 收录总数：${seoSkillItems.length} 个经过核验的开源学术科研 AI Skills · 更新日期：${generatedDay} · 主站：${SITE_ORIGIN}/
+
+${fullCatalogLines}
+`;
+
+await writeFile("dist/llms.txt", llmsTxt);
+await writeFile("dist/llms-full.txt", llmsFullTxt);
+console.log(`Generated dist/llms.txt and dist/llms-full.txt (${seoSkillItems.length} verified skills).`);
