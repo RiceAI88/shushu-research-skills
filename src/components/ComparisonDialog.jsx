@@ -69,8 +69,8 @@ export default function ComparisonDialog({
         const thresholds = deriveSetupThresholds(
           item,
           installationFor(item),
-          lang,
           installationDetails[item.repo],
+          lang,
         );
         if (!thresholds.length) return t("compareUnknown");
         return (
@@ -78,7 +78,7 @@ export default function ComparisonDialog({
             {thresholds.map((b) => (
               <span
                 key={b.id}
-                className={`threshold-badge threshold-${b.tone || "easy"}`}
+                className={`threshold-pill threshold-${b.tone || "easy"}`}
               >
                 {b.label}
               </span>

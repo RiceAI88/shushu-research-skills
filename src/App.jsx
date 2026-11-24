@@ -479,6 +479,10 @@ function Dashboard({ state, update }) {
           { lang: state.lang },
         )
       : formatPackShareText(favItems, { lang: state.lang });
+    trackEvent("share_favorites_pack", {
+      count: favItems.length,
+      mode: onlyUrl ? "url" : "card",
+    });
     try {
       await copyText(text);
       message.success(
@@ -1002,7 +1006,15 @@ function Dashboard({ state, update }) {
           </div>
         </section>
 
-        <ActiveFilters {...{ state, update, t }} empty={!visible.length} />
+        <ActiveFilters
+          {...{ state, update, t }}
+          empty={!visible.length}
+          onShareFavorites={
+            state.favOnly && state.favorites.length
+              ? () => shareFavoritesPack(false)
+              : null
+          }
+        />
         <div
           id="panel-ranking"
           role="tabpanel"
@@ -1314,6 +1326,7 @@ function Dashboard({ state, update }) {
             {...{
               item: selected,
               items: visible,
+              allItems: items,
               state,
               update,
               toggleCompare,

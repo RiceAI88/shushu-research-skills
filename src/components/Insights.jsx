@@ -1,14 +1,6 @@
 import { DisciplineCounts, DisciplineCoverage } from "./DisciplineInsights";
-import React, {
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { Bar, Line, Scatter } from "@ant-design/plots";
-import { Renderer as SVGRenderer } from "@antv/g-svg";
-import { Button, Empty, Select, Tooltip } from "antd";
+import React, { useEffect, useMemo, useState } from "react";
+import { Empty, Select, Tooltip } from "antd";
 import { buildInsightData, createColorMaps } from "../insights";
 import { THEME_TOKENS } from "../tokens";
 import {
@@ -17,7 +9,6 @@ import {
   matchesResearchTask,
   sceneLabelsFor,
 } from "../domain";
-import { ChartSkeleton } from "./ChartSkeleton";
 import { ChartBoundary } from "./ChartBoundary";
 
 const chartLabels = {
@@ -60,38 +51,10 @@ const chartLabels = {
   },
 };
 
-function SvgPlot({ plot: Plot, onReady, loadingLabel, ...props }) {
-  const [loading, setLoading] = useState(true);
-  const listener = useRef(null);
-  useEffect(() => () => {
-    if (listener.current) {
-      const { chart, complete } = listener.current;
-      chart.off("afterrender", complete);
-    }
-  }, []);
-  const ready = (instance) => {
-    const complete = () => setLoading(false);
-    listener.current = { chart: instance.chart, complete };
-    // onReady means the instance exists; wait for its actual first render.
-    instance.chart.once("afterrender", complete);
-    instance.chart.getContext().canvas.setRenderer(new SVGRenderer());
-    onReady?.(instance);
-  };
-  return (
-    <div
-      className="chart-loading-host"
-      aria-busy={loading}
-      style={{ minHeight: props.height || 280 }}
-    >
-      <Plot {...props} onReady={ready} />
-      {loading && (
-        <div className="chart-loading-overlay">
-          <ChartSkeleton height={props.height || 280} label={loadingLabel} />
-        </div>
-      )}
-    </div>
-  );
-}
+const compactFmt = new Intl.NumberFormat("en", {
+  notation: "compact",
+  maximumFractionDigits: 1,
+});
 
 function ChartFrame({ title, note, action, id, children, t, hidden = false }) {
   return (
@@ -117,6 +80,7 @@ function ChartFrame({ title, note, action, id, children, t, hidden = false }) {
     </article>
   );
 }
+
 function NoData({ text }) {
   return (
     <div className="chart-empty">
@@ -124,12 +88,421 @@ function NoData({ text }) {
     </div>
   );
 }
+
+// 响应式轻量水平柱状图（替代 @ant-design/plots Bar，零重型运行时依赖）
+function HorizontalBarSvg({
+  rows,
+  height,
+  padLeft,
+  padRight = 64,
+  maxValue,
+  entering = false,
+  muted,
+  getLabel,
+  getValue,
+  getRightText,
+  getFill,
+  getTitle,
+  onSelect,
+}) {
+  const W = 640;
+  const padTop = 14;
+  const padBottom = 14;
+  const innerW = Math.max(80, W - padLeft - padRight);
+  const innerH = Math.max(40, height - padTop - padBottom);
+  const step = rows.length ? innerH / rows.length : innerH;
+  const barH = Math.min(16, Math.max(10, step * 0.52));
+  const safeMax = Math.max(1, maxValue);
+
+  return (
+    <svg
+      className={`insight-svg${entering ? " is-entering" : ""}`}
+      viewBox={`0 0 ${W} ${height}`}
+      width="100%"
+      height={height}
+      style={{ display: "block", fontFamily: FONT_FAMILY }}
+    >
+      {rows.map((row, idx) => {
+        const val = Math.max(0, Number(getValue(row)) || 0);
+        const bw = val > 0 ? Math.max(4, (val / safeMax) * innerW) : 2;
+        const cy = padTop + step * (idx + 0.5);
+        const by = cy - barH / 2;
+        return (
+          <g key={row.id || row.repo || idx}>
+            <text
+              x={padLeft - 10}
+              y={cy}
+              dy="0.35em"
+              textAnchor="end"
+              fill={muted}
+              fontSize="12"
+            >
+              {getLabel(row)}
+            </text>
+            <rect
+              className="element"
+              x={padLeft}
+              y={by}
+              width={bw}
+              height={barH}
+              rx={4}
+              fill={getFill(row, idx)}
+              style={{
+                cursor: "pointer",
+                transformOrigin: `${padLeft}px ${cy}px`,
+              }}
+              onClick={() => onSelect?.(row)}
+            >
+              <title>{getTitle(row)}</title>
+            </rect>
+            <text
+              x={padLeft + bw + 7}
+              y={cy}
+              dy="0.35em"
+              textAnchor="start"
+              fill={muted}
+              fontSize="11.5"
+            >
+              {getRightText(row)}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+// 响应式多序列相对增长折线图（原生矢量渲染，自带终点标签防重叠）
+function TrendLineSvg({
+  trends,
+  trendRepos,
+  trendRange,
+  trendTicks,
+  muted,
+  grid,
+  percent,
+  fmt,
+  baselineLabel,
+  onOpenRepo,
+}) {
+  const W = 680;
+  const H = 280;
+  const padL = 54;
+  const padR = 132;
+  const padT = 16;
+  const padB = 34;
+  const plotW = W - padL - padR;
+  const plotH = H - padT - padB;
+
+  const valid = trends.filter((p) => Number.isFinite(p.growthPercent));
+  const times = valid.map((p) => p.time);
+  const minT = Math.min(...times);
+  const maxT = Math.max(...times);
+  const spanT = maxT - minT;
+
+  const vals = valid.map((p) => p.growthPercent);
+  let minY = Math.min(...vals);
+  let maxY = Math.max(...vals);
+  if (minY === maxY) {
+    minY -= 5;
+    maxY += 5;
+  } else {
+    const pad = (maxY - minY) * 0.1;
+    minY -= pad;
+    maxY += pad;
+  }
+
+  const toX = (tVal) =>
+    spanT > 0 ? padL + ((tVal - minT) / spanT) * plotW : padL + plotW / 2;
+  const toY = (vVal) => padT + (1 - (vVal - minY) / (maxY - minY)) * plotH;
+
+  const yTicks = Array.from({ length: 5 }, (_, i) => minY + ((maxY - minY) * i) / 4);
+  const dashPatterns = [undefined, "7 4", "2 4"];
+
+  const seriesList = trendRepos
+    .map((item, idx) => {
+      const pts = valid
+        .filter((p) => p.repo === item.repo)
+        .sort((a, b) => a.time - b.time);
+      if (!pts.length) return null;
+      const last = pts[pts.length - 1];
+      return {
+        repo: item.repo,
+        shortName: item.repo.split("/").pop(),
+        color: trendRange[idx] || trendRange[0],
+        dash: dashPatterns[idx],
+        pts,
+        last,
+        lastX: toX(last.time),
+        lastY: toY(last.growthPercent),
+        labelY: toY(last.growthPercent),
+      };
+    })
+    .filter(Boolean);
+
+  // 简易垂直错位，避免多条曲线终点仓库名重叠
+  const sortedLabels = [...seriesList].sort((a, b) => a.labelY - b.labelY);
+  for (let i = 1; i < sortedLabels.length; i++) {
+    if (sortedLabels[i].labelY - sortedLabels[i - 1].labelY < 14) {
+      sortedLabels[i].labelY = Math.min(
+        H - padB + 4,
+        sortedLabels[i - 1].labelY + 14,
+      );
+    }
+  }
+
+  return (
+    <svg
+      className="insight-svg"
+      viewBox={`0 0 ${W} ${H}`}
+      width="100%"
+      height={H}
+      style={{ display: "block", fontFamily: FONT_FAMILY }}
+    >
+      {yTicks.map((yv, idx) => {
+        const y = toY(yv);
+        return (
+          <g key={idx}>
+            <line
+              x1={padL}
+              y1={y}
+              x2={W - padR}
+              y2={y}
+              stroke={grid}
+              strokeDasharray="2 3"
+            />
+            <text
+              x={padL - 8}
+              y={y}
+              dy="0.35em"
+              textAnchor="end"
+              fill={muted}
+              fontSize="11.5"
+            >
+              {`${Math.round(yv * 10) / 10}%`}
+            </text>
+          </g>
+        );
+      })}
+      {trendTicks.map((tv) => {
+        const x = toX(tv);
+        return (
+          <text
+            key={tv}
+            x={x}
+            y={H - 10}
+            textAnchor="middle"
+            fill={muted}
+            fontSize="11.5"
+          >
+            {new Date(tv).toISOString().slice(5, 10)}
+          </text>
+        );
+      })}
+      {seriesList.map((s) => (
+        <g key={s.repo}>
+          <path
+            className="element"
+            d={s.pts
+              .map(
+                (p, idx) =>
+                  `${idx === 0 ? "M" : "L"}${toX(p.time).toFixed(1)},${toY(p.growthPercent).toFixed(1)}`,
+              )
+              .join(" ")}
+            fill="none"
+            stroke={s.color}
+            strokeWidth="2"
+            strokeDasharray={s.dash}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ cursor: "pointer" }}
+            onClick={() => onOpenRepo?.(s.repo)}
+          />
+          <circle
+            cx={s.lastX}
+            cy={s.lastY}
+            r="3.2"
+            fill={s.color}
+            style={{ cursor: "pointer" }}
+            onClick={() => onOpenRepo?.(s.repo)}
+          >
+            <title>
+              {`${s.repo} (${s.last.date}): ${percent(s.last.growthPercent)} · ${fmt(s.last.stars)} Stars | ${baselineLabel}: ${s.last.baselineDate} (${fmt(s.last.baselineStars)} Stars)`}
+            </title>
+          </circle>
+          <text
+            x={s.lastX + 7}
+            y={s.labelY}
+            dy="0.35em"
+            textAnchor="start"
+            fill={muted}
+            fontSize="10.5"
+            style={{ cursor: "pointer" }}
+            onClick={() => onOpenRepo?.(s.repo)}
+          >
+            {s.shortName}
+          </text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+// 响应式对数散点图（Stars 对数 × 近 7 日增量）
+function LogScatterSvg({
+  scatterData,
+  scatterDomain,
+  scatterTicks,
+  growthTicks,
+  dark,
+  muted,
+  grid,
+  fmt,
+  signed,
+  categoryTooltipLabel,
+  growthLabel,
+  onOpenRepo,
+}) {
+  const W = 680;
+  const H = 300;
+  const padL = 54;
+  const padR = 24;
+  const padT = 18;
+  const padB = 38;
+  const plotW = W - padL - padR;
+  const plotH = H - padT - padB;
+
+  const logMinX = Math.log10(Math.max(1, scatterDomain[0]));
+  const logMaxX = Math.log10(Math.max(10, scatterDomain[1]));
+  const spanX = Math.max(1, logMaxX - logMinX);
+
+  const yVals = [0, ...growthTicks, ...scatterData.map((d) => d.growthLog)];
+  let minY = Math.min(...yVals);
+  let maxY = Math.max(...yVals);
+  if (minY === maxY) {
+    minY -= 1;
+    maxY += 1;
+  } else {
+    maxY += (maxY - minY) * 0.08;
+  }
+
+  const toX = (stars) =>
+    padL +
+    ((Math.log10(Math.max(1, stars || 1)) - logMinX) / spanX) * plotW;
+  const toY = (gLog) => padT + (1 - (gLog - minY) / (maxY - minY)) * plotH;
+
+  const dotColor = dark ? "#34D399" : "#0D9F6E";
+  const highlights = scatterData.filter((d) => d.highlight);
+
+  return (
+    <svg
+      className="insight-svg"
+      viewBox={`0 0 ${W} ${H}`}
+      width="100%"
+      height={H}
+      style={{ display: "block", fontFamily: FONT_FAMILY }}
+    >
+      {growthTicks.map((gy, idx) => {
+        const y = toY(gy);
+        const rawVal = Math.sign(gy) * Math.round(10 ** Math.abs(gy) - 1);
+        return (
+          <g key={idx}>
+            <line
+              x1={padL}
+              y1={y}
+              x2={W - padR}
+              y2={y}
+              stroke={grid}
+              strokeDasharray="2 3"
+            />
+            <text
+              x={padL - 8}
+              y={y}
+              dy="0.35em"
+              textAnchor="end"
+              fill={muted}
+              fontSize="11.5"
+            >
+              {compactFmt.format(rawVal)}
+            </text>
+          </g>
+        );
+      })}
+      {scatterTicks.map((sx) => {
+        const x = toX(sx);
+        return (
+          <text
+            key={sx}
+            x={x}
+            y={H - 18}
+            textAnchor="middle"
+            fill={muted}
+            fontSize="11.5"
+          >
+            {compactFmt.format(sx)}
+          </text>
+        );
+      })}
+      <text
+        x={padL + plotW / 2}
+        y={H - 3}
+        textAnchor="middle"
+        fill={muted}
+        fontSize="11"
+      >
+        Stars (log)
+      </text>
+      {scatterData.map((datum) => {
+        const cx = toX(datum.stars);
+        const cy = toY(datum.growthLog);
+        return (
+          <circle
+            key={datum.repo}
+            className="element"
+            cx={cx}
+            cy={cy}
+            r={datum.highlight ? 4.2 : 2.6}
+            fill={dotColor}
+            fillOpacity={datum.highlight ? 0.95 : 0.26}
+            stroke={dotColor}
+            strokeWidth="0.6"
+            style={{ cursor: "pointer" }}
+            onClick={() => onOpenRepo?.(datum.repo)}
+          >
+            <title>
+              {`${datum.repo} · ${categoryTooltipLabel}: ${datum.sceneLabel} · Stars: ${fmt(datum.stars)} · ${growthLabel}: ${signed(datum.growth)}`}
+            </title>
+          </circle>
+        );
+      })}
+      {highlights.map((datum) => {
+        const cx = toX(datum.stars);
+        const cy = toY(datum.growthLog);
+        const alignEnd = cx > W - 120;
+        return (
+          <text
+            key={`lbl-${datum.repo}`}
+            x={alignEnd ? cx - 6 : cx + 6}
+            y={Math.max(padT + 8, cy - 7)}
+            textAnchor={alignEnd ? "end" : "start"}
+            fill={muted}
+            fontSize="10"
+            pointerEvents="none"
+          >
+            {datum.repo.split("/").pop()}
+          </text>
+        );
+      })}
+    </svg>
+  );
+}
+
 export default function Insights({
   items,
   allItems,
   professionItems = items,
   scopeControl,
-  hideHeading=false,
+  hideHeading = false,
   history,
   generatedAt,
   state,
@@ -148,7 +521,6 @@ export default function Insights({
     return () => query.removeEventListener("change", change);
   }, []);
   const showAdditional = expanded;
-  const entered = useRef(new Set());
   const [reducedMotion, setReducedMotion] = useState(
     () => matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
@@ -158,21 +530,16 @@ export default function Insights({
     media.addEventListener("change", change);
     return () => media.removeEventListener("change", change);
   }, []);
-  const entrance = (id) => {
-    if (reducedMotion || entered.current.has(id)) return false;
-    const settings = {
-      trend: { type: "pathIn", duration: 900, delay: 0 },
-      categories: { type: "scaleInY", duration: 800, delay: 80 },
-      growth: { type: "scaleInY", duration: 700, delay: 140 },
-      scatter: { type: "fadeIn", duration: 600, delay: 200 },
-    };
-    return {
-      enter: { ...settings[id], easing: "ease-out" },
-      update: false,
-      exit: false,
-    };
-  };
-  const trendEntrance = entrance("trend");
+  const [entering, setEntering] = useState(() => !reducedMotion);
+  useEffect(() => {
+    if (!entering || reducedMotion) {
+      setEntering(false);
+      return undefined;
+    }
+    const timer = setTimeout(() => setEntering(false), 760);
+    return () => clearTimeout(timer);
+  }, [entering, reducedMotion]);
+
   const [days, setDays] = useState(60);
   const selectedTrends = useMemo(
     () =>
@@ -188,8 +555,9 @@ export default function Insights({
   const colors = useMemo(() => createColorMaps(allItems), [allItems]);
   const dark = state.theme === "dark";
   const themeTokens = THEME_TOKENS[state.theme] || THEME_TOKENS.light;
-  const muted = themeTokens.textSecondary,
-    grid = themeTokens.border;
+  const muted = themeTokens.textSecondary;
+  const grid = themeTokens.border;
+
   const fmt = (value) =>
     new Intl.NumberFormat(state.lang === "zh" ? "zh-CN" : "en-US").format(
       value,
@@ -205,6 +573,7 @@ export default function Insights({
     String(value).length > (isMobile ? 16 : 24)
       ? String(value).slice(0, isMobile ? 15 : 23) + "…"
       : String(value);
+
   const open = (repo) => {
     if (repo && allItems.some((i) => i.repo === repo))
       update((s) => ({ ...s, repo }));
@@ -215,74 +584,9 @@ export default function Insights({
       task: s.task === id ? "all" : id,
       category: "all",
     }));
-  const handlers = useRef({ open, category });
-  useLayoutEffect(() => {
-    handlers.current = { open, category };
-  });
-  const bind =
-    (id) =>
-    ({ chart }) => {
-      entered.current.add(id);
-      chart.on("element:click", (event) => {
-        const datum = event.data?.data;
-        if (!datum) return;
-        if (id === "categories") handlers.current.category(datum.id);
-        else handlers.current.open(datum.repo);
-      });
-    };
-  const base = {
-    autoFit: true,
-    height: 280,
-    animate: false,
-    legend: false,
-    theme: {
-      type: dark ? "dark" : "light",
-      axis: {
-        labelOpacity: 1,
-        labelFill: muted,
-        labelFontFamily: FONT_FAMILY,
-        titleFill: muted,
-        titleFontFamily: FONT_FAMILY,
-      },
-      view: { viewFill: "transparent" },
-    },
-    style: { fontFamily: FONT_FAMILY },
-    paddingLeft: 50,
-    paddingRight: 18,
-    paddingTop: 12,
-    paddingBottom: 32,
-  };
-  const numericAxis = {
-    title: false,
-    labelFill: muted,
-    labelOpacity: 1,
-    labelFontFamily: FONT_FAMILY,
-    labelFontSize: 12,
-    grid: true,
-    gridStroke: grid,
-    gridLineDash: [2, 3],
-    tick: false,
-    line: false,
-    labelFormatter: (value) =>
-      new Intl.NumberFormat("en", {
-        notation: "compact",
-        maximumFractionDigits: 1,
-      }).format(Number(value)),
-  };
-  const repoDomain = Object.keys(colors.repos),
-    repoRange = Object.values(colors.repos),
-    catDomain = Object.keys(colors.categories),
-    catRange = Object.values(colors.categories);
+
   const latest = new Map(data.trends.map((p) => [p.repo, p]));
-  const trendDomain = data.trendRepos.map((item) => item.repo);
   const trendRange = themeTokens.chartSeries;
-  const trendDashes = [[], [7, 4], [2, 4]];
-  const trendStyles = Object.fromEntries(
-    trendDomain.map((repo, index) => [
-      repo,
-      { color: trendRange[index], dash: trendDashes[index] },
-    ]),
-  );
   const hasTrend = data.trends.some((point) =>
     Number.isFinite(point.growthPercent),
   );
@@ -298,6 +602,7 @@ export default function Insights({
         ]),
       ]
     : [];
+
   const starValues = data.scatter.map((item) => item.stars);
   const minExponent = Math.floor(Math.log10(Math.min(...starValues, Infinity)));
   const maxExponent = Math.max(
@@ -313,6 +618,7 @@ export default function Insights({
         (_, index) => 10 ** (minExponent + index),
       )
     : [1, 10];
+
   const taskKeys = {
     analyze: "taskAnalyze",
     compute: "taskCompute",
@@ -328,6 +634,7 @@ export default function Insights({
     label: t(taskKeys[task.id]),
     count: items.filter((item) => matchesResearchTask(item, task)).length,
   })).sort((a, b) => b.count - a.count);
+
   const signedLog = (value) =>
     Math.sign(value) * Math.log10(1 + Math.abs(value));
   const scatterData = data.scatter.map((point) => ({
@@ -347,25 +654,26 @@ export default function Insights({
     .filter((value) => value >= growthMin && value <= growthMax * 1.2)
     .map(signedLog);
   const categoryMax = Math.max(0, ...categories.map((c) => c.count));
+  const growthBarMax = Math.max(1, ...data.growth.map((d) => d.growth || 0));
+
   return (
     <section
       className={hideHeading ? "insights-body" : "insights"}
       data-testid={hideHeading ? undefined : "insights"}
       aria-labelledby="insights-heading"
     >
-      {!hideHeading && <div className="insights-heading">
-        <div>
-          <h2 id="insights-heading">{t("insightsTitle")}</h2>
-          <p>
-            {t("insightsScope")}{" "}
-            <b data-testid="insight-count">{items.length}</b> {t("repos")}
-          </p>
+      {!hideHeading && (
+        <div className="insights-heading">
+          <div>
+            <h2 id="insights-heading">{t("insightsTitle")}</h2>
+            <p>
+              {t("insightsScope")}{" "}
+              <b data-testid="insight-count">{items.length}</b> {t("repos")}
+            </p>
+          </div>
+          <div className="insights-actions">{scopeControl}</div>
         </div>
-        <div className="insights-actions">
-          {scopeControl}
-
-        </div>
-      </div>}
+      )}
       <div className="insights-top">
         <ChartFrame
           id="growth"
@@ -380,68 +688,30 @@ export default function Insights({
                 role="img"
                 aria-label={t("insightGrowth")}
               >
-                <SvgPlot
-                  loadingLabel={t("chartsLoading")}
-                  plot={Bar}
-                  {...base}
-                  animate={entrance("growth")}
+                <HorizontalBarSvg
+                  rows={data.growth}
                   height={300}
-                  paddingRight={65}
-                  data={data.growth}
-                  xField="repo"
-                  yField="growth"
-                  colorField="repo"
-                  scale={{
-                    color: { domain: repoDomain, range: repoRange },
-                    y: { zero: true, nice: true },
-                  }}
-                  axis={{
-                    x: {
-                      title: false,
-                      tick: false,
-                      line: false,
-                      labelFill: muted,
-                      labelOpacity: 1,
-                      labelFontFamily: FONT_FAMILY,
-                      labelFontSize: 12,
-                      labelFormatter: (value) =>
-                        short(String(value).split("/").pop()),
-                    },
-                    y: false,
-                  }}
-                  paddingLeft={isMobile ? 112 : 180}
-                  label={{
-                    text: (datum) => signed(datum.growth),
-                    position: "right",
-                    style: {
-                      dx: 6,
-                      fill: muted,
-                      fontSize: 11,
-                      textAlign: "left",
-                    },
-                  }}
-                  style={{
-                    maxWidth: 16,
-                    fill: (datum) =>
-                      datum.repo === data.growth[0]?.repo
-                        ? dark
-                          ? "#34D399"
-                          : "#0D9F6E"
-                        : dark
-                          ? "#10B981"
-                          : "#6EE7B7",
-                  }}
-                  tooltip={{
-                    title: "repo",
-                    items: [
-                      {
-                        field: "growth",
-                        name: t("insightGrowth"),
-                        valueFormatter: signed,
-                      },
-                    ],
-                  }}
-                  onReady={bind("growth")}
+                  padLeft={isMobile ? 128 : 190}
+                  padRight={72}
+                  maxValue={growthBarMax}
+                  entering={entering && !reducedMotion}
+                  muted={muted}
+                  getLabel={(d) => short(String(d.repo).split("/").pop())}
+                  getValue={(d) => d.growth}
+                  getRightText={(d) => signed(d.growth)}
+                  getFill={(d, idx) =>
+                    idx === 0
+                      ? dark
+                        ? "#34D399"
+                        : "#0D9F6E"
+                      : dark
+                        ? "#10B981"
+                        : "#6EE7B7"
+                  }
+                  getTitle={(d) =>
+                    `${d.repo} · ${t("insightGrowth")}: ${signed(d.growth)}`
+                  }
+                  onSelect={(d) => open(d.repo)}
                 />
               </div>
               <div className="chart-keyboard-controls">
@@ -467,389 +737,268 @@ export default function Insights({
             <NoData text={t("noGrowth")} />
           )}
         </ChartFrame>
-        <DisciplineCounts items={professionItems} state={state} update={update} />
+        <DisciplineCounts
+          items={professionItems}
+          state={state}
+          update={update}
+        />
       </div>
-      <DisciplineCoverage items={professionItems} state={state} update={update} t={t} />
-      <details className="more-chart-details" data-testid="more-charts" open={expanded} onToggle={event => setExpanded(event.currentTarget.open)}>
-        <summary>{state.lang === 'zh' ? '更多图表：相对增长、规模与场景分布' : 'More charts: growth trends, scale and task distribution'}</summary>
-        {expanded && <>
-        <div className="legacy-chart-controls">          <label className="history-window">
-            <span>{state.lang === "zh" ? "增长曲线窗口" : "Trend window"}</span>
-            <Select
-              aria-label={t("historyWindow")}
-              value={days}
-              onChange={setDays}
-              options={[30, 60, 90].map((value) => ({
-                value,
-                label: `${value} ${t("days")}`,
-              }))}
-            />
-          </label>
-</div>
-        <div className="legacy-category-chart">        <ChartFrame
-          id="categories"
-          title={t("sceneDistribution")}
-          note={t("sceneDistributionHelp")}
-          t={t}
-        >
-          {categories.length ? (
-            <>
-              <div
-                className="plot-host"
-                role="img"
-                aria-label={t("sceneDistribution")}
-              >
-                <SvgPlot
-                  loadingLabel={t("chartsLoading")}
-                  plot={Bar}
-                  {...base}
-                  animate={entrance("categories")}
-                  height={Math.max(150, categories.length * 27 + 30)}
-                  paddingLeft={
-                    isMobile
-                      ? state.lang === "zh"
-                        ? 76
-                        : 110
-                      : state.lang === "zh"
-                        ? 110
-                        : 160
-                  }
-                  paddingRight={40}
-                  data={categories}
-                  xField="label"
-                  yField="count"
-                  scale={{
-                    y: {
-                      zero: true,
-                      nice: true,
-                      domain: [
-                        0,
-                        categoryMax + Math.max(4, Math.ceil(categoryMax * 0.2)),
-                      ],
-                    },
-                  }}
-                  axis={{
-                    x: {
-                      title: false,
-                      tick: false,
-                      line: false,
-                      labelFill: muted,
-                      labelOpacity: 1,
-                      labelFontFamily: FONT_FAMILY,
-                      labelFontSize: 12,
-                      labelAutoEllipsis: false,
-                    },
-                    y: false,
-                  }}
-                  label={{
-                    text: "count",
-                    position: "right",
-                    style: {
-                      fill: muted,
-                      fontFamily: FONT_FAMILY,
-                      fontSize: 12,
-                      textAlign: "start",
-                      dx: 6,
-                    },
-                  }}
-                  style={{
-                    maxWidth: 14,
-                    fill: (datum) =>
-                      state.task === datum.id
-                        ? dark
-                          ? "#34D399"
-                          : "#0D9F6E"
-                        : dark
-                          ? "#475569"
-                          : "#CBD5E1",
-                  }}
-                  tooltip={{
-                    title: "label",
-                    items: [{ field: "count", name: t("repos") }],
-                  }}
-                  onReady={bind("categories")}
-                />
-              </div>
-              <div className="chart-keyboard-controls category-filter-controls">
-                {categories.map((c) => (
-                  <button
-                    key={c.id}
-                    data-chart-category={c.id}
-                    onClick={() => category(c.id)}
-                    aria-pressed={state.task === c.id}
-                  >
-                    <i style={{ background: dark ? "#34D399" : "#0D9F6E" }} />
-                    <span>{c.label}</span>
-                    <b>{c.count}</b>
-                  </button>
-                ))}
-              </div>
-            </>
-          ) : (
-            <NoData text={t("empty")} />
-          )}
-        </ChartFrame></div>
-      <div className="insights-bottom" hidden={!showAdditional}>
-        <ChartFrame
-          id="trend"
-          hidden={!showAdditional}
-          title={t("insightTrend")}
-          note={t(
-            selectedTrends.length ? "comparisonNote" : "insightTrendNote",
-          )}
-          t={t}
-        >
-          <div className="trend-legend">
-            {data.trendRepos.map((item, index) => (
-              <button key={item.repo} onClick={() => open(item.repo)}>
-                <i
-                  style={{
-                    borderColor: trendRange[index],
-                    borderStyle:
-                      index === 1 ? "dashed" : index === 2 ? "dotted" : "solid",
-                  }}
-                />
-                {short(item.repo.split("/").pop())}
-              </button>
-            ))}
-          </div>
-          <div className="chart-keyboard-controls">
-            {data.trendRepos.map((item) => (
-              <button key={item.repo} onClick={() => open(item.repo)}>
-                {item.repo} · {latest.get(item.repo)?.date || "—"} ·{" "}
-                {Number.isFinite(latest.get(item.repo)?.growthPercent)
-                  ? percent(latest.get(item.repo).growthPercent)
-                  : "—"}
-              </button>
-            ))}
-          </div>
-          {hasTrend ? (
-            <div
-              className="plot-host"
-              role="img"
-              aria-label={t("insightTrend")}
-            >
-              <SvgPlot
-                  loadingLabel={t("chartsLoading")}
-                plot={Line}
-                {...base}
-                paddingRight={135}
-                animate={trendEntrance}
-                data={data.trends}
-                xField="time"
-                yField="growthPercent"
-                colorField="repo"
-                scale={{
-                  x: { type: "time", tickMethod: () => trendTicks },
-                  y: { zero: false, nice: true },
-                  color: { domain: trendDomain, range: trendRange },
-                }}
-                axis={{
-                  x: {
-                    title: false,
-                    labelFill: muted,
-                    labelOpacity: 1,
-                    labelFontFamily: FONT_FAMILY,
-                    labelFontSize: 12,
-                    tick: false,
-                    labelFormatter: (value) =>
-                      new Date(value).toISOString().slice(5, 10),
-                  },
-                  y: { ...numericAxis, labelFormatter: (value) => `${value}%` },
-                }}
-                style={{
-                  lineWidth: 2,
-                  // G2 passes the entire series to a line mark's style callback.
-                  lineDash: (series) =>
-                    trendStyles[series[0]?.repo]?.dash || [],
-                }}
-                point={{
-                  style: {
-                    r: (datum) =>
-                      latest.get(datum.repo)?.time === datum.time ? 2.8 : 0,
-                  },
-                  tooltip: false,
-                  animate: trendEntrance
-                    ? {
-                        enter: { type: "fadeIn", duration: 150, delay: 750 },
-                        update: false,
-                        exit: false,
-                      }
-                    : false,
-                }}
-                label={{
-                  text: (datum) =>
-                    latest.get(datum.repo)?.time === datum.time
-                      ? datum.repo.split("/").pop()
-                      : "",
-                  style: {
-                    dx: 7,
-                    textAlign: "left",
-                    fontSize: 10,
-                    fill: muted,
-                  },
-                  transform: [{ type: "overlapDodgeY" }],
-                }}
-                tooltip={{
-                  title: (datum) => datum.date,
-                  items: [
-                    (datum) => ({
-                      name: datum.repo,
-                      value: `${percent(datum.growthPercent)} · ${fmt(datum.stars)} Stars`,
-                    }),
-                    (datum) => ({
-                      name: t("insightBaseline"),
-                      value: `${datum.baselineDate} · ${fmt(datum.baselineStars)} Stars`,
-                    }),
-                  ],
-                }}
-                onReady={bind("trend")}
-              />
-            </div>
-          ) : (
-            <NoData text={t("noHistory")} />
-          )}
-          <p className="chart-footnote">
-            {recordedDates.length > 0 && (
-              <span>
-                {t("dataSince")} {recordedDates[0]}{" "}
-              </span>
-            )}
-            <Tooltip
-              title={`${t("historyProvenance")} ${t("insightBaselineNote")}`}
-            >
-              <button className="chart-help" aria-label={t("historyDetails")}>
-                ?
-              </button>
-            </Tooltip>
-          </p>
-        </ChartFrame>
-        <ChartFrame
-          id="scatter"
-          hidden={!showAdditional}
-          title={t("insightScatter")}
-          note={t("insightScatterNote")}
-          t={t}
-        >
-          {data.scatter.length ? (
-            <>
-              <div
-                className="plot-host"
-                role="img"
-                aria-label={t("insightScatter")}
-              >
-                <SvgPlot
-                  loadingLabel={t("chartsLoading")}
-                  plot={Scatter}
-                  {...base}
-                  animate={entrance("scatter")}
-                  height={300}
-                  data={scatterData}
-                  xField="stars"
-                  yField="growthLog"
-                  colorField="category"
-                  scale={{
-                    x: {
-                      type: "log",
-                      base: 10,
-                      domain: scatterDomain,
-                      tickMethod: () => scatterTicks,
-                    },
-                    y: {
-                      zero: true,
-                      nice: true,
-                      tickMethod: () => growthTicks,
-                    },
-                    color: { domain: catDomain, range: catRange },
-                  }}
-                  axis={{
-                    x: { ...numericAxis, title: "Stars (log)", grid: false },
-                    y: {
-                      ...numericAxis,
-                      labelFormatter: (value) =>
-                        new Intl.NumberFormat("en", {
-                          notation: "compact",
-                          maximumFractionDigits: 0,
-                        }).format(
-                          Math.sign(value) *
-                            Math.round(10 ** Math.abs(value) - 1),
-                        ),
-                    },
-                  }}
-                  label={{
-                    text: (datum) =>
-                      datum.highlight ? datum.repo.split("/").pop() : "",
-                    style: { dy: -10, fill: muted, fontSize: 10 },
-                    transform: [{ type: "overlapHide" }],
-                  }}
-                  shapeField={() => "point"}
-                  style={{
-                    fill: () => (dark ? "#34D399" : "#0D9F6E"),
-                    fillOpacity: (datum) => (datum.highlight ? 0.95 : 0.25),
-                    stroke: () => (dark ? "#34D399" : "#0D9F6E"),
-                    r: (datum) => (datum.highlight ? 4 : 2.5),
-                    lineWidth: 0.5,
-                  }}
-                  tooltip={{
-                    title: "repo",
-                    items: [
-                      (datum) => ({
-                        name: t("categoryTooltip"),
-                        value: datum.sceneLabel,
-                      }),
-                      { field: "stars", name: "Stars" },
-                      {
-                        field: "growth",
-                        name: t("insightGrowth"),
-                        valueFormatter: signed,
-                      },
-                    ],
-                  }}
-                  onReady={bind("scatter")}
-                />
-              </div>
-              <div className="scatter-legend">
+      <DisciplineCoverage
+        items={professionItems}
+        state={state}
+        update={update}
+        t={t}
+      />
+      <details
+        className="more-chart-details"
+        data-testid="more-charts"
+        open={expanded}
+        onToggle={(event) => setExpanded(event.currentTarget.open)}
+      >
+        <summary>
+          {state.lang === "zh"
+            ? "更多图表：相对增长、规模与场景分布"
+            : "More charts: growth trends, scale and task distribution"}
+        </summary>
+        {expanded && (
+          <>
+            <div className="legacy-chart-controls">
+              <label className="history-window">
                 <span>
-                  <i style={{ background: dark ? "#34D399" : "#0D9F6E" }} />
-                  {state.lang === "zh"
-                    ? "深色：近 7 日增长前 3 · 浅色：其他项目"
-                    : "Dark: top 3 by 7-day growth · Faint: other projects"}
+                  {state.lang === "zh" ? "增长曲线窗口" : "Trend window"}
                 </span>
-              </div>
-              <details className="chart-data">
-                <summary>{t("viewChartData")}</summary>
-                <div className="chart-data-scroll">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>{t("repo")}</th>
-                        <th>Stars</th>
-                        <th>{t("insightGrowth")}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data.scatter.map((item) => (
-                        <tr key={item.repo}>
-                          <td>
-                            <button onClick={() => open(item.repo)}>
-                              {item.repo}
-                            </button>
-                          </td>
-                          <td>{fmt(item.stars)}</td>
-                          <td>{signed(item.growth)}</td>
-                        </tr>
+                <Select
+                  aria-label={t("historyWindow")}
+                  value={days}
+                  onChange={setDays}
+                  options={[30, 60, 90].map((value) => ({
+                    value,
+                    label: `${value} ${t("days")}`,
+                  }))}
+                />
+              </label>
+            </div>
+            <div className="legacy-category-chart">
+              <ChartFrame
+                id="categories"
+                title={t("sceneDistribution")}
+                note={t("sceneDistributionHelp")}
+                t={t}
+              >
+                {categories.length ? (
+                  <>
+                    <div
+                      className="plot-host"
+                      role="img"
+                      aria-label={t("sceneDistribution")}
+                    >
+                      <HorizontalBarSvg
+                        rows={categories}
+                        height={Math.max(150, categories.length * 27 + 30)}
+                        padLeft={
+                          isMobile
+                            ? state.lang === "zh"
+                              ? 86
+                              : 120
+                            : state.lang === "zh"
+                              ? 116
+                              : 168
+                        }
+                        padRight={48}
+                        maxValue={
+                          categoryMax + Math.max(4, Math.ceil(categoryMax * 0.2))
+                        }
+                        muted={muted}
+                        getLabel={(c) => c.label}
+                        getValue={(c) => c.count}
+                        getRightText={(c) => String(c.count)}
+                        getFill={(c) =>
+                          state.task === c.id
+                            ? dark
+                              ? "#34D399"
+                              : "#0D9F6E"
+                            : dark
+                              ? "#475569"
+                              : "#CBD5E1"
+                        }
+                        getTitle={(c) => `${c.label}: ${c.count} ${t("repos")}`}
+                        onSelect={(c) => category(c.id)}
+                      />
+                    </div>
+                    <div className="chart-keyboard-controls category-filter-controls">
+                      {categories.map((c) => (
+                        <button
+                          key={c.id}
+                          data-chart-category={c.id}
+                          onClick={() => category(c.id)}
+                          aria-pressed={state.task === c.id}
+                        >
+                          <i
+                            style={{ background: dark ? "#34D399" : "#0D9F6E" }}
+                          />
+                          <span>{c.label}</span>
+                          <b>{c.count}</b>
+                        </button>
                       ))}
-                    </tbody>
-                  </table>
+                    </div>
+                  </>
+                ) : (
+                  <NoData text={t("empty")} />
+                )}
+              </ChartFrame>
+            </div>
+            <div className="insights-bottom" hidden={!showAdditional}>
+              <ChartFrame
+                id="trend"
+                hidden={!showAdditional}
+                title={t("insightTrend")}
+                note={t(
+                  selectedTrends.length ? "comparisonNote" : "insightTrendNote",
+                )}
+                t={t}
+              >
+                <div className="trend-legend">
+                  {data.trendRepos.map((item, index) => (
+                    <button key={item.repo} onClick={() => open(item.repo)}>
+                      <i
+                        style={{
+                          borderColor: trendRange[index],
+                          borderStyle:
+                            index === 1
+                              ? "dashed"
+                              : index === 2
+                                ? "dotted"
+                                : "solid",
+                        }}
+                      />
+                      {short(item.repo.split("/").pop())}
+                    </button>
+                  ))}
                 </div>
-              </details>
-            </>
-          ) : (
-            <NoData text={t("empty")} />
-          )}
-        </ChartFrame>
-      </div>
-        </>}
+                <div className="chart-keyboard-controls">
+                  {data.trendRepos.map((item) => (
+                    <button key={item.repo} onClick={() => open(item.repo)}>
+                      {item.repo} · {latest.get(item.repo)?.date || "—"} ·{" "}
+                      {Number.isFinite(latest.get(item.repo)?.growthPercent)
+                        ? percent(latest.get(item.repo).growthPercent)
+                        : "—"}
+                    </button>
+                  ))}
+                </div>
+                {hasTrend ? (
+                  <div
+                    className="plot-host"
+                    role="img"
+                    aria-label={t("insightTrend")}
+                  >
+                    <TrendLineSvg
+                      trends={data.trends}
+                      trendRepos={data.trendRepos}
+                      trendRange={trendRange}
+                      trendTicks={trendTicks}
+                      muted={muted}
+                      grid={grid}
+                      percent={percent}
+                      fmt={fmt}
+                      baselineLabel={t("insightBaseline")}
+                      onOpenRepo={open}
+                    />
+                  </div>
+                ) : (
+                  <NoData text={t("noHistory")} />
+                )}
+                <p className="chart-footnote">
+                  {recordedDates.length > 0 && (
+                    <span>
+                      {t("dataSince")} {recordedDates[0]}{" "}
+                    </span>
+                  )}
+                  <Tooltip
+                    title={`${t("historyProvenance")} ${t("insightBaselineNote")}`}
+                  >
+                    <button
+                      className="chart-help"
+                      aria-label={t("historyDetails")}
+                    >
+                      ?
+                    </button>
+                  </Tooltip>
+                </p>
+              </ChartFrame>
+              <ChartFrame
+                id="scatter"
+                hidden={!showAdditional}
+                title={t("insightScatter")}
+                note={t("insightScatterNote")}
+                t={t}
+              >
+                {data.scatter.length ? (
+                  <>
+                    <div
+                      className="plot-host"
+                      role="img"
+                      aria-label={t("insightScatter")}
+                    >
+                      <LogScatterSvg
+                        scatterData={scatterData}
+                        scatterDomain={scatterDomain}
+                        scatterTicks={scatterTicks}
+                        growthTicks={growthTicks}
+                        dark={dark}
+                        muted={muted}
+                        grid={grid}
+                        fmt={fmt}
+                        signed={signed}
+                        categoryTooltipLabel={t("categoryTooltip")}
+                        growthLabel={t("insightGrowth")}
+                        onOpenRepo={open}
+                      />
+                    </div>
+                    <div className="scatter-legend">
+                      <span>
+                        <i
+                          style={{ background: dark ? "#34D399" : "#0D9F6E" }}
+                        />
+                        {state.lang === "zh"
+                          ? "深色：近 7 日增长前 3 · 浅色：其他项目"
+                          : "Dark: top 3 by 7-day growth · Faint: other projects"}
+                      </span>
+                    </div>
+                    <details className="chart-data">
+                      <summary>{t("viewChartData")}</summary>
+                      <div className="chart-data-scroll">
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>{t("repo")}</th>
+                              <th>Stars</th>
+                              <th>{t("insightGrowth")}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {data.scatter.map((item) => (
+                              <tr key={item.repo}>
+                                <td>
+                                  <button onClick={() => open(item.repo)}>
+                                    {item.repo}
+                                  </button>
+                                </td>
+                                <td>{fmt(item.stars)}</td>
+                                <td>{signed(item.growth)}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </details>
+                  </>
+                ) : (
+                  <NoData text={t("empty")} />
+                )}
+              </ChartFrame>
+            </div>
+          </>
+        )}
       </details>
     </section>
   );

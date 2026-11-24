@@ -27,7 +27,7 @@ export const resets = {
   newOnly: false,
   todayOnly: "",
 };
-export function ActiveFilters({ state, update, t, empty }) {
+export function ActiveFilters({ state, update, t, empty, onShareFavorites }) {
   const conditions = [];
   if (state.pack?.length)
     conditions.push([
@@ -87,6 +87,19 @@ export function ActiveFilters({ state, update, t, empty }) {
             <CloseOutlined aria-hidden="true" />
           </Button>
         ))}
+        {onShareFavorites && (
+          <Button
+            size="small"
+            type="primary"
+            ghost
+            data-testid="active-share-favorites"
+            onClick={onShareFavorites}
+          >
+            {state.lang === "zh"
+              ? `📦 一键分享收藏工具包 (${state.favorites.length})`
+              : `📦 Share toolkit (${state.favorites.length})`}
+          </Button>
+        )}
         <Button
           size="small"
           type="link"

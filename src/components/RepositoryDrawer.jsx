@@ -1,15 +1,19 @@
 import { DisciplineEvidence } from "./DisciplineEvidence";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import installationDetails from "../../config/installation-details.json";
 import { Button, Descriptions, Drawer, Space, Tag } from "antd";
 import { ExportOutlined } from "@ant-design/icons";
 import {
   AGENT_PLATFORMS,
+  RESEARCH_TASKS,
+  matchesResearchTask,
   sceneLabelsFor,
   detectAgents,
   REPOSITORY_URL,
   safeExternalUrl,
 } from "../domain";
+import { DISCIPLINES, disciplineFit } from "../disciplines";
+import { trackEvent } from "../analytics";
 import { QualityBadges, RepositoryActions } from "./RepositoryViews";
 import { useFeedback } from "./FeedbackProvider";
 import { copyText } from "../clipboard";
@@ -20,6 +24,7 @@ import { SkillUsageGuide } from "./SkillUsageGuide";
 export function RepositoryDrawer({
   item,
   items,
+  allItems = items,
   state,
   update,
   toggleCompare,
@@ -29,6 +34,38 @@ export function RepositoryDrawer({
 }) {
   const contentRef = useRef(null);
   const position = items.findIndex((entry) => entry.repo === item?.repo);
+  const similarSkills = useMemo(() => {
+    if (!item) return [];
+    const itemTasks = RESEARCH_TASKS.filter((task) =>
+      matchesResearchTask(item, task),
+    );
+    const itemDiscs = DISCIPLINES.filter(
+      (d) => disciplineFit(item, { discipline: d.id, major: "all" }) === "specific",
+    ).map((d) => d.id);
+    const pool = (allItems || items).filter(
+      (c) => c.repository_kind === "skill" && c.repo !== item.repo && !c.stale,
+    );
+    return pool
+      .map((cand) => {
+        let score = 0;
+        for (const task of itemTasks) {
+          if (matchesResearchTask(cand, task)) score += 32;
+        }
+        for (const did of itemDiscs) {
+          if (disciplineFit(cand, { discipline: did, major: "all" }) === "specific") {
+            score += 26;
+          }
+        }
+        const webFriendly =
+          !cand.language || ["Markdown", "TeX", "HTML"].includes(cand.language);
+        if (webFriendly) score += 8;
+        score += Math.min(14, Math.log10(Math.max(10, cand.stars || 10)) * 3.2);
+        return { cand, score, webFriendly };
+      })
+      .filter((x) => x.score >= 28)
+      .sort((a, b) => b.score - a.score || (b.cand.stars || 0) - (a.cand.stars || 0))
+      .slice(0, 3);
+  }, [item, allItems, items]);
   useEffect(() => {
     const body = contentRef.current?.closest(".ant-drawer-body");
     if (body) body.scrollTop = 0;
@@ -278,6 +315,62 @@ export function RepositoryDrawer({
             </div>
           </dl>
           <DisciplineEvidence item={item} state={state} />
+          {similarSkills.length > 0 && (
+            <section
+              className="drawer-alternatives"
+              data-testid="drawer-alternatives"
+              aria-label={
+                state.lang === "zh" ? "同场景高分替代推荐" : "Similar verified Skills"
+              }
+            >
+              <div className="drawer-alternatives-head">
+                <h4>
+                  {state.lang === "zh"
+                    ? "🧭 同场景高分替代推荐"
+                    : "🧭 Similar Verified Skills"}
+                </h4>
+                <span>
+                  {state.lang === "zh"
+                    ? "当前配置偏复杂？可一键切换同方向热门方案"
+                    : "Switch to another verified Skill for the same workflow"}
+                </span>
+              </div>
+              <div className="drawer-alternatives-grid">
+                {similarSkills.map(({ cand, webFriendly }) => (
+                  <button
+                    key={cand.repo}
+                    type="button"
+                    className="drawer-alt-card"
+                    data-testid="drawer-alt-card"
+                    onClick={() => {
+                      trackEvent("click_drawer_alternative", {
+                        from: item.repo,
+                        to: cand.repo,
+                      });
+                      update((s) => ({ ...s, repo: cand.repo }));
+                    }}
+                  >
+                    <div className="drawer-alt-top">
+                      <strong>{cand.repo.split("/").pop()}</strong>
+                      <span className="drawer-alt-meta">
+                        {webFriendly && (
+                          <em>
+                            {state.lang === "zh" ? "免命令行可用" : "Web AI ready"}
+                          </em>
+                        )}
+                        <span>★ {fmt(cand.stars)}</span>
+                      </span>
+                    </div>
+                    <p>
+                      {(state.lang === "zh" && cand.curated_use_zh) ||
+                        cand.description ||
+                        t("noDescription")}
+                    </p>
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
           <details className="drawer-more">
             <summary>{t("moreRepositoryDetails")}</summary>
             <InstallationRequirements

@@ -30,7 +30,7 @@ export function DailyArrivals({ items, state, update, t }) {
     {skills.length ? <div className="daily-arrivals-list">
       {skills.slice(0, 3).map(item => <button type="button" key={item.repo} className="daily-arrival-entry"
         aria-label={item.repo} onClick={() => update(s => ({ ...s, repo: item.repo }))}>
-        <strong>{item.repo}</strong><span>{item.description || t('noDescription')}</span>
+        <strong>{item.repo}</strong><span>{(state.lang === 'zh' && item.curated_use_zh) || item.description || t('noDescription')}</span>
       </button>)}
     </div> : null}
   </Reveal>;

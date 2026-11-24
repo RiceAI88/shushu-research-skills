@@ -212,6 +212,10 @@ test("static skill SEO page, auto preview for new repos, direct web prompt, and 
   const drawer = page.getByRole("dialog");
   await expect(drawer).toContainText("Yuan1z0825/nature-skills");
   await expect(drawer.getByTestId("drawer-recharge-tip")).toBeVisible();
+  await expect(drawer.getByTestId("drawer-alternatives")).toBeVisible();
+  await expect(
+    drawer.getByTestId("drawer-alt-card").first(),
+  ).toBeVisible();
 
   // 2. 打开未手动配置的新收录写作类 Skill，自动生成使用前后示意卡 + 免开 GitHub 完整指令 + 写作备选提示
   await page.goto("./#repo=YuanZHAO321%2FScientific-Writing-zh");
