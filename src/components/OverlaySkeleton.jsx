@@ -4,9 +4,15 @@ import {useSiteReducedMotion} from './SiteMotion';
 
 export function OverlaySkeleton({kind='guide',lang='zh'}) {
  const reduced=useSiteReducedMotion();
- const label=lang==='zh'?(kind==='guide'?'正在加载入门指南…':'正在加载筛选条件…'):(kind==='guide'?'Loading the starter guide…':'Loading filters…');
+ const zh=lang==='zh';
+ const label=kind==='drawer'
+  ?(zh?'正在加载项目详情与上手指南…':'Loading project details & quick-start guide…')
+  :kind==='guide'
+   ?(zh?'正在加载入门指南…':'Loading the starter guide…')
+   :(zh?'正在加载筛选条件…':'Loading filters…');
+ const blocks=kind==='drawer'?[2,4,2]:kind==='guide'?[3,3,3]:[1,1];
  return <div className={`overlay-skeleton overlay-skeleton-${kind}`} role="status" aria-label={label} aria-busy="true">
   <span className="overlay-skeleton-caption">{label}</span>
-  {Array.from({length:kind==='guide'?3:2},(_,index)=><Skeleton key={index} active={!reduced} title={{width:'35%'}} paragraph={{rows:kind==='guide'?3:1}}/>)}
+  {blocks.map((rows,index)=><Skeleton key={index} active={!reduced} title={{width:index===0?'42%':'32%'}} paragraph={{rows}}/>)}
  </div>;
 }

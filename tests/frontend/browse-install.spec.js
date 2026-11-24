@@ -4,6 +4,10 @@ const data = JSON.parse(
   readFileSync(new URL("../../data/rankings.json", import.meta.url), "utf8"),
 );
 const commandRepo = "K-Dense-AI/scientific-agent-skills";
+const commandSkillRank =
+  data.items
+    .filter((i) => i.repository_kind === "skill")
+    .findIndex((i) => i.repo === commandRepo) + 1;
 
 test.beforeEach(async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -128,7 +132,9 @@ test("drawer prioritizes installation with adjacent copy and a single primary ac
     more.getByRole("link", { name: "反馈信息问题" }),
   ).toHaveAttribute("href", /issues\/new/);
   await more.getByRole("button", { name: "复制为 Markdown" }).click();
-  expect(await page.evaluate(() => window.__copied.at(-1))).toContain("| 1 |");
+  expect(await page.evaluate(() => window.__copied.at(-1))).toContain(
+    `| ${commandSkillRank} |`,
+  );
 });
 
 test("review time uses relative wording and a Shanghai precision tooltip", async ({

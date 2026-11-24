@@ -1,10 +1,16 @@
 import { cp, mkdir, copyFile, readdir, readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 
+const PUBLIC_DATA_FILES = new Set([
+  "rankings.json",
+  "rankings.csv",
+  "rankings.js",
+  "history.js",
+]);
 await cp("reports", "dist/reports", { recursive: true });
 await mkdir("dist/data", { recursive: true });
 for (const entry of await readdir("data", { withFileTypes: true })) {
-  if (entry.isFile() && entry.name !== "repository-catalog.json") {
+  if (entry.isFile() && PUBLIC_DATA_FILES.has(entry.name)) {
     await copyFile(`data/${entry.name}`, `dist/data/${entry.name}`);
   }
 }
@@ -21,6 +27,9 @@ for (const file of [
   "hero.svg",
   "favicon.png",
   "hamster-logo.png",
+  "icon-192.png",
+  "icon-512.png",
+  "icon-maskable-512.png",
   "shushu-mascot.svg",
 ])
   await copyFile(`assets/${file}`, `dist/assets/${file}`);
@@ -368,7 +377,7 @@ for (const page of landingPages) {
 
   const bootScript = `<script>window.__ARS_INITIAL_HASH=${JSON.stringify(page.initialHash)};window.__ARS_CUSTOM_TITLE=${JSON.stringify(page.title)};</script>`;
   html = html.replace(
-    /(<script\s+src="\/data\/rankings\.js)/,
+    /(<script\b[^>]*\bsrc="\/data\/rankings\.js)/,
     `${bootScript}\n    $1`,
   );
 
@@ -487,7 +496,7 @@ for (let idx = 0; idx < seoSkillItems.length; idx++) {
 
   const bootScript = `<script>window.__ARS_INITIAL_HASH=${JSON.stringify(initialHash)};window.__ARS_CUSTOM_TITLE=${JSON.stringify(pageTitle)};</script>`;
   html = html.replace(
-    /(<script\s+src="\/data\/rankings\.js)/,
+    /(<script\b[^>]*\bsrc="\/data\/rankings\.js)/,
     `${bootScript}\n    $1`,
   );
 
@@ -580,12 +589,31 @@ const webManifest = {
       src: "/assets/favicon.png",
       sizes: "64x64",
       type: "image/png",
+      purpose: "any",
     },
     {
       src: "/assets/hamster-logo.png",
+      sizes: "128x128",
+      type: "image/png",
+      purpose: "any",
+    },
+    {
+      src: "/assets/icon-192.png",
+      sizes: "192x192",
+      type: "image/png",
+      purpose: "any",
+    },
+    {
+      src: "/assets/icon-512.png",
       sizes: "512x512",
       type: "image/png",
-      purpose: "any maskable",
+      purpose: "any",
+    },
+    {
+      src: "/assets/icon-maskable-512.png",
+      sizes: "512x512",
+      type: "image/png",
+      purpose: "maskable",
     },
   ],
 };

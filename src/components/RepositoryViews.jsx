@@ -1,9 +1,8 @@
 import { ProjectFacts, GrowthValue } from "./ProjectFacts";
 import { Zhi1keAd } from "./Zhi1keAd";
-import { EmptyResults } from "./EmptyResults";
 import { SearchHighlight } from "./SearchHighlight";
 import { Panel } from "./Panel";
-import React, { lazy, useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { Button, Space, Tag, Tooltip } from "antd";
 import { StarFilled, StarOutlined, SwapOutlined } from "@ant-design/icons";
 import {
@@ -15,6 +14,9 @@ import {
 import { useFeedback } from "./FeedbackProvider";
 import { DeferredFeature } from "./DeferredFeature";
 const RepositoryTable = lazy(() => import("./RepositoryTable"));
+const EmptyResults = lazy(() =>
+  import("./EmptyResults").then((m) => ({ default: m.EmptyResults })),
+);
 import { safeExternalUrl } from "../domain";
 export function QualityBadges({
   item,
@@ -173,6 +175,7 @@ export function RepositoryViews({
   filterHeight,
   onReady,
   onAskShushu,
+  onPreloadDetail,
   state,
   update,
   toggleCompare,
@@ -242,15 +245,20 @@ export function RepositoryViews({
       <SearchHighlight text={item.repo} query={state.query} />
     </a>
   );
+  const preloadOnMouse = (event) => {
+    if (event.pointerType === "mouse") onPreloadDetail?.();
+  };
   if (!items.length)
     return (
-      <EmptyResults
-        items={allItems}
-        state={state}
-        update={update}
-        t={t}
-        onAskShushu={onAskShushu}
-      />
+      <Suspense fallback={null}>
+        <EmptyResults
+          items={allItems}
+          state={state}
+          update={update}
+          t={t}
+          onAskShushu={onAskShushu}
+        />
+      </Suspense>
     );
   const partnerStrip = (
     <div className="partner-top-strip">
@@ -270,6 +278,7 @@ export function RepositoryViews({
                 motionOrder={index % 3}
                 className="repository-card"
                 tabIndex={0}
+                onPointerEnter={preloadOnMouse}
                 onClick={() => open(item)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && e.target === e.currentTarget)
@@ -394,6 +403,7 @@ export function RepositoryViews({
           onRow={(item) => ({
             "data-repo": item.repo,
             tabIndex: 0,
+            onPointerEnter: preloadOnMouse,
             onClick: (e) => {
               if (!e.target.closest("button,a")) open(item);
             },

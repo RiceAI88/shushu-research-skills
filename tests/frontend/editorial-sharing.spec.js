@@ -112,7 +112,8 @@ test.describe("metadata works without running application JavaScript", () => {
       expect(schema.url).toBe(canonical);
       expect(schema.name).toBe(brand);
       expect(schema.description).toMatch(lang === "zh" ? /本科生与研究生/ : /undergraduate and postgraduate students/);
-      await expect(page.locator("noscript a")).toHaveCount(20);
+      await expect(page.locator("noscript ol > li")).toHaveCount(20);
+      await expect(page.locator("noscript ol > li > a:first-child")).toHaveCount(20);
       const image = await request.get("./assets/" + cover);
       expect(image.ok()).toBe(true);
       expect(image.headers()["content-type"]).toContain("image/png");
@@ -159,4 +160,18 @@ test("running application preserves the canonical default Skills structured list
  const schema=JSON.parse(await page.locator('#ld-json').textContent());
  expect(schema.itemListElement.map(i=>i.name)).toEqual(defaultItems.slice(0,20).map(i=>i.repo));
  expect(schema.numberOfItems).toBe(defaultItems.length);
+});
+
+test("static skill subpage hides internal debug signals and normalizes pathname after closing drawer", async ({
+  page,
+}) => {
+  await page.goto("./skills/Yuan1z0825/nature-skills/");
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+  await expect(dialog).not.toContainText(/admission:|missing_|readme_|trusted_seed/);
+  await page.keyboard.press("Escape");
+  await expect(dialog).not.toBeVisible();
+  await expect.poll(() => new URL(page.url()).pathname).toBe("/");
+  await page.reload();
+  await expect(dialog).not.toBeVisible();
 });

@@ -73,3 +73,24 @@ test('reduced motion removes modal and panel movement and skeleton shimmer',asyn
  await page.getByRole('button',{name:'筛选',exact:true}).click();
  expect(await page.getByRole('dialog',{name:'筛选条件',exact:true}).evaluate(el=>el.getAnimations({subtree:true}).length)).toBe(0);
 });
+
+test('slow detail drawer opens shell immediately with repo title and skeleton, permits closing, then loads in place',async({page})=>{
+ let release;const gate=new Promise(resolve=>{release=resolve;});
+ await page.route('**/RepositoryDrawer-*.js',async route=>{await gate;await route.continue();});
+ try {
+  await page.goto('./');
+  await page.getByTestId('repo-card').first().click();
+  const drawer=page.getByRole('dialog');
+  await expect(drawer).toBeVisible();
+  await expect(drawer.locator('.drawer-repo')).not.toBeEmpty();
+  await expect(drawer.locator('.overlay-skeleton-drawer[aria-busy="true"]')).toBeVisible();
+  await expect(drawer.locator('.ant-skeleton')).not.toHaveCount(0);
+  await page.keyboard.press('Escape');
+  await expect(drawer).not.toBeVisible();
+  release();
+  await page.getByTestId('repo-card').first().click();
+  await expect(drawer).toBeVisible();
+  await expect(drawer.locator('.drawer-content')).toBeVisible();
+  await expect(drawer.locator('[aria-busy="true"]')).toHaveCount(0);
+ } finally {release();}
+});

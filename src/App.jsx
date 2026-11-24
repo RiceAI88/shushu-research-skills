@@ -60,7 +60,6 @@ import {
   serializeState,
 } from "./domain";
 import { copyText } from "./clipboard";
-import { buildPackUrl, formatPackShareText } from "./shareText";
 import { translations } from "./i18n";
 import { THEME_TOKENS } from "./tokens";
 import { enrichItem, editorialPicks } from "./practical";
@@ -71,14 +70,16 @@ import { ActiveFilters } from "./components/ActiveFilters";
 import { RepositoryViews } from "./components/RepositoryViews";
 import { FeedbackProvider, useFeedback } from "./components/FeedbackProvider";
 import { DeferredFeature } from "./components/DeferredFeature";
-const RepositoryDrawer = lazy(() =>
-  import("./components/RepositoryDrawer").then((module) => ({
-    default: module.RepositoryDrawer,
-  })),
-);
+import {
+  RepositoryDrawerDialog,
+  preloadRepositoryDrawer,
+} from "./components/RepositoryDrawerDialog";
+import CommunityDialog, {
+  preloadCommunityQr,
+  triggerCommunityDialog,
+} from "./components/CommunityCard";
 const FilterControls = lazy(() => import("./components/FilterControls"));
 const ComparisonDialog = lazy(() => import("./components/ComparisonDialog"));
-const CommunityDialog = lazy(() => import("./components/CommunityCard"));
 const ShushuAssistant = lazy(() => import("./components/ShushuAssistant"));
 const RoamingMascot = lazy(() => import("./components/RoamingMascot"));
 const RechargeNotice = lazy(() =>
@@ -86,7 +87,11 @@ const RechargeNotice = lazy(() =>
     default: m.RechargeNotice,
   })),
 );
-import { ViewportInsights } from "./components/ViewportInsights";
+const ViewportInsights = lazy(() =>
+  import("./components/ViewportInsights").then((m) => ({
+    default: m.ViewportInsights,
+  })),
+);
 
 const dataset = window.ACADEMIC_SKILLS_RANKINGS || {};
 const sourceItems = Array.isArray(dataset.items)
@@ -132,10 +137,14 @@ const STAGE_ICON_PATHS = {
   rebuttal: "M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z",
 };
 const localFile = (name) => base + name;
+const enEntryPath = base + "en/";
+const CANONICAL_ROOT = "https://riceai985.cc/";
 const landingHash = window.__ARS_INITIAL_HASH || "";
 export default function App() {
   const reducedMotion=useSiteReducedMotion();
   const items = sourceItems;
+  const landingActiveRef = useRef(Boolean(landingHash));
+  const langSwitchedRef = useRef(false);
   const landingSeed = useMemo(
     () => (landingHash ? restoreState(null, landingHash, defaults, items) : null),
     [items],
@@ -143,42 +152,78 @@ export default function App() {
   const [state, update] = useState(() =>
     restoreState(storage, location.hash || landingHash, defaults, items),
   );
+  const switchLang = useCallback((nextLang) => {
+    langSwitchedRef.current = true;
+    update((s) => ({ ...s, lang: nextLang }));
+  }, []);
   useEffect(() => {
     persistState(storage, state);
     document.documentElement.dataset.theme = state.theme;
     document.documentElement.lang = state.lang === "zh" ? "zh-CN" : "en";
-    const matchesLanding =
-      landingSeed &&
-      state.lang === "zh" &&
-      state.discipline === landingSeed.discipline &&
-      state.task === landingSeed.task &&
-      state.repo === landingSeed.repo;
+    const matchesLanding = Boolean(
+      landingActiveRef.current &&
+        landingSeed &&
+        state.lang === "zh" &&
+        state.discipline === landingSeed.discipline &&
+        state.task === landingSeed.task &&
+        state.repo === landingSeed.repo,
+    );
+    if (landingActiveRef.current && !matchesLanding) {
+      landingActiveRef.current = false;
+    }
     document.title =
       matchesLanding && window.__ARS_CUSTOM_TITLE
         ? window.__ARS_CUSTOM_TITLE
         : state.lang === "zh"
           ? "科研鼠鼠 · Skills 导航站｜大学生与研究生科研工具"
           : "Research Hamster · Skills Directory";
+    let nextPathname = location.pathname;
+    if (landingSeed && !matchesLanding) {
+      nextPathname =
+        state.lang === "en" && langSwitchedRef.current ? enEntryPath : base;
+    } else if (langSwitchedRef.current) {
+      nextPathname = state.lang === "en" ? enEntryPath : base;
+    } else if (location.pathname === enEntryPath && state.lang === "zh") {
+      nextPathname = base;
+    }
+    if (nextPathname === base && window.ARS_DEFAULT_LANG === "en" && state.lang === "zh") {
+      delete window.ARS_DEFAULT_LANG;
+    }
+    if (
+      nextPathname !== location.pathname &&
+      (nextPathname === base || nextPathname === enEntryPath)
+    ) {
+      const targetCanonical =
+        CANONICAL_ROOT + (nextPathname === enEntryPath ? "en/" : "");
+      document
+        .querySelector('link[rel="canonical"]')
+        ?.setAttribute("href", targetCanonical);
+      document
+        .querySelector('meta[property="og:url"]')
+        ?.setAttribute("content", targetCanonical);
+    }
     const hash = serializeState(state);
-    const seedSerialized = landingSeed
+    const seedSerialized = matchesLanding
       ? serializeState(restoreState(storage, landingHash, defaults, items))
       : "";
     const nextHash =
-      landingSeed && !location.hash && hash === seedSerialized ? "" : hash;
-    if (location.hash !== nextHash)
+      matchesLanding && !location.hash && hash === seedSerialized ? "" : hash;
+    if (location.pathname !== nextPathname || location.hash !== nextHash)
       window.history.replaceState(
         null,
         "",
-        location.pathname + location.search + nextHash,
+        nextPathname + location.search + nextHash,
       );
   }, [state, landingSeed]);
   useEffect(() => {
-    const change = () =>
+    const change = () => {
+      const fallbackHash = landingActiveRef.current ? landingHash : "";
       update((previous) => ({
-        ...restoreState(storage, location.hash || landingHash, defaults, items),
+        ...restoreState(storage, location.hash || fallbackHash, defaults, items),
         favorites: previous.favorites,
         compare: previous.compare,
       }));
+    };
     addEventListener("hashchange", change);
     return () => removeEventListener("hashchange", change);
   }, []);
@@ -209,12 +254,12 @@ export default function App() {
       }}
     >
       <FeedbackProvider>
-        <Dashboard {...{ state, update }} />
+        <Dashboard {...{ state, update, switchLang }} />
       </FeedbackProvider>
     </ConfigProvider>
   );
 }
-function Dashboard({ state, update }) {
+function Dashboard({ state, update, switchLang }) {
   const [historyData, setHistoryData] = useState(
     () => window.ACADEMIC_SKILLS_HISTORY || { series: {} },
   );
@@ -438,14 +483,14 @@ function Dashboard({ state, update }) {
           theme: s.theme === "light" ? "dark" : "light",
         }));
       if (e.key === "l")
-        update((s) => ({ ...s, lang: s.lang === "zh" ? "en" : "zh" }));
+        switchLang(state.lang === "zh" ? "en" : "zh");
       if (e.key === "v")
         update((s) => ({ ...s, view: s.view === "table" ? "card" : "table" }));
       if (e.key === "f") update((s) => ({ ...s, favOnly: !s.favOnly }));
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
-  }, [compareOpen, guideSection, state.repo, update, stickySearchVisible]);
+  }, [compareOpen, guideSection, state.repo, state.lang, switchLang, update, stickySearchVisible]);
   function exportFavorites() {
     const favorites = items
       .filter((i) => state.favorites.includes(i.repo))
@@ -481,17 +526,18 @@ function Dashboard({ state, update }) {
       .map((r) => byRepo.get(r))
       .filter(Boolean);
     if (!favItems.length) return;
-    const text = onlyUrl
-      ? buildPackUrl(
-          favItems.map((i) => i.repo),
-          { lang: state.lang },
-        )
-      : formatPackShareText(favItems, { lang: state.lang });
     trackEvent("share_favorites_pack", {
       count: favItems.length,
       mode: onlyUrl ? "url" : "card",
     });
     try {
+      const { buildPackUrl, formatPackShareText } = await import("./shareText");
+      const text = onlyUrl
+        ? buildPackUrl(
+            favItems.map((i) => i.repo),
+            { lang: state.lang },
+          )
+        : formatPackShareText(favItems, { lang: state.lang });
       await copyText(text);
       message.success(
         onlyUrl
@@ -549,10 +595,14 @@ function Dashboard({ state, update }) {
             <button
               type="button"
               className="top-notice-action"
+              onPointerEnter={preloadCommunityQr}
+              onFocus={preloadCommunityQr}
+              onTouchStart={preloadCommunityQr}
               onClick={() => {
+                preloadCommunityQr();
                 trackEvent("open_community_qr", { slot: "top_notice" });
                 if (communityRequested) {
-                  window.dispatchEvent(new CustomEvent("ars-open-community"));
+                  triggerCommunityDialog();
                 } else {
                   setCommunityRequested(true);
                 }
@@ -600,7 +650,7 @@ function Dashboard({ state, update }) {
                 { label: "中文", value: "zh" },
                 { label: "EN", value: "en" },
               ]}
-              onChange={(lang) => update((s) => ({ ...s, lang }))}
+              onChange={(lang) => switchLang(lang)}
             />
             <Tooltip title={t("reportsLink")}>
               <Button
@@ -1239,6 +1289,7 @@ function Dashboard({ state, update }) {
                     data-testid="reshare-pack"
                     onClick={async () => {
                       try {
+                        const { formatPackShareText } = await import("./shareText");
                         await copyText(
                           formatPackShareText(visible, {
                             lang: state.lang,
@@ -1286,6 +1337,7 @@ function Dashboard({ state, update }) {
                 history: historyData,
                 generatedAt: dataset.metadata?.generated_at,
               }}
+              onPreloadDetail={preloadRepositoryDrawer}
               onAskShushu={(q) => {
                 setBotRequested(true);
                 setBotInitialQuery(q);
@@ -1304,19 +1356,21 @@ function Dashboard({ state, update }) {
           hidden={state.section !== "insights"}
         >
           {state.section === "insights" && (
-            <ViewportInsights
-              scopeControl={
-                <ScopeControl {...{state,update,relatedCount}} />
-              }
-              items={visible}
-              professionItems={disciplineItems}
-              allItems={scopeItems}
-              history={historyData}
-              generatedAt={dataset.metadata?.generated_at}
-              state={state}
-              update={update}
-              t={t}
-            />
+            <React.Suspense fallback={null}>
+              <ViewportInsights
+                scopeControl={
+                  <ScopeControl {...{state,update,relatedCount}} />
+                }
+                items={visible}
+                professionItems={disciplineItems}
+                allItems={scopeItems}
+                history={historyData}
+                generatedAt={dataset.metadata?.generated_at}
+                state={state}
+                update={update}
+                t={t}
+              />
+            </React.Suspense>
           )}
         </div>
         <DataTransparency t={t} base={base} lang={state.lang} />
@@ -1334,24 +1388,22 @@ function Dashboard({ state, update }) {
         <span className="keyboard-hint">{t("shortcuts")}</span>
       </Reveal>
       {(selected || drawerRequested) && (
-        <DeferredFeature t={t}>
-          <RepositoryDrawer
-            {...{
-              item: selected,
-              items: visible,
-              allItems: items,
-              state,
-              update,
-              toggleCompare,
-              t,
-              fmt,
-            }}
-            onOpenGuide={() => {
-              update((s) => ({ ...s, repo: null }));
-              setGuideSection("basics");
-            }}
-          />
-        </DeferredFeature>
+        <RepositoryDrawerDialog
+          {...{
+            item: selected,
+            items: visible,
+            allItems: items,
+            state,
+            update,
+            toggleCompare,
+            t,
+            fmt,
+          }}
+          onOpenGuide={() => {
+            update((s) => ({ ...s, repo: null }));
+            setGuideSection("basics");
+          }}
+        />
       )}
       {state.compare.length > 0 && (
         <div className="compare-tray" data-testid="compare-tray">
@@ -1489,11 +1541,7 @@ function Dashboard({ state, update }) {
           />
         </DeferredFeature>
       )}
-      {communityRequested && (
-        <React.Suspense fallback={null}>
-          <CommunityDialog lang={state.lang} openOnMount />
-        </React.Suspense>
-      )}
+      {communityRequested && <CommunityDialog lang={state.lang} openOnMount />}
       <BackToTop
         label={t("backToTop")}
         comparisonOpen={state.compare.length > 0}

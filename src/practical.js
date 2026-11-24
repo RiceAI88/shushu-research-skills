@@ -4,6 +4,33 @@ import { safeExternalUrl } from "./domain.js";
 export const EDITORIAL_CONTENT = editorial;
 export const UPDATE_RUNS_URL =
   "https://api.github.com/repos/RiceAI88/shushu-research-skills/actions/workflows/update-rankings.yml/runs?branch=main&per_page=1";
+
+const CATEGORY_CATALOG = {
+  "paper-writing": { id: "paper-writing", zh: "论文写作", en: "Paper Writing" },
+  "discipline-specific": { id: "discipline-specific", zh: "学科专项", en: "Discipline Specific" },
+  "deep-research": { id: "deep-research", zh: "深度研究", en: "Deep Research" },
+  "peer-review": { id: "peer-review", zh: "评审反馈", en: "Peer Review" },
+  "general-research": { id: "general-research", zh: "综合研究", en: "General Research" },
+  "literature-review": { id: "literature-review", zh: "文献综述", en: "Literature Review" },
+  "experiment-reproducibility": { id: "experiment-reproducibility", zh: "实验复现", en: "Experiments" },
+};
+
+const TREND_CATALOG = {
+  hot: { id: "hot", zh: "热门上升", en: "Hot" },
+  rising: { id: "rising", zh: "持续增长", en: "Rising" },
+  steady: { id: "steady", zh: "稳定", en: "Steady" },
+};
+
+const INTERNAL_SIGNAL_RE = /^(?:admission:|missing_|readme_|negative:|trusted_seed$)/i;
+
+// 过滤仅供后端准入审计使用的内部信号，保留对学生可读的领域/平台特征词
+export function filterPublicSignals(signals) {
+  if (!Array.isArray(signals)) return [];
+  return signals.filter(
+    (s) => typeof s === "string" && s.trim() && !INTERNAL_SIGNAL_RE.test(s.trim()),
+  );
+}
+
 export function installationFor(item, content = EDITORIAL_CONTENT) {
   const entry = content.installations?.[item.repo];
   const source = entry?.reviewed_at && safeExternalUrl(entry.source_url);
@@ -11,6 +38,9 @@ export function installationFor(item, content = EDITORIAL_CONTENT) {
     typeof entry?.command === "string" && entry.command.trim()
       ? entry.command
       : null;
+  const fallbackUrl =
+    safeExternalUrl(item.url) ||
+    (item.repo ? `https://github.com/${item.repo}` : "https://github.com");
   return source
     ? {
         ...entry,
@@ -25,15 +55,51 @@ export function installationFor(item, content = EDITORIAL_CONTENT) {
     : {
         mode: "docs",
         command: null,
-        source_url:
-          (safeExternalUrl(item.url) ||
-            "https://github.com/" + encodeURIComponent(item.repo)) + "#readme",
+        source_url: fallbackUrl + "#readme",
       };
 }
 export function enrichItem(item, content = EDITORIAL_CONTENT) {
+  const category =
+    typeof item.category === "string"
+      ? CATEGORY_CATALOG[item.category] || {
+          id: item.category,
+          zh: item.category,
+          en: item.category,
+        }
+      : item.category;
+  const trend =
+    typeof item.trend === "string"
+      ? TREND_CATALOG[item.trend] || {
+          id: item.trend,
+          zh: item.trend,
+          en: item.trend,
+        }
+      : item.trend;
+  const license =
+    typeof item.license === "string"
+      ? item.license
+        ? {
+            spdx_id: item.license === "Other" ? "NOASSERTION" : item.license,
+            name: item.license,
+          }
+        : undefined
+      : item.license;
   return {
+    refresh_status: "fresh",
+    stale: false,
+    verifies_citations: false,
+    skills_count_complete: true,
+    first_seen_is_baseline: false,
+    homepage: "",
+    language: "",
+    topics: [],
     ...item,
-    agents: content.platforms?.[item.repo] || item.agents,
+    url: item.url || (item.repo ? `https://github.com/${item.repo}` : ""),
+    category,
+    trend,
+    license,
+    precision_signals: filterPublicSignals(item.precision_signals),
+    agents: content.platforms?.[item.repo] || item.agents || [],
     platforms_reviewed: Object.hasOwn(content.platforms || {}, item.repo),
     documented_platform_names: reviewedUsage[item.repo]?.platform_names || [],
   };

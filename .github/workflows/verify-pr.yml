@@ -41,6 +41,9 @@ jobs:
           SEEDS: ${{ steps.seeds.outputs.seeds }}
         with:
           script: |
+            const fs = require('node:fs');
+            const rankingConfig = JSON.parse(fs.readFileSync('config/ranking.json', 'utf8'));
+            const minStars = Number(rankingConfig.min_stars) || 30;
             const seeds = process.env.SEEDS.split('\n').map(s => s.trim()).filter(Boolean);
             if (!seeds.length) {
               core.notice('No new seed repositories added in this PR.');
@@ -51,7 +54,7 @@ jobs:
               const [owner, name] = full.split('/');
               try {
                 const { data: r } = await github.rest.repos.get({ owner, repo: name });
-                const ok = !r.archived && !r.fork && r.stargazers_count >= 100;
+                const ok = !r.archived && !r.fork && r.stargazers_count >= minStars;
                 const desc = (r.description || '').replace(/\|/g, '\\|').slice(0, 120);
                 rows.push(`| ${ok ? '✅' : '⚠️'} | [${full}](${r.html_url}) | ${r.stargazers_count.toLocaleString()} | ${r.fork ? 'yes' : 'no'} | ${r.archived ? 'yes' : 'no'} | ${(r.pushed_at || '').slice(0, 10)} | ${desc} |`);
               } catch (e) {
@@ -62,7 +65,7 @@ jobs:
               '<!-- seeds-verify -->',
               '## 🤖 Seed repository verification',
               '',
-              `Checked ${seeds.length} newly added seed(s) against the inclusion criteria (≥100 stars, not a fork, not archived):`,
+              `Checked ${seeds.length} newly added seed(s) against the inclusion criteria (≥${minStars} stars, not a fork, not archived):`,
               '',
               '| | Repository | Stars | Fork | Archived | Last push | Description |',
               '|---|---|---:|---|---|---|---|',
@@ -70,27 +73,35 @@ jobs:
               '',
               '_Automated check — final inclusion is still a maintainer decision._',
             ].join('\n');
-            // Update the existing verification comment instead of adding a new
-            // one on every push to the same PR.
-            const { data: comments } = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              per_page: 100,
-            });
-            const existing = comments.find(c => c.body && c.body.includes('<!-- seeds-verify -->'));
-            if (existing) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existing.id,
-                body,
-              });
-            } else {
-              await github.rest.issues.createComment({
+            await core.summary.addRaw(body).write();
+            // Fork PRs run with a read-only GITHUB_TOKEN; degrade gracefully to job summary on 403.
+            try {
+              const { data: comments } = await github.rest.issues.listComments({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body,
+                per_page: 100,
               });
+              const existing = comments.find(c => c.body && c.body.includes('<!-- seeds-verify -->'));
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existing.id,
+                  body,
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body,
+                });
+              }
+            } catch (err) {
+              if (err && err.status === 403) {
+                core.notice('Read-only token on fork PR: verification table written to Actions Job Summary.');
+              } else {
+                throw err;
+              }
             }

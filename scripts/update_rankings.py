@@ -991,6 +991,32 @@ def collect_repositories(config: dict[str, Any], token: str | None) -> collectio
     return result
 
 
+def _compact_catalog_entry(entry: Any) -> Any:
+    """Trim unreferenced metadata and strip noisy blocks from cached README evidence."""
+    if not isinstance(entry, dict):
+        return entry
+    meta = entry.get("metadata")
+    if not isinstance(meta, dict):
+        return entry
+    ev = meta.get("_readme_evidence")
+    if isinstance(ev, dict) and isinstance(ev.get("text"), str):
+        cleaned = README_BIBLIOGRAPHY_RE.split(ev["text"], maxsplit=1)[0]
+        cleaned = re.sub(r"<!--[^>]*?-->", "", cleaned, flags=re.S)
+        if not entry.get("eligible") and entry.get("status") == "excluded":
+            cleaned = re.sub(r"```[\s\S]*?```", "", cleaned)
+        ev["text"] = cleaned[:8000]
+    if not entry.get("eligible") and entry.get("status") == "excluded":
+        slim_meta: dict[str, Any] = {}
+        if meta.get("nameWithOwner"):
+            slim_meta["nameWithOwner"] = meta["nameWithOwner"]
+        if meta.get("_previous_names"):
+            slim_meta["_previous_names"] = meta["_previous_names"]
+        if isinstance(ev, dict):
+            slim_meta["_readme_evidence"] = ev
+        entry["metadata"] = slim_meta
+    return entry
+
+
 def write_collection_state(result: collection.CollectionResult, data=None) -> None:
     # Diagnostics are written even on failure; the workflow uploads them as an artifact.
     report = result.report
@@ -1001,11 +1027,8 @@ def write_collection_state(result: collection.CollectionResult, data=None) -> No
     if report["fatal"]:
         return
     for entry in result.catalog.get("repositories", {}).values():
-        meta = entry.get("metadata") if isinstance(entry, dict) else None
-        ev = meta.get("_readme_evidence") if isinstance(meta, dict) else None
-        if isinstance(ev, dict) and isinstance(ev.get("text"), str) and len(ev["text"]) > 8000:
-            ev["text"] = ev["text"][:8000]
-    # Compact JSON keeps repository-catalog.json ~40% smaller and avoids huge git diffs.
+        _compact_catalog_entry(entry)
+    # Compact JSON keeps repository-catalog.json lean and avoids huge git diffs.
     CATALOG_PATH.write_text(json.dumps(result.catalog, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     events = load_json(COLLECTION_EVENTS_PATH, [])
     events.extend({"at": report["generated_at"], **event} for event in report["changes"])
@@ -1712,18 +1735,62 @@ _BACKEND_ONLY_JS_FIELDS = frozenset({
     "watchers",
 })
 
+_INTERNAL_JS_SIGNAL_RE = re.compile(r"^(?:admission:|missing_|readme_|negative:|trusted_seed$)", re.I)
+
+_JS_OMIT_DEFAULTS: dict[str, Any] = {
+    "refresh_status": "fresh",
+    "stale": False,
+    "verifies_citations": False,
+    "skills_count_complete": True,
+    "first_seen_is_baseline": False,
+    "homepage": "",
+    "language": "",
+    "topics": [],
+    "agents": [],
+}
+
+
+def _slim_js_item(item: Any) -> Any:
+    if not isinstance(item, dict):
+        return item
+    out: dict[str, Any] = {}
+    repo = item.get("repo")
+    default_url = f"https://github.com/{repo}" if repo else None
+    for k, v in item.items():
+        if k in _BACKEND_ONLY_JS_FIELDS:
+            continue
+        if k in _JS_OMIT_DEFAULTS and v == _JS_OMIT_DEFAULTS[k]:
+            continue
+        if k == "url" and default_url and v == default_url:
+            continue
+        if k == "category" and isinstance(v, dict) and v.get("id"):
+            out[k] = v["id"]
+            continue
+        if k == "trend" and isinstance(v, dict) and v.get("id"):
+            out[k] = v["id"]
+            continue
+        if k == "license" and isinstance(v, dict):
+            spdx = v.get("spdx_id")
+            lic_str = spdx if spdx and spdx != "NOASSERTION" else (v.get("name") or "")
+            if lic_str:
+                out[k] = lic_str
+            continue
+        if k == "precision_signals" and isinstance(v, list):
+            pub = [s for s in v if isinstance(s, str) and s.strip() and not _INTERNAL_JS_SIGNAL_RE.match(s.strip())]
+            if pub:
+                out[k] = pub
+            continue
+        out[k] = v
+    return out
+
 
 def render_data_js(data: dict[str, Any]) -> str:
-    # Compact separators and strip backend-only collection metadata not read by
-    # the web dashboard (full fields remain in data/rankings.json).
+    # Compact separators, strip backend-only collection metadata, and normalize
+    # repeated enums/defaults hydrated by enrichItem() in src/practical.js
+    # (full verbose schema remains intact in data/rankings.json).
     slim_data = {
         **data,
-        "items": [
-            {k: v for k, v in item.items() if k not in _BACKEND_ONLY_JS_FIELDS}
-            if isinstance(item, dict)
-            else item
-            for item in data.get("items", [])
-        ],
+        "items": [_slim_js_item(item) for item in data.get("items", [])],
     }
     payload = json.dumps(slim_data, ensure_ascii=False, separators=(",", ":"))
     return f"window.ACADEMIC_SKILLS_RANKINGS={payload};\n"

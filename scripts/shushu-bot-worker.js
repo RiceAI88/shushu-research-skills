@@ -19,15 +19,25 @@ const ALLOWED_ORIGINS = new Set([
   "http://localhost:5173",
 ]);
 
-// 轻量内存级单实例限流（每 IP 每分钟最多 12 次提问）
+// 轻量内存级单实例限流（每 IP 每分钟最多 12 次提问，按过期与最早键渐进淘汰，避免整体清空失效）
+const MAX_IP_BUCKETS = 2000;
+const RATE_WINDOW_MS = 60_000;
 const ipBuckets = new Map();
-function checkRateLimit(ip) {
-  const now = Date.now();
-  const windowMs = 60_000;
+export function checkRateLimit(ip, now = Date.now()) {
   const record = ipBuckets.get(ip);
-  if (!record || now - record.start > windowMs) {
+  if (!record || now - record.start > RATE_WINDOW_MS) {
+    if (ipBuckets.size >= MAX_IP_BUCKETS && !ipBuckets.has(ip)) {
+      for (const [k, v] of ipBuckets) {
+        if (now - v.start > RATE_WINDOW_MS) ipBuckets.delete(k);
+      }
+      while (ipBuckets.size >= MAX_IP_BUCKETS) {
+        const oldestKey = ipBuckets.keys().next().value;
+        if (oldestKey === undefined) break;
+        ipBuckets.delete(oldestKey);
+      }
+    }
+    ipBuckets.delete(ip);
     ipBuckets.set(ip, { start: now, count: 1 });
-    if (ipBuckets.size > 2000) ipBuckets.clear();
     return true;
   }
   if (record.count >= 12) return false;
@@ -109,7 +119,7 @@ export default {
       );
     }
 
-    if (origin && !ALLOWED_ORIGINS.has(origin)) {
+    if (!origin || !ALLOWED_ORIGINS.has(origin)) {
       return Response.json({ error: "Origin not allowed" }, { status: 403, headers });
     }
 

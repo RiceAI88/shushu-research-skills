@@ -42,3 +42,28 @@ test("dialog close icon stays centered with a quiet hover style", async ({ page 
   await close.click();
   await expect(page.getByRole("dialog")).not.toBeVisible();
 });
+
+test("slow QR image opens community dialog immediately with skeleton and reveals image once loaded", async ({
+  page,
+}) => {
+  let release;
+  const gate = new Promise((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/research-community-*.jpg", async (route) => {
+    await gate;
+    await route.continue();
+  });
+  try {
+    await page.goto("./");
+    await page.getByRole("button", { name: /加入各专业科研交流群/ }).click();
+    const dialog = page.getByRole("dialog", { name: "各专业科研 Skills 交流群" });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator('.community-qr-skeleton[aria-busy="true"]')).toBeVisible();
+    release();
+    await expect(dialog.locator(".community-qr-skeleton")).toHaveCount(0);
+    await expect(dialog.locator("img")).toHaveJSProperty("naturalWidth", 660);
+  } finally {
+    release();
+  }
+});

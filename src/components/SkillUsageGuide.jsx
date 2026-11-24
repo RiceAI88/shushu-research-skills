@@ -289,8 +289,8 @@ export function SkillUsageGuide({
                 </p>
                 <div className="web-ai-actions">
                   <Button
-                    type="primary"
                     size="small"
+                    className="web-ai-primary-btn"
                     icon={
                       copiedKey === "direct-web" ? (
                         <CheckOutlined aria-hidden="true" />

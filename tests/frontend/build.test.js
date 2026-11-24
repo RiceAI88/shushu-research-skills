@@ -51,6 +51,10 @@ test("website build excludes development code and keeps monthly report assets", 
     "assets/app.js",
     "docs/superpowers",
     "data/repository-catalog.json",
+    "data/collection-report.json",
+    "data/collection-events.json",
+    "data/first-seen.json",
+    "data/editorial-status.json",
     "data/history",
   ])
     await assert.rejects(access("dist/" + name));
@@ -128,4 +132,27 @@ test("static SEO skill detail pages render SoftwareSourceCode JSON-LD and initia
   const llms = await readFile("dist/llms.txt", "utf8");
   assert.match(llms, /https:\/\/riceai985\.cc\/skills\//);
   assert.match(llms, /llms-full\.txt/);
+});
+
+test("rankings script uses defer and manifest icons match real PNG dimensions", async () => {
+  for (const page of [
+    "dist/index.html",
+    "dist/en/index.html",
+    "dist/disciplines/medicine/index.html",
+    "dist/skills/Yuan1z0825/nature-skills/index.html",
+  ]) {
+    const html = await readFile(page, "utf8");
+    assert.match(html, /<script\b[^>]*\bdefer\b[^>]*\bsrc="\/data\/rankings\.js\?v=/);
+  }
+  const manifest = JSON.parse(await readFile("dist/manifest.webmanifest", "utf8"));
+  const purposes = new Set();
+  for (const icon of manifest.icons) {
+    assert.doesNotMatch(icon.purpose || "", /\bany\s+maskable\b/);
+    purposes.add(icon.purpose);
+    const bytes = await readFile("dist" + icon.src);
+    const width = bytes.readUInt32BE(16);
+    const height = bytes.readUInt32BE(20);
+    assert.equal(`${width}x${height}`, icon.sizes, `${icon.src} PNG dimensions must match declared sizes`);
+  }
+  assert.ok(purposes.has("any") && purposes.has("maskable"));
 });
