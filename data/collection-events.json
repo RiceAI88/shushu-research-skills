@@ -3892,5 +3892,130 @@
     "at": "2026-11-23T06:08:47Z",
     "repo": "wangdongdut/paperwriting",
     "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "datawhalechina/dive-into-embodied-ai",
+    "action": "removed",
+    "reasons": [
+      "missing_skill_signal",
+      "missing_academic_signal",
+      "missing_readme_academic_scope"
+    ]
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "zacksomething/research-radar",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "296711867/figcraft-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "huangcongqing/3d-point-clouds",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "coder-world04/ml-ai-research-papers---solved",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "leey21/arxiv-translator",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "desbordante/desbordante-core",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "r2m-ai/scholar-loop",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "socialcatalystlab/ape-papers",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "thedesignfounder/dreamlayer-eval",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "secnotes/fuzzing-tutorial",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "skjack/kelip-paper-reading",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "yifangao112/camyla",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "mikamikasuki/forest",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "yerbapage/awesome-repo-level-code-generation",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "yu-xin-c/sea-mult-agent",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "yuanchen-home/cumcm-step-review",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "researai/awesome-ai-scientist",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "paulhe666/visualtex",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "thinson/rs-paperclaw",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "k-dense-ai/scientific-agents",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "lzwei196/kiss-knowledge-infrastructure-for-scientific-simulation",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "hqhq1025/ai-course-notes",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-24T02:10:19Z",
+    "repo": "yunjiaxi/awesome-search-agent-papers",
+    "action": "added"
   }
 ]
