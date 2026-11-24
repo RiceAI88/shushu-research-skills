@@ -79,6 +79,13 @@ test("research stages round-trip in hash and pin featured starters ahead of regu
   const state = restoreState(null, "#stage=slides", {}, catalog);
   assert.equal(state.stage, "slides");
   assert.match(serializeState(state), /stage=slides/);
+  const lowerRepoState = restoreState(
+    null,
+    "#repo=paper2poster%2Fpaper2poster",
+    {},
+    catalog,
+  );
+  assert.equal(lowerRepoState.repo, "Paper2Poster/Paper2Poster");
 
   const visible = filterItems(catalog, state);
   assert.deepEqual(

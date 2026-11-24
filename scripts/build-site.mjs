@@ -563,3 +563,107 @@ ${fullCatalogLines}
 await writeFile("dist/llms.txt", llmsTxt);
 await writeFile("dist/llms-full.txt", llmsFullTxt);
 console.log(`Generated dist/llms.txt and dist/llms-full.txt (${seoSkillItems.length} verified skills).`);
+
+// 生成 Web App Manifest，优化手机/iPad“添加到主屏幕”与桌面快捷应用图标体验
+const webManifest = {
+  name: "科研鼠鼠 · Skills 导航站",
+  short_name: "科研鼠鼠",
+  description:
+    "面向大学生与研究生，按专业和科研任务查找经过核验的 GitHub 开源科研 AI Skills。",
+  start_url: "/",
+  scope: "/",
+  display: "standalone",
+  background_color: "#f8fafc",
+  theme_color: "#0d9f6e",
+  icons: [
+    {
+      src: "/assets/favicon.png",
+      sizes: "64x64",
+      type: "image/png",
+    },
+    {
+      src: "/assets/hamster-logo.png",
+      sizes: "512x512",
+      type: "image/png",
+      purpose: "any maskable",
+    },
+  ],
+};
+await writeFile(
+  "dist/manifest.webmanifest",
+  JSON.stringify(webManifest, null, 2) + "\n",
+);
+
+// 生成智能容错 404.html：自动纠正大小写/简写路径至对应抽屉或学科页，其余路径展示品牌化导航兜底页
+const disciplineNavPills = DISCIPLINES.map(
+  (d) => `<a class="pill" href="/disciplines/${escapeHtml(d.id)}/">${escapeHtml(d.zh)}</a>`,
+).join("");
+
+const notFoundHtml = `<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0d9f6e" />
+    <title>页面未找到 · 科研鼠鼠 Skills 导航站</title>
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <script>
+      (function () {
+        try {
+          var p = location.pathname.replace(/\\/+$/, "");
+          var skillMatch = p.match(/^\\/skills\\/([A-Za-z0-9_.-]+\\/[A-Za-z0-9_.-]+)$/i);
+          if (skillMatch) {
+            location.replace("/#repo=" + encodeURIComponent(skillMatch[1]));
+            return;
+          }
+          var discMatch = p.match(/^\\/(medicine|economics|management|law|literature|history|philosophy|education|agriculture|arts|science|engineering)$/i);
+          if (discMatch) {
+            location.replace("/disciplines/" + discMatch[1].toLowerCase() + "/");
+            return;
+          }
+          var topicMatch = p.match(/^\\/(find|read|write|figures|reproduce|review|analyze|compute)$/i);
+          if (topicMatch) {
+            location.replace("/topics/" + topicMatch[1].toLowerCase() + "/");
+            return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <style>
+      :root { color-scheme: light dark; --bg: #f8fafc; --panel: #ffffff; --text: #0f172a; --muted: #64748b; --border: #e2e8f0; --primary: #0d9f6e; --tint: #ecfdf5; }
+      @media (prefers-color-scheme: dark) {
+        :root { --bg: #0b1120; --panel: #111827; --text: #f1f5f9; --muted: #94a3b8; --border: #1e293b; --primary: #10b981; --tint: rgba(16,185,129,0.14); }
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+      main { max-width: 560px; width: 100%; padding: 32px 28px; border-radius: 20px; background: var(--panel); border: 1px solid var(--border); box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08); text-align: center; }
+      img { display: block; margin: 0 auto 12px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      p { margin: 0 0 18px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+      form { display: flex; gap: 8px; margin-bottom: 18px; }
+      input { flex: 1; height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; font-size: 13.5px; outline: none; }
+      input:focus { border-color: var(--primary); }
+      button, .home-btn { height: 38px; padding: 0 18px; border-radius: 999px; border: 0; background: var(--primary); color: #fff; font: inherit; font-size: 13.5px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+      .pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 20px; }
+      .pill { padding: 4px 11px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); text-decoration: none; font-size: 12.5px; }
+      .pill:hover { border-color: var(--primary); color: var(--primary); background: var(--tint); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/assets/shushu-mascot.svg" width="76" height="76" alt="科研鼠鼠" />
+      <h1>这个链接好像迷路啦（404）</h1>
+      <p>可能是项目仓库改名或网址拼写有误。你可以直接搜科研需求，或按学科返回总榜：</p>
+      <form onsubmit="event.preventDefault();var q=this.q.value.trim();location.href=q?'/#q='+encodeURIComponent(q):'/';">
+        <input name="q" type="search" placeholder="输入你的科研任务，例如：文献综述 / 顶刊配图 / Stata…" aria-label="搜索科研 Skills" />
+        <button type="submit">搜索</button>
+      </form>
+      <div class="pills">${disciplineNavPills}</div>
+      <a class="home-btn" href="/">返回科研鼠鼠总榜首页</a>
+    </main>
+  </body>
+</html>
+`;
+await writeFile("dist/404.html", notFoundHtml);
+console.log("Generated dist/manifest.webmanifest and smart dist/404.html.");

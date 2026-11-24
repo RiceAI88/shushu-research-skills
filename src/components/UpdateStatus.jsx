@@ -16,9 +16,19 @@ export function UpdateStatus({
   }, []);
   const [status, setStatus] = useState({ kind: "checking" });
   useEffect(() => {
+    const cacheKey = `ars-run-v1:${generatedAt || ""}`;
+    try {
+      const cached = JSON.parse(sessionStorage.getItem(cacheKey) || "null");
+      if (cached && Date.now() - cached.ts < 600000) {
+        setStatus(cached.status);
+        return undefined;
+      }
+    } catch {
+      /* ignore storage errors */
+    }
     const controller = new AbortController();
     let active = true;
-    const timer = setTimeout(() => controller.abort(), 8000);
+    const timer = setTimeout(() => controller.abort(), 5000);
     fetch(UPDATE_RUNS_URL, {
       signal: controller.signal,
       credentials: "omit",
@@ -29,11 +39,20 @@ export function UpdateStatus({
         return response.json();
       })
       .then((data) => {
-        if (active)
-          setStatus({
-            ...classifyUpdateRun(data.workflow_runs?.[0], generatedAt),
-            checkedAt: new Date().toISOString(),
-          });
+        if (!active) return;
+        const nextStatus = {
+          ...classifyUpdateRun(data.workflow_runs?.[0], generatedAt),
+          checkedAt: new Date().toISOString(),
+        };
+        setStatus(nextStatus);
+        try {
+          sessionStorage.setItem(
+            cacheKey,
+            JSON.stringify({ ts: Date.now(), status: nextStatus }),
+          );
+        } catch {
+          /* ignore */
+        }
       })
       .catch(() => {
         if (active)

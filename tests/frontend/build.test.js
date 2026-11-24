@@ -24,6 +24,8 @@ test("production site preserves both language entries and public data resources"
     "sitemap.xml",
     "llms.txt",
     "llms-full.txt",
+    "manifest.webmanifest",
+    "404.html",
     "robots.txt",
     "reports/index.html",
     "assets/styles.css",

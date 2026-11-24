@@ -405,6 +405,13 @@ function Dashboard({ state, update }) {
         setCompareOpen(false);
         return;
       }
+      if ((e.metaKey || e.ctrlKey) && !e.altKey && e.key.toLowerCase() === "k") {
+        if (!compareOpen && !guideSection && !state.repo) {
+          e.preventDefault();
+          (stickySearchVisible ? stickySearch.current : search.current)?.focus();
+        }
+        return;
+      }
       if (
         e.defaultPrevented ||
         e.ctrlKey ||

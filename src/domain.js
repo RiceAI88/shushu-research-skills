@@ -264,6 +264,9 @@ export function restoreState(storage, hash = "", defaults = {}, items = []) {
   };
   const p = new URLSearchParams(hash.replace(/^#/, ""));
   const repositories = new Set(items.map((i) => i.repo));
+  const repoByLower = new Map(
+    items.map((i) => [String(i.repo || "").toLowerCase(), i.repo]),
+  );
   const pack = parsePackRepos(p.get("pack"), items);
   return {
     query: p.get("q") || "",
@@ -319,7 +322,7 @@ export function restoreState(storage, hash = "", defaults = {}, items = []) {
     favOnly: p.get("fav") === "1",
     newOnly: p.get("new") === "1",
     todayOnly: valid(p.get("today"), ["skill", "related"], ""),
-    repo: repositories.has(p.get("repo")) ? p.get("repo") : null,
+    repo: repoByLower.get(String(p.get("repo") || "").toLowerCase()) || null,
   };
 }
 export function serializeState(state) {
