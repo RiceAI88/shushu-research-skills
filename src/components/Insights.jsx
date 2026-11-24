@@ -4,8 +4,10 @@ import { Empty, Select, Tooltip } from "antd";
 import { buildInsightData, createColorMaps } from "../insights";
 import { THEME_TOKENS } from "../tokens";
 import {
+  AGENT_PLATFORMS,
   FONT_FAMILY,
   RESEARCH_TASKS,
+  detectAgents,
   matchesResearchTask,
   sceneLabelsFor,
 } from "../domain";
@@ -392,7 +394,29 @@ function LogScatterSvg({
   const toY = (gLog) => padT + (1 - (gLog - minY) / (maxY - minY)) * plotH;
 
   const dotColor = dark ? "#34D399" : "#0D9F6E";
-  const highlights = scatterData.filter((d) => d.highlight);
+  const highlightLabels = scatterData
+    .filter((d) => d.highlight)
+    .map((datum) => {
+      const cx = toX(datum.stars);
+      const cy = toY(datum.growthLog);
+      const alignEnd = cx > W - 140;
+      return {
+        repo: datum.repo,
+        shortName: datum.repo.split("/").pop(),
+        x: alignEnd ? cx - 6 : cx + 6,
+        y: Math.max(padT + 10, cy - 7),
+        alignEnd,
+      };
+    })
+    .sort((a, b) => a.y - b.y);
+  for (let i = 1; i < highlightLabels.length; i++) {
+    if (highlightLabels[i].y - highlightLabels[i - 1].y < 13) {
+      highlightLabels[i].y = Math.min(
+        H - padB - 6,
+        highlightLabels[i - 1].y + 13,
+      );
+    }
+  }
 
   return (
     <svg
@@ -475,24 +499,19 @@ function LogScatterSvg({
           </circle>
         );
       })}
-      {highlights.map((datum) => {
-        const cx = toX(datum.stars);
-        const cy = toY(datum.growthLog);
-        const alignEnd = cx > W - 120;
-        return (
-          <text
-            key={`lbl-${datum.repo}`}
-            x={alignEnd ? cx - 6 : cx + 6}
-            y={Math.max(padT + 8, cy - 7)}
-            textAnchor={alignEnd ? "end" : "start"}
-            fill={muted}
-            fontSize="10"
-            pointerEvents="none"
-          >
-            {datum.repo.split("/").pop()}
-          </text>
-        );
-      })}
+      {highlightLabels.map((lbl) => (
+        <text
+          key={`lbl-${lbl.repo}`}
+          x={lbl.x}
+          y={lbl.y}
+          textAnchor={lbl.alignEnd ? "end" : "start"}
+          fill={muted}
+          fontSize="10"
+          pointerEvents="none"
+        >
+          {lbl.shortName}
+        </text>
+      ))}
     </svg>
   );
 }
@@ -634,6 +653,30 @@ export default function Insights({
     label: t(taskKeys[task.id]),
     count: items.filter((item) => matchesResearchTask(item, task)).length,
   })).sort((a, b) => b.count - a.count);
+
+  const agentStats = useMemo(() => {
+    const counts = Object.fromEntries(AGENT_PLATFORMS.map((p) => [p.id, 0]));
+    let generalCount = 0;
+    for (const item of items) {
+      const matched = detectAgents(item);
+      if (!matched.length) generalCount += 1;
+      for (const id of matched) {
+        if (id in counts) counts[id] += 1;
+      }
+    }
+    const list = AGENT_PLATFORMS.map((p) => ({
+      id: p.id,
+      label: p.label,
+      count: counts[p.id] || 0,
+    }))
+      .filter((p) => p.count > 0 || state.agent === p.id)
+      .sort((a, b) => b.count - a.count);
+    return {
+      list,
+      generalCount,
+      max: Math.max(1, ...list.map((p) => p.count)),
+    };
+  }, [items, state.agent]);
 
   const signedLog = (value) =>
     Math.sign(value) * Math.log10(1 + Math.abs(value));
@@ -846,6 +889,64 @@ export default function Insights({
                   <NoData text={t("empty")} />
                 )}
               </ChartFrame>
+              <article
+                className="insight-panel discipline-count-chart"
+                data-testid="insight-agents"
+              >
+                <h3>
+                  {state.lang === "zh"
+                    ? "AI Agent 平台适配分布"
+                    : "Compatible AI Agent Platforms"}
+                </h3>
+                <p className="discipline-chart-note">
+                  {state.lang === "zh"
+                    ? "点击任一平台可直接筛选项目；单个 Skill 可同时兼容多个 Agent"
+                    : "Click any platform to filter; one Skill can support multiple Agents"}
+                </p>
+                {agentStats.list.length ? (
+                  <>
+                    <div className="discipline-bar-list">
+                      {agentStats.list.map((p) => (
+                        <button
+                          key={p.id}
+                          type="button"
+                          data-chart-agent={p.id}
+                          aria-pressed={state.agent === p.id}
+                          onClick={() =>
+                            update((s) => ({
+                              ...s,
+                              agent: s.agent === p.id ? "all" : p.id,
+                            }))
+                          }
+                        >
+                          <span>{p.label}</span>
+                          <i>
+                            <b
+                              style={{
+                                width: `${(p.count / agentStats.max) * 100}%`,
+                                opacity:
+                                  state.agent !== "all" && state.agent !== p.id
+                                    ? 0.45
+                                    : 1,
+                              }}
+                            />
+                          </i>
+                          <strong>{fmt(p.count)}</strong>
+                        </button>
+                      ))}
+                    </div>
+                    {agentStats.generalCount > 0 && (
+                      <p className="discipline-chart-note">
+                        {state.lang === "zh"
+                          ? `另有 ${fmt(agentStats.generalCount)} 个通用规范项目支持直接复制到网页版 AI 或任意兼容 Agent 使用。`
+                          : `Plus ${fmt(agentStats.generalCount)} general-spec repositories usable across Web AI and standard Agents.`}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <NoData text={t("empty")} />
+                )}
+              </article>
             </div>
             <div className="insights-bottom" hidden={!showAdditional}>
               <ChartFrame

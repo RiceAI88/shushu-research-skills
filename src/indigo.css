@@ -3135,8 +3135,16 @@ a:focus-visible,
   margin-bottom: 16px;
 }
 .legacy-category-chart {
-  margin: 16px 0;
-  max-width: 590px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 16px 0 18px;
+  align-items: stretch;
+}
+@media (max-width: 760px) {
+  .legacy-category-chart {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 .discipline-selector button:focus-visible,
 .discipline-matrix button:focus-visible,
