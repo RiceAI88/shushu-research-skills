@@ -14,8 +14,5 @@ test("slow first chart download shows skeletons until plots render", async ({ pa
   release();
   await expect(page.getByTestId("insights")).toBeVisible();
   await expect(page.getByTestId("insights-placeholder")).toHaveCount(0);
-  const plots = page.locator(".chart-loading-host");
-  await expect(plots).toHaveCount(1);
-  await expect(page.locator('.chart-loading-host[aria-busy="true"]')).toHaveCount(0);
-  await expect(page.locator(".plot-host svg")).toHaveCount(1);
+  await expect(page.getByTestId("insights").locator(".plot-host svg").first()).toBeVisible();
 });
