@@ -56,11 +56,11 @@ function TableInlineBadges({ item, state }) {
       className="table-web-pill"
       title={
         zh
-          ? "免命令行环境，支持网页版 AI 直接使用"
-          : "Works directly in Web AI chat without CLI"
+          ? "免安装 · 打开网页版 DeepSeek / Kimi / ChatGPT 复制即可直用"
+          : "Zero-install · Works directly in Web AI chat"
       }
     >
-      {zh ? "免命令行" : "Web AI"}
+      {zh ? "网页直用" : "Web AI"}
     </span>
   ) : item.skills_count > 0 ? (
     <span className="table-skill-count">

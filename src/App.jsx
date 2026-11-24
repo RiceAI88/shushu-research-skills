@@ -1047,8 +1047,8 @@ function Dashboard({ state, update, switchLang }) {
               aria-pressed={Boolean(state.webReady)}
               title={
                 state.lang === "zh"
-                  ? "仅展示免配命令行环境、支持在网页版 DeepSeek / Kimi / ChatGPT 直接使用的项目"
-                  : "Show only Skills usable directly in Web AI chat without local CLI setup"
+                  ? "无需安装编程环境，打开网页版 DeepSeek / Kimi / ChatGPT 复制规则即可直接使用"
+                  : "No local setup needed — copy and use directly in Web AI chat (ChatGPT, Claude, DeepSeek)"
               }
               onClick={() =>
                 update((s) => ({
@@ -1060,7 +1060,7 @@ function Dashboard({ state, update, switchLang }) {
             >
               <i className="web-ready-dot" aria-hidden="true" />
               <span>
-                {state.lang === "zh" ? "免命令行可用" : "Web AI ready"}
+                {state.lang === "zh" ? "免安装 · 网页直用" : "Zero-install · Web AI"}
               </span>
             </button>
             <ActionPopover label={state.lang === "zh" ? "筛选" : "Filters"} filter lang={state.lang} count={Number(state.agent !== "all") + Number(!["rank","stars"].includes(state.sort)) + Number(state.favOnly)}>

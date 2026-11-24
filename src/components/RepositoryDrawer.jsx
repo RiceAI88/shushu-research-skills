@@ -190,7 +190,7 @@ export function RepositoryDrawer({
                   <span className="drawer-alt-meta">
                     {webFriendly && (
                       <em>
-                        {state.lang === "zh" ? "免命令行可用" : "Web AI ready"}
+                        {state.lang === "zh" ? "免安装 · 网页直用" : "Zero-install · Web AI"}
                       </em>
                     )}
                     <span>★ {fmt(cand.stars)}</span>

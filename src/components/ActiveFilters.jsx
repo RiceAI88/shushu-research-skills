@@ -45,7 +45,7 @@ export function ActiveFilters({ state, update, t, empty, onShareFavorites }) {
   if (state.webReady)
     conditions.push([
       "webReady",
-      state.lang === "zh" ? "免命令行可用" : "Web AI ready",
+      state.lang === "zh" ? "免安装 · 网页直用" : "Zero-install · Web AI",
     ]);
   if (state.query.trim())
     conditions.push(["query", t("filterSearch") + state.query.trim()]);

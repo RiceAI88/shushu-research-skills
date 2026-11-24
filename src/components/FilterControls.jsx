@@ -65,7 +65,7 @@ export default function FilterControls({state,update,t,platformIds}) {
                 aria-pressed={Boolean(state.webReady)}
                 onClick={() => update((s) => ({ ...s, webReady: !s.webReady }))}
               >
-                {state.lang === "zh" ? "🟢 免命令行 / 网页版直用" : "🟢 Zero-CLI / Web AI ready"}
+                {state.lang === "zh" ? "🟢 免安装 · 网页直用" : "🟢 Zero-install · Web AI"}
               </Button>
 
 </>;
