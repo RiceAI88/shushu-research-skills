@@ -193,6 +193,7 @@ export function RepositoryViews({
     state.agent,
     state.sort,
     state.favOnly,
+    state.webReady,
     state.newOnly,
     state.todayOnly,
     items.map((item) => item.repo),
@@ -234,16 +235,17 @@ export function RepositoryViews({
   );
   const open = (item) => update((s) => ({ ...s, repo: item.repo }));
   const link = (item) => (
-    <a
-      href={safeExternalUrl(item.url) || undefined}
-      target="_blank"
-      rel="noreferrer"
-      onClick={(e) => e.stopPropagation()}
-      className="repo-name"
+    <button
+      type="button"
+      onClick={(e) => {
+        e.stopPropagation();
+        open(item);
+      }}
+      className="repo-name repo-title table-repo-btn"
       title={item.repo}
     >
       <SearchHighlight text={item.repo} query={state.query} />
-    </a>
+    </button>
   );
   const preloadOnMouse = (event) => {
     if (event.pointerType === "mouse") onPreloadDetail?.();

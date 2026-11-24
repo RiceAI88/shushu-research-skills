@@ -3,7 +3,8 @@ import { EditorialReviewNotice } from "./EditorialReviewNotice";
 import { Panel } from "./Panel";
 import React from "react";
 import { editorialPicks } from "../practical";
-import { PlatformTags, InstallationActions } from "./PracticalInfo";
+import { PlatformTags } from "./PracticalInfo";
+import { InstallationActions } from "./InstallationActions";
 export function EditorialPicks({ items, state, t }) {
   const picks = editorialPicks(items);
   if (!picks.length) return null;

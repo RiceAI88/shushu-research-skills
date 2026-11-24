@@ -1,16 +1,16 @@
 import { GrowthValue } from "./ProjectFacts";
-import React, { createContext, useContext, useEffect } from "react";
-import { Button, Table, Tag, Tooltip } from "antd";
-import {
-  PlatformTags,
-  SummaryText,
-  InstallationActions,
-} from "./PracticalInfo";
-import { sceneLabelsFor } from "../domain";
+import React, { useEffect } from "react";
+import { Table, Tag, Tooltip } from "antd";
+import { PlatformTags, SummaryText } from "./PracticalInfo";
+import { InstallationActions } from "./InstallationActions";
+import { isWebAiReady, orderedSceneLabelsFor, safeExternalUrl } from "../domain";
+import { fitLabels } from "../projectFacts";
 import { Sparkline } from "./TrendCharts";
-function SceneTags({ item, t }) {
-  const labels = sceneLabelsFor(item, t);
-  if (!labels.length) return <span className="scene-unclassified">{t("sceneUnclassified")}</span>;
+
+function SceneTags({ item, t, activeTask }) {
+  const labels = orderedSceneLabelsFor(item, t, activeTask);
+  if (!labels.length)
+    return <span className="scene-unclassified">{t("sceneUnclassified")}</span>;
   return (
     <div className="scene-tags">
       <Tag>{labels[0]}</Tag>
@@ -31,6 +31,56 @@ function SceneTags({ item, t }) {
     </div>
   );
 }
+
+function TableInlineBadges({ item, state }) {
+  const zh = state.lang === "zh";
+  const fit = fitLabels(item, state);
+  const webReady = isWebAiReady(item);
+  const fitBadge =
+    fit?.kind === "specific" && fit.labels?.length ? (
+      <span
+        className="discipline-card-fit fit-specific table-fit-pill"
+        title={fit.labels.join(" / ")}
+      >
+        {zh ? "专业适用" : "Fit"} · {fit.labels[0]}
+        {fit.labels.length > 1 ? ` +${fit.labels.length - 1}` : ""}
+      </span>
+    ) : state.discipline && state.discipline !== "all" && fit?.kind === "common" ? (
+      <span className="discipline-card-fit fit-common table-fit-pill">
+        {zh ? "跨专业通用" : "General"}
+      </span>
+    ) : null;
+
+  const metaBadge = webReady ? (
+    <span
+      className="table-web-pill"
+      title={
+        zh
+          ? "免命令行环境，支持网页版 AI 直接使用"
+          : "Works directly in Web AI chat without CLI"
+      }
+    >
+      {zh ? "免命令行" : "Web AI"}
+    </span>
+  ) : item.skills_count > 0 ? (
+    <span className="table-skill-count">
+      {item.skills_count}
+      {item.skills_count_complete === false ? "+" : ""}{" "}
+      {item.skills_count === 1 && item.skills_count_complete !== false
+        ? "skill"
+        : "skills"}
+    </span>
+  ) : null;
+
+  if (!fitBadge && !metaBadge) return null;
+  return (
+    <span className="table-inline-badges">
+      {fitBadge}
+      {metaBadge}
+    </span>
+  );
+}
+
 export default function RepositoryTable({
   onReady,
   state,
@@ -39,7 +89,6 @@ export default function RepositoryTable({
   fmt,
   link,
   actions,
-  badges,
   history,
   generatedAt,
   ...props
@@ -69,7 +118,7 @@ export default function RepositoryTable({
     {
       title: "#",
       dataIndex: "rank",
-      width: 70,
+      width: 68,
       render: (rank, item) => (
         <span className="card-rank-group">
           <span
@@ -90,12 +139,20 @@ export default function RepositoryTable({
     {
       title: t("repo"),
       key: "repo",
-      width: 360,
+      width: 356,
       render: (_, item) => (
         <div className="table-repository">
-          {link(item)}
+          <div className="table-repo-head">
+            {link(item)}
+            <TableInlineBadges item={item} state={state} />
+          </div>
           <div className="table-description-line">
-            <SummaryText item={item} t={t} query={state.query} lang={state.lang} />
+            <SummaryText
+              item={item}
+              t={t}
+              query={state.query}
+              lang={state.lang}
+            />
             {item.stale && (
               <Tooltip
                 title={t("staleReason")}
@@ -118,13 +175,13 @@ export default function RepositoryTable({
     {
       title: t("drAgent"),
       key: "platforms",
-      width: 150,
+      width: 184,
       render: (_, item) => <PlatformTags item={item} t={t} compact />,
     },
     {
       title: t("installation"),
       key: "installation",
-      width: 160,
+      width: 158,
       render: (_, item) => (
         <InstallationActions item={item} lang={state.lang} t={t} compact />
       ),
@@ -132,13 +189,16 @@ export default function RepositoryTable({
     {
       title: t("sceneHeading"),
       key: "scene",
-      width: 130,
-      render: (_, item) => <SceneTags item={item} t={t} />,
+      width: 132,
+      render: (_, item) => (
+        <SceneTags item={item} t={t} activeTask={state.task} />
+      ),
     },
     {
       title: sortHeading("Stars", "stars", t("rankByStars")),
       key: "stars",
-      width: 100,
+      width: 104,
+      align: "right",
       render: (_, item) => (
         <div className="reference-metrics table-metrics">
           <span className="table-stars">{fmt(item.stars)}</span>
@@ -153,21 +213,37 @@ export default function RepositoryTable({
     {
       title: sortHeading(t("shortDelta7"), "delta7", t("sortDelta7Action")),
       key: "delta7",
-      width: 110,
+      width: 108,
+      align: "right",
       render: (_, item) => (
         <span
           className={`table-growth${item.star_delta_7d ? "" : " no-growth"}`}
         >
-          <GrowthValue {...{item,history,generatedAt,fmt}} lang={state.lang} />
+          <GrowthValue {...{ item, history, generatedAt, fmt }} lang={state.lang} />
         </span>
       ),
     },
     {
       title: t("actions"),
       key: "actions",
-      width: 90,
+      width: 110,
       fixed: "right",
-      render: (_, item) => actions(item),
+      render: (_, item) => (
+        <div className="table-row-actions">
+          {actions(item)}
+          <a
+            className="repository-external"
+            href={safeExternalUrl(item.url) || undefined}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${t("drOpenRepo")} ${item.repo}`}
+            title="GitHub"
+            onClick={(event) => event.stopPropagation()}
+          >
+            ↗
+          </a>
+        </div>
+      ),
     },
   ];
   return <Table {...props} columns={columns} />;

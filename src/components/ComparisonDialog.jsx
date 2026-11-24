@@ -2,7 +2,8 @@ import { reviewedInstallSnapshot } from "../practical";
 import React from "react";
 import { Modal, Tag, Tooltip } from "antd";
 import { ComparisonChart } from "./TrendCharts";
-import { PlatformTags, InstallationActions } from "./PracticalInfo";
+import { PlatformTags } from "./PracticalInfo";
+import { InstallationActions } from "./InstallationActions";
 import { EditorialReviewNotice } from "./EditorialReviewNotice";
 import {
   RESEARCH_TASKS,

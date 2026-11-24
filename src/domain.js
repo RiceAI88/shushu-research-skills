@@ -183,10 +183,116 @@ export const TASK_LABEL_KEYS = {
   reproduce: "taskReproduce",
   review: "taskReview",
 };
+const CATEGORY_PRIMARY_TASK = {
+  "paper-writing": "write",
+  "peer-review": "review",
+  "experiment-reproducibility": "reproduce",
+  "literature-review": "find",
+  "deep-research": "find",
+  "discipline-specific": "analyze",
+};
+
+const PRIMARY_SCENE_HINTS = [
+  ["figures", /绘图|配图|图表|插图|海报|流程图|\b(?:figure|figures|plot|plotting|chart|diagram|poster|ppt|slide|illustration)\b/i],
+  ["review", /审稿|返修|同行评审|\b(?:rebuttal|peer[- ]review|referee|proofread)\b/i],
+  ["reproduce", /复现|消融|自主科研|自动实验|\b(?:reproduc|ablation|auto[- ]research|autonomous\s+ml|benchmark)\b/i],
+  ["compute", /数学建模|分子模拟|数值仿真|物理仿真|\b(?:isaac|molecular|simulation|math[- ]?model)\b/i],
+  ["analyze", /实证|计量|单细胞|转录组|统计检验|问卷|\b(?:econometric|stata|scrna|single[- ]cell|bioinformatic|meta[- ]analysis)\b/i],
+  ["write", /写作|润色|降重|去\s*ai|排版|\b(?:humaniz|anti[- ]defensive|paper[- ]writing|manuscript|latex|docx)\b/i],
+  ["read", /精读|翻译论文|阅读笔记|\b(?:paper[- ]reading|arxiv[- ]translat|pdf.*translat)\b/i],
+];
+
 export function sceneLabelsFor(item, t) {
   return RESEARCH_TASKS.filter((task) => matchesResearchTask(item, task)).map(
     (task) => t(TASK_LABEL_KEYS[task.id]),
   );
+}
+
+const FIGURE_PRIORITY_RE =
+  /绘图|配图|图表|插图|海报|流程图|\b(?:figure|figures|plot|plotting|chart|diagram|poster|ppt|slide|illustration)\b/i;
+
+// 为紧凑表格场景列排序任务标签：优先呼应当前筛选任务、显式绘图定位或项目主分类，避免清一色显示“找文献”
+export function orderedSceneLabelsFor(item, t, activeTask = "all") {
+  const matched = RESEARCH_TASKS.filter((task) => matchesResearchTask(item, task));
+  if (matched.length <= 1) return matched.map((task) => t(TASK_LABEL_KEYS[task.id]));
+  let preferredId =
+    activeTask !== "all" && matched.some((m) => m.id === activeTask) ? activeTask : "";
+  const shortSummary = [item?.repo, item?.curated_use_zh].join(" ");
+  if (!preferredId && FIGURE_PRIORITY_RE.test(shortSummary) && matched.some((m) => m.id === "figures")) {
+    preferredId = "figures";
+  }
+  if (
+    !preferredId &&
+    ["paper-writing", "peer-review", "experiment-reproducibility"].includes(item?.category?.id)
+  ) {
+    const catTask = CATEGORY_PRIMARY_TASK[item.category.id];
+    if (catTask && matched.some((m) => m.id === catTask)) preferredId = catTask;
+  }
+  if (!preferredId) {
+    const summaryText = [item?.repo, item?.curated_use_zh, item?.description].join(" ");
+    for (const [tid, re] of PRIMARY_SCENE_HINTS) {
+      if (re.test(summaryText) && matched.some((m) => m.id === tid)) {
+        preferredId = tid;
+        break;
+      }
+    }
+  }
+  if (!preferredId) {
+    const catTask = CATEGORY_PRIMARY_TASK[item?.category?.id];
+    if (catTask && matched.some((m) => m.id === catTask)) preferredId = catTask;
+  }
+  const sorted = preferredId
+    ? [
+        ...matched.filter((m) => m.id === preferredId),
+        ...matched.filter((m) => m.id !== preferredId),
+      ]
+    : matched;
+  return sorted.map((task) => t(TASK_LABEL_KEYS[task.id]));
+}
+
+const WEB_HEAVY_RUNTIME_RE =
+  /\b(?:gpu|cuda|nvidia|vram|isaac[- ]?sim|mcp[- ]?server|fastmcp|docker|compose|gradio|streamlit|fastapi|flask|playwright|selenium|puppeteer|electron|vscode[- ]extension)\b|服务端|本地部署|数学建模\s*Agent/i;
+const WEB_PROMPT_SIGNAL_RE =
+  /\b(?:markdown[- ]only|prompt[- ]pack|prompt[- ]only|claude\.ai|(?:chatgpt|deepseek|kimi)\s+skill|web\s*(?:ai|chat|ui)|zero[- ]install|no[- ]code|humanizer|anti[- ]defensive)\b|提示词|纯文档|免安装|网页版|润色原则|写作原则/i;
+const CODE_RUNTIME_LANGS = new Set([
+  "Python",
+  "TypeScript",
+  "JavaScript",
+  "Go",
+  "Rust",
+  "C++",
+  "C",
+  "Java",
+  "Stata",
+  "R",
+  "Jupyter Notebook",
+  "Shell",
+  "PowerShell",
+  "Batchfile",
+]);
+
+// 判定项目是否免装本地命令行/编程环境，支持在网页版 AI（DeepSeek/Kimi/ChatGPT/Claude）直接复制规则或在线使用
+export function isWebAiReady(item) {
+  const blob = [
+    item?.repo,
+    item?.description,
+    item?.curated_use_zh,
+    item?.curated_use_en,
+    ...(item?.topics || []),
+  ].join(" ");
+  if (WEB_HEAVY_RUNTIME_RE.test(blob)) return false;
+  if (
+    Array.isArray(item?.agents) &&
+    item.agents.length === 1 &&
+    item.agents[0] === "mcp"
+  )
+    return false;
+  if (WEB_PROMPT_SIGNAL_RE.test(blob)) return true;
+  const lang = String(item?.language || "").trim();
+  if (!lang || lang === "Markdown") return true;
+  if (item?.repository_kind === "related" && !CODE_RUNTIME_LANGS.has(lang))
+    return true;
+  return false;
 }
 
 /* Agent platform catalog — the order here is the display/sort order. */
@@ -320,6 +426,7 @@ export function restoreState(storage, hash = "", defaults = {}, items = []) {
       .filter((repo) => repositories.has(repo))
       .slice(0, 3),
     favOnly: p.get("fav") === "1",
+    webReady: p.get("web") === "1",
     newOnly: p.get("new") === "1",
     todayOnly: valid(p.get("today"), ["skill", "related"], ""),
     repo: repoByLower.get(String(p.get("repo") || "").toLowerCase()) || null,
@@ -348,6 +455,7 @@ export function serializeState(state) {
   }
   if (state.includeRelated) p.set("related", "1");
   if (state.favOnly) p.set("fav", "1");
+  if (state.webReady) p.set("web", "1");
   if (state.newOnly) p.set("new", "1");
   if (state.todayOnly) p.set("today", state.todayOnly);
   if (state.repo) p.set("repo", state.repo);
@@ -393,6 +501,7 @@ export function filterItems(items, state) {
     if (task && !matchesResearchTask(item, task)) return false;
     if (state.agent !== "all" && !detectAgents(item).includes(state.agent))
       return false;
+    if (state.webReady && !isWebAiReady(item)) return false;
     if (state.favOnly && !state.favorites.includes(item.repo)) return false;
     return (
       !q ||

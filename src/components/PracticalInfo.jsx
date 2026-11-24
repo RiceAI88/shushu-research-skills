@@ -1,7 +1,7 @@
 import React from "react";
 import { SearchHighlight } from "./SearchHighlight";
 import { Button, Space, Tag, Tooltip } from "antd";
-import { CopyOutlined, ExportOutlined } from "@ant-design/icons";
+import { CopyOutlined } from "@ant-design/icons";
 import { AGENT_PLATFORMS, detectAgents, safeExternalUrl } from "../domain";
 import { EDITORIAL_CONTENT, installationFor } from "../practical";
 import { useFeedback } from "./FeedbackProvider";
@@ -40,21 +40,22 @@ export function SummaryText({ item, t, query = "", full = false, lang = "" }) {
 }
 export function dedupePlatformLabels(rawLabels) {
   const unique = [];
-  const seenLower = new Set();
+  const seenCompact = new Set();
   for (const label of rawLabels) {
     const clean = String(label || "").trim();
     if (!clean) continue;
-    const lower = clean.toLowerCase();
-    if (seenLower.has(lower)) continue;
-    seenLower.add(lower);
+    // 归一化空格、连字符与下划线，避免 "Claude Code" 与 "claude-code" 重复出现
+    const compactKey = clean.toLowerCase().replace(/[-_\s]+/g, "");
+    if (!compactKey || seenCompact.has(compactKey)) continue;
+    seenCompact.add(compactKey);
     unique.push(clean);
   }
   // Drop shorter generic labels when a more specific official name is already present
   // (e.g. "Gemini" when "Gemini CLI" is listed, or "Antigravity" when "Google Antigravity" is listed).
   return unique.filter((label) => {
-    const lower = label.toLowerCase();
+    const lower = label.toLowerCase().replace(/[-_]+/g, " ");
     return !unique.some((other) => {
-      const otherLower = other.toLowerCase();
+      const otherLower = other.toLowerCase().replace(/[-_]+/g, " ");
       if (otherLower === lower || otherLower.length <= lower.length) return false;
       return (
         otherLower.startsWith(lower + " ") ||
@@ -72,11 +73,15 @@ export function PlatformTags({ item, t, compact = false }) {
     ...(item.documented_platform_names || []),
   ]);
   if (compact) {
+    const pairText = labels.slice(0, 2).join(" · ");
+    const shownCount =
+      labels.length >= 2 && pairText.length > 20 ? 1 : Math.min(2, labels.length);
+    const overflow = labels.length - shownCount;
     return (
       <Tooltip title={labels.join(" · ") || t("platformUnspecifiedHint")}>
         <span className="card-platforms">
-          {labels.slice(0, 2).join(" · ") || t("agentGeneral")}
-          {labels.length > 2 && ` +${labels.length - 2}`}
+          {labels.slice(0, shownCount).join(" · ") || t("agentGeneral")}
+          {overflow > 0 && ` +${overflow}`}
         </span>
       </Tooltip>
     );
@@ -178,77 +183,5 @@ export function CopyInstallButton({
         {!iconOnly && t("copyInstall")}
       </Button>
     </Tooltip>
-  );
-}
-
-export function InstallationActions({
-  item,
-  lang,
-  t,
-  details = false,
-  compact = false,
-  hideExtras = false,
-}) {
-  const installation = installationFor(item);
-  return (
-    <div
-      className={`installation-actions${details ? " installation-details" : " installation-compact"}${compact ? " installation-inline" : ""}`}
-      onClick={(event) => {
-        if (event.target.closest("button,a")) event.stopPropagation();
-      }}
-    >
-      {!(details && installation.command) && (
-        <div className="installation-status">
-          <InstallationMode item={item} t={t} short={compact} />
-        </div>
-      )}
-      {!compact && !details && installation[`context_${lang}`] && (
-        <div className="installation-context">
-          {installation[`context_${lang}`]}
-        </div>
-      )}
-      {details && installation.command && (
-        <div className="install-command-block">
-          <div className="install-command-heading">
-            <span className="install-command-title">
-              <span>{t("installCommandHeading")}</span>
-              <InstallationMode item={item} t={t} short={compact} />
-            </span>
-            <CopyInstallButton item={item} t={t} primary />
-          </div>
-          <pre className="install-command" tabIndex={0}>
-            {installation.command}
-          </pre>
-        </div>
-      )}
-      {details && hideExtras && installation[`context_${lang}`] && (
-        <p className="installation-context-inline">
-          {installation[`context_${lang}`]}
-        </p>
-      )}
-      <Space size={[4, 6]} wrap>
-        {!details && <CopyInstallButton item={item} t={t} iconOnly={compact} />}
-        <Button
-          size="small"
-          type={compact ? "text" : "link"}
-          icon={<ExportOutlined aria-hidden="true" />}
-          aria-label={t(
-            ["docs", "reference"].includes(installation.mode)
-              ? "projectDocs"
-              : "installDocs",
-          )}
-          href={installation.source_url}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {!compact &&
-            t(
-              ["docs", "reference"].includes(installation.mode)
-                ? "projectDocs"
-                : "installDocs",
-            )}
-        </Button>
-      </Space>
-    </div>
   );
 }

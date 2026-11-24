@@ -1,5 +1,5 @@
 import usageExamples from "../config/usage-examples.json" with { type: "json" };
-import { RESEARCH_TASKS, matchesResearchTask } from "./domain.js";
+import { RESEARCH_TASKS, isWebAiReady, matchesResearchTask } from "./domain.js";
 
 // 通用科研任务首试提示词模板（当项目暂无专属案例时按任务自动匹配）
 const TASK_PROMPT_TEMPLATES = {
@@ -251,9 +251,10 @@ export function deriveSetupThresholds(
   const isPureDocSkill =
     item?.repository_kind === "skill" &&
     !needsGpu &&
-    !needsPython &&
-    !needsR &&
-    (!langName || ["Markdown", "TeX", "HTML"].includes(langName));
+    (isWebAiReady(item) ||
+      (!needsPython &&
+        !needsR &&
+        (!langName || ["Markdown", "TeX", "HTML"].includes(langName))));
 
   if (isPureDocSkill) {
     badges.push({

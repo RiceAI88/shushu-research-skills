@@ -54,6 +54,20 @@ test("dense table bounds scenes, omits empty tags and supports header sorting", 
     .getByRole("button", { name: "按 Stars 排序", exact: true })
     .click();
   await expect(page).toHaveURL(/sort=stars/);
+
+  // 平台列归一化去重（不出现 Claude Code · claud... 重复截断），且点击仓库标题打开站内上手抽屉
+  const firstRow = rows.first();
+  await expect(firstRow.locator(".card-platforms")).not.toContainText(/claud\.\.\./i);
+  await expect(firstRow.locator(".table-row-actions .repository-external")).toBeVisible();
+  await firstRow.locator(".table-repo-btn").click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).not.toBeVisible();
+
+  // 工具栏一键“免命令行可用”筛选联动 URL 与结果
+  await page.getByTestId("web-ready-toggle").click();
+  await expect(page).toHaveURL(/web=1/);
+  expect(await rows.count()).toBeGreaterThan(0);
 });
 
 test("cards expose install mode and copy, keep actions visible and maintenance inside footer", async ({

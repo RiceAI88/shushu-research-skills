@@ -4848,3 +4848,137 @@ a:focus-visible,
   background: rgba(15, 23, 42, 0.08);
   color: var(--prs-text);
 }
+
+/* 列表页一键“免命令行 / 网页版可用”快捷筛选胶囊 */
+.web-ready-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid var(--prs-border);
+  background: var(--prs-panel);
+  color: var(--prs-secondary);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+.web-ready-toggle:hover {
+  border-color: var(--prs-primary);
+  color: var(--prs-primary);
+}
+.web-ready-toggle.is-active {
+  border-color: var(--prs-primary);
+  background: var(--prs-tint);
+  color: var(--prs-primary);
+  font-weight: 600;
+}
+.web-ready-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  flex: 0 0 7px;
+}
+
+/* 表格视图同步优化：标题按钮化、内联专业/免命令行徽标、单行简介防裁切、等宽数字对齐 */
+.table-repo-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 20px;
+}
+.table-repo-head .table-repo-btn {
+  flex: 0 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--prs-text);
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.table-repo-head .table-repo-btn:hover {
+  color: var(--prs-primary);
+}
+.table-inline-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+.table-fit-pill,
+.table-web-pill,
+.table-skill-count {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1;
+  white-space: nowrap;
+}
+.table-web-pill {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--prs-primary);
+  font-weight: 600;
+}
+.table-skill-count {
+  background: var(--prs-bg);
+  border: 1px solid var(--prs-border);
+  color: var(--prs-muted);
+}
+.ranking-table .curated-use-line {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  line-height: 19px;
+}
+.ranking-table .card-platforms {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ranking-table .table-metrics {
+  align-items: flex-end;
+  font-variant-numeric: tabular-nums;
+}
+.ranking-table .table-growth {
+  font-variant-numeric: tabular-nums;
+}
+.table-row-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+}
+
+/* 手机窄屏隐藏横向滚动表格切换器，专注卡片浏览体验 */
+@media (max-width: 760px) {
+  .view-controls {
+    display: none !important;
+  }
+  .web-ready-toggle {
+    font-size: 12px;
+    padding: 0 9px;
+  }
+}

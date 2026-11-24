@@ -24,6 +24,9 @@ test("mobile card entry does not download table, detail or comparison code until
   expect(requests.some((url) => /ComparisonDialog-/.test(url))).toBe(true);
   await page.locator(".ant-modal-close").click();
   await expect(page.locator(".ant-modal")).not.toBeVisible();
+  // 手机窄屏自动隐藏表格切换器；切回桌面视口点击表格时才按需加载 RepositoryTable
+  await expect(page.locator(".view-controls")).not.toBeVisible();
+  await page.setViewportSize({ width: 1024, height: 844 });
   await page
     .getByRole("radio", { name: "表格", exact: true })
     .locator("..")

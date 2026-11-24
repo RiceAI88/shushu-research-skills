@@ -13,7 +13,8 @@ import {
 } from "../usageGuide";
 import { safeExternalUrl } from "../domain";
 import { trackEvent } from "../analytics";
-import { PlatformTags, InstallationActions } from "./PracticalInfo";
+import { PlatformTags } from "./PracticalInfo";
+import { InstallationActions } from "./InstallationActions";
 import { OutputPreviewCard } from "./OutputPreviewCard";
 import { useFeedback } from "./FeedbackProvider";
 import { copyText } from "../clipboard";

@@ -5,6 +5,8 @@ import {
   restoreState,
   serializeState,
   detectAgents,
+  isWebAiReady,
+  orderedSceneLabelsFor,
 } from "../../src/domain.js";
 const item = (
   repo,
@@ -208,4 +210,45 @@ test("growth and first-listed sorts are shareable and preserve rank ties", () =>
     assert.deepEqual(filterItems(list, restored).map(i => i.repo), ["b/new", "c/tie", "a/old", "d/unknown"]);
     assert.deepEqual(filterItems(list, restored).map(i => i.rank), [1,2,3,4]);
   }
+});
+
+test("webReady filter round-trips in hash and distinguishes Web-AI-ready rules from heavy runtimes", () => {
+  const list = [
+    item("a/markdown-polish", "Academic paper writing rules", "paper-writing", {
+      language: "",
+    }),
+    item("b/prompt-pack", "Anti-defensive writing prompt pack", "paper-writing", {
+      language: "Python",
+    }),
+    item("c/gpu-sim", "Robot simulation requiring NVIDIA CUDA GPU", "general-research", {
+      language: "Python",
+    }),
+    item("d/mcp-go", "Academic search MCP server", "general-research", {
+      language: "Go",
+      agents: ["mcp"],
+    }),
+  ];
+  assert.equal(isWebAiReady(list[0]), true);
+  assert.equal(isWebAiReady(list[1]), true);
+  assert.equal(isWebAiReady(list[2]), false);
+  assert.equal(isWebAiReady(list[3]), false);
+
+  const state = restoreState(store(), "#web=1", {}, list);
+  assert.equal(state.webReady, true);
+  assert.match(serializeState(state), /web=1/);
+  assert.deepEqual(
+    filterItems(list, state).map((i) => i.repo),
+    ["a/markdown-polish", "b/prompt-pack"],
+  );
+});
+
+test("orderedSceneLabelsFor prioritizes primary category or figure/reproduce focus over generic find", () => {
+  const t = (k) => k;
+  const writingItem = item(
+    "u/writing-suite",
+    "Literature search, paper writing and peer review workflow",
+    "paper-writing",
+  );
+  assert.equal(orderedSceneLabelsFor(writingItem, t)[0], "taskWrite");
+  assert.equal(orderedSceneLabelsFor(writingItem, t, "review")[0], "taskReview");
 });

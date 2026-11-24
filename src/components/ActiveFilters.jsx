@@ -24,6 +24,7 @@ export const resets = {
   packTitle: "",
   agent: "all",
   favOnly: false,
+  webReady: false,
   newOnly: false,
   todayOnly: "",
 };
@@ -41,6 +42,11 @@ export function ActiveFilters({ state, update, t, empty, onShareFavorites }) {
     const activeStage = RESEARCH_STAGES.find((s) => s.id === state.stage);
     conditions.push(["stage", activeStage?.[state.lang] || state.stage]);
   }
+  if (state.webReady)
+    conditions.push([
+      "webReady",
+      state.lang === "zh" ? "免命令行可用" : "Web AI ready",
+    ]);
   if (state.query.trim())
     conditions.push(["query", t("filterSearch") + state.query.trim()]);
   if (state.task !== "all") conditions.push(["task", t(taskKeys[state.task])]);

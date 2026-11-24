@@ -59,6 +59,14 @@ export default function FilterControls({state,update,t,platformIds}) {
                 </span>{" "}
                 <Tag variant="borderless">{state.favorites.length}</Tag>
               </Button>
+              <Button
+                data-testid="popover-web-ready"
+                type={state.webReady ? "primary" : "default"}
+                aria-pressed={Boolean(state.webReady)}
+                onClick={() => update((s) => ({ ...s, webReady: !s.webReady }))}
+              >
+                {state.lang === "zh" ? "🟢 免命令行 / 网页版直用" : "🟢 Zero-CLI / Web AI ready"}
+              </Button>
 
 </>;
 }

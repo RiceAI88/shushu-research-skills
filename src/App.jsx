@@ -413,6 +413,7 @@ function Dashboard({ state, update, switchLang }) {
       state.query,
       state.agent,
       state.favOnly,
+      state.webReady,
       state.favorites,
       state.newOnly,
       state.todayOnly,
@@ -791,6 +792,7 @@ function Dashboard({ state, update, switchLang }) {
                   category: "all",
                   agent: "all",
                   favOnly: false,
+                  webReady: false,
                   newOnly: false,
                   todayOnly: "",
                   discipline: "all",
@@ -1038,6 +1040,29 @@ function Dashboard({ state, update, switchLang }) {
             <p className="task-count-note sr-only">{t("taskCountNote")}</p>
           </section>
           <div className="filter-fields">
+            <button
+              type="button"
+              className={`web-ready-toggle${state.webReady ? " is-active" : ""}`}
+              data-testid="web-ready-toggle"
+              aria-pressed={Boolean(state.webReady)}
+              title={
+                state.lang === "zh"
+                  ? "仅展示免配命令行环境、支持在网页版 DeepSeek / Kimi / ChatGPT 直接使用的项目"
+                  : "Show only Skills usable directly in Web AI chat without local CLI setup"
+              }
+              onClick={() =>
+                update((s) => ({
+                  ...s,
+                  section: "ranking",
+                  webReady: !s.webReady,
+                }))
+              }
+            >
+              <i className="web-ready-dot" aria-hidden="true" />
+              <span>
+                {state.lang === "zh" ? "免命令行可用" : "Web AI ready"}
+              </span>
+            </button>
             <ActionPopover label={state.lang === "zh" ? "筛选" : "Filters"} filter lang={state.lang} count={Number(state.agent !== "all") + Number(!["rank","stars"].includes(state.sort)) + Number(state.favOnly)}>
             {() => <DeferredFeature t={t} loadingFallback={<OverlaySkeleton kind="filters" lang={state.lang}/>}><FilterControls {...{state,update,t,platformIds}} /></DeferredFeature>}
             </ActionPopover>
@@ -1049,12 +1074,20 @@ function Dashboard({ state, update, switchLang }) {
                 options={[
                   {
                     value: "table",
-                    icon: <BarsOutlined aria-hidden="true" />,
+                    icon: (
+                      <Tooltip title={t("viewTable")}>
+                        <BarsOutlined aria-hidden="true" />
+                      </Tooltip>
+                    ),
                     label: <span className="sr-only">{t("viewTable")}</span>,
                   },
                   {
                     value: "card",
-                    icon: <AppstoreOutlined aria-hidden="true" />,
+                    icon: (
+                      <Tooltip title={t("viewCard")}>
+                        <AppstoreOutlined aria-hidden="true" />
+                      </Tooltip>
+                    ),
                     label: <span className="sr-only">{t("viewCard")}</span>,
                   },
                 ]}
