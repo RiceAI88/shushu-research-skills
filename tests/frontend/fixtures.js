@@ -17,8 +17,9 @@ export const test = base.extend({
         };
       });
     }
-    // Never send automated test events to the real analytics account.
-    await page.route("https://*.umami.is/**", route => route.abort());
+    // Never send automated test events to the real analytics accounts.
+    await page.route("https://*.clarity.ms/**", route => route.abort());
+    await page.route("https://*.51.la/**", route => route.abort());
     await use(page);
   },
 });

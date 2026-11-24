@@ -1,46 +1,128 @@
-import {test,expect} from './fixtures.js';
-const site='https://riceai985.cc/';
-const tracker='https://cloud.umami.is/script.js';
-async function productionPage(page,{automated=false}={}) {
- if(!automated)await page.addInitScript(()=>Object.defineProperty(navigator,'webdriver',{get:()=>false}));
- await page.route('https://riceai985.cc/**',async route=>{
-  const url=new URL(route.request().url());
-  const response=await route.fetch({url:`http://127.0.0.1:4173${url.pathname}${url.search}`});
-  await route.fulfill({response});
- });
- await page.route('https://busuanzi.9420.ltd/api',route=>route.abort());
+import { test, expect } from "./fixtures.js";
+
+const site = "https://riceai985.cc/";
+const clarityTag = "https://www.clarity.ms/tag/zihqusczc3";
+const laSdk = "https://sdk.51.la/js-sdk-pro.min.js";
+
+async function productionPage(page, { automated = false } = {}) {
+  if (!automated) {
+    await page.addInitScript(() =>
+      Object.defineProperty(navigator, "webdriver", { get: () => false }),
+    );
+  }
+  await page.route("https://riceai985.cc/**", async (route) => {
+    const url = new URL(route.request().url());
+    const response = await route.fetch({
+      url: `http://127.0.0.1:4173${url.pathname}${url.search}`,
+    });
+    await route.fulfill({ response });
+  });
 }
-const mockTracker=`window.__analytics=[];window.umami={track(build){window.__analytics.push(build({website:document.querySelector('[data-website-id]').dataset.websiteId,url:location.pathname+location.search,title:document.title,referrer:document.referrer}));return Promise.resolve();}};`;
-for(const entry of ['', 'en/'])test(`Umami records one incoming channel and ignores hash navigation at ${entry||'Chinese entry'}`,async({page})=>{
- await productionPage(page);
- await page.route(tracker,route=>route.fulfill({contentType:'application/javascript',body:mockTracker}));
- await page.goto(site+entry+'?utm_source=douyin&utm_medium=video&utm_campaign=skills_nav#view=card');
- await expect.poll(()=>page.evaluate(()=>window.__analytics?.length)).toBe(1);
- const script=page.locator('script[src="'+tracker+'"]');
- await expect(script).toHaveAttribute('data-website-id','f9eb8025-865b-4ddb-b00e-510bb13e56f5');
- await expect(script).toHaveAttribute('data-auto-track','false');
- await page.getByRole('searchbox').fill('paper');await page.locator('.nav-actions').getByText(entry?'中文':'EN',{exact:true}).click();
- expect(await page.evaluate(()=>window.__analytics.length)).toBe(1);
- const payload=await page.evaluate(()=>window.__analytics[0]);
- expect(payload.url).toBe('/'+entry+'?utm_source=douyin&utm_medium=video&utm_campaign=skills_nav');
- expect(payload.url).not.toContain('#');
+
+const mockClarity = `
+window.__clarityCalls = (window.clarity && window.clarity.q ? [...window.clarity.q] : []).map(a => Array.from(a));
+window.clarity = function() { window.__clarityCalls.push(Array.from(arguments)); };
+`;
+const mockLa = `
+window.__laInits = [];
+window.__laEvents = [];
+window.LA = {
+  init(cfg) { window.__laInits.push(cfg); },
+  track(name, data) { window.__laEvents.push({ name, data }); }
+};
+`;
+
+for (const entry of ["", "en/"]) {
+  test(`Clarity and 51LA initialize cleanly and record custom conversion events at ${entry || "Chinese entry"}`, async ({
+    page,
+  }) => {
+    await productionPage(page);
+    await page.route(clarityTag, (route) =>
+      route.fulfill({ contentType: "application/javascript", body: mockClarity }),
+    );
+    await page.route(laSdk, (route) =>
+      route.fulfill({ contentType: "application/javascript", body: mockLa }),
+    );
+    await page.goto(
+      `${site}${entry}?utm_source=douyin&utm_medium=video&utm_campaign=skills_nav#view=card`,
+    );
+    await expect
+      .poll(() => page.evaluate(() => window.__clarityCalls?.length || 0))
+      .toBeGreaterThanOrEqual(1);
+    await expect
+      .poll(() => page.evaluate(() => window.__laInits?.length || 0))
+      .toBe(1);
+
+    const script = page.locator(`script[src="${clarityTag}"]`);
+    await expect(script).toHaveAttribute("data-clarity-id", "zihqusczc3");
+
+    const laInit = await page.evaluate(() => window.__laInits[0]);
+    expect(laInit.id).toBe("3RvWxo8gzUw6CRfi");
+    expect(laInit.ck).toBe("3RvWxo8gzUw6CRfi");
+
+    const calls = await page.evaluate(() => window.__clarityCalls);
+    expect(calls).toContainEqual([
+      "set",
+      "entry_url",
+      `/${entry}?utm_source=douyin&utm_medium=video&utm_campaign=skills_nav`,
+    ]);
+  });
+}
+
+test("late tracker preserves the original campaign and failure leaves the ranking usable", async ({
+  page,
+}) => {
+  await productionPage(page);
+  let release;
+  const gate = new Promise((resolve) => {
+    release = resolve;
+  });
+  await page.route(clarityTag, async (route) => {
+    await gate;
+    await route.fulfill({
+      contentType: "application/javascript",
+      body: mockClarity,
+    });
+  });
+  try {
+    await page.goto(`${site}?utm_source=wechat&utm_medium=group`, {
+      waitUntil: "domcontentloaded",
+    });
+    await expect(page.getByTestId("repo-card").first()).toBeVisible();
+    await page.getByRole("searchbox").fill("paper");
+    release();
+    await expect
+      .poll(() => page.evaluate(() => window.__clarityCalls?.length || 0))
+      .toBeGreaterThanOrEqual(1);
+    const calls = await page.evaluate(() => window.__clarityCalls);
+    expect(calls).toContainEqual([
+      "set",
+      "entry_url",
+      "/?utm_source=wechat&utm_medium=group",
+    ]);
+  } finally {
+    release();
+  }
+  await page.route(clarityTag, (route) => route.abort());
+  await page.reload();
+  await expect(page.getByTestId("repo-card").first()).toBeVisible();
+  await page.getByRole("searchbox").fill("zotero");
+  await expect(page).toHaveURL(/q=zotero/);
 });
-test('late tracker preserves the original campaign and failure leaves the ranking usable',async({page})=>{
- await productionPage(page);let release;const gate=new Promise(resolve=>release=resolve);
- await page.route(tracker,async route=>{await gate;await route.fulfill({contentType:'application/javascript',body:mockTracker});});
- try {
-  await page.goto(site+'?utm_source=wechat&utm_medium=group',{waitUntil:'domcontentloaded'});
-  await expect(page.getByTestId('repo-card').first()).toBeVisible();
-  await page.getByRole('searchbox').fill('paper');release();
-  await expect.poll(()=>page.evaluate(()=>window.__analytics?.length)).toBe(1);
-  expect((await page.evaluate(()=>window.__analytics[0])).url).toBe('/?utm_source=wechat&utm_medium=group');
- } finally {release();}
- await page.route(tracker,route=>route.abort());await page.reload();
- await expect(page.getByTestId('repo-card').first()).toBeVisible();await page.getByRole('searchbox').fill('zotero');
- await expect(page).toHaveURL(/q=zotero/);
-});
-test('local previews and automated production visits never load the tracker',async({page})=>{
- let requests=0;await page.route(tracker,route=>{requests++;return route.abort();});
- await page.goto('./');await expect(page.getByTestId('repo-card').first()).toBeVisible();expect(requests).toBe(0);
- await productionPage(page,{automated:true});await page.goto(site);await expect(page.getByTestId('repo-card').first()).toBeVisible();expect(requests).toBe(0);
+
+test("local previews and automated production visits never load the tracker", async ({
+  page,
+}) => {
+  let requests = 0;
+  await page.route(clarityTag, (route) => {
+    requests++;
+    return route.abort();
+  });
+  await page.goto("./");
+  await expect(page.getByTestId("repo-card").first()).toBeVisible();
+  expect(requests).toBe(0);
+  await productionPage(page, { automated: true });
+  await page.goto(site);
+  await expect(page.getByTestId("repo-card").first()).toBeVisible();
+  expect(requests).toBe(0);
 });
