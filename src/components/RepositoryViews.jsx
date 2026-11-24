@@ -172,6 +172,7 @@ export function RepositoryViews({
   allItems = items,
   filterHeight,
   onReady,
+  onAskShushu,
   state,
   update,
   toggleCompare,
@@ -243,7 +244,13 @@ export function RepositoryViews({
   );
   if (!items.length)
     return (
-      <EmptyResults items={allItems} state={state} update={update} t={t} />
+      <EmptyResults
+        items={allItems}
+        state={state}
+        update={update}
+        t={t}
+        onAskShushu={onAskShushu}
+      />
     );
   const partnerStrip = (
     <div className="partner-top-strip">

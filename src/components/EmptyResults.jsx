@@ -12,8 +12,9 @@ const withoutFit = (s) => (s.sort === "fit" ? { sort: "rank" } : {});
 
 // Empty result guidance: explains why nothing matched and offers one-click ways
 // to widen the search, each labelled with the number of results it would yield.
-export function EmptyResults({ items, state, update, t }) {
+export function EmptyResults({ items, state, update, t, onAskShushu }) {
   const query = state.query.trim();
+  const zh = state.lang === "zh";
   const otherFilters = Object.keys(resets).some(
     (key) => key !== "query" && key !== "category" && state[key] !== resets[key],
   );
@@ -51,38 +52,51 @@ export function EmptyResults({ items, state, update, t }) {
       />
       <p className="ranking-empty-hint">{t("emptyHint")}</p>
       <div className="ranking-empty-actions">
+        {query && onAskShushu && (
+          <Button
+            type="primary"
+            data-testid="empty-ask-shushu"
+            onClick={() => onAskShushu(query)}
+          >
+            <span>
+              {zh
+                ? "🐹 让鼠鼠 AI 按这句话帮你挑工具"
+                : "🐹 Ask Hamster AI for this need"}
+            </span>
+          </Button>
+        )}
         {options.map((option) => (
           <Button
             key={option.key}
             data-empty-action={option.key}
             onClick={() => update((s) => ({ ...s, ...option.patch(s) }))}
           >
-            {option.label}
+            <span>{option.label}</span>
             <span className="ranking-empty-count">{option.n}</span>
           </Button>
         ))}
         <Button
-          type={options.length ? "default" : "primary"}
+          type={options.length || (query && onAskShushu) ? "default" : "primary"}
           data-empty-action="clear-all"
           onClick={() => update((s) => ({ ...s, ...resets, ...withoutFit(s) }))}
         >
-          {t("emptyClearAll")}
+          <span>{t("emptyClearAll")}</span>
         </Button>
       </div>
       {keywords.length > 0 && (
         <div className="ranking-empty-keywords">
-          <span>{t("emptyTry")}</span>
+          <span className="ranking-empty-try-label">{t("emptyTry")}</span>
           {keywords.map(({ word, n }) => (
-            <Button
+            <button
               key={word}
-              size="small"
-              type="text"
+              type="button"
+              className="ranking-empty-keyword-pill"
               data-empty-keyword={word}
               onClick={() => update((s) => ({ ...s, query: word }))}
             >
-              {word}
+              <span>{word}</span>
               <span className="ranking-empty-count">{n}</span>
-            </Button>
+            </button>
           ))}
         </div>
       )}

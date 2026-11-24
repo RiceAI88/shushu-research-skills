@@ -86,10 +86,18 @@ export default function ShushuAssistant({
   onClose,
   items,
   lang = "zh",
+  initialQuery = "",
+  onConsumeInitialQuery,
   onOpenRepo,
   onApplyPack,
 }) {
   const zh = lang === "zh";
+  const verifiedFloor = Math.max(
+    420,
+    Math.floor(
+      ((items || []).filter((i) => i.repository_kind === "skill").length || 460) / 10,
+    ) * 10,
+  );
   const [rendered, setRendered] = useState(open);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -146,6 +154,15 @@ export default function ShushuAssistant({
     }
   }, [messages, loading]);
 
+  useEffect(() => {
+    if (!open || !initialQuery || loading) return;
+    const pending = String(initialQuery).trim();
+    onConsumeInitialQuery?.();
+    if (pending) {
+      submitQuestion(pending, "", "empty_search");
+    }
+  }, [open, initialQuery, loading]);
+
   if (!open && (!rendered || prefersReduced)) return null;
   const isClosing = !open;
   const followUps = !loading && messages.length > 0 ? buildFollowUpChips(messages, lang) : [];
@@ -193,8 +210,8 @@ export default function ShushuAssistant({
             </h2>
             <span>
               {zh
-                ? "基于本站 420+ 真实收录库推荐 · 零幻觉编造"
-                : "Grounded in 420+ verified Skills on site"}
+                ? `基于本站 ${verifiedFloor}+ 真实收录库推荐 · 零幻觉编造`
+                : `Grounded in ${verifiedFloor}+ verified Skills on site`}
             </span>
           </div>
         </div>

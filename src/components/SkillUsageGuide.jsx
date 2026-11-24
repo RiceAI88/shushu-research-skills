@@ -54,6 +54,13 @@ export function SkillUsageGuide({
   const repoUrl = safeExternalUrl(item?.url);
   const envText = detailsInfo[`environment_${lang}`];
   const depText = detailsInfo[`dependencies_${lang}`];
+  const rawCmd = String(installation?.command || "").trim();
+  const mirrorCmd =
+    /^(?:npx|npm)\s+/i.test(rawCmd) && !/--registry/i.test(rawCmd)
+      ? rawCmd.replace(/^(npx|npm)\s+/i, "$1 --registry=https://registry.npmmirror.com ")
+      : /^(?:pip3?|uv\s+pip)\s+install\s+/i.test(rawCmd) && !/(?:\s-i\s|--index-url)/i.test(rawCmd)
+        ? `${rawCmd} -i https://pypi.tuna.tsinghua.edu.cn/simple`
+        : "";
 
   const handleCopy = async (key, text, successMsg) => {
     try {
@@ -187,6 +194,34 @@ export function SkillUsageGuide({
             details
             hideExtras
           />
+          {mirrorCmd && (
+            <div className="campus-mirror-tip" data-testid="campus-mirror-tip">
+              <span>
+                {zh
+                  ? "⚡ 校园网终端下载慢？可用国内镜像源一键安装："
+                  : "⚡ Slow network? Copy mirror-accelerated command:"}
+              </span>
+              <button
+                type="button"
+                className="campus-mirror-copy"
+                onClick={() =>
+                  handleCopy(
+                    "mirror-cmd",
+                    mirrorCmd,
+                    zh ? "已复制国内镜像源加速命令" : "Mirror command copied",
+                  )
+                }
+              >
+                {copiedKey === "mirror-cmd"
+                  ? zh
+                    ? "✓ 已复制加速命令"
+                    : "✓ Copied"
+                  : zh
+                    ? "复制国内源加速命令"
+                    : "Copy mirror command"}
+              </button>
+            </div>
+          )}
           {!isReference && (
             <details className="ai-install-helper">
               <summary>

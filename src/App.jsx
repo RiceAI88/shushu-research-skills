@@ -251,6 +251,7 @@ function Dashboard({ state, update }) {
   const [guideSection, setGuideSection] = useState(null);
   const [botOpen, setBotOpen] = useState(false);
   const [botRequested, setBotRequested] = useState(false);
+  const [botInitialQuery, setBotInitialQuery] = useState("");
   const [communityRequested, setCommunityRequested] = useState(false);
   const [petRoam, setPetRoam] = useState(() => {
     try {
@@ -1278,6 +1279,11 @@ function Dashboard({ state, update }) {
                 history: historyData,
                 generatedAt: dataset.metadata?.generated_at,
               }}
+              onAskShushu={(q) => {
+                setBotRequested(true);
+                setBotInitialQuery(q);
+                setBotOpen(true);
+              }}
             />
           </Panel>
           <div id="beginner-paths">
@@ -1454,6 +1460,8 @@ function Dashboard({ state, update }) {
             onClose={() => setBotOpen(false)}
             items={items}
             lang={state.lang}
+            initialQuery={botInitialQuery}
+            onConsumeInitialQuery={() => setBotInitialQuery("")}
             onOpenRepo={(repo) => {
               setBotOpen(false);
               update((s) => ({ ...s, repo }));
