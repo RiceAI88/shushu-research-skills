@@ -2356,6 +2356,199 @@
       "common": true,
       "reviewed_at": "2026-11-25",
       "evidence": true
+    },
+    "zyhsechub/chinese-thesis-workbench-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "zimoliao/scholaraio": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "claesbackman/ai-research-feedback": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "alfonso0512/research-writing-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "bahayonghang/academic-writing-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "damonwan1/autoscholarloop": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "federicodeponte/opendraft": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "leey21/arxiv-translator": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "moonlit-pages/aigc-detector-rewriter-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "donghuixin/ai-vibe-writing-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "fakerqwq/social-science-paper-writing-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "aristoteleo/pantheonos": {
+      "disciplines": [
+        "medicine",
+        "science"
+      ],
+      "majors": [
+        "bioinformatics",
+        "biology"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "wenyuchiou/academic-writing-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "the-shy123456/thesis-docx": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "xiejhhhhhh/draftpaper_loop": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "lingzhi227/agent-research-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "qwwzdyj/aia-academic-illustrator-": {
+      "disciplines": [
+        "engineering"
+      ],
+      "majors": [
+        "ai"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "cloudwave818/ieee-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "lupynow/math-modeling-skills": {
+      "disciplines": [
+        "science"
+      ],
+      "majors": [
+        "mathematics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "mlnlp-world/paper-rebuttal-tips": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "rimagination/instsci": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "scverse/rapids-singlecell": {
+      "disciplines": [
+        "medicine"
+      ],
+      "majors": [
+        "bioinformatics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "wp-a/nature-academic-search": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "skjack/kelip-paper-reading": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "lylll9436/paper-polish-workflow-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
     }
   }
 }
