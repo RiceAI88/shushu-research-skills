@@ -2161,6 +2161,201 @@
       "common": true,
       "reviewed_at": "2026-11-25",
       "evidence": true
+    },
+    "yzy1996/english-writing": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "ruc-nlpir/arbor": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "light0305/light-science": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "xuzhougeng/wisp-science": {
+      "disciplines": [
+        "medicine"
+      ],
+      "majors": [
+        "bioinformatics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "neuroaihub/brainpilot": {
+      "disciplines": [
+        "science"
+      ],
+      "majors": [
+        "biology"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "trae1oung/paper-plot-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "yzlin286-wq/deepscient": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "labarba/sciwrite": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "luwill/research-skills": {
+      "disciplines": [
+        "medicine"
+      ],
+      "majors": [
+        "clinical"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "gulucaptain/best-paper-writing-skill": {
+      "disciplines": [
+        "engineering"
+      ],
+      "majors": [
+        "ai"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "ar9av/paperorchestra": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "abnerla/ai_paper": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "xiaofenggan01/aigc-reduce": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "ligphidonk/oh-my--paper": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "siriusfzh/novaforge": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "cheneternity/zotero-analytical-workflow-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "andrehuang/research-companion": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "m1n-n9/paper-lifecycle": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "boom5426/nature-paper-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "tingxiyu/academic-figure-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "doryoku1223/lunwen-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "qjhwc/paperforge": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "xiao24bei/xiaobei-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "adkid-zephyr/oral-paper-skill": {
+      "disciplines": [
+        "engineering"
+      ],
+      "majors": [
+        "ai"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "jimmc414/kosmos": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
     }
   }
 }

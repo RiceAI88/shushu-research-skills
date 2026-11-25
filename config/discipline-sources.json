@@ -1564,5 +1564,230 @@
     "source_sha": "c15ee5c67c94e3e195947a6a1a3c0603438f00ab",
     "reviewed_at": "2026-11-25",
     "review_kind": "documentation_only"
+  },
+  "yzy1996/english-writing": {
+    "use_zh": "学术论文写作、润色与格式排版",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "PS: 一些 Latex 写作经验 https://github.com/yzy1996/Latex",
+    "source_url": "https://github.com/yzy1996/English-Writing/blob/main/README.md",
+    "source_sha": "14c2b75dc5c4da5972fb4093a92c0197516512aa",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "ruc-nlpir/arbor": {
+    "use_zh": "支持全流程自动化科研探索与实验的科研技能",
+    "use_en": "Cross-disciplinary research, data analysis and reproducibility",
+    "source_quote": "The autonomous research agent that beats Claude Code and Codex by 2.5× on the same compute budget",
+    "source_url": "https://github.com/RUC-NLPIR/Arbor/blob/main/README.md",
+    "source_sha": "d108033a532e4d77d88bfe6d89e3097d4f2ff2a5",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "light0305/light-science": {
+    "use_zh": "串联文献调研、实验记录、科研绘图与论文写作的协同技能包",
+    "use_en": "Integrated workflow pack connecting literature, experiments, figures, and writing",
+    "source_quote": "Start from scratch, or bring an existing paper, dataset, codebase or set of reviewer comments and go straight to the stage you need.",
+    "source_url": "https://github.com/Light0305/Light-Science/blob/master/README.md",
+    "source_sha": "664ede9054d46faae468cd84e77e15078d68facf",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "xuzhougeng/wisp-science": {
+    "use_zh": "支持 Python / R 与生信工具的本地优先科研计算桌面工作台",
+    "use_en": "Local-first desktop workbench for Python/R scientific computing and bioinformatics",
+    "source_quote": "Search the literature, run Python and R, query ~80 scientific databases, and keep the trail — figures, runs, decisions, and drafts — in one project. Your data, conversations, and credentials stay on your machi…",
+    "source_url": "https://github.com/xuzhougeng/wisp-science/blob/main/README.md",
+    "source_sha": "7ac97ec7eeda913987a74f754c491fff77528a0e",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "neuroaihub/brainpilot": {
+    "use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
+    "use_en": "Biological sciences research",
+    "source_quote": "**2026-08-22** — BrainPilot v0.2.2 aligns the hosted interface with currently available Cloud capabilities and removes unsupported control-plane requests. See the changelog. **2026-08-22** — BrainPilot v0.2.1…",
+    "source_url": "https://github.com/NeuroAIHub/BrainPilot/blob/main/README.md",
+    "source_sha": "79f2e8134c71c44b915e7641df2f7d394579a0be",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "trae1oung/paper-plot-skills": {
+    "use_zh": "学术论文写作、润色与格式排版",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "| 风格 | 类型 | 来源论文 | 关键特征 | | ----------------------------------------------- | --- | ----------------- | -------------------------------- | | `bar_paired_delta` | 柱状图 | MemEvolve | 配对柱 + 增益箭头，serif 字体 | | `bar_…",
+    "source_url": "https://github.com/Trae1ounG/paper-plot-skills/blob/main/README.md",
+    "source_sha": "4a84c6a2f614ef7e85dc0e183d3504a25b1f9527",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "yzlin286-wq/deepscient": {
+    "use_zh": "文献检索、引文核验与综述整理",
+    "use_en": "Literature search, citation verification and synthesis",
+    "source_quote": "DeepScient 是一个跑在 DeepSeek Harness（dsh）运行时上的**科研工作台**： 它把「选题 → 检索 → 实验 → 分析 → 作图 → 写作 → 投稿 → 审稿回应」做成看得见的 12 个阶段、 55 个可判定的门，配上 36 个科研工具、98 条技能和一套可审计的证据链。",
+    "source_url": "https://github.com/yzlin286-wq/Deepscient/blob/main/README.md",
+    "source_sha": "b752d6437dfe4bfcd9b35272ead3f4b2e2009708",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "labarba/sciwrite": {
+    "use_zh": "基于斯坦福科学写作方法论的英文手稿表达审阅与润色",
+    "use_en": "Scientific manuscript writing review grounded in Writing in the Sciences",
+    "source_quote": "SciWrite — Manuscript Writing Review",
+    "source_url": "https://github.com/labarba/sciwrite/blob/main/README.md",
+    "source_sha": "b39d4fa45bc3e9957a3b04bbec5f0f4652b2e4f8",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "luwill/research-skills": {
+    "use_zh": "常用科研流程与实战经验封装的可复用 Agent 技能集",
+    "use_en": "Reusable agent skills encapsulating common research workflows",
+    "source_quote": "| Skill | Description | Trigger | |-------|-------------|---------| | medical-imaging-review | Write comprehensive literature reviews for medical imaging AI | `/medical-imaging-review`, \"review paper\", \"survey…",
+    "source_url": "https://github.com/luwill/research-skills/blob/main/README.md",
+    "source_sha": "5f64c64696b1d1f41ee78588190c7bbad7105161",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "gulucaptain/best-paper-writing-skill": {
+    "use_zh": "提炼顶会获奖论文范式，辅助撰写摘要、引言、方法与实验章节",
+    "use_en": "Draft abstracts, intros, and methods in the style of award-winning AI papers",
+    "source_quote": "🏆 写作规律提炼自 60 篇 CVPR / ICCV / NeurIPS 获奖论文，一个 Skill 同时支持 Claude 与 Codex",
+    "source_url": "https://github.com/gulucaptain/Best-Paper-Writing-Skill/blob/main/README.md",
+    "source_sha": "f00761aee7fdc8d9f7373fa8034705d48051c13e",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "ar9av/paperorchestra": {
+    "use_zh": "基于多智能体分工与自动评分的科研论文自动撰写系统",
+    "use_en": "Multi-agent automated academic paper writing and evaluation workflow",
+    "source_quote": "Song, Y., Song, Y., Pfister, T., Yoon, J. *PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing.* arXiv:2604.05018, 2026.",
+    "source_url": "https://github.com/Ar9av/PaperOrchestra/blob/main/README.md",
+    "source_sha": "5914c588d79482f2d42ffae963fd97445dc9d8a6",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "abnerla/ai_paper": {
+    "use_zh": "学术论文写作、润色与格式排版",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "纸研社 面向 Windows 的本地优先 AI 学术写作助手 一站式论文写作辅助平台 · 支持主流 AI 模型 · 离线可用 · 数据不出本地",
+    "source_url": "https://github.com/Abnerla/AI_paper/blob/main/README.md",
+    "source_sha": "124329c6eb79c37074175de597ffe8750f40d5fe",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "xiaofenggan01/aigc-reduce": {
+    "use_zh": "学术论文写作、润色与格式排版",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "基于知网 3.0、万方、PaperPass、PaperPure 等主流检测器的技术原理，结合 humanizer skill（源自 Wikipedia \"Signs of AI writing\"）的 AI 痕迹识别方法论，通过**三轮降重协议**（去除痕迹 → 注入书面学术特征 → 自检审计）打破 AI 的模板化痕迹。",
+    "source_url": "https://github.com/xiaofenggan01/aigc-reduce/blob/main/README.md",
+    "source_sha": "adf875353c7be4373517c077b09735c1b7903aae",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "ligphidonk/oh-my--paper": {
+    "use_zh": "终端内一站式完成文献综述、实验运行与论文撰写的插件",
+    "use_en": "Terminal research pipeline covering literature survey, experiments, and writing",
+    "source_quote": "Claude Code is already a great coding agent. But **research isn't just coding** — it's literature survey, idea evaluation, experiment design, paper writing, reference checking, and a dozen other things that re…",
+    "source_url": "https://github.com/LigphiDonk/Oh-my--paper/blob/main/README.md",
+    "source_sha": "54b9d072ae389722bb58aefa402aa5fc3a9174f4",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "siriusfzh/novaforge": {
+    "use_zh": "学术论文写作、润色与格式排版",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "2026/5/16 23:22 **移除 pdf companion 依赖**：NovaForge 独立完成 LaTeX 编译，不再依赖 pdf skill",
+    "source_url": "https://github.com/SiriusFzh/NovaForge/blob/main/README.md",
+    "source_sha": "85fc1b1666fa66ad19045498004231752a3795e6",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "cheneternity/zotero-analytical-workflow-skills": {
+    "use_zh": "文献检索、引文核验与综述整理",
+    "use_en": "Literature search, citation verification and synthesis",
+    "source_quote": "Zotero Analytical Workflow Skills",
+    "source_url": "https://github.com/cheneternity/Zotero-Analytical-Workflow-Skills/blob/main/README.md",
+    "source_sha": "299b6d8f1b3419c1072d387fbea0e4da2ee093c8",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "andrehuang/research-companion": {
+    "use_zh": "支持实验设计与复现评测、前沿论文合集与研读清单的科研技能",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "**📢 Update (April 2026): Research Companion is now also a component of `researcher-pack`** — a more advanced, all-in-one Claude Code plugin for researchers that bundles strategic brainstorming, paper reading…",
+    "source_url": "https://github.com/andrehuang/research-companion/blob/main/README.md",
+    "source_sha": "661c4cf188be7031fd1515cf7b8018dbe0a5610c",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "m1n-n9/paper-lifecycle": {
+    "use_zh": "覆盖学术论文全生命周期结构分析、修订与质量把关",
+    "use_en": "Full academic paper lifecycle analysis and revision skill",
+    "source_quote": "论文 PDF、LaTeX、Word 或 Markdown 初稿诊断 A 会、期刊或 workshop 投稿前 checklist introduction、related work、method、experiments 等逐节修改 theory、statistics、reproducibility、figures/tables 审计",
+    "source_url": "https://github.com/M1n-n9/paper-lifecycle/blob/master/README.md",
+    "source_sha": "efda7220ec814e3af3c7fb8af6928dfd241af725",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "boom5426/nature-paper-skills": {
+    "use_zh": "面向 Nature 子刊风格的论文起草、自查审计与返修重投工作流",
+    "use_en": "Drafting, auditing, and resubmitting Nature-style journal manuscripts",
+    "source_quote": "From first draft to submission and rebuttal, build a clear, evidence-grounded manuscript.**",
+    "source_url": "https://github.com/Boom5426/Nature-Paper-Skills/blob/main/README.md",
+    "source_sha": "ea9b456d4142fd0146ec8c12991160d66a7d555d",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "tingxiyu/academic-figure-skill": {
+    "use_zh": "自动理解数据、推荐图表类型并生成规范格式的学术配图",
+    "use_en": "Automated data understanding, chart recommendation, and figure generation",
+    "source_quote": "Academic Figure Skill 面向学术级科学图表生成Skill，可自动完成从数据解读到顶刊格式图表生成的全流程。 问题驱动 · 8 步闭环工作流 · 29 种图型 · 四轮 QA 协议 · 矢量 PDF 交付 · 统计报告",
+    "source_url": "https://github.com/TingxiYu/academic-figure-skill/blob/main/README.md",
+    "source_sha": "8e2c2f48982f59e10fc793c0f9d20795bc1c7d2d",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "doryoku1223/lunwen-skill": {
+    "use_zh": "学术论文写作、润色与格式排版",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "不会写毕业论文初稿，开题报告和项目代码不知道怎么落成正文？ 历届样文、学校模板、格式要求很多，但拼不出完整结构？ 流程图、用例图、E-R 图、系统截图和测试内容总是缺一块？ 最后要交 `.docx`，却还停留在零散材料和碎片化笔记里？",
+    "source_url": "https://github.com/Doryoku1223/lunwen-skill/blob/main/README.md",
+    "source_sha": "b5463506822cb55cb661b9a0af243fe44d0c0720",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "qjhwc/paperforge": {
+    "use_zh": "从课题构思、文献检索、远程实验回填到 LaTeX 编译的全流程写作",
+    "use_en": "End-to-end paper system from ideation and SSH experiments to LaTeX compilation",
+    "source_quote": "PaperForge v3 是一个以证据为中心的科研工作系统，用于研究规划、受控实验、 论文写作、同行审查、排版发布和交付验证。CLI、浏览器前端以及兼容入口最终都 进入同一套工作流数据库、执行策略、Agent Runtime、Provider Registry、 Artifact Registry 和 Release Verifier。",
+    "source_url": "https://github.com/QJHWC/PaperForge/blob/main/README.md",
+    "source_sha": "8bb9a3ece69436b48a1548f88b7ffaead0023234",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "xiao24bei/xiaobei-skill": {
+    "use_zh": "学术论文写作、润色与格式排版",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "和小北一起做 AI + 科研 适合硕博生、科研工作者、论文写作者、科研工具爱好者。 交流方向：科研 Agent / 学术绘图 / 论文工作流 / API 工具 / 研究生提效。 加好友建议备注： GitHub + 学校/方向 + 年级 例如： GitHub + 电子信息 + 研二",
+    "source_url": "https://github.com/xiao24bei/xiaobei-skill/blob/main/README.md",
+    "source_sha": "68ed2669a545cdccf19f11af7180f9d2db4c8eb6",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "adkid-zephyr/oral-paper-skill": {
+    "use_zh": "人工智能与机器学习研究",
+    "use_en": "AI and machine learning research",
+    "source_quote": "想投 ICLR，就看 ICLR 往届的优秀论文；想投 ICML、NeurIPS，也做同样的事。从中找灵感，把 A 的方法接到 B 的场景里，或者做局部优化，再写成一篇新的 paper。",
+    "source_url": "https://github.com/Adkid-Zephyr/oral-paper-skill/blob/main/README.md",
+    "source_sha": "1e007dbe8216492849d6c4ca9dc09071f4e7301c",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "jimmc414/kosmos": {
+    "use_zh": "基于 Kosmos 架构驱动自主文献探索与科学发现的研究代理",
+    "use_en": "Autonomous scientific discovery agent workflow driven by Claude Code",
+    "source_quote": "| Feature | Description | Status | |---------|-------------|--------| | Research Loop | Multi-cycle autonomous research with hypothesis generation | Complete | | Literature Search | ArXiv, PubMed, Semantic Sch…",
+    "source_url": "https://github.com/jimmc414/Kosmos/blob/master/README.md",
+    "source_sha": "de1aa66e1cf930c6810cc229f1d70ddff7fbaa4d",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
   }
 }

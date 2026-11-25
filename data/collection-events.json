@@ -4017,5 +4017,72 @@
     "at": "2026-11-24T02:10:19Z",
     "repo": "yunjiaxi/awesome-search-agent-papers",
     "action": "added"
+  },
+  {
+    "at": "2026-11-25T11:07:27Z",
+    "repo": "lisresearchgroup/math-rsi",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-25T11:07:27Z",
+    "repo": "visterainer/aidea-zotero",
+    "action": "removed",
+    "reasons": [
+      "plugin",
+      "assistant",
+      "copilot",
+      "academic",
+      "research",
+      "论文",
+      "missing_readme_academic_scope"
+    ]
+  },
+  {
+    "at": "2026-11-25T11:07:27Z",
+    "repo": "wxyhgk/retain-pdf",
+    "action": "removed",
+    "reasons": [
+      "paper",
+      "papers",
+      "scientific",
+      "科研",
+      "missing_skill_signal",
+      "missing_readme_academic_scope"
+    ]
+  },
+  {
+    "at": "2026-11-25T11:07:27Z",
+    "repo": "lucasuiii/modeling-workbench",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-25T11:07:27Z",
+    "repo": "drpedapati/sciclaw",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-25T11:07:27Z",
+    "repo": "siyunhao2025-beep/math-modeling-to-sci-skill",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-25T11:07:27Z",
+    "repo": "scrapeatlas/social-media-agent-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-25T11:07:27Z",
+    "repo": "openmoss/scienceevolve",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-25T11:07:27Z",
+    "repo": "li2990555-pixel/zhisi-skill",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-25T11:07:27Z",
+    "repo": "smaniches/semantic-scholar-mcp",
+    "action": "added"
   }
 ]

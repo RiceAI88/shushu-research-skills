@@ -911,6 +911,11 @@
       "first_seen_at": "2026-10-27T16:17:18Z",
       "first_seen_is_baseline": false
     },
+    "drpedapati/sciclaw": {
+      "first_seen_date": "2026-11-25",
+      "first_seen_at": "2026-11-25T11:44:10Z",
+      "first_seen_is_baseline": false
+    },
     "drpwchen/paper-review-and-digest": {
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
@@ -1894,6 +1899,11 @@
       "first_seen_at": "2026-11-23T06:36:57Z",
       "first_seen_is_baseline": false
     },
+    "li2990555-pixel/zhisi-skill": {
+      "first_seen_date": "2026-11-25",
+      "first_seen_at": "2026-11-25T11:44:10Z",
+      "first_seen_is_baseline": false
+    },
     "liangdabiao/stem-illustration-skill": {
       "first_seen_date": "2026-09-28",
       "first_seen_is_baseline": false
@@ -2007,6 +2017,11 @@
     "ltjed/freephdlabor": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
+      "first_seen_is_baseline": false
+    },
+    "lucasuiii/modeling-workbench": {
+      "first_seen_date": "2026-11-25",
+      "first_seen_at": "2026-11-25T11:44:10Z",
       "first_seen_is_baseline": false
     },
     "lunarxuan/paper-reading-tutor": {
@@ -2344,6 +2359,11 @@
     },
     "openlair/dr-claw": {
       "first_seen_date": "2026-09-27",
+      "first_seen_is_baseline": false
+    },
+    "openmoss/scienceevolve": {
+      "first_seen_date": "2026-11-25",
+      "first_seen_at": "2026-11-25T11:44:10Z",
       "first_seen_is_baseline": false
     },
     "opennswm-lab/faros": {
@@ -2690,6 +2710,11 @@
       "first_seen_at": "2026-11-22T07:41:21Z",
       "first_seen_is_baseline": false
     },
+    "scrapeatlas/social-media-agent-skills": {
+      "first_seen_date": "2026-11-25",
+      "first_seen_at": "2026-11-25T11:44:10Z",
+      "first_seen_is_baseline": false
+    },
     "scrapecreators/social-media-research-skills": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
@@ -2789,6 +2814,11 @@
       "first_seen_at": "2026-11-19T14:34:30Z",
       "first_seen_is_baseline": false
     },
+    "siyunhao2025-beep/math-modeling-to-sci-skill": {
+      "first_seen_date": "2026-11-25",
+      "first_seen_at": "2026-11-25T11:44:10Z",
+      "first_seen_is_baseline": false
+    },
     "skjack/kelip-paper-reading": {
       "first_seen_date": "2026-11-24",
       "first_seen_at": "2026-11-24T02:39:08Z",
@@ -2802,6 +2832,11 @@
     "skyming/awesome-ai-agent": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
+      "first_seen_is_baseline": false
+    },
+    "smaniches/semantic-scholar-mcp": {
+      "first_seen_date": "2026-11-25",
+      "first_seen_at": "2026-11-25T11:44:10Z",
       "first_seen_is_baseline": false
     },
     "smbai1998/sci-ps-skill": {
