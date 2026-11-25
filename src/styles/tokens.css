@@ -1,6 +1,12 @@
-/* 统一设计令牌（Emerald Portal 主题，与 src/tokens.js 保持单一来源一致） */
+/* 统一设计令牌（翡翠绿主色 + 鲜橙点缀，与 src/tokens.js 保持单一来源一致）
+ * 用色原则：
+ * - 绿色（--prs-primary）只用于品牌、选中态、主操作按钮和链接；
+ * - 鲜橙（--prs-warm）只做少量点缀：增长数字、前三名、"支持本站"、今日新增、提示词占位符；
+ * - 其余区域使用中性灰，避免大面积绿色淡底。
+ */
 :root {
   --prs-primary: #0d9f6e;
+  --prs-primary-rgb: 13 159 110;
   --prs-primary-strong: #059669;
   --prs-primary-hover: #047857;
   --prs-on-primary-dark: #06281e;
@@ -8,7 +14,7 @@
   --prs-secondary: #059669;
   --prs-deep: #0284c7;
   --prs-bg: #f4f7fa;
-  --prs-tint: #ecfdf5;
+  --prs-tint: #eef7f3;
   --prs-panel: #ffffff;
   --prs-text: #0f172a;
   --prs-body: #334155;
@@ -17,6 +23,11 @@
   --prs-pill-dark: #0d9f6e;
   --prs-tag-bg: #f1f5f9;
   --prs-tag-text: #475569;
+  /* 鲜橙点缀：色块用 warm，文字用 warm-strong */
+  --prs-warm: #f26a1b;
+  --prs-warm-rgb: 242 106 27;
+  --prs-warm-strong: #ea580c;
+  --prs-warm-tint: #fff1e8;
   --prs-shadow: none;
   --prs-shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
   --prs-shadow-md: 0 10px 26px -6px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.04);
@@ -28,6 +39,7 @@
 
 [data-theme="dark"] {
   --prs-primary: #34d399;
+  --prs-primary-rgb: 52 211 153;
   --prs-primary-strong: #34d399;
   --prs-primary-hover: #6ee7b7;
   --prs-on-primary-dark: #06281e;
@@ -35,7 +47,7 @@
   --prs-secondary: #6ee7b7;
   --prs-deep: #38bdf8;
   --prs-bg: #0b111e;
-  --prs-tint: #132a26;
+  --prs-tint: #12241f;
   --prs-panel: #111a2c;
   --prs-text: #f1f5f9;
   --prs-body: #cbd5e1;
@@ -44,6 +56,10 @@
   --prs-pill-dark: #34d399;
   --prs-tag-bg: #1e293b;
   --prs-tag-text: #cbd5e1;
+  --prs-warm: #ff7a1a;
+  --prs-warm-rgb: 255 122 26;
+  --prs-warm-strong: #ff8a3d;
+  --prs-warm-tint: rgba(255, 122, 26, 0.16);
   --prs-shadow: none;
   --prs-shadow-sm: 0 3px 14px rgba(0, 0, 0, 0.28);
   --prs-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.36);

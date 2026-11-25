@@ -743,13 +743,12 @@ export default function Insights({
                   getValue={(d) => d.growth}
                   getRightText={(d) => signed(d.growth)}
                   getFill={(d, idx) =>
+                    // 增长语义统一用鲜橙：第一名实心；其余亮色用半透明橙，暗色用石板灰（避免橙色叠深底发褐）
                     idx === 0
-                      ? dark
-                        ? "#34D399"
-                        : "#0D9F6E"
+                      ? themeTokens.warm
                       : dark
-                        ? "#10B981"
-                        : "#6EE7B7"
+                        ? "#475569"
+                        : `${themeTokens.warm}73`
                   }
                   getTitle={(d) =>
                     `${d.repo} · ${t("insightGrowth")}: ${signed(d.growth)}`

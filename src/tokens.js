@@ -13,8 +13,11 @@ export const THEME_TOKENS = {
     text: "#0F172A",
     textSecondary: "#64748B",
     border: "#E2E8F0",
-    // 高区分度图表对比三色组（翠绿 / 天蓝 / 琥珀）
-    chartSeries: ["#0D9F6E", "#0284C7", "#D97706"],
+    // 鲜橙点缀色（与 tokens.css 的 --prs-warm / --prs-warm-strong 一致）
+    warm: "#F26A1B",
+    warmStrong: "#EA580C",
+    // 高区分度图表对比三色组（翠绿 / 天蓝 / 鲜橙）
+    chartSeries: ["#0D9F6E", "#0284C7", "#F26A1B"],
   },
   dark: {
     primary: "#34D399",
@@ -30,6 +33,8 @@ export const THEME_TOKENS = {
     text: "#F1F5F9",
     textSecondary: "#94A3B8",
     border: "#1E293B",
-    chartSeries: ["#34D399", "#38BDF8", "#FBBF24"],
+    warm: "#FF7A1A",
+    warmStrong: "#FF8A3D",
+    chartSeries: ["#34D399", "#38BDF8", "#FF7A1A"],
   },
 };

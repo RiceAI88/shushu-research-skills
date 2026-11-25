@@ -65,7 +65,9 @@ export default function FilterControls({state,update,t,platformIds}) {
                 aria-pressed={Boolean(state.webReady)}
                 onClick={() => update((s) => ({ ...s, webReady: !s.webReady }))}
               >
-                {state.lang === "zh" ? "🟢 免安装 · 网页直用" : "🟢 Zero-install · Web AI"}
+                {/* 与工具栏"免安装"开关共用鲜橙圆点，避免绿色 emoji 与全站点缀色不一致 */}
+                <i className="web-ready-dot" aria-hidden="true" />
+                {state.lang === "zh" ? "免安装 · 网页直用" : "Zero-install · Web AI"}
               </Button>
 
 </>;
