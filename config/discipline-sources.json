@@ -1492,5 +1492,77 @@
     "source_sha": "b3de064f997a3f4d7185c82b9f614eaf4604a6cb",
     "reviewed_at": "2026-11-22",
     "review_kind": "documentation_only"
+  },
+  "paperdebugger/paperdebugger": {
+    "use_zh": "编辑器内多智能体学术论文写作、审阅与LaTeX协同修改",
+    "use_en": "In-editor multi-agent academic writing, review, and LaTeX editing",
+    "source_quote": "PaperDebugger** is an AI-powered academic writing assistant that helps researchers debug and improve their research papers with intelligent suggestions and seamless Overleaf integration, without leaving the ed…",
+    "source_url": "https://github.com/PaperDebugger/paperdebugger/blob/chore/pd-agentic/README.md",
+    "source_sha": "2608881358f6176a28af3d4808e4c0bae3673f49",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "917dhj/deeppapernote": {
+    "use_zh": "将高密度论文转化为与本地知识库关联的 Obsidian 精读笔记",
+    "use_en": "Turn dense papers into linked Obsidian research reading notes",
+    "source_quote": "🚀 **One sentence, one note.** No prompts to learn, no templates to set up. Say \"Generate a deep-reading note for this paper\" with a title, DOI, arXiv ID, or PDF, and it finds the paper, reads it in full, extra…",
+    "source_url": "https://github.com/917Dhj/DeepPaperNote/blob/main/README.md",
+    "source_sha": "b123817225fcd399122fe005397e65039b27f8eb",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "huangkiki/dailypaper-skills": {
+    "use_zh": "每日论文发现、批判性精读与双语关联研究笔记生成",
+    "use_en": "Daily paper discovery, critical reviews, and connected bilingual notes",
+    "source_quote": "这是我自己平时追论文、读论文用的一套 Agent skills。从 HuggingFace 和 arXiv 找新论文，按研究兴趣挑重点，再把重点论文读完，整理成带公式、图表和概念链接的 Markdown 笔记。",
+    "source_url": "https://github.com/huangkiki/dailypaper-skills/blob/main/README.md",
+    "source_sha": "0ec2342571c963937ebb53513a6f2c19f17a8637",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "xianshang33/llm-paper-daily": {
+    "use_zh": "文献检索、引文核验与综述整理",
+    "use_en": "Literature search, citation verification and synthesis",
+    "source_quote": "📚 **每日更新:** 仓库每天会带来最新的 LLM、Agent 相关研究，并附有 arXiv 地址、相关 GitHub 仓库和文章的总结。",
+    "source_url": "https://github.com/xianshang33/llm-paper-daily/blob/main/README.md",
+    "source_sha": "ac847c357e3527324757bb713a693ef93daf6809",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "oleafly/oleafly": {
+    "use_zh": "内置 AI Agent 与实时协作的开源本地 LaTeX / Typst 论文编辑器",
+    "use_en": "Local-first LaTeX and Typst academic IDE with AI agents",
+    "source_quote": "Oleafly is a free, open-source workspace for scientific research writing. It includes a desktop agentic development environment for macOS, Windows and Linux, a server your lab hosts for live collaboration, a c…",
+    "source_url": "https://github.com/Oleafly/Oleafly/blob/main/README.md",
+    "source_sha": "bff56c7743e50f7f189996dc8cb1e8f23f665ae7",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "spark-to-paper-skills/paperjury": {
+    "use_zh": "投稿前论文模拟审稿压力测试、问题诊断与修改核验",
+    "use_en": "Pre-submission AI peer-review stress test, revision, and verification",
+    "source_quote": "🏛️ 项目主页 · 🧭 交互式总览 · 🏆 Dogfood showcase · 🧑‍✈️ Agent Guide · 📌 BibTeX · 💻 Codex 版",
+    "source_url": "https://github.com/Spark-To-Paper-Skills/paperjury/blob/main/README.md",
+    "source_sha": "f0ff10fe868616fdc7062eafcf815c513b6a7f54",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "spark-to-paper-skills/spark-to-paper-skills": {
+    "use_zh": "从研究想法出发自动执行文献调研、实验规划与初稿撰写",
+    "use_en": "Automated paper review, experiment planning, and draft writing",
+    "source_quote": "Citation checks. Editable vector figures. Source-traced numbers.",
+    "source_url": "https://github.com/Spark-To-Paper-Skills/spark-to-paper-skills/blob/main/README.md",
+    "source_sha": "8d48cf7e5e0f63d116b425f2d44909b0b5c56fba",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
+  },
+  "openlair/dr-claw": {
+    "use_zh": "面向多学科文献调研与论文写作的 AI 博士助研工作台",
+    "use_en": "Multi-agent research assistant IDE for literature review and writing",
+    "source_quote": "Overview What's New Highlights Quick Start Configuration OpenClaw Integration Research Lab - Quick Example Usage Guide Claude Code Plugin Additional Details Contributing FAQ License Citation Acknowledgments Su…",
+    "source_url": "https://github.com/OpenLAIR/dr-claw/blob/main/README.md",
+    "source_sha": "c15ee5c67c94e3e195947a6a1a3c0603438f00ab",
+    "reviewed_at": "2026-11-25",
+    "review_kind": "documentation_only"
   }
 }

@@ -10658,7 +10658,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",

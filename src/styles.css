@@ -1982,6 +1982,9 @@ body:has(.back-to-top) .shushu-bot-panel { bottom: calc(156px + env(safe-area-in
 .shushu-pick-stars { flex: 0 0 auto; font-size: 11.5px; color: var(--prs-muted); font-variant-numeric: tabular-nums; }
 .shushu-pick-card p { margin: 0; font-size: 12px; line-height: 1.45; color: var(--prs-body); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .shushu-pick-cta { font-size: 11.5px; font-weight: 600; color: var(--prs-primary); }
+.shushu-pack-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.shushu-pack-actions .shushu-pack-btn { flex: 1 1 auto; }
+.shushu-context-bar { margin-bottom: 8px; padding: 5px 10px; border-radius: 8px; background: var(--prs-tag-bg); color: var(--prs-muted); font-size: 11.5px; line-height: 1.4; }
 .shushu-pack-btn { width: 100%; padding: 7px 10px; border-radius: 8px; border: 1px dashed var(--prs-primary); background: var(--prs-tint); color: var(--prs-primary); font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
 [data-theme="dark"] .shushu-pack-btn { background: rgb(var(--prs-primary-rgb) / 0.14); }
 .shushu-followups { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; margin-top: 2px; }

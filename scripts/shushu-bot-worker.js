@@ -140,6 +140,22 @@ export default {
 
     const query = String(payload?.query || "").trim().slice(0, 300);
     const lang = payload?.lang === "en" ? "en" : "zh";
+    const pageContext = String(payload?.pageContext || "").trim().slice(0, 80);
+    const priorHistory = Array.isArray(payload?.history)
+      ? payload.history
+          .filter(
+            (m) =>
+              m &&
+              (m.role === "user" || m.role === "assistant") &&
+              typeof m.content === "string" &&
+              m.content.trim(),
+          )
+          .slice(-4)
+          .map((m) => ({
+            role: m.role,
+            content: m.content.trim().slice(0, 240),
+          }))
+      : [];
     const candidates = Array.isArray(payload?.candidates)
       ? payload.candidates.slice(0, 8)
       : [];
@@ -151,21 +167,28 @@ export default {
     const candidateText = candidates
       .map(
         (c, idx) =>
-          `${idx + 1}. ${c.repo} (★${c.stars || 0}) | 用途: ${c.summary || ""} | 任务: ${c.tasks || ""} | 安装: ${c.mode || ""}`,
+          `${idx + 1}. ${c.repo} (★${c.stars || 0}) | 用途: ${c.summary || ""} | 任务: ${c.tasks || ""} | 安装: ${c.mode || ""}${c.webReady ? " | 免命令行网页可用" : ""}`,
       )
       .join("\n");
+
+    const contextLine = pageContext
+      ? lang === "en"
+        ? `Active page filters: ${pageContext}\n`
+        : `学生当前页面筛选上下文：${pageContext}\n`
+      : "";
 
     const messages = [
       {
         role: "system",
         content: lang === "en" ? SYSTEM_PROMPT_EN : SYSTEM_PROMPT_ZH,
       },
+      ...priorHistory,
       {
         role: "user",
         content:
           lang === "en"
-            ? `Student question: ${query}\n\nCandidate Skills on site:\n${candidateText}`
-            : `学生提问：${query}\n\n本站真实候选仓库列表：\n${candidateText}`,
+            ? `${contextLine}Student question: ${query}\n\nCandidate Skills on site:\n${candidateText}`
+            : `${contextLine}学生提问：${query}\n\n本站真实候选仓库列表：\n${candidateText}`,
       },
     ];
 

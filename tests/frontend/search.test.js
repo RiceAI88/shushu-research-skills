@@ -1,7 +1,7 @@
 import { highlightParts } from "../../src/highlight.js";
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createSearch, suggestedTaskIds } from "../../src/search.js";
+import { createSearch, splitSearchTokens, suggestedTaskIds } from "../../src/search.js";
 import { filterItems, restoreState } from "../../src/domain.js";
 const items = [
   {
@@ -112,5 +112,53 @@ test("task suggestions correspond to known intent and do not infer tasks for arb
   assert.ok(suggestedTaskIds("数学建模").includes("compute"));
   assert.ok(suggestedTaskIds("文献综述").includes("find"));
   assert.ok(suggestedTaskIds("返修").includes("review"));
+  assert.ok(suggestedTaskIds("英文润色").includes("write"));
+  assert.ok(suggestedTaskIds("画流程图").includes("figures"));
+  assert.ok(suggestedTaskIds("跑实验").includes("reproduce"));
   assert.deepEqual(suggestedTaskIds("owner/exact-repo"), []);
+});
+
+test("multi-word AND queries and compound Chinese/mixed intents match without breaking long natural-language handoff", () => {
+  const richItems = [
+    ...items,
+    {
+      repository_kind: "skill",
+      repo: "f/stata-econ",
+      description: "Stata econometric regression and causal inference tables.",
+      category: { id: "other" },
+      rank: 6,
+    },
+    {
+      repository_kind: "skill",
+      repo: "g/py-plot",
+      description: "Python scripts to generate publication-ready figures and architecture diagrams.",
+      category: { id: "other" },
+      rank: 7,
+    },
+  ];
+  assert.deepEqual(splitSearchTokens("英文润色"), ["英文", "润色"]);
+  assert.deepEqual(splitSearchTokens("python配图"), ["python", "配图"]);
+  assert.deepEqual(splitSearchTokens("reproduction"), ["reproduction"]);
+
+  assert.deepEqual(
+    filterItems(richItems, { ...state, query: "stata 回归" }).map((x) => x.repo),
+    ["f/stata-econ"],
+  );
+  assert.deepEqual(
+    filterItems(richItems, { ...state, query: "python 配图" }).map((x) => x.repo),
+    ["g/py-plot"],
+  );
+  assert.deepEqual(
+    filterItems(richItems, { ...state, query: "python配图" }).map((x) => x.repo),
+    ["g/py-plot"],
+  );
+  assert.deepEqual(
+    filterItems(richItems, { ...state, query: "画流程图" }).map((x) => x.repo),
+    ["g/py-plot"],
+  );
+  // 长句自然语言提问仍应为空，以便触发 EmptyResults 引导一键问鼠鼠 AI
+  assert.deepEqual(
+    filterItems(richItems, { ...state, query: "本科生不会代码怎么降 AIGC 率" }),
+    [],
+  );
 });

@@ -1552,6 +1552,7 @@ function Dashboard({ state, update, switchLang }) {
             onClose={() => setBotOpen(false)}
             items={items}
             lang={state.lang}
+            pageState={state}
             initialQuery={botInitialQuery}
             onConsumeInitialQuery={() => setBotInitialQuery("")}
             onOpenRepo={(repo) => {
@@ -1571,6 +1572,11 @@ function Dashboard({ state, update, switchLang }) {
                 stage: "",
               }))
             }
+            onCompareRepos={(repos) => {
+              setComparisonRequested(true);
+              update((s) => ({ ...s, compare: repos.slice(0, 3) }));
+              setCompareOpen(true);
+            }}
           />
         </DeferredFeature>
       )}

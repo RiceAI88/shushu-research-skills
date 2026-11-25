@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-22",
+  "reviewed_at": "2026-11-25",
   "count_unit": "unique_repositories",
   "disciplines": [
     {
@@ -2100,6 +2100,66 @@
       ],
       "common": true,
       "reviewed_at": "2026-11-22",
+      "evidence": true
+    },
+    "paperdebugger/paperdebugger": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "917dhj/deeppapernote": {
+      "disciplines": [
+        "engineering"
+      ],
+      "majors": [
+        "ai"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "huangkiki/dailypaper-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "xianshang33/llm-paper-daily": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "oleafly/oleafly": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "spark-to-paper-skills/paperjury": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "spark-to-paper-skills/spark-to-paper-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "openlair/dr-claw": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-25",
       "evidence": true
     }
   }

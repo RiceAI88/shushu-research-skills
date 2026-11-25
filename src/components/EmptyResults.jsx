@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Button, Empty } from "antd";
 import { filterItems, REPOSITORY_URL } from "../domain";
+import { trackEvent } from "../analytics";
 import { resets } from "./ActiveFilters";
 
 const KEYWORDS = {
@@ -10,28 +11,82 @@ const KEYWORDS = {
 
 const withoutFit = (s) => (s.sort === "fit" ? { sort: "rank" } : {});
 
-// Empty result guidance: explains why nothing matched and offers one-click ways
-// to widen the search, each labelled with the number of results it would yield.
+// 空结果智能诊断：找出卡死结果的具体筛选项并提供一键单步放宽，同时记录零结果搜索词供运营分析
 export function EmptyResults({ items, state, update, t, onAskShushu }) {
   const query = state.query.trim();
   const zh = state.lang === "zh";
   const otherFilters = Object.keys(resets).some(
     (key) => key !== "query" && key !== "category" && state[key] !== resets[key],
   );
+
+  // 防抖上报零结果查询词，避免用户输入中途频繁触发
+  useEffect(() => {
+    if (!query) return undefined;
+    const timer = setTimeout(() => {
+      trackEvent("search_empty", {
+        query: query.slice(0, 60),
+        discipline: state.discipline || "all",
+        task: state.task || "all",
+      });
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [query, state.discipline, state.task]);
+
   const options = useMemo(() => {
     const count = (patch) => filterItems(items, { ...state, ...patch }).length;
     const list = [];
+    const pushOption = (key, label, patchObj, patchFn) => {
+      const n = count(patchObj);
+      if (n > 0) {
+        list.push({
+          key,
+          label,
+          n,
+          patch: patchFn || (() => patchObj),
+        });
+      }
+    };
+
+    // 1. 优先给出保留用户核心意图的单步精准放宽路径
+    if (state.discipline !== "all" && state.includeCommon === false) {
+      pushOption("include-common", t("emptyIncludeCommon"), { includeCommon: true });
+    }
+    if (state.major && state.major !== "all") {
+      pushOption("relax-major", t("emptyRelaxMajor"), { major: "all" });
+    }
+    if (state.discipline && state.discipline !== "all") {
+      pushOption(
+        "all-disciplines",
+        t("emptyAllDisciplines"),
+        { discipline: "all", major: "all" },
+        (s) => ({ discipline: "all", major: "all", ...withoutFit(s) }),
+      );
+    }
+    if (state.webReady) {
+      pushOption("relax-web", t("emptyRelaxWebReady"), { webReady: false });
+    }
+    if (state.agent && state.agent !== "all") {
+      pushOption("relax-agent", t("emptyRelaxAgent"), { agent: "all" });
+    }
     if (!state.includeRelated) {
-      const n = count({ includeRelated: true });
-      if (n) list.push({ key: "related", label: t("emptyIncludeRelated"), n, patch: () => ({ includeRelated: true }) });
+      pushOption("related", t("emptyIncludeRelated"), { includeRelated: true });
     }
     if (query && otherFilters) {
       const keep = count({ ...resets, query: state.query });
-      if (keep) list.push({ key: "keep-query", label: t("emptyKeepQuery"), n: keep, patch: (s) => ({ ...resets, query: s.query, ...withoutFit(s) }) });
+      if (keep && !list.some((o) => o.n === keep && o.key === "all-disciplines")) {
+        list.push({
+          key: "keep-query",
+          label: t("emptyKeepQuery"),
+          n: keep,
+          patch: (s) => ({ ...resets, query: s.query, ...withoutFit(s) }),
+        });
+      }
       const drop = count({ query: "" });
-      if (drop) list.push({ key: "drop-query", label: t("emptyDropQuery"), n: drop, patch: () => ({ query: "" }) });
+      if (drop) {
+        list.push({ key: "drop-query", label: t("emptyDropQuery"), n: drop, patch: () => ({ query: "" }) });
+      }
     }
-    return list;
+    return list.slice(0, 4);
   }, [items, state, query, otherFilters, t]);
   const keywords = useMemo(() => {
     if (!query) return [];

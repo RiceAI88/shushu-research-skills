@@ -2,10 +2,11 @@ import {
   RESEARCH_STAGES,
   RESEARCH_TASKS,
   detectAgents,
+  isWebAiReady,
   matchesResearchStage,
   matchesResearchTask,
 } from "./domain.js";
-import { DISCIPLINES, disciplineFit } from "./disciplines.js";
+import { DISCIPLINES, disciplineFit, professionLabel } from "./disciplines.js";
 import { createSearch } from "./search.js";
 import { installationFor } from "./practical.js";
 
@@ -39,18 +40,84 @@ const STAGE_HINTS = [
 const BEGINNER_RE = /不会(?:编程|代码|命令行)|零基础|小白|没装|网页版|不敲命令|纯文科|简单|省事|beginner|no[- ]?code|no[- ]?cli|web/i;
 
 /**
- * 从全站收录库中毫秒级召回与学生提问最匹配的 Top K 真实 Skill 候选
+ * 提炼用户在页面上已激活的筛选上下文摘要（用于检索加权与云端模型提示）
  */
-export function retrieveAssistantCandidates(query, items, limit = 8) {
+export function summarizePageContext(pageState, lang = "zh") {
+  if (!pageState || typeof pageState !== "object") return "";
+  const zh = lang === "zh";
+  const parts = [];
+  if (pageState.discipline && pageState.discipline !== "all") {
+    parts.push(professionLabel(pageState, lang));
+  }
+  if (pageState.stage) {
+    const st = RESEARCH_STAGES.find((s) => s.id === pageState.stage);
+    if (st) parts.push((zh ? st.zh : st.en).replace(/^[^\p{L}\p{N}]+\s*/u, ""));
+  }
+  if (pageState.task && pageState.task !== "all") {
+    parts.push(pageState.task);
+  }
+  if (pageState.webReady) {
+    parts.push(zh ? "免安装/网页版直用" : "Zero-install Web AI");
+  }
+  if (pageState.agent && pageState.agent !== "all") {
+    parts.push(pageState.agent);
+  }
+  return parts.join(" · ");
+}
+
+/**
+ * 从全站收录库中毫秒级召回与学生提问最匹配的 Top K 真实 Skill 候选
+ * 支持结合多轮对话历史（history）与当前页面已选筛选（pageState）做上下文感知加权
+ */
+export function retrieveAssistantCandidates(query, items, limit = 8, context = {}) {
   const clean = String(query || "").trim();
   const skills = (items || []).filter((i) => i.repository_kind === "skill");
   if (!clean) return skills.slice(0, limit);
 
-  const matchedDisciplines = DISCIPLINE_HINTS.filter((d) => d.re.test(clean)).map((d) => d.id);
-  const matchedStages = STAGE_HINTS.filter((s) => s.re.test(clean)).map((s) => s.id);
-  const wantsBeginner = BEGINNER_RE.test(clean);
+  const priorUserTexts = Array.isArray(context?.history)
+    ? context.history
+        .filter((m) => m && m.role === "user" && typeof m.text === "string")
+        .slice(-2)
+        .map((m) => m.text.trim())
+        .filter(Boolean)
+    : [];
+  const pageState = context?.pageState || null;
+  const combinedContext = [...priorUserTexts, clean].join(" ");
 
-  // 分词检索辅助打分
+  // 当前提问优先识别学科与阶段；若当前是短追问（未显式点名学科），则继承上文或页面已选专业
+  const directDisciplines = DISCIPLINE_HINTS.filter((d) => d.re.test(clean)).map((d) => d.id);
+  const historyDisciplines = directDisciplines.length
+    ? []
+    : DISCIPLINE_HINTS.filter((d) => d.re.test(combinedContext)).map((d) => d.id);
+  const pageDiscipline =
+    !directDisciplines.length &&
+    pageState?.discipline &&
+    pageState.discipline !== "all"
+      ? [pageState.discipline]
+      : [];
+  const matchedDisciplines = [
+    ...new Set([...directDisciplines, ...historyDisciplines, ...pageDiscipline]),
+  ];
+
+  const directStages = STAGE_HINTS.filter((s) => s.re.test(clean)).map((s) => s.id);
+  const fallbackStages = directStages.length
+    ? []
+    : STAGE_HINTS.filter((s) => s.re.test(combinedContext)).map((s) => s.id);
+  const pageStage = !directStages.length && pageState?.stage ? [pageState.stage] : [];
+  const matchedStages = [...new Set([...directStages, ...fallbackStages, ...pageStage])];
+
+  const wantsBeginner =
+    BEGINNER_RE.test(clean) ||
+    BEGINNER_RE.test(combinedContext) ||
+    Boolean(pageState?.webReady);
+  const preferredAgent =
+    pageState?.agent && pageState.agent !== "all" ? pageState.agent : "";
+  const preferredTask =
+    pageState?.task && pageState.task !== "all"
+      ? RESEARCH_TASKS.find((t) => t.id === pageState.task)
+      : null;
+
+  // 分词检索辅助打分（当前提问高权重，历史首轮核心词低权重兜底）
   const tokens = clean
     .replace(/[，。？！、,.?!:：/]/g, " ")
     .split(/\s+/)
@@ -58,6 +125,7 @@ export function retrieveAssistantCandidates(query, items, limit = 8) {
     .slice(0, 6);
   const tokenSearches = tokens.map((tok) => createSearch(tok));
   const fullSearch = createSearch(clean);
+  const historySearches = priorUserTexts.slice(-1).map((txt) => createSearch(txt));
 
   const scored = skills.map((item) => {
     let score = 0;
@@ -69,10 +137,13 @@ export function retrieveAssistantCandidates(query, items, limit = 8) {
       ...(item.topics || []),
     ].join(" ");
 
-    // 1. 专业匹配加权
+    // 1. 专业匹配加权（显式提问权重高于页面隐式继承）
     for (const did of matchedDisciplines) {
-      const fit = disciplineFit(item, { discipline: did, major: "all" });
-      if (fit === "specific") score += 42;
+      const isDirect = directDisciplines.includes(did);
+      const major =
+        did === pageState?.discipline && pageState?.major ? pageState.major : "all";
+      const fit = disciplineFit(item, { discipline: did, major });
+      if (fit === "specific") score += isDirect ? 42 : 28;
       else if (fit === "common") score += 8;
     }
 
@@ -80,36 +151,51 @@ export function retrieveAssistantCandidates(query, items, limit = 8) {
     for (const sid of matchedStages) {
       const stage = RESEARCH_STAGES.find((s) => s.id === sid);
       if (!stage) continue;
+      const isDirect = directStages.includes(sid);
       const featuredIdx = stage.featured?.indexOf(item.repo) ?? -1;
       if (featuredIdx !== -1) {
-        score += 55 - featuredIdx * 3;
+        score += (isDirect ? 55 : 34) - featuredIdx * 3;
       } else if (matchesResearchStage(item, stage)) {
-        score += 24;
+        score += isDirect ? 24 : 14;
       }
     }
 
-    // 3. 关键词检索匹配
+    // 3. 页面已选任务与平台加权
+    if (preferredTask && matchesResearchTask(item, preferredTask)) {
+      score += 14;
+    }
+    const itemAgents = detectAgents(item);
+    if (preferredAgent && itemAgents.includes(preferredAgent)) {
+      score += 15;
+    }
+
+    // 4. 关键词检索匹配
     if (fullSearch.matches(blob)) score += 30;
     for (const ts of tokenSearches) {
       if (ts.matches(blob)) score += 12;
     }
+    for (const hs of historySearches) {
+      if (hs.matches(blob)) score += 10;
+    }
 
-    // 4. 零门槛/新手友好度微调
+    // 5. 零门槛/免命令行友好度加权
     const inst = installationFor(item);
     if (wantsBeginner) {
-      if (inst.mode === "command") score += 10;
+      if (isWebAiReady(item)) score += 20;
+      if (inst.mode === "command") score += 8;
       if (/claude\.ai|web|网页|docx|easyread|anti-defensive|humanizer/i.test(blob)) score += 12;
     }
 
-    // 5. 社区认可度（对数平滑，避免大而全仓库无脑霸榜）
+    // 6. 社区认可度与近期维护状态（对数平滑，长期停更项目轻微降权）
     score += Math.min(18, Math.log10(Math.max(10, item.stars || 10)) * 3.8);
+    if (item.stale) score -= 4;
 
-    return { item, score, inst };
+    return { item, score, inst, itemAgents };
   });
 
   scored.sort((a, b) => b.score - a.score || (b.item.stars || 0) - (a.item.stars || 0));
 
-  return scored.slice(0, limit).map(({ item, inst }) => {
+  return scored.slice(0, limit).map(({ item, inst, itemAgents }) => {
     const matchedTaskIds = RESEARCH_TASKS.filter((t) => matchesResearchTask(item, t)).map(
       (t) => t.id,
     );
@@ -120,8 +206,9 @@ export function retrieveAssistantCandidates(query, items, limit = 8) {
       summary: item.curated_use_zh || item.description || "",
       summaryEn: item.curated_use_en || item.description || "",
       tasks: matchedTaskIds.join(", "),
-      agents: detectAgents(item).slice(0, 3).join(", "),
+      agents: itemAgents.slice(0, 3).join(", "),
       mode: inst.mode,
+      webReady: isWebAiReady(item),
     };
   });
 }
@@ -129,10 +216,24 @@ export function retrieveAssistantCandidates(query, items, limit = 8) {
 /**
  * 本地零成本智能回复生成器（当云端免费 API 未配置、离线或限流时无缝秒回）
  */
-export function buildLocalAdvisorReply(query, candidates, lang = "zh") {
+export function buildLocalAdvisorReply(query, candidates, lang = "zh", context = {}) {
   const top = candidates.slice(0, 3);
-  const wantsBeginner = BEGINNER_RE.test(query || "");
-  const matchedDisc = DISCIPLINE_HINTS.find((d) => d.re.test(query || ""));
+  const priorText = Array.isArray(context?.history)
+    ? context.history
+        .filter((m) => m?.role === "user")
+        .slice(-2)
+        .map((m) => m.text)
+        .join(" ")
+    : "";
+  const combined = `${priorText} ${query || ""}`;
+  const wantsBeginner =
+    BEGINNER_RE.test(combined) || Boolean(context?.pageState?.webReady);
+  const matchedDisc =
+    DISCIPLINE_HINTS.find((d) => d.re.test(query || "")) ||
+    DISCIPLINE_HINTS.find((d) => d.re.test(priorText)) ||
+    (context?.pageState?.discipline && context.pageState.discipline !== "all"
+      ? { id: context.pageState.discipline }
+      : null);
   const discObj = matchedDisc ? DISCIPLINES.find((d) => d.id === matchedDisc.id) : null;
 
   if (lang === "en") {
@@ -188,8 +289,29 @@ export function extractMentionedCandidates(replyText, candidates) {
 /**
  * 提问主入口：优先请求免费云端 AI（智谱主力 + 混元备胎），失败则零感降级本地顾问引擎
  */
-export async function askShushuAssistant({ query, items, lang = "zh", apiEndpoint }) {
-  const candidates = retrieveAssistantCandidates(query, items, 8);
+export async function askShushuAssistant({
+  query,
+  items,
+  lang = "zh",
+  apiEndpoint,
+  history = [],
+  pageState = null,
+}) {
+  const context = { history, pageState };
+  const candidates = retrieveAssistantCandidates(query, items, 8, context);
+  const pageContext = summarizePageContext(pageState, lang);
+  const priorTurns = Array.isArray(history)
+    ? history
+        .filter(
+          (m) =>
+            m &&
+            (m.role === "user" || m.role === "assistant") &&
+            typeof m.text === "string" &&
+            m.text.trim(),
+        )
+        .slice(-4)
+        .map((m) => ({ role: m.role, content: m.text.trim().slice(0, 220) }))
+    : [];
   const endpoint =
     apiEndpoint ||
     (typeof window !== "undefined" && window.__ARS_BOT_API) ||
@@ -205,12 +327,15 @@ export async function askShushuAssistant({ query, items, lang = "zh", apiEndpoin
         body: JSON.stringify({
           query,
           lang,
+          pageContext,
+          history: priorTurns,
           candidates: candidates.map((c) => ({
             repo: c.repo,
             stars: c.stars,
             summary: lang === "en" ? c.summaryEn : c.summary,
             tasks: c.tasks,
             mode: c.mode,
+            webReady: c.webReady,
           })),
         }),
         signal: controller.signal,
@@ -234,7 +359,7 @@ export async function askShushuAssistant({ query, items, lang = "zh", apiEndpoin
   }
 
   return {
-    reply: buildLocalAdvisorReply(query, candidates, lang),
+    reply: buildLocalAdvisorReply(query, candidates, lang, context),
     picks: candidates.slice(0, 3),
     source: "local-advisor",
   };

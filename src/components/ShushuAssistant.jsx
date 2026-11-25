@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { askShushuAssistant } from "../assistantEngine.js";
+import { askShushuAssistant, summarizePageContext } from "../assistantEngine.js";
 import { HamsterMascot } from "./HamsterMascot.jsx";
 import { trackEvent } from "../analytics.js";
 
@@ -43,7 +43,7 @@ function buildFollowUpChips(messages, lang = "zh") {
   const chips = [];
   if (!/免命令行|网页版|不会敲命令|零基础|no[- ]?cli|web/i.test(lastUser)) {
     chips.push({
-      label: zh ? "🟢 只要免命令行网页版能用的" : "🟢 Zero-CLI / Web AI only",
+      label: zh ? "✨ 只要免命令行网页版能用的" : "✨ Zero-CLI / Web AI only",
       query: zh
         ? `${baseTopic}，要求零基础免命令行、网页版 AI 直接能用`
         : `${baseTopic}, zero-CLI and usable directly in Web AI`,
@@ -86,12 +86,15 @@ export default function ShushuAssistant({
   onClose,
   items,
   lang = "zh",
+  pageState = null,
   initialQuery = "",
   onConsumeInitialQuery,
   onOpenRepo,
   onApplyPack,
+  onCompareRepos,
 }) {
   const zh = lang === "zh";
+  const contextSummary = summarizePageContext(pageState, lang);
   const verifiedFloor = Math.max(
     420,
     Math.floor(
@@ -171,12 +174,19 @@ export default function ShushuAssistant({
     const q = String(rawText ?? input).trim();
     if (!q || loading) return;
     const shown = String(displayLabel || q).trim();
+    const priorHistory = messages.slice(-6);
     setInput("");
     trackEvent("ask_shushu", { mode: rawText ? mode : "custom" });
     setMessages((prev) => [...prev, { role: "user", text: shown }]);
     setLoading(true);
     try {
-      const res = await askShushuAssistant({ query: q, items, lang });
+      const res = await askShushuAssistant({
+        query: q,
+        items,
+        lang,
+        history: priorHistory,
+        pageState,
+      });
       setMessages((prev) => [
         ...prev,
         {
@@ -238,6 +248,13 @@ export default function ShushuAssistant({
       </header>
 
       <div ref={listRef} className="shushu-bot-body">
+        {contextSummary && (
+          <div className="shushu-context-bar" data-testid="shushu-context-bar">
+            {zh
+              ? `🎯 已结合当前筛选：${contextSummary}`
+              : `🎯 Grounded in active filter: ${contextSummary}`}
+          </div>
+        )}
         {messages.length === 0 ? (
           <div className="shushu-bot-welcome">
             <p>
@@ -299,23 +316,43 @@ export default function ShushuAssistant({
                         </span>
                       </button>
                     ))}
-                    {msg.picks.length >= 2 && onApplyPack && (
-                      <button
-                        type="button"
-                        className="shushu-pack-btn"
-                        data-testid="shushu-apply-pack"
-                        onClick={() => {
-                          onApplyPack(
-                            msg.picks.map((p) => p.repo),
-                            zh ? "鼠鼠推荐组合" : "AI Recommended Pack",
-                          );
-                          onClose();
-                        }}
-                      >
-                        {zh
-                          ? `📦 在页面中集中查看这 ${msg.picks.length} 个推荐工具`
-                          : `📦 View these ${msg.picks.length} picks as a toolkit`}
-                      </button>
+                    {msg.picks.length >= 2 && (onApplyPack || onCompareRepos) && (
+                      <div className="shushu-pack-actions">
+                        {onApplyPack && (
+                          <button
+                            type="button"
+                            className="shushu-pack-btn"
+                            data-testid="shushu-apply-pack"
+                            onClick={() => {
+                              onApplyPack(
+                                msg.picks.map((p) => p.repo),
+                                zh ? "鼠鼠推荐组合" : "AI Recommended Pack",
+                              );
+                              onClose();
+                            }}
+                          >
+                            {zh
+                              ? `📦 在列表中查看这 ${msg.picks.length} 个`
+                              : `📦 View these ${msg.picks.length} picks`}
+                          </button>
+                        )}
+                        {onCompareRepos && (
+                          <button
+                            type="button"
+                            className="shushu-pack-btn"
+                            data-testid="shushu-compare-picks"
+                            onClick={() => {
+                              trackEvent("compare_shushu_picks", {
+                                count: msg.picks.length,
+                              });
+                              onCompareRepos(msg.picks.slice(0, 3).map((p) => p.repo));
+                              onClose();
+                            }}
+                          >
+                            {zh ? "⚖️ 横向对比参数" : "⚖️ Compare side-by-side"}
+                          </button>
+                        )}
+                      </div>
                     )}
                   </div>
                 )}

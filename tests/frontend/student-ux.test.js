@@ -17,6 +17,7 @@ import {
   askShushuAssistant,
   buildLocalAdvisorReply,
   retrieveAssistantCandidates,
+  summarizePageContext,
 } from "../../src/assistantEngine.js";
 
 const mkItem = (repo, extra = {}) => ({
@@ -225,4 +226,23 @@ test("assistantEngine retrieves domain-relevant Skills and falls back to local a
   });
   assert.equal(res.source, "local-advisor");
   assert.equal(res.picks.length, 3);
+
+  // 多轮追问：当前短问题未点名学科，自动继承上一轮经管实证上下文与页面筛选
+  assert.match(
+    summarizePageContext(
+      { discipline: "economics", major: "all", webReady: true },
+      "zh",
+    ),
+    /经济学.*免安装/,
+  );
+  const followUpRes = await askShushuAssistant({
+    query: "这里面哪个不用敲命令行？",
+    items: rankings.items,
+    lang: "zh",
+    apiEndpoint: "local-only",
+    history: [{ role: "user", text: "经管研究生做 DID 实证回归推荐什么？" }],
+    pageState: { discipline: "economics", major: "all", webReady: true },
+  });
+  assert.match(followUpRes.reply, /经济学/);
+  assert.match(followUpRes.reply, /SKILL\.md/);
 });
