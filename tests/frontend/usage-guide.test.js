@@ -1,15 +1,37 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  applyPromptPlaceholders,
   classifyInstallLocation,
   aiInstallPromptFor,
   deriveSetupThresholds,
   directWebPromptFor,
   drawerSupportHintsFor,
+  extractEditablePlaceholders,
   usagePromptFor,
   webChatPromptFor,
 } from "../../src/usageGuide.js";
 import { outputPreviewFor } from "../../src/outputPreviewData.js";
+
+test("extractEditablePlaceholders skips skill name tokens and applyPromptPlaceholders substitutes user inputs cleanly", () => {
+  const item = {
+    repo: "demo-lab/my-latex-helper",
+    description: "Academic writing and LaTeX manuscript polishing skill",
+    category: { id: "paper-writing" },
+  };
+  const ex = usagePromptFor(item, "zh");
+  const slots = extractEditablePlaceholders(ex.prompt, item);
+  assert.equal(slots.some((s) => s.inner === "my-latex-helper"), false);
+  assert.equal(slots.length, 1);
+  assert.match(slots[0].inner, /draft/);
+
+  const unchanged = applyPromptPlaceholders(ex.prompt, {});
+  assert.equal(unchanged, ex.prompt);
+
+  const filled = applyPromptPlaceholders(ex.prompt, { [slots[0].token]: "thesis_v2.tex" });
+  assert.match(filled, /thesis_v2\.tex/);
+  assert.doesNotMatch(filled, /【draft\.tex/);
+});
 
 test("classifyInstallLocation distinguishes terminal, host chat, repo-local terminal, manual, docs and reference", () => {
   assert.equal(

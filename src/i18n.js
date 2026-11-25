@@ -173,6 +173,7 @@ export const translations = {
     viewTable: "表格",
     viewCard: "卡片",
     favoritesOnly: "仅看收藏",
+    recentOnly: "最近看过",
     exportFav: "导出收藏",
     tableTitle: "今日榜单",
     tableHint:
@@ -470,6 +471,7 @@ export const translations = {
     viewTable: "Table",
     viewCard: "Cards",
     favoritesOnly: "Favorites only",
+    recentOnly: "Recently viewed",
     exportFav: "Export favorites",
     tableTitle: "Today’s ranking",
     tableHint:

@@ -2050,7 +2050,9 @@ def render_month_report(
             return "<p class='muted'>本月无条目。</p>"
         body = "".join(
             f"<tr><td>{i}</td><td><a href='{r['item'].get('url', '#')}'>{xml_escape(r['repo'])}</a></td>"
-            f"<td>{r['stars']:,}</td><td>{r['delta']:+d}</td><td>{xml_escape(r['item'].get('category', {}).get('zh', ''))}</td></tr>"
+            f"<td>{r['stars']:,}</td>"
+            f"<td class='{'delta-pos' if r['delta'] > 0 else 'delta-muted'}'>{r['delta']:+d}</td>"
+            f"<td>{xml_escape(r['item'].get('category', {}).get('zh', ''))}</td></tr>"
             for i, r in enumerate(entries, 1)
         )
         return (
@@ -2133,7 +2135,18 @@ def build_monthly_reports(history: dict[str, dict[str, dict[str, Any]]]) -> None
         if report:
             month_page.write_text(report, encoding="utf-8")
 
-    links = "".join(f"<li><a href='{m}.html'>{m}</a></li>" for m in reversed(months))
+    def month_card(m: str) -> str:
+        m_dates = sorted(k for k in history if k.startswith(m))
+        if not m_dates:
+            return f"<li><a href='{m}.html'><span>{m} 月报 →</span></a></li>"
+        repo_total = len(history[m_dates[-1]])
+        new_cnt = sum(1 for r in history[m_dates[-1]] if first_seen.get(r, "")[:7] == m)
+        return (
+            f"<li><a href='{m}.html'><span>{m} 月度报告 →</span>"
+            f"<small>月末收录 {repo_total} 个 · 新入榜 {new_cnt} 个</small></a></li>"
+        )
+
+    links = "".join(month_card(m) for m in reversed(months))
     (REPORTS_DIR / "index.html").write_text(
         f"""<!doctype html>
 <html lang="zh-CN">

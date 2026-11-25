@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Select, Tag } from "antd";
-import { StarFilled, StarOutlined } from "@ant-design/icons";
+import { HistoryOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
 import { AGENT_PLATFORMS } from "../domain";
 export default function FilterControls({state,update,t,platformIds}) {
  return <>
@@ -58,6 +58,20 @@ export default function FilterControls({state,update,t,platformIds}) {
                   {t("favoritesOnly")}
                 </span>{" "}
                 <Tag variant="borderless">{state.favorites.length}</Tag>
+              </Button>
+              <Button
+                aria-label={t("recentOnly")}
+                data-testid="recent-only"
+                icon={<HistoryOutlined aria-hidden="true" />}
+                type={state.recentOnly ? "primary" : "default"}
+                aria-pressed={Boolean(state.recentOnly)}
+                disabled={!(state.recent?.length > 0) && !state.recentOnly}
+                onClick={() => update((s) => ({ ...s, recentOnly: !s.recentOnly }))}
+              >
+                <span className="favorite-filter-label">
+                  {t("recentOnly")}
+                </span>{" "}
+                <Tag variant="borderless">{(state.recent || []).length}</Tag>
               </Button>
               <Button
                 data-testid="popover-web-ready"

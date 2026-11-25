@@ -422,10 +422,14 @@ export function restoreState(storage, hash = "", defaults = {}, items = []) {
       valid(get("ars-view"), ["table", "card"], defaults.view || "table"),
     ),
     favorites: array("ars-favorites"),
+    recent: array("ars-recent")
+      .filter((repo) => repositories.has(repo))
+      .slice(0, 12),
     compare: array("ars-compare")
       .filter((repo) => repositories.has(repo))
       .slice(0, 3),
     favOnly: p.get("fav") === "1",
+    recentOnly: p.get("recent") === "1",
     webReady: p.get("web") === "1",
     newOnly: p.get("new") === "1",
     todayOnly: valid(p.get("today"), ["skill", "related"], ""),
@@ -455,6 +459,7 @@ export function serializeState(state) {
   }
   if (state.includeRelated) p.set("related", "1");
   if (state.favOnly) p.set("fav", "1");
+  if (state.recentOnly) p.set("recent", "1");
   if (state.webReady) p.set("web", "1");
   if (state.newOnly) p.set("new", "1");
   if (state.todayOnly) p.set("today", state.todayOnly);
@@ -503,6 +508,7 @@ export function filterItems(items, state) {
       return false;
     if (state.webReady && !isWebAiReady(item)) return false;
     if (state.favOnly && !state.favorites.includes(item.repo)) return false;
+    if (state.recentOnly && !(state.recent || []).includes(item.repo)) return false;
     return (
       !q ||
       search.matches(
@@ -546,6 +552,9 @@ export function filterItems(items, state) {
       if (packIndex && state.sort === "rank") {
         return packIndex.get(a.repo.toLowerCase()) - packIndex.get(b.repo.toLowerCase());
       }
+      if (state.recentOnly && state.sort === "rank" && Array.isArray(state.recent)) {
+        return state.recent.indexOf(a.repo) - state.recent.indexOf(b.repo);
+      }
       if (state.sort === 'fit' && state.discipline && state.discipline !== 'all') {
         const priority = Number(disciplineFit(a,state) !== 'specific') - Number(disciplineFit(b,state) !== 'specific');
         if (priority) return priority;
@@ -569,6 +578,7 @@ export function persistState(storage, state) {
     theme: state.theme,
     view: state.view,
     favorites: JSON.stringify(state.favorites),
+    recent: JSON.stringify((state.recent || []).slice(0, 12)),
     compare: JSON.stringify(state.compare),
   })) {
     try {

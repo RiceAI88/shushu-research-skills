@@ -1915,6 +1915,23 @@ body:has(.back-to-top) .shushu-mascot-dock.above-comparison { bottom: calc(206px
   .shushu-mascot-fab:hover:not(.is-open) .shushu-mascot-speech { opacity: 1; transform: translateY(0) scale(1); }
 }
 .shushu-mascot-fab:focus-visible { outline: 2px solid var(--prs-primary); outline-offset: 4px; border-radius: 16px; }
+/* 窄屏向下滚动后自动折叠桌宠插画与放风开关，避免遮挡卡片底部与回到顶部按钮 */
+@media (max-width: 760px) {
+  .shushu-mascot-dock { right: 12px; }
+  body:has(.back-to-top):not(:has(.shushu-bot-panel.is-open)) .shushu-mascot-dock .shushu-mascot-stage { max-height: 0; opacity: 0; transform: translateY(10px) scale(0.65); pointer-events: none; }
+  body:has(.back-to-top):not(:has(.shushu-bot-panel.is-open)) .shushu-mascot-dock .shushu-mascot-plate { margin-top: 0; padding: 4px 11px; font-size: 11.5px; }
+  body:has(.back-to-top):not(:has(.shushu-bot-panel.is-open)) .shushu-mascot-dock .shushu-roam-toggle { max-width: 0; margin-left: 0; padding-inline: 0; border-width: 0; opacity: 0; visibility: hidden; pointer-events: none; }
+}
+/* 详情抽屉提示词行内填空栏与可点击占位胶囊 */
+.prompt-placeholder.is-editable { border: 1px dashed rgb(var(--prs-warm-rgb) / 0.55); font: inherit; font-weight: 600; cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease; }
+.prompt-placeholder.is-editable:hover { border-color: var(--prs-warm); }
+.prompt-placeholder.is-filled { background: var(--prs-tint); border-color: rgb(var(--prs-primary-rgb) / 0.45); color: var(--prs-primary); }
+.usage-prompt-slots { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; margin-top: 10px; padding-top: 9px; border-top: 1px dashed var(--prs-border); }
+.usage-prompt-slots-label { font-size: 12px; color: var(--prs-muted); font-weight: 500; }
+.prompt-slot-input { flex: 1 1 160px; min-width: 120px; max-width: 260px; height: 28px; padding: 0 9px; border-radius: 7px; border: 1px solid var(--prs-border); background: var(--prs-bg); color: var(--prs-text); font: inherit; font-size: 12.5px; outline: none; transition: border-color 0.15s ease; }
+.prompt-slot-input:focus { border-color: var(--prs-warm); background: var(--prs-panel); }
+.prompt-slot-reset { border: 0; background: transparent; color: var(--prs-muted); font: inherit; font-size: 12px; cursor: pointer; padding: 2px 4px; }
+.prompt-slot-reset:hover { color: var(--prs-warm-strong); }
 
 .shushu-bot-panel { position: fixed; right: 24px; bottom: calc(104px + env(safe-area-inset-bottom, 0px)); z-index: 920; width: min(392px, calc(100vw - 24px)); height: min(540px, calc(100vh - 130px)); display: flex; flex-direction: column; border-radius: 18px; border: 1px solid var(--prs-border); background: var(--prs-panel); box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16); overflow: hidden; transform-origin: calc(100% - 36px) calc(100% + 12px); will-change: transform, opacity; transition: bottom 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
 .shushu-bot-panel.is-open { animation: shushu-panel-in 0.26s cubic-bezier(0.22, 1, 0.36, 1) both; }

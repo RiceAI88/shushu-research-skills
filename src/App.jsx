@@ -216,11 +216,23 @@ export default function App() {
       );
   }, [state, landingSeed]);
   useEffect(() => {
+    if (!state.repo) return;
+    update((s) => {
+      const prev = Array.isArray(s.recent) ? s.recent : [];
+      if (prev[0] === state.repo) return s;
+      return {
+        ...s,
+        recent: [state.repo, ...prev.filter((r) => r !== state.repo)].slice(0, 12),
+      };
+    });
+  }, [state.repo]);
+  useEffect(() => {
     const change = () => {
       const fallbackHash = landingActiveRef.current ? landingHash : "";
       update((previous) => ({
         ...restoreState(storage, location.hash || fallbackHash, defaults, items),
         favorites: previous.favorites,
+        recent: previous.recent,
         compare: previous.compare,
       }));
     };

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "antd";
 import { CheckOutlined, CopyOutlined, RobotOutlined } from "@ant-design/icons";
 import { installationFor } from "../practical";
 import {
   aiInstallPromptFor,
+  applyPromptPlaceholders,
   classifyInstallLocation,
   deriveSetupThresholds,
   directWebPromptFor,
   drawerSupportHintsFor,
+  extractEditablePlaceholders,
   usagePromptFor,
   webChatPromptFor,
 } from "../usageGuide";
@@ -19,18 +21,33 @@ import { OutputPreviewCard } from "./OutputPreviewCard";
 import { useFeedback } from "./FeedbackProvider";
 import { copyText } from "../clipboard";
 
-// 将提示词中的【占位符】或 [placeholder] 高亮，方便学生一眼看出替换位置
-function renderPromptWithPlaceholders(text) {
+// 将提示词中的【占位符】或 [placeholder] 高亮；可编辑槽位支持点击聚焦输入框并实时预览替换结果
+function renderPromptWithPlaceholders(text, editableSet, slotValues = {}, onFocusToken) {
   const parts = String(text || "").split(/(【[^】]+】|\[[^\]]+\])/g);
-  return parts.map((part, index) =>
-    /^(?:【[^】]+】|\[[^\]]+\])$/.test(part) ? (
+  return parts.map((part, index) => {
+    if (!/^(?:【[^】]+】|\[[^\]]+\])$/.test(part)) {
+      return <React.Fragment key={index}>{part}</React.Fragment>;
+    }
+    if (editableSet?.has(part) && onFocusToken) {
+      const filled = String(slotValues[part] ?? "").trim();
+      return (
+        <button
+          key={index}
+          type="button"
+          className={`prompt-placeholder is-editable${filled ? " is-filled" : ""}`}
+          onClick={() => onFocusToken(part)}
+          title={filled ? part : undefined}
+        >
+          {filled || part}
+        </button>
+      );
+    }
+    return (
       <mark key={index} className="prompt-placeholder">
         {part}
       </mark>
-    ) : (
-      <React.Fragment key={index}>{part}</React.Fragment>
-    ),
-  );
+    );
+  });
 }
 
 export function SkillUsageGuide({
@@ -43,6 +60,12 @@ export function SkillUsageGuide({
   const zh = lang === "zh";
   const message = useFeedback();
   const [copiedKey, setCopiedKey] = useState("");
+  const [slotValues, setSlotValues] = useState({});
+  const slotInputRefs = useRef({});
+  useEffect(() => {
+    setSlotValues({});
+  }, [item?.repo, lang]);
+
   const installation = installationFor(item);
   const location = classifyInstallLocation(installation, lang);
   const aiInstallPrompt = aiInstallPromptFor(item, installation, lang);
@@ -51,6 +74,10 @@ export function SkillUsageGuide({
   const thresholds = deriveSetupThresholds(item, installation, detailsInfo, lang);
   const supportHints = drawerSupportHintsFor(item, installation, thresholds);
   const example = usagePromptFor(item, lang);
+  const editableSlots = extractEditablePlaceholders(example.prompt, item);
+  const editableTokenSet = new Set(editableSlots.map((s) => s.token));
+  const filledUsagePrompt = applyPromptPlaceholders(example.prompt, slotValues);
+  const hasFilledSlot = editableSlots.some((s) => String(slotValues[s.token] ?? "").trim());
   const isReference = installation.mode === "reference";
   const repoUrl = safeExternalUrl(item?.url);
   const envText = detailsInfo[`environment_${lang}`];
@@ -412,8 +439,14 @@ export function SkillUsageGuide({
                   onClick={() =>
                     handleCopy(
                       "usage-prompt",
-                      example.prompt,
-                      zh ? "已复制提示词案例" : "Prompt example copied",
+                      filledUsagePrompt,
+                      hasFilledSlot
+                        ? zh
+                          ? "已复制替换后的专属提示词"
+                          : "Customized prompt copied"
+                        : zh
+                          ? "已复制提示词案例"
+                          : "Prompt example copied",
                     )
                   }
                 >
@@ -427,8 +460,50 @@ export function SkillUsageGuide({
                 </Button>
               </div>
               <p className="usage-prompt-text">
-                {renderPromptWithPlaceholders(example.prompt)}
+                {renderPromptWithPlaceholders(
+                  example.prompt,
+                  editableTokenSet,
+                  slotValues,
+                  (tok) => slotInputRefs.current[tok]?.focus(),
+                )}
               </p>
+              {editableSlots.length > 0 && (
+                <div className="usage-prompt-slots" data-testid="usage-prompt-slots">
+                  <span className="usage-prompt-slots-label">
+                    {zh ? "✏️ 填入自动替换：" : "✏️ Fill to replace:"}
+                  </span>
+                  {editableSlots.map((slot) => (
+                    <input
+                      key={slot.token}
+                      ref={(el) => {
+                        slotInputRefs.current[slot.token] = el;
+                      }}
+                      type="text"
+                      className="prompt-slot-input"
+                      data-testid="prompt-slot-input"
+                      maxLength={100}
+                      value={slotValues[slot.token] || ""}
+                      placeholder={slot.inner}
+                      aria-label={slot.inner}
+                      onChange={(e) =>
+                        setSlotValues((prev) => ({
+                          ...prev,
+                          [slot.token]: e.target.value,
+                        }))
+                      }
+                    />
+                  ))}
+                  {hasFilledSlot && (
+                    <button
+                      type="button"
+                      className="prompt-slot-reset"
+                      onClick={() => setSlotValues({})}
+                    >
+                      {zh ? "清空" : "Reset"}
+                    </button>
+                  )}
+                </div>
+              )}
               <div className="usage-prompt-output">
                 <strong>{zh ? "预期产出：" : "Expected output: "}</strong>
                 <span>{example.output}</span>

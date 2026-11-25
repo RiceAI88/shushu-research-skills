@@ -184,6 +184,44 @@ export function aiInstallPromptFor(item, installation, lang = "zh") {
 }
 
 /**
+ * 提取提示词中真正需要学生替换的可编辑【占位符】或 [placeholder]（自动跳过已填好的仓库/技能名）
+ */
+export function extractEditablePlaceholders(promptText, item) {
+  const shortName = String(item?.repo || "").split("/").pop()?.toLowerCase() || "";
+  const fullRepo = String(item?.repo || "").toLowerCase();
+  const matches = String(promptText || "").match(/【[^】]+】|\[[^\]]+\]/g) || [];
+  const seen = new Set();
+  const slots = [];
+  for (const token of matches) {
+    if (seen.has(token)) continue;
+    const inner = token.slice(1, -1).trim();
+    const lower = inner.toLowerCase();
+    // 跳过空括号、纯数字文献角标（如 [1]）以及已自动填入的技能名称本身
+    if (!inner || /^\d+$/.test(inner) || lower === shortName || lower === fullRepo) {
+      continue;
+    }
+    seen.add(token);
+    slots.push({ token, inner });
+    if (slots.length >= 3) break;
+  }
+  return slots;
+}
+
+/**
+ * 将用户在详情页填入的自定义文件名/课题替换进提示词（已填项自动去掉外层括号，未填项保留原占位符）
+ */
+export function applyPromptPlaceholders(promptText, values = {}) {
+  let result = String(promptText || "");
+  if (!values || typeof values !== "object") return result;
+  for (const [token, rawVal] of Object.entries(values)) {
+    const val = String(rawVal ?? "").trim();
+    if (!val) continue;
+    result = result.split(token).join(val);
+  }
+  return result;
+}
+
+/**
  * 获取“装完怎么用”的实战提示词案例：优先匹配专属案例，否则按科研任务自动生成
  */
 export function usagePromptFor(item, lang = "zh") {

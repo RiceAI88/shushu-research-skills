@@ -60,6 +60,19 @@ test("task filtering combines with search, platform and favorites", () => {
   assert.equal(filterItems(items, { ...state, query: "missing" }).length, 0);
   assert.equal(filterItems(items, { ...state, favorites: [] }).length, 0);
 });
+test("recent history filters and preserves most-recently-viewed order on default sort", () => {
+  const state = initial(
+    { "ars-recent": JSON.stringify(["c/preview", "a/figures", "not/exist"]) },
+    "#recent=1",
+  );
+  assert.deepEqual(state.recent, ["c/preview", "a/figures"]);
+  assert.equal(state.recentOnly, true);
+  assert.match(serializeState(state), /recent=1/);
+  assert.deepEqual(
+    filterItems(items, state).map((i) => i.repo),
+    ["c/preview", "a/figures"],
+  );
+});
 test("review matching does not mistake preview for peer review", () => {
   const list = [...items, item("d/referee", "Peer review and rebuttal")];
   assert.deepEqual(
