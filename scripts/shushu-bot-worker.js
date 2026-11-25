@@ -45,8 +45,14 @@ export function checkRateLimit(ip, now = Date.now()) {
   return true;
 }
 
+function isAllowedOrigin(origin) {
+  if (!origin) return false;
+  if (ALLOWED_ORIGINS.has(origin)) return true;
+  return /^http:\/\/(?:127\.0\.0\.1|localhost):\d+$/.test(origin);
+}
+
 function corsHeaders(origin) {
-  const allow = ALLOWED_ORIGINS.has(origin) ? origin : "https://riceai985.cc";
+  const allow = isAllowedOrigin(origin) ? origin : "https://riceai985.cc";
   return {
     "Access-Control-Allow-Origin": allow,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -56,19 +62,18 @@ function corsHeaders(origin) {
   };
 }
 
-const SYSTEM_PROMPT_ZH = `你是“科研鼠鼠 · Skills 导航站（riceai985.cc）”的站内 AI 选工具学长顾问。
-你的任务是根据学生的【专业背景、科研阶段痛点、是否会用命令行】，从下方提供的【本站真实收录候选仓库列表】中挑选最合适的 2～3 个开源科研 Skill 进行推荐。
+const SYSTEM_PROMPT_ZH = `你是“科研鼠鼠 · Skills 导航站（riceai985.cc）”的站内 AI 选工具学长顾问（名字叫“科研鼠鼠”）。
+请根据学生的提问意图灵活回应：
 
-严格遵守以下规则：
-1. 【严禁编造】只能推荐候选列表中真实存在的仓库（使用完整的 owner/repo 名称），绝对不要编造列表之外的仓库名或安装命令。
-2. 【真诚克制】先用一句话回应学生的场景，再分 2～3 点说明推荐哪个仓库（写出完整 owner/repo）、它具体解决什么问题、适合什么门槛（例如零命令行同学可直接复制仓库里的 SKILL.md 到网页版 DeepSeek/Kimi/ChatGPT 使用）。
-3. 【简明易读】总字数控制在 220 字以内，不要长篇大论，语气亲切自然像同门师兄师姐。`;
+1. 【寒暄 / 问名字 / 闲聊 / 非科研问题】：如果学生只是打招呼、问你是谁、调侃或问与学术科研/写作/数据分析/编程工具无关的问题，请用亲切俏皮的“科研鼠鼠”学长口吻简短回应（80字以内），并引导他说出【专业 + 卡住的科研环节】，此时【不要强行推荐任何仓库】！
+2. 【科研痛点与选工具咨询】：根据学生的【专业背景、科研阶段痛点、是否习惯用命令行】，从下方提供的【本站真实收录候选仓库列表】中挑选最合适的 2～3 个开源科研 Skill 推荐：
+   - 严禁编造：只能推荐候选列表中真实存在的仓库（写出完整 owner/repo 名称），绝不编造列表外的仓库。
+   - 真诚实用：先用一句话回应场景，再分 2～3 点说明推荐哪个 owner/repo、解决什么问题、上手门槛如何（如零命令行同学可直接复制 SKILL.md 到网页版 DeepSeek/Kimi/ChatGPT 使用）。
+   - 简明易读：总字数控制在 220 字以内，语气自然像同门师兄师姐。`;
 
-const SYSTEM_PROMPT_EN = `You are the Research Hamster AI advisor for riceai985.cc.
-Recommend the best 2–3 open-source research Skills ONLY from the provided candidate list based on the student's discipline, research task, and technical comfort level.
-Rules:
-1. Never invent repositories outside the provided candidate list; always cite exact owner/repo names.
-2. Keep your answer concise (under 150 words), practical, and mention zero-CLI Web AI usage (copying SKILL.md) if the user is a beginner.`;
+const SYSTEM_PROMPT_EN = `You are "Research Hamster (科研鼠鼠)", the AI Skill advisor for riceai985.cc.
+1. If the user is just greeting, asking your name, or chatting off-topic (unrelated to research, writing, coding, or data tools), reply warmly in under 60 words and invite them to share their discipline + research bottleneck—do NOT force repository recommendations.
+2. When the user asks about academic workflows or tools, recommend the best 2–3 open-source Skills ONLY from the provided candidate list using exact owner/repo names (never invent repos), keep it under 150 words, and mention zero-CLI Web AI usage (copying SKILL.md) if they prefer no CLI.`;
 
 async function callOpenAICompatible({ endpoint, apiKey, model, messages, timeoutMs = 11000 }) {
   const controller = new AbortController();
@@ -119,7 +124,7 @@ export default {
       );
     }
 
-    if (!origin || !ALLOWED_ORIGINS.has(origin)) {
+    if (!isAllowedOrigin(origin)) {
       return Response.json({ error: "Origin not allowed" }, { status: 403, headers });
     }
 

@@ -245,4 +245,33 @@ test("assistantEngine retrieves domain-relevant Skills and falls back to local a
   });
   assert.match(followUpRes.reply, /经济学/);
   assert.match(followUpRes.reply, /SKILL\.md/);
+
+  // 身份询问、寒暄、调侃与纯闲聊：应自然直回，绝不强塞 3 个高赞无关仓库卡片
+  for (const chitchat of [
+    "你叫什么？",
+    "傻的？鼠鼠",
+    "你好呀",
+    "什么是 Skill？",
+    "今天中午吃什么？",
+  ]) {
+    const chatRes = await askShushuAssistant({
+      query: chitchat,
+      items: rankings.items,
+      lang: "zh",
+      apiEndpoint: "local-only",
+    });
+    assert.equal(chatRes.source, "shushu-persona", `Expected persona reply for: ${chitchat}`);
+    assert.equal(chatRes.picks.length, 0, `Should not spam repo cards for: ${chitchat}`);
+    assert.doesNotMatch(chatRes.reply, /Imbad0202\/academic-research-skills/);
+  }
+
+  // 带问候语但包含明确科研诉求时，正常进入检索推荐
+  const mixedRes = await askShushuAssistant({
+    query: "你好，经管硕士想做 DID 实证回归推荐哪几个？",
+    items: rankings.items,
+    lang: "zh",
+    apiEndpoint: "local-only",
+  });
+  assert.equal(mixedRes.source, "local-advisor");
+  assert.equal(mixedRes.picks.length, 3);
 });

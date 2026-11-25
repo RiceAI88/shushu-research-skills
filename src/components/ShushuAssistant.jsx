@@ -32,16 +32,61 @@ function loadSessionMessages() {
   }
 }
 
-// 根据最近一轮提问生成保留学科上下文的一键追问胶囊
+const CONVERSATIONAL_STARTER_CHIPS = {
+  zh: [
+    {
+      label: "🎓 本科毕设免命令行写作与排版",
+      query: "本科毕设不会敲命令行，写论文和 Word 排版用哪个？",
+    },
+    {
+      label: "📈 经管 Stata / DID 实证推荐",
+      query: "经管研究生做 DID 因果识别与 Stata 实证推荐哪几个？",
+    },
+    {
+      label: "🧬 医学查 PubMed 与写综述",
+      query: "医学科研查 PubMed、精读英文文献和写综述配什么？",
+    },
+  ],
+  en: [
+    {
+      label: "🎓 Zero-CLI undergrad thesis starter",
+      query: "Undergraduate thesis starter with no CLI setup?",
+    },
+    {
+      label: "📈 Econometrics & Stata DID Skills",
+      query: "Best Skills for econometrics, DID, and Stata tables?",
+    },
+    {
+      label: "🧬 Biomedical PubMed & review workflow",
+      query: "Biomedical PubMed search and literature synthesis workflow?",
+    },
+  ],
+};
+
+// 根据最近一轮有效推荐生成保留学科上下文的一键追问胶囊；若上一轮为闲聊介绍则展示常见场景快捷入口
 function buildFollowUpChips(messages, lang = "zh") {
   const zh = lang === "zh";
-  const userMsgs = messages.filter((m) => m.role === "user");
-  const baseTopic = String(userMsgs[0]?.text || "").slice(0, 64);
-  const lastUser = String(userMsgs[userMsgs.length - 1]?.text || "");
+  const lastAssistantIdx = messages.map((m) => m.role).lastIndexOf("assistant");
+  if (lastAssistantIdx === -1) return [];
+  const lastAssistant = messages[lastAssistantIdx];
+
+  if (!lastAssistant?.picks || lastAssistant.picks.length === 0) {
+    return (CONVERSATIONAL_STARTER_CHIPS[lang] || CONVERSATIONAL_STARTER_CHIPS.zh).slice(0, 3);
+  }
+
+  // 向前寻找触发工具推荐的最近一条用户科研提问（跳过开场闲聊如“你好”“你叫什么”）
+  let baseTopic = "";
+  for (let i = lastAssistantIdx - 1; i >= 0; i--) {
+    if (messages[i]?.role === "user" && messages[i]?.text) {
+      baseTopic = String(messages[i].text).slice(0, 64);
+      break;
+    }
+  }
+  const lastUser = baseTopic;
   if (!baseTopic) return [];
 
   const chips = [];
-  if (!/免命令行|网页版|不会敲命令|零基础|no[- ]?cli|web/i.test(lastUser)) {
+  if (!/免命令行|网页版|不会敲命令|零基础|免安装|no[- ]?cli|web/i.test(lastUser)) {
     chips.push({
       label: zh ? "✨ 只要免命令行网页版能用的" : "✨ Zero-CLI / Web AI only",
       query: zh
