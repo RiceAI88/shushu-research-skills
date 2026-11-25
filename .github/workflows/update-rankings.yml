@@ -73,6 +73,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/auto_enrich_disciplines.py --limit 25 --sync-rankings
 
+      - name: Sync multi-skill repository sub-skills catalog
+        if: steps.gate.outputs.run_needed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/auto_extract_subskills.py --limit 20
+
       - name: Check curated source documents
         if: steps.gate.outputs.run_needed == 'true'
         env:
@@ -92,7 +98,7 @@ jobs:
           # 通配符必须加引号交给 git pathspec 匹配；由 shell 展开会漏掉
           # 按 60 天保留期删除的历史快照，导致删除无法提交、rebase 被未暂存改动阻断。
           paths=(
-            config/disciplines.json config/discipline-sources.json
+            config/disciplines.json config/discipline-sources.json config/subskills-catalog.json
             data/repository-catalog.json data/collection-report.json data/collection-events.json
             README.md README_EN.md data/first-seen.json data/editorial-status.json data/rankings.json
             data/rankings.js data/history.js data/rankings.csv 'data/history/*.json'

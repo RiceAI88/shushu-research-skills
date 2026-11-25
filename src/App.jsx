@@ -44,6 +44,7 @@ import {
 } from "@ant-design/icons";
 import {
   AGENT_PLATFORMS,
+  CURATED_PACKS,
   detectAgents,
   filterItems,
   taskCountsFor,
@@ -1075,7 +1076,7 @@ function Dashboard({ state, update, switchLang }) {
                 {state.lang === "zh" ? "免安装 · 网页直用" : "Zero-install · Web AI"}
               </span>
             </button>
-            <ActionPopover label={state.lang === "zh" ? "筛选" : "Filters"} filter lang={state.lang} count={Number(state.agent !== "all") + Number(!["rank","stars"].includes(state.sort)) + Number(state.favOnly)}>
+            <ActionPopover label={state.lang === "zh" ? "筛选" : "Filters"} filter lang={state.lang} count={Number(state.agent !== "all") + Number(!["rank","stars"].includes(state.sort)) + Number(state.favOnly) + Number(Boolean(state.recentOnly)) + Number(Boolean(state.activeOnly))}>
             {() => <DeferredFeature t={t} loadingFallback={<OverlaySkeleton kind="filters" lang={state.lang}/>}><FilterControls {...{state,update,t,platformIds}} /></DeferredFeature>}
             </ActionPopover>
             <div className="view-controls">
@@ -1244,6 +1245,42 @@ function Dashboard({ state, update, switchLang }) {
                   </Button>
                 )}
                 <ScopeControl {...{state,update,relatedCount}} />
+                <details className="export-menu curated-packs-menu" data-testid="curated-packs-menu">
+                  <summary>{t("curatedPacks")} ⌄</summary>
+                  <div
+                    className="export-options curated-packs-options"
+                    role="group"
+                    aria-label={t("curatedPacks")}
+                  >
+                    {CURATED_PACKS.map((p) => (
+                      <button
+                        key={p.id}
+                        type="button"
+                        className="curated-pack-option"
+                        data-testid={`curated-pack-${p.id}`}
+                        onClick={(e) => {
+                          const detailsEl = e.currentTarget.closest("details");
+                          if (detailsEl) detailsEl.open = false;
+                          trackEvent("apply_curated_pack", { id: p.id });
+                          update((s) => ({
+                            ...s,
+                            section: "ranking",
+                            pack: p.repos,
+                            packTitle: p[s.lang].replace(/^[^\p{L}\p{N}]+\s*/u, ""),
+                            query: "",
+                            task: "all",
+                            discipline: "all",
+                            major: "all",
+                            stage: "",
+                          }));
+                        }}
+                      >
+                        <strong>{p[state.lang]}</strong>
+                        <small>{p[`desc_${state.lang}`]}</small>
+                      </button>
+                    ))}
+                  </div>
+                </details>
                 <Button type="link" onClick={()=>setGuideSection("paths")}>{state.lang === "zh" ? "专业路径" : "Research paths"}</Button>
                 <details className="export-menu">
                   <summary>{t("exportMenu")} ⌄</summary>

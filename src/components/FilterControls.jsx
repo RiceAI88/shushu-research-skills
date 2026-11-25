@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Select, Tag } from "antd";
-import { HistoryOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
+import { HistoryOutlined, StarFilled, StarOutlined, ThunderboltOutlined } from "@ant-design/icons";
 import { AGENT_PLATFORMS } from "../domain";
 export default function FilterControls({state,update,t,platformIds}) {
  return <>
@@ -72,6 +72,18 @@ export default function FilterControls({state,update,t,platformIds}) {
                   {t("recentOnly")}
                 </span>{" "}
                 <Tag variant="borderless">{(state.recent || []).length}</Tag>
+              </Button>
+              <Button
+                aria-label={t("activeOnly")}
+                data-testid="active-only"
+                icon={<ThunderboltOutlined aria-hidden="true" />}
+                type={state.activeOnly ? "primary" : "default"}
+                aria-pressed={Boolean(state.activeOnly)}
+                onClick={() => update((s) => ({ ...s, activeOnly: !s.activeOnly }))}
+              >
+                <span className="favorite-filter-label">
+                  {t("activeOnly")}
+                </span>
               </Button>
               <Button
                 data-testid="popover-web-ready"

@@ -65,6 +65,9 @@ export function EmptyResults({ items, state, update, t, onAskShushu }) {
     if (state.webReady) {
       pushOption("relax-web", t("emptyRelaxWebReady"), { webReady: false });
     }
+    if (state.activeOnly) {
+      pushOption("relax-active", t("emptyRelaxActive"), { activeOnly: false });
+    }
     if (state.agent && state.agent !== "all") {
       pushOption("relax-agent", t("emptyRelaxAgent"), { agent: "all" });
     }

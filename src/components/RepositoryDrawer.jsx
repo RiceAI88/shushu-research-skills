@@ -10,6 +10,7 @@ import { filterPublicSignals } from "../practical";
 import { SummaryText } from "./PracticalInfo";
 import { InstallationRequirements } from "./InstallationRequirements";
 import { SkillUsageGuide } from "./SkillUsageGuide";
+import { SubskillsExplorer } from "./SubskillsExplorer";
 
 export function RepositoryDrawer({
   item,
@@ -116,6 +117,7 @@ export function RepositoryDrawer({
   return (
     <div ref={contentRef} className="drawer-content" key={item.repo}>
       <SummaryText item={item} t={t} lang={state.lang} full />
+      <SubskillsExplorer item={item} lang={state.lang} />
       <SkillUsageGuide
         item={item}
         lang={state.lang}

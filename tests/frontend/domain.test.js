@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  CURATED_PACKS,
   filterItems,
   restoreState,
   serializeState,
@@ -8,6 +9,7 @@ import {
   isWebAiReady,
   orderedSceneLabelsFor,
 } from "../../src/domain.js";
+import { readFileSync } from "node:fs";
 const item = (
   repo,
   description,
@@ -72,6 +74,31 @@ test("recent history filters and preserves most-recently-viewed order on default
     filterItems(items, state).map((i) => i.repo),
     ["c/preview", "a/figures"],
   );
+});
+test("activeOnly excludes stale repositories and curated starter packs map to real ranked Skills", () => {
+  const mixed = [
+    item("fresh/repo", "Active skill", undefined, { stale: false }),
+    item("old/stale-repo", "Unmaintained skill", undefined, { stale: true }),
+  ];
+  const st = restoreState(store(), "#active=1", {}, mixed);
+  assert.equal(st.activeOnly, true);
+  assert.match(serializeState(st), /active=1/);
+  assert.deepEqual(
+    filterItems(mixed, st).map((i) => i.repo),
+    ["fresh/repo"],
+  );
+
+  const rankings = JSON.parse(
+    readFileSync(new URL("../../data/rankings.json", import.meta.url), "utf8"),
+  );
+  const known = new Set(rankings.items.map((i) => i.repo));
+  assert.ok(CURATED_PACKS.length >= 4);
+  for (const pack of CURATED_PACKS) {
+    assert.ok(pack.zh && pack.en && pack.repos.length >= 3);
+    for (const repo of pack.repos) {
+      assert.ok(known.has(repo), `Pack ${pack.id} references missing repo: ${repo}`);
+    }
+  }
 });
 test("review matching does not mistake preview for peer review", () => {
   const list = [...items, item("d/referee", "Peer review and rebuttal")];

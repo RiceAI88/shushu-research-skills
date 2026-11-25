@@ -43,6 +43,78 @@ export const RESEARCH_TASKS = [
 
 ];
 
+// 官方精选课题组工具包：依托 #pack= 机制一键展示与同门群转发
+export const CURATED_PACKS = [
+  {
+    id: "undergrad-starter",
+    zh: "🎓 本科毕设免折腾包",
+    en: "🎓 Undergrad Thesis Pack",
+    desc_zh: "选题综述、英文文献阅读、中文 Word 论文排版与答辩 PPT",
+    desc_en: "Scoping, paper reading, thesis formatting & defense slides",
+    repos: [
+      "Gostyan/docx-skill-4-cn-paper",
+      "Imbad0202/academic-research-skills",
+      "Edwardxlai/easyread",
+      "HKUSTDial/Supervisor-Skills",
+      "zouchenzhen/thesis-defense-pptx-skill",
+    ],
+  },
+  {
+    id: "econ-empirical",
+    zh: "📈 经管实证与计量包",
+    en: "📈 Econometrics & Empirical Pack",
+    desc_zh: "Stata 面板回归、因果推断、SSCI 写作规范与数学建模",
+    desc_en: "Stata regressions, causal inference, SSCI writing & modeling",
+    repos: [
+      "dylantmoore/stata-skill",
+      "hanlulong/econ-writing-skill",
+      "peacefulj/SSCI-SCI-skills",
+      "jihe520/MathModelAgent",
+      "Adkid-Zephyr/anti-defensive-writing-Skill",
+    ],
+  },
+  {
+    id: "biomed-lit",
+    zh: "🧬 生信分析与文献综述包",
+    en: "🧬 Bio-Omics & Literature Pack",
+    desc_zh: "多学科组学数据库、Zotero 文献精读工作流与系统综述",
+    desc_en: "Omics databases, Zotero analytical workflow & systematic review",
+    repos: [
+      "K-Dense-AI/scientific-agent-skills",
+      "google-deepmind/science-skills",
+      "cheneternity/Zotero-Analytical-Workflow-Skills",
+      "stephenlzc/AI-Powered-Literature-Review-Skills",
+    ],
+  },
+  {
+    id: "ai-conference",
+    zh: "🤖 AI 顶会实验与润色包",
+    en: "🤖 ML Conference & Rebuttal Pack",
+    desc_zh: "自主机器学习实验、消融评测、顶会写作与审稿去防御腔",
+    desc_en: "Autonomous ML experiments, paper writing & anti-defensive polish",
+    repos: [
+      "wanshuiyin/Auto-claude-code-research-in-sleep",
+      "Orchestra-Research/AI-Research-SKILLs",
+      "Master-cai/Research-Paper-Writing-Skills",
+      "Adkid-Zephyr/anti-defensive-writing-Skill",
+    ],
+  },
+  {
+    id: "figures-slides",
+    zh: "🎨 顶刊配图与组会汇报包",
+    en: "🎨 Figures, Slides & Posters Pack",
+    desc_zh: "Nature 级科研统计图、架构示意图、组会 PPT 与会议海报",
+    desc_en: "Publication plots, architecture diagrams, lab decks & posters",
+    repos: [
+      "Yuan1z0825/nature-skills",
+      "ChenLiu-1996/figures4papers",
+      "dwzhu-pku/PaperBanana",
+      "ningzimu/codex-ppt-skill",
+      "Paper2Poster/Paper2Poster",
+    ],
+  },
+];
+
 // 论文阶段急救包：面向学生高频场景的精选锚点 + 规则筛选
 export const RESEARCH_STAGES = [
   {
@@ -430,6 +502,7 @@ export function restoreState(storage, hash = "", defaults = {}, items = []) {
       .slice(0, 3),
     favOnly: p.get("fav") === "1",
     recentOnly: p.get("recent") === "1",
+    activeOnly: p.get("active") === "1",
     webReady: p.get("web") === "1",
     newOnly: p.get("new") === "1",
     todayOnly: valid(p.get("today"), ["skill", "related"], ""),
@@ -460,6 +533,7 @@ export function serializeState(state) {
   if (state.includeRelated) p.set("related", "1");
   if (state.favOnly) p.set("fav", "1");
   if (state.recentOnly) p.set("recent", "1");
+  if (state.activeOnly) p.set("active", "1");
   if (state.webReady) p.set("web", "1");
   if (state.newOnly) p.set("new", "1");
   if (state.todayOnly) p.set("today", state.todayOnly);
@@ -507,6 +581,7 @@ export function filterItems(items, state) {
     if (state.agent !== "all" && !detectAgents(item).includes(state.agent))
       return false;
     if (state.webReady && !isWebAiReady(item)) return false;
+    if (state.activeOnly && item.stale) return false;
     if (state.favOnly && !state.favorites.includes(item.repo)) return false;
     if (state.recentOnly && !(state.recent || []).includes(item.repo)) return false;
     return (

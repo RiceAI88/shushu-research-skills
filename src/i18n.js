@@ -174,6 +174,8 @@ export const translations = {
     viewCard: "卡片",
     favoritesOnly: "仅看收藏",
     recentOnly: "最近看过",
+    activeOnly: "仅看活跃维护",
+    curatedPacks: "课题组工具包",
     exportFav: "导出收藏",
     tableTitle: "今日榜单",
     tableHint:
@@ -195,6 +197,7 @@ export const translations = {
     emptyRelaxMajor: "放宽到整个学科门类",
     emptyAllDisciplines: "切换到全部专业",
     emptyRelaxWebReady: "取消「免安装」限制",
+    emptyRelaxActive: "包含长期未更新项目",
     emptyRelaxAgent: "不限 AI Agent 平台",
     emptyKeepQuery: "只保留搜索词",
     emptyDropQuery: "去掉搜索词",
@@ -472,6 +475,8 @@ export const translations = {
     viewCard: "Cards",
     favoritesOnly: "Favorites only",
     recentOnly: "Recently viewed",
+    activeOnly: "Actively maintained",
+    curatedPacks: "Starter packs",
     exportFav: "Export favorites",
     tableTitle: "Today’s ranking",
     tableHint:
@@ -493,6 +498,7 @@ export const translations = {
     emptyRelaxMajor: "Widen to whole discipline",
     emptyAllDisciplines: "Switch to all disciplines",
     emptyRelaxWebReady: "Remove zero-install filter",
+    emptyRelaxActive: "Include unmaintained repos",
     emptyRelaxAgent: "Allow any AI Agent",
     emptyKeepQuery: "Keep only the search term",
     emptyDropQuery: "Remove the search term",

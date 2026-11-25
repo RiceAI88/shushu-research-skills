@@ -25,6 +25,7 @@ export const resets = {
   agent: "all",
   favOnly: false,
   recentOnly: false,
+  activeOnly: false,
   webReady: false,
   newOnly: false,
   todayOnly: "",
@@ -64,6 +65,7 @@ export function ActiveFilters({ state, update, t, empty, onShareFavorites }) {
   if (state.newOnly) conditions.push(["newOnly", t("statNewWeek")]);
   if (state.favOnly) conditions.push(["favOnly", t("favoritesOnly")]);
   if (state.recentOnly) conditions.push(["recentOnly", t("recentOnly")]);
+  if (state.activeOnly) conditions.push(["activeOnly", t("activeOnly")]);
   // 当来源控件隐藏在弹窗中或不可见时，即使仅有单一筛选条件也保留可见状态与一键清除入口。
   const needsReset =
     Boolean(state.pack?.length) ||
@@ -72,6 +74,7 @@ export function ActiveFilters({ state, update, t, empty, onShareFavorites }) {
     state.agent !== "all" ||
     state.favOnly ||
     state.recentOnly ||
+    state.activeOnly ||
     (state.section === "insights" && state.todayOnly);
   if (!conditions.length || (conditions.length === 1 && !empty && !needsReset))
     return null;
