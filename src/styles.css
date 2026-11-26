@@ -1424,9 +1424,9 @@ h1 em {
 .compact-search label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .compact-search .ant-input-affix-wrapper { min-height: 32px; padding-top: 4px; padding-bottom: 4px; }
 .compact-search .ant-input { font-size: 13px; }
-.export-menu { position: relative; font-size: 12px; }
-.export-menu summary { list-style: none; cursor: pointer; padding: 5px 10px; border: 1px solid var(--prs-border); border-radius: 5px; }
-.export-menu summary::-webkit-details-marker { display: none; }
+.export-menu, .curated-packs-menu { position: relative; font-size: 12px; }
+.export-menu summary, .curated-packs-menu summary { list-style: none; cursor: pointer; padding: 5px 10px; border: 1px solid var(--prs-border); border-radius: 5px; }
+.export-menu summary::-webkit-details-marker, .curated-packs-menu summary::-webkit-details-marker { display: none; }
 .export-options { position: absolute; top: calc(100% + 5px); right: 0; z-index: 40; min-width: 140px; padding: 5px; background: var(--prs-bg); border: 1px solid var(--prs-border); border-radius: 6px; box-shadow: var(--prs-shadow-md); }
 .export-options a, .export-options button { display: block; width: 100%; text-align: left; padding: 7px 10px; color: var(--prs-text); background: none; border: 0; font: inherit; white-space: nowrap; text-decoration: none; cursor: pointer; }
 .export-options button:disabled { opacity: .4; cursor: default; }
@@ -1532,6 +1532,7 @@ h1 em {
 .ranking-header p,
 .ranking-header > .ant-space .ant-btn,
 .export-menu,
+.curated-packs-menu,
 .installation-context,
 .reference-metrics { font-size: 13px; }
 .hero-search label,
@@ -1558,24 +1559,6 @@ h1 em {
 .site-footer { flex-wrap: wrap; }
 .feedback-app:has(.compare-tray) .site-footer { padding-bottom: calc(230px + env(safe-area-inset-bottom, 0px)); }
 
-/* A clearly labeled promotion, separate from repository data and ranking. */
-.sponsor-banner { --ad-bg: #fff0f5; --ad-bg-soft: #fff8fa; --ad-border: #e8a7bc; --ad-accent: #ad365f; --ad-hover: #922b50; --ad-muted: #754358; --ad-button-text: #fff; --ad-label-bg: #fff9fb; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 24px; padding: 20px 24px; margin: 0 0 14px; border: 1px solid var(--ad-border); border-radius: 8px; background: linear-gradient(110deg, var(--ad-bg), var(--ad-bg-soft)); color: var(--prs-text); }
-[data-theme="dark"] .sponsor-banner { --ad-bg: #402432; --ad-bg-soft: #30212b; --ad-border: #a75d7a; --ad-accent: #f29abb; --ad-hover: #ffb3ce; --ad-muted: #e7b9c8; --ad-button-text: #351624; --ad-label-bg: #4b2b3c; }
-.sponsor-brand { display: flex; align-items: center; gap: 10px; white-space: nowrap; font-size: 16px; font-weight: 600; }
-.sponsor-brand img { flex: 0 0 auto; object-fit: contain; }
-.sponsor-brand small { color: var(--ad-accent); font-size: 12px; font-weight: 500; }
-.sponsor-copy { min-width: 0; }
-.sponsor-copy h3 { margin: 0; font-size: 18px; line-height: 1.5; font-weight: 600; letter-spacing: -.015em; }
-.sponsor-copy p { margin: 6px 0 0; color: var(--ad-muted); font-size: 13px; line-height: 1.7; }
-.sponsor-cta { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 8px 12px; min-height: 40px; border: 1px solid var(--ad-accent); border-radius: 5px; background: var(--ad-accent); color: var(--ad-button-text); font-size: 14px; line-height: 1.5; text-decoration: none; white-space: nowrap; }
-.sponsor-cta > span { font-size: 17px; line-height: 1; }
-.sponsor-cta:hover { border-color: var(--ad-hover); background: var(--ad-hover); color: var(--ad-button-text); }
-.sponsor-cta:focus-visible { outline: 2px solid var(--ad-accent); outline-offset: 3px; }
-@media (max-width: 760px) {
-  .sponsor-banner { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 20px; }
-  .sponsor-copy h3 { font-size: 20px; }
-  .sponsor-cta { justify-self: start; min-height: 44px; }
-}
 .drawer-primary-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 @media (max-width: 760px) {
   .hero { padding-top: 8px; padding-bottom: 4px; }
@@ -2080,4 +2063,163 @@ body:has(.back-to-top) .shushu-bot-panel { bottom: calc(156px + env(safe-area-in
   .shushu-mascot-stage { max-height: 54px; }
   .shushu-mascot-fab .hamster-mascot { width: 54px; height: 54px; }
   .shushu-bot-panel { right: 12px; left: 12px; width: auto; bottom: calc(92px + env(safe-area-inset-bottom, 0px)); height: min(500px, calc(100vh - 110px)); }
+}
+
+/* 子技能穿透检索命中提示胶囊 */
+.card-subskill-hit {
+  margin: -2px 0 8px;
+}
+.card-subskill-hit span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 2px 9px;
+  border-radius: 6px;
+  border: 1px solid rgb(var(--prs-primary-rgb) / 0.32);
+  background: var(--prs-tint);
+  color: var(--prs-primary);
+  font-size: 11.5px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+[data-theme="dark"] .card-subskill-hit span {
+  background: rgb(var(--prs-primary-rgb) / 0.14);
+}
+
+/* 免登录站内推荐开源科研 Skill 弹窗 */
+.recommend-skill-form {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding-top: 4px;
+}
+.recommend-form-hint {
+  margin: 0;
+  color: var(--prs-muted);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+.recommend-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.recommend-field > span {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--prs-text);
+}
+.recommend-field input,
+.recommend-field select {
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 9px;
+  border: 1px solid var(--prs-border);
+  background: var(--prs-bg);
+  color: var(--prs-text);
+  font: inherit;
+  font-size: 13.5px;
+  outline: none;
+  transition: border-color 140ms ease;
+}
+.recommend-field input:focus,
+.recommend-field select:focus {
+  border-color: var(--prs-primary);
+}
+.recommend-existing-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid rgb(var(--prs-primary-rgb) / 0.35);
+  background: var(--prs-tint);
+  color: var(--prs-text);
+  font-size: 12.5px;
+}
+.recommend-existing-alert button {
+  flex: 0 0 auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--prs-primary);
+  background: var(--prs-primary);
+  color: #ffffff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.recommend-error {
+  margin: 0;
+  color: #dc2626;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+.recommend-form-actions,
+.recommend-done-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+.recommend-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 9px;
+  border: 1px solid var(--prs-primary);
+  background: var(--prs-primary);
+  color: #ffffff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: filter 140ms ease, opacity 140ms ease;
+}
+.recommend-btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.recommend-btn-primary:not(:disabled):hover {
+  filter: brightness(1.06);
+}
+.recommend-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 13px;
+  border-radius: 9px;
+  border: 1px solid var(--prs-border);
+  background: transparent;
+  color: var(--prs-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.recommend-btn-ghost:hover {
+  border-color: var(--prs-primary);
+  color: var(--prs-primary);
+}
+.recommend-skill-done {
+  padding: 6px 0 2px;
+}
+.recommend-done-badge {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--prs-primary);
+}
+.recommend-done-desc {
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--prs-body);
 }

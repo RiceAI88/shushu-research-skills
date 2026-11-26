@@ -117,7 +117,7 @@ export function RepositoryDrawer({
   return (
     <div ref={contentRef} className="drawer-content" key={item.repo}>
       <SummaryText item={item} t={t} lang={state.lang} full />
-      <SubskillsExplorer item={item} lang={state.lang} />
+      <SubskillsExplorer item={item} lang={state.lang} initialFilter={state.query} />
       <SkillUsageGuide
         item={item}
         lang={state.lang}

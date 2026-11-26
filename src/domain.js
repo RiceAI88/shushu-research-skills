@@ -598,6 +598,7 @@ export function filterItems(items, state) {
           item.trend?.en,
           ...(item.topics || []),
           item.language,
+          item.subskills_blob,
           ...detectAgents(item).flatMap((id) => [
             id,
             AGENT_PLATFORMS.find((a) => a.id === id)?.label,
@@ -670,6 +671,19 @@ export function safeExternalUrl(url) {
   } catch {
     return null;
   }
+}
+
+const REPO_URL_OR_SLUG_RE =
+  /^(?:https?:\/\/github\.com\/)?([A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+?)(?:\.git|\/.*)?$/i;
+
+// 解析用户粘贴的 GitHub URL 或 owner/repo 简写为标准仓库标识
+export function parseGitHubRepoInput(raw) {
+  const clean = String(raw || "").trim();
+  const m = clean.match(REPO_URL_OR_SLUG_RE);
+  if (!m) return null;
+  const slug = m[1].replace(/\.git$/i, "");
+  if (slug.includes("..")) return null;
+  return slug;
 }
 
 export function taskCountsFor(items, state) {

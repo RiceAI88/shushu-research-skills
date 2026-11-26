@@ -87,7 +87,7 @@ export function RechargeNotice({ lang, busy = false, immediate = false }) {
       onCancel={close}
       footer={null}
       closable={false}
-      title={<span className="sr-only">{zh ? "GPT 正规代充" : "GPT top-up service"}</span>}
+      title={<span className="sr-only">{zh ? "AI 订阅正规代充" : "Official AI top-up service"}</span>}
       centered
       width={440}
       rootClassName="recharge-modal"
@@ -120,7 +120,7 @@ export function RechargeNotice({ lang, busy = false, immediate = false }) {
         </div>
         <div className="recharge-notice-header-row">
           <h2 id="recharge-notice-title" tabIndex={-1} autoFocus>
-            {zh ? "GPT 正规代充" : "GPT top-up service"}
+            {zh ? "AI 订阅正规代充" : "Official AI top-up"}
           </h2>
           <p className="recharge-notice-invoice">
             {zh ? "可开发票" : "Invoices available"}
@@ -128,8 +128,8 @@ export function RechargeNotice({ lang, busy = false, immediate = false }) {
         </div>
         <p id="recharge-notice-description">
           {zh
-            ? "自营 GPT / Codex 代充服务，有账单、可开发票。需要代充的朋友，可以了解一下，也支持本站持续维护。"
-            : "Self-operated GPT / Codex top-ups with billing records and invoices. Explore the service and support this site's upkeep."}
+            ? "自营 ChatGPT / Claude / Gemini / Codex 正规代充服务，有账单、可开发票。需要代充的朋友，可以了解一下，也支持本站持续维护。"
+            : "Self-operated ChatGPT / Claude / Gemini / Codex top-ups with billing records and invoices. Explore the service and support this site's upkeep."}
         </p>
         <div className="recharge-notice-tags" aria-hidden="true">
           <span>{zh ? "✓ 正规账单可查" : "✓ Official billing"}</span>

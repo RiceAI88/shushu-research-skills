@@ -171,8 +171,8 @@ export function SkillUsageGuide({
               <span aria-hidden="true">💡</span>
               <span>
                 {zh
-                  ? "还没有 Codex / GPT Plus 额度或海外卡？可查看 "
-                  : "Need GPT / Codex access or an invoice? See "}
+                  ? "还没有 ChatGPT / Claude / Gemini / Codex 额度或海外卡？可查看 "
+                  : "Need GPT / Claude / Gemini / Codex access or an invoice? See "}
                 <a
                   href="https://catfk.com/shop/1991"
                   target="_blank"

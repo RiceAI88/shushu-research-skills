@@ -4,7 +4,7 @@ test.use({ showEntryNotice: true });
 
 test("entry notice links to the shop and stays quiet for 12 hours after showing", async ({ page }) => {
   await page.goto("./");
-  const dialog = page.getByRole("dialog", { name: "GPT 正规代充" });
+  const dialog = page.getByRole("dialog", { name: /正规代充/ });
   await expect(dialog).toBeVisible();
   await expect(dialog).toContainText("可开发票");
   await expect(dialog.getByRole("link", { name: /查看代充服务/ })).toHaveAttribute("href", "https://catfk.com/shop/1991");
@@ -22,7 +22,7 @@ test("notice returns once 12 hours have passed and closes on Escape on mobile", 
     localStorage.setItem("prs-recharge-notice-shown-v2", String(Date.now() - 12 * 60 * 60 * 1000 - 1000)),
   );
   await page.goto("./");
-  const dialog = page.getByRole("dialog", { name: "GPT 正规代充" });
+  const dialog = page.getByRole("dialog", { name: /正规代充/ });
   await expect(dialog).toBeVisible();
   const box = await dialog.boundingBox();
   expect(box.x).toBeGreaterThanOrEqual(0);

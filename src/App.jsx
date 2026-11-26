@@ -9,6 +9,7 @@ import { SlidingTaskList } from "./components/SlidingTaskList";
 import { Reveal, useSiteReducedMotion } from "./components/SiteMotion";
 import { DailyArrivals } from "./components/DailyArrivals";
 import { HeroPosterAd } from "./components/HeroPosterAd";
+import { loadSubskillsCatalog } from "./subskillsLoader";
 import { BackToTop } from "./components/BackToTop";
 import { trackEvent } from "./analytics";
 import { SearchBox } from "./components/SearchBox";
@@ -81,6 +82,7 @@ import CommunityDialog, {
 } from "./components/CommunityCard";
 const FilterControls = lazy(() => import("./components/FilterControls"));
 const ComparisonDialog = lazy(() => import("./components/ComparisonDialog"));
+const RecommendSkillModal = lazy(() => import("./components/RecommendSkillModal"));
 const ShushuAssistant = lazy(() => import("./components/ShushuAssistant"));
 const RoamingMascot = lazy(() => import("./components/RoamingMascot"));
 const RechargeNotice = lazy(() =>
@@ -274,8 +276,11 @@ export default function App() {
 }
 function Dashboard({ state, update, switchLang }) {
   const [historyData, setHistoryData] = useState(
-    () => window.ACADEMIC_SKILLS_HISTORY || { series: {} },
+    () => window.ACADEMIC_SKILLS_HISTORY || null,
   );
+  const [compareOpen, setCompareOpen] = useState(false);
+  const needsHistory =
+    state.section === "insights" || state.view === "table" || compareOpen;
   useEffect(() => {
     const syncHistory = () => {
       if (window.ACADEMIC_SKILLS_HISTORY) {
@@ -286,6 +291,28 @@ function Dashboard({ state, update, switchLang }) {
     window.addEventListener("ars-history-loaded", syncHistory);
     return () => window.removeEventListener("ars-history-loaded", syncHistory);
   }, []);
+  useEffect(() => {
+    if (!needsHistory || window.ACADEMIC_SKILLS_HISTORY || window.__ARS_HISTORY_LOADING) {
+      return;
+    }
+    const src =
+      document.querySelector('meta[name="ars-history-src"]')?.getAttribute("content") ||
+      "/data/history.js";
+    window.__ARS_HISTORY_LOADING = true;
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = src;
+    s.onload = () => {
+      window.__ARS_HISTORY_LOADING = false;
+      window.dispatchEvent(new Event("ars-history-loaded"));
+    };
+    s.onerror = () => {
+      window.__ARS_HISTORY_LOADING = false;
+      window.ACADEMIC_SKILLS_HISTORY = { series: {} };
+      window.dispatchEvent(new Event("ars-history-loaded"));
+    };
+    document.head.appendChild(s);
+  }, [needsHistory]);
   const [today, setToday] = useState(() => beijingDay());
   useEffect(() => {
     const sync = () => setToday(beijingDay());
@@ -296,17 +323,37 @@ function Dashboard({ state, update, switchLang }) {
       removeEventListener("focus", sync);
     };
   }, []);
+  const [subskillsMap, setSubskillsMap] = useState(null);
+  useEffect(() => {
+    if (!state.query?.trim() || subskillsMap) return;
+    let alive = true;
+    loadSubskillsCatalog().then((cat) => {
+      if (alive && cat?.repos) setSubskillsMap(cat.repos);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [state.query, subskillsMap]);
   const items = useMemo(
     () =>
-      sourceItems.map((item) => ({
-        ...item,
-        new_today: isNewToday(item, today),
-      })),
-    [today],
+      sourceItems.map((item) => {
+        const subEntry = subskillsMap?.[String(item.repo || "").toLowerCase()];
+        const subList = subEntry?.items || null;
+        return {
+          ...item,
+          new_today: isNewToday(item, today),
+          subskills_list: subList,
+          subskills_blob: subList
+            ? subList.map((s) => `${s.n} ${s.g || ""}`).join(" ")
+            : "",
+        };
+      }),
+    [today, subskillsMap],
   );
   const message = useFeedback();
-  const [compareOpen, setCompareOpen] = useState(false);
   const [guideSection, setGuideSection] = useState(null);
+  const [recommendRequested, setRecommendRequested] = useState(false);
+  const [recommendOpen, setRecommendOpen] = useState(false);
   const [botOpen, setBotOpen] = useState(false);
   const [botRequested, setBotRequested] = useState(false);
   const [botInitialQuery, setBotInitialQuery] = useState("");
@@ -681,7 +728,20 @@ function Dashboard({ state, update, switchLang }) {
                 {t("themeLabel")}
               </Button>
             </Tooltip>
-            <Button href={`${REPOSITORY_URL}/issues/new?template=recommend-repo.yml`} target="_blank" rel="noopener noreferrer">{state.lang === "zh" ? "推荐 Skill" : "Suggest a Skill"}</Button>
+            <Button
+              href={`${REPOSITORY_URL}/issues/new?template=recommend-repo.yml`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
+                  e.preventDefault();
+                  setRecommendRequested(true);
+                  setRecommendOpen(true);
+                }
+              }}
+            >
+              {state.lang === "zh" ? "推荐 Skill" : "Suggest a Skill"}
+            </Button>
             <Button
               icon={<GithubOutlined aria-hidden="true" />}
               href={REPOSITORY_URL}
@@ -1241,7 +1301,7 @@ function Dashboard({ state, update, switchLang }) {
                   </Button>
                 )}
                 <ScopeControl {...{state,update,relatedCount}} />
-                <details className="export-menu curated-packs-menu" data-testid="curated-packs-menu">
+                <details className="curated-packs-menu" data-testid="curated-packs-menu">
                   <summary>{t("curatedPacks")} ⌄</summary>
                   <div
                     className="export-options curated-packs-options"
@@ -1443,7 +1503,7 @@ function Dashboard({ state, update, switchLang }) {
                 items={visible}
                 professionItems={disciplineItems}
                 allItems={scopeItems}
-                history={historyData}
+                history={historyData || { series: {} }}
                 generatedAt={dataset.metadata?.generated_at}
                 state={state}
                 update={update}
@@ -1645,8 +1705,20 @@ function Dashboard({ state, update, switchLang }) {
             items={items}
             lang={state.lang}
             theme={state.theme}
-            history={historyData}
+            history={historyData || { series: {} }}
             t={t}
+          />
+        </DeferredFeature>
+      )}
+      {recommendRequested && (
+        <DeferredFeature t={t}>
+          <RecommendSkillModal
+            open={recommendOpen}
+            onClose={() => setRecommendOpen(false)}
+            items={items}
+            lang={state.lang}
+            onOpenRepo={(repo) => update((s) => ({ ...s, repo }))}
+            onOpenCommunity={openCommunity}
           />
         </DeferredFeature>
       )}

@@ -270,3 +270,46 @@ test("Shushu mascot trigger transitions smoothly without DOM snap under standard
   await expect(panel).toHaveCount(0);
   await expect(roamToggle).toBeVisible();
 });
+
+test("lazy history loading, deep subskill search handoff, and zero-login recommend modal work end to end", async ({
+  page,
+}) => {
+  const historyRequests = [];
+  page.on("request", (req) => {
+    if (req.url().includes("/data/history.js")) historyRequests.push(req.url());
+  });
+  await page.addInitScript(() => {
+    window.__ARS_BOT_API = "local-only";
+  });
+  await page.setViewportSize({ width: 1280, height: 860 });
+  await page.goto("./");
+  await expect(page.getByTestId("repo-card").first()).toBeVisible();
+  expect(historyRequests).toHaveLength(0);
+
+  // 1. 首页大搜索框穿透检索合集仓库内的具体子技能（如 scanpy）
+  await page.locator("#searchInput").fill("scanpy");
+  const hitBadge = page.getByTestId("card-subskill-hit").first();
+  await expect(hitBadge).toBeVisible();
+  await expect(hitBadge).toContainText("scanpy");
+
+  // 点击卡片打开详情抽屉，子技能浏览器自动定位到 scanpy
+  await page.getByTestId("repo-card").first().click();
+  const drawer = page.getByRole("dialog");
+  await expect(drawer.getByTestId("subskills-search")).toHaveValue("scanpy");
+  await page.keyboard.press("Escape");
+
+  // 2. 点击导航栏「推荐 Skill」打开免登录弹窗，支持已收录提示与新项目一键提交
+  await page.getByRole("link", { name: "推荐 Skill", exact: true }).click();
+  const recModal = page.getByTestId("recommend-skill-modal");
+  await expect(recModal).toBeVisible();
+  const repoInput = recModal.getByTestId("recommend-repo-input");
+  await repoInput.fill("https://github.com/K-Dense-AI/scientific-agent-skills");
+  await expect(recModal.getByTestId("recommend-existing-hit")).toBeVisible();
+
+  await repoInput.fill("https://github.com/example-lab/new-research-skill");
+  await expect(recModal.getByTestId("recommend-existing-hit")).toHaveCount(0);
+  await recModal.getByTestId("recommend-submit-btn").click();
+  await expect(page.getByTestId("recommend-skill-done")).toContainText(
+    "example-lab/new-research-skill",
+  );
+});

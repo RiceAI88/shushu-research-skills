@@ -13,9 +13,15 @@ export function learnerLevel(item) { const entry=learnerLevels[item.repo];return
 export function growthState(item,history,generatedAt) {
  const value=item.star_delta_7d;
  if(!Number.isFinite(value))return 'unavailable';
- const cutoff=Date.parse(generatedAt)-7*86400000;
- const points=(history?.series?.[item.repo]||[]).filter(p=>Number.isFinite(p.stars)&&p.stars>=0&&Number.isFinite(Date.parse(p.date)));
- return Number.isFinite(cutoff)&&points.some(p=>Date.parse(p.date)<=cutoff)&&points.some(p=>Date.parse(p.date)>=cutoff+6*86400000)?(value===0?'zero':'value'):'short';
+ if(history&&typeof history==='object'&&'series' in history){
+  const cutoff=Date.parse(generatedAt)-7*86400000;
+  const points=(history.series?.[item.repo]||[]).filter(p=>Number.isFinite(p.stars)&&p.stars>=0&&Number.isFinite(Date.parse(p.date)));
+  return Number.isFinite(cutoff)&&points.some(p=>Date.parse(p.date)<=cutoff)&&points.some(p=>Date.parse(p.date)>=cutoff+6*86400000)?(value===0?'zero':'value'):'short';
+ }
+ if(typeof item.has_7d_baseline==='boolean'){
+  return item.has_7d_baseline?(value===0?'zero':'value'):'short';
+ }
+ return 'short';
 }
 export function updateDateLabel(date,lang,now=Date.now()) {
  const value=Date.parse(date);if(!Number.isFinite(value))return lang==='zh'?'更新日期见项目':'Update date: see project';

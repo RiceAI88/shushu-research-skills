@@ -181,6 +181,7 @@ test("skip link focuses the ranking without clearing shared filters", async ({
 }) => {
   await page.goto("./#view=table&q=zotero&task=read&sort=stars");
   await expect(page.getByRole("searchbox")).toHaveValue("zotero");
+  await expect(page.locator(".ant-table-row").first()).toBeVisible();
   const count = await page.locator(".ant-table-row").count();
   await page.locator(".skip-link").focus();
   await page.keyboard.press("Enter");

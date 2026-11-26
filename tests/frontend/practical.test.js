@@ -8,6 +8,9 @@ import {
   classifyUpdateRun,
 } from "../../src/practical.js";
 import worker, { checkRateLimit } from "../../scripts/shushu-bot-worker.js";
+import { parseGitHubRepoInput } from "../../src/domain.js";
+import { matchSubskillsForItem } from "../../src/subskillsLoader.js";
+import { growthState } from "../../src/projectFacts.js";
 const item = {
   repo: "sample/tool",
   description: "Original summary",
@@ -221,5 +224,38 @@ test("bot worker rejects requests without allowed Origin and evicts rate limits 
     checkRateLimit("recent-heavy-ip", t0 + 6500),
     false,
     "active heavy IP must remain rate-limited after bucket eviction",
+  );
+
+  // 验证站内免登录推荐接口与仓库地址解析、子技能穿透匹配及免 history.js 基线判定
+  assert.equal(
+    parseGitHubRepoInput("https://github.com/K-Dense-AI/scientific-agent-skills/tree/main"),
+    "K-Dense-AI/scientific-agent-skills",
+  );
+  assert.equal(parseGitHubRepoInput("owner/repo.git"), "owner/repo");
+  assert.equal(parseGitHubRepoInput("not-a-repo"), null);
+
+  const recReq = new Request("https://bot.riceai985.cc/api/recommend", {
+    method: "POST",
+    headers: { Origin: "https://riceai985.cc", "Content-Type": "text/plain" },
+    body: JSON.stringify({ repo: "example/new-skill", discipline: "medicine", reason: "好用" }),
+  });
+  const recRes = await worker.fetch(recReq, {});
+  assert.equal(recRes.status, 200);
+  assert.deepEqual(await recRes.json(), { ok: true, repo: "example/new-skill" });
+
+  const subHits = matchSubskillsForItem(
+    { subskills_list: [{ n: "scanpy", g: "bioinformatics" }, { n: "stata-did", g: "econ" }] },
+    "scanpy",
+  );
+  assert.equal(subHits.length, 1);
+  assert.equal(subHits[0].n, "scanpy");
+
+  assert.equal(
+    growthState({ repo: "a/b", star_delta_7d: 42, has_7d_baseline: true }, null, "2026-11-26T00:00:00Z"),
+    "value",
+  );
+  assert.equal(
+    growthState({ repo: "a/c", star_delta_7d: 15, has_7d_baseline: false }, null, "2026-11-26T00:00:00Z"),
+    "short",
   );
 });

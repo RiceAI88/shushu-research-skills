@@ -1,5 +1,6 @@
 import { ProjectFacts, GrowthValue } from "./ProjectFacts";
 import { SearchHighlight } from "./SearchHighlight";
+import { matchSubskillsForItem } from "../subskillsLoader";
 import { Panel } from "./Panel";
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import { Button, Space, Tag, Tooltip } from "antd";
@@ -353,6 +354,20 @@ export function RepositoryViews({
                   </div>
                 </div>
                 <SummaryText item={item} t={t} query={state.query} lang={state.lang} />
+                {state.query && (() => {
+                  const hits = matchSubskillsForItem(item, state.query);
+                  if (!hits.length) return null;
+                  const firstHit = hits[0].n;
+                  return (
+                    <div className="card-subskill-hit" data-testid="card-subskill-hit">
+                      <span>
+                        {state.lang === "zh"
+                          ? `🧩 命中子技能：${firstHit}${hits.length > 1 ? ` 等 ${hits.length} 项` : ""} ›`
+                          : `🧩 Matched sub-skill: ${firstHit}${hits.length > 1 ? ` +${hits.length - 1}` : ""} ›`}
+                      </span>
+                    </div>
+                  );
+                })()}
                 <ProjectFacts {...{item,state,t}} />
                 <div
                   className="card-info-footer"

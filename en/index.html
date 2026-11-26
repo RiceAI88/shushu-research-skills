@@ -133,6 +133,7 @@
       }
     </script>
     <script defer src="%BASE_URL%data/rankings.js"></script>
+    <meta name="ars-history-src" content="%BASE_URL%data/history.js" />
   </head>
   <body>
     <div id="root"></div>
@@ -140,12 +141,6 @@
       >请启用 JavaScript 查看排行榜。 / Enable JavaScript to view the
       ranking.</noscript
     >
-    <script
-      async
-      src="%BASE_URL%data/history.js"
-      onload="window.dispatchEvent(new Event('ars-history-loaded'));"
-      onerror="window.ACADEMIC_SKILLS_HISTORY={series:{}};window.dispatchEvent(new Event('ars-history-loaded'));"
-    ></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

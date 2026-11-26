@@ -117,6 +117,44 @@ export default {
     }
 
     const url = new URL(request.url);
+    if (request.method === "POST" && url.pathname === "/api/recommend") {
+      if (!isAllowedOrigin(origin)) {
+        return Response.json({ error: "Origin not allowed" }, { status: 403, headers });
+      }
+      const clientIp = request.headers.get("CF-Connecting-IP") || "anon";
+      if (!checkRateLimit(`rec:${clientIp}`)) {
+        return Response.json({ error: "提交太频繁，请稍后再试" }, { status: 429, headers });
+      }
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return Response.json({ error: "Invalid JSON" }, { status: 400, headers });
+      }
+      const slug = String(body?.repo || "").trim();
+      if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(slug) || slug.includes("..")) {
+        return Response.json({ error: "Invalid repository slug" }, { status: 400, headers });
+      }
+      const discipline = String(body?.discipline || "all").slice(0, 32);
+      const reason = String(body?.reason || "").trim().slice(0, 240);
+      // 若环境变量配置了 GITHUB_SUBMIT_TOKEN，自动在主仓库创建待审推荐 Issue
+      if (env.GITHUB_SUBMIT_TOKEN) {
+        await fetch("https://api.github.com/repos/RiceAI88/shushu-research-skills/issues", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${env.GITHUB_SUBMIT_TOKEN}`,
+            "User-Agent": "shushu-bot-worker",
+          },
+          body: JSON.stringify({
+            title: `[Recommend] ${slug}`,
+            body: `### GitHub 仓库\nhttps://github.com/${slug}\n\n### 学科分类\n${discipline}\n\n### 推荐理由\n${reason || "站内免登录提交"}`,
+          }),
+        }).catch(() => {});
+      }
+      return Response.json({ ok: true, repo: slug }, { status: 200, headers });
+    }
+
     if (request.method !== "POST" || (url.pathname !== "/api/chat" && url.pathname !== "/")) {
       return Response.json(
         { ok: true, service: "shushu-bot-worker", status: "ready" },

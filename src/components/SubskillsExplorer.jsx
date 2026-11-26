@@ -3,21 +3,12 @@ import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
 import { copyText } from "../clipboard";
 import { trackEvent } from "../analytics";
 import { useFeedback } from "./FeedbackProvider";
-
-let catalogPromise = null;
-function loadSubskillsCatalog() {
-  if (!catalogPromise) {
-    catalogPromise = import("../../config/subskills-catalog.json")
-      .then((m) => m.default || m)
-      .catch(() => ({ repos: {} }));
-  }
-  return catalogPromise;
-}
+import { loadSubskillsCatalog, matchSubskillsForItem } from "../subskillsLoader";
 
 /**
  * 面向多技能合集仓库的子技能目录浏览器：支持毫秒级搜索、点选复制调用词与直达官方 SKILL.md
  */
-export function SubskillsExplorer({ item, lang = "zh" }) {
+export function SubskillsExplorer({ item, lang = "zh", initialFilter = "" }) {
   const zh = lang === "zh";
   const message = useFeedback();
   const [catalog, setCatalog] = useState(null);
@@ -26,21 +17,30 @@ export function SubskillsExplorer({ item, lang = "zh" }) {
   const [copiedName, setCopiedName] = useState("");
 
   useEffect(() => {
-    setQuery("");
     setExpanded(false);
     setCopiedName("");
+    setQuery("");
   }, [item?.repo]);
 
   useEffect(() => {
     let alive = true;
     if ((item?.skills_count || 0) < 2) return undefined;
     loadSubskillsCatalog().then((data) => {
-      if (alive) setCatalog(data);
+      if (!alive) return;
+      setCatalog(data);
+      const extQuery = String(initialFilter || "").trim();
+      if (extQuery) {
+        const list = data?.repos?.[String(item?.repo || "").toLowerCase()]?.items || [];
+        const hits = matchSubskillsForItem({ subskills_list: list }, extQuery);
+        if (hits.length > 0 && hits.length < list.length) {
+          setQuery(extQuery);
+        }
+      }
     });
     return () => {
       alive = false;
     };
-  }, [item?.repo, item?.skills_count]);
+  }, [item?.repo, item?.skills_count, initialFilter]);
 
   const entry = catalog?.repos?.[String(item?.repo || "").toLowerCase()];
   const allSubskills = entry?.items || [];

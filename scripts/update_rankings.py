@@ -1784,13 +1784,55 @@ def _slim_js_item(item: Any) -> Any:
     return out
 
 
-def render_data_js(data: dict[str, Any]) -> str:
+def _has_7d_baseline(
+    repo: str,
+    history_series: dict[str, Any] | None,
+    generated_at: str | None,
+) -> bool | None:
+    """与前端 growthState 保持毫秒级一致的 7 日历史基线判定（避免首屏必须下载 537KB history.js）。"""
+    if not history_series or not generated_at or not repo:
+        return None
+    series_map = history_series.get("series") if isinstance(history_series, dict) else None
+    if not isinstance(series_map, dict):
+        return None
+    try:
+        gen_ms = datetime.fromisoformat(generated_at.replace("Z", "+00:00")).timestamp() * 1000
+    except ValueError:
+        return None
+    cutoff = gen_ms - 7 * 86400000
+    pts: list[float] = []
+    for p in series_map.get(repo) or []:
+        if not isinstance(p, dict):
+            continue
+        stars = p.get("stars")
+        day_str = p.get("date")
+        if isinstance(stars, (int, float)) and not isinstance(stars, bool) and stars >= 0 and isinstance(day_str, str):
+            try:
+                pts.append(datetime.fromisoformat(f"{day_str}T00:00:00+00:00").timestamp() * 1000)
+            except ValueError:
+                pass
+    return any(t <= cutoff for t in pts) and any(t >= cutoff + 6 * 86400000 for t in pts)
+
+
+def render_data_js(
+    data: dict[str, Any],
+    history_series: dict[str, Any] | None = None,
+) -> str:
     # Compact separators, strip backend-only collection metadata, and normalize
     # repeated enums/defaults hydrated by enrichItem() in src/practical.js
     # (full verbose schema remains intact in data/rankings.json).
+    generated_at = (data.get("metadata") or {}).get("generated_at")
+    slim_items = []
+    for item in data.get("items", []):
+        slim = _slim_js_item(item)
+        if isinstance(slim, dict) and slim.get("repo"):
+            has_base = _has_7d_baseline(slim["repo"], history_series, generated_at)
+            if has_base is not None:
+                slim["has_7d_baseline"] = has_base
+        slim_items.append(slim)
     slim_data = {
         **data,
-        "items": [_slim_js_item(item) for item in data.get("items", [])],
+        "items": slim_items,
     }
     payload = json.dumps(slim_data, ensure_ascii=False, separators=(",", ":"))
     return f"window.ACADEMIC_SKILLS_RANKINGS={payload};\n"
@@ -1804,10 +1846,11 @@ def render_history_js(history_payload: dict[str, Any]) -> str:
 def write_outputs(data: dict[str, Any], window_snapshot: dict[str, Any] | None = None) -> None:
     if isinstance(data.get("items"), list):
         attach_curated_uses(data["items"])
-    DATA_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    DATA_JS_PATH.write_text(render_data_js(data), encoding="utf-8")
     history = load_history_snapshots()
-    HISTORY_JS_PATH.write_text(render_history_js(render_history_series(history)), encoding="utf-8")
+    history_series = render_history_series(history)
+    DATA_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    DATA_JS_PATH.write_text(render_data_js(data, history_series=history_series), encoding="utf-8")
+    HISTORY_JS_PATH.write_text(render_history_js(history_series), encoding="utf-8")
     build_monthly_reports(history)
     render_csv(data["items"])
     README_PATH.write_text(render_readme(data, window_snapshot=window_snapshot), encoding="utf-8")

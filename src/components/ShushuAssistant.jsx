@@ -446,7 +446,9 @@ export default function ShushuAssistant({
         <span className="shushu-bot-promo-main">
           <span className="shushu-bot-promo-dot" aria-hidden="true" />
           <strong>
-            {zh ? "本站自营 · GPT / Codex 正规代充" : "Official GPT / Codex Top-up"}
+            {zh
+              ? "本站自营 · GPT / Claude / Gemini / Codex 代充"
+              : "Official GPT / Claude / Gemini / Codex Top-up"}
           </strong>
           <em>{zh ? "有账单 · 可开发票报销" : "Invoices available"}</em>
         </span>
