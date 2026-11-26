@@ -168,7 +168,7 @@ for (const lang of ["zh", "en"])
       await page.evaluate(() => document.documentElement.scrollWidth),
     ).toBe(320);
     await page.evaluate(() => scrollTo(0, 0));
-    await page.getByRole("tab").nth(1).click();
+    await page.locator(".page-tabs").getByRole("tab").nth(1).click();
     await expect(page.getByTestId("insights")).toBeVisible();
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth),

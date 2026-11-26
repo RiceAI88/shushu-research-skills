@@ -142,7 +142,7 @@ export function DisciplineSelector({ items, visible, state, update }) {
       <div className="discipline-selector-heading">
         <div className="discipline-selector-title"><h2 id="discipline-selector-title">{group ? <>{zh ? "我是 " : "For "}<em>{professionLabel(state, lang)}</em>{zh ? (state.major === "all" ? " 类专业的学生" : " 专业的学生") : " students"}</> : (zh ? "按专业寻找科研 Skills" : "Choose your discipline")}</h2><ActionPopover label={zh ? "分类说明" : "About classification"} lang={lang}><p>{zh ? "专业归属依据项目官方文档，数量按仓库去重。尚未核验专业归属的项目可在“全部”中查看。" : "Discipline labels are based on official documentation and count unique repositories. Projects awaiting discipline review remain in All."}</p></ActionPopover></div>
         <div className="discipline-heading-meta">
-          <span>{group ? (zh ? `当前结果 ${visible.length}：专业适用 ${specific} ＋ 通用 ${common}` : `Results ${visible.length}: ${specific} specialized + ${common} general`) : (zh ? "先选专业，再选你想完成的科研任务" : "Choose a discipline, then a research task")}</span>
+          <span>{group ? (zh ? `当前结果 ${visible.length}：专业适用 ${specific} ＋ 通用 ${common}` : `Results ${visible.length}: ${specific} specialized + ${common} general`) : (zh ? "按学科或论文阶段快速锁定适用工具" : "Filter by discipline or research stage")}</span>
           {group && (
             <label className="discipline-common-toggle">
               <span>{zh ? "包含通用" : "Include general"}</span>

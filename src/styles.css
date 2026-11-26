@@ -1608,7 +1608,7 @@ h1 em {
 .repository-card[data-motion="card"] { transition-property: border-color, background-color, box-shadow; }
 
 /* 论文阶段急救包（与上方学科门类面板无缝拼接为一体式定位工作台，严格左对齐与垂直居中） */
-.stage-quick-bar { margin: 0 0 14px; padding: 10px 24px 13px; border: 1px solid var(--prs-border); border-radius: 16px; background: var(--prs-panel); box-shadow: var(--prs-shadow-sm); }
+.stage-quick-bar { margin: 0 0 14px; padding: 9px 20px 11px; border: 1px solid var(--prs-border); border-radius: 16px; background: var(--prs-panel); box-shadow: var(--prs-shadow-sm); }
 .discipline-selector + .stage-quick-bar { margin-top: 0; border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
 .stage-quick-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .stage-quick-label { flex: 0 0 60px; display: inline-flex; align-items: center; height: 32px; font-size: 13px; line-height: 20px; font-weight: 400; color: var(--prs-muted); }

@@ -694,63 +694,67 @@ function Dashboard({ state, update, switchLang }) {
             </span>
             <span>{state.lang === "zh" ? "科研鼠鼠 · Skills 导航站" : "Research Hamster · Skills Directory"}</span>
           </a>
-          <Space size={8} wrap className="nav-actions">
-            <Segmented
-              aria-label="Language"
-              value={state.lang}
-              options={[
-                { label: "中文", value: "zh" },
-                { label: "EN", value: "en" },
-              ]}
-              onChange={(lang) => switchLang(lang)}
-            />
-            <Tooltip title={t("reportsLink")}>
+          <div className="nav-actions">
+            <div className="nav-primary-group">
+              <Tooltip title={t("reportsLink")}>
+                <Button
+                  aria-label={t("reportsLink")}
+                  icon={<CalendarOutlined aria-hidden="true" />}
+                  href={localFile("reports/")}
+                >
+                  {t("reportsLink")}
+                </Button>
+              </Tooltip>
               <Button
-                aria-label={t("reportsLink")}
-                icon={<CalendarOutlined aria-hidden="true" />}
-                href={localFile("reports/")}
+                href={`${REPOSITORY_URL}/issues/new?template=recommend-repo.yml`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
+                    e.preventDefault();
+                    setRecommendRequested(true);
+                    setRecommendOpen(true);
+                  }
+                }}
               >
-                {t("reportsLink")}
+                {state.lang === "zh" ? "推荐 Skill" : "Suggest a Skill"}
               </Button>
-            </Tooltip>
-            <Tooltip title={state.lang === "zh" ? "切换主题" : "Toggle theme"}>
+            </div>
+            <div className="nav-utility-group">
+              <Segmented
+                aria-label="Language"
+                value={state.lang}
+                options={[
+                  { label: "中文", value: "zh" },
+                  { label: "EN", value: "en" },
+                ]}
+                onChange={(lang) => switchLang(lang)}
+              />
+              <Tooltip title={state.lang === "zh" ? "切换主题" : "Toggle theme"}>
+                <Button
+                  aria-label="Toggle theme"
+                  data-testid="theme-toggle"
+                  icon={<BulbOutlined aria-hidden="true" />}
+                  onClick={() =>
+                    update((s) => ({
+                      ...s,
+                      theme: s.theme === "light" ? "dark" : "light",
+                    }))
+                  }
+                >
+                  {t("themeLabel")}
+                </Button>
+              </Tooltip>
               <Button
-                aria-label="Toggle theme"
-                data-testid="theme-toggle"
-                icon={<BulbOutlined aria-hidden="true" />}
-                onClick={() =>
-                  update((s) => ({
-                    ...s,
-                    theme: s.theme === "light" ? "dark" : "light",
-                  }))
-                }
+                icon={<GithubOutlined aria-hidden="true" />}
+                href={REPOSITORY_URL}
+                target="_blank"
+                rel="noreferrer"
               >
-                {t("themeLabel")}
+                GitHub
               </Button>
-            </Tooltip>
-            <Button
-              href={`${REPOSITORY_URL}/issues/new?template=recommend-repo.yml`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                  e.preventDefault();
-                  setRecommendRequested(true);
-                  setRecommendOpen(true);
-                }
-              }}
-            >
-              {state.lang === "zh" ? "推荐 Skill" : "Suggest a Skill"}
-            </Button>
-            <Button
-              icon={<GithubOutlined aria-hidden="true" />}
-              href={REPOSITORY_URL}
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </Button>
-          </Space>
+            </div>
+          </div>
         </Reveal>
         <section className="hero container">
           <div className="hero-top-grid">
@@ -979,7 +983,7 @@ function Dashboard({ state, update, switchLang }) {
         >
           <div className="stage-quick-row">
             <span className="stage-quick-label">
-              {state.lang === "zh" ? "急救场景" : "Quick stage"}
+              {state.lang === "zh" ? "阶段组合" : "Stage kits"}
             </span>
             <div className="stage-pill-list">
               {RESEARCH_STAGES.map((stage) => {
@@ -1196,23 +1200,66 @@ function Dashboard({ state, update, switchLang }) {
                   )}
                 </h2>
                 <div className="ranking-status-line">
-                  <span>
-                    {state.sort === 'fit' && state.discipline !== 'all' && <>{state.lang === 'zh' ? '专业适用优先 · ' : 'Discipline fit first · '}</>}
-                    {t(
-                      {
-                        fit: "rankByStars",
-                        rank: "rankByStars",
-                        stars: "rankByStars",
-                        installs: "rankByInstalls",
-                        trend: "sortTrend",
-                        updated: "sortUpdated",
-                        delta30: "sortDelta30",
-                        delta7: "sortDelta7",
-                        newest: "sortNewest",
-                      }[state.sort],
-                    )}
+                  <span className="ranking-sort-shortcuts" role="group" aria-label={t("sortLabel")}>
+                    <Button
+                      type="text"
+                      size="small"
+                      aria-pressed={["rank", "stars", "fit"].includes(state.sort)}
+                      onClick={() =>
+                        update((s) => ({
+                          ...s,
+                          sort: s.discipline !== "all" ? "fit" : "rank",
+                        }))
+                      }
+                    >
+                      Stars
+                    </Button>
+                    {[
+                      ["installs", "sortInstalls"],
+                      ["delta7", "sortDelta7"],
+                      ["newest", "sortNewest"],
+                    ].map(([sort, label]) => (
+                      <Button
+                        key={sort}
+                        type="text"
+                        size="small"
+                        aria-pressed={state.sort === sort}
+                        onClick={() =>
+                          update((s) => ({
+                            ...s,
+                            sort:
+                              s.sort === sort
+                                ? s.discipline !== "all"
+                                  ? "fit"
+                                  : "rank"
+                                : sort,
+                          }))
+                        }
+                      >
+                        {t(label)}
+                      </Button>
+                    ))}
                   </span>
-                  <span aria-hidden="true">·</span>
+                  {(state.sort === "fit" && state.discipline !== "all") ||
+                  ["trend", "updated", "delta30"].includes(state.sort) ? (
+                    <>
+                      <span aria-hidden="true">·</span>
+                      <span>
+                        {state.sort === "fit" && state.discipline !== "all"
+                          ? state.lang === "zh"
+                            ? "专业适用优先"
+                            : "Discipline fit first"
+                          : t(
+                              {
+                                trend: "sortTrend",
+                                updated: "sortUpdated",
+                                delta30: "sortDelta30",
+                              }[state.sort],
+                            )}
+                      </span>
+                    </>
+                  ) : null}
+                  <span className="ranking-status-sep" aria-hidden="true">·</span>
                   <UpdateStatus
                     generatedAt={dataset.metadata?.generated_at}
                     collection={dataset.metadata?.collection}
@@ -1228,23 +1275,6 @@ function Dashboard({ state, update, switchLang }) {
                   >
                     {t("dataOverview")} {overviewOpen ? "⌃" : "⌄"}
                   </Button>
-                  <span className="ranking-sort-shortcuts">
-                    {[
-                      ["installs", "sortInstalls"],
-                      ["delta7", "sortDelta7"],
-                      ["newest", "sortNewest"],
-                    ].map(([sort, label]) => (
-                      <Button
-                        key={sort}
-                        type="text"
-                        size="small"
-                        aria-pressed={state.sort === sort}
-                        onClick={() => update((s) => ({ ...s, sort }))}
-                      >
-                        {t(label)}
-                      </Button>
-                    ))}
-                  </span>
                 </div>
                 <section
                   id="data-overview"
@@ -1339,7 +1369,6 @@ function Dashboard({ state, update, switchLang }) {
                     ))}
                   </div>
                 </details>
-                <Button type="link" onClick={()=>setGuideSection("paths")}>{state.lang === "zh" ? "专业路径" : "Research paths"}</Button>
                 <details className="export-menu">
                   <summary>{t("exportMenu")} ⌄</summary>
                   <div
@@ -1558,15 +1587,22 @@ function Dashboard({ state, update, switchLang }) {
               </Tag>
             ))}
           </div>
-          <Tooltip title={t("compareTitle")}>
-            <Button
-              data-testid="open-compare"
-              icon={<SwapOutlined aria-hidden="true" />}
-              onClick={() => setCompareOpen(true)}
-            />
-          </Tooltip>
+          <Button
+            type="primary"
+            size="small"
+            className="compare-open-btn"
+            data-testid="open-compare"
+            icon={<SwapOutlined aria-hidden="true" />}
+            onClick={() => setCompareOpen(true)}
+          >
+            {state.lang === "zh" ? "开始对比" : "Compare"}
+          </Button>
           <Tooltip title={t("compareClear")}>
             <Button
+              size="small"
+              type="text"
+              className="compare-clear-btn"
+              aria-label={t("compareClear")}
               data-testid="clear-compare"
               icon={<CloseOutlined aria-hidden="true" />}
               onClick={() => update((s) => ({ ...s, compare: [] }))}
