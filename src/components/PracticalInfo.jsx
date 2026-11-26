@@ -2,38 +2,84 @@ import React from "react";
 import { SearchHighlight } from "./SearchHighlight";
 import { Button, Space, Tag, Tooltip } from "antd";
 import { CopyOutlined } from "@ant-design/icons";
-import { AGENT_PLATFORMS, detectAgents, safeExternalUrl } from "../domain";
+import {
+  AGENT_PLATFORMS,
+  detectAgents,
+  isWebAiReady,
+  safeExternalUrl,
+} from "../domain";
 import { EDITORIAL_CONTENT, installationFor } from "../practical";
 import { useFeedback } from "./FeedbackProvider";
 import { copyText } from "../clipboard";
 const HAS_CHINESE_RE = /[\u4e00-\u9fff]/;
 
+// 在无搜索词高亮时为中英文粘连文本补充标准半角间距（如 "符合nature论文" -> "符合 nature 论文"）
+function polishZhSpacing(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/([\u4e00-\u9fff])([A-Za-z0-9])/g, "$1 $2")
+    .replace(/([A-Za-z0-9])([\u4e00-\u9fff])/g, "$1 $2");
+}
+
 export function SummaryText({ item, t, query = "", full = false, lang = "" }) {
-  const showCuratedZh =
-    lang === "zh" &&
-    Boolean(item.curated_use_zh) &&
-    !HAS_CHINESE_RE.test(item.description || "");
-  return (
-    <div
-      className={`practical-description${showCuratedZh ? " has-curated-use" : ""}`}
-    >
-      {showCuratedZh && (
-        <div
-          className="curated-use-line"
-          data-testid="card-cn-summary"
-          title={full ? undefined : item.curated_use_zh}
-        >
-          <SearchHighlight text={item.curated_use_zh} query={query} />
-        </div>
-      )}
-      <p
-        className={full ? "description-full" : "description-clamp"}
-        title={full ? undefined : item.description}
+  const rawDesc = item.description || "";
+  const curatedZh = item.curated_use_zh || "";
+  const hasNativeZh = HAS_CHINESE_RE.test(rawDesc);
+
+  // 详情抽屉展开态：保留上方中文导读 + 下方 GitHub 作者英文原文双层对照
+  if (full) {
+    const showCuratedZh = lang === "zh" && Boolean(curatedZh) && !hasNativeZh;
+    return (
+      <div
+        className={`practical-description${showCuratedZh ? " has-curated-use" : ""}`}
       >
-        <SearchHighlight
-          text={item.description || t("noDescription")}
-          query={query}
-        />
+        {showCuratedZh && (
+          <div className="curated-use-line" data-testid="card-cn-summary">
+            <SearchHighlight text={curatedZh} query={query} />
+          </div>
+        )}
+        <p className="description-full">
+          <SearchHighlight text={rawDesc || t("noDescription")} query={query} />
+        </p>
+      </div>
+    );
+  }
+
+  // 卡片与表格紧凑态：中文界面统一呈现单层柔和字重简介，避免粗体打架与英文半句截断
+  if (lang === "zh") {
+    const preferredZh = !hasNativeZh && curatedZh ? curatedZh : rawDesc || curatedZh;
+    const q = query.trim().toLowerCase();
+    const fallbackToRawForQuery =
+      q &&
+      rawDesc &&
+      !preferredZh.toLowerCase().includes(q) &&
+      rawDesc.toLowerCase().includes(q);
+    const chosen = fallbackToRawForQuery
+      ? rawDesc
+      : q
+        ? preferredZh
+        : polishZhSpacing(preferredZh);
+    const hoverTitle =
+      curatedZh && rawDesc && curatedZh !== rawDesc
+        ? `${polishZhSpacing(curatedZh)}\n${rawDesc}`
+        : chosen || t("noDescription");
+    return (
+      <div className="practical-description">
+        <p
+          className="description-clamp"
+          data-testid="card-cn-summary"
+          title={hoverTitle}
+        >
+          <SearchHighlight text={chosen || t("noDescription")} query={query} />
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="practical-description">
+      <p className="description-clamp" title={rawDesc}>
+        <SearchHighlight text={rawDesc || t("noDescription")} query={query} />
       </p>
     </div>
   );
@@ -111,15 +157,31 @@ export function PlatformTags({ item, t, compact = false }) {
     </Tooltip>
   );
 }
-export function InstallationMode({ item, t, short = false, cardEntry = false }) {
+export function InstallationMode({
+  item,
+  t,
+  lang = "zh",
+  short = false,
+  cardEntry = false,
+}) {
   if (cardEntry) {
+    if (!isWebAiReady(item)) return null;
+    const zh = lang === "zh";
     return (
-      <Tag
-        className="install-mode install-mode-entry"
-        data-testid="installation-mode"
+      <Tooltip
+        title={
+          zh
+            ? "免命令行安装 · 可直接复制到网页版 AI 对话使用"
+            : "Zero-install · Works directly in Web AI chat"
+        }
       >
-        {t("installPendingShort")}
-      </Tag>
+        <span
+          className="card-web-badge"
+          data-testid="installation-mode"
+        >
+          {zh ? "网页直用" : "Web AI"}
+        </span>
+      </Tooltip>
     );
   }
   const installation = installationFor(item);

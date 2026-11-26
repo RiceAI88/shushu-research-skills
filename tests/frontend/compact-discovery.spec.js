@@ -19,7 +19,7 @@ test("compact first screen groups stats below controls and exposes visitor copy"
     .locator(".statistics")
     .evaluate((e) => e.getBoundingClientRect().top);
   expect(statsY).toBeGreaterThanOrEqual(filterY - 2);
-  const adHeight = (await page.locator(".partner-top-strip").boundingBox()).height + 16;
+  const adHeight = (await page.locator(".hero-poster-wrap").boundingBox()).height + 16;
   const dailyList = page.locator(".daily-arrivals-list");
   const dailyListHeight = (await dailyList.count())
     ? (await dailyList.boundingBox()).height + 8
@@ -186,7 +186,7 @@ test("mobile ranking stays compact apart from the approved leading ad, with task
   expect(await pills.evaluate((el) => el.scrollWidth > el.clientWidth)).toBe(
     true,
   );
-  const adHeight = (await page.locator(".partner-top-strip").boundingBox()).height + 16;
+  const adHeight = (await page.locator(".hero-poster-wrap").boundingBox()).height + 16;
   const dailyList = page.locator(".daily-arrivals-list");
   const dailyListHeight = (await dailyList.count())
     ? (await dailyList.boundingBox()).height + 8

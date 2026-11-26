@@ -1,15 +1,99 @@
-import React from 'react';
-import {Tooltip} from 'antd';
-import {sceneLabelsFor} from '../domain';
-import {fitLabels,learnerLevel,growthState,updateDateLabel} from '../projectFacts';
-export function ProjectFacts({item,state,t}) {
- const zh=state.lang==='zh',fit=fitLabels(item,state),tasks=sceneLabelsFor(item,t),level=learnerLevel(item);
- const range=fit?.kind==='common'?(zh?'跨专业通用':'Cross-disciplinary'):fit?.labels.length?`${zh?'专业适用':'For'} · ${fit.labels.slice(0,2).join(' / ')}${fit.labels.length>2?` +${fit.labels.length-2}`:''}`:null;
- const taskText=tasks.length?tasks.join(' · '):(zh?'未分类':'Unclassified');
- return <div className="project-facts">
-  <div className="project-fit-line">{range && <span className={`discipline-card-fit fit-${fit.kind}`} title={fit.labels?.join(' / ')}>{range}</span>}<span data-testid="card-tasks" className="card-tasks" title={taskText}>{zh?'适合：':'Tasks: '}{taskText}</span></div>
-  <div className="project-facts-meta"><time data-testid="card-updated" dateTime={item.last_push_date} title={`${zh?'最近提交日期':'Last push date'}: ${item.last_push_date||'—'} (UTC)`}>{updateDateLabel(item.last_push_date,state.lang)}</time>{level && <Tooltip trigger={['hover','focus','click']} title={`${level.quote} · ${level.source_url}`}><span className="learner-level" tabIndex={0} onClick={e=>e.stopPropagation()}>{level.levels.map(id=>({undergraduate:zh?'本科':'Undergrad',postgraduate:zh?'硕博':'Postgrad',doctoral:zh?'博士':'PhD',masters:zh?'硕士':'Master'}[id])).filter(Boolean).join(' / ')}</span></Tooltip>}</div>
- </div>;
+import React from "react";
+import { Tooltip } from "antd";
+import { orderedSceneLabelsFor } from "../domain";
+import { fitLabels, learnerLevel, growthState } from "../projectFacts";
+
+// 按完整词与剩余计数格式化紧凑胶囊文案，彻底避免半个词被省略号截断
+function compactLabels(list, maxItems, maxPairChars, separator = " · ") {
+  if (!list.length) return "";
+  const count =
+    list.length >= 2 &&
+    maxItems >= 2 &&
+    list[0].length + list[1].length <= maxPairChars
+      ? 2
+      : 1;
+  const shown = list.slice(0, count);
+  const rest = list.length - shown.length;
+  return `${shown.join(separator)}${rest > 0 ? ` +${rest}` : ""}`;
+}
+
+export function ProjectFacts({ item, state, t }) {
+  const zh = state.lang === "zh";
+  const fit = fitLabels(item, state);
+  const tasks = orderedSceneLabelsFor(item, t, state.task);
+  const level = learnerLevel(item);
+
+  const range =
+    fit?.kind === "common"
+      ? zh
+        ? "跨专业通用"
+        : "General"
+      : fit?.labels?.length
+        ? compactLabels(fit.labels, 2, zh ? 8 : 16, " / ")
+        : null;
+  const fitTooltip =
+    fit?.kind === "specific" && fit.labels?.length
+      ? `${zh ? "专业适用：" : "Disciplines: "}${fit.labels.join(" / ")}`
+      : null;
+
+  const maxTaskItems = range && range.length > (zh ? 9 : 14) ? 1 : 2;
+  const taskSummary = tasks.length
+    ? compactLabels(tasks, maxTaskItems, zh ? 8 : 18, " · ")
+    : zh
+      ? "未分类"
+      : "Unclassified";
+  const taskTooltip = tasks.length
+    ? `${zh ? "适用场景：" : "Tasks: "}${tasks.join(" · ")}`
+    : taskSummary;
+
+  return (
+    <div className="project-facts">
+      <div className="project-fit-line">
+        {range &&
+          (fitTooltip ? (
+            <Tooltip title={fitTooltip}>
+              <span className={`discipline-card-fit fit-${fit.kind}`}>
+                {range}
+              </span>
+            </Tooltip>
+          ) : (
+            <span className={`discipline-card-fit fit-${fit.kind}`}>
+              {range}
+            </span>
+          ))}
+        <Tooltip title={taskTooltip}>
+          <span data-testid="card-tasks" className="card-tasks">
+            {taskSummary}
+          </span>
+        </Tooltip>
+        {level && !range && (
+          <Tooltip
+            trigger={["hover", "focus", "click"]}
+            title={`${level.quote} · ${level.source_url}`}
+          >
+            <span
+              className="learner-level"
+              tabIndex={0}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {level.levels
+                .map(
+                  (id) =>
+                    ({
+                      undergraduate: zh ? "本科" : "Undergrad",
+                      postgraduate: zh ? "硕博" : "Postgrad",
+                      doctoral: zh ? "博士" : "PhD",
+                      masters: zh ? "硕士" : "Master",
+                    })[id],
+                )
+                .filter(Boolean)
+                .join(" / ")}
+            </span>
+          </Tooltip>
+        )}
+      </div>
+    </div>
+  );
 }
 export function GrowthValue({item,history,generatedAt,lang,fmt,withPeriod=false}) {
  const zh=lang==='zh',status=growthState(item,history,generatedAt);

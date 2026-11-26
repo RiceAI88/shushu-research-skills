@@ -2243,6 +2243,24 @@ a:focus-visible,
   gap: 6px;
   min-width: 0;
 }
+.card-top-updated {
+  font-size: 11.5px;
+  line-height: 18px;
+  color: var(--prs-muted);
+  white-space: nowrap;
+}
+.card-web-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 550;
+  background: var(--prs-tint);
+  color: var(--prs-primary);
+  white-space: nowrap;
+}
 .card-rank-group .install-mode {
   max-width: 120px;
   padding-inline: 6px;
@@ -3386,9 +3404,9 @@ a:focus-visible,
   opacity: 0.45;
 }
 .project-facts {
-  margin: 6px 0 4px;
+  margin: 4px 0 6px;
   font-size: 12px;
-  line-height: 1.55;
+  line-height: 1.5;
   color: var(--prs-muted);
 }
 .project-fit-line {
@@ -3398,15 +3416,17 @@ a:focus-visible,
   min-width: 0;
 }
 .project-fit-line .discipline-card-fit {
-  flex-shrink: 0;
-  max-width: 50%;
+  flex: 0 1 auto;
+  max-width: 58%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: 0;
+  cursor: default;
 }
 .card-tasks {
   display: inline-block;
+  flex: 0 1 auto;
   min-width: 0;
   padding: 2px 8px;
   border-radius: 6px;
@@ -3415,6 +3435,7 @@ a:focus-visible,
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: default;
 }
 .project-facts-meta {
   display: flex;
@@ -4175,24 +4196,28 @@ a:focus-visible,
   }
 }
 
-/* Style A: left emerald-bar curated Chinese summary above English original description */
+/* 首页卡片简介统一为单层柔和两行正文，避免与仓库标题争抢粗体视觉焦点 */
 .repository-card .practical-description {
-  height: 62px;
-  margin: 8px 0;
+  height: 42px;
+  min-height: 42px;
+  margin: 6px 0 8px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   overflow: hidden;
 }
-.repository-card .practical-description:not(.has-curated-use) .description-clamp {
-  -webkit-line-clamp: 3;
-  line-height: 20.5px;
-  height: auto;
-  max-height: 62px;
+.repository-card .practical-description .description-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 21px;
+  height: 42px;
+  max-height: 42px;
   margin: 0;
-}
-.repository-card .practical-description.has-curated-use {
-  gap: 5px;
+  font-size: 13.5px;
+  font-weight: 450;
+  color: var(--prs-body);
+  overflow: hidden;
 }
 .curated-use-line {
   border-left: 0;
@@ -4206,15 +4231,6 @@ a:focus-visible,
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-.repository-card .practical-description.has-curated-use .description-clamp {
-  color: var(--prs-muted);
-  font-size: 12.5px;
-  line-height: 18px;
-  height: 18px;
-  min-height: 18px;
-  -webkit-line-clamp: 1;
-  margin: 0;
 }
 
 /* Style unification: Table view curated Chinese summary & refined dark-mode medal/badge */

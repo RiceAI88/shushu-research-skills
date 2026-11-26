@@ -1,4 +1,5 @@
 import { ProjectFacts, GrowthValue } from "./ProjectFacts";
+import { updateDateLabel } from "../projectFacts";
 import { SearchHighlight } from "./SearchHighlight";
 import { matchSubskillsForItem } from "../subskillsLoader";
 import { Panel } from "./Panel";
@@ -295,22 +296,36 @@ export function RepositoryViews({
                     >
                       {String(item.rank).padStart(2, "0")}
                     </span>
-                    {item.new_today && (
-                      <Tooltip
-                        title={t("dailyBadge")}
-                        trigger={["hover", "focus"]}
-                      >
-                        <span
-                          className="daily-new-badge"
-                          tabIndex={0}
-                          aria-label={t("dailyBadge")}
-                        >
-                          {t("newShort")}
-                        </span>
-                      </Tooltip>
-                    )}
-                    <InstallationMode item={item} t={t} short cardEntry />
-                  </div>
+                     {item.new_today && (
+                       <Tooltip
+                         title={t("dailyBadge")}
+                         trigger={["hover", "focus"]}
+                       >
+                         <span
+                           className="daily-new-badge"
+                           tabIndex={0}
+                           aria-label={t("dailyBadge")}
+                         >
+                           {t("newShort")}
+                         </span>
+                       </Tooltip>
+                     )}
+                     <time
+                       data-testid="card-updated"
+                       className="card-top-updated"
+                       dateTime={item.last_push_date}
+                       title={`${state.lang === "zh" ? "最近提交日期" : "Last push date"}: ${item.last_push_date || "—"} (UTC)`}
+                     >
+                       {updateDateLabel(item.last_push_date, state.lang)}
+                     </time>
+                     <InstallationMode
+                       item={item}
+                       t={t}
+                       lang={state.lang}
+                       short
+                       cardEntry
+                     />
+                   </div>
                   <div
                     className={`card-actions${state.favorites.includes(item.repo) || state.compare.includes(item.repo) ? " has-selection" : ""}`}
                   >
