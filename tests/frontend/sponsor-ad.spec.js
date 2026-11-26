@@ -95,3 +95,17 @@ test("mobile English dark poster ad stays readable and does not repeat when load
     ),
   ).toBe(true);
 });
+
+test("hero poster auto-rotates between official top-up and Zhi1ke AI even with reduced motion", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.addInitScript(() => {
+    window.__ARS_POSTER_ROTATE_MS = 600;
+  });
+  await page.goto("./#view=card");
+  const ad = page.getByTestId("hero-poster-ad");
+  await expect(ad.getByTestId("poster-slide-recharge")).toBeVisible();
+  await expect(ad.getByTestId("poster-slide-zhi1ke")).toBeVisible({ timeout: 2500 });
+  await expect(ad.getByTestId("poster-slide-recharge")).toBeVisible({ timeout: 2500 });
+});

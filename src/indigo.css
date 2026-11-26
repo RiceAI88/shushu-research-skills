@@ -1275,6 +1275,8 @@
   gap: 5px;
 }
 .hero-poster-dot {
+  position: relative;
+  overflow: hidden;
   width: 7px;
   height: 5px;
   padding: 0;
@@ -1288,13 +1290,43 @@
   background: #334155;
 }
 .hero-poster-dot.is-active {
-  width: 16px;
+  width: 22px;
+  background: rgba(148, 163, 184, 0.28);
 }
-.hero-poster-dot.is-active.is-warm {
+.hero-poster-dot.is-active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform-origin: left center;
+  animation: heroPosterProgress var(--poster-rotate-ms, 4500ms) linear forwards;
+}
+.hero-poster-wrap.is-paused .hero-poster-dot.is-active::after {
+  animation-play-state: paused;
+}
+.hero-poster-dot.is-active.is-warm::after {
   background: var(--prs-warm);
 }
-.hero-poster-dot.is-active.is-jade {
+.hero-poster-dot.is-active.is-jade::after {
   background: var(--prs-primary);
+}
+@keyframes heroPosterProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes heroPosterFade {
+  from {
+    opacity: 0.45;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .hero-poster-card {
   position: relative;
@@ -1306,7 +1338,13 @@
   padding: 15px 18px 15px 20px;
   border-radius: 14px;
   text-decoration: none;
+  animation: heroPosterFade 240ms ease-out;
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-poster-card {
+    animation: none;
+  }
 }
 .hero-poster-card.is-warm {
   border: 1px solid #f4cbb3;

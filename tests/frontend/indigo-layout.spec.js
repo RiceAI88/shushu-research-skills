@@ -92,7 +92,7 @@ for (const width of [1280, 390])
     expect(box.y + box.height).toBeLessThanOrEqual(firstCardTop + 1);
     await expect(ad.getByRole("link")).toHaveAttribute(
       "href",
-      "https://catfk.com/shop/1991",
+      /https:\/\/(catfk\.com\/shop\/1991|zhi1ke\.com\?pic=6PEB)/,
     );
     expect(
       await page.evaluate(

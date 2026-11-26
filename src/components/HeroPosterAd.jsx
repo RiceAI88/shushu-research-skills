@@ -4,28 +4,29 @@ import zhi1keLogo from "../assets/zhi1ke-logo.png";
 
 const RECHARGE_URL = "https://catfk.com/shop/1991";
 const ZHI1KE_URL = "https://zhi1ke.com?pic=6PEB";
-const ROTATE_MS = 6500;
+const ROTATE_MS = 4500;
 
 /**
  * 首屏标题右侧高辨识度带图海报广告窗（改良版 1B）：
- * - 内置矢量流光丝带底纹插画与平台矢量图标（ChatGPT / Claude / Gemini / Codex + 智一刻工作台），视网膜屏无损清晰且零额外图片请求阻塞
- * - 支持双业务自动柔和轮播 + 顶部指示器手动秒切（悬停/聚焦自动暂停，遵循系统减弱动态效果偏好）
+ * - 内置矢量流光丝带底纹插画与平台矢量图标（ChatGPT / Claude / Gemini / Codex + 智一刻工作台）
+ * - 默认每 4.5 秒自动轮播切换（不受系统减弱动画开关阻断，确保双广告位稳定曝光），顶部胶囊内置读秒进度条，悬停卡片主体自动暂停
  */
-export function HeroPosterAd({ lang = "zh", hidden = false }) {
+export function HeroPosterAd({ lang = "zh", hidden = false, rotateMs = ROTATE_MS }) {
   const zh = lang !== "en";
   const [activeIdx, setActiveIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    if (paused || hidden || typeof window === "undefined") return undefined;
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-      return undefined;
-    }
-    const timer = window.setInterval(() => {
+    if (hovered || hidden || typeof window === "undefined") return undefined;
+    const ms =
+      Number.isFinite(window.__ARS_POSTER_ROTATE_MS) && window.__ARS_POSTER_ROTATE_MS > 0
+        ? window.__ARS_POSTER_ROTATE_MS
+        : rotateMs;
+    const timer = window.setTimeout(() => {
       setActiveIdx((prev) => (prev + 1) % 2);
-    }, ROTATE_MS);
-    return () => window.clearInterval(timer);
-  }, [paused, hidden]);
+    }, ms);
+    return () => window.clearTimeout(timer);
+  }, [activeIdx, hovered, hidden, rotateMs]);
 
   if (hidden) return null;
 
@@ -33,13 +34,10 @@ export function HeroPosterAd({ lang = "zh", hidden = false }) {
 
   return (
     <aside
-      className="hero-poster-wrap"
+      className={`hero-poster-wrap${hovered ? " is-paused" : ""}`}
+      style={{ "--poster-rotate-ms": `${rotateMs}ms` }}
       aria-label={zh ? "赞助与自营服务推荐" : "Partner & official services"}
       data-testid="hero-poster-ad"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
     >
       <div className="hero-poster-topbar">
         <span className={`hero-poster-kicker${isRecharge ? " is-warm" : " is-jade"}`}>
@@ -80,7 +78,10 @@ export function HeroPosterAd({ lang = "zh", hidden = false }) {
             aria-label={zh ? "查看 AI 订阅代充海报" : "Show AI subscription top-up"}
             className={`hero-poster-dot${activeIdx === 0 ? " is-active is-warm" : ""}`}
             data-testid="poster-tab-recharge"
-            onClick={() => setActiveIdx(0)}
+            onClick={() => {
+              setHovered(false);
+              setActiveIdx(0);
+            }}
           />
           <button
             type="button"
@@ -89,7 +90,10 @@ export function HeroPosterAd({ lang = "zh", hidden = false }) {
             aria-label={zh ? "查看智一刻 AI 海报" : "Show Zhi1ke AI studio"}
             className={`hero-poster-dot${activeIdx === 1 ? " is-active is-jade" : ""}`}
             data-testid="poster-tab-zhi1ke"
-            onClick={() => setActiveIdx(1)}
+            onClick={() => {
+              setHovered(false);
+              setActiveIdx(1);
+            }}
           />
         </div>
       </div>
@@ -102,6 +106,8 @@ export function HeroPosterAd({ lang = "zh", hidden = false }) {
           target="_blank"
           rel="sponsored noopener noreferrer"
           data-testid="poster-slide-recharge"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
           onClick={() => trackEvent("click_recharge", { slot: "hero_poster" })}
         >
           {/* 暖橙流光丝带矢量海报底图 */}
@@ -205,6 +211,8 @@ export function HeroPosterAd({ lang = "zh", hidden = false }) {
           target="_blank"
           rel="sponsored noopener noreferrer"
           data-testid="poster-slide-zhi1ke"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
           onClick={() => trackEvent("click_zhi1ke", { slot: "hero_poster" })}
         >
           {/* 翠绿流光丝带矢量海报底图 */}
