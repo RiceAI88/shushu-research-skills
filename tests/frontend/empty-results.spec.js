@@ -5,7 +5,7 @@ test("empty search shows guidance near the filters without promotions", async ({
   const empty = page.getByTestId("ranking-empty");
   await expect(empty).toBeVisible();
   await expect(empty).toContainText("没有找到与「zzzqqq-no-match」相关的项目");
-  await expect(page.getByTestId("zhi1ke-ad")).toHaveCount(0);
+  await expect(page.getByTestId("hero-poster-ad")).toHaveCount(0);
   await expect(page.getByTestId("daily-arrivals")).toHaveCount(0);
   // Guidance must start inside the first viewport on desktop.
   const box = await empty.boundingBox();

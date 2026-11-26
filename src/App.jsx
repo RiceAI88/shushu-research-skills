@@ -9,6 +9,7 @@ import { SlidingTaskList } from "./components/SlidingTaskList";
 import { Reveal, useSiteReducedMotion } from "./components/SiteMotion";
 import { DailyArrivals } from "./components/DailyArrivals";
 import { RechargeAd } from "./components/RechargeAd";
+import { HeroPosterAd } from "./components/HeroPosterAd";
 import { BackToTop } from "./components/BackToTop";
 import { trackEvent } from "./analytics";
 import { SearchBox } from "./components/SearchBox";
@@ -705,39 +706,45 @@ function Dashboard({ state, update, switchLang }) {
           <RechargeAd t={t} />
         </Reveal>
         <section className="hero container">
-          <div className="hero-copy">
-            <div className="hero-capsule">
-              <Button
-                className="beginner-entry"
-                onClick={() => setGuideSection("basics")}
-              >
-                {state.lang === "zh" ? "30 秒看懂 Skill" : "Skills in 30 seconds"}
-              </Button>
-              <span className="hero-capsule-sep" aria-hidden="true">
-                ·
-              </span>
-              <button
-                type="button"
-                className="hero-capsule-path"
-                onClick={() => setGuideSection("paths")}
-              >
-                {state.lang === "zh" ? "专业科研路径 ›" : "Research paths ›"}
-              </button>
+          <div className="hero-top-grid">
+            <div className="hero-copy">
+              <div className="hero-capsule">
+                <Button
+                  className="beginner-entry"
+                  onClick={() => setGuideSection("basics")}
+                >
+                  {state.lang === "zh" ? "30 秒看懂 Skill" : "Skills in 30 seconds"}
+                </Button>
+                <span className="hero-capsule-sep" aria-hidden="true">
+                  ·
+                </span>
+                <button
+                  type="button"
+                  className="hero-capsule-path"
+                  onClick={() => setGuideSection("paths")}
+                >
+                  {state.lang === "zh" ? "专业科研路径 ›" : "Research paths ›"}
+                </button>
+              </div>
+              <Reveal as="h1" kind="hero" tabIndex={-1}>
+                {state.lang === "zh" ? (
+                  <>
+                    找到适合你专业的<em>科研 Skills</em>
+                  </>
+                ) : (
+                  <>
+                    Find research <em>Skills for your discipline</em>
+                  </>
+                )}
+              </Reveal>
+              <Reveal as="p" kind="hero" order={1} className="hero-subtitle">
+                {t("heroSubtitle")}
+              </Reveal>
             </div>
-            <Reveal as="h1" kind="hero" tabIndex={-1}>
-              {state.lang === "zh" ? (
-                <>
-                  找到适合你专业的<em>科研 Skills</em>
-                </>
-              ) : (
-                <>
-                  Find research <em>Skills for your discipline</em>
-                </>
-              )}
-            </Reveal>
-            <Reveal as="p" kind="hero" order={1} className="hero-subtitle">
-              {t("heroSubtitle")}
-            </Reveal>
+            <HeroPosterAd
+              lang={state.lang}
+              hidden={Boolean(state.query && visible.length === 0)}
+            />
           </div>
           <div className="hero-toolbar">
             <div

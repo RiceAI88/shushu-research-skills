@@ -1,6 +1,4 @@
 import { ProjectFacts, GrowthValue } from "./ProjectFacts";
-import { Zhi1keAd } from "./Zhi1keAd";
-import { SponsorRail } from "./SponsorRail";
 import { SearchHighlight } from "./SearchHighlight";
 import { Panel } from "./Panel";
 import React, { Suspense, lazy, useEffect, useState } from "react";
@@ -264,18 +262,9 @@ export function RepositoryViews({
         />
       </Suspense>
     );
-  const partnerStrip = (
-    <>
-      <div className="partner-top-strip">
-        <Zhi1keAd t={t} lang={state.lang} />
-      </div>
-      <SponsorRail lang={state.lang} onOpenCommunity={onOpenCommunity} />
-    </>
-  );
   if (state.view === "card")
     return (
       <>
-        {partnerStrip}
         <div className="repository-grid">
           {entries.map((item, index) => (
             <React.Fragment key={item.repo}>
@@ -390,7 +379,6 @@ export function RepositoryViews({
     );
   return (
     <>
-      {partnerStrip}
       <DeferredFeature
         t={t}
         loadingFallback={<TableLoadingFallback lang={state.lang} />}

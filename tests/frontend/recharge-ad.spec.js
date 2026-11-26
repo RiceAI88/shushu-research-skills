@@ -24,7 +24,7 @@ for (const width of [1280, 390])
     expect(box.y).toBeLessThan((await page.locator("h1").boundingBox()).y);
     expect(box.width).toBeLessThanOrEqual(280);
     expect(box.height).toBeLessThanOrEqual(80);
-    await expect(page.getByTestId("zhi1ke-ad")).toHaveCount(1);
+    await expect(page.getByTestId("hero-poster-ad")).toHaveCount(1);
     await page.getByTestId("load-more").click();
     await expect(page.getByTestId("repo-card")).toHaveCount(60);
     await expect(ad).toHaveCount(1);

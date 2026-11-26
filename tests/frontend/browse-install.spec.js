@@ -197,14 +197,14 @@ for (const view of ["card", "table"])
   }) => {
     await page.goto(`./#view=${view}`);
     await expect(page.getByTestId("gpt-recharge-ad")).not.toContainText("广告");
-    const ad = page.getByTestId("zhi1ke-ad");
+    const ad = page.getByTestId("hero-poster-ad");
     await expect(ad).toHaveCount(1);
     const entrySelector =
       view === "card" ? '[data-testid="repo-card"]' : ".ant-table-row";
     await expect(page.locator(entrySelector).first()).toBeVisible();
     const result = await page.evaluate((selector) => {
       const ad = document
-        .querySelector('[data-testid="zhi1ke-ad"]')
+        .querySelector('[data-testid="hero-poster-ad"]')
         .getBoundingClientRect();
       const first = document.querySelector(selector).getBoundingClientRect();
       return {
