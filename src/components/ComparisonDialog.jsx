@@ -1,6 +1,7 @@
 import { installationFor, installMetricFor, reviewedInstallSnapshot } from "../practical";
 import React from "react";
 import { Modal, Tag, Tooltip } from "antd";
+import { DownloadOutlined, StarOutlined } from "@ant-design/icons";
 import { ComparisonChart } from "./TrendCharts";
 import { PlatformTags } from "./PracticalInfo";
 import { InstallationActions } from "./InstallationActions";
@@ -195,14 +196,32 @@ export default function ComparisonDialog({
                       )}
                     </div>
                     <div className="comparison-col-metrics">
-                      <span>★ {fmt(item.stars)}</span>
+                      <Tooltip
+                        title={
+                          lang === "zh"
+                            ? `GitHub 星标（Stars）：${fmt(item.stars)}`
+                            : `GitHub Stars: ${fmt(item.stars)}`
+                        }
+                      >
+                        <span className="comparison-col-stars">
+                          <StarOutlined
+                            className="card-metric-icon"
+                            aria-hidden="true"
+                          />{" "}
+                          {fmt(item.stars)}
+                        </span>
+                      </Tooltip>
                       {(() => {
                         const info = installMetricFor(item, lang);
                         if (!info) return null;
                         return (
                           <Tooltip title={info.tooltip}>
                             <span className="comparison-col-installs">
-                              ↓ {info.compact} {info.label}
+                              <DownloadOutlined
+                                className="card-metric-icon"
+                                aria-hidden="true"
+                              />{" "}
+                              {info.compact}
                             </span>
                           </Tooltip>
                         );

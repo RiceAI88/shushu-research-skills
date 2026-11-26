@@ -1941,7 +1941,7 @@ body:has(.back-to-top) .shushu-mascot-dock.above-comparison { bottom: calc(206px
 .table-installs strong { font-size: 13.5px; font-weight: 600; color: var(--prs-body); }
 .table-installs small { font-size: 11px; color: var(--prs-muted); }
 .table-installs.is-empty { color: var(--prs-muted); cursor: default; }
-.comparison-col-installs { cursor: help; text-decoration: underline dashed var(--prs-border); text-underline-offset: 2px; }
+.comparison-col-stars, .comparison-col-installs { display: inline-flex; align-items: center; gap: 3px; cursor: help; }
 .subskill-doc-link { display: inline-flex; align-items: center; justify-content: center; padding: 4px 6px; border-left: 1px solid var(--prs-border); color: var(--prs-muted); font-size: 11px; text-decoration: none; }
 .subskill-doc-link:hover { color: var(--prs-primary); background: var(--prs-tint); }
 .subskills-empty { margin: 0; font-size: 12px; color: var(--prs-muted); }

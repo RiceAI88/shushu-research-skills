@@ -223,7 +223,6 @@ export default function RepositoryTable({
           <Tooltip title={info.tooltip}>
             <span className="table-installs" data-testid="table-installs">
               <strong>{info.compact}</strong>
-              <small>{info.label}</small>
             </span>
           </Tooltip>
         );

@@ -92,46 +92,54 @@ export function installMetricFor(item, lang = "zh") {
   const compact = formatCompactCount(count);
   const label = zh ? "下载量" : "Downloads";
   if (source === "skills_cli") {
+    const detail = zh
+      ? `${exact} 次（Skills CLI 官方统计）`
+      : `${exact} (verified via Skills CLI)`;
     return {
       count,
       compact,
       source,
       label,
-      tooltip: zh
-        ? `Skills CLI 官方累计下载/安装 ${exact} 次`
-        : `${exact} verified downloads/installs via Skills CLI`,
+      detail,
+      tooltip: zh ? `下载量：${detail}` : `Downloads: ${detail}`,
     };
   }
   if (source === "pypi_30d") {
+    const detail = zh
+      ? `${exact} 次（PyPI 官方近 30 天）`
+      : `${exact} (PyPI last 30 days)`;
     return {
       count,
       compact,
       source,
       label,
-      tooltip: zh
-        ? `PyPI 官方近 30 天下载 ${exact} 次`
-        : `${exact} PyPI downloads in the last 30 days`,
+      detail,
+      tooltip: zh ? `下载量：${detail}` : `Downloads: ${detail}`,
     };
   }
   if (source === "npm_30d") {
+    const detail = zh
+      ? `${exact} 次（npm 官方近 30 天）`
+      : `${exact} (npm last 30 days)`;
     return {
       count,
       compact,
       source,
       label,
-      tooltip: zh
-        ? `npm 官方近 30 天下载 ${exact} 次`
-        : `${exact} npm downloads in the last 30 days`,
+      detail,
+      tooltip: zh ? `下载量：${detail}` : `Downloads: ${detail}`,
     };
   }
+  const detail = zh
+    ? `${exact} 次（GitHub Releases 累计）`
+    : `${exact} (GitHub Releases total)`;
   return {
     count,
     compact,
     source: source || "github_releases",
     label,
-    tooltip: zh
-      ? `GitHub Releases 安装包累计下载 ${exact} 次`
-      : `${exact} GitHub Release asset downloads`,
+    detail,
+    tooltip: zh ? `下载量：${detail}` : `Downloads: ${detail}`,
   };
 }
 

@@ -4,7 +4,12 @@ import { matchSubskillsForItem } from "../subskillsLoader";
 import { Panel } from "./Panel";
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import { Button, Space, Tag, Tooltip } from "antd";
-import { StarFilled, StarOutlined, SwapOutlined } from "@ant-design/icons";
+import {
+  DownloadOutlined,
+  StarFilled,
+  StarOutlined,
+  SwapOutlined,
+} from "@ant-design/icons";
 import {
   PlatformTags,
   SummaryText,
@@ -345,10 +350,29 @@ export function RepositoryViews({
                 </div>
                 <div className="card-key-metrics">
                   <div className="card-primary-stats">
-                    <div className="card-stars-stat">
-                      <strong>{fmt(item.stars)}</strong>
-                      <span>Stars</span>
-                    </div>
+                    <Tooltip
+                      title={
+                        state.lang === "zh"
+                          ? `GitHub 星标（Stars）：${fmt(item.stars)}`
+                          : `GitHub Stars: ${fmt(item.stars)}`
+                      }
+                    >
+                      <div
+                        className="card-stars-stat"
+                        data-testid="card-stars"
+                        aria-label={
+                          state.lang === "zh"
+                            ? `GitHub 星标 ${fmt(item.stars)}`
+                            : `GitHub Stars ${fmt(item.stars)}`
+                        }
+                      >
+                        <StarOutlined
+                          className="card-metric-icon"
+                          aria-hidden="true"
+                        />
+                        <strong>{fmt(item.stars)}</strong>
+                      </div>
+                    </Tooltip>
                     {(() => {
                       const installInfo = installMetricFor(item, state.lang);
                       if (!installInfo) return null;
@@ -357,9 +381,13 @@ export function RepositoryViews({
                           <div
                             className="card-installs-stat"
                             data-testid="card-installs"
+                            aria-label={installInfo.tooltip}
                           >
+                            <DownloadOutlined
+                              className="card-metric-icon"
+                              aria-hidden="true"
+                            />
                             <strong>{installInfo.compact}</strong>
-                            <span>{installInfo.label}</span>
                           </div>
                         </Tooltip>
                       );

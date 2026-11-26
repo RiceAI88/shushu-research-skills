@@ -717,32 +717,40 @@
 }
 .card-key-metrics .card-primary-stats {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 4px 10px;
+  gap: 4px 12px;
   min-width: 0;
 }
 .card-key-metrics .card-stars-stat,
 .card-key-metrics .card-installs-stat {
   display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
+  align-items: center;
+  gap: 5px;
   white-space: nowrap;
-}
-.card-key-metrics .card-installs-stat {
-  padding-left: 10px;
-  border-left: 1px solid var(--prs-border);
   cursor: help;
 }
+.card-metric-icon {
+  font-size: 13.5px;
+  color: var(--prs-muted);
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+.card-key-metrics .card-stars-stat:hover .card-metric-icon,
+.card-key-metrics .card-installs-stat:hover .card-metric-icon,
+.comparison-col-stars:hover .card-metric-icon,
+.comparison-col-installs:hover .card-metric-icon {
+  color: var(--prs-primary);
+}
+.card-key-metrics .card-installs-stat {
+  padding-left: 12px;
+  border-left: 1px solid var(--prs-border);
+}
 .card-key-metrics .card-installs-stat strong {
-  font-size: 14.5px;
-  line-height: 20px;
+  font-size: 15px;
+  line-height: 22px;
   font-weight: 600;
   color: var(--prs-body);
-}
-.card-key-metrics .card-installs-stat span {
-  text-decoration: underline dashed var(--prs-border);
-  text-underline-offset: 3px;
 }
 .card-key-metrics strong {
   font-size: 16.5px;
