@@ -1,5 +1,6 @@
 import { ProjectFacts, GrowthValue } from "./ProjectFacts";
 import { Zhi1keAd } from "./Zhi1keAd";
+import { SponsorRail } from "./SponsorRail";
 import { SearchHighlight } from "./SearchHighlight";
 import { Panel } from "./Panel";
 import React, { Suspense, lazy, useEffect, useState } from "react";
@@ -175,6 +176,7 @@ export function RepositoryViews({
   filterHeight,
   onReady,
   onAskShushu,
+  onOpenCommunity,
   onPreloadDetail,
   state,
   update,
@@ -263,9 +265,12 @@ export function RepositoryViews({
       </Suspense>
     );
   const partnerStrip = (
-    <div className="partner-top-strip">
-      <Zhi1keAd t={t} lang={state.lang} />
-    </div>
+    <>
+      <div className="partner-top-strip">
+        <Zhi1keAd t={t} lang={state.lang} />
+      </div>
+      <SponsorRail lang={state.lang} onOpenCommunity={onOpenCommunity} />
+    </>
   );
   if (state.view === "card")
     return (

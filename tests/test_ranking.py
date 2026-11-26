@@ -594,6 +594,8 @@ class RankingRulesTest(unittest.TestCase):
         self.assertIn("example/b", report)  # newcomer
         self.assertIn("example/a", report)  # riser +30
         self.assertIn("example/gone", report)  # dropped
+        self.assertIn("report-sidebar", report)
+        self.assertIn("推荐服务", report)
 
     def test_dedupe_unforked_clones_drops_copycats_and_keeps_independent_same_name_repos(self):
         items = [

@@ -46,6 +46,9 @@ for (const [width, view] of [
     }));
     expect(positions.adTop).toBeGreaterThanOrEqual(positions.heading);
     expect(positions.adBottom).toBeLessThanOrEqual(positions.first);
+    if (width >= 1240) {
+      expect(positions.adBottom - positions.adTop).toBeLessThanOrEqual(76);
+    }
     await page
       .getByRole("searchbox")
       .fill("K-Dense-AI/scientific-agent-skills");
@@ -78,4 +81,35 @@ test("mobile English dark advertisement stays readable and does not repeat when 
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
+});
+
+test("ultrawide viewport switches inline banner to right-hand recommended services rail without overflow", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1920, height: 1000 });
+  await page.goto("./#view=card");
+  await expect(page.getByTestId("repo-card")).toHaveCount(30);
+  await expect(page.locator(".partner-top-strip")).toBeHidden();
+  const rail = page.getByTestId("sponsor-rail");
+  await expect(rail).toBeVisible();
+  await expect(rail).toContainText("推荐服务");
+  await expect(rail).toContainText("智一刻 AI");
+  await expect(rail).toContainText("GPT / Codex 正规代充");
+  const layout = await page.evaluate(() => {
+    const mainRight = document
+      .querySelector(".ranking-section")
+      .getBoundingClientRect().right;
+    const railRect = document
+      .querySelector('[data-testid="sponsor-rail"]')
+      .getBoundingClientRect();
+    return {
+      mainRight,
+      railLeft: railRect.left,
+      railRight: railRect.right,
+      noOverflow: document.documentElement.scrollWidth <= window.innerWidth,
+    };
+  });
+  expect(layout.railLeft).toBeGreaterThanOrEqual(layout.mainRight + 16);
+  expect(layout.railRight).toBeLessThanOrEqual(1920);
+  expect(layout.noOverflow).toBe(true);
 });

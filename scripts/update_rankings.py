@@ -2009,6 +2009,51 @@ def render_history_series(history: dict[str, dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def render_report_sidebar(toc_items: list[tuple[str, str]], toc_title: str = "目录") -> str:
+    """渲染月报阅读页右侧粘性侧栏（目录导航 + 自营/严选推荐服务卡片）。"""
+    toc_rows = "".join(
+        f"<li><a href='{href}'><em>{idx:02d}</em><span>{xml_escape(label)}</span></a></li>"
+        for idx, (href, label) in enumerate(toc_items, 1)
+    )
+    toc_block = (
+        f"<section class='report-toc-card' aria-label='{xml_escape(toc_title)}'>"
+        f"<div class='report-toc-head'><span class='report-toc-hash'>#</span><span>{xml_escape(toc_title)}</span></div>"
+        f"<ol class='report-toc-list'>{toc_rows}</ol>"
+        "</section>"
+        if toc_rows
+        else ""
+    )
+    return (
+        "<aside class='report-sidebar' aria-label='目录与推荐服务'>"
+        f"{toc_block}"
+        "<div class='report-promo-group'>"
+        "<div class='report-promo-head'><span>推荐服务</span><span>自营 / 严选</span></div>"
+        "<section class='report-promo-card'>"
+        "<div class='report-promo-meta'><span class='report-promo-tag is-warm'>全站推荐</span>"
+        "<span class='report-promo-domain'>zhi1ke.com</span></div>"
+        "<h3>智一刻 AI · 学术写作工作台</h3>"
+        "<p>从一个题目到一篇论文初稿：开题、文献综述、正文图表、降 AI 率一站完成。</p>"
+        "<a class='report-promo-cta' href='https://zhi1ke.com?pic=6PEB' target='_blank' rel='sponsored noopener noreferrer'>免费生成提纲 →</a>"
+        "</section>"
+        "<section class='report-promo-card'>"
+        "<div class='report-promo-meta'><span class='report-promo-tag'>自营直充</span>"
+        "<span class='report-promo-domain'>catfk.com</span></div>"
+        "<h3>GPT / Codex 正规代充</h3>"
+        "<p>官方渠道充值，有账单、可开发票报销，同时支持本站持续维护。</p>"
+        "<a class='report-promo-cta' href='https://catfk.com/shop/1991' target='_blank' rel='sponsored noopener noreferrer'>前往选购 →</a>"
+        "</section>"
+        "<section class='report-promo-card'>"
+        "<div class='report-promo-meta'><span class='report-promo-tag'>开源导航</span>"
+        "<span class='report-promo-domain'>riceai985.cc</span></div>"
+        "<h3>按 13 个学科找科研 Skills</h3>"
+        "<p>支持免命令行网页直用筛选、课题组工具包与鼠鼠 AI 选工具顾问。</p>"
+        "<a class='report-promo-cta is-ghost' href='../'>打开工具总榜 →</a>"
+        "</section>"
+        "</div>"
+        "</aside>"
+    )
+
+
 def render_month_report(
     month: str,
     history: dict[str, dict[str, dict[str, Any]]],
@@ -2072,6 +2117,14 @@ def render_month_report(
         f"<a href='{m}.html'>{m}</a>" if m != month else f"<b>{m}</b>" for m in all_months
     )
     total_stars = sum(r["stars"] for r in rows)
+    sidebar = render_report_sidebar(
+        [
+            ("#sec-newcomers", f"本月新收录（{len(newcomers)}）"),
+            ("#sec-risers", "月度上升前 10"),
+            ("#sec-stalled", f"增长停滞（{len(stalled)}）"),
+            ("#sec-dropped", f"本月跌出（{len(dropped)}）"),
+        ]
+    )
     return f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -2082,23 +2135,26 @@ def render_month_report(
 <link rel="canonical" href="{SITE_URL}/reports/{month}.html" />
 </head>
 <body>
-<main style="max-width:960px;margin:0 auto;padding:32px 20px">
+<div class="report-shell">
+<main>
 <p><a href="../">← 返回排行榜</a></p>
 <h1>{month} 月度报告</h1>
 <p class="muted">收录 {len(rows)} 个仓库 · 合计 {total_stars:,}★ · 报告期 {dates[0]} → {dates[-1]}</p>
 <nav>{nav}</nav>
 
-<h2>🆕 本月新收录（{len(newcomers)}）</h2>
+<h2 id="sec-newcomers">🆕 本月新收录（{len(newcomers)}）</h2>
 {table(newcomers)}
-<h2>📈 月度上升前 10</h2>
+<h2 id="sec-risers">📈 月度上升前 10</h2>
 {table(risers)}
-<h2>⏸️ 增长停滞（{len(stalled)}）</h2>
+<h2 id="sec-stalled">⏸️ 增长停滞（{len(stalled)}）</h2>
 {table(stalled)}
-<h2>🚪 本月跌出（{len(dropped)}）</h2>
+<h2 id="sec-dropped">🚪 本月跌出（{len(dropped)}）</h2>
 {dropped_html}
 
 <footer style="margin-top:32px"><a href="../feed.xml">RSS 订阅</a> · <a href="../index.html">可视化榜单</a> · 数据基于每日快照自动生成</footer>
 </main>
+{sidebar}
+</div>
 </body>
 </html>
 """
@@ -2122,6 +2178,15 @@ def build_monthly_reports(history: dict[str, dict[str, dict[str, Any]]]) -> None
         for repo in history[date_key]:
             first_seen.setdefault(repo, date_key)
 
+    all_report_months = sorted(
+        {m for m in months}
+        | {
+            p.stem
+            for p in REPORTS_DIR.glob("20??-??.html")
+            if re.fullmatch(r"\d{4}-\d{2}", p.stem)
+        }
+    )
+
     for index, month in enumerate(months):
         month_page = REPORTS_DIR / f"{month}.html"
         if month_page.exists() and month != current_month:
@@ -2131,14 +2196,14 @@ def build_monthly_reports(history: dict[str, dict[str, dict[str, Any]]]) -> None
             prev_dates = sorted(key for key in history if key.startswith(months[index - 1]))
             if prev_dates:
                 prev_repos = set(history[prev_dates[-1]])
-        report = render_month_report(month, history, first_seen, prev_repos, months)
+        report = render_month_report(month, history, first_seen, prev_repos, all_report_months)
         if report:
             month_page.write_text(report, encoding="utf-8")
 
     def month_card(m: str) -> str:
         m_dates = sorted(k for k in history if k.startswith(m))
         if not m_dates:
-            return f"<li><a href='{m}.html'><span>{m} 月报 →</span></a></li>"
+            return f"<li><a href='{m}.html'><span>{m} 月度报告 →</span><small>历史归档快照</small></a></li>"
         repo_total = len(history[m_dates[-1]])
         new_cnt = sum(1 for r in history[m_dates[-1]] if first_seen.get(r, "")[:7] == m)
         return (
@@ -2146,7 +2211,11 @@ def build_monthly_reports(history: dict[str, dict[str, dict[str, Any]]]) -> None
             f"<small>月末收录 {repo_total} 个 · 新入榜 {new_cnt} 个</small></a></li>"
         )
 
-    links = "".join(month_card(m) for m in reversed(months))
+    links = "".join(month_card(m) for m in reversed(all_report_months))
+    index_sidebar = render_report_sidebar(
+        [(f"{m}.html", f"{m} 月度报告") for m in list(reversed(all_report_months))[:5]],
+        toc_title="近期归档",
+    )
     (REPORTS_DIR / "index.html").write_text(
         f"""<!doctype html>
 <html lang="zh-CN">
@@ -2158,7 +2227,8 @@ def build_monthly_reports(history: dict[str, dict[str, dict[str, Any]]]) -> None
 <link rel="canonical" href="{SITE_URL}/reports/" />
 </head>
 <body>
-<main style="max-width:720px;margin:0 auto;padding:32px 20px">
+<div class="report-shell">
+<main>
 <p><a href="../">← 返回排行榜</a></p>
 <h1>月度报告</h1>
 <p class="muted">每月自动总结：新收录、上升、停滞与跌出的仓库。</p>
@@ -2166,6 +2236,8 @@ def build_monthly_reports(history: dict[str, dict[str, dict[str, Any]]]) -> None
 {links}
 </ul>
 </main>
+{index_sidebar}
+</div>
 </body>
 </html>
 """,

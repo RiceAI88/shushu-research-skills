@@ -311,6 +311,16 @@ function Dashboard({ state, update, switchLang }) {
   const [botRequested, setBotRequested] = useState(false);
   const [botInitialQuery, setBotInitialQuery] = useState("");
   const [communityRequested, setCommunityRequested] = useState(false);
+  // 统一打开科研交流群二维码弹窗（顶部公告条与超宽屏侧栏共用）
+  const openCommunity = (slot = "top_notice") => {
+    preloadCommunityQr();
+    trackEvent("open_community_qr", { slot });
+    if (communityRequested) {
+      triggerCommunityDialog();
+    } else {
+      setCommunityRequested(true);
+    }
+  };
   const [petRoam, setPetRoam] = useState(() => {
     try {
       if (window.__ARS_FORCE_ROAM) return true;
@@ -612,15 +622,7 @@ function Dashboard({ state, update, switchLang }) {
               onPointerEnter={preloadCommunityQr}
               onFocus={preloadCommunityQr}
               onTouchStart={preloadCommunityQr}
-              onClick={() => {
-                preloadCommunityQr();
-                trackEvent("open_community_qr", { slot: "top_notice" });
-                if (communityRequested) {
-                  triggerCommunityDialog();
-                } else {
-                  setCommunityRequested(true);
-                }
-              }}
+              onClick={() => openCommunity("top_notice")}
             >
               {state.lang === "zh"
                 ? "💬 加入各专业科研交流群 ›"
@@ -1420,6 +1422,7 @@ function Dashboard({ state, update, switchLang }) {
                 generatedAt: dataset.metadata?.generated_at,
               }}
               onPreloadDetail={preloadRepositoryDrawer}
+              onOpenCommunity={openCommunity}
               onAskShushu={(q) => {
                 setBotRequested(true);
                 setBotInitialQuery(q);

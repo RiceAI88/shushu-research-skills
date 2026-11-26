@@ -82,7 +82,7 @@ test("empty search aligns filter bar and count pills, and hands natural-language
   await empty.getByTestId("empty-ask-shushu").click();
   const panel = page.getByTestId("shushu-bot-panel");
   await expect(panel).toBeVisible();
-  await expect(panel).toContainText("460+");
+  await expect(panel).toContainText(/\d{3}\+\s*真实收录库/);
   await expect(panel.getByTestId("shushu-msg-user")).toContainText(
     "本科生不会代码怎么降 AIGC 率",
   );

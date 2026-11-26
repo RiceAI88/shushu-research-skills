@@ -1231,6 +1231,197 @@
 .ranking-section > .panel-body > .sponsor-banner {
   margin-bottom: 20px;
 }
+/* 桌面端横幅压缩为单行原生条：品牌 · 一句话卖点 · 保障徽章 · 行动按钮，让首排卡片回到首屏 */
+@media (min-width: 961px) {
+  .partner-top-strip {
+    margin: 0 0 14px;
+  }
+  .sponsor-banner,
+  .sponsor-banner.sponsor-banner-jade {
+    gap: 16px;
+    padding: 10px 12px 10px 20px;
+    border-radius: 14px;
+  }
+  .sponsor-main {
+    flex-direction: row;
+    align-items: center;
+    flex: 1 1 auto;
+    gap: 14px;
+  }
+  .sponsor-brand-row {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+  }
+  .sponsor-brand {
+    font-size: 15px;
+  }
+  .sponsor-copy {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 13px;
+  }
+  .sponsor-guarantees {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    gap: 6px;
+    margin-top: 0;
+  }
+  .sponsor-badge {
+    padding: 2px 9px;
+    font-size: 11.5px;
+    white-space: nowrap;
+  }
+  .sponsor-workbench {
+    display: none;
+  }
+  .sponsor-cta {
+    min-height: 34px;
+    padding: 0 16px;
+    font-size: 13px;
+    box-shadow: 0 4px 12px -4px rgba(43, 138, 82, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  }
+}
+@media (min-width: 961px) and (max-width: 1239px) {
+  .sponsor-subbrand,
+  .sponsor-guarantees {
+    display: none;
+  }
+}
+
+/* 超宽屏右侧留白「推荐服务」侧栏（≥1760px 且高度足够时启用，列表内横幅同步隐藏） */
+.sponsor-rail {
+  display: none;
+}
+@media (min-width: 1760px) and (min-height: 760px) {
+  .partner-top-strip {
+    display: none;
+  }
+  .sponsor-rail {
+    position: fixed;
+    top: 112px;
+    left: calc(50% + 610px + 28px);
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: min(272px, calc(50vw - 610px - 56px));
+    opacity: 0;
+    transform: translateX(10px);
+    pointer-events: none;
+    transition: opacity 220ms ease, transform 220ms ease;
+  }
+  .sponsor-rail.is-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sponsor-rail {
+    transition: none;
+  }
+}
+.sponsor-rail-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+  color: var(--prs-muted);
+  font-size: 12px;
+}
+.sponsor-rail-card {
+  padding: 13px 15px 14px;
+  border: 1px solid var(--prs-border);
+  border-radius: 14px;
+  background: var(--prs-panel);
+  box-shadow: var(--prs-shadow-sm);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+.sponsor-rail-card:hover {
+  border-color: rgb(var(--prs-primary-rgb) / 0.35);
+  transform: translateY(-1px);
+}
+.sponsor-rail-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.sponsor-rail-tag {
+  padding: 1px 8px;
+  border: 1px solid var(--prs-border);
+  border-radius: 6px;
+  background: var(--prs-tag-bg);
+  color: var(--prs-body);
+  font-size: 11px;
+  font-weight: 600;
+}
+.sponsor-rail-tag.is-warm {
+  border-color: var(--prs-warm);
+  background: transparent;
+  color: var(--prs-warm-strong);
+}
+.sponsor-rail-domain {
+  color: var(--prs-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
+.sponsor-rail-card h3 {
+  margin: 8px 0 4px;
+  color: var(--prs-text);
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.sponsor-rail-card p {
+  margin: 0 0 10px;
+  color: var(--prs-muted);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+.sponsor-rail-card .sponsor-rail-note {
+  margin-top: -4px;
+  color: var(--prs-primary);
+  font-size: 12px;
+  font-weight: 600;
+}
+.sponsor-rail-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 13px;
+  border: 1px solid var(--prs-text);
+  border-radius: 8px;
+  background: var(--prs-text);
+  color: var(--prs-panel);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+.sponsor-rail-cta:hover {
+  border-color: var(--prs-primary);
+  background: var(--prs-primary);
+  color: #ffffff;
+}
+.sponsor-rail-cta.is-ghost {
+  border-color: var(--prs-border);
+  background: transparent;
+  color: var(--prs-primary);
+}
+.sponsor-rail-cta.is-ghost:hover {
+  border-color: var(--prs-primary);
+  background: transparent;
+  color: var(--prs-primary);
+}
+.sponsor-rail-cta:focus-visible {
+  outline: 2px solid var(--prs-primary);
+  outline-offset: 2px;
+}
 #beginner-paths {
   scroll-margin-top: 100px;
 }
