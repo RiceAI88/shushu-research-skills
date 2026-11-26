@@ -4217,14 +4217,13 @@ a:focus-visible,
 
 @media (max-width: 760px) {
   .site-nav {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
   .site-nav .brand {
-    grid-column: 1;
-    grid-row: 1;
-    width: auto;
+    width: 100%;
     min-width: 0;
   }
   .site-nav .brand > span:last-child {
@@ -4235,13 +4234,7 @@ a:focus-visible,
     min-width: 0;
     flex: 1;
   }
-  .site-nav > .support-card {
-    grid-column: 2;
-    grid-row: 1;
-  }
   .site-nav .nav-actions {
-    grid-column: 1 / -1;
-    grid-row: 2;
     width: 100%;
     gap: 4px !important;
   }

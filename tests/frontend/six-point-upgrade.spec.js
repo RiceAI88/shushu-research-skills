@@ -40,14 +40,13 @@ for(const width of [1280,390,320])test(`brand, useful card and beginner entry at
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 
-test('English brand and support entry never overlap on a narrow screen',async({page})=>{
+test('English brand fits cleanly on a narrow screen without redundant header ads',async({page})=>{
  await page.setViewportSize({width:320,height:900});
  await page.goto('./#lang=en');
- const brand=await page.locator('.brand').boundingBox();
- const support=await page.getByTestId('gpt-recharge-ad').boundingBox();
- expect(brand.x+brand.width).toBeLessThanOrEqual(support.x);
+ await expect(page.getByTestId('gpt-recharge-ad')).toHaveCount(0);
  const text=page.locator('.brand span').last();
  expect(await text.evaluate(el=>el.scrollWidth<=el.clientWidth+1)).toBe(true);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 
 for(const lang of ['zh','en'])test(`runtime document title keeps the ${lang} public brand`,async({page})=>{

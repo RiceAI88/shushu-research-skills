@@ -35,8 +35,9 @@ test('clear visitor copy and recommendation link',async({page})=>{
  await expect(page.getByRole('link',{name:'推荐 Skill',exact:true})).toHaveAttribute('href',/issues\/new\?template=recommend-repo.yml/);
  await expect(page.locator('.community-card')).toHaveCount(0);
  await expect(page.getByRole('button',{name:/加入各专业科研交流群/})).toBeVisible();
- await expect(page.getByTestId('gpt-recharge-ad')).toHaveText(/支持本站/);
- await expect(page.locator('.support-card-caption')).toHaveCount(0);
+ await expect(page.getByTestId('gpt-recharge-ad')).toHaveCount(0);
+ await expect(page.locator('.top-notice-partner')).toHaveCount(0);
+ await expect(page.getByTestId('hero-poster-ad')).toBeVisible();
  await expect(page.getByRole('dialog',{name:'分类说明'})).not.toBeVisible();
  await page.getByRole('button',{name:'分类说明',exact:true}).click();
  await expect(page.getByRole('dialog',{name:'分类说明'})).toContainText('尚未核验专业归属');

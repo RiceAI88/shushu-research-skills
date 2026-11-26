@@ -196,7 +196,8 @@ for (const view of ["card", "table"])
     page,
   }) => {
     await page.goto(`./#view=${view}`);
-    await expect(page.getByTestId("gpt-recharge-ad")).not.toContainText("广告");
+    await expect(page.getByTestId("gpt-recharge-ad")).toHaveCount(0);
+    await expect(page.locator(".top-notice-partner")).toHaveCount(0);
     const ad = page.getByTestId("hero-poster-ad");
     await expect(ad).toHaveCount(1);
     const entrySelector =

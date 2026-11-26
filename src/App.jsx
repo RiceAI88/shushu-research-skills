@@ -8,7 +8,6 @@ import { DisciplineSelector } from "./components/DisciplineSelector";
 import { SlidingTaskList } from "./components/SlidingTaskList";
 import { Reveal, useSiteReducedMotion } from "./components/SiteMotion";
 import { DailyArrivals } from "./components/DailyArrivals";
-import { RechargeAd } from "./components/RechargeAd";
 import { HeroPosterAd } from "./components/HeroPosterAd";
 import { BackToTop } from "./components/BackToTop";
 import { trackEvent } from "./analytics";
@@ -629,17 +628,6 @@ function Dashboard({ state, update, switchLang }) {
                 ? "💬 加入各专业科研交流群 ›"
                 : "💬 Join research community ›"}
             </button>
-            <a
-              className="top-notice-partner"
-              href="https://zhi1ke.com?pic=6PEB"
-              target="_blank"
-              rel="sponsored noopener noreferrer"
-              onClick={() => trackEvent("click_zhi1ke", { slot: "top_notice" })}
-            >
-              {state.lang === "zh"
-                ? "✨ 合作伙伴：智一刻 AI 论文初稿生成 ↗"
-                : "✨ Partner: Zhi1ke AI paper outline ↗"}
-            </a>
           </div>
         </div>
         <Reveal
@@ -703,7 +691,6 @@ function Dashboard({ state, update, switchLang }) {
               GitHub
             </Button>
           </Space>
-          <RechargeAd t={t} />
         </Reveal>
         <section className="hero container">
           <div className="hero-top-grid">
