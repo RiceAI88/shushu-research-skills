@@ -1,0 +1,273 @@
+{
+  "updated_at": "2026-11-26",
+  "repos": {
+    "k-dense-ai/scientific-agent-skills": [
+      325150,
+      "skills_cli"
+    ],
+    "yuan1z0825/nature-skills": [
+      322796,
+      "skills_cli"
+    ],
+    "orchestra-research/ai-research-skills": [
+      112648,
+      "skills_cli"
+    ],
+    "future-house/paper-qa": [
+      108760,
+      "pypi_30d"
+    ],
+    "google-deepmind/science-skills": [
+      97446,
+      "skills_cli"
+    ],
+    "blazickjp/arxiv-mcp-server": [
+      73723,
+      "pypi_30d"
+    ],
+    "wanshuiyin/auto-claude-code-research-in-sleep": [
+      46420,
+      "skills_cli"
+    ],
+    "imbad0202/academic-research-skills": [
+      40354,
+      "skills_cli"
+    ],
+    "scrapecreators/social-media-research-skills": [
+      30187,
+      "skills_cli"
+    ],
+    "jihe520/mathmodelagent": [
+      19380,
+      "skills_cli"
+    ],
+    "nvidia/nvalchemi-toolkit": [
+      11215,
+      "pypi_30d"
+    ],
+    "lancopku/pkuseg-python": [
+      10993,
+      "pypi_30d"
+    ],
+    "hkustdial/supervisor-skills": [
+      10538,
+      "skills_cli"
+    ],
+    "pensivefei/deep-read-summarize": [
+      7734,
+      "npm_30d"
+    ],
+    "scverse/rapids-singlecell": [
+      6548,
+      "pypi_30d"
+    ],
+    "oksure/openalex-research-mcp": [
+      6072,
+      "npm_30d"
+    ],
+    "ningzimu/codex-ppt-skill": [
+      5475,
+      "skills_cli"
+    ],
+    "wubing2023/paperspine": [
+      4334,
+      "skills_cli"
+    ],
+    "givemotion/givemotion": [
+      3586,
+      "npm_30d"
+    ],
+    "zlanqing/codex-claude-academic-skills": [
+      3435,
+      "skills_cli"
+    ],
+    "tmonk/mcp-stata": [
+      3400,
+      "pypi_30d"
+    ],
+    "scitex-ai/scitex-python": [
+      3397,
+      "pypi_30d"
+    ],
+    "companion-inc/feynman": [
+      2935,
+      "skills_cli"
+    ],
+    "imbad0202/academic-research-skills-codex": [
+      2248,
+      "skills_cli"
+    ],
+    "larashero3-dotcom/lieflat-charts": [
+      2001,
+      "skills_cli"
+    ],
+    "master-cai/research-paper-writing-skills": [
+      1953,
+      "skills_cli"
+    ],
+    "brycewang-stanford/auto-empirical-research-skills": [
+      1943,
+      "skills_cli"
+    ],
+    "neuroaihub/awesome_cognitive_and_neuroscience_skills": [
+      1078,
+      "skills_cli"
+    ],
+    "aiscientists-dev/academic-humanizer": [
+      1039,
+      "skills_cli"
+    ],
+    "patsnap/skills": [
+      942,
+      "skills_cli"
+    ],
+    "xunbu/docutranslate": [
+      869,
+      "pypi_30d"
+    ],
+    "openlair/dr-claw": [
+      779,
+      "npm_30d"
+    ],
+    "cookjohn/zotero-mcp": [
+      762,
+      "npm_30d"
+    ],
+    "tsingyuai/scientify": [
+      691,
+      "npm_30d"
+    ],
+    "adkid-zephyr/anti-defensive-writing-skill": [
+      524,
+      "skills_cli"
+    ],
+    "chenliu-1996/figures4papers": [
+      427,
+      "skills_cli"
+    ],
+    "yzhao062/anywhere-agents": [
+      407,
+      "pypi_30d"
+    ],
+    "aiming-lab/autoresearchclaw": [
+      370,
+      "skills_cli"
+    ],
+    "dvdsosa/scientific-writing-skills": [
+      322,
+      "skills_cli"
+    ],
+    "torolex/research-os-studio": [
+      314,
+      "skills_cli"
+    ],
+    "synthetic-sciences/openscience": [
+      296,
+      "skills_cli"
+    ],
+    "chicagohai/openaireview": [
+      290,
+      "pypi_30d"
+    ],
+    "isaac-sim/isaaclab": [
+      237,
+      "skills_cli"
+    ],
+    "zxyasfas/paper_format_agent": [
+      195,
+      "pypi_30d"
+    ],
+    "afishinlake/wordformat": [
+      180,
+      "pypi_30d"
+    ],
+    "federicodeponte/opendraft": [
+      175,
+      "pypi_30d"
+    ],
+    "cooleava1-gif/materials-science-skills": [
+      165,
+      "skills_cli"
+    ],
+    "d6t/d6tflow": [
+      165,
+      "pypi_30d"
+    ],
+    "jordan-gibbs/hyperresearch": [
+      129,
+      "skills_cli"
+    ],
+    "zimoliao/scholaraio": [
+      112,
+      "pypi_30d"
+    ],
+    "pangenomeai/academic-skills-food-nutrition": [
+      62,
+      "skills_cli"
+    ],
+    "russellbrenner/jurisd": [
+      46,
+      "npm_30d"
+    ],
+    "chenxiangypily1234/paper-storycraft-skills": [
+      35,
+      "skills_cli"
+    ],
+    "lawrenceriver/figfox-gen-skill": [
+      31,
+      "skills_cli"
+    ],
+    "icip-cas/pptagent": [
+      25,
+      "skills_cli"
+    ],
+    "baojie/shiji-kb": [
+      23,
+      "skills_cli"
+    ],
+    "dwzhu-pku/paperbanana": [
+      19,
+      "skills_cli"
+    ],
+    "chanw-research/claude-code-paper-writing": [
+      16,
+      "skills_cli"
+    ],
+    "hanlulong/econ-paper-review-skill": [
+      16,
+      "skills_cli"
+    ],
+    "honeymeta/ai-check-skills": [
+      15,
+      "skills_cli"
+    ],
+    "maxwell2732/claudecode-research-harness-workflow": [
+      10,
+      "skills_cli"
+    ],
+    "caodoudou99/literature-review-econ-skill": [
+      8,
+      "skills_cli"
+    ],
+    "xiaomihu1992/econometrics-skill": [
+      8,
+      "skills_cli"
+    ],
+    "ai-4-phi/phillit": [
+      6,
+      "skills_cli"
+    ],
+    "paper2poster/paper2poster": [
+      5,
+      "skills_cli"
+    ],
+    "drpwchen/paper-review-and-digest": [
+      5,
+      "skills_cli"
+    ],
+    "juliaerror/econ-thesis-idea": [
+      3,
+      "skills_cli"
+    ]
+  }
+}

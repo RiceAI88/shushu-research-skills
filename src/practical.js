@@ -1,5 +1,6 @@
 import reviewedUsage from "../config/project-usage.json" with {type:"json"};
 import editorial from "../config/editorial.json" with { type: "json" };
+import installCounts from "../config/install-counts.json" with { type: "json" };
 import { safeExternalUrl } from "./domain.js";
 export const EDITORIAL_CONTENT = editorial;
 export const UPDATE_RUNS_URL =
@@ -58,6 +59,81 @@ export function installationFor(item, content = EDITORIAL_CONTENT) {
         source_url: fallbackUrl + "#readme",
       };
 }
+// 紧凑格式化真实安装/下载数字（如 325125 -> 325.1k）
+export function formatCompactCount(n) {
+  const val = Number(n) || 0;
+  if (val >= 1_000_000) return `${(val / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
+  if (val >= 10_000) return `${(val / 1_000).toFixed(1).replace(/\.0$/, "")}k`;
+  if (val >= 1_000) return `${(val / 1_000).toFixed(1).replace(/\.0$/, "")}k`;
+  return String(val);
+}
+
+export function getInstallCount(item) {
+  if (Number.isFinite(item?.install_count) && item.install_count > 0) {
+    return item.install_count;
+  }
+  const pair = installCounts?.repos?.[String(item?.repo || "").toLowerCase()];
+  return Array.isArray(pair) && Number.isFinite(pair[0]) ? pair[0] : 0;
+}
+
+export function installMetricFor(item, lang = "zh") {
+  const pair = installCounts?.repos?.[String(item?.repo || "").toLowerCase()];
+  const count =
+    Number.isFinite(item?.install_count) && item.install_count > 0
+      ? item.install_count
+      : Array.isArray(pair)
+        ? Number(pair[0]) || 0
+        : 0;
+  const source =
+    item?.install_source || (Array.isArray(pair) ? String(pair[1] || "") : "");
+  if (!count || count <= 0) return null;
+  const zh = lang === "zh";
+  const exact = new Intl.NumberFormat(zh ? "zh-CN" : "en-US").format(count);
+  const compact = formatCompactCount(count);
+  if (source === "skills_cli") {
+    return {
+      count,
+      compact,
+      source,
+      label: zh ? "安装" : "Installs",
+      tooltip: zh
+        ? `Skills CLI 官方累计安装 ${exact} 次`
+        : `${exact} verified installs via Skills CLI`,
+    };
+  }
+  if (source === "pypi_30d") {
+    return {
+      count,
+      compact,
+      source,
+      label: zh ? "月下载" : "30d DL",
+      tooltip: zh
+        ? `PyPI 官方近 30 天下载 ${exact} 次`
+        : `${exact} PyPI downloads in the last 30 days`,
+    };
+  }
+  if (source === "npm_30d") {
+    return {
+      count,
+      compact,
+      source,
+      label: zh ? "月下载" : "30d DL",
+      tooltip: zh
+        ? `npm 官方近 30 天下载 ${exact} 次`
+        : `${exact} npm downloads in the last 30 days`,
+    };
+  }
+  return {
+    count,
+    compact,
+    source: source || "github_releases",
+    label: zh ? "下载" : "Downloads",
+    tooltip: zh
+      ? `GitHub Releases 安装包累计下载 ${exact} 次`
+      : `${exact} GitHub Release asset downloads`,
+  };
+}
+
 export function enrichItem(item, content = EDITORIAL_CONTENT) {
   const category =
     typeof item.category === "string"
@@ -102,6 +178,11 @@ export function enrichItem(item, content = EDITORIAL_CONTENT) {
     agents: content.platforms?.[item.repo] || item.agents || [],
     platforms_reviewed: Object.hasOwn(content.platforms || {}, item.repo),
     documented_platform_names: reviewedUsage[item.repo]?.platform_names || [],
+    install_count: getInstallCount(item),
+    install_source:
+      item.install_source ||
+      installCounts?.repos?.[String(item.repo || "").toLowerCase()]?.[1] ||
+      "",
   };
 }
 export function editorialPicks(visibleItems, content = EDITORIAL_CONTENT) {

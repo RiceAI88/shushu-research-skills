@@ -18,6 +18,7 @@ const EmptyResults = lazy(() =>
   import("./EmptyResults").then((m) => ({ default: m.EmptyResults })),
 );
 import { safeExternalUrl } from "../domain";
+import { installMetricFor } from "../practical";
 export function QualityBadges({
   item,
   t,
@@ -343,9 +344,26 @@ export function RepositoryViews({
                   </button>
                 </div>
                 <div className="card-key-metrics">
-                  <div>
-                    <strong>{fmt(item.stars)}</strong>
-                    <span>Stars</span>
+                  <div className="card-primary-stats">
+                    <div className="card-stars-stat">
+                      <strong>{fmt(item.stars)}</strong>
+                      <span>Stars</span>
+                    </div>
+                    {(() => {
+                      const installInfo = installMetricFor(item, state.lang);
+                      if (!installInfo) return null;
+                      return (
+                        <Tooltip title={installInfo.tooltip}>
+                          <div
+                            className="card-installs-stat"
+                            data-testid="card-installs"
+                          >
+                            <strong>{installInfo.compact}</strong>
+                            <span>{installInfo.label}</span>
+                          </div>
+                        </Tooltip>
+                      );
+                    })()}
                   </div>
                   <div
                     className={`card-growth${item.star_delta_7d ? "" : " no-growth"}`}
@@ -406,7 +424,7 @@ export function RepositoryViews({
           badges={(item) => <QualityBadges item={item} t={t} />}
           dataSource={entries}
           pagination={false}
-          scroll={{ x: 1220 }}
+          scroll={{ x: 1310 }}
           tableLayout="fixed"
           sticky={{ offsetHeader: filterHeight }}
           size="middle"

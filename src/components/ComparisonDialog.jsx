@@ -1,4 +1,4 @@
-import { reviewedInstallSnapshot } from "../practical";
+import { installationFor, installMetricFor, reviewedInstallSnapshot } from "../practical";
 import React from "react";
 import { Modal, Tag, Tooltip } from "antd";
 import { ComparisonChart } from "./TrendCharts";
@@ -10,7 +10,6 @@ import {
   matchesResearchTask,
   safeExternalUrl,
 } from "../domain";
-import { installationFor } from "../practical";
 import { deriveSetupThresholds } from "../usageGuide";
 import installationDetails from "../../config/installation-details.json";
 const labels = {
@@ -197,6 +196,17 @@ export default function ComparisonDialog({
                     </div>
                     <div className="comparison-col-metrics">
                       <span>★ {fmt(item.stars)}</span>
+                      {(() => {
+                        const info = installMetricFor(item, lang);
+                        if (!info) return null;
+                        return (
+                          <Tooltip title={info.tooltip}>
+                            <span className="comparison-col-installs">
+                              ↓ {info.compact} {info.label}
+                            </span>
+                          </Tooltip>
+                        );
+                      })()}
                       {delta !== 0 && (
                         <span className="comparison-col-delta">
                           {lang === "zh" ? "7日 " : "7d "}

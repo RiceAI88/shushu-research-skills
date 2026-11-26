@@ -1203,6 +1203,7 @@ function Dashboard({ state, update, switchLang }) {
                         fit: "rankByStars",
                         rank: "rankByStars",
                         stars: "rankByStars",
+                        installs: "sortInstalls",
                         trend: "sortTrend",
                         updated: "sortUpdated",
                         delta30: "sortDelta30",
@@ -1229,6 +1230,7 @@ function Dashboard({ state, update, switchLang }) {
                   </Button>
                   <span className="ranking-sort-shortcuts">
                     {[
+                      ["installs", "sortInstalls"],
                       ["delta7", "sortDelta7"],
                       ["newest", "sortNewest"],
                     ].map(([sort, label]) => (

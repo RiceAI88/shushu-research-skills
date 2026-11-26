@@ -29,6 +29,7 @@ export default function FilterControls({state,update,t,platformIds}) {
                 options={[
                   ...(state.discipline !== "all" ? [["fit", state.lang === "zh" ? "专业适用优先" : "Discipline fit first"]] : []),
                   ["rank", "Stars"],
+                  ["installs", t("sortInstalls")],
                   ["delta7", t("sortDelta7")],
                   ["newest", t("sortNewest")],
                   ["updated", t("sortUpdated")],

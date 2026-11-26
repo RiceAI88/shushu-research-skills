@@ -79,6 +79,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/auto_extract_subskills.py --limit 20
 
+      - name: Sync verified Skill install and package download counts
+        if: steps.gate.outputs.run_needed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/sync_install_counts.py --limit 160 --workers 10
+
       - name: Check curated source documents
         if: steps.gate.outputs.run_needed == 'true'
         env:

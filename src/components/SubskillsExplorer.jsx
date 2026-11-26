@@ -3,6 +3,7 @@ import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
 import { copyText } from "../clipboard";
 import { trackEvent } from "../analytics";
 import { useFeedback } from "./FeedbackProvider";
+import { formatCompactCount } from "../practical";
 import { loadSubskillsCatalog, matchSubskillsForItem } from "../subskillsLoader";
 
 /**
@@ -136,6 +137,18 @@ export function SubskillsExplorer({ item, lang = "zh", initialFilter = "" }) {
                     <CopyOutlined className="subskill-icon" aria-hidden="true" />
                   )}
                   <span className="subskill-name">{sub.n}</span>
+                  {sub.i > 0 && (
+                    <b
+                      className="subskill-installs"
+                      title={
+                        zh
+                          ? `Skills CLI 累计安装 ${sub.i.toLocaleString()} 次`
+                          : `${sub.i.toLocaleString()} installs via Skills CLI`
+                      }
+                    >
+                      ↓{formatCompactCount(sub.i)}
+                    </b>
+                  )}
                   {sub.g && <em className="subskill-group">{sub.g.split("/").pop()}</em>}
                 </button>
                 <a

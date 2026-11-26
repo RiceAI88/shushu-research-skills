@@ -292,3 +292,32 @@ test("orderedSceneLabelsFor prioritizes primary category or figure/reproduce foc
   assert.equal(orderedSceneLabelsFor(writingItem, t)[0], "taskWrite");
   assert.equal(orderedSceneLabelsFor(writingItem, t, "review")[0], "taskReview");
 });
+
+test("installs sort round-trips in URL hash and orders verified install counts before stars", () => {
+  const list = [
+    item("a/high-stars-zero-installs", "paper", undefined, {
+      rank: 1,
+      stars: 9000,
+      install_count: 0,
+    }),
+    item("b/top-installed", "paper", undefined, {
+      rank: 2,
+      stars: 1200,
+      install_count: 325000,
+    }),
+    item("c/mid-installed", "paper", undefined, {
+      rank: 3,
+      stars: 500,
+      install_count: 42000,
+    }),
+  ];
+  const state = { ...initial(), sort: "installs" };
+  const hash = serializeState(state);
+  assert.match(hash, /sort=installs/);
+  const restored = restoreState(store(), hash, {}, list);
+  assert.equal(restored.sort, "installs");
+  assert.deepEqual(
+    filterItems(list, restored).map((i) => i.repo),
+    ["b/top-installed", "c/mid-installed", "a/high-stars-zero-installs"],
+  );
+});

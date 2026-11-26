@@ -6,7 +6,7 @@ import { RESEARCH_TASKS, matchesResearchTask } from "../domain";
 import { DISCIPLINES, disciplineFit } from "../disciplines";
 import { trackEvent } from "../analytics";
 import { QualityBadges } from "./RepositoryViews";
-import { filterPublicSignals } from "../practical";
+import { filterPublicSignals, installMetricFor } from "../practical";
 import { SummaryText } from "./PracticalInfo";
 import { InstallationRequirements } from "./InstallationRequirements";
 import { SkillUsageGuide } from "./SkillUsageGuide";
@@ -68,7 +68,17 @@ export function RepositoryDrawer({
 
   const delta = item.star_delta_7d || 0;
   const publicSignals = filterPublicSignals(item.precision_signals);
+  const installInfo = installMetricFor(item, state.lang);
   const details = [
+    ...(installInfo
+      ? [
+          {
+            key: "installs",
+            label: state.lang === "zh" ? "真实安装/下载" : "Verified installs",
+            children: installInfo.tooltip,
+          },
+        ]
+      : []),
     {
       key: "topics",
       label: t("drTopics"),
@@ -91,7 +101,6 @@ export function RepositoryDrawer({
         </Space>
       ),
     },
-    { key: "forks", label: t("drForks"), children: fmt(item.forks) },
     {
       key: "issues",
       label: t("drIssues"),

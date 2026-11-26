@@ -715,6 +715,35 @@
   align-items: baseline;
   gap: 5px;
 }
+.card-key-metrics .card-primary-stats {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  min-width: 0;
+}
+.card-key-metrics .card-stars-stat,
+.card-key-metrics .card-installs-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  white-space: nowrap;
+}
+.card-key-metrics .card-installs-stat {
+  padding-left: 10px;
+  border-left: 1px solid var(--prs-border);
+  cursor: help;
+}
+.card-key-metrics .card-installs-stat strong {
+  font-size: 14.5px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--prs-body);
+}
+.card-key-metrics .card-installs-stat span {
+  text-decoration: underline dashed var(--prs-border);
+  text-underline-offset: 3px;
+}
 .card-key-metrics strong {
   font-size: 16.5px;
   line-height: 22px;
@@ -2260,7 +2289,9 @@ a:focus-visible,
 .ranking-sort-shortcuts {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  max-width: 100%;
 }
 .ranking-sort-shortcuts .ant-btn {
   min-height: 28px;

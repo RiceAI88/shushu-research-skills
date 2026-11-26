@@ -4,6 +4,7 @@ import { Table, Tag, Tooltip } from "antd";
 import { PlatformTags, SummaryText } from "./PracticalInfo";
 import { InstallationActions } from "./InstallationActions";
 import { isWebAiReady, orderedSceneLabelsFor, safeExternalUrl } from "../domain";
+import { installMetricFor } from "../practical";
 import { fitLabels } from "../projectFacts";
 import { Sparkline } from "./TrendCharts";
 
@@ -209,6 +210,24 @@ export default function RepositoryTable({
           />
         </div>
       ),
+    },
+    {
+      title: sortHeading(t("shortInstalls"), "installs", t("sortInstallsAction")),
+      key: "installs",
+      width: 96,
+      align: "right",
+      render: (_, item) => {
+        const info = installMetricFor(item, state.lang);
+        if (!info) return <span className="table-installs is-empty">—</span>;
+        return (
+          <Tooltip title={info.tooltip}>
+            <span className="table-installs" data-testid="table-installs">
+              <strong>{info.compact}</strong>
+              <small>{info.label}</small>
+            </span>
+          </Tooltip>
+        );
+      },
     },
     {
       title: sortHeading(t("shortDelta7"), "delta7", t("sortDelta7Action")),

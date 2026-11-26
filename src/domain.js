@@ -1,6 +1,16 @@
 import reviewedUsage from "../config/project-usage.json" with {type:"json"};
+import installCounts from "../config/install-counts.json" with { type: "json" };
 import { DISCIPLINES, matchesDiscipline, disciplineFit } from "./disciplines.js";
 import { createSearch } from "./search.js";
+
+// 获取仓库经过公开核验的真实安装/下载量（无真实记录时返回 0，绝不用 Forks 充数）
+function repoInstallCount(item) {
+  if (Number.isFinite(item?.install_count) && item.install_count > 0) {
+    return item.install_count;
+  }
+  const pair = installCounts?.repos?.[String(item?.repo || "").toLowerCase()];
+  return Array.isArray(pair) && Number.isFinite(pair[0]) ? pair[0] : 0;
+}
 export const RESEARCH_TASKS = [
   {
     id: "find",
@@ -475,7 +485,7 @@ export function restoreState(storage, hash = "", defaults = {}, items = []) {
     ),
     sort: valid(
       p.get("sort") === "fit" && !DISCIPLINES.some(d => d.id === p.get("discipline")) ? "rank" : p.get("sort"),
-      ["rank", "trend", "stars", "updated", "delta30", "delta7", "newest", "fit"],
+      ["rank", "installs", "trend", "stars", "updated", "delta30", "delta7", "newest", "fit"],
       "rank",
     ),
     lang: valid(
@@ -610,6 +620,8 @@ export function filterItems(items, state) {
   const ranks = (a, b) => a.rank - b.rank;
   const sorts = {
     rank: ranks,
+    installs: (a, b) =>
+      repoInstallCount(b) - repoInstallCount(a) || b.stars - a.stars || ranks(a, b),
     stars: (a, b) => b.stars - a.stars || ranks(a, b),
     trend: (a, b) => b.trend_score - a.trend_score || b.stars - a.stars,
     updated: (a, b) =>
