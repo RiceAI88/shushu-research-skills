@@ -24,62 +24,38 @@ function polishZhSpacing(str) {
 export function SummaryText({ item, t, query = "", full = false, lang = "" }) {
   const rawDesc = item.description || "";
   const curatedZh = item.curated_use_zh || "";
-  const hasNativeZh = HAS_CHINESE_RE.test(rawDesc);
-
-  // 详情抽屉展开态：保留上方中文导读 + 下方 GitHub 作者英文原文双层对照
-  if (full) {
-    const showCuratedZh = lang === "zh" && Boolean(curatedZh) && !hasNativeZh;
-    return (
-      <div
-        className={`practical-description${showCuratedZh ? " has-curated-use" : ""}`}
-      >
-        {showCuratedZh && (
-          <div className="curated-use-line" data-testid="card-cn-summary">
-            <SearchHighlight text={curatedZh} query={query} />
-          </div>
-        )}
-        <p className="description-full">
-          <SearchHighlight text={rawDesc || t("noDescription")} query={query} />
-        </p>
-      </div>
-    );
-  }
-
-  // 卡片与表格紧凑态：中文界面统一呈现单层柔和字重简介，避免粗体打架与英文半句截断
-  if (lang === "zh") {
-    const preferredZh = !hasNativeZh && curatedZh ? curatedZh : rawDesc || curatedZh;
-    const q = query.trim().toLowerCase();
-    const fallbackToRawForQuery =
-      q &&
-      rawDesc &&
-      !preferredZh.toLowerCase().includes(q) &&
-      rawDesc.toLowerCase().includes(q);
-    const chosen = fallbackToRawForQuery
-      ? rawDesc
-      : q
-        ? preferredZh
-        : polishZhSpacing(preferredZh);
-    const hoverTitle =
-      curatedZh && rawDesc && curatedZh !== rawDesc
-        ? `${polishZhSpacing(curatedZh)}\n${rawDesc}`
-        : chosen || t("noDescription");
-    return (
-      <div className="practical-description">
-        <p
-          className="description-clamp"
-          data-testid="card-cn-summary"
-          title={hoverTitle}
-        >
-          <SearchHighlight text={chosen || t("noDescription")} query={query} />
-        </p>
-      </div>
-    );
-  }
-
+  const showCuratedZh =
+    lang === "zh" &&
+    Boolean(curatedZh) &&
+    curatedZh.trim() !== rawDesc.trim();
   return (
-    <div className="practical-description">
-      <p className="description-clamp" title={rawDesc}>
-        <SearchHighlight text={rawDesc || t("noDescription")} query={query} />
+    <div
+      className={`practical-description${showCuratedZh ? " has-curated-use" : ""}`}
+    >
+      {showCuratedZh && (
+        <div
+          className="curated-use-line"
+          data-testid="card-cn-summary"
+          title={full ? undefined : curatedZh}
+        >
+          <SearchHighlight
+            text={query ? curatedZh : polishZhSpacing(curatedZh)}
+            query={query}
+          />
+        </div>
+      )}
+      <p
+        className={full ? "description-full" : "description-clamp"}
+        title={full ? undefined : rawDesc}
+      >
+        <SearchHighlight
+          text={
+            !query && HAS_CHINESE_RE.test(rawDesc)
+              ? polishZhSpacing(rawDesc)
+              : rawDesc || t("noDescription")
+          }
+          query={query}
+        />
       </p>
     </div>
   );
