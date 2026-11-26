@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-25",
+  "reviewed_at": "2026-11-26",
   "count_unit": "unique_repositories",
   "disciplines": [
     {
@@ -2548,6 +2548,201 @@
       "majors": [],
       "common": true,
       "reviewed_at": "2026-11-25",
+      "evidence": true
+    },
+    "chtc66/academic-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "mikamikasuki/forest": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "lmdhq-0420/researchpilot-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "openraiser/paperfit": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "lzh-phd/topic-feasibility-screener": {
+      "disciplines": [
+        "economics"
+      ],
+      "majors": [
+        "economics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "scverse/liana": {
+      "disciplines": [
+        "medicine"
+      ],
+      "majors": [
+        "bioinformatics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "wentorai/research-plugins": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "matsuikentaro1/humanizer_academic": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "yuanchen-home/cumcm-step-review": {
+      "disciplines": [
+        "science"
+      ],
+      "majors": [
+        "mathematics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "ymx10086/researchclaw": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "jihe520/sci-box": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "sibyl-research-team/autoresearch-sibylsystem": {
+      "disciplines": [
+        "engineering"
+      ],
+      "majors": [
+        "ai"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "shzhao27208/aut_sci_write": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "deepshare-official/ccf-figure": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "yunshenwuchuxun/latex-paper-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "ai4s-research/ai4s-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "haimbeau1o/thesis-optimizer": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "brycewang-stanford/free-research-crew": {
+      "disciplines": [
+        "economics"
+      ],
+      "majors": [
+        "economics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "nengong/download-anything": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "ycc-lover/research-starter-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "dictation354/paper-fetch-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "yzhao062/anywhere-agents": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "k-dense-ai/scientific-agents": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "dr-dumpling/papersearch": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "0antique/auto-visio-helper": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-26",
       "evidence": true
     }
   }

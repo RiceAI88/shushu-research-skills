@@ -91,6 +91,11 @@
       "first_seen_at": "2026-11-02T03:20:20Z",
       "first_seen_is_baseline": false
     },
+    "a-yeyang/ai-researcher": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "aarongig/pdf2zh-desktop": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
@@ -134,6 +139,11 @@
       "first_seen_date": "2026-09-27",
       "first_seen_is_baseline": false
     },
+    "adongwanai/follow-rsi": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "afishinlake/wordformat": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
@@ -147,6 +157,11 @@
     "agentichealthai/awesome-ai-agents-for-healthcare": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T08:55:06Z",
+      "first_seen_is_baseline": false
+    },
+    "agi4sci/sciforge": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "ahmadhassan-bted/turnitout-humanizer": {
@@ -177,6 +192,11 @@
     "ai45lab/awesome-trustworthy-embodied-ai": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T08:55:06Z",
+      "first_seen_is_baseline": false
+    },
+    "ai4risk/awesome-fraud-detection": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "ai4s-research/ai4s-skills": {
@@ -230,6 +250,16 @@
     "alchaincyf/huashu-report": {
       "first_seen_date": "2026-11-15",
       "first_seen_at": "2026-11-15T09:52:47Z",
+      "first_seen_is_baseline": false
+    },
+    "alchemistry/alchemical-best-practices": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
+    "alejandroll10/zeropaper": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "alephpi/texo": {
@@ -546,6 +576,11 @@
       "first_seen_at": "2026-10-27T16:05:57Z",
       "first_seen_is_baseline": false
     },
+    "chanw-research/claude-code-paper-writing": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "chb-learner/paperpilot": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
@@ -672,6 +707,11 @@
     "colinlh/paperscientist": {
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
+      "first_seen_is_baseline": false
+    },
+    "colrev-environment/colrev": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "companion-inc/feynman": {
@@ -1298,6 +1338,11 @@
       "first_seen_at": "2026-10-27T16:05:57Z",
       "first_seen_is_baseline": false
     },
+    "gudehhh666/awesome_scientific_agent": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "gulucaptain/best-paper-review-skill": {
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
@@ -1483,6 +1528,11 @@
     },
     "hrdzhu/modelviz-skill": {
       "first_seen_date": "2026-09-27",
+      "first_seen_is_baseline": false
+    },
+    "hs-esslingen-it-security/awesome-llm4svd": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "htlin222/meta-pipe": {
@@ -1979,6 +2029,11 @@
       "first_seen_date": "2026-08-27",
       "first_seen_is_baseline": true
     },
+    "limanman-design/lumior-community": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "limhyungtae/awesome-claudecode-paper-proofreading": {
       "first_seen_date": "2026-08-27",
       "first_seen_is_baseline": true
@@ -2041,6 +2096,11 @@
       "first_seen_at": "2026-11-22T07:41:21Z",
       "first_seen_is_baseline": false
     },
+    "liyuanbo1024/management-science-writing": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "llmbook-zh/llmbook-zh.github.io": {
       "first_seen_date": "2026-11-21",
       "first_seen_at": "2026-11-21T10:15:45Z",
@@ -2067,6 +2127,11 @@
     "lottshin/scholar-kit": {
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
+      "first_seen_is_baseline": false
+    },
+    "loujc/eda-paper-writing": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "ltjed/freephdlabor": {
@@ -2231,6 +2296,11 @@
       "first_seen_at": "2026-11-20T10:32:13Z",
       "first_seen_is_baseline": false
     },
+    "mlnlp-world/paper-presentation-tips": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "mlnlp-world/paper-rebuttal-tips": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
@@ -2265,6 +2335,11 @@
       "first_seen_at": "2026-11-16T03:03:06Z",
       "first_seen_is_baseline": false
     },
+    "mountainwaterr/yuehui-tegong": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "mrgediao/paper-reading-zh": {
       "first_seen_date": "2026-11-06",
       "first_seen_at": "2026-11-06T02:17:21Z",
@@ -2292,6 +2367,11 @@
     "n-allpass/modex-mh-agent": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
+      "first_seen_is_baseline": false
+    },
+    "nanboy-ronan/awesome-medical-imaging-agents": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "nealcaren/social-data-analysis": {
@@ -2417,6 +2497,11 @@
       "first_seen_at": "2026-10-27T16:05:57Z",
       "first_seen_is_baseline": false
     },
+    "opendatalab/sciverse-agent-tools": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "opendcai/dataflow": {
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
@@ -2523,6 +2608,11 @@
       "first_seen_at": "2026-11-24T02:39:08Z",
       "first_seen_is_baseline": false
     },
+    "pbhu1024/awesome-augmented-language-model": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "pcdp577/evidence-grounded-manuscript-skills": {
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
@@ -2531,6 +2621,11 @@
     "pdfmathtranslate/pdfmathtranslate": {
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
+      "first_seen_is_baseline": false
+    },
+    "peaceful-world-x/arxivhub": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "peacefulj/ssci-sci-skills": {
@@ -2554,6 +2649,11 @@
     "pensivefei/deep-read-summarize": {
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
+      "first_seen_is_baseline": false
+    },
+    "picrew/awesome-rsi": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "pigeondan1/paper_claw": {
@@ -2636,6 +2736,11 @@
       "first_seen_at": "2026-11-05T09:48:29Z",
       "first_seen_is_baseline": false
     },
+    "quenithai/t2i-generation-paper-list": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "quenithai/video-generation-paper-list": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
@@ -2659,6 +2764,11 @@
     "qwwzdyj/aia-academic-illustrator-": {
       "first_seen_date": "2026-11-20",
       "first_seen_at": "2026-11-20T10:32:13Z",
+      "first_seen_is_baseline": false
+    },
+    "qxy661/uav-wm-vla-learning": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "r2m-ai/scholar-loop": {
@@ -2699,6 +2809,16 @@
     "researai/awesome-ai-scientist": {
       "first_seen_date": "2026-11-24",
       "first_seen_at": "2026-11-24T02:39:08Z",
+      "first_seen_is_baseline": false
+    },
+    "reyuyu/ccfa-gent": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
+    "rhu2xx/academic_radar": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "rimagination/easyplot": {
@@ -2982,6 +3102,11 @@
       "first_seen_at": "2026-11-23T06:36:57Z",
       "first_seen_is_baseline": false
     },
+    "songhahaha66/paperagent": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "spark-to-paper-skills/paperjury": {
       "first_seen_date": "2026-09-27",
       "first_seen_is_baseline": false
@@ -2989,6 +3114,11 @@
     "spark-to-paper-skills/spark-to-paper-skills": {
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
+      "first_seen_is_baseline": false
+    },
+    "sparks-baird/auto-paper": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "spectrum527/academic-automation-skill": {
@@ -3052,6 +3182,11 @@
     "sunnnybala/rstack": {
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
+      "first_seen_is_baseline": false
+    },
+    "susannalles/minimaleditions": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
       "first_seen_is_baseline": false
     },
     "sustech-cra/sustech-master-thesis": {
@@ -3459,6 +3594,11 @@
       "first_seen_at": "2026-11-25T16:14:32Z",
       "first_seen_is_baseline": false
     },
+    "xueyongfu11/awesome-deep-learning-resource": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "xujingchen1996/research-app-toolkit": {
       "first_seen_date": "2026-10-14",
       "first_seen_is_baseline": false
@@ -3703,6 +3843,11 @@
       "first_seen_date": "2026-09-27",
       "first_seen_is_baseline": false
     },
+    "zhengzihaopku/awesome-embodied-trustworthy-execution": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "zhenwei017-lgtm/citation-formatter": {
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
@@ -3743,6 +3888,11 @@
       "first_seen_at": "2026-11-20T10:32:13Z",
       "first_seen_is_baseline": false
     },
+    "zjunlp/mechanist": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
+    },
     "zjunlp/sciatlas": {
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T05:55:35Z",
@@ -3751,6 +3901,11 @@
     "zlanqing/codex-claude-academic-skills": {
       "first_seen_date": "2026-08-27",
       "first_seen_is_baseline": true
+    },
+    "zoedsy/awesome-science-agents": {
+      "first_seen_date": "2026-11-26",
+      "first_seen_at": "2026-11-26T08:00:33Z",
+      "first_seen_is_baseline": false
     },
     "zoharbabin/web-researcher-mcp": {
       "first_seen_date": "2026-11-22",

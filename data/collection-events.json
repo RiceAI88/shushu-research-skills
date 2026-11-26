@@ -4214,5 +4214,173 @@
     "at": "2026-11-25T15:38:39Z",
     "repo": "l2461090/nature-figure-editable",
     "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "r2m-ai/scholar-loop",
+    "action": "removed",
+    "reasons": [
+      "research",
+      "citation",
+      "scholar",
+      "missing_skill_signal",
+      "missing_high_confidence_academic_signal",
+      "missing_readme_academic_scope"
+    ]
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "opendatalab/sciverse-agent-tools",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "limanman-design/lumior-community",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "zhengzihaopku/awesome-embodied-trustworthy-execution",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "hs-esslingen-it-security/awesome-llm4svd",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "alchemistry/alchemical-best-practices",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "nanboy-ronan/awesome-medical-imaging-agents",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "zoedsy/awesome-science-agents",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "peaceful-world-x/arxivhub",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "agi4sci/sciforge",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "gudehhh666/awesome_scientific_agent",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "zjunlp/mechanist",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "a-yeyang/ai-researcher",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "sparks-baird/auto-paper",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "alejandroll10/zeropaper",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "mountainwaterr/yuehui-tegong",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "xueyongfu11/awesome-deep-learning-resource",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "quenithai/t2i-generation-paper-list",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "mlnlp-world/paper-presentation-tips",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "picrew/awesome-rsi",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "reyuyu/ccfa-gent",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "rhu2xx/academic_radar",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "liyuanbo1024/management-science-writing",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "qxy661/uav-wm-vla-learning",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "susannalles/minimaleditions",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "adongwanai/follow-rsi",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "ai4risk/awesome-fraud-detection",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "pbhu1024/awesome-augmented-language-model",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "loujc/eda-paper-writing",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "songhahaha66/paperagent",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "chanw-research/claude-code-paper-writing",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-26T07:30:55Z",
+    "repo": "colrev-environment/colrev",
+    "action": "added"
   }
 ]

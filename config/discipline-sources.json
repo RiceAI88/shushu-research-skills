@@ -2014,5 +2014,230 @@
     "source_sha": "270177e1dd529f7e31e9c7212f23f5dac04db673",
     "reviewed_at": "2026-11-25",
     "review_kind": "documentation_only"
+  },
+  "chtc66/academic-skills": {
+    "use_zh": "覆盖论文精读、综述撰写、实验总结、Rebuttal 与组会周报的技能包",
+    "use_en": "Workflow skills for paper reading, surveys, experiment summaries, and rebuttals",
+    "source_quote": "`academic-skills` 是一个面向中文科研工作流的 ChatGPT skills 仓库，聚焦论文阅读、综述写作、arXiv 监控、飞书速递、审稿回复、实验总结、benchmark 抽取、research gap 分析，以及周报和组会材料生成。",
+    "source_url": "https://github.com/chtc66/academic-skills/blob/main/README.md",
+    "source_sha": "1374fee62a62ccc8cb8a73b8843b38da1f581a07",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "mikamikasuki/forest": {
+    "use_zh": "人工智能与深度学习：全流程自动化科研探索与实验、科研配图与数据可视化技能",
+    "use_en": "Literature search, citation verification and synthesis",
+    "source_quote": "Idea discovery → literature review → hypothesis formation → experiment design → real execution → result analysis → research-path revision → baselines & ablations → figures & tables → full-paper generation**",
+    "source_url": "https://github.com/mikamikasuki/forest/blob/main/README.md",
+    "source_sha": "a2d1c955d1873b743978fd89f502e59ac9ad1d96",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "lmdhq-0420/researchpilot-skills": {
+    "use_zh": "从方向探索、文献调研、实验代码实现到论文撰写的自动化工作流",
+    "use_en": "Automated academic workflow from topic exploration to experiments and writing",
+    "source_quote": "🎨 **[2026/09/11]** 新增独立科研绘图 Skill `/research[fig]`：读取真实项目数据，在 `code/fig/` 下生成并检查 PDF、SVG 和 500 dpi PNG 图件。 🌟 **[2026/08/01]** 突破 200 stars！感谢大家的支持。借此机会优化了两处体验：作图不再强制样式，可以更加灵活的作图；写作阶段新增架构变更检测，随时带着修改意图触发任意 G.1–G…",
+    "source_url": "https://github.com/LMDHQ-0420/ResearchPilot-Skills/blob/main/README.md",
+    "source_sha": "4e06a8257986da564d92e9c9621e17a37fbfb505",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "openraiser/paperfit": {
+    "use_zh": "视觉闭环 LaTeX 自动编译、版面超界诊断与论文排版修复",
+    "use_en": "Vision-in-the-loop LaTeX compiler and layout diagnostic/fix agent",
+    "source_quote": "PaperFit 是面向 `Claude Code`、`Codex`、`Cursor` 的视觉闭环 LaTeX 排版系统。PaperFit 组织“渲染页图—视觉诊断—受约束源码修复—重新渲染与视觉复验”的结构化循环，由当前多模态宿主执行。实际页图反馈是诊断和每个修复候选验收的必要环节，每个完整候选重新渲染后都检查全部物理页面，再决定保留、修改或回滚；独立视觉 API 可补充证据，不能把视觉反馈降为可选。最终交付前检…",
+    "source_url": "https://github.com/OpenRaiser/PaperFit/blob/main/README.md",
+    "source_sha": "b1e2fb796fc41e961950143de07b9195eff13378",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "lzh-phd/topic-feasibility-screener": {
+    "use_zh": "经济学实证与计量分析",
+    "use_en": "Economics and econometric analysis",
+    "source_quote": "`topic-feasibility-screener` is a Codex skill for screening empirical research topics from existing `.csv` or Stata `.dta` datasets. It combines dataset profiling, broad topic brainstorming, real literature se…",
+    "source_url": "https://github.com/lzh-phd/topic-feasibility-screener/blob/master/README.md",
+    "source_sha": "549c723bf0444e3073813101839f3dffe1b5359d",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "scverse/liana": {
+    "use_zh": "单细胞与空间转录组细胞间通讯及配体-受体互作分析框架",
+    "use_en": "All-in-one framework for single-cell and spatial cell-cell communication",
+    "source_quote": "LIANA+ is a scalable framework that adapts and extends existing methods and knowledge to study cell-cell communication in single-cell, spatially-resolved, and multi-modal omics data. It is part of the scverse…",
+    "source_url": "https://github.com/scverse/liana/blob/main/README.md",
+    "source_sha": "0316158db860b72438ce818e8a841c458576de0f",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "wentorai/research-plugins": {
+    "use_zh": "汇集 350+ 学术检索、写作与工具配置的综合科研插件库",
+    "use_en": "Collection of 350+ academic research skills, MCP configs, and plugins",
+    "source_quote": "一行命令,让你的 AI 助手学会查文献、写综述、跑回归、管引文、写基金—— 科研龙虾 (Research-Claw) 的内置技能库,同时兼容 40+ 主流 Agent 框架。",
+    "source_url": "https://github.com/wentorai/research-plugins/blob/main/README.md",
+    "source_sha": "545cdd946d8be781e9d3324b5423187c34b72b2c",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "matsuikentaro1/humanizer_academic": {
+    "use_zh": "消除医学与学术英文论文中的生硬 AI 腔，恢复自然专业笔触",
+    "use_en": "Remove formulaic AI phrasing from English medical and academic manuscripts",
+    "source_quote": "1. Download `SKILL.md` and `references/reader-clarity.md` from this repository. 2. Upload both files to the chat along with the text you want to edit. 3. Ask: `Apply this skill to the following manuscript text…",
+    "source_url": "https://github.com/matsuikentaro1/humanizer_academic/blob/main/README.md",
+    "source_sha": "2b4f9c94e1291d1e9a5b6b0472467556377c06b1",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "yuanchen-home/cumcm-step-review": {
+    "use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
+    "use_en": "Mathematics and mathematical modeling",
+    "source_quote": "cumcm-step-review ｜ 数学建模国赛 · 逐步审核版",
+    "source_url": "https://github.com/yuanchen-home/cumcm-step-review/blob/main/README.md",
+    "source_sha": "c2bbb1cd9cd2363e0d3bb479c434e3cddf5c82fb",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "ymx10086/researchclaw": {
+    "use_zh": "可接入常用聊天工具的个人文献精读、笔记管理与实验追踪助手",
+    "use_en": "Personal research assistant for literature review, notes, and experiment tracking",
+    "source_quote": "Local-first Research OS for papers, workflows, experiments, channels, and automation.",
+    "source_url": "https://github.com/ymx10086/ResearchClaw/blob/main/README.md",
+    "source_sha": "7200d70f6cbd64c6894e84998189542f8ba2c724",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "jihe520/sci-box": {
+    "use_zh": "科研配图、流程图与汇报文稿制作",
+    "use_en": "Publication figures, diagrams and presentation slides",
+    "source_quote": "sci-box 提供一组可直接调用的科研绘图与论文示意图模板，帮助 Agent 快速产出高质量图表与可编辑矢量图。",
+    "source_url": "https://github.com/jihe520/sci-box/blob/main/README.md",
+    "source_sha": "c1376b331f122bd73c7e2fb60f80538c0f6a6439",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "sibyl-research-team/autoresearch-sibylsystem": {
+    "use_zh": "支持实验调度、结果反馈与论文生成的自演进自主科研系统",
+    "use_en": "Self-evolving multi-agent system for experiment execution and paper generation",
+    "source_quote": "Sibyl is a **fully autonomous AI scientist** that drives end-to-end ML research — from literature survey and hypothesis generation to GPU experiment execution and conference-ready paper writing. It operates as…",
+    "source_url": "https://github.com/Sibyl-Research-Team/AutoResearch-SibylSystem/blob/main/README.md",
+    "source_sha": "d8cbc28d3e68f1806cc20b4d5dd6d6aae8848a76",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "shzhao27208/aut_sci_write": {
+    "use_zh": "覆盖 WoS / Elsevier 文献下载、PDF 图表提取、Zotero 同步与综述撰写",
+    "use_en": "Literature search/download, PDF figure extraction, Zotero sync, and review writing",
+    "source_quote": "| Skill | Description | Example Trigger | |:------|:------------|:----------------| | `sci-search` | Search arXiv + PubMed + **Web of Science** + **Elsevier** +**Springer** + Semantic Scholar + OpenAlex simult…",
+    "source_url": "https://github.com/ShZhao27208/Aut_Sci_Write/blob/main/README.md",
+    "source_sha": "3343cf3b515e8d19f57cc3d23bd962c5d74f0401",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "deepshare-official/ccf-figure": {
+    "use_zh": "科研配图、流程图与汇报文稿制作",
+    "use_en": "Publication figures, diagrams and presentation slides",
+    "source_quote": "A skill for generating publication-ready scientific figures from AI/CS research papers. Classify paper type first, then select the optimal diagram structure automatically.",
+    "source_url": "https://github.com/Deepshare-Official/CCF-Figure/blob/main/README.md",
+    "source_sha": "9e2b38e89661c3dc702ff123589ecc9d3cdfab9a",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "yunshenwuchuxun/latex-paper-skills": {
+    "use_zh": "模块化 LaTeX 学术论文分节撰写、图表排版与修订管理框架",
+    "use_en": "Modular skill framework for drafting, revising, and managing LaTeX papers",
+    "source_quote": "Portable **AI agent skill bundle** for writing ML/AI academic papers — from topic to compiled PDF, with verified BibTeX citations, gated workflows, and multi-agent collaboration.",
+    "source_url": "https://github.com/yunshenwuchuxun/latex-paper-skills/blob/main/README.md",
+    "source_sha": "da8ebf5dfcf6c0f48de304ce9574c4c97f4593a2",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "ai4s-research/ai4s-skills": {
+    "use_zh": "面向 AI for Science 的课题调研、实验执行、论文撰写与诚信核查",
+    "use_en": "AI-for-Science skills covering literature survey, experiments, and integrity audits",
+    "source_quote": "Seven agent skills for AI-for-Science research — turn a research direction into literature surveys, runnable experiments, publication-grade papers, and integrity audits, with every citation, number, and figure…",
+    "source_url": "https://github.com/ai4s-research/ai4s-skills/blob/main/README.md",
+    "source_sha": "f4433c2ab843e44072579c44e5fd05219441e932",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "haimbeau1o/thesis-optimizer": {
+    "use_zh": "学术论文写作、润色与格式排版",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "🎓 Thesis-Optimizer: 学术论文智能优化系统",
+    "source_url": "https://github.com/Haimbeau1o/thesis-optimizer/blob/main/README.md",
+    "source_sha": "fa836fd01d5e124376f46000627e23512f1ab2fc",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "brycewang-stanford/free-research-crew": {
+    "use_zh": "经济学实证与计量分析",
+    "use_en": "Economics and econometric analysis",
+    "source_quote": "| 团队成员 | 为你做什么 | |---|---| | **PI**（你 + 主会话） | 定问题、做计划、审批每一道关卡 | | **Scout（文献）** | 查找已有研究，逐条核验每一条参考文献 | | **Designer（设计）** | 在看到任何结果之前锁定研究设计 | | **Econometrician（计量）** | 社科赛道：数据、估计、稳健性 | | **Experimenter（实验）**…",
+    "source_url": "https://github.com/brycewang-stanford/Free-Research-Crew/blob/main/README.md",
+    "source_sha": "065d9d89ee327a054b889b9adadbd093320c339f",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "nengong/download-anything": {
+    "use_zh": "文献检索、引文核验与综述整理",
+    "use_en": "Literature search, citation verification and synthesis",
+    "source_quote": "**面向个人与 AI Agent 的全能下载与结构化归档工具**：提供 **命令行 CLI** 与 **Agent Skill** 双入口。从 App 分享口令或原始链接一键下载内容，自动落盘配套字幕、原画封面、独立音轨、BibTeX 引用及本地化 Markdown。",
+    "source_url": "https://github.com/nengong/download-anything/blob/main/README.md",
+    "source_sha": "0dc177888dc503826e82a4ca0f78e99f4f666202",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "ycc-lover/research-starter-skills": {
+    "use_zh": "文献检索、引文核验与综述整理",
+    "use_en": "Literature search, citation verification and synthesis",
+    "source_quote": "科研入门、论文写作与学术汇报，连接到你正在做的研究。**",
+    "source_url": "https://github.com/YCC-Lover/research-starter-skills/blob/main/README.md",
+    "source_sha": "1c54456034906ba579eba2233522afcb7cd79b81",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "dictation354/paper-fetch-skill": {
+    "use_zh": "输入 DOI、标题或链接即可提取结构化 Markdown 论文全文",
+    "use_en": "Fetch structured agent-ready Markdown full text from DOI, URL, or paper title",
+    "source_quote": "| 维度 | Paper Fetch | 单一 PDF → Markdown 路径 | | --- | --- | --- | | 输入入口 | DOI、URL、标题、arXiv ID 或引用条目 | 已取得的 PDF | | 首选内容源 | 受支持 provider 优先使用官方 HTML/XML，失败时再走验证后的 PDF fallback | PDF 文本层、版面和 OCR | | 论文结构 | 统一为 me…",
+    "source_url": "https://github.com/Dictation354/paper-fetch-skill/blob/main/README.md",
+    "source_sha": "eb5d372e96c8739aeb20877a69f68ef617392253",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "yzhao062/anywhere-agents": {
+    "use_zh": "跨项目复用的安全科研 Agent 写作配置、技能路由与误删防护",
+    "use_en": "Portable agent configuration with curated writing skills and command safety guards",
+    "source_quote": "[!NOTE] **Condensed from daily use.** The sanitized public release of the agent config I have run daily since early 2026 across research, paper writing, and dev work (PyOD 3, LaTeX, admin) on macOS, Windows, a…",
+    "source_url": "https://github.com/yzhao062/anywhere-agents/blob/main/README.md",
+    "source_sha": "b2c1d03bf869f69b6339ae5d8383ec48a8a3f003",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "k-dense-ai/scientific-agents": {
+    "use_zh": "面向人工智能与深度学习的科研辅助技能",
+    "use_en": "Literature search, citation verification and synthesis",
+    "source_quote": "📄 **Read the paper:** Scientific Agents: Evaluating Profession-Specific System Prompts on Scientific Tasks (arXiv:2610.00084). If these profiles support your research, please cite it.",
+    "source_url": "https://github.com/K-Dense-AI/scientific-agents/blob/main/README.md",
+    "source_sha": "46ae83c0b9d43da1aae45086010d17c5f1a5d86c",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "dr-dumpling/papersearch": {
+    "use_zh": "支持期刊指标查询及开放获取/校园订阅渠道的论文检索与全文下载",
+    "use_en": "Paper search, journal metrics, and PDF/Markdown full-text download tool",
+    "source_quote": "轻量、全自动的 AI 文献全能工具 一句话让AI完成文献检索、核对、下载全文和补充材料，后台自动完成。",
+    "source_url": "https://github.com/dr-dumpling/PaperSearch/blob/main/README.md",
+    "source_sha": "f38e6a7db9c72b97a6a8014581eb4f21f1cf0f56",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
+  },
+  "0antique/auto-visio-helper": {
+    "use_zh": "科研配图、流程图与汇报文稿制作",
+    "use_en": "Publication figures, diagrams and presentation slides",
+    "source_quote": "把“论文图想法 / 截图 / 草图”变成真正可编辑的 Microsoft Visio `.vsdx`。",
+    "source_url": "https://github.com/0Antique/Auto-Visio-Helper/blob/master/README.md",
+    "source_sha": "7314d71426bb2f3226fb20c42364f4a16f5f2921",
+    "reviewed_at": "2026-11-26",
+    "review_kind": "documentation_only"
   }
 }
