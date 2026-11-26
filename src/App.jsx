@@ -696,6 +696,45 @@ function Dashboard({ state, update, switchLang }) {
           </a>
           <div className="nav-actions">
             <div className="nav-primary-group">
+              <div
+                className="page-tabs nav-page-tabs"
+                data-section={state.section}
+                role="tablist"
+                aria-label={t("pageViews")}
+              >
+                {["ranking", "insights"].map((section) => (
+                  <Button
+                    key={section}
+                    role="tab"
+                    id={`tab-${section}`}
+                    aria-selected={state.section === section}
+                    aria-controls={`panel-${section}`}
+                    tabIndex={state.section === section ? 0 : -1}
+                    onKeyDown={(event) => {
+                      if (
+                        ["ArrowLeft", "ArrowRight", "Home", "End"].includes(
+                          event.key,
+                        )
+                      ) {
+                        event.preventDefault();
+                        const next =
+                          event.key === "Home"
+                            ? "ranking"
+                            : event.key === "End"
+                              ? "insights"
+                              : section === "ranking"
+                                ? "insights"
+                                : "ranking";
+                        update((s) => ({ ...s, section: next }));
+                        document.getElementById(`tab-${next}`)?.focus();
+                      }
+                    }}
+                    onClick={() => update((s) => ({ ...s, section }))}
+                  >
+                    {t(section === "ranking" ? "tableTitle" : "insightsTitle")}
+                  </Button>
+                ))}
+              </div>
               <Tooltip title={t("reportsLink")}>
                 <Button
                   aria-label={t("reportsLink")}
@@ -756,105 +795,15 @@ function Dashboard({ state, update, switchLang }) {
             </div>
           </div>
         </Reveal>
-        <section className="hero container">
-          <div className="hero-top-grid">
-            <div className="hero-copy">
-              <div className="hero-capsule">
-                <Button
-                  className="beginner-entry"
-                  onClick={() => setGuideSection("basics")}
-                >
-                  {state.lang === "zh" ? "30 秒看懂 Skill" : "Skills in 30 seconds"}
-                </Button>
-                <span className="hero-capsule-sep" aria-hidden="true">
-                  ·
-                </span>
-                <button
-                  type="button"
-                  className="hero-capsule-path"
-                  onClick={() => setGuideSection("paths")}
-                >
-                  {state.lang === "zh" ? "专业科研路径 ›" : "Research paths ›"}
-                </button>
-              </div>
-              <Reveal as="h1" kind="hero" tabIndex={-1}>
-                {state.lang === "zh" ? (
-                  <>
-                    找到适合你专业的<em>科研 Skills</em>
-                  </>
-                ) : (
-                  <>
-                    Find research <em>Skills for your discipline</em>
-                  </>
-                )}
-              </Reveal>
-              <Reveal as="p" kind="hero" order={1} className="hero-subtitle">
-                {t("heroSubtitle")}
-              </Reveal>
-            </div>
-            <HeroPosterAd
-              lang={state.lang}
-              hidden={Boolean(state.query && visible.length === 0)}
-            />
-          </div>
-          <div className="hero-toolbar">
-            <div
-              className="page-tabs"
-              data-section={state.section}
-              role="tablist"
-              aria-label={t("pageViews")}
-            >
-              {["ranking", "insights"].map((section) => (
-                <Button
-                  key={section}
-                  role="tab"
-                  id={`tab-${section}`}
-                  aria-selected={state.section === section}
-                  aria-controls={`panel-${section}`}
-                  tabIndex={state.section === section ? 0 : -1}
-                  onKeyDown={(event) => {
-                    if (
-                      ["ArrowLeft", "ArrowRight", "Home", "End"].includes(
-                        event.key,
-                      )
-                    ) {
-                      event.preventDefault();
-                      const next =
-                        event.key === "Home"
-                          ? "ranking"
-                          : event.key === "End"
-                            ? "insights"
-                            : section === "ranking"
-                              ? "insights"
-                              : "ranking";
-                      update((s) => ({ ...s, section: next }));
-                      document.getElementById(`tab-${next}`)?.focus();
-                    }
-                  }}
-                  onClick={() => update((s) => ({ ...s, section }))}
-                >
-                  {t(section === "ranking" ? "tableTitle" : "insightsTitle")}
-                </Button>
-              ))}
-            </div>
-            <SearchBox
-              inactive={stickySearchVisible}
-              inputRef={search}
-              state={state}
-              update={update}
-              items={visible}
-              taskOptions={taskOptions}
-              t={t}
-            />
-          </div>
+        <section className="hero hero-centered container">
           <div
-            className="portal-kpi-grid"
-            data-testid="portal-kpi-grid"
-            aria-label={state.lang === "zh" ? "核心收录指标" : "Key directory metrics"}
+            className="hero-live-pill"
+            data-testid="hero-live-pill"
+            aria-label={state.lang === "zh" ? "核心收录指标与新手入口" : "Key directory metrics & starter guide"}
           >
             <button
               type="button"
-              className="portal-kpi-card portal-kpi-btn"
+              className="hero-stat-chip"
               title={state.lang === "zh" ? "查看全部收录并重置筛选" : "Show all listed Skills and reset filters"}
               onClick={() =>
                 update((s) => ({
@@ -877,20 +826,23 @@ function Dashboard({ state, update, switchLang }) {
                 }))
               }
             >
-              <div className="portal-kpi-meta">
-                <span>{state.lang === "zh" ? "已收录 Skills" : "Listed Skills"}</span>
-                <strong>{fmt(scopeItems.length)}</strong>
-              </div>
-              <span className="portal-kpi-icon kpi-icon-blue" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" />
-                </svg>
+              <i className="hero-live-dot" aria-hidden="true" />
+              <span>
+                {state.lang === "zh" ? (
+                  <>
+                    已收录 <strong>{fmt(scopeItems.length)}</strong> 款科研 Skills
+                  </>
+                ) : (
+                  <>
+                    <strong>{fmt(scopeItems.length)}</strong> Research Skills
+                  </>
+                )}
               </span>
             </button>
+            <span className="hero-pill-sep" aria-hidden="true">·</span>
             <button
               type="button"
-              className={`portal-kpi-card portal-kpi-btn${state.sort === "updated" ? " is-active" : ""}`}
+              className={`hero-stat-chip${state.sort === "updated" ? " is-active" : ""}`}
               aria-pressed={state.sort === "updated"}
               title={state.lang === "zh" ? "按最近更新排序" : "Sort by most recently updated"}
               onClick={() =>
@@ -901,19 +853,22 @@ function Dashboard({ state, update, switchLang }) {
                 }))
               }
             >
-              <div className="portal-kpi-meta">
-                <span>{state.lang === "zh" ? "近期活跃维护" : "Active in 30d"}</span>
-                <strong>{fmt(recentCount)}</strong>
-              </div>
-              <span className="portal-kpi-icon kpi-icon-emerald" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3L12 3z" />
-                </svg>
+              <span>
+                {state.lang === "zh" ? (
+                  <>
+                    近期活跃 <strong>{fmt(recentCount)}</strong>
+                  </>
+                ) : (
+                  <>
+                    Active <strong>{fmt(recentCount)}</strong>
+                  </>
+                )}
               </span>
             </button>
+            <span className="hero-pill-sep" aria-hidden="true">·</span>
             <button
               type="button"
-              className={`portal-kpi-card portal-kpi-btn${state.newOnly ? " is-active" : ""}`}
+              className={`hero-stat-chip${state.newOnly ? " is-active" : ""}`}
               aria-pressed={state.newOnly}
               title={state.lang === "zh" ? "筛选本周新收录项目" : "Filter Skills added this week"}
               onClick={() =>
@@ -925,46 +880,71 @@ function Dashboard({ state, update, switchLang }) {
                 }))
               }
             >
-              <div className="portal-kpi-meta">
-                <span>{state.lang === "zh" ? "本周新增收录" : "New this week"}</span>
-                <strong>{fmt(newcomers)}</strong>
-              </div>
-              <span className="portal-kpi-icon kpi-icon-amber" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M19 8v6M22 11h-6" />
-                </svg>
+              <span>
+                {state.lang === "zh" ? (
+                  <>
+                    本周新增 <strong className="is-warm">+{fmt(newcomers)}</strong>
+                  </>
+                ) : (
+                  <>
+                    New <strong className="is-warm">+{fmt(newcomers)}</strong>
+                  </>
+                )}
               </span>
             </button>
+            <span className="hero-pill-divider" aria-hidden="true">|</span>
+            <Button
+              className="beginner-entry"
+              onClick={() => setGuideSection("basics")}
+            >
+              {state.lang === "zh" ? "30 秒看懂 Skill" : "Skills in 30 seconds"}
+            </Button>
+            <span className="hero-pill-sep" aria-hidden="true">·</span>
             <button
               type="button"
-              className={`portal-kpi-card portal-kpi-btn${state.sort === "delta7" ? " is-active" : ""}`}
-              aria-pressed={state.sort === "delta7"}
-              title={state.lang === "zh" ? "按近 7 日 Stars 上升最快排序" : "Sort by fastest 7-day Stars growth"}
-              onClick={() =>
-                update((s) => ({
-                  ...s,
-                  section: "ranking",
-                  sort: s.sort === "delta7" ? "rank" : "delta7",
-                }))
-              }
+              className="hero-capsule-path"
+              onClick={() => setGuideSection("paths")}
             >
-              <div className="portal-kpi-meta">
-                <span>{state.lang === "zh" ? "近 7 日净增 Stars" : "7-day net Stars"}</span>
-                <strong>
-                  {net7 > 0 ? "+" : ""}
-                  {fmt(net7)}
-                </strong>
-              </div>
-              <span className="portal-kpi-icon kpi-icon-purple" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-                  <polyline points="16 7 22 7 22 13" />
-                </svg>
-              </span>
+              {state.lang === "zh" ? "专业科研路径 ›" : "Research paths ›"}
             </button>
           </div>
+
+          <Reveal as="h1" kind="hero" tabIndex={-1}>
+            {state.lang === "zh" ? (
+              <>
+                找到适合你专业的<em>科研 Skills</em>
+              </>
+            ) : (
+              <>
+                Find research <em>Skills for your discipline</em>
+              </>
+            )}
+          </Reveal>
+          <Reveal as="p" kind="hero" order={1} className="hero-subtitle">
+            {t("heroSubtitle")}
+          </Reveal>
+
+          <div className="hero-toolbar hero-search-stage">
+            <SearchBox
+              inactive={stickySearchVisible}
+              inputRef={search}
+              state={state}
+              update={update}
+              items={visible}
+              taskOptions={taskOptions}
+              t={t}
+            />
+            {!state.query && (
+              <kbd className="hero-search-kbd" aria-hidden="true">
+                /
+              </kbd>
+            )}
+          </div>
+
+          <HeroPosterAd
+            lang={state.lang}
+            hidden={Boolean(state.query && visible.length === 0)}
+          />
         </section>
       </header>
       <main

@@ -34,17 +34,15 @@ test("reference palette, right-hand search and default cards give a compact firs
     "background-color",
     "rgb(244, 247, 250)",
   );
-  await expect(page.locator(".portal-kpi-card")).toHaveCount(4);
+  await expect(page.getByTestId("hero-live-pill")).toBeVisible();
   const title = await page.locator("h1").boundingBox();
   const search = await page.locator("#searchInput").boundingBox();
   expect(search.y).toBeGreaterThan(title.y + title.height);
-  expect(Math.abs(search.y - (await page.locator(".page-tabs").boundingBox()).y)).toBeLessThan(10);
   const first = await page.getByTestId("repo-card").first().boundingBox();
-  const kpiHeight = (await page.locator(".portal-kpi-grid").boundingBox()).height + 24;
+  const dualAdHeight = (await page.getByTestId("hero-poster-ad").boundingBox()).height + 20;
   const noticeHeight = (await page.locator(".top-notice-bar").boundingBox()).height + 16;
-  // Daily discoveries precede the first ranked card while poster sits in the hero top-right.
-  expect(first.y).toBeLessThan(560 + kpiHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
-  expect(first.y + first.height).toBeLessThan(900 + kpiHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
+  expect(first.y).toBeLessThan(560 + dualAdHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
+  expect(first.y + first.height).toBeLessThan(900 + dualAdHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
   await expect(page.locator(".task-selection-indicator")).toHaveCSS(
     "background-color",
     "rgb(13, 159, 110)",
@@ -90,9 +88,13 @@ for (const width of [1280, 390])
       .evaluate((e) => e.getBoundingClientRect().top);
     const box = await ad.boundingBox();
     expect(box.y + box.height).toBeLessThanOrEqual(firstCardTop + 1);
-    await expect(ad.getByRole("link")).toHaveAttribute(
+    await expect(ad.getByTestId("poster-slide-recharge")).toHaveAttribute(
       "href",
-      /https:\/\/(catfk\.com\/shop\/1991|zhi1ke\.com\?pic=6PEB)/,
+      "https://catfk.com/shop/1991",
+    );
+    await expect(ad.getByTestId("poster-slide-zhi1ke")).toHaveAttribute(
+      "href",
+      "https://zhi1ke.com?pic=6PEB",
     );
     expect(
       await page.evaluate(

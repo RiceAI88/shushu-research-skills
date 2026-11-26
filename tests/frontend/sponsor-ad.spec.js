@@ -4,7 +4,7 @@ for (const [width, view] of [
   [1440, "table"],
   [390, "card"],
 ]) {
-  test(`hero poster ad stays separate from ranked entries and supports dual slides at ${width}px`, async ({
+  test(`hero dual partner cards stay separate from ranked entries and show both services simultaneously at ${width}px`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: 1000 });
@@ -13,25 +13,26 @@ for (const [width, view] of [
     await expect(ad).toHaveCount(1);
     await expect(ad).not.toContainText("广告");
 
-    // 默认首张海报：自营 AI 订阅代充（含 ChatGPT / Claude / Gemini / Codex）
-    await expect(ad).toContainText("专业 AI 订阅正规代充");
-    await expect(ad).not.toContainText("catfk.com");
-    await expect(ad).toContainText("ChatGPT");
-    await expect(ad).toContainText("Claude");
-    await expect(ad).toContainText("Gemini");
-    await expect(ad).toContainText("Codex");
+    // 左卡：自营 AI 订阅代充（含 ChatGPT / Claude / Gemini / Codex，不展示 catfk.com）
     const rechargeLink = ad.getByTestId("poster-slide-recharge");
+    await expect(rechargeLink).toBeVisible();
+    await expect(rechargeLink).toContainText("专业 AI 订阅正规代充");
+    await expect(ad).not.toContainText("catfk.com");
+    await expect(rechargeLink).toContainText("ChatGPT");
+    await expect(rechargeLink).toContainText("Claude");
+    await expect(rechargeLink).toContainText("Gemini");
+    await expect(rechargeLink).toContainText("Codex");
     await expect(rechargeLink).toHaveAttribute("href", "https://catfk.com/shop/1991");
     await expect(rechargeLink).toHaveAttribute("target", "_blank");
     await expect(rechargeLink).toHaveAttribute("rel", /sponsored/);
     await expect(rechargeLink).toHaveAttribute("rel", /noopener/);
 
-    // 手动切换到第二张海报：智一刻 AI
-    await ad.getByTestId("poster-tab-zhi1ke").click();
-    await expect(ad).toContainText("从一个题目，到一篇论文初稿。");
-    await expect(ad).toContainText("免费无限改稿");
-    await expect(ad).toContainText("重复率AI率不达标直接退");
+    // 右卡：智一刻 AI 同屏并排可见（无需手动点击或等待轮播）
     const zhiLink = ad.getByTestId("poster-slide-zhi1ke");
+    await expect(zhiLink).toBeVisible();
+    await expect(zhiLink).toContainText("从一个题目，到一篇论文初稿。");
+    await expect(zhiLink).toContainText("免费无限改稿");
+    await expect(zhiLink).toContainText("重复率AI率不达标直接退");
     await expect(zhiLink).toHaveAttribute("href", "https://zhi1ke.com?pic=6PEB");
     await expect(zhiLink).toHaveAttribute("rel", /sponsored/);
     await expect(ad.locator("img")).toHaveJSProperty("complete", true);
@@ -41,23 +42,26 @@ for (const [width, view] of [
     );
     await expect(entries).toHaveCount(30);
     const positions = await page.evaluate(() => ({
+      searchBottom: document
+        .querySelector("#searchInput")
+        .getBoundingClientRect().bottom,
+      searchWidth: document
+        .querySelector(".hero-search-stage")
+        .getBoundingClientRect().width,
+      adTop: document
+        .querySelector('[data-testid="hero-poster-ad"]')
+        .getBoundingClientRect().top,
       adBottom: document
         .querySelector('[data-testid="hero-poster-ad"]')
         .getBoundingClientRect().bottom,
-      searchTop: document
-        .querySelector("#searchInput")
-        .getBoundingClientRect().top,
-      searchWidth: document
-        .querySelector(".hero-toolbar > .hero-search")
-        .getBoundingClientRect().width,
       first: document
         .querySelector('.ant-table-row, [data-testid="repo-card"]')
         .getBoundingClientRect().top,
     }));
-    expect(positions.adBottom).toBeLessThanOrEqual(positions.searchTop + 6);
+    expect(positions.adTop).toBeGreaterThanOrEqual(positions.searchBottom - 2);
     expect(positions.adBottom).toBeLessThan(positions.first);
     if (width >= 1280) {
-      expect(positions.searchWidth).toBeGreaterThan(760);
+      expect(positions.searchWidth).toBeGreaterThan(740);
     }
 
     await page
@@ -73,7 +77,7 @@ for (const [width, view] of [
   });
 }
 
-test("mobile English dark poster ad stays readable and does not repeat when loading more", async ({
+test("mobile English dark dual partner strip stays readable and does not repeat when loading more", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -81,7 +85,6 @@ test("mobile English dark poster ad stays readable and does not repeat when load
   const ad = page.getByTestId("hero-poster-ad");
   await expect(ad).not.toContainText("Advertisement");
   await expect(ad).toContainText("Gemini");
-  await ad.getByTestId("poster-tab-zhi1ke").click();
   await expect(
     ad.getByRole("link", { name: /Generate a free outline/ }),
   ).toBeVisible();
@@ -94,18 +97,4 @@ test("mobile English dark poster ad stays readable and does not repeat when load
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
-});
-
-test("hero poster auto-rotates between official top-up and Zhi1ke AI even with reduced motion", async ({
-  page,
-}) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.addInitScript(() => {
-    window.__ARS_POSTER_ROTATE_MS = 600;
-  });
-  await page.goto("./#view=card");
-  const ad = page.getByTestId("hero-poster-ad");
-  await expect(ad.getByTestId("poster-slide-recharge")).toBeVisible();
-  await expect(ad.getByTestId("poster-slide-zhi1ke")).toBeVisible({ timeout: 2500 });
-  await expect(ad.getByTestId("poster-slide-recharge")).toBeVisible({ timeout: 2500 });
 });

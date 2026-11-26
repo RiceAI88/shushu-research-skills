@@ -1,295 +1,167 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { trackEvent } from "../analytics";
 import zhi1keLogo from "../assets/zhi1ke-logo.png";
 
 const RECHARGE_URL = "https://catfk.com/shop/1991";
 const ZHI1KE_URL = "https://zhi1ke.com?pic=6PEB";
-const ROTATE_MS = 4500;
 
 /**
- * 首屏标题右侧高辨识度带图海报广告窗（改良版 1B）：
- * - 内置矢量流光丝带底纹插画与平台矢量图标（ChatGPT / Claude / Gemini / Codex + 智一刻工作台）
- * - 默认每 4.5 秒自动轮播切换（不受系统减弱动画开关阻断，确保双广告位稳定曝光），顶部胶囊内置读秒进度条，悬停卡片主体自动暂停
+ * 范式一首屏搜索框下方的同屏双联服务推荐卡：
+ * - 左卡：本站自营 AI 订阅正规代充（ChatGPT / Claude / Gemini / Codex，不展示 catfk 域名）
+ * - 右卡：严选学术合作 智一刻 AI 论文工作台
+ * - 双卡 100% 首屏同屏直达，无需等待轮播切换，窄屏自动流式叠放
  */
-export function HeroPosterAd({ lang = "zh", hidden = false, rotateMs = ROTATE_MS }) {
+export function HeroPosterAd({ lang = "zh", hidden = false }) {
   const zh = lang !== "en";
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [hovered, setHovered] = useState(false);
-
-  useEffect(() => {
-    if (hovered || hidden || typeof window === "undefined") return undefined;
-    const ms =
-      Number.isFinite(window.__ARS_POSTER_ROTATE_MS) && window.__ARS_POSTER_ROTATE_MS > 0
-        ? window.__ARS_POSTER_ROTATE_MS
-        : rotateMs;
-    const timer = window.setTimeout(() => {
-      setActiveIdx((prev) => (prev + 1) % 2);
-    }, ms);
-    return () => window.clearTimeout(timer);
-  }, [activeIdx, hovered, hidden, rotateMs]);
-
   if (hidden) return null;
-
-  const isRecharge = activeIdx === 0;
 
   return (
     <aside
-      className={`hero-poster-wrap${hovered ? " is-paused" : ""}`}
-      style={{ "--poster-rotate-ms": `${rotateMs}ms` }}
+      className="hero-poster-wrap hero-dual-strip"
       aria-label={zh ? "赞助与自营服务推荐" : "Partner & official services"}
       data-testid="hero-poster-ad"
     >
-      <div className="hero-poster-topbar">
-        <span className={`hero-poster-kicker${isRecharge ? " is-warm" : " is-jade"}`}>
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 16 16"
-            fill="none"
+      {/* 左卡：本站自营 AI 订阅正规代充 */}
+      <a
+        className="hero-dual-card is-warm"
+        href={RECHARGE_URL}
+        target="_blank"
+        rel="sponsored noopener noreferrer"
+        data-testid="poster-slide-recharge"
+        onClick={() => trackEvent("click_recharge", { slot: "hero_dual" })}
+      >
+        <svg
+          className="hero-dual-art"
+          viewBox="0 0 560 110"
+          preserveAspectRatio="none"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M320 120C385 52 452 88 532 18C552 0 568 6 580 -8V120H320Z"
+            fill="currentColor"
+            fillOpacity="0.08"
+          />
+          <path
+            d="M290 116C368 44 456 84 548 4"
             stroke="currentColor"
-            strokeWidth="1.7"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M11.5 3.2 5.6 6H3.2A1.2 1.2 0 0 0 2 7.2v1.6A1.2 1.2 0 0 0 3.2 10h1.1l1.1 3.2h1.7L6.2 10l5.3 2.8V3.2Z" />
-            <path d="M13.5 5.8a2.8 2.8 0 0 1 0 4.4" />
-          </svg>
-          <span>
-            {isRecharge
-              ? zh
-                ? "赞助 · 本站自营"
-                : "Partner · Official Top-up"
-              : zh
-                ? "严选合作 · 学术工作台"
-                : "Featured · Academic Studio"}
-          </span>
-        </span>
-
-        <div
-          className="hero-poster-dots"
-          role="tablist"
-          aria-label={zh ? "切换推荐海报" : "Switch featured poster"}
-        >
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeIdx === 0}
-            aria-label={zh ? "查看 AI 订阅代充海报" : "Show AI subscription top-up"}
-            className={`hero-poster-dot${activeIdx === 0 ? " is-active is-warm" : ""}`}
-            data-testid="poster-tab-recharge"
-            onClick={() => {
-              setHovered(false);
-              setActiveIdx(0);
-            }}
+            strokeOpacity="0.18"
+            strokeWidth="1.3"
           />
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeIdx === 1}
-            aria-label={zh ? "查看智一刻 AI 海报" : "Show Zhi1ke AI studio"}
-            className={`hero-poster-dot${activeIdx === 1 ? " is-active is-jade" : ""}`}
-            data-testid="poster-tab-zhi1ke"
-            onClick={() => {
-              setHovered(false);
-              setActiveIdx(1);
-            }}
-          />
-        </div>
-      </div>
+        </svg>
 
-      {isRecharge ? (
-        <a
-          key="recharge"
-          className="hero-poster-card is-warm"
-          href={RECHARGE_URL}
-          target="_blank"
-          rel="sponsored noopener noreferrer"
-          data-testid="poster-slide-recharge"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-          onClick={() => trackEvent("click_recharge", { slot: "hero_poster" })}
-        >
-          {/* 暖橙流光丝带矢量海报底图 */}
-          <svg
-            className="hero-poster-art"
-            viewBox="0 0 600 164"
-            preserveAspectRatio="none"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M235 178C308 92 392 142 486 44C532 -4 576 10 616 -16V178H235Z"
-              fill="currentColor"
-              fillOpacity="0.11"
-            />
-            <path
-              d="M196 172C288 76 402 136 514 14"
-              stroke="currentColor"
-              strokeOpacity="0.24"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M258 186C346 104 432 150 548 34"
-              stroke="currentColor"
-              strokeOpacity="0.14"
-              strokeWidth="1.2"
-            />
-            <circle cx="468" cy="34" r="2.5" fill="currentColor" fillOpacity="0.34" />
-            <circle cx="526" cy="68" r="2" fill="currentColor" fillOpacity="0.24" />
-            <circle cx="412" cy="92" r="1.8" fill="currentColor" fillOpacity="0.22" />
-          </svg>
-
-          <div className="hero-poster-main">
-            <div className="hero-poster-headline">
+        <div className="hero-dual-body">
+          <div className="hero-dual-top">
+            <span className="hero-dual-badge is-warm">
+              {zh ? "本站自营" : "Self-operated"}
+            </span>
+            <strong className="hero-dual-title">
               {zh ? "专业 AI 订阅正规代充" : "Official AI Subscription Top-up"}
-            </div>
-            <div className="hero-poster-brands">
-              <span className="hero-poster-origin is-warm">
-                {zh ? "鼠鼠自营" : "Self-operated"}
-              </span>
-              <span className="hero-poster-sep" aria-hidden="true">|</span>
-              <span className="hero-poster-chip">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            </strong>
+            <span className="hero-dual-sep" aria-hidden="true">·</span>
+            <span className="hero-dual-models">
+              <span className="hero-dual-model">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path d="M12 3a5 5 0 0 1 4.5 2.8A5 5 0 0 1 20 12.2a5 5 0 0 1-2.5 6.3A5 5 0 0 1 12 21a5 5 0 0 1-4.5-2.8A5 5 0 0 1 4 11.8a5 5 0 0 1 2.5-6.3A5 5 0 0 1 12 3Z" />
                   <circle cx="12" cy="12" r="2.6" />
                 </svg>
                 ChatGPT
               </span>
-              <span className="hero-poster-chip is-claude">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" aria-hidden="true">
+              <span className="hero-dual-model is-claude">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" aria-hidden="true">
                   <path d="M12 2.5v19M5.3 5.3l13.4 13.4M2.5 12h19M5.3 18.7 18.7 5.3" />
                 </svg>
                 Claude
               </span>
-              <span className="hero-poster-chip is-gemini">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <span className="hero-dual-model is-gemini">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12 2C12.4 7.3 16.7 11.6 22 12c-5.3.4-9.6 4.7-10 10-.4-5.3-4.7-9.6-10-10 5.3-.4 9.6-4.7 10-10Z" />
                 </svg>
                 Gemini
               </span>
-              <span className="hero-poster-chip">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <span className="hero-dual-model">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <rect x="3" y="4" width="18" height="16" rx="3" />
                   <path d="m7.5 10 2.8 2.2-2.8 2.2m5 0h3.5" />
                 </svg>
                 Codex
               </span>
-            </div>
-            <div className="hero-poster-sub">
-              {zh ? (
-                <>
-                  自助下单 · 正规账单可查 · <em>支持科研报销</em>
-                </>
-              ) : (
-                <>
-                  Self-service · Official billing · <em>Reimbursement ready</em>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="hero-poster-aside">
-            <div className="hero-poster-domain-group">
-              <span className="hero-poster-eyebrow">
-                {zh ? "官方渠道 · 自动发货" : "Official · Auto"}
-              </span>
-              <strong className="hero-poster-badge-text">
-                {zh ? "可开发票" : "Invoices"}
-              </strong>
-            </div>
-            <span className="hero-poster-cta is-warm">
-              {zh ? "立即选购 →" : "Top up →"}
             </span>
           </div>
-        </a>
-      ) : (
-        <a
-          key="zhi1ke"
-          className="hero-poster-card is-jade"
-          href={ZHI1KE_URL}
-          target="_blank"
-          rel="sponsored noopener noreferrer"
-          data-testid="poster-slide-zhi1ke"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-          onClick={() => trackEvent("click_zhi1ke", { slot: "hero_poster" })}
+          <div className="hero-dual-sub">
+            {zh ? (
+              <>
+                官方渠道自动发货 · 正规账单可查 · <em>支持科研报销开票</em>
+              </>
+            ) : (
+              <>
+                Instant auto-delivery · Official billing · <em>Invoices &amp; reimbursement</em>
+              </>
+            )}
+          </div>
+        </div>
+
+        <span className="hero-dual-cta is-warm">
+          {zh ? "立即选购 →" : "Top up →"}
+        </span>
+      </a>
+
+      {/* 右卡：智一刻 AI 学术论文工作台 */}
+      <a
+        className="hero-dual-card is-jade"
+        href={ZHI1KE_URL}
+        target="_blank"
+        rel="sponsored noopener noreferrer"
+        data-testid="poster-slide-zhi1ke"
+        onClick={() => trackEvent("click_zhi1ke", { slot: "hero_dual" })}
+      >
+        <svg
+          className="hero-dual-art"
+          viewBox="0 0 560 110"
+          preserveAspectRatio="none"
+          fill="none"
+          aria-hidden="true"
         >
-          {/* 翠绿流光丝带矢量海报底图 */}
-          <svg
-            className="hero-poster-art"
-            viewBox="0 0 600 164"
-            preserveAspectRatio="none"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M245 178C322 88 408 136 496 40C542 -6 580 12 616 -12V178H245Z"
-              fill="currentColor"
-              fillOpacity="0.11"
-            />
-            <path
-              d="M210 172C302 76 414 130 526 12"
-              stroke="currentColor"
-              strokeOpacity="0.22"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M272 186C358 104 440 148 556 32"
-              stroke="currentColor"
-              strokeOpacity="0.13"
-              strokeWidth="1.2"
-            />
-            <circle cx="484" cy="34" r="2.5" fill="currentColor" fillOpacity="0.32" />
-            <circle cx="538" cy="64" r="2" fill="currentColor" fillOpacity="0.24" />
-          </svg>
+          <path
+            d="M330 120C396 50 462 86 538 16C556 0 570 6 582 -6V120H330Z"
+            fill="currentColor"
+            fillOpacity="0.08"
+          />
+          <path
+            d="M302 116C380 44 466 82 554 4"
+            stroke="currentColor"
+            strokeOpacity="0.17"
+            strokeWidth="1.3"
+          />
+        </svg>
 
-          <div className="hero-poster-main">
-            <div className="hero-poster-headline">
-              {zh ? "从一个题目，到一篇论文初稿。" : "From a topic to a first draft."}
-            </div>
-            <div className="hero-poster-brands">
-              <span className="hero-poster-origin is-jade">
-                <img src={zhi1keLogo} alt="" width={16} height={12} decoding="async" />
-                智一刻 AI
-              </span>
-              <span className="hero-poster-sep" aria-hidden="true">|</span>
-              <span className="hero-poster-chip">
-                {zh ? "毕业设计" : "Thesis"}
-              </span>
-              <span className="hero-poster-chip">
-                {zh ? "开题综述" : "Literature"}
-              </span>
-              <span className="hero-poster-chip">
-                {zh ? "降重降AIGC" : "AIGC Check"}
-              </span>
-            </div>
-            <div className="hero-poster-sub">
-              {zh ? (
-                <>
-                  免费无限改稿 · <em>重复率AI率不达标直接退</em>
-                </>
-              ) : (
-                <>
-                  Free unlimited revisions · <em>Full refund guarantee</em>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="hero-poster-aside">
-            <div className="hero-poster-domain-group">
-              <span className="hero-poster-eyebrow">
-                {zh ? "学术写作工作台" : "Writing Studio"}
-              </span>
-              <strong className="hero-poster-domain">zhi1ke.com</strong>
-            </div>
-            <span className="hero-poster-cta is-jade">
-              {zh ? "免费生成提纲 →" : "Generate a free outline →"}
+        <div className="hero-dual-body">
+          <div className="hero-dual-top">
+            <span className="hero-dual-badge is-jade">
+              <img src={zhi1keLogo} alt="" width={14} height={11} decoding="async" />
+              {zh ? "智一刻 AI" : "Zhi1ke AI"}
             </span>
+            <strong className="hero-dual-title">
+              {zh ? "从一个题目，到一篇论文初稿。" : "From a topic to a first draft."}
+            </strong>
           </div>
-        </a>
-      )}
+          <div className="hero-dual-sub">
+            {zh ? (
+              <>
+                毕业设计 · 开题综述 · 免费无限改稿 · <em>重复率AI率不达标直接退</em>
+              </>
+            ) : (
+              <>
+                Thesis &amp; literature studio · Free unlimited revisions · <em>Full refund guarantee</em>
+              </>
+            )}
+          </div>
+        </div>
+
+        <span className="hero-dual-cta is-jade">
+          {zh ? "免费生成提纲 →" : "Generate a free outline →"}
+        </span>
+      </a>
     </aside>
   );
 }
