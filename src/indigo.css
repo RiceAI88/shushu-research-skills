@@ -76,6 +76,19 @@
   min-height: 62px;
   border-bottom: 1px solid rgba(226, 232, 240, 0.7);
 }
+@media (min-width: 1080px) {
+  .site-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+  .site-nav .brand {
+    justify-self: start;
+  }
+  .site-nav .nav-actions {
+    justify-self: center;
+  }
+}
 [data-theme="dark"] .site-nav {
   border-bottom-color: rgba(30, 41, 59, 0.8);
 }
