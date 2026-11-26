@@ -15,6 +15,7 @@ for (const [width, view] of [
 
     // 默认首张海报：自营 AI 订阅代充（含 ChatGPT / Claude / Gemini / Codex）
     await expect(ad).toContainText("专业 AI 订阅正规代充");
+    await expect(ad).not.toContainText("catfk.com");
     await expect(ad).toContainText("ChatGPT");
     await expect(ad).toContainText("Claude");
     await expect(ad).toContainText("Gemini");

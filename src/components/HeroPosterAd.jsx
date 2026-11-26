@@ -173,11 +173,11 @@ export function HeroPosterAd({ lang = "zh", hidden = false }) {
             <div className="hero-poster-sub">
               {zh ? (
                 <>
-                  自助下单 · 正规账单可查 · <em>可开发票科研报销</em>
+                  自助下单 · 正规账单可查 · <em>支持科研报销</em>
                 </>
               ) : (
                 <>
-                  Self-service · Official billing · <em>Invoices available</em>
+                  Self-service · Official billing · <em>Reimbursement ready</em>
                 </>
               )}
             </div>
@@ -188,7 +188,9 @@ export function HeroPosterAd({ lang = "zh", hidden = false }) {
               <span className="hero-poster-eyebrow">
                 {zh ? "官方渠道 · 自动发货" : "Official · Auto"}
               </span>
-              <strong className="hero-poster-domain">catfk.com</strong>
+              <strong className="hero-poster-badge-text">
+                {zh ? "可开发票" : "Invoices"}
+              </strong>
             </div>
             <span className="hero-poster-cta is-warm">
               {zh ? "立即选购 →" : "Top up →"}
