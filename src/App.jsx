@@ -1203,7 +1203,7 @@ function Dashboard({ state, update, switchLang }) {
                         fit: "rankByStars",
                         rank: "rankByStars",
                         stars: "rankByStars",
-                        installs: "sortInstalls",
+                        installs: "rankByInstalls",
                         trend: "sortTrend",
                         updated: "sortUpdated",
                         delta30: "sortDelta30",

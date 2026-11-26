@@ -74,7 +74,7 @@ export function RepositoryDrawer({
       ? [
           {
             key: "installs",
-            label: state.lang === "zh" ? "真实安装/下载" : "Verified installs",
+            label: state.lang === "zh" ? "下载量" : "Downloads",
             children: installInfo.tooltip,
           },
         ]

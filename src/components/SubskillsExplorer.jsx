@@ -142,8 +142,8 @@ export function SubskillsExplorer({ item, lang = "zh", initialFilter = "" }) {
                       className="subskill-installs"
                       title={
                         zh
-                          ? `Skills CLI 累计安装 ${sub.i.toLocaleString()} 次`
-                          : `${sub.i.toLocaleString()} installs via Skills CLI`
+                          ? `Skills CLI 累计下载 ${sub.i.toLocaleString()} 次`
+                          : `${sub.i.toLocaleString()} downloads via Skills CLI`
                       }
                     >
                       ↓{formatCompactCount(sub.i)}

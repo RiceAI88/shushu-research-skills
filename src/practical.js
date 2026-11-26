@@ -90,15 +90,16 @@ export function installMetricFor(item, lang = "zh") {
   const zh = lang === "zh";
   const exact = new Intl.NumberFormat(zh ? "zh-CN" : "en-US").format(count);
   const compact = formatCompactCount(count);
+  const label = zh ? "下载量" : "Downloads";
   if (source === "skills_cli") {
     return {
       count,
       compact,
       source,
-      label: zh ? "安装" : "Installs",
+      label,
       tooltip: zh
-        ? `Skills CLI 官方累计安装 ${exact} 次`
-        : `${exact} verified installs via Skills CLI`,
+        ? `Skills CLI 官方累计下载/安装 ${exact} 次`
+        : `${exact} verified downloads/installs via Skills CLI`,
     };
   }
   if (source === "pypi_30d") {
@@ -106,7 +107,7 @@ export function installMetricFor(item, lang = "zh") {
       count,
       compact,
       source,
-      label: zh ? "月下载" : "30d DL",
+      label,
       tooltip: zh
         ? `PyPI 官方近 30 天下载 ${exact} 次`
         : `${exact} PyPI downloads in the last 30 days`,
@@ -117,7 +118,7 @@ export function installMetricFor(item, lang = "zh") {
       count,
       compact,
       source,
-      label: zh ? "月下载" : "30d DL",
+      label,
       tooltip: zh
         ? `npm 官方近 30 天下载 ${exact} 次`
         : `${exact} npm downloads in the last 30 days`,
@@ -127,7 +128,7 @@ export function installMetricFor(item, lang = "zh") {
     count,
     compact,
     source: source || "github_releases",
-    label: zh ? "下载" : "Downloads",
+    label,
     tooltip: zh
       ? `GitHub Releases 安装包累计下载 ${exact} 次`
       : `${exact} GitHub Release asset downloads`,

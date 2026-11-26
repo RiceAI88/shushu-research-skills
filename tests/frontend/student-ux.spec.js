@@ -286,12 +286,12 @@ test("lazy history loading, deep subskill search handoff, and zero-login recomme
   await expect(page.getByTestId("repo-card").first()).toBeVisible();
   expect(historyRequests).toHaveLength(0);
 
-  // 0. 验证「最多安装」快捷排序按钮可切换 #sort=installs 并在首张卡片展示真实安装/下载量（且详情页不含 Forks）
-  await page.getByRole("button", { name: "最多安装" }).click();
+  // 0. 验证「下载量」快捷排序按钮可切换 #sort=installs 并在首张卡片展示真实下载量（且详情页不含 Forks）
+  await page.getByRole("button", { name: "下载量", exact: true }).click();
   await expect(page).toHaveURL(/#sort=installs/);
   await expect(
     page.getByTestId("repo-card").first().getByTestId("card-installs"),
-  ).toBeVisible();
+  ).toContainText("下载量");
 
   // 1. 首页大搜索框穿透检索合集仓库内的具体子技能（如 scanpy）
   await page.locator("#searchInput").fill("scanpy");
