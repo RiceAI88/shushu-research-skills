@@ -2239,5 +2239,230 @@
     "source_sha": "7314d71426bb2f3226fb20c42364f4a16f5f2921",
     "reviewed_at": "2026-11-26",
     "review_kind": "documentation_only"
+  },
+  "thinson/rs-paperclaw": {
+    "use_zh": "遥感与地球科学：论文精读与研究笔记、前沿论文合集与研读清单技能",
+    "use_en": "Earth sciences and remote sensing; AI and machine learning research",
+    "source_quote": "🔎 拉取 arXiv 候选论文（遥感相关） 🧠 关键词 + LLM 二级筛选 📝 生成 / 更新单篇阅读报告（GitHub Issue） 🗞️ 生成当天日报（GitHub Issue） 🗂️ 同步日报到 `daily_reports/YYYYMM/YYYYMMDD.md` 📮 推送摘要到钉钉/飞书",
+    "source_url": "https://github.com/thinson/RS-PaperClaw/blob/main/README.md",
+    "source_sha": "7467eaf8c197b7553d8767e815c0dfc228a0fa3a",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "snl-ucsb/paper-writing-skill": {
+    "use_zh": "结合章节修辞规范从头脑风暴、初稿评估到精简定稿的写作流水线",
+    "use_en": "Structured manuscript pipeline encoding editorial principles and rhetorical moves",
+    "source_quote": "Who it's for:** PhD students and researchers writing conference or journal papers. Tuned for systems/networking (SIGCOMM, NSDI, CoNEXT, IMC) and ML (NeurIPS, ICLR, ICML); adaptable to any field (see Customize).",
+    "source_url": "https://github.com/SNL-UCSB/paper-writing-skill/blob/main/README.md",
+    "source_sha": "d2311d2d80d76e81fd17035c0c0e5408e672c831",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "socialpranker/deepdive": {
+    "use_zh": "具备多层引文核验、证据三角互证与反方质询的 12 阶段深度调研",
+    "use_en": "12-phase deep research pipeline with claims triangulation and 4-layer citation checks",
+    "source_quote": "A structured meta-research skill for Claude Code",
+    "source_url": "https://github.com/Socialpranker/deepdive/blob/main/README.md",
+    "source_sha": "ce62bf53706e47a076de8589efadfb693e386fca",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "yezery/aigc-down-skill": {
+    "use_zh": "学术论文写作、润色与格式排版",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "中文学术论文 AIGC 检测率降低工具，专为专科、本科毕业论文设计。",
+    "source_url": "https://github.com/Yezery/aigc-down-skill/blob/master/README.md",
+    "source_sha": "1534764d5eaf52ed2dea9d11e3428a4d4be0ad71",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "jing1312/nature-figure-skill": {
+    "use_zh": "模拟同行审稿与返修回复",
+    "use_en": "Mock peer review and rebuttal preparation",
+    "source_quote": "A paper-figure studio in the browser — drag-and-drop templates, with an agent workflow as the power path",
+    "source_url": "https://github.com/jing1312/nature-figure-skill/blob/main/README.md",
+    "source_sha": "55808e1dcf0b6915b3a78c84fb9e99b03f97b40f",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "algorineko/agenticarxiv-rl": {
+    "use_zh": "面向 arXiv 学术论文精准检索与工具调用的强化学习训练管线",
+    "use_en": "Reinforcement learning pipeline for training arXiv paper retrieval agents",
+    "source_quote": "**基于 ReAct Agent + arXiv 工具的 Agentic RL 训练环境** 支持 SFT/DPO/GRPO/OPD 训练路径与可验证奖励（RLVR），用于研究 LLM Agent 强化学习。 终极目标：**端侧部署的轻量多模态论文助手**——从检索、下载、翻译到总结、识图的端到端论文阅读模型。",
+    "source_url": "https://github.com/Algorineko/AgenticArXiv-RL/blob/main/README.md",
+    "source_sha": "5bbb3fe25d25ddc11359ae4e075c4744c44d0194",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "haojae/scipilot-writing-skill": {
+    "use_zh": "带 AI 痕迹检测与审稿人视角自查闭环的学术写作与润色助手",
+    "use_en": "Academic writing and polishing co-pilot with AI-tell linting and self-check loop",
+    "source_quote": "A Claude Code / Codex / Cursor Skill that takes scientific text the last mile: from a Chinese draft, a rough paragraph, or a whole section, to **submission-grade** English (or Chinese) prose. It covers transla…",
+    "source_url": "https://github.com/Haojae/scipilot-writing-skill/blob/main/README.md",
+    "source_sha": "27a16e087669b4a83a18dff0a8d3ee82defc4c74",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "stars-oc/thesis-creator": {
+    "use_zh": "教育学与学习分析研究",
+    "use_en": "Education research and learning analytics",
+    "source_quote": "[!IMPORTANT] **v2.0 多学科 Beta 预告**：`main` 当前默认支持 CS / SE 学科。 已在 `multi-discipline-beta` 分支提供 **9 个学科模板包**（计算机/经管/法学/教育/人文/医护/工科/理科/艺术设计）+ **状态机产物对账** + **图片管线双格式**。 教育学测试用例已端到端跑通（Step 0→9 全部 completed，AIGC 6.1%…",
+    "source_url": "https://github.com/Stars-OC/thesis-creator/blob/main/README.md",
+    "source_sha": "4cf0793be8e6b6bdded330f15f4590728a7a8641",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "andrehuang/academic-writing-agents": {
+    "use_zh": "由 10 个专项智能体协作完成学术文献调研、初稿撰写、审阅与润色",
+    "use_en": "10-agent orchestrator for academic research, drafting, review, and polishing",
+    "source_quote": "A Claude Code plugin that brings multi-agent review to academic writing — the same \"multiple expert reviewers\" model that makes peer review work, built into your writing process.",
+    "source_url": "https://github.com/andrehuang/academic-writing-agents/blob/main/README.md",
+    "source_sha": "2213e85535ef580051d402b3203765f22b58efb0",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "stephenlzc/ai-powered-literature-review-skills": {
+    "use_zh": "文献检索、引文核验与综述整理",
+    "use_en": "Literature search, citation verification and synthesis",
+    "source_quote": "系统性学术文献回顾（Literature Survey）Skill for Kimi CLI",
+    "source_url": "https://github.com/stephenlzc/AI-Powered-Literature-Review-Skills/blob/main/README.md",
+    "source_sha": "c8ce295886ffbb2126d190ea4e0fd26080830e97",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "o0000-code/paper-search-pro": {
+    "use_zh": "聚合五大数据库检索并生成单文件可视化综述报告的文献发现技能",
+    "use_en": "Multi-source academic literature discovery skill with interactive summary reports",
+    "source_quote": "You ask your agent for papers; this Skill runs a real multi-source literature search across **OpenAlex · Semantic Scholar · CrossRef · PubMed · arXiv** — plus native-Chinese sources **NSSD** (社会科学) and **yiigl…",
+    "source_url": "https://github.com/O0000-code/paper-search-pro/blob/main/README.md",
+    "source_sha": "bd75110057a095e416455fc9bca9c10b56a6b2cf",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "lzwei196/kiss-knowledge-infrastructure-for-scientific-simulation": {
+    "use_zh": "支持科学计算与数学建模的科研技能",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "Knowledge dissection converts operational expertise into agent-usable Knowledge Infrastructure. Figure 2 from the KISS manuscript.",
+    "source_url": "https://github.com/lzwei196/KISS-Knowledge-Infrastructure-for-Scientific-Simulation/blob/main/README.md",
+    "source_sha": "45bcc6e77272365f19b8494e87b3893fa9c1f3eb",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "biotender-max/awesome-bio-agent-skills": {
+    "use_zh": "覆盖基因组学、蛋白质组、单细胞分析与药物发现的生物医学技能集",
+    "use_en": "Biomedical agent skills covering genomics, proteomics, single-cell, and drug design",
+    "source_quote": "A curated collection of AI agent skills for biomedical research, covering genomics, proteomics, single-cell analysis, clinical AI, and protein design.",
+    "source_url": "https://github.com/BioTender-max/awesome-bio-agent-skills/blob/main/README.md",
+    "source_sha": "ea2695fc96b8ffead478f270ce650019ccc09beb",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "paperseek/paperseek": {
+    "use_zh": "将自然语言研究问题转化为多源学术检索式并整理综述文献",
+    "use_en": "Turn research questions into multi-source search queries and organized paper lists",
+    "source_quote": "Follow the question. Find the evidence. Open-source literature search, preliminary bibliometrics, and abstract-based reviews.",
+    "source_url": "https://github.com/paperseek/paperseek/blob/main/README.md",
+    "source_sha": "aa89bccbfae0009cf0dec27b2468f98ed802e352",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "ozrwayne/rw-research-skill": {
+    "use_zh": "涵盖选题凝练、文献证据、研究设计、论文撰写与投稿的 12 项独立技能",
+    "use_en": "Twelve standalone workflow skills spanning research questions, design, and submission",
+    "source_quote": "适用于手上有研究想法、论文、数据、研究方案、章节草稿或审稿意见，需要判断下一步的人。你可以直接提交材料，也可以只说现在卡在哪里。系统会选择一个主 Skill，每次处理当前一步。",
+    "source_url": "https://github.com/ozrwayne/rw-research-skill/blob/main/README.md",
+    "source_sha": "5a40d119878a9f96f8a42fc726a5d85ea84c17ed",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "hqhq1025/ai-course-notes": {
+    "use_zh": "学术论文写作、润色与格式排版",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "398 份 AI / LLM 中文讲义，支持在线阅读、LaTeX 源码查看与本地 PDF 编译",
+    "source_url": "https://github.com/hqhq1025/ai-course-notes/blob/main/README.md",
+    "source_sha": "4584dde766e5a15a952fe93b6cc7cf08ecd08699",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "dqxcj-a11y/thesis-skill-hub": {
+    "use_zh": "学术论文写作、润色与格式排版",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "| 编号 | 名称 | 适合什么阶段 | 说明 | |------|------|-------------|------| | 00 | 风格学习 | 所有阶段之前 | 让 AI 学习你的写作风格，后续输出像你自己写的 | | 01 | 选题调研 | 刚开始 | 从导师给的关键词，走到一个站得住脚的选题 | | 02 | 文献分析 | 选题/开题 | 单篇精读、多篇对比、研究空白识别 | | 03 | 大纲生成…",
+    "source_url": "https://github.com/DQXCJ-a11y/thesis-skill-hub/blob/main/README.md",
+    "source_sha": "9f643982d0eea7893a1992a3d7ab2d6b197f9dc7",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "arcinstitute/sragent": {
+    "use_zh": "面向 NCBI SRA 测序数据库检索与生物信息元数据处理的科研代理",
+    "use_en": "LLM agents for querying NCBI SRA and associated bioinformatics databases",
+    "source_quote": "scBaseCount: An AI agent-curated, uniformly processed, and continually expanding single cell data repository**. Nicholas D Youngblut, Christopher Carpenter, Jaanak Prashar, Chiara Ricci-Tam, Rajesh Ilango, Noa…",
+    "source_url": "https://github.com/ArcInstitute/SRAgent/blob/main/README.md",
+    "source_sha": "82a55ad715065b18a6f5ab0a594da860352405a3",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "joshzyj/open-scholar-skill": {
+    "use_zh": "支持文献检索与学术问答的 Open Scholar 科研辅助插件",
+    "use_en": "Open Scholar plugin for grounded academic literature search and synthesis",
+    "source_quote": "**If you use open-scholar-skill, please cite Zhang (2026), *Chinese Sociological Review*.** See the Citation section below for the full reference and BibTeX (an arXiv preprint is also available).",
+    "source_url": "https://github.com/joshzyj/open-scholar-skill/blob/main/README.md",
+    "source_sha": "9fc29902b0462d25f49ab517b94c3931f7d74fea",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "renaissance-mind/drawai": {
+    "use_zh": "文献检索、引文核验与综述整理",
+    "use_en": "Literature search, citation verification and synthesis",
+    "source_quote": "**2026.08** — DrawAI 论文《DrawAI: Agentic Benchmark and Workflow for Making Raster Images Editable》已在 arXiv 上线，欢迎阅读。 **2026.08** — 新增 LLM API 支持，支持 Agent SDK 与 API 执行。",
+    "source_url": "https://github.com/Renaissance-Mind/DrawAI/blob/main/README.md",
+    "source_sha": "8b7ce8de061c6920c654d22b9fa6375f21b08f44",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "congcongwang0122/zotero-skill": {
+    "use_zh": "文献检索、引文核验与综述整理",
+    "use_en": "Literature search, citation verification and synthesis",
+    "source_quote": "文献管理自动化工具箱：连接 Zotero 本地 API，一键搜索、导出 BibTeX、插入引用、读取 PDF 全文。",
+    "source_url": "https://github.com/congcongwang0122/zotero-skill/blob/main/README.md",
+    "source_sha": "22a22a44bdcbac2a4f0b1ed350796733f7b72855",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "drcathicks/informed-patient": {
+    "use_zh": "围绕具体健康与临床问题检索医学证据并生成循证综述报告",
+    "use_en": "Generate structured medical evidence reviews for specific health questions",
+    "source_quote": "This Claude Skill provides a framework to help you use Claude to research medical evidence to inform specific health questions, primarily designed around use cases like trying to understand and organize questi…",
+    "source_url": "https://github.com/DrCatHicks/informed-patient/blob/main/README.md",
+    "source_sha": "0b6ab7cbe3177c883cbd3dd016785b0396db06ff",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "syntaxsmith/nature-writing-skill": {
+    "use_zh": "提炼 44 篇 Nature 子刊论文范式，辅助 AI/ML 学者撰写高水平手稿",
+    "use_en": "Nature-family manuscript writing skill distilled from 44 open-access papers",
+    "source_quote": "把\"能过审的 arXiv 风格\"打磨成\"Nature 系审稿人读完会说 *well-written, clearly motivated, compelling, careful, and hard to put down* 的论文\"——本 skill 是 **44 篇开放获取论文逐句抽取**出来的 craft + taste + story-craft 手册，覆盖 abstract / intro / resul…",
+    "source_url": "https://github.com/SyntaxSmith/nature-writing-skill/blob/main/README.md",
+    "source_sha": "cd6604efd76c49a286dd2eef28435918307d1336",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "z-liu-xiugou/research-workbench-assistant": {
+    "use_zh": "本地优先的科研进度台账、检查点记录与结构化论文阅读笔记管理",
+    "use_en": "Local-first research memory with progress ledgers and Markdown/JSON paper notes",
+    "source_quote": "Research Workbench Assistant｜科研工作台助手",
+    "source_url": "https://github.com/z-liu-xiugou/research-workbench-assistant/blob/main/README.md",
+    "source_sha": "c92a613cec9941610948ef87b094b1be9956f5f1",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
+  },
+  "lucasuiii/modeling-workbench": {
+    "use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
+    "use_en": "Mathematics and mathematical modeling",
+    "source_quote": "面向数学建模比赛的 **Codex / Claude Code 工作流**。提供官方赛题与附件，由 agent 按阶段完成问题拆解、模型比较、计算、复核和中英文 LaTeX/PDF 交付；你在三个关键节点审阅并决定是否继续。",
+    "source_url": "https://github.com/Lucasuiii/modeling-workbench/blob/main/README.md",
+    "source_sha": "6237f0f157bf96980d1c64dbaf3a9f84b43647e6",
+    "reviewed_at": "2026-11-27",
+    "review_kind": "documentation_only"
   }
 }

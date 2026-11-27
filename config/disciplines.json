@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-26",
+  "reviewed_at": "2026-11-27",
   "count_unit": "unique_repositories",
   "disciplines": [
     {
@@ -2743,6 +2743,220 @@
       "majors": [],
       "common": true,
       "reviewed_at": "2026-11-26",
+      "evidence": true
+    },
+    "thinson/rs-paperclaw": {
+      "disciplines": [
+        "science",
+        "engineering"
+      ],
+      "majors": [
+        "geoscience",
+        "ai"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "snl-ucsb/paper-writing-skill": {
+      "disciplines": [
+        "engineering"
+      ],
+      "majors": [
+        "ai"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "socialpranker/deepdive": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "yezery/aigc-down-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "jing1312/nature-figure-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "algorineko/agenticarxiv-rl": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "haojae/scipilot-writing-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "stars-oc/thesis-creator": {
+      "disciplines": [
+        "education"
+      ],
+      "majors": [
+        "education"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "andrehuang/academic-writing-agents": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "stephenlzc/ai-powered-literature-review-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "o0000-code/paper-search-pro": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "lzwei196/kiss-knowledge-infrastructure-for-scientific-simulation": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "biotender-max/awesome-bio-agent-skills": {
+      "disciplines": [
+        "medicine"
+      ],
+      "majors": [
+        "bioinformatics",
+        "pharmacy"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "paperseek/paperseek": {
+      "disciplines": [
+        "management"
+      ],
+      "majors": [
+        "information-management"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "ozrwayne/rw-research-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "hqhq1025/ai-course-notes": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "dqxcj-a11y/thesis-skill-hub": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "arcinstitute/sragent": {
+      "disciplines": [
+        "medicine"
+      ],
+      "majors": [
+        "bioinformatics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "joshzyj/open-scholar-skill": {
+      "disciplines": [
+        "law"
+      ],
+      "majors": [
+        "sociology"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "renaissance-mind/drawai": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "congcongwang0122/zotero-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "drcathicks/informed-patient": {
+      "disciplines": [
+        "medicine"
+      ],
+      "majors": [
+        "clinical"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "syntaxsmith/nature-writing-skill": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "z-liu-xiugou/research-workbench-assistant": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-27",
+      "evidence": true
+    },
+    "lucasuiii/modeling-workbench": {
+      "disciplines": [
+        "science"
+      ],
+      "majors": [
+        "mathematics"
+      ],
+      "common": false,
+      "reviewed_at": "2026-11-27",
       "evidence": true
     }
   }

@@ -4382,5 +4382,167 @@
     "at": "2026-11-26T07:30:55Z",
     "repo": "colrev-environment/colrev",
     "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "gulucaptain/best-paper-writing-skill",
+    "action": "removed",
+    "reasons": [
+      "skill",
+      "skills",
+      "codex",
+      "academic",
+      "paper",
+      "papers",
+      "experiment",
+      "missing_readme_academic_scope"
+    ]
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "jiassia/manuweave",
+    "action": "restored"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "l2461090/nature-figure-editable",
+    "action": "pending",
+    "reason": "http_404"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "zhengzihaopku/awesome-embodied-trustworthy-execution",
+    "action": "removed",
+    "reasons": [
+      "survey",
+      "missing_skill_signal",
+      "missing_high_confidence_academic_signal",
+      "missing_readme_academic_scope"
+    ]
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "wilddatax/suppr-mcp",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "caciniep/texada-studio-with-agentskills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "li-2132/zhuzhu-ppt-skill",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "grotyx/academic_writing_c_claudecode",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "kangwang42/epiagentkit",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "zhou2030109-glitch/remit",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "one2nc/awesome-inference-engineering",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "optpku/reasbook",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "daniel-bogdoll/phd",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "nanless/audio-research-workbench",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "seregonwar/memdbg",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "airas-org/airas",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "lishn6/awesome-ai-econ-research-writing",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "rspace-os/rspace-web",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "webioinfo01/awesome-ai-meets-biology",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "daiwk/auto-research",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "lowtidebuild/consolidated-legal-research",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "flozxwer/freecite",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "vergilshawn/awesome-humanoid-robot-learning",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "ahmet-ruchan/trace-research-paper-studio",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "cangyeone/sage",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "whut09/paper_agent",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "zlab-princeton-internal/writing-guide",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "imbue-ai/catalyst",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-27T06:10:24Z",
+    "repo": "jinzhuwei/awesome_mamba",
+    "action": "added"
   }
 ]
