@@ -4582,70 +4582,240 @@ a:focus-visible,
   }
 }
 
-/* 详情抽屉：单行紧凑 Header + 左侧时间轴连接线 3 步上手流（Timeline Stepper） */
+/* 详情抽屉：右上角关闭钮左对齐顶栏 + 浅灰画布独立白卡模块分区（Bento Modules） */
+.repository-drawer .ant-drawer-header {
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid var(--prs-border);
+  background: var(--prs-panel);
+}
+.repository-drawer .ant-drawer-header-title {
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  gap: 8px;
+}
+.repository-drawer .ant-drawer-close {
+  margin: 0 -4px 0 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.repository-drawer .ant-drawer-body {
+  background: var(--prs-bg);
+  padding: 14px 20px 20px;
+}
+.repository-drawer .ant-drawer-footer {
+  background: var(--prs-panel);
+  border-top: 1px solid var(--prs-border);
+}
 .drawer-header-wrap {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
+  min-width: 0;
+  width: 100%;
+}
+.drawer-top-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.drawer-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  font-size: 12px;
+  color: var(--prs-muted);
+  min-width: 0;
+}
+.drawer-rank-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: var(--prs-tag-bg);
+  color: var(--prs-body);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+.drawer-top-meta .detail-navigation {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  padding: 2px;
+  border-radius: 8px;
+  background: var(--prs-tag-bg);
+  flex-shrink: 0;
+}
+.drawer-top-meta .detail-navigation .ant-btn {
+  height: 22px;
+  min-height: 22px;
+  padding-inline: 6px;
+  font-size: 11.5px;
+  border-radius: 6px;
+}
+.drawer-top-meta .detail-position {
+  flex: 0 0 auto;
+  min-width: 44px;
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--prs-muted);
+  font-variant-numeric: tabular-nums;
 }
 .drawer-title-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px 12px;
+  gap: 10px;
+  min-width: 0;
 }
-.drawer-title-bar .detail-navigation {
-  margin-top: 0;
-  gap: 6px;
+.drawer-repo {
+  min-width: 0;
+  font-size: 17px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
 }
-.drawer-title-bar .detail-position {
-  flex: 0 0 auto;
-  min-width: 50px;
-  font-variant-numeric: tabular-nums;
+.drawer-repo-owner {
+  font-weight: 450;
+  color: var(--prs-muted);
+  font-size: 14.5px;
+  margin-right: 2px;
+}
+.drawer-repo-name {
+  font-weight: 720;
+  color: var(--prs-text);
+}
+.drawer-header-share.ant-btn {
+  flex-shrink: 0;
+  border-radius: 999px;
+  border-color: rgb(var(--prs-primary-rgb) / 0.35);
+  color: var(--prs-primary);
+  background: var(--prs-tint);
+  font-weight: 600;
+  padding-inline: 11px;
+}
+.drawer-header-share.ant-btn:hover {
+  border-color: var(--prs-primary) !important;
+  background: var(--prs-primary) !important;
+  color: #ffffff !important;
+}
+.drawer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.drawer-module-card,
+.repository-drawer .subskills-explorer,
+.repository-drawer .output-preview-card,
+.repository-drawer .discipline-evidence,
+.repository-drawer .drawer-alternatives,
+.repository-drawer .drawer-more {
+  margin: 0 !important;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--prs-border);
+  background: var(--prs-panel);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+}
+.drawer-overview-card .practical-description p {
+  margin: 4px 0 0;
+}
+.drawer-overview-metrics.drawer-health {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+  gap: 12px;
+}
+.lite-segmented {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 8px;
+  background: var(--prs-tag-bg);
+  border: 1px solid var(--prs-border);
+  user-select: none;
+}
+.lite-segmented .ant-segmented-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.lite-segmented .ant-segmented-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  padding: 0 10px;
+  border-radius: 6px;
+  color: var(--prs-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+.lite-segmented .ant-segmented-item:hover {
+  color: var(--prs-text);
+}
+.lite-segmented .ant-segmented-item-selected {
+  background: var(--prs-panel);
+  color: var(--prs-text);
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+.lite-segmented .ant-segmented-item-input {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.lite-segmented .ant-segmented-item-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 .usage-guide-flow {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  margin: 14px 0 6px;
+  gap: 12px;
+  margin: 0;
 }
 .usage-step {
   position: relative;
-  padding: 1px 0 20px 34px;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
+  padding: 14px 16px;
 }
 .usage-step:last-child {
-  padding-bottom: 6px;
+  padding-bottom: 14px;
 }
 .usage-step:not(:last-child)::before {
-  content: "";
-  position: absolute;
-  left: 10.5px;
-  top: 26px;
-  bottom: 2px;
-  width: 1.5px;
-  background: var(--prs-border);
+  display: none;
 }
 .usage-step-highlight,
 [data-theme="dark"] .usage-step-highlight {
-  border: 0;
-  background: transparent;
+  border-color: rgb(var(--prs-primary-rgb) / 0.28);
 }
 .usage-step-header {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  min-height: 22px;
+  min-height: 24px;
   margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--prs-bg);
 }
 .usage-step-num {
-  position: absolute;
-  left: 0;
-  top: 1px;
+  position: static;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -4923,8 +5093,26 @@ a:focus-visible,
     gap: 2px;
   }
   .usage-step {
-    padding: 1px 0 16px 32px;
+    padding: 12px 14px;
   }
+}
+.install-doc-concise {
+  margin: 0 0 8px;
+  font-size: 12.5px;
+  color: var(--prs-muted);
+}
+.installation-actions.installation-inline-doc {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.installation-actions.installation-inline-doc .installation-status {
+  margin: 0;
+}
+.setup-threshold-strip {
+  margin-bottom: 10px;
 }
 
 /* 详情抽屉场景化帮扶入口（第 1 步环境准备 & 第 3 步论文写作备选） */
@@ -5097,6 +5285,50 @@ a:focus-visible,
 .quick-fav-toggle.is-active .quick-fav-count {
   background: var(--prs-primary);
   color: #ffffff;
+}
+.quick-fav-toggle.is-compact {
+  min-height: 28px;
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12.5px;
+}
+.filter-controls-stack {
+  display: flex;
+  flex-direction: column;
+}
+.filter-quick-section {
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--prs-border);
+}
+.filter-quick-heading {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12.5px;
+  color: var(--prs-muted);
+}
+.filter-toggle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.filter-toggle-grid .filter-grid-btn.ant-btn {
+  width: 100%;
+  min-height: 36px;
+  height: 36px;
+  padding-inline: 10px;
+  border-radius: 10px;
+  justify-content: flex-start;
+  font-size: 12.5px;
+  gap: 5px;
+}
+.filter-toggle-grid .filter-grid-btn .ant-tag {
+  margin-left: auto;
+  margin-inline-end: 0;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 18px;
+  padding-inline: 6px;
 }
 .web-ready-dot {
   width: 7px;

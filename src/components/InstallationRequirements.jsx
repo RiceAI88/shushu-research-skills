@@ -1,15 +1,20 @@
 import React from "react";
+import editorialContexts from "../../config/editorial.json?contexts";
 import { EditorialReviewNotice } from "./EditorialReviewNotice";
 import { safeExternalUrl } from "../domain";
 import { installationFor, reviewedInstallSnapshot } from "../practical";
 
 export function InstallationRequirements({ item, lang, t, detailsInfo = {} }) {
   const installation = installationFor(item);
+  const lazyCtx = editorialContexts?.[item.repo];
+  const contextText =
+    installation[`context_${lang}`] ||
+    (Array.isArray(lazyCtx) ? lazyCtx[lang === "zh" ? 0 : 1] : "");
   return (
     <div className="installation-evidence">
-      {installation[`context_${lang}`] && (
+      {contextText && (
         <p className="installation-context">
-          {installation[`context_${lang}`]}
+          {contextText}
         </p>
       )}
       {installation.mode === "docs" && !installation.reviewed_at && (

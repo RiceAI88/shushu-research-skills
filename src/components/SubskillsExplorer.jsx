@@ -103,7 +103,7 @@ export function SubskillsExplorer({ item, lang = "zh", initialFilter = "" }) {
         </div>
         {allSubskills.length > 6 && (
           <input
-            type="search"
+            type="text"
             className="subskills-search"
             data-testid="subskills-search"
             value={query}

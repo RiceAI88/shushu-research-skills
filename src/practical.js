@@ -34,7 +34,11 @@ export function filterPublicSignals(signals) {
 
 export function installationFor(item, content = EDITORIAL_CONTENT) {
   const entry = content.installations?.[item.repo];
-  const source = entry?.reviewed_at && safeExternalUrl(entry.source_url);
+  const rawSourceUrl =
+    typeof entry?.source_url === "string" && entry.source_url.startsWith("~")
+      ? `https://github.com/${item.repo}${entry.source_url.slice(1)}`
+      : entry?.source_url;
+  const source = entry?.reviewed_at && safeExternalUrl(rawSourceUrl);
   const command =
     typeof entry?.command === "string" && entry.command.trim()
       ? entry.command

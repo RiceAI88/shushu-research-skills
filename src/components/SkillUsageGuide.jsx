@@ -111,27 +111,8 @@ export function SkillUsageGuide({
       data-testid="skill-usage-guide"
       aria-label={zh ? "快速上手指南" : "Quick start guide"}
     >
-      {thresholds.length > 0 && (
-        <div
-          className="setup-threshold-strip"
-          data-testid="setup-thresholds"
-          aria-label={zh ? "环境与使用门槛提示" : "Setup threshold hints"}
-        >
-          {thresholds.map((badge) => (
-            <span
-              key={badge.id}
-              className={`threshold-pill threshold-${badge.tone}`}
-            >
-              {badge.label}
-            </span>
-          ))}
-        </div>
-      )}
-
-      <OutputPreviewCard item={item} lang={lang} />
-
       {/* 第 1 步：准备 AI Agent 与运行环境 */}
-      <div className="usage-step">
+      <div className="usage-step drawer-module-card">
         <div className="usage-step-header">
           <span className="usage-step-num" aria-hidden="true">
             1
@@ -148,6 +129,22 @@ export function SkillUsageGuide({
           )}
         </div>
         <div className="usage-step-body">
+          {thresholds.length > 0 && (
+            <div
+              className="setup-threshold-strip"
+              data-testid="setup-thresholds"
+              aria-label={zh ? "环境与使用门槛提示" : "Setup threshold hints"}
+            >
+              {thresholds.map((badge) => (
+                <span
+                  key={badge.id}
+                  className={`threshold-pill threshold-${badge.tone}`}
+                >
+                  {badge.label}
+                </span>
+              ))}
+            </div>
+          )}
           {preferredAgent && preferredAgent !== "all" && (
             <div className="preferred-agent-banner" data-testid="preferred-agent-banner">
               <span>
@@ -206,7 +203,7 @@ export function SkillUsageGuide({
       </div>
 
       {/* 第 2 步：执行安装（含执行位置标注 + 让 AI 帮你装兜底） */}
-      <div className="usage-step">
+      <div className="usage-step drawer-module-card">
         <div className="usage-step-header">
           <span className="usage-step-num" aria-hidden="true">
             2
@@ -222,10 +219,18 @@ export function SkillUsageGuide({
           </h3>
         </div>
         <div className="usage-step-body">
-          <div className={`install-location-banner location-${location.kind}`}>
-            <span className="install-location-badge">{location.badge}</span>
-            <p>{location.hint}</p>
-          </div>
+          {installation.command ? (
+            <div className={`install-location-banner location-${location.kind}`}>
+              <span className="install-location-badge">{location.badge}</span>
+              <p>{location.hint}</p>
+            </div>
+          ) : (
+            <p className="install-doc-concise">
+              {zh
+                ? "暂未提炼单行命令，可查阅官方说明或复制下方提示词让 AI 自动安装："
+                : "No single-line command yet—check official docs or let AI install it below:"}
+            </p>
+          )}
           <InstallationActions
             item={item}
             lang={lang}
@@ -405,7 +410,7 @@ export function SkillUsageGuide({
 
       {/* 第 3 步：装完怎么用（直接可抄的提示词案例） */}
       {!isReference && (
-        <div className="usage-step usage-step-highlight">
+        <div className="usage-step usage-step-highlight drawer-module-card">
           <div className="usage-step-header">
             <span className="usage-step-num" aria-hidden="true">
               3
@@ -554,6 +559,8 @@ export function SkillUsageGuide({
           </div>
         </div>
       )}
+
+      <OutputPreviewCard item={item} lang={lang} />
     </section>
   );
 }

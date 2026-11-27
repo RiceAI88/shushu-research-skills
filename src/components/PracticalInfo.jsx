@@ -49,11 +49,7 @@ export function SummaryText({ item, t, query = "", full = false, lang = "" }) {
         title={full ? undefined : rawDesc}
       >
         <SearchHighlight
-          text={
-            !query && HAS_CHINESE_RE.test(rawDesc)
-              ? polishZhSpacing(rawDesc)
-              : rawDesc || t("noDescription")
-          }
+          text={rawDesc || t("noDescription")}
           query={query}
         />
       </p>

@@ -25,7 +25,6 @@ import React, {
 import {
   Button,
   ConfigProvider,
-  Segmented,
   Space,
   Tag,
   Tooltip,
@@ -76,10 +75,48 @@ import {
   RepositoryDrawerDialog,
   preloadRepositoryDrawer,
 } from "./components/RepositoryDrawerDialog";
-import CommunityDialog, {
-  preloadCommunityQr,
-  triggerCommunityDialog,
-} from "./components/CommunityCard";
+const CommunityDialog = lazy(() => import("./components/CommunityCard"));
+const preloadCommunityQr = () => {
+  import("./components/CommunityCard").then((m) => m.preloadCommunityQr?.());
+};
+const triggerCommunityDialog = () => {
+  window.dispatchEvent(new CustomEvent("ars-open-community"));
+};
+
+// 轻量分段单选器：保留与 Ant Design Segmented 一致的 ARIA / 类名契约，省去首屏重型依赖
+function Segmented({ "aria-label": ariaLabel, value, options, onChange }) {
+  return (
+    <div
+      className="ant-segmented lite-segmented"
+      role="radiogroup"
+      aria-label={ariaLabel}
+    >
+      <div className="ant-segmented-group">
+        {options.map((opt) => {
+          const checked = value === opt.value;
+          return (
+            <label
+              key={opt.value}
+              className={`ant-segmented-item${checked ? " ant-segmented-item-selected" : ""}`}
+            >
+              <input
+                className="ant-segmented-item-input"
+                type="radio"
+                name={ariaLabel}
+                checked={checked}
+                onChange={() => onChange(opt.value)}
+              />
+              <div className="ant-segmented-item-label">
+                {opt.icon}
+                {opt.label}
+              </div>
+            </label>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 const FilterControls = lazy(() => import("./components/FilterControls"));
 const ComparisonDialog = lazy(() => import("./components/ComparisonDialog"));
 const RecommendSkillModal = lazy(() => import("./components/RecommendSkillModal"));
@@ -279,8 +316,12 @@ function Dashboard({ state, update, switchLang }) {
     () => window.ACADEMIC_SKILLS_HISTORY || null,
   );
   const [compareOpen, setCompareOpen] = useState(false);
+  const [overviewOpen, setOverviewOpen] = useState(false);
   const needsHistory =
-    state.section === "insights" || state.view === "table" || compareOpen;
+    state.section === "insights" ||
+    state.view === "table" ||
+    compareOpen ||
+    overviewOpen;
   useEffect(() => {
     const syncHistory = () => {
       if (window.ACADEMIC_SKILLS_HISTORY) {
@@ -425,7 +466,6 @@ function Dashboard({ state, update, switchLang }) {
     };
   }, []);
   const visible = useMemo(() => filterItems(items, state), [items, state]);
-  const [overviewOpen, setOverviewOpen] = useState(false);
   const disciplineItems = useMemo(() => filterItems(items, {...state, discipline:'all', major:'all', task:'all'}), [items,state]);
   const scopeItems = useMemo(
     () =>
@@ -517,6 +557,13 @@ function Dashboard({ state, update, switchLang }) {
   }, [state.compare]);
   useEffect(() => {
     const handler = (e) => {
+      if (e.key === "Escape") {
+        document
+          .querySelectorAll("details.curated-packs-menu[open], details.export-menu[open]")
+          .forEach((d) => {
+            d.open = false;
+          });
+      }
       if (e.key === "Escape" && compareOpen) {
         setCompareOpen(false);
         return;
@@ -559,8 +606,19 @@ function Dashboard({ state, update, switchLang }) {
         update((s) => ({ ...s, view: s.view === "table" ? "card" : "table" }));
       if (e.key === "f") update((s) => ({ ...s, favOnly: !s.favOnly }));
     };
+    const closeOpenMenusOnOutside = (e) => {
+      document
+        .querySelectorAll("details.curated-packs-menu[open], details.export-menu[open]")
+        .forEach((d) => {
+          if (!d.contains(e.target)) d.open = false;
+        });
+    };
     document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
+    document.addEventListener("pointerdown", closeOpenMenusOnOutside);
+    return () => {
+      document.removeEventListener("keydown", handler);
+      document.removeEventListener("pointerdown", closeOpenMenusOnOutside);
+    };
   }, [compareOpen, guideSection, state.repo, state.lang, switchLang, update, stickySearchVisible]);
   function exportFavorites() {
     const favorites = items
@@ -1096,36 +1154,6 @@ function Dashboard({ state, update, switchLang }) {
           <div className="filter-fields">
             <button
               type="button"
-              className={`quick-fav-toggle${state.favOnly ? " is-active" : ""}${state.favorites.length > 0 ? " has-items" : ""}`}
-              data-testid="quick-favorites-toggle"
-              aria-pressed={Boolean(state.favOnly)}
-              title={
-                state.lang === "zh"
-                  ? "查看我收藏的科研 Skills（快捷键 f）"
-                  : "View my saved Skills (shortcut: f)"
-              }
-              onClick={() =>
-                update((s) => ({
-                  ...s,
-                  section: "ranking",
-                  favOnly: !s.favOnly,
-                }))
-              }
-            >
-              {state.favOnly || state.favorites.length > 0 ? (
-                <StarFilled className="quick-fav-icon is-saved" aria-hidden="true" />
-              ) : (
-                <StarOutlined className="quick-fav-icon" aria-hidden="true" />
-              )}
-              <span className="quick-fav-text">
-                {state.lang === "zh" ? "我的收藏" : "Saved"}
-              </span>
-              {state.favorites.length > 0 && (
-                <b className="quick-fav-count">{state.favorites.length}</b>
-              )}
-            </button>
-            <button
-              type="button"
               className={`web-ready-toggle${state.webReady ? " is-active" : ""}`}
               data-testid="web-ready-toggle"
               aria-pressed={Boolean(state.webReady)}
@@ -1331,6 +1359,36 @@ function Dashboard({ state, update, switchLang }) {
                 </section>
               </div>
               <Space wrap size={8}>
+                <button
+                  type="button"
+                  className={`quick-fav-toggle is-compact${state.favOnly ? " is-active" : ""}${state.favorites.length > 0 ? " has-items" : ""}`}
+                  data-testid="quick-favorites-toggle"
+                  aria-pressed={Boolean(state.favOnly)}
+                  title={
+                    state.lang === "zh"
+                      ? "查看我收藏的科研 Skills（快捷键 f）"
+                      : "View my saved Skills (shortcut: f)"
+                  }
+                  onClick={() =>
+                    update((s) => ({
+                      ...s,
+                      section: "ranking",
+                      favOnly: !s.favOnly,
+                    }))
+                  }
+                >
+                  {state.favOnly || state.favorites.length > 0 ? (
+                    <StarFilled className="quick-fav-icon is-saved" aria-hidden="true" />
+                  ) : (
+                    <StarOutlined className="quick-fav-icon" aria-hidden="true" />
+                  )}
+                  <span className="quick-fav-text">
+                    {state.lang === "zh" ? "我的收藏" : "Saved"}
+                  </span>
+                  {state.favorites.length > 0 && (
+                    <b className="quick-fav-count">{state.favorites.length}</b>
+                  )}
+                </button>
                 {state.favorites.length > 0 && (
                   <Button
                     size="small"
@@ -1345,7 +1403,10 @@ function Dashboard({ state, update, switchLang }) {
                 )}
                 <ScopeControl {...{state,update,relatedCount}} />
                 <details className="curated-packs-menu" data-testid="curated-packs-menu">
-                  <summary>{t("curatedPacks")} ⌄</summary>
+                  <summary>
+                    <span>{t("curatedPacks")}</span>
+                    <i className="dropdown-caret" aria-hidden="true">⌄</i>
+                  </summary>
                   <div
                     className="export-options curated-packs-options"
                     role="group"
@@ -1381,7 +1442,10 @@ function Dashboard({ state, update, switchLang }) {
                   </div>
                 </details>
                 <details className="export-menu">
-                  <summary>{t("exportMenu")} ⌄</summary>
+                  <summary>
+                    <span>{t("exportMenu")}</span>
+                    <i className="dropdown-caret" aria-hidden="true">⌄</i>
+                  </summary>
                   <div
                     className="export-options"
                     role="group"
@@ -1744,7 +1808,11 @@ function Dashboard({ state, update, switchLang }) {
           />
         </DeferredFeature>
       )}
-      {communityRequested && <CommunityDialog lang={state.lang} openOnMount />}
+      {communityRequested && (
+        <React.Suspense fallback={null}>
+          <CommunityDialog lang={state.lang} openOnMount />
+        </React.Suspense>
+      )}
       <BackToTop
         label={t("backToTop")}
         comparisonOpen={state.compare.length > 0}

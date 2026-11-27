@@ -120,49 +120,62 @@ export function RepositoryDrawerDialog({
       title={
         activeItem ? (
           <div className="drawer-header-wrap">
-            <div className="drawer-eyebrow">
-              {t("drEyebrow")} #{activeItem.rank}
-              {category && ` · ${category}`}
-            </div>
-            <div className="drawer-title-bar">
-              <span className="drawer-repo">{activeItem.repo}</span>
-              <div className="drawer-header-controls">
+            <div className="drawer-top-meta">
+              <div className="drawer-eyebrow">
+                <span className="drawer-rank-pill">#{activeItem.rank}</span>
+                {category && <span>{category}</span>}
+              </div>
+              <nav className="detail-navigation" aria-label={t("drBrowse")}>
                 <Button
                   size="small"
-                  className="drawer-header-share"
-                  data-testid="drawer-header-share"
-                  onClick={sharePeerCard}
+                  type="text"
+                  aria-label={t("drPrevious")}
+                  data-testid="detail-previous"
+                  disabled={position <= 0}
+                  onClick={() => navigate(-1)}
                 >
-                  {state.lang === "zh" ? "分享同门" : "Share"}
+                  <span aria-hidden="true">‹ </span>
+                  {t("drPrevious")}
                 </Button>
-                <nav className="detail-navigation" aria-label={t("drBrowse")}>
-                  <Button
-                    size="small"
-                    data-testid="detail-previous"
-                    disabled={position <= 0}
-                    onClick={() => navigate(-1)}
-                  >
-                    {t("drPrevious")}
-                  </Button>
-                  <span
-                    className="detail-position"
-                    data-testid="detail-position"
-                    aria-live="polite"
-                  >
-                    {position >= 0
-                      ? `${position + 1} / ${items.length}`
-                      : t("drOutsideResults")}
-                  </span>
-                  <Button
-                    size="small"
-                    data-testid="detail-next"
-                    disabled={position < 0 || position >= items.length - 1}
-                    onClick={() => navigate(1)}
-                  >
-                    {t("drNext")}
-                  </Button>
-                </nav>
-              </div>
+                <span
+                  className="detail-position"
+                  data-testid="detail-position"
+                  aria-live="polite"
+                >
+                  {position >= 0
+                    ? `${position + 1} / ${items.length}`
+                    : t("drOutsideResults")}
+                </span>
+                <Button
+                  size="small"
+                  type="text"
+                  aria-label={t("drNext")}
+                  data-testid="detail-next"
+                  disabled={position < 0 || position >= items.length - 1}
+                  onClick={() => navigate(1)}
+                >
+                  {t("drNext")}
+                  <span aria-hidden="true"> ›</span>
+                </Button>
+              </nav>
+            </div>
+            <div className="drawer-title-bar">
+              <span className="drawer-repo">
+                <span className="drawer-repo-owner">
+                  {activeItem.repo.split("/")[0]}/
+                </span>
+                <strong className="drawer-repo-name">
+                  {activeItem.repo.split("/").slice(1).join("/")}
+                </strong>
+              </span>
+              <Button
+                size="small"
+                className="drawer-header-share"
+                data-testid="drawer-header-share"
+                onClick={sharePeerCard}
+              >
+                {state.lang === "zh" ? "分享同门" : "Share"}
+              </Button>
             </div>
           </div>
         ) : (

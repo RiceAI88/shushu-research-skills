@@ -1427,8 +1427,19 @@ h1 em {
 .export-menu, .curated-packs-menu { position: relative; font-size: 12px; }
 .export-menu summary, .curated-packs-menu summary { list-style: none; cursor: pointer; padding: 5px 10px; border: 1px solid var(--prs-border); border-radius: 5px; }
 .export-menu summary::-webkit-details-marker, .curated-packs-menu summary::-webkit-details-marker { display: none; }
-.export-options { position: absolute; top: calc(100% + 5px); right: 0; z-index: 40; min-width: 140px; padding: 5px; background: var(--prs-bg); border: 1px solid var(--prs-border); border-radius: 6px; box-shadow: var(--prs-shadow-md); }
-.export-options a, .export-options button { display: block; width: 100%; text-align: left; padding: 7px 10px; color: var(--prs-text); background: none; border: 0; font: inherit; white-space: nowrap; text-decoration: none; cursor: pointer; }
+.export-options { position: absolute; top: calc(100% + 6px); right: 0; z-index: 40; min-width: 156px; padding: 6px; background: var(--prs-panel); border: 1px solid var(--prs-border); border-radius: 12px; box-shadow: 0 14px 36px rgba(15, 23, 42, 0.14); transform-origin: top right; }
+.export-menu[open] > .export-options, .curated-packs-menu[open] > .export-options { animation: menu-dropdown-in 180ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.dropdown-caret { display: inline-block; font-style: normal; margin-left: 3px; transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1); }
+.export-menu[open] .dropdown-caret, .curated-packs-menu[open] .dropdown-caret { transform: rotate(180deg); }
+@keyframes menu-dropdown-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .export-menu[open] > .export-options, .curated-packs-menu[open] > .export-options { animation: none; }
+  .dropdown-caret { transition: none; }
+}
+.export-options a, .export-options button { display: block; width: 100%; text-align: left; padding: 7px 10px; border-radius: 8px; color: var(--prs-text); background: none; border: 0; font: inherit; white-space: nowrap; text-decoration: none; cursor: pointer; transition: background-color 0.14s ease; }
 .export-options button:disabled { opacity: .4; cursor: default; }
 .export-options a:hover, .export-options button:enabled:hover { background: var(--prs-tint); }
 .editorial-preview { color: var(--prs-muted); font-size: 11px; margin: 5px 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -1916,8 +1927,8 @@ body:has(.back-to-top) .shushu-mascot-dock.above-comparison { bottom: calc(206px
 .prompt-slot-reset { border: 0; background: transparent; color: var(--prs-muted); font: inherit; font-size: 12px; cursor: pointer; padding: 2px 4px; }
 .prompt-slot-reset:hover { color: var(--prs-warm-strong); }
 /* 官方精选课题组工具包下拉菜单 & 详情抽屉多技能目录浏览器 */
-.curated-packs-options { min-width: 268px; max-width: min(320px, 88vw); max-height: 360px; overflow-y: auto; }
-.curated-pack-option { display: flex !important; flex-direction: column; align-items: flex-start !important; gap: 2px; padding: 8px 10px !important; text-align: left; }
+.curated-packs-options { min-width: 280px; max-width: min(332px, 88vw); max-height: min(540px, 78vh); overflow-y: auto; padding: 6px; border-radius: 12px; background: var(--prs-panel); box-shadow: 0 14px 36px rgba(15, 23, 42, 0.14); }
+.curated-pack-option { display: flex !important; flex-direction: column; align-items: flex-start !important; gap: 3px; padding: 8px 11px !important; border-radius: 8px; text-align: left; transition: background-color 0.14s ease; }
 .curated-pack-option strong { font-size: 13px; font-weight: 600; color: var(--prs-text); }
 .curated-pack-option small { font-size: 11.5px; color: var(--prs-muted); line-height: 1.4; white-space: normal; }
 .subskills-explorer { margin: 10px 0 14px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--prs-border); background: var(--prs-bg); display: flex; flex-direction: column; gap: 10px; }

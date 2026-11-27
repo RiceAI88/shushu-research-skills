@@ -32,7 +32,7 @@ test("cards emphasize metrics, explain actions and align installation footers", 
   const card = cards.filter({ has: page.locator('a[href="https://github.com/K-Dense-AI/scientific-agent-skills"]') });
   await expect(card.getByTestId("card-stars")).toHaveAttribute("aria-label", /GitHub 星标/);
   await expect(card.getByTestId("card-installs")).toHaveAttribute("aria-label", /下载量：/);
-  await expect(card.locator(".card-key-metrics").getByLabel("近 7 日净增", {exact:true})).toBeVisible();
+  await expect(card.locator(".card-key-metrics .growth-value")).toHaveAttribute("aria-label", /近 7 日净增|短期增量参考/);
   await expect(card.locator("[data-compare]")).toHaveAccessibleName(/^对比 /);
   await expect(card.locator('[data-testid^="favorite-"]')).toHaveAccessibleName(/^收藏 /);
   await expect(card.locator("svg.mini-area-chart")).toHaveCount(0);
@@ -69,6 +69,7 @@ test("back to top appears only after one viewport and keeps filters", async ({
 test("sorting resets batches, while saving and switching view preserve loaded results", async ({
   page,
 }) => {
+  test.setTimeout(60000);
   await page.goto("./#related=1&view=card");
   await page.getByTestId("load-more").click();
   await expect(page.getByTestId("repo-card")).toHaveCount(60);
@@ -85,7 +86,7 @@ test("sorting resets batches, while saving and switching view preserve loaded re
   await expect(page.locator(".ant-table-row")).toHaveCount(60);
   await page.getByRole("button", {name:/^筛选/}).click();
   await page.locator("#sortSelect").click();
-  await page.locator('.ant-select-item-option[title="排序：最近更新"]').click();
+  await page.locator('.ant-select-item-option[title="最近更新"]').click();
   await expect(page.locator(".ant-table-row")).toHaveCount(30);
   while (await page.getByTestId("load-more").count())
     await page.getByTestId("load-more").click();

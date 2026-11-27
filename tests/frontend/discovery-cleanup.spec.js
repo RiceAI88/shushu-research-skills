@@ -18,7 +18,7 @@ for (const width of [1280,390,320]) test(`filter panel and honest counts at ${wi
  await page.locator('.ant-select-item-option[title="Claude Code"]').click();
  await expect(page).toHaveURL(/agent=claude-code/);
  await panel.locator('#sortSelect').click();
- await page.locator('.ant-select-item-option[title="排序：最新收录"]').click();
+ await page.locator('.ant-select-item-option[title="最新收录"]').click();
  await expect(trigger).toContainText('2');
  await expect(panel.getByRole('button',{name:'完成',exact:true})).toHaveCount(0);
  await panel.getByRole('button',{name:'关闭',exact:true}).click();

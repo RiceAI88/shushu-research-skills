@@ -126,7 +126,9 @@ export function RepositoryDrawer({
 
   return (
     <div ref={contentRef} className="drawer-content" key={item.repo}>
-      <SummaryText item={item} t={t} lang={state.lang} full />
+      <section className="drawer-module-card drawer-overview-card">
+        <SummaryText item={item} t={t} lang={state.lang} full />
+      </section>
       <SubskillsExplorer item={item} lang={state.lang} initialFilter={state.query} />
       <SkillUsageGuide
         item={item}
@@ -137,11 +139,17 @@ export function RepositoryDrawer({
         detailsInfo={installationDetails[item.repo]}
         onOpenGuide={onOpenGuide}
       />
-      <dl className="drawer-health">
+      <dl className="drawer-health drawer-overview-metrics drawer-module-card">
         <div>
           <dt>Stars</dt>
           <dd>{fmt(item.stars)}</dd>
         </div>
+        {installInfo && (
+          <div>
+            <dt>{state.lang === "zh" ? "下载量" : "Downloads"}</dt>
+            <dd title={installInfo.detail}>{installInfo.compact}</dd>
+          </div>
+        )}
         <div>
           <dt>{t("shortDelta7")}</dt>
           <dd>{delta ? `${delta > 0 ? "+" : ""}${fmt(delta)}` : "—"}</dd>

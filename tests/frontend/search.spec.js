@@ -1,11 +1,24 @@
 import { test, expect } from "./fixtures.js";
 import { readFileSync } from "node:fs";
 import { filterItems, restoreState } from "../../src/domain.js";
+import { enrichItem } from "../../src/practical.js";
 const data = JSON.parse(
   readFileSync(new URL("../../data/rankings.json", import.meta.url), "utf8"),
 );
-const base = restoreState(null, "", {}, data.items);
-const expected = filterItems(data.items, { ...base, query: "润色" });
+const subskillsCatalog = JSON.parse(
+  readFileSync(new URL("../../config/subskills-catalog.json", import.meta.url), "utf8"),
+);
+const enrichedItems = data.items.map((item) => {
+  const enriched = enrichItem(item);
+  const subList = subskillsCatalog.repos?.[String(item.repo || "").toLowerCase()]?.items || null;
+  return {
+    ...enriched,
+    subskills_list: subList,
+    subskills_blob: subList ? subList.map((s) => `${s.n} ${s.g || ""}`).join(" ") : "",
+  };
+});
+const base = restoreState(null, "", {}, enrichedItems);
+const expected = filterItems(enrichedItems, { ...base, query: "润色" });
 test("suggestions support keyboard selection, Escape and literal Enter without accidentally opening a tool", async ({
   page,
 }) => {

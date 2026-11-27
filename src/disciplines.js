@@ -2,6 +2,14 @@ import catalog from "../config/disciplines.json" with { type: "json" };
 export const DISCIPLINES = catalog.disciplines;
 export function profileFor(item) {
   const entry = catalog.profiles[String(item?.repo || '').toLowerCase()];
+  if (Array.isArray(entry)) {
+    return {
+      disciplines: entry[0] || [],
+      majors: entry[1] || [],
+      common: Boolean(entry[2]),
+      evidence: true,
+    };
+  }
   return entry?.reviewed_at && entry.evidence === true ? entry : null;
 }
 export function selectedDiscipline(state) {

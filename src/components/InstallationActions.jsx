@@ -13,9 +13,10 @@ export function InstallationActions({
   hideExtras = false,
 }) {
   const installation = installationFor(item);
+  const inlineNoCmd = details && hideExtras && !installation.command;
   return (
     <div
-      className={`installation-actions${details ? " installation-details" : " installation-compact"}${compact ? " installation-inline" : ""}`}
+      className={`installation-actions${details ? " installation-details" : " installation-compact"}${compact ? " installation-inline" : ""}${inlineNoCmd ? " installation-inline-doc" : ""}`}
       onClick={(event) => {
         if (event.target.closest("button,a")) event.stopPropagation();
       }}
