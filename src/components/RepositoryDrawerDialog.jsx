@@ -168,14 +168,6 @@ export function RepositoryDrawerDialog({
                   {activeItem.repo.split("/").slice(1).join("/")}
                 </strong>
               </span>
-              <Button
-                size="small"
-                className="drawer-header-share"
-                data-testid="drawer-header-share"
-                onClick={sharePeerCard}
-              >
-                {state.lang === "zh" ? "分享同门" : "Share"}
-              </Button>
             </div>
           </div>
         ) : (

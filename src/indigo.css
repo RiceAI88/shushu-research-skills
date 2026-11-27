@@ -4696,20 +4696,6 @@ a:focus-visible,
   font-weight: 720;
   color: var(--prs-text);
 }
-.drawer-header-share.ant-btn {
-  flex-shrink: 0;
-  border-radius: 999px;
-  border-color: rgb(var(--prs-primary-rgb) / 0.35);
-  color: var(--prs-primary);
-  background: var(--prs-tint);
-  font-weight: 600;
-  padding-inline: 11px;
-}
-.drawer-header-share.ant-btn:hover {
-  border-color: var(--prs-primary) !important;
-  background: var(--prs-primary) !important;
-  color: #ffffff !important;
-}
 .drawer-content {
   display: flex;
   flex-direction: column;

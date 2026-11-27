@@ -303,11 +303,12 @@ test("lazy history loading, deep subskill search handoff, and zero-login recomme
   await expect(hitBadge).toBeVisible();
   await expect(hitBadge).toContainText("scanpy");
 
-  // 点击卡片打开详情抽屉，子技能浏览器自动定位到 scanpy，且顶栏分享与相似项目一键对比可用
+  // 点击卡片打开详情抽屉，子技能浏览器自动定位到 scanpy，底栏分享与相似项目一键对比可用
   await page.getByTestId("repo-card").first().click();
   const drawer = page.getByRole("dialog");
   await expect(drawer.getByTestId("subskills-search")).toHaveValue("scanpy");
-  await expect(drawer.getByTestId("drawer-header-share")).toBeVisible();
+  await expect(drawer.getByTestId("drawer-header-share")).toHaveCount(0);
+  await expect(drawer.getByTestId("share-peer-btn")).toBeVisible();
   const altPk = drawer.getByTestId("drawer-alt-compare").first();
   if ((await altPk.count()) > 0) {
     await altPk.click();
