@@ -1282,13 +1282,28 @@
 }
 @media (max-width: 520px) {
   .hero-dual-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px 12px;
+    flex-direction: row;
+    align-items: center;
+    padding: 9px 12px;
     gap: 8px;
   }
+  .hero-dual-models,
+  .hero-dual-sep {
+    display: none;
+  }
+  .hero-dual-title {
+    font-size: 13px;
+  }
+  .hero-dual-sub {
+    font-size: 11.5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
   .hero-dual-cta {
-    align-self: flex-end;
+    padding: 4.5px 10px;
+    font-size: 11.5px;
   }
 }
 #beginner-paths {
@@ -4422,15 +4437,46 @@ a:focus-visible,
   font-variant-numeric: tabular-nums;
 }
 
-/* 搜索框聚焦空态：热门科研场景快捷词 */
+/* 搜索框聚焦空态：最近浏览 + 最近搜索 + 热门科研场景快捷词 */
 .search-quick-picks {
   padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.search-quick-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.search-quick-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .search-quick-label {
   display: block;
   font-size: 11.5px;
   color: var(--prs-muted);
-  margin-bottom: 8px;
+  margin-bottom: 0;
+}
+.search-quick-clear {
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: var(--prs-muted);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+.search-quick-clear:hover {
+  color: var(--prs-primary);
+}
+.search-quick-chip.is-repo {
+  border-color: rgb(var(--prs-primary-rgb) / 0.28);
+  background: var(--prs-tint);
+  color: var(--prs-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 .search-quick-list {
   display: flex;
@@ -4990,7 +5036,8 @@ a:focus-visible,
   color: var(--prs-text);
 }
 
-/* 列表页一键“免命令行 / 网页版可用”快捷筛选胶囊 */
+/* 外置「我的收藏」一键直达胶囊与「免命令行 / 网页版可用」快捷筛选胶囊 */
+.quick-fav-toggle,
 .web-ready-toggle {
   display: inline-flex;
   align-items: center;
@@ -5011,15 +5058,45 @@ a:focus-visible,
     background-color 150ms ease,
     color 150ms ease;
 }
+.quick-fav-toggle:hover,
 .web-ready-toggle:hover {
   border-color: var(--prs-primary);
   color: var(--prs-primary);
 }
+.quick-fav-toggle.is-active,
 .web-ready-toggle.is-active {
   border-color: var(--prs-primary);
   background: var(--prs-tint);
   color: var(--prs-primary);
   font-weight: 600;
+}
+.quick-fav-icon {
+  font-size: 12.5px;
+  color: var(--prs-muted);
+}
+.quick-fav-icon.is-saved {
+  color: var(--prs-warm);
+}
+.quick-fav-toggle.is-active .quick-fav-icon {
+  color: var(--prs-primary);
+}
+.quick-fav-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--prs-tag-bg);
+  color: var(--prs-text);
+  font-size: 11px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+.quick-fav-toggle.is-active .quick-fav-count {
+  background: var(--prs-primary);
+  color: #ffffff;
 }
 .web-ready-dot {
   width: 7px;
@@ -5118,8 +5195,12 @@ a:focus-visible,
   .view-controls {
     display: none !important;
   }
+  .quick-fav-toggle,
   .web-ready-toggle {
     font-size: 12px;
     padding: 0 9px;
+  }
+  .quick-fav-toggle:not(.has-items):not(.is-active) .quick-fav-text {
+    display: none;
   }
 }

@@ -931,6 +931,7 @@ function Dashboard({ state, update, switchLang }) {
               state={state}
               update={update}
               items={visible}
+              allItems={items}
               taskOptions={taskOptions}
               t={t}
             />
@@ -1093,6 +1094,36 @@ function Dashboard({ state, update, switchLang }) {
             <p className="task-count-note sr-only">{t("taskCountNote")}</p>
           </section>
           <div className="filter-fields">
+            <button
+              type="button"
+              className={`quick-fav-toggle${state.favOnly ? " is-active" : ""}${state.favorites.length > 0 ? " has-items" : ""}`}
+              data-testid="quick-favorites-toggle"
+              aria-pressed={Boolean(state.favOnly)}
+              title={
+                state.lang === "zh"
+                  ? "查看我收藏的科研 Skills（快捷键 f）"
+                  : "View my saved Skills (shortcut: f)"
+              }
+              onClick={() =>
+                update((s) => ({
+                  ...s,
+                  section: "ranking",
+                  favOnly: !s.favOnly,
+                }))
+              }
+            >
+              {state.favOnly || state.favorites.length > 0 ? (
+                <StarFilled className="quick-fav-icon is-saved" aria-hidden="true" />
+              ) : (
+                <StarOutlined className="quick-fav-icon" aria-hidden="true" />
+              )}
+              <span className="quick-fav-text">
+                {state.lang === "zh" ? "我的收藏" : "Saved"}
+              </span>
+              {state.favorites.length > 0 && (
+                <b className="quick-fav-count">{state.favorites.length}</b>
+              )}
+            </button>
             <button
               type="button"
               className={`web-ready-toggle${state.webReady ? " is-active" : ""}`}
@@ -1548,6 +1579,15 @@ function Dashboard({ state, update, switchLang }) {
             toggleCompare,
             t,
             fmt,
+          }}
+          onQuickCompare={(repoA, repoB) => {
+            setComparisonRequested(true);
+            update((s) => ({
+              ...s,
+              repo: null,
+              compare: [repoA, repoB],
+            }));
+            setCompareOpen(true);
           }}
           onOpenGuide={() => {
             update((s) => ({ ...s, repo: null }));

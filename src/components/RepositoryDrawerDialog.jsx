@@ -36,6 +36,7 @@ export function RepositoryDrawerDialog({
   state,
   update,
   toggleCompare,
+  onQuickCompare,
   onOpenGuide,
   t,
   fmt,
@@ -125,33 +126,43 @@ export function RepositoryDrawerDialog({
             </div>
             <div className="drawer-title-bar">
               <span className="drawer-repo">{activeItem.repo}</span>
-              <nav className="detail-navigation" aria-label={t("drBrowse")}>
+              <div className="drawer-header-controls">
                 <Button
                   size="small"
-                  data-testid="detail-previous"
-                  disabled={position <= 0}
-                  onClick={() => navigate(-1)}
+                  className="drawer-header-share"
+                  data-testid="drawer-header-share"
+                  onClick={sharePeerCard}
                 >
-                  {t("drPrevious")}
+                  {state.lang === "zh" ? "分享同门" : "Share"}
                 </Button>
-                <span
-                  className="detail-position"
-                  data-testid="detail-position"
-                  aria-live="polite"
-                >
-                  {position >= 0
-                    ? `${position + 1} / ${items.length}`
-                    : t("drOutsideResults")}
-                </span>
-                <Button
-                  size="small"
-                  data-testid="detail-next"
-                  disabled={position < 0 || position >= items.length - 1}
-                  onClick={() => navigate(1)}
-                >
-                  {t("drNext")}
-                </Button>
-              </nav>
+                <nav className="detail-navigation" aria-label={t("drBrowse")}>
+                  <Button
+                    size="small"
+                    data-testid="detail-previous"
+                    disabled={position <= 0}
+                    onClick={() => navigate(-1)}
+                  >
+                    {t("drPrevious")}
+                  </Button>
+                  <span
+                    className="detail-position"
+                    data-testid="detail-position"
+                    aria-live="polite"
+                  >
+                    {position >= 0
+                      ? `${position + 1} / ${items.length}`
+                      : t("drOutsideResults")}
+                  </span>
+                  <Button
+                    size="small"
+                    data-testid="detail-next"
+                    disabled={position < 0 || position >= items.length - 1}
+                    onClick={() => navigate(1)}
+                  >
+                    {t("drNext")}
+                  </Button>
+                </nav>
+              </div>
             </div>
           </div>
         ) : (
@@ -225,6 +236,7 @@ export function RepositoryDrawerDialog({
             allItems={allItems}
             state={state}
             update={update}
+            onQuickCompare={onQuickCompare}
             onOpenGuide={onOpenGuide}
             t={t}
             fmt={fmt}

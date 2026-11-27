@@ -18,6 +18,7 @@ export function RepositoryDrawer({
   allItems = items,
   state,
   update,
+  onQuickCompare,
   onOpenGuide,
   t,
   fmt,
@@ -131,6 +132,8 @@ export function RepositoryDrawer({
         item={item}
         lang={state.lang}
         t={t}
+        preferredAgent={state.agent}
+        preferWebReady={Boolean(state.webReady)}
         detailsInfo={installationDetails[item.repo]}
         onOpenGuide={onOpenGuide}
       />
@@ -183,36 +186,56 @@ export function RepositoryDrawer({
           </div>
           <div className="drawer-alternatives-grid">
             {similarSkills.map(({ cand, webFriendly }) => (
-              <button
+              <div
                 key={cand.repo}
-                type="button"
                 className="drawer-alt-card"
                 data-testid="drawer-alt-card"
-                onClick={() => {
-                  trackEvent("click_drawer_alternative", {
-                    from: item.repo,
-                    to: cand.repo,
-                  });
-                  update((s) => ({ ...s, repo: cand.repo }));
-                }}
               >
-                <div className="drawer-alt-top">
-                  <strong>{cand.repo.split("/").pop()}</strong>
-                  <span className="drawer-alt-meta">
-                    {webFriendly && (
-                      <em>
-                        {state.lang === "zh" ? "免安装 · 网页直用" : "Zero-install · Web AI"}
-                      </em>
-                    )}
-                    <span>★ {fmt(cand.stars)}</span>
-                  </span>
-                </div>
-                <p>
-                  {(state.lang === "zh" && cand.curated_use_zh) ||
-                    cand.description ||
-                    t("noDescription")}
-                </p>
-              </button>
+                <button
+                  type="button"
+                  className="drawer-alt-main"
+                  onClick={() => {
+                    trackEvent("click_drawer_alternative", {
+                      from: item.repo,
+                      to: cand.repo,
+                    });
+                    update((s) => ({ ...s, repo: cand.repo }));
+                  }}
+                >
+                  <div className="drawer-alt-top">
+                    <strong>{cand.repo.split("/").pop()}</strong>
+                    <span className="drawer-alt-meta">
+                      {webFriendly && (
+                        <em>
+                          {state.lang === "zh" ? "免安装 · 网页直用" : "Zero-install · Web AI"}
+                        </em>
+                      )}
+                      <span>★ {fmt(cand.stars)}</span>
+                    </span>
+                  </div>
+                  <p>
+                    {(state.lang === "zh" && cand.curated_use_zh) ||
+                      cand.description ||
+                      t("noDescription")}
+                  </p>
+                </button>
+                {onQuickCompare && (
+                  <button
+                    type="button"
+                    className="drawer-alt-pk"
+                    data-testid="drawer-alt-compare"
+                    onClick={() => {
+                      trackEvent("quick_compare_alternative", {
+                        from: item.repo,
+                        to: cand.repo,
+                      });
+                      onQuickCompare(item.repo, cand.repo);
+                    }}
+                  >
+                    {state.lang === "zh" ? "⇄ 与当前项目对比" : "⇄ Compare side by side"}
+                  </button>
+                )}
+              </div>
             ))}
           </div>
         </section>

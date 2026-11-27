@@ -13,7 +13,7 @@ import {
   usagePromptFor,
   webChatPromptFor,
 } from "../usageGuide";
-import { safeExternalUrl } from "../domain";
+import { AGENT_PLATFORMS, safeExternalUrl } from "../domain";
 import { trackEvent } from "../analytics";
 import { PlatformTags } from "./PracticalInfo";
 import { InstallationActions } from "./InstallationActions";
@@ -54,6 +54,8 @@ export function SkillUsageGuide({
   item,
   lang,
   t,
+  preferredAgent = "all",
+  preferWebReady = false,
   detailsInfo = {},
   onOpenGuide,
 }) {
@@ -146,6 +148,15 @@ export function SkillUsageGuide({
           )}
         </div>
         <div className="usage-step-body">
+          {preferredAgent && preferredAgent !== "all" && (
+            <div className="preferred-agent-banner" data-testid="preferred-agent-banner">
+              <span>
+                {zh
+                  ? `✓ 已匹配你当前筛选的「${AGENT_PLATFORMS.find((a) => a.id === preferredAgent)?.label || preferredAgent}」环境`
+                  : `✓ Matched to your selected "${AGENT_PLATFORMS.find((a) => a.id === preferredAgent)?.label || preferredAgent}" environment`}
+              </span>
+            </div>
+          )}
           <div className="drawer-platforms">
             <span>{t("drAgent")}</span>
             <PlatformTags item={item} t={t} />
@@ -297,6 +308,7 @@ export function SkillUsageGuide({
             <details
               className="ai-install-helper web-ai-helper"
               data-testid="web-ai-helper"
+              open={preferWebReady || undefined}
             >
               <summary>
                 <span aria-hidden="true">🌐</span>

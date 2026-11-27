@@ -1,13 +1,45 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { SearchHighlight } from "./SearchHighlight";
+
 const QUICK_KEYWORDS = {
   zh: ["论文写作", "文献综述", "Zotero", "LaTeX", "科研绘图", "审稿"],
   en: ["paper writing", "literature review", "Zotero", "LaTeX", "figures", "peer review"],
 };
+
+const RECENT_QUERIES_KEY = "ars-recent-queries";
+
+function readRecentQueries() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(RECENT_QUERIES_KEY) || "[]");
+    return Array.isArray(parsed)
+      ? parsed.filter((s) => typeof s === "string" && s.trim().length >= 2).slice(0, 5)
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveRecentQuery(raw) {
+  const clean = String(raw || "").trim();
+  if (clean.length < 2) return;
+  try {
+    const prev = readRecentQueries().filter(
+      (x) => x.toLowerCase() !== clean.toLowerCase(),
+    );
+    localStorage.setItem(
+      RECENT_QUERIES_KEY,
+      JSON.stringify([clean, ...prev].slice(0, 5)),
+    );
+  } catch {
+    /* ignore */
+  }
+}
+
 export default function SearchSuggestions({
   state,
   update,
   items,
+  allItems = items,
   taskOptions,
   taskIds,
   t,
@@ -19,7 +51,14 @@ export default function SearchSuggestions({
   inputRef,
 }) {
   const [active, setActive] = useState(-1);
+  const [recentQueries, setRecentQueries] = useState(readRecentQueries);
   const listRef = useRef(null);
+  const zh = state.lang === "zh";
+
+  useEffect(() => {
+    if (focused) setRecentQueries(readRecentQueries());
+  }, [focused]);
+
   useEffect(
     () => setActive(-1),
     [
@@ -36,6 +75,7 @@ export default function SearchSuggestions({
   useEffect(() => {
     if (!expanded) setActive(-1);
   }, [expanded]);
+
   const q = state.query.trim().toLowerCase();
   const options = q
     ? [
@@ -57,18 +97,28 @@ export default function SearchSuggestions({
   const open = focused && expanded && options.length > 0;
   const showQuickPicks = focused && expanded && !q;
   const activeOption = open && options[active];
+
+  const recentViewedItems = showQuickPicks
+    ? (state.recent || [])
+        .slice(0, 3)
+        .map((repo) => (allItems || items).find((it) => it.repo === repo))
+        .filter(Boolean)
+    : [];
+
   useEffect(() => {
     if (open && active >= 0)
       listRef.current
         ?.querySelector(`#search-option-${active}`)
         ?.scrollIntoView({ block: "nearest" });
   }, [open, active]);
+
   useLayoutEffect(() => {
     keyHandler.current = keyDown;
     return () => {
       keyHandler.current = null;
     };
   });
+
   useLayoutEffect(() => {
     const input = inputRef.current?.input;
     if (!input) return;
@@ -83,7 +133,9 @@ export default function SearchSuggestions({
       input.removeAttribute("aria-activedescendant");
     };
   }, [open, active, activeOption, inputRef]);
+
   function choose(option) {
+    if (state.query.trim().length >= 2) saveRecentQuery(state.query);
     dismiss();
     setActive(-1);
     if (option.kind === "task") {
@@ -95,6 +147,7 @@ export default function SearchSuggestions({
       }));
     } else update((previous) => ({ ...previous, repo: option.id }));
   }
+
   function keyDown(event) {
     if (event.nativeEvent.isComposing || event.keyCode === 229) return;
     if (["ArrowDown", "ArrowUp"].includes(event.key) && options.length) {
@@ -108,6 +161,7 @@ export default function SearchSuggestions({
             : previous - 1,
       );
     } else if (event.key === "Enter") {
+      if (state.query.trim().length >= 2) saveRecentQuery(state.query);
       if (activeOption) {
         event.preventDefault();
         choose(activeOption);
@@ -121,6 +175,7 @@ export default function SearchSuggestions({
       setActive(-1);
     } else if (event.key === "Tab") dismiss();
   }
+
   return (
     <>
       <span className="sr-only" role="status">
@@ -162,13 +217,13 @@ export default function SearchSuggestions({
                     )}
                   </small>
                 </div>
-                {(state.lang === "zh" && option.item?.curated_use_zh
+                {(zh && option.item?.curated_use_zh
                   ? option.item.curated_use_zh
                   : option.item?.description) && (
                   <div className="search-option-description">
                     <SearchHighlight
                       text={
-                        state.lang === "zh" && option.item?.curated_use_zh
+                        zh && option.item?.curated_use_zh
                           ? option.item.curated_use_zh
                           : option.item.description
                       }
@@ -187,25 +242,89 @@ export default function SearchSuggestions({
       {showQuickPicks && (
         <div
           className="search-popup search-quick-picks"
+          data-testid="search-quick-picks"
           onPointerDown={(event) => event.preventDefault()}
         >
-          <span className="search-quick-label">
-            {state.lang === "zh" ? "热门科研场景" : "Popular searches"}
-          </span>
-          <div className="search-quick-list">
-            {(QUICK_KEYWORDS[state.lang] || QUICK_KEYWORDS.zh).map((word) => (
-              <button
-                key={word}
-                type="button"
-                className="search-quick-chip"
-                onClick={() => {
-                  update((previous) => ({ ...previous, query: word }));
-                  expand();
-                }}
-              >
-                {word}
-              </button>
-            ))}
+          {recentViewedItems.length > 0 && (
+            <div className="search-quick-group" data-testid="search-recent-repos">
+              <span className="search-quick-label">
+                {zh ? "最近浏览" : "Recently viewed"}
+              </span>
+              <div className="search-quick-list">
+                {recentViewedItems.map((it) => (
+                  <button
+                    key={it.repo}
+                    type="button"
+                    className="search-quick-chip is-repo"
+                    onClick={() => {
+                      dismiss();
+                      update((prev) => ({ ...prev, repo: it.repo }));
+                    }}
+                  >
+                    {it.repo.split("/").pop()}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          {recentQueries.length > 0 && (
+            <div className="search-quick-group" data-testid="search-recent-queries">
+              <div className="search-quick-head">
+                <span className="search-quick-label">
+                  {zh ? "最近搜索" : "Recent searches"}
+                </span>
+                <button
+                  type="button"
+                  className="search-quick-clear"
+                  onClick={() => {
+                    setRecentQueries([]);
+                    try {
+                      localStorage.removeItem(RECENT_QUERIES_KEY);
+                    } catch {
+                      /* ignore */
+                    }
+                  }}
+                >
+                  {zh ? "清空" : "Clear"}
+                </button>
+              </div>
+              <div className="search-quick-list">
+                {recentQueries.map((word) => (
+                  <button
+                    key={word}
+                    type="button"
+                    className="search-quick-chip"
+                    onClick={() => {
+                      update((previous) => ({ ...previous, query: word }));
+                      expand();
+                    }}
+                  >
+                    {word}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          <div className="search-quick-group">
+            <span className="search-quick-label">
+              {zh ? "热门科研场景" : "Popular searches"}
+            </span>
+            <div className="search-quick-list">
+              {(QUICK_KEYWORDS[state.lang] || QUICK_KEYWORDS.zh).map((word) => (
+                <button
+                  key={word}
+                  type="button"
+                  className="search-quick-chip"
+                  onClick={() => {
+                    saveRecentQuery(word);
+                    update((previous) => ({ ...previous, query: word }));
+                    expand();
+                  }}
+                >
+                  {word}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}

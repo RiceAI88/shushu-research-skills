@@ -113,7 +113,15 @@ export function RepositoryActions({
           style={{ color: favorite ? "var(--prs-primary)" : undefined }}
           onClick={(e) => {
             e.stopPropagation();
-            message.success(t(favorite ? "favoriteRemoved" : "favoriteSaved"));
+            if (!favorite && state.favorites.length === 1) {
+              message.success(
+                state.lang === "zh"
+                  ? "已加入「我的收藏 (2)」· 可在工具栏随时查看，或按 Ctrl/Cmd+D 收藏本站防丢失"
+                  : "Saved (2)! View anytime in the toolbar or press Cmd/Ctrl+D to bookmark",
+              );
+            } else {
+              message.success(t(favorite ? "favoriteRemoved" : "favoriteSaved"));
+            }
             update((s) => ({
               ...s,
               favorites: favorite
