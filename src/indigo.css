@@ -794,8 +794,8 @@
   background: transparent;
   text-align: left;
   color: var(--prs-text);
-  font-size: 15.5px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 400;
   line-height: 20px;
   overflow-wrap: anywhere;
   text-decoration: none;
@@ -846,17 +846,17 @@
   border-left: 1px solid var(--prs-border);
 }
 .card-key-metrics .card-installs-stat strong {
-  font-size: 15px;
+  font-size: 14.5px;
   line-height: 22px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--prs-body);
 }
 .card-key-metrics strong {
-  font-size: 16.5px;
+  font-size: 15.5px;
   line-height: 22px;
-  font-weight: 650;
-  letter-spacing: -0.015em;
-  color: var(--prs-body);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--prs-text);
   font-variant-numeric: tabular-nums;
 }
 .card-key-metrics span {
@@ -869,7 +869,7 @@
 .card-key-metrics .card-growth strong {
   font-size: 12.5px;
   line-height: 20px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--prs-warm-strong);
 }
 .repository-card .practical-description {
@@ -904,15 +904,21 @@
   color: var(--prs-muted);
 }
 @media (hover: hover) {
+  .card-info-footer > :last-child {
+    transition: opacity 0.14s ease;
+  }
+  .repository-card:hover .card-info-footer[data-guide-cue] > :last-child {
+    opacity: 0;
+  }
   .card-info-footer[data-guide-cue]::after {
     content: attr(data-guide-cue);
     position: absolute;
     right: 0;
     top: 10px;
     padding-left: 10px;
-    background: var(--prs-panel);
+    background: transparent;
     color: var(--prs-primary);
-    font-weight: 600;
+    font-weight: 500;
     opacity: 0;
     transform: translateX(-2px);
     transition: opacity 0.16s ease, transform 0.16s ease;
@@ -4326,7 +4332,7 @@ a:focus-visible,
   border-left: 0;
   padding-left: 0;
   font-size: 13.5px;
-  font-weight: 530;
+  font-weight: 400;
   line-height: 20px;
   height: 20px;
   max-height: 20px;
