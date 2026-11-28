@@ -1,4 +1,12 @@
 {
+  "EvoScientist/EvoScientist": {
+    "scenario_zh": "多智能体自演进科研探索",
+    "scenario_en": "Self-evolving multi-agent research",
+    "prompt_zh": "请调用 EvoScientist 技能，围绕课题【图神经网络在分子性质预测中的跨分布泛化瓶颈】生成一组可检验的研究假设、基线对比方案与首轮验证实验步骤。",
+    "prompt_en": "Use EvoScientist to formulate testable hypotheses, baseline comparisons, and first-round validation experiments for [out-of-distribution generalization of GNNs in molecular property prediction].",
+    "output_zh": "输出多智能体协同推演的研究假设、实验设计清单与迭代路线。",
+    "output_en": "Produces multi-agent research hypotheses, experimental design checklists, and an iterative validation roadmap."
+  },
   "K-Dense-AI/scientific-agent-skills": {
     "scenario_zh": "科学数据分析与文献综述",
     "scenario_en": "Scientific analysis & literature review",

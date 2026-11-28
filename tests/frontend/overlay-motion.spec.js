@@ -60,6 +60,18 @@ for(const width of [1440,390])test(`filter loads with a skeleton and transitions
  } finally {release();}
 });
 
+test('scope action popover transitions smoothly on open and close',async({page})=>{
+ await page.goto('./');
+ const trigger=page.getByRole('button',{name:/^收录范围/});
+ await trigger.click();
+ const panel=page.getByRole('dialog',{name:'收录范围',exact:true});
+ await expect(panel).toBeVisible();
+ const exit=await exitState(panel,'.popover-panel-heading button');
+ expect(exit.running).toBe(true);
+ expect(exit.display).not.toBe('none');
+ await expect(panel).not.toBeVisible();
+});
+
 test('reduced motion removes modal and panel movement and skeleton shimmer',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('./');
  await page.getByTestId('repo-card').first().click();

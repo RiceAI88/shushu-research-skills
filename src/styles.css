@@ -1280,38 +1280,49 @@ h1 em {
 .hero-search { position: relative; }
 .search-popup {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% + 8px);
   left: 0;
   right: 0;
   z-index: 50;
   border: 1px solid var(--prs-border);
-  border-radius: 6px;
+  border-radius: 14px;
   background: var(--prs-panel);
-  box-shadow: var(--prs-shadow);
+  box-shadow: 0 14px 36px -8px rgba(15, 23, 42, 0.12), 0 2px 8px rgba(15, 23, 42, 0.04);
   overflow: hidden;
+  transform-origin: top center;
+  animation: menu-dropdown-in 160ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+[data-theme="dark"] .search-popup {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-popup { animation: none; }
 }
 .search-popup ul {
   max-height: min(360px, 45vh);
   overflow-y: auto;
   overscroll-behavior: contain;
   list-style: none;
-  padding: 4px;
+  padding: 6px;
   margin: 0;
 }
 .search-popup [role="option"] {
-  padding: 10px 12px;
-  border-radius: 3px;
+  padding: 9px 12px;
+  border-radius: 9px;
   cursor: pointer;
   color: var(--prs-text);
   line-height: 1.5;
+  transition: background-color 120ms ease;
 }
+.search-popup [role="option"]:hover,
 .search-popup [role="option"][aria-selected="true"] { background: var(--prs-tint); }
-.search-option-heading { display: flex; align-items: baseline; gap: 10px; font-size: 13px; }
+.search-option-heading { display: flex; align-items: center; gap: 10px; font-size: 13px; }
 .search-option-heading > span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
-.search-option-heading small { color: var(--prs-muted); flex-shrink: 0; font-size: 11px; }
+.search-option-heading small { color: var(--prs-muted); background: var(--prs-tag-bg); padding: 1px 7px; border-radius: 999px; flex-shrink: 0; font-size: 11px; }
 .search-option-description { margin-top: 3px; color: var(--prs-muted); font-size: 12px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.search-suggestion-hint { padding: 7px 12px; font-size: 11px; border-top: 1px solid var(--prs-border); color: var(--prs-muted); }
-.search-match { color: var(--prs-text); background: var(--prs-tint); font-weight: 600; border-radius: 2px; }
+.search-suggestion-hint { padding: 7px 14px; font-size: 11px; border-top: 1px solid var(--prs-border); background: rgba(248, 250, 252, 0.6); color: var(--prs-muted); }
+[data-theme="dark"] .search-suggestion-hint { background: rgba(15, 23, 42, 0.4); }
+.search-match { color: var(--prs-primary); background: var(--prs-tint); font-weight: 500; border-radius: 3px; padding: 0 2px; }
 
 /* Put research tasks first; categories remain an optional second dimension. */
 .task-list { flex-wrap: wrap; justify-content: flex-start; gap: 8px; }

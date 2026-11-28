@@ -1018,6 +1018,63 @@ function Dashboard({ state, update, switchLang }) {
             )}
           </div>
 
+          <div
+            className="hero-search-hotbar"
+            data-testid="hero-search-hotbar"
+            aria-label={state.lang === "zh" ? "热门搜索与最近浏览" : "Popular searches"}
+          >
+            <span className="hero-hotbar-group">
+              <span className="hero-hotbar-label">
+                {state.lang === "zh" ? "热门：" : "Popular:"}
+              </span>
+              {(state.lang === "zh"
+                ? ["Zotero", "LaTeX", "文献综述", "SCI 润色", "学术配图", "实验代码", "审稿回复"]
+                : ["Zotero", "LaTeX", "literature review", "SCI polish", "scientific plot", "rebuttal"]
+              ).map((word) => {
+                const isCurrent = state.query.trim().toLowerCase() === word.toLowerCase();
+                return (
+                  <button
+                    key={word}
+                    type="button"
+                    className={`hero-hotbar-chip${isCurrent ? " is-active" : ""}`}
+                    aria-pressed={isCurrent}
+                    onClick={() =>
+                      update((s) => ({
+                        ...s,
+                        section: "ranking",
+                        query: isCurrent ? "" : word,
+                      }))
+                    }
+                  >
+                    {word}
+                  </button>
+                );
+              })}
+            </span>
+            {state.recent?.length > 0 && (
+              <span className="hero-hotbar-group hero-hotbar-recent" data-testid="search-recent-repos">
+                <i className="hero-hotbar-sep" aria-hidden="true">·</i>
+                <span className="hero-hotbar-label">
+                  {state.lang === "zh" ? "最近浏览：" : "Recent:"}
+                </span>
+                {state.recent
+                  .slice(0, 2)
+                  .map((repo) => items.find((it) => it.repo === repo))
+                  .filter(Boolean)
+                  .map((it) => (
+                    <button
+                      key={it.repo}
+                      type="button"
+                      className="hero-hotbar-chip is-repo"
+                      onClick={() => update((prev) => ({ ...prev, repo: it.repo }))}
+                    >
+                      {it.repo.split("/").pop()}
+                    </button>
+                  ))}
+              </span>
+            )}
+          </div>
+
           <HeroPosterAd
             lang={state.lang}
             hidden={Boolean(state.query && visible.length === 0)}
@@ -1327,11 +1384,26 @@ function Dashboard({ state, update, switchLang }) {
                   />
                   <Button
                     type="link"
+                    className="overview-toggle-btn"
                     onClick={() => setOverviewOpen((value) => !value)}
                     aria-expanded={overviewOpen}
                     aria-controls="data-overview"
                   >
-                    {t("dataOverview")} {overviewOpen ? "⌃" : "⌄"}
+                    <span>{t("dataOverview")}</span>
+                    <svg
+                      className={`dropdown-caret${overviewOpen ? " is-open" : ""}`}
+                      width="11"
+                      height="11"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M2.5 4.5L6 8l3.5-3.5" />
+                    </svg>
                   </Button>
                 </div>
                 <section
@@ -1424,7 +1496,20 @@ function Dashboard({ state, update, switchLang }) {
                 <details className="curated-packs-menu" data-testid="curated-packs-menu">
                   <summary>
                     <span>{t("curatedPacks")}</span>
-                    <i className="dropdown-caret" aria-hidden="true">⌄</i>
+                    <svg
+                      className="dropdown-caret"
+                      width="11"
+                      height="11"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M2.5 4.5L6 8l3.5-3.5" />
+                    </svg>
                   </summary>
                   <div
                     className="export-options curated-packs-options"
@@ -1463,12 +1548,31 @@ function Dashboard({ state, update, switchLang }) {
                 <details className="export-menu">
                   <summary>
                     <span>{t("exportMenu")}</span>
-                    <i className="dropdown-caret" aria-hidden="true">⌄</i>
+                    <svg
+                      className="dropdown-caret"
+                      width="11"
+                      height="11"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M2.5 4.5L6 8l3.5-3.5" />
+                    </svg>
                   </summary>
                   <div
                     className="export-options"
                     role="group"
                     aria-label={t("exportMenu")}
+                    onClick={(e) => {
+                      if (e.target.closest("button:not(:disabled), a")) {
+                        const detailsEl = e.currentTarget.closest("details");
+                        if (detailsEl) detailsEl.open = false;
+                      }
+                    }}
                   >
                     <button
                       type="button"
