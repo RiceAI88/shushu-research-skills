@@ -14,7 +14,6 @@ import {
 import {
   PlatformTags,
   SummaryText,
-  InstallationMode,
   CopyInstallButton,
 } from "./PracticalInfo";
 import { useFeedback } from "./FeedbackProvider";
@@ -326,13 +325,6 @@ export function RepositoryViews({
                      >
                        {updateDateLabel(item.last_push_date, state.lang)}
                      </time>
-                     <InstallationMode
-                       item={item}
-                       t={t}
-                       lang={state.lang}
-                       short
-                       cardEntry
-                     />
                    </div>
                   <div
                     className={`card-actions${state.favorites.includes(item.repo) || state.compare.includes(item.repo) ? " has-selection" : ""}`}

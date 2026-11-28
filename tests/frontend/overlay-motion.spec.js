@@ -23,23 +23,19 @@ test.describe('entry promotion transition',()=>{
  });
 });
 
-test('slow guide opens one modal shell with a skeleton, permits closing, then loads in place',async({page})=>{
+test('slow agent guides module renders a skeleton first, permits returning, then loads in place',async({page})=>{
  let release;const gate=new Promise(resolve=>{release=resolve;});
- await page.route('**/BeginnerGuide-*.js',async route=>{await gate;await route.continue();});
+ await page.route('**/AgentGuides-*.js',async route=>{await gate;await route.continue();});
  try {
-  await page.goto('./');await page.getByRole('button',{name:'30 秒看懂 Skill',exact:true}).click();
-  const panel=page.getByRole('dialog',{name:'科研 Skills 入门',exact:true});
+  await page.goto('./');await page.getByTestId('nav-agent-guides').click();
+  const panel=page.getByTestId('panel-guides');
   await expect(panel).toBeVisible();await expect(panel.locator('.ant-skeleton')).not.toHaveCount(0);await expect(panel.locator('[aria-busy="true"]')).toBeVisible();
-  await panel.evaluate(el=>{el.dataset.stableShell='yes';});
-  await panel.getByRole('button',{name:'关闭入门指南',exact:true}).click();
-  await expect(panel).not.toBeVisible();
+  await page.getByTestId('nav-agent-guides').click();
+  await expect(panel).toHaveCount(0);
   release();
-  await page.getByRole('button',{name:'30 秒看懂 Skill',exact:true}).click();
-  await expect(panel).toHaveAttribute('data-stable-shell','yes');
-  await expect(panel).toContainText('先准备哪些工具');
+  await page.getByTestId('nav-agent-guides').click();
+  await expect(page.getByTestId('agent-guides-module')).toContainText('Antigravity');
   await expect(panel.locator('[aria-busy="true"]')).toHaveCount(0);
-  expect(await exitState(panel,'.ant-modal-close')).toEqual({display:'inline-block',running:true});
-  await expect(panel).not.toBeVisible();
  } finally {release();}
 });
 
@@ -66,10 +62,10 @@ for(const width of [1440,390])test(`filter loads with a skeleton and transitions
 
 test('reduced motion removes modal and panel movement and skeleton shimmer',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('./');
- await page.getByRole('button',{name:'30 秒看懂 Skill',exact:true}).click();
- const guide=page.getByRole('dialog',{name:'科研 Skills 入门',exact:true});
- await expect(guide).toBeVisible();expect(await guide.evaluate(el=>el.getAnimations({subtree:true}).length)).toBe(0);
- await guide.getByRole('button',{name:'关闭入门指南',exact:true}).click();await expect(guide).not.toBeVisible();
+ await page.getByTestId('repo-card').first().click();
+ const drawer=page.getByRole('dialog');
+ await expect(drawer).toBeVisible();expect(await drawer.evaluate(el=>el.getAnimations({subtree:true}).length)).toBe(0);
+ await drawer.locator('.ant-drawer-close').click();await expect(drawer).not.toBeVisible();
  await page.getByRole('button',{name:'筛选',exact:true}).click();
  expect(await page.getByRole('dialog',{name:'筛选条件',exact:true}).evaluate(el=>el.getAnimations({subtree:true}).length)).toBe(0);
 });

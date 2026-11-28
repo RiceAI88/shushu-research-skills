@@ -52,18 +52,7 @@ function TableInlineBadges({ item, state }) {
       </span>
     ) : null;
 
-  const metaBadge = webReady ? (
-    <span
-      className="table-web-pill"
-      title={
-        zh
-          ? "免安装 · 打开网页版 DeepSeek / Kimi / ChatGPT 复制即可直用"
-          : "Zero-install · Works directly in Web AI chat"
-      }
-    >
-      {zh ? "网页直用" : "Web AI"}
-    </span>
-  ) : item.skills_count > 0 ? (
+  const metaBadge = item.skills_count > 0 ? (
     <span className="table-skill-count">
       {item.skills_count}
       {item.skills_count_complete === false ? "+" : ""}{" "}

@@ -102,19 +102,6 @@ export default function FilterControls({ state, update, t, platformIds }) {
           >
             <span className="favorite-filter-label">{t("activeOnly")}</span>
           </Button>
-
-          <Button
-            data-testid="popover-web-ready"
-            className="filter-grid-btn"
-            type={state.webReady ? "primary" : "default"}
-            aria-pressed={Boolean(state.webReady)}
-            onClick={() => update((s) => ({ ...s, webReady: !s.webReady }))}
-          >
-            <i className="web-ready-dot" aria-hidden="true" />
-            <span className="favorite-filter-label">
-              {zh ? "免安装直用" : "Web AI ready"}
-            </span>
-          </Button>
         </div>
       </div>
     </div>

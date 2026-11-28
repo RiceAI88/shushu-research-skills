@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import os
 import re
@@ -435,8 +436,7 @@ _HTML_TAG_RE = re.compile(r"<[^>]+>")
 
 
 def github_readme_fetch(repo: str, token: str | None = None) -> dict[str, Any]:
-    """调用 GitHub 官方 /readme 接口获取真实 blob SHA、URL 与内容。"""
-    url = f"https://api.github.com/repos/{repo}/readme"
+    """调用 GitHub 官方 /readme 接口获取真实 blob SHA、URL 与内容；无 README 时回退读取根 SKILL.md。"""
     headers = {
         "Accept": "application/vnd.github+json",
         "User-Agent": "shushu-discipline-enricher",
@@ -444,9 +444,21 @@ def github_readme_fetch(repo: str, token: str | None = None) -> dict[str, Any]:
     }
     if token:
         headers["Authorization"] = f"Bearer {token}"
-    req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req, timeout=25) as resp:
-        return json.load(resp)
+    for endpoint in (
+        f"https://api.github.com/repos/{repo}/readme",
+        f"https://api.github.com/repos/{repo}/contents/SKILL.md",
+    ):
+        req = urllib.request.Request(endpoint, headers=headers)
+        try:
+            with urllib.request.urlopen(req, timeout=25) as resp:
+                data = json.load(resp)
+                if isinstance(data, dict) and data.get("sha"):
+                    return data
+        except urllib.error.HTTPError as exc:
+            if exc.code == 404:
+                continue
+            raise
+    raise urllib.error.URLError(f"No README or SKILL.md found for {repo}")
 
 
 def decode_readme_content(readme_payload: dict[str, Any]) -> str:
@@ -499,10 +511,19 @@ def classify_from_evidence(
     valid_disciplines: set[str],
     valid_majors: set[str],
 ) -> dict[str, Any] | None:
-    """基于仓库元数据与 README 前部核心段落提炼学科归属与真实原文摘录。"""
+    """基于仓库元数据与 README 前部核心段落提炼学科归属与真实原文依据。"""
     paragraphs = extract_clean_paragraphs(readme_text)
     if not paragraphs:
-        return None
+        # 对极简短文档回退提取非空文本行作为真实原文摘录
+        short_lines = [
+            " ".join(_HTML_TAG_RE.sub(" ", _MD_LINK_RE.sub(r"\1", ln)).split()).strip("#-*+ >")
+            for ln in _CODE_FENCE_RE.sub("\n", readme_text or "").splitlines()
+        ]
+        short_lines = [ln.strip() for ln in short_lines if len(ln.strip()) >= 8]
+        if short_lines:
+            paragraphs = [" ".join(short_lines[:4])]
+        else:
+            return None
 
     # 仅依据仓库名、简介、topics 与 README 前 8 段（核心定位区）判断学科专用性，
     # 避免 README 末尾举例提到某个词就把通用工具误判为某专业专用。
@@ -555,9 +576,13 @@ def classify_from_evidence(
                         evidence_quote = clip_quote(p)
                         break
 
-    # 若既无学科信号也无明确的通用学术工作流证据句，宁可跳过也不乱标
+    # 已通过准入核验的科研 Skill 若未命中细分学科或预设关键词，归入跨学科通用科研工作流并保留真实原文依据
     if not matched_disciplines and not common_zh:
-        return None
+        if item.get("repository_kind") == "skill":
+            common_zh.append("跨学科通用科研辅助工作流")
+            common_en.append("Cross-disciplinary academic research workflow")
+        else:
+            return None
 
     if not evidence_quote:
         evidence_quote = clip_quote(head_paragraphs[0])
@@ -589,6 +614,7 @@ def enrich_unreviewed_skills(
     fetch_readme=github_readme_fetch,
     token: str | None = None,
     limit: int = 25,
+    workers: int = 1,
     today: str | None = None,
 ) -> list[str]:
     """对尚未建立学科档案的已验证 Skill 按 Stars 顺序自动核验 README 并写入内存字典。"""
@@ -609,28 +635,50 @@ def enrich_unreviewed_skills(
         and str(it.get("repo") or "").lower() not in profiles
     ]
     items.sort(key=lambda x: -(x.get("stars") or 0))
+    candidates = items[: max(0, limit) * 2 if limit < len(items) else len(items)]
 
-    added: list[str] = []
-    for item in items:
-        if len(added) >= limit:
-            break
+    def _process_one(item: dict[str, Any]) -> tuple[str, dict[str, Any] | None]:
         repo = str(item["repo"])
-        key = repo.lower()
         try:
             payload = fetch_readme(repo, token)
-        except (urllib.error.URLError, TimeoutError, ValueError, KeyError):
-            continue
-
+        except Exception:
+            return repo, None
         sha = str(payload.get("sha") or "").strip().lower()
         html_url = str(payload.get("html_url") or "").strip()
         if not SHA_RE.fullmatch(sha) or not html_url.startswith("https://github.com/"):
-            continue
-
+            return repo, None
         readme_text = decode_readme_content(payload)
         classified = classify_from_evidence(item, readme_text, valid_disciplines, valid_majors)
         if not classified:
-            continue
+            return repo, None
+        return repo, {"sha": sha, "html_url": html_url, "classified": classified}
 
+    results_by_repo: dict[str, dict[str, Any]] = {}
+    if workers > 1 and len(candidates) > 1 and fetch_readme is github_readme_fetch:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futs = {pool.submit(_process_one, it): it for it in candidates}
+            for fut in as_completed(futs):
+                repo, res = fut.result()
+                if res:
+                    results_by_repo[repo] = res
+    else:
+        for it in candidates:
+            if len(results_by_repo) >= limit:
+                break
+            repo, res = _process_one(it)
+            if res:
+                results_by_repo[repo] = res
+
+    added: list[str] = []
+    for item in candidates:
+        if len(added) >= limit:
+            break
+        repo = str(item["repo"])
+        res = results_by_repo.get(repo)
+        if not res:
+            continue
+        key = repo.lower()
+        classified = res["classified"]
         profiles[key] = {
             "disciplines": classified["disciplines"],
             "majors": classified["majors"],
@@ -642,8 +690,8 @@ def enrich_unreviewed_skills(
             "use_zh": classified["use_zh"],
             "use_en": classified["use_en"],
             "source_quote": classified["source_quote"],
-            "source_url": html_url,
-            "source_sha": sha,
+            "source_url": res["html_url"],
+            "source_sha": res["sha"],
             "reviewed_at": review_date,
             "review_kind": "documentation_only",
         }
@@ -656,7 +704,8 @@ def enrich_unreviewed_skills(
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="自动核验未归类科研 Skills 的官方 README 学科证据")
-    parser.add_argument("--limit", type=int, default=25, help="单次最多核验的新仓库数量")
+    parser.add_argument("--limit", type=int, default=250, help="单次最多核验的新仓库数量")
+    parser.add_argument("--workers", type=int, default=8, help="并发请求线程数")
     parser.add_argument("--dry-run", action="store_true", help="仅打印提炼结果，不写入配置文件")
     parser.add_argument("--sync-rankings", action="store_true", help="将提炼出的双语导读同步回 rankings.json 与 rankings.js")
     args = parser.parse_args(argv)
@@ -672,6 +721,7 @@ def main(argv: list[str] | None = None) -> int:
         sources_cfg=sources_cfg,
         token=token,
         limit=max(0, args.limit),
+        workers=max(1, args.workers),
     )
     print(f"Auto-enriched discipline profiles: {len(added)} repositories")
     for repo in added:

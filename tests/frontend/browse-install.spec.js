@@ -64,10 +64,9 @@ test("dense table bounds scenes, omits empty tags and supports header sorting", 
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).not.toBeVisible();
 
-  // 工具栏一键“免命令行可用”筛选联动 URL 与结果
-  await page.getByTestId("web-ready-toggle").click();
-  await expect(page).toHaveURL(/web=1/);
-  expect(await rows.count()).toBeGreaterThan(0);
+  // 主站聚焦科研 Agent 用户：移除旧“免安装网页版”工具栏按钮，保留顶栏独立“Agent 装机教程”入口
+  await expect(page.getByTestId("web-ready-toggle")).toHaveCount(0);
+  await expect(page.getByTestId("nav-agent-guides")).toBeVisible();
 });
 
 test("cards expose install mode and copy, keep actions visible and maintenance inside footer", async ({

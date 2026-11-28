@@ -506,6 +506,84 @@ for (let idx = 0; idx < seoSkillItems.length; idx++) {
 }
 console.log(`Generated ${seoSkillItems.length} static SEO skill detail pages.`);
 
+// 生成独立静态 SEO 教程页（/guides/ 与 /guides/<slug>/），与 content/guides/*.md 自动同步
+const guideFiles = (await readdir("content/guides")).filter(
+  (f) => f.endsWith(".md") && !/^readme\.md$/i.test(f),
+);
+const guideEntries = [];
+for (const gf of guideFiles) {
+  const rawMd = await readFile(`content/guides/${gf}`, "utf8");
+  const fmMatch = rawMd.replace(/\r\n/g, "\n").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!fmMatch) continue;
+  const meta = {};
+  for (const ln of fmMatch[1].split("\n")) {
+    const idx = ln.indexOf(":");
+    if (idx > 0) meta[ln.slice(0, idx).trim()] = ln.slice(idx + 1).trim();
+  }
+  if (meta.slug && meta.title) {
+    guideEntries.push({ ...meta, order: Number(meta.order) || 99, body: fmMatch[2].trim() });
+  }
+}
+guideEntries.sort((a, b) => a.order - b.order);
+
+const renderGuideSeoPage = async ({ outSubdir, pageTitle, pageDesc, initialHash, h1, bodyText }) => {
+  let html = await readFile("dist/index.html", "utf8");
+  const canonicalUrl = `${SITE_ORIGIN}/${outSubdir ? `${outSubdir}/` : ""}`;
+  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(pageTitle)}</title>`);
+  html = html.replace(
+    /<meta\b[^>]*\bname="description"[^>]*>/,
+    `<meta name="description" content="${escapeHtml(pageDesc)}" />`,
+  );
+  html = html.replace(
+    /<link\b[^>]*\brel="canonical"[^>]*>/,
+    `<link rel="canonical" href="${escapeHtml(canonicalUrl)}" />`,
+  );
+  html = html.replace(
+    /<meta\b[^>]*\bproperty="og:url"[^>]*>/,
+    `<meta property="og:url" content="${escapeHtml(canonicalUrl)}" />`,
+  );
+  html = html.replace(
+    /<meta\b[^>]*\bproperty="og:title"[^>]*>/,
+    `<meta property="og:title" content="${escapeHtml(pageTitle)}" />`,
+  );
+  html = html.replace(
+    /<meta\b[^>]*\bproperty="og:description"[^>]*>/,
+    `<meta property="og:description" content="${escapeHtml(pageDesc)}" />`,
+  );
+  const guideNav = guideEntries
+    .map((g) => `<li><a href="/guides/${escapeHtml(g.slug)}/">${escapeHtml(g.title)}</a></li>`)
+    .join("");
+  html = html.replace(
+    /<noscript\s*>[\s\S]*?<\/noscript\s*>/,
+    () =>
+      `<noscript><article><h1>${escapeHtml(h1)}</h1><p>${escapeHtml(pageDesc)}</p><pre>${escapeHtml(bodyText.slice(0, 1800))}</pre><ul>${guideNav}</ul><p><a href="/">返回科研鼠鼠 · Skills 导航站总榜</a></p></article></noscript>`,
+  );
+  const bootScript = `<script>window.__ARS_INITIAL_HASH=${JSON.stringify(initialHash)};window.__ARS_CUSTOM_TITLE=${JSON.stringify(pageTitle)};</script>`;
+  html = html.replace(/(<script\b[^>]*\bsrc="\/data\/rankings\.js)/, `${bootScript}\n    $1`);
+  await mkdir(`dist/${outSubdir}`, { recursive: true });
+  await writeFile(`dist/${outSubdir}/index.html`, html);
+};
+
+await renderGuideSeoPage({
+  outSubdir: "guides",
+  pageTitle: "科研 AI Agent 零基础装机与 Skills 教程专栏｜科研鼠鼠导航站",
+  pageDesc: "面向本硕博科研人员，详解 Google Antigravity、Claude Code、OpenAI Codex CLI 与 Cursor 的零基础安装、账号配置与学术 Skills 挂载实战。",
+  initialHash: "#section=guides",
+  h1: "科研 AI Agent 零基础装机与 Skills 实战专栏",
+  bodyText: guideEntries.map((g) => `${g.title}：${g.summary || ""}`).join("\n"),
+});
+for (const g of guideEntries) {
+  await renderGuideSeoPage({
+    outSubdir: `guides/${g.slug}`,
+    pageTitle: `${g.title}｜科研鼠鼠 Agent 装机教程`,
+    pageDesc: g.summary || g.title,
+    initialHash: `#section=guides&guide=${encodeURIComponent(g.slug)}`,
+    h1: g.title,
+    bodyText: g.body,
+  });
+}
+console.log(`Generated ${guideEntries.length + 1} static SEO Agent guide pages.`);
+
 // 生成标准 /llms.txt 与 /llms-full.txt，方便 DeepSeek、Kimi、Perplexity、ChatGPT Search 等大模型检索引用
 const generatedDay = String(ranking.metadata?.generated_at || "").slice(0, 10) || "latest";
 const disciplineLines = DISCIPLINES.map(

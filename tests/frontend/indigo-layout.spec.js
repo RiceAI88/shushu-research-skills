@@ -41,8 +41,8 @@ test("reference palette, right-hand search and default cards give a compact firs
   const first = await page.getByTestId("repo-card").first().boundingBox();
   const dualAdHeight = (await page.getByTestId("hero-poster-ad").boundingBox()).height + 20;
   const noticeHeight = (await page.locator(".top-notice-bar").boundingBox()).height + 16;
-  expect(first.y).toBeLessThan(560 + dualAdHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
-  expect(first.y + first.height).toBeLessThan(900 + dualAdHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.locator(".beginner-entry").boundingBox()).height + 12);
+  expect(first.y).toBeLessThan(560 + dualAdHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.getByTestId("hero-live-pill").boundingBox()).height + 12);
+  expect(first.y + first.height).toBeLessThan(900 + dualAdHeight + noticeHeight + (await page.getByTestId("discipline-selector").boundingBox()).height + 24 + (await page.getByTestId("hero-live-pill").boundingBox()).height + 12);
   await expect(page.locator(".task-selection-indicator")).toHaveCSS(
     "background-color",
     "rgb(13, 159, 110)",

@@ -459,7 +459,8 @@ export function restoreState(storage, hash = "", defaults = {}, items = []) {
   return {
     query: p.get("q") || "",
     includeRelated: p.get("related") === "1" || p.get("today") === "related",
-    section: valid(p.get("section"), ["ranking", "insights"], "ranking"),
+    section: valid(p.get("section"), ["ranking", "guides", "insights"], "ranking"),
+    guide: String(p.get("guide") || "").replace(/[^a-z0-9-]/gi, "").slice(0, 48),
     category: "all",
     discipline: valid(p.get("discipline"), DISCIPLINES.map(d => d.id), "all"),
     major: valid(p.get("major"), DISCIPLINES.find(d => d.id === p.get("discipline"))?.majors.map(m => m.id) || [], "all"),
@@ -532,6 +533,7 @@ export function serializeState(state) {
     ["theme", "theme", "light"],
   ])
     if (state[key] !== fallback) p.set(param, state[key]);
+  if (state.section === "guides" && state.guide) p.set("guide", state.guide);
   if (state.discipline && state.discipline !== "all") p.set("discipline", state.discipline);
   if (state.major && state.major !== "all") p.set("major", state.major);
   if (state.includeCommon === false) p.set("common", "0");

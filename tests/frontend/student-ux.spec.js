@@ -75,15 +75,15 @@ test("stage quick-picks, shared toolkit pack banner, and zero-CLI Web AI guide w
   expect(centerDelta).toBeLessThan(1);
   await expect(drawer.getByTestId("setup-thresholds")).toBeVisible();
   await expect(drawer.getByTestId("share-peer-btn")).toBeVisible();
-  const webHelper = drawer.getByTestId("web-ai-helper");
-  await expect(webHelper).toBeVisible();
-  await webHelper.locator("summary").click();
-  await expect(drawer.getByTestId("copy-web-ai-prompt")).toBeVisible();
-  await page.keyboard.press("Escape");
-
-  // 4. 30 秒看懂 Skill 弹窗包含零命令行网页版兜底说明
-  await page.locator(".beginner-entry").click();
-  await expect(page.getByTestId("guide-web-fallback")).toBeVisible();
+  await expect(drawer.getByTestId("web-ai-helper")).toHaveCount(0);
+  await drawer.locator(".drawer-guide-footnote button").click();
+  const guidesModule = page.getByTestId("agent-guides-module");
+  await expect(guidesModule).toBeVisible();
+  await expect(guidesModule).toContainText("Antigravity");
+  await guidesModule.locator('[data-guide-card="claude-code-setup"]').click();
+  await expect(guidesModule).toContainText("Claude Code 国内安装");
+  await guidesModule.getByTestId("guides-back-to-ranking").click();
+  await expect(page.getByTestId("repo-card").first()).toBeVisible();
 });
 
 test("switching from card view to table view shows animated skeleton instead of plain loading text", async ({
@@ -217,15 +217,20 @@ test("static skill SEO page, auto preview for new repos, direct web prompt, and 
     drawer.getByTestId("drawer-alt-card").first(),
   ).toBeVisible();
 
-  // 2. 打开未手动配置的新收录写作类 Skill，自动生成使用前后示意卡 + 免开 GitHub 完整指令 + 写作备选提示
+  // 2. 打开未手动配置的新收录写作类 Skill，自动生成使用前后示意卡 + 写作备选提示（已移除冗余网页版折叠框）
   await page.goto("./#repo=YuanZHAO321%2FScientific-Writing-zh");
   await expect(drawer).toContainText("YuanZHAO321/Scientific-Writing-zh");
   const autoPreview = drawer.getByTestId("output-preview-card");
   await expect(autoPreview).toBeVisible();
   await expect(autoPreview).toContainText("典型场景示意");
-  await drawer.getByTestId("web-ai-helper").locator("summary").click();
-  await expect(drawer.getByTestId("copy-direct-web-prompt")).toBeVisible();
+  await expect(drawer.getByTestId("web-ai-helper")).toHaveCount(0);
   await expect(drawer.getByTestId("drawer-zhi1ke-tip")).toBeVisible();
+
+  // 2b. 直接访问静态 Agent 装机教程落地页 /guides/antigravity-setup/，保持干净地址并直接渲染对应文章
+  await page.goto("./guides/antigravity-setup/");
+  await expect(page).toHaveTitle(/Antigravity/);
+  expect(new URL(page.url()).hash).toBe("");
+  await expect(page.getByTestId("agent-guides-module")).toContainText("Google Antigravity 零基础安装");
 
   // 3. 选择“经济学”后重新访问首页，展示上次浏览专业提示并支持一键切回
   await page.goto("./");

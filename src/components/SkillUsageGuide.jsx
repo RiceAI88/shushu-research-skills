@@ -1,19 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "antd";
-import { CheckOutlined, CopyOutlined, RobotOutlined } from "@ant-design/icons";
+import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
 import { installationFor } from "../practical";
 import {
-  aiInstallPromptFor,
   applyPromptPlaceholders,
   classifyInstallLocation,
   deriveSetupThresholds,
-  directWebPromptFor,
   drawerSupportHintsFor,
   extractEditablePlaceholders,
   usagePromptFor,
-  webChatPromptFor,
 } from "../usageGuide";
-import { AGENT_PLATFORMS, safeExternalUrl } from "../domain";
+import { AGENT_PLATFORMS } from "../domain";
 import { trackEvent } from "../analytics";
 import { PlatformTags } from "./PracticalInfo";
 import { InstallationActions } from "./InstallationActions";
@@ -55,7 +52,6 @@ export function SkillUsageGuide({
   lang,
   t,
   preferredAgent = "all",
-  preferWebReady = false,
   detailsInfo = {},
   onOpenGuide,
 }) {
@@ -70,9 +66,6 @@ export function SkillUsageGuide({
 
   const installation = installationFor(item);
   const location = classifyInstallLocation(installation, lang);
-  const aiInstallPrompt = aiInstallPromptFor(item, installation, lang);
-  const directWebPrompt = directWebPromptFor(item, lang);
-  const webPrompt = webChatPromptFor(item, lang);
   const thresholds = deriveSetupThresholds(item, installation, detailsInfo, lang);
   const supportHints = drawerSupportHintsFor(item, installation, thresholds);
   const example = usagePromptFor(item, lang);
@@ -81,7 +74,6 @@ export function SkillUsageGuide({
   const filledUsagePrompt = applyPromptPlaceholders(example.prompt, slotValues);
   const hasFilledSlot = editableSlots.some((s) => String(slotValues[s.token] ?? "").trim());
   const isReference = installation.mode === "reference";
-  const repoUrl = safeExternalUrl(item?.url);
   const envText = detailsInfo[`environment_${lang}`];
   const depText = detailsInfo[`dependencies_${lang}`];
   const rawCmd = String(installation?.command || "").trim();
@@ -117,16 +109,7 @@ export function SkillUsageGuide({
           <span className="usage-step-num" aria-hidden="true">
             1
           </span>
-          <h3>{zh ? "准备 AI Agent 与环境" : "Prepare AI Agent & environment"}</h3>
-          {onOpenGuide && (
-            <button
-              type="button"
-              className="usage-guide-link"
-              onClick={onOpenGuide}
-            >
-              {zh ? "没用过 AI Agent？30 秒看懂 ›" : "New to AI Agents? 30s guide ›"}
-            </button>
-          )}
+          <h3>{zh ? "适用 AI Agent 与运行环境" : "Compatible AI Agents & Environment"}</h3>
         </div>
         <div className="usage-step-body">
           {thresholds.length > 0 && (
@@ -227,8 +210,8 @@ export function SkillUsageGuide({
           ) : (
             <p className="install-doc-concise">
               {zh
-                ? "暂未提炼单行命令，可查阅官方说明或复制下方提示词让 AI 自动安装："
-                : "No single-line command yet—check official docs or let AI install it below:"}
+                ? "暂未提炼单行命令，请直接查阅官方仓库说明配置："
+                : "No single-line command yet—check official repository docs:"}
             </p>
           )}
           <InstallationActions
@@ -265,145 +248,6 @@ export function SkillUsageGuide({
                     : "Copy mirror command"}
               </button>
             </div>
-          )}
-          {!isReference && (
-            <details className="ai-install-helper">
-              <summary>
-                <RobotOutlined aria-hidden="true" />
-                <span>
-                  {zh
-                    ? "不会敲命令或想省事？复制一句话让 AI 帮你装"
-                    : "Skip manual setup? Copy a prompt so AI installs it for you"}
-                </span>
-              </summary>
-              <div className="ai-install-helper-body">
-                <p className="usage-prompt-text">{aiInstallPrompt}</p>
-                <Button
-                  size="small"
-                  icon={
-                    copiedKey === "ai-install" ? (
-                      <CheckOutlined aria-hidden="true" />
-                    ) : (
-                      <CopyOutlined aria-hidden="true" />
-                    )
-                  }
-                  data-copy-ai-install={item.repo}
-                  onClick={() =>
-                    handleCopy(
-                      "ai-install",
-                      aiInstallPrompt,
-                      zh
-                        ? "已复制“让 AI 帮你装”提示词"
-                        : "AI-assisted install prompt copied",
-                    )
-                  }
-                >
-                  {copiedKey === "ai-install"
-                    ? zh
-                      ? "已复制，直接粘贴给 AI 即可"
-                      : "Copied—paste into your AI Agent"
-                    : zh
-                      ? "复制让 AI 帮你装"
-                      : "Copy AI install prompt"}
-                </Button>
-              </div>
-            </details>
-          )}
-          {!isReference && item.repository_kind === "skill" && (
-            <details
-              className="ai-install-helper web-ai-helper"
-              data-testid="web-ai-helper"
-              open={preferWebReady || undefined}
-            >
-              <summary>
-                <span aria-hidden="true">🌐</span>
-                <span>
-                  {zh
-                    ? "没装命令行或打不开 GitHub？网页版 DeepSeek / Kimi / ChatGPT 直接用"
-                    : "No CLI or GitHub blocked? Use directly in Web AI chat"}
-                </span>
-              </summary>
-              <div className="ai-install-helper-body">
-                <p className="web-ai-steps">
-                  {zh
-                    ? "⚡ 免进 GitHub 极速用法（校园网推荐）：直接复制下方提炼好的完整科研规范指令，粘贴进 DeepSeek / Kimi / Claude / Gemini 即可开用："
-                    : "⚡ Zero-GitHub instant mode: copy the complete structured research prompt below and paste it straight into any Web AI chat:"}
-                </p>
-                <p className="usage-prompt-text">
-                  {renderPromptWithPlaceholders(directWebPrompt)}
-                </p>
-                <div className="web-ai-actions">
-                  <Button
-                    size="small"
-                    className="web-ai-primary-btn"
-                    icon={
-                      copiedKey === "direct-web" ? (
-                        <CheckOutlined aria-hidden="true" />
-                      ) : (
-                        <CopyOutlined aria-hidden="true" />
-                      )
-                    }
-                    data-testid="copy-direct-web-prompt"
-                    onClick={() => {
-                      trackEvent("copy_direct_web_prompt", { repo: item?.repo });
-                      handleCopy(
-                        "direct-web",
-                        directWebPrompt,
-                        zh
-                          ? "已复制免 GitHub 完整网页版指令"
-                          : "Complete Web AI prompt copied",
-                      );
-                    }}
-                  >
-                    {copiedKey === "direct-web"
-                      ? zh
-                        ? "已复制，去网页版 AI 粘贴即可"
-                        : "Copied—paste into Web AI"
-                      : zh
-                        ? "一键复制完整指令（免开 GitHub）"
-                        : "Copy complete prompt (no GitHub needed)"}
-                  </Button>
-                  <Button
-                    size="small"
-                    icon={
-                      copiedKey === "web-ai" ? (
-                        <CheckOutlined aria-hidden="true" />
-                      ) : (
-                        <CopyOutlined aria-hidden="true" />
-                      )
-                    }
-                    data-testid="copy-web-ai-prompt"
-                    onClick={() =>
-                      handleCopy(
-                        "web-ai",
-                        webPrompt,
-                        zh
-                          ? "已复制网页版 AI 引导词"
-                          : "Web AI wrapper prompt copied",
-                      )
-                    }
-                  >
-                    {copiedKey === "web-ai"
-                      ? zh
-                        ? "已复制引导词"
-                        : "Copied"
-                      : zh
-                        ? "复制 SKILL.md 拼接引导词"
-                        : "Copy SKILL.md wrapper"}
-                  </Button>
-                  {repoUrl && (
-                    <a
-                      className="web-ai-repo-link"
-                      href={repoUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {zh ? "去仓库找 SKILL.md ↗" : "Find SKILL.md in repo ↗"}
-                    </a>
-                  )}
-                </div>
-              </div>
-            </details>
           )}
         </div>
       </div>
@@ -526,11 +370,6 @@ export function SkillUsageGuide({
                 <span>{example.output}</span>
               </div>
             </div>
-            <p className="usage-verify-tip">
-              {zh
-                ? "提示：首次使用建议先拿一小份公开示例材料试跑；AI 生成的文献引用、统计数值与代码结果请务必自行核验。"
-                : "Tip: Test on a small public sample first, and always verify generated citations, statistics, and code."}
-            </p>
             {supportHints.isPaperWritingFlow && (
               <div className="usage-zhi1ke-tip" data-testid="drawer-zhi1ke-tip">
                 <span aria-hidden="true">✨</span>
@@ -561,6 +400,18 @@ export function SkillUsageGuide({
       )}
 
       <OutputPreviewCard item={item} lang={lang} />
+      {onOpenGuide && (
+        <p className="drawer-guide-footnote">
+          <span>
+            {zh
+              ? "还没安装 Antigravity / Claude Code / Codex？"
+              : "Haven't set up a local AI Agent yet? "}
+          </span>
+          <button type="button" onClick={onOpenGuide}>
+            {zh ? "查看 Agent 装机图文教程 ›" : "Read Agent Setup Guides ›"}
+          </button>
+        </p>
+      )}
     </section>
   );
 }

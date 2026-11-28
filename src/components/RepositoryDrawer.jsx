@@ -135,7 +135,6 @@ export function RepositoryDrawer({
         lang={state.lang}
         t={t}
         preferredAgent={state.agent}
-        preferWebReady={Boolean(state.webReady)}
         detailsInfo={installationDetails[item.repo]}
         onOpenGuide={onOpenGuide}
       />
@@ -193,7 +192,7 @@ export function RepositoryDrawer({
             </span>
           </div>
           <div className="drawer-alternatives-grid">
-            {similarSkills.map(({ cand, webFriendly }) => (
+            {similarSkills.map(({ cand }) => (
               <div
                 key={cand.repo}
                 className="drawer-alt-card"
@@ -213,11 +212,6 @@ export function RepositoryDrawer({
                   <div className="drawer-alt-top">
                     <strong>{cand.repo.split("/").pop()}</strong>
                     <span className="drawer-alt-meta">
-                      {webFriendly && (
-                        <em>
-                          {state.lang === "zh" ? "免安装 · 网页直用" : "Zero-install · Web AI"}
-                        </em>
-                      )}
                       <span>★ {fmt(cand.stars)}</span>
                     </span>
                   </div>

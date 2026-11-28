@@ -71,7 +71,7 @@ jobs:
         if: steps.gate.outputs.run_needed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python scripts/auto_enrich_disciplines.py --limit 25 --sync-rankings
+        run: python scripts/auto_enrich_disciplines.py --limit 250 --workers 10 --sync-rankings
 
       - name: Sync multi-skill repository sub-skills catalog
         if: steps.gate.outputs.run_needed == 'true'

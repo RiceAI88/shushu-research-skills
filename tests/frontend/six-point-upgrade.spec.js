@@ -18,21 +18,16 @@ test('one scope entry retains independent common and related options',async({pag
  await panel.getByRole('button',{name:'关闭',exact:true}).click();
  await expect(page.locator('.discipline-selector-foot .scope-switch')).toHaveCount(0);
 });
-for(const width of [1280,390,320])test(`brand, useful card and beginner entry at ${width}px`,async({page})=>{
+for(const width of [1280,390,320])test(`brand, useful card and agent guides entry at ${width}px`,async({page})=>{
  await page.setViewportSize({width,height:950});
  await page.goto('./');
  await expect(page.locator('.brand')).toContainText('科研鼠鼠 · Skills 导航站');
- await expect(page.getByRole('button',{name:'30 秒看懂 Skill',exact:true})).toBeVisible();
- await page.getByRole('button',{name:'30 秒看懂 Skill',exact:true}).click();
- const guide=page.getByRole('dialog',{name:'科研 Skills 入门',exact:true});
- await expect(guide).toContainText('Claude Code');await expect(guide).toContainText('Codex');
- await expect(guide).toContainText('费用');
- const theme=await page.locator('html').getAttribute('data-theme');
- await page.keyboard.press('t');
- await expect(page.locator('html')).toHaveAttribute('data-theme',theme);
- await guide.getByRole('button',{name:'专业科研路径',exact:true}).click();
- await expect(guide.locator('[data-research-path]')).not.toHaveCount(0);
- await guide.getByRole('button',{name:'关闭入门指南',exact:true}).click();
+ const guidesBtn=page.getByTestId('nav-agent-guides');
+ await expect(guidesBtn).toBeVisible();
+ await guidesBtn.click();
+ const guide=page.getByTestId('agent-guides-module');
+ await expect(guide).toContainText('Antigravity');await expect(guide).toContainText('Claude Code');
+ await guide.getByTestId('guides-back-to-ranking').click();
  const card=page.getByTestId('repo-card').first();
  await expect(card.locator('[data-testid="card-updated"]')).toBeVisible();
  await expect(card.locator('[data-testid="card-tasks"]')).toBeVisible();

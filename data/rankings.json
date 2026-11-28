@@ -13265,7 +13265,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:05:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -13735,7 +13737,8 @@
       "curated_use_zh": "支持前沿论文合集与研读清单的科研技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -14277,7 +14280,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-27",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -22120,7 +22125,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-24",
       "first_seen_at": "2026-11-24T02:39:08Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -23947,7 +23953,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -29419,7 +29427,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -30071,7 +30081,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-28",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "科研配图、流程图与汇报文稿制作",
+      "curated_use_en": "Publication figures, diagrams and presentation slides"
     },
     {
       "refresh_status": "fresh",
@@ -30297,7 +30309,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T16:14:32Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -30359,7 +30372,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T16:14:32Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -30910,7 +30924,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-06",
       "first_seen_at": "2026-11-06T09:41:05Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -31269,7 +31285,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-28",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -31362,7 +31380,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-05",
       "first_seen_at": "2026-11-05T09:48:29Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -31434,7 +31454,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-08-27",
-      "first_seen_is_baseline": true
+      "first_seen_is_baseline": true,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -31639,7 +31661,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-20",
       "first_seen_at": "2026-11-20T10:32:13Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -31973,7 +31997,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Publication figures, diagrams and presentation slides"
     },
     {
       "refresh_status": "fresh",
@@ -32248,7 +32273,8 @@
       "curated_use_zh": "支持论文精读与研究笔记的科研技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -32444,7 +32470,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-10-08",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -33299,7 +33327,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-28",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "公共卫生与流行病学",
+      "curated_use_en": "Public health and epidemiology"
     },
     {
       "refresh_status": "fresh",
@@ -33707,7 +33737,8 @@
       "curated_use_zh": "面向人工智能与深度学习的科研辅助技能",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Publication figures, diagrams and presentation slides"
     },
     {
       "refresh_status": "fresh",
@@ -33932,7 +33963,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-15",
       "first_seen_at": "2026-11-15T03:41:23Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -33992,7 +34025,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-28",
       "first_seen_at": "2026-10-28T17:00:50Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -34071,7 +34106,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-28",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "生物信息与组学分析",
+      "curated_use_en": "Bioinformatics and omics analysis"
     },
     {
       "refresh_status": "fresh",
@@ -34412,7 +34449,8 @@
       "curated_use_zh": "临床与生物医学：系统性文献综述、学术论文起草与写作技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -34876,7 +34914,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -35002,7 +35042,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-10-15",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -35296,7 +35338,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -35436,7 +35480,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -35511,7 +35557,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-06",
       "first_seen_at": "2026-11-06T02:17:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -35574,7 +35622,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-10-27",
       "first_seen_at": "2026-10-27T16:17:18Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -35635,7 +35685,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-28",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -35841,7 +35893,9 @@
       "skills_count_complete": true,
       "repository_kind": "skill",
       "first_seen_date": "2026-09-28",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "土木与城乡规划研究",
+      "curated_use_en": "Civil engineering and urban research"
     },
     {
       "refresh_status": "fresh",
@@ -36083,7 +36137,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T16:14:32Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -36213,7 +36268,8 @@
       "curated_use_zh": "支持论文精读与研究笔记的科研技能",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -37132,7 +37188,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -37285,7 +37343,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-20",
       "first_seen_at": "2026-11-20T10:32:13Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -37479,7 +37539,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -37556,7 +37618,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T16:14:32Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "经济学实证与计量分析",
+      "curated_use_en": "Economics and econometric analysis"
     },
     {
       "refresh_status": "fresh",
@@ -37713,7 +37777,8 @@
       "curated_use_zh": "生物信息与组学：学术海报生成、学术汇报 PPT 制作技能",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T16:14:32Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Bioinformatics and omics analysis"
     },
     {
       "refresh_status": "fresh",
@@ -37775,7 +37840,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-14",
       "first_seen_at": "2026-11-14T06:02:17Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "科研配图、流程图与汇报文稿制作",
+      "curated_use_en": "Publication figures, diagrams and presentation slides"
     },
     {
       "refresh_status": "fresh",
@@ -38110,7 +38177,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "法学检索与判例分析",
+      "curated_use_en": "Legal research and case analysis"
     },
     {
       "refresh_status": "fresh",
@@ -38190,7 +38259,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -38340,7 +38411,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -38407,7 +38480,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "生物信息与组学分析、临床医学研究",
+      "curated_use_en": "Bioinformatics and omics analysis; Clinical medical research"
     },
     {
       "refresh_status": "fresh",
@@ -38639,7 +38714,8 @@
       "curated_use_zh": "支持Zotero 与参考文献管理、文献精准问答与原文溯源、系统性文献综述的科研技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -39278,7 +39354,8 @@
       "curated_use_zh": "面向计量经济与因果推断的科研辅助技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Economics and econometric analysis"
     },
     {
       "refresh_status": "fresh",
@@ -39431,7 +39508,8 @@
       "curated_use_zh": "人工智能与深度学习：学术论文起草与写作技能",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T11:44:10Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -39691,7 +39769,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "生物信息与组学分析",
+      "curated_use_en": "Bioinformatics and omics analysis"
     },
     {
       "refresh_status": "fresh",
@@ -39768,7 +39848,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "数学与数学建模",
+      "curated_use_en": "Mathematics and mathematical modeling"
     },
     {
       "refresh_status": "fresh",
@@ -39981,7 +40063,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -40059,7 +40142,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -40128,7 +40213,8 @@
       "curated_use_zh": "支持多源文献检索与追踪的科研技能",
       "first_seen_date": "2026-11-24",
       "first_seen_at": "2026-11-24T02:39:08Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -40647,7 +40733,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -40935,7 +41023,8 @@
       "curated_use_zh": "人工智能与深度学习：全流程自动化科研探索与实验技能",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -41001,7 +41090,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -41081,7 +41172,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -41333,7 +41426,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -41462,7 +41557,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -41736,7 +41833,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -41886,7 +41985,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -42183,7 +42284,8 @@
       "curated_use_zh": "支持全流程自动化科研探索与实验的科研技能",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -42311,7 +42413,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "数学与数学建模",
+      "curated_use_en": "Mathematics and mathematical modeling"
     },
     {
       "refresh_status": "fresh",
@@ -42378,7 +42482,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -42445,7 +42551,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "模拟同行审稿与返修回复",
+      "curated_use_en": "Mock peer review and rebuttal preparation"
     },
     {
       "refresh_status": "fresh",
@@ -42663,7 +42771,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "数学与数学建模",
+      "curated_use_en": "Mathematics and mathematical modeling"
     },
     {
       "refresh_status": "fresh",
@@ -42887,7 +42997,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -42949,7 +43060,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "模拟同行审稿与返修回复",
+      "curated_use_en": "Mock peer review and rebuttal preparation"
     },
     {
       "refresh_status": "fresh",
@@ -43039,7 +43152,8 @@
       "curated_use_zh": "支持Zotero 与参考文献管理、系统性文献综述、论文精读与研究笔记的科研技能",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T16:14:32Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -43341,7 +43455,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -43427,7 +43543,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -43494,7 +43612,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -43632,7 +43752,8 @@
       "curated_use_zh": "支持前沿论文合集与研读清单的科研技能",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -43829,7 +43950,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文精读、翻译与笔记结构化",
+      "curated_use_en": "Paper reading, translation and structured notes"
     },
     {
       "refresh_status": "fresh",
@@ -44068,7 +44191,8 @@
       "curated_use_zh": "支持学术汇报 PPT 制作的科研技能",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Publication figures, diagrams and presentation slides"
     },
     {
       "refresh_status": "fresh",
@@ -44584,7 +44708,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "数学与数学建模",
+      "curated_use_en": "Mathematics and mathematical modeling"
     },
     {
       "refresh_status": "fresh",
@@ -44958,7 +45084,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "临床医学研究",
+      "curated_use_en": "Clinical medical research"
     },
     {
       "refresh_status": "fresh",
@@ -45031,7 +45159,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -45243,7 +45373,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -45331,7 +45463,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "经济学实证与计量分析",
+      "curated_use_en": "Economics and econometric analysis"
     },
     {
       "refresh_status": "fresh",
@@ -45405,7 +45539,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -45564,7 +45700,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -45650,7 +45788,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -45807,7 +45947,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "数学与数学建模",
+      "curated_use_en": "Mathematics and mathematical modeling"
     },
     {
       "refresh_status": "fresh",
@@ -45941,7 +46083,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "人工智能与机器学习研究",
+      "curated_use_en": "AI and machine learning research"
     },
     {
       "refresh_status": "fresh",
@@ -46148,7 +46292,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文精读、翻译与笔记结构化",
+      "curated_use_en": "Paper reading, translation and structured notes"
     },
     {
       "refresh_status": "fresh",
@@ -46416,7 +46562,8 @@
       "curated_use_zh": "支持学术论文起草与写作的科研技能",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Business and management research"
     },
     {
       "refresh_status": "fresh",
@@ -46479,7 +46626,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -46921,7 +47070,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "生命科学实验与计算、地球科学与遥感分析",
+      "curated_use_en": "Biological sciences research; Earth sciences and remote sensing"
     },
     {
       "refresh_status": "fresh",
@@ -47059,7 +47210,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -47206,7 +47359,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科科研调研、数据分析与实验工作流",
+      "curated_use_en": "Cross-disciplinary research, data analysis and reproducibility"
     },
     {
       "refresh_status": "fresh",
@@ -47270,7 +47425,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Publication figures, diagrams and presentation slides"
     },
     {
       "refresh_status": "fresh",
@@ -47735,7 +47891,8 @@
       "curated_use_zh": "支持学术论文起草与写作的科研技能",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -48191,7 +48348,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-20",
       "first_seen_at": "2026-11-20T10:32:13Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "人工智能与机器学习研究",
+      "curated_use_en": "AI and machine learning research"
     },
     {
       "refresh_status": "fresh",
@@ -48433,7 +48592,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "经济学实证与计量分析",
+      "curated_use_en": "Economics and econometric analysis"
     },
     {
       "refresh_status": "fresh",
@@ -48498,7 +48659,8 @@
       "curated_use_zh": "支持系统性文献综述的科研技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -48873,7 +49035,8 @@
       "curated_use_zh": "支持学术论文起草与写作的科研技能",
       "first_seen_date": "2026-11-26",
       "first_seen_at": "2026-11-26T08:00:33Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -49250,7 +49413,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "经济学实证与计量分析",
+      "curated_use_en": "Economics and econometric analysis"
     },
     {
       "refresh_status": "fresh",
@@ -49313,7 +49478,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "模拟同行审稿与返修回复",
+      "curated_use_en": "Mock peer review and rebuttal preparation"
     },
     {
       "refresh_status": "fresh",
@@ -49374,7 +49541,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -49449,7 +49617,8 @@
       "curated_use_zh": "临床与生物医学：模拟审稿与返修回复、论文精读与研究笔记技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -49945,7 +50114,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -50005,7 +50175,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "经济学实证与计量分析、社会学与质性/调查研究",
+      "curated_use_en": "Economics and econometric analysis; Sociology and qualitative/survey research"
     },
     {
       "refresh_status": "fresh",
@@ -50074,7 +50246,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -50145,7 +50318,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "信息管理与文献计量分析",
+      "curated_use_en": "Information management and bibliometrics"
     },
     {
       "refresh_status": "fresh",
@@ -50212,7 +50387,8 @@
       "curated_use_zh": "支持学术论文起草与写作、前沿论文合集与研读清单的科研技能",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -50272,7 +50448,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "模拟同行审稿与返修回复",
+      "curated_use_en": "Mock peer review and rebuttal preparation"
     },
     {
       "refresh_status": "fresh",
@@ -50418,7 +50596,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -50552,7 +50732,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -50747,7 +50929,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -51098,7 +51282,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -51166,7 +51352,8 @@
       "curated_use_zh": "支持学术汇报 PPT 制作、科研配图与数据可视化、学术润色与降 AI 痕迹的科研技能",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -51230,7 +51417,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Publication figures, diagrams and presentation slides"
     },
     {
       "refresh_status": "fresh",
@@ -51292,7 +51480,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T11:44:10Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "数学与数学建模",
+      "curated_use_en": "Mathematics and mathematical modeling"
     },
     {
       "refresh_status": "fresh",
@@ -51630,7 +51820,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -52045,7 +52237,8 @@
       "curated_use_zh": "支持前沿论文合集与研读清单的科研技能",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -52206,7 +52399,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文精读、翻译与笔记结构化",
+      "curated_use_en": "Paper reading, translation and structured notes"
     },
     {
       "refresh_status": "fresh",
@@ -52267,7 +52462,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "历史学与史料整理",
+      "curated_use_en": "Historical archives and textual study"
     },
     {
       "refresh_status": "fresh",
@@ -52401,7 +52598,8 @@
       "curated_use_zh": "支持统计检验与数据分析的科研技能",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Earth sciences and remote sensing"
     },
     {
       "refresh_status": "fresh",
@@ -52543,7 +52741,8 @@
       "curated_use_zh": "临床与生物医学：学术论文起草与写作技能",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -52832,7 +53031,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -52981,7 +53181,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -53047,7 +53249,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -53202,7 +53406,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T11:44:10Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Information management and bibliometrics"
     },
     {
       "refresh_status": "fresh",
@@ -53326,7 +53531,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "统计建模与推断",
+      "curated_use_en": "Statistical modeling and inference"
     },
     {
       "refresh_status": "fresh",
@@ -53533,7 +53740,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文精读、翻译与笔记结构化",
+      "curated_use_en": "Paper reading, translation and structured notes"
     },
     {
       "refresh_status": "fresh",
@@ -53684,7 +53893,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -53902,7 +54113,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-19",
       "first_seen_at": "2026-11-19T14:34:30Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -54103,7 +54316,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -54174,7 +54389,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -54387,7 +54604,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "生物信息与组学分析",
+      "curated_use_en": "Bioinformatics and omics analysis"
     },
     {
       "refresh_status": "fresh",
@@ -54460,7 +54679,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "生物信息与组学分析、药学与药物研发",
+      "curated_use_en": "Bioinformatics and omics analysis; Pharmacy and drug discovery"
     },
     {
       "refresh_status": "fresh",
@@ -54611,7 +54832,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -54693,7 +54916,8 @@
       "curated_use_zh": "支持论文排版与格式处理、学术论文起草与写作、前沿论文合集与研读清单的科研技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -54891,7 +55115,8 @@
       "curated_use_zh": "支持学术论文起草与写作、前沿论文合集与研读清单的科研技能",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -55090,7 +55315,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T11:44:10Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -55231,7 +55457,8 @@
       "curated_use_zh": "支持论文排版与格式处理、学术论文起草与写作的科研技能",
       "first_seen_date": "2026-11-20",
       "first_seen_at": "2026-11-20T04:33:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -55373,7 +55600,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-20",
       "first_seen_at": "2026-11-20T04:33:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "文献检索、引文核验与综述整理",
+      "curated_use_en": "Literature search, citation verification and synthesis"
     },
     {
       "refresh_status": "fresh",
@@ -55446,7 +55675,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -55574,7 +55805,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "模拟同行审稿与返修回复",
+      "curated_use_en": "Mock peer review and rebuttal preparation"
     },
     {
       "refresh_status": "fresh",
@@ -55640,7 +55873,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-23",
       "first_seen_at": "2026-11-23T06:36:57Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "生物信息与组学分析",
+      "curated_use_en": "Bioinformatics and omics analysis"
     },
     {
       "refresh_status": "fresh",
@@ -55719,7 +55954,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T16:14:32Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -55883,7 +56120,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-20",
       "first_seen_at": "2026-11-20T04:33:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",
@@ -55952,7 +56191,8 @@
       "curated_use_zh": "面向学术研究工作流的 AI Agent 辅助技能",
       "first_seen_date": "2026-11-27",
       "first_seen_at": "2026-11-27T06:39:35Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Public health and epidemiology; Statistical modeling and inference"
     },
     {
       "refresh_status": "fresh",
@@ -56101,7 +56341,8 @@
       "curated_use_zh": "支持科研配图与数据可视化、学术论文起草与写作的科研技能",
       "first_seen_date": "2026-11-24",
       "first_seen_at": "2026-11-24T02:39:08Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -56164,7 +56405,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-25",
       "first_seen_at": "2026-11-25T11:44:10Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "学术论文写作、润色与格式排版",
+      "curated_use_en": "Academic writing, polishing and manuscript formatting"
     },
     {
       "refresh_status": "fresh",
@@ -56231,7 +56474,9 @@
       "repository_kind": "skill",
       "first_seen_date": "2026-11-22",
       "first_seen_at": "2026-11-22T07:41:21Z",
-      "first_seen_is_baseline": false
+      "first_seen_is_baseline": false,
+      "curated_use_zh": "跨学科通用科研辅助工作流",
+      "curated_use_en": "Cross-disciplinary academic research workflow"
     },
     {
       "refresh_status": "fresh",

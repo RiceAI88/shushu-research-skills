@@ -1,4 +1,3 @@
-import { BeginnerDialog } from "./components/BeginnerDialog";
 import { OverlaySkeleton } from "./components/OverlaySkeleton";
 import { growthState } from "./projectFacts";
 import { ScopeControl } from "./components/ScopeControl";
@@ -132,6 +131,7 @@ const ViewportInsights = lazy(() =>
     default: m.ViewportInsights,
   })),
 );
+const AgentGuides = lazy(() => import("./components/AgentGuides"));
 
 const dataset = window.ACADEMIC_SKILLS_RANKINGS || {};
 const sourceItems = Array.isArray(dataset.items)
@@ -204,6 +204,8 @@ export default function App() {
       landingActiveRef.current &&
         landingSeed &&
         state.lang === "zh" &&
+        state.section === landingSeed.section &&
+        (state.guide || "") === (landingSeed.guide || "") &&
         state.discipline === landingSeed.discipline &&
         state.task === landingSeed.task &&
         state.repo === landingSeed.repo,
@@ -392,7 +394,6 @@ function Dashboard({ state, update, switchLang }) {
     [today, subskillsMap],
   );
   const message = useFeedback();
-  const [guideSection, setGuideSection] = useState(null);
   const [recommendRequested, setRecommendRequested] = useState(false);
   const [recommendOpen, setRecommendOpen] = useState(false);
   const [botOpen, setBotOpen] = useState(false);
@@ -453,6 +454,10 @@ function Dashboard({ state, update, switchLang }) {
   const [filterHeight, setFilterHeight] = useState(0);
   useEffect(() => {
     const element = filterRef.current;
+    if (!element) {
+      setFilterHeight(0);
+      return undefined;
+    }
     const measure = () =>
       setFilterHeight(Math.ceil(element.getBoundingClientRect().height));
     measure();
@@ -464,7 +469,7 @@ function Dashboard({ state, update, switchLang }) {
       observer?.disconnect();
       window.removeEventListener("resize", measure);
     };
-  }, []);
+  }, [state.section]);
   const visible = useMemo(() => filterItems(items, state), [items, state]);
   const disciplineItems = useMemo(() => filterItems(items, {...state, discipline:'all', major:'all', task:'all'}), [items,state]);
   const scopeItems = useMemo(
@@ -569,7 +574,7 @@ function Dashboard({ state, update, switchLang }) {
         return;
       }
       if ((e.metaKey || e.ctrlKey) && !e.altKey && e.key.toLowerCase() === "k") {
-        if (!compareOpen && !guideSection && !state.repo) {
+        if (!compareOpen && state.section !== "guides" && !state.repo) {
           e.preventDefault();
           (stickySearchVisible ? stickySearch.current : search.current)?.focus();
         }
@@ -581,7 +586,7 @@ function Dashboard({ state, update, switchLang }) {
         e.metaKey ||
         e.altKey ||
         compareOpen ||
-        guideSection ||
+        state.section === "guides" ||
         state.repo
       )
         return;
@@ -619,7 +624,7 @@ function Dashboard({ state, update, switchLang }) {
       document.removeEventListener("keydown", handler);
       document.removeEventListener("pointerdown", closeOpenMenusOnOutside);
     };
-  }, [compareOpen, guideSection, state.repo, state.lang, switchLang, update, stickySearchVisible]);
+  }, [compareOpen, state.section, state.repo, state.lang, switchLang, update, stickySearchVisible]);
   function exportFavorites() {
     const favorites = items
       .filter((i) => state.favorites.includes(i.repo))
@@ -793,6 +798,31 @@ function Dashboard({ state, update, switchLang }) {
                   </Button>
                 ))}
               </div>
+              <Button
+                className={`nav-guides-entry${state.section === "guides" ? " is-active" : ""}`}
+                data-testid="nav-agent-guides"
+                href={localFile("guides/")}
+                aria-current={state.section === "guides" ? "page" : undefined}
+                onClick={(e) => {
+                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
+                    e.preventDefault();
+                    trackEvent("open_agent_guides", {
+                      from: state.section,
+                    });
+                    update((s) => ({
+                      ...s,
+                      section: s.section === "guides" ? "ranking" : "guides",
+                    }));
+                  }
+                }}
+              >
+                <span>
+                  {state.lang === "zh" ? "Agent 装机教程" : "Agent Setup"}
+                </span>
+                <em className="nav-guides-badge">
+                  {state.lang === "zh" ? "新手必看" : "Starter"}
+                </em>
+              </Button>
               <Tooltip title={t("reportsLink")}>
                 <Button
                   aria-label={t("reportsLink")}
@@ -853,11 +883,14 @@ function Dashboard({ state, update, switchLang }) {
             </div>
           </div>
         </Reveal>
-        <section className="hero hero-centered container">
+        <section
+          className="hero hero-centered container"
+          hidden={state.section === "guides"}
+        >
           <div
             className="hero-live-pill"
             data-testid="hero-live-pill"
-            aria-label={state.lang === "zh" ? "核心收录指标与新手入口" : "Key directory metrics & starter guide"}
+            aria-label={state.lang === "zh" ? "核心收录指标" : "Key directory metrics"}
           >
             <button
               type="button"
@@ -950,21 +983,6 @@ function Dashboard({ state, update, switchLang }) {
                 )}
               </span>
             </button>
-            <span className="hero-pill-divider" aria-hidden="true">|</span>
-            <Button
-              className="beginner-entry"
-              onClick={() => setGuideSection("basics")}
-            >
-              {state.lang === "zh" ? "30 秒看懂 Skill" : "Skills in 30 seconds"}
-            </Button>
-            <span className="hero-pill-sep" aria-hidden="true">·</span>
-            <button
-              type="button"
-              className="hero-capsule-path"
-              onClick={() => setGuideSection("paths")}
-            >
-              {state.lang === "zh" ? "专业科研路径 ›" : "Research paths ›"}
-            </button>
           </div>
 
           <Reveal as="h1" kind="hero" tabIndex={-1}>
@@ -1014,12 +1032,14 @@ function Dashboard({ state, update, switchLang }) {
           "--ranking-filter-height": `${filterHeight + (stickySearchVisible ? 48 : 0)}px`,
         }}
       >
-        <DisciplineSelector items={disciplineItems} visible={visible} state={state} update={update} />
-        <section
-          className="stage-quick-bar"
-          data-testid="stage-quick-bar"
-          aria-label={state.lang === "zh" ? "论文阶段急救包" : "Research stage quick-picks"}
-        >
+        {state.section !== "guides" && (
+          <>
+            <DisciplineSelector items={disciplineItems} visible={visible} state={state} update={update} />
+            <section
+              className="stage-quick-bar"
+              data-testid="stage-quick-bar"
+              aria-label={state.lang === "zh" ? "论文阶段急救包" : "Research stage quick-picks"}
+            >
           <div className="stage-quick-row">
             <span className="stage-quick-label">
               {state.lang === "zh" ? "阶段组合" : "Stage kits"}
@@ -1152,29 +1172,6 @@ function Dashboard({ state, update, switchLang }) {
             <p className="task-count-note sr-only">{t("taskCountNote")}</p>
           </section>
           <div className="filter-fields">
-            <button
-              type="button"
-              className={`web-ready-toggle${state.webReady ? " is-active" : ""}`}
-              data-testid="web-ready-toggle"
-              aria-pressed={Boolean(state.webReady)}
-              title={
-                state.lang === "zh"
-                  ? "无需安装编程环境，打开网页版 DeepSeek / Kimi / ChatGPT 复制规则即可直接使用"
-                  : "No local setup needed — copy and use directly in Web AI chat (ChatGPT, Claude, DeepSeek)"
-              }
-              onClick={() =>
-                update((s) => ({
-                  ...s,
-                  section: "ranking",
-                  webReady: !s.webReady,
-                }))
-              }
-            >
-              <i className="web-ready-dot" aria-hidden="true" />
-              <span>
-                {state.lang === "zh" ? "免安装 · 网页直用" : "Zero-install · Web AI"}
-              </span>
-            </button>
             <ActionPopover label={state.lang === "zh" ? "筛选" : "Filters"} filter lang={state.lang} count={Number(state.agent !== "all") + Number(!["rank","stars"].includes(state.sort)) + Number(state.favOnly) + Number(Boolean(state.recentOnly)) + Number(Boolean(state.activeOnly))}>
             {() => <DeferredFeature t={t} loadingFallback={<OverlaySkeleton kind="filters" lang={state.lang}/>}><FilterControls {...{state,update,t,platformIds}} /></DeferredFeature>}
             </ActionPopover>
@@ -1212,12 +1209,34 @@ function Dashboard({ state, update, switchLang }) {
         <ActiveFilters
           {...{ state, update, t }}
           empty={!visible.length}
-          onShareFavorites={
-            state.favOnly && state.favorites.length
-              ? () => shareFavoritesPack(false)
-              : null
-          }
-        />
+                onShareFavorites={
+                  state.favOnly && state.favorites.length
+                    ? () => shareFavoritesPack(false)
+                    : null
+                }
+              />
+          </>
+        )}
+        {state.section === "guides" && (
+          <div id="panel-guides" data-testid="panel-guides">
+            <DeferredFeature
+              t={t}
+              loadingFallback={<OverlaySkeleton lang={state.lang} />}
+            >
+              <AgentGuides
+                lang={state.lang}
+                activeSlug={state.guide || ""}
+                onSelectSlug={(slug) =>
+                  update((s) => ({ ...s, section: "guides", guide: slug }))
+                }
+                onBackToRanking={() =>
+                  update((s) => ({ ...s, section: "ranking", guide: "" }))
+                }
+                onOpenCommunity={openCommunity}
+              />
+            </DeferredFeature>
+          </div>
+        )}
         <div
           id="panel-ranking"
           role="tabpanel"
@@ -1654,8 +1673,7 @@ function Dashboard({ state, update, switchLang }) {
             setCompareOpen(true);
           }}
           onOpenGuide={() => {
-            update((s) => ({ ...s, repo: null }));
-            setGuideSection("basics");
+            update((s) => ({ ...s, repo: null, section: "guides" }));
           }}
         />
       )}
@@ -1694,10 +1712,9 @@ function Dashboard({ state, update, switchLang }) {
           </Tooltip>
         </div>
       )}
-      <BeginnerDialog section={guideSection} lang={state.lang} items={items} t={t} onClose={()=>setGuideSection(null)} onOpenRepo={repo=>update(s=>({...s,repo}))} />
       <DeferredRechargeNotice
         lang={state.lang}
-        busy={Boolean(state.repo || compareOpen || guideSection || botOpen)}
+        busy={Boolean(state.repo || compareOpen || state.section === "guides" || botOpen)}
       />
       {!state.repo && (
         <div
