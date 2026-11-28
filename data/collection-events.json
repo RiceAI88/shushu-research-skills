@@ -4544,5 +4544,77 @@
     "at": "2026-11-27T06:10:24Z",
     "repo": "jinzhuwei/awesome_mamba",
     "action": "added"
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "hongramirez/mendeley",
+    "action": "pending",
+    "reason": "http_404"
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "snl-ucsb/paper-writing-skill",
+    "action": "pending",
+    "reason": "http_404"
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "wenyuchiou/research-hub",
+    "action": "removed",
+    "reasons": [
+      "codex",
+      "mcp",
+      "gemini",
+      "academic",
+      "research",
+      "literature",
+      "review",
+      "missing_readme_academic_scope"
+    ]
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "adongwanai/adong-skills",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "evoscientist/evoscientist",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "gnehuy/awesome-agenticrag_deepresearch",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "isenglab/nju_se_thesiswritingtips",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "luosyrrrr/learn_embodied_papers",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "sabercomo/mefinder",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "knowzou/academic-paper-writing",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "rainbownebula/robot-paper-daily",
+    "action": "added"
+  },
+  {
+    "at": "2026-11-28T10:09:33Z",
+    "repo": "summer-ai-lab/scientific-figure-shapes",
+    "action": "added"
   }
 ]

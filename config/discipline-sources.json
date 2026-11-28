@@ -4525,5 +4525,41 @@
     "source_sha": "6d6e5468fd98a429200db7148c988a765ad615ef",
     "reviewed_at": "2026-11-28",
     "review_kind": "documentation_only"
+  },
+  "evoscientist/evoscientist": {
+    "use_zh": "面向人工智能与深度学习的科研辅助技能",
+    "use_en": "Cross-disciplinary research, data analysis and reproducibility",
+    "source_quote": "1 on AstaBench Data Analysis",
+    "source_url": "https://github.com/EvoScientist/EvoScientist/blob/main/README.md",
+    "source_sha": "d35894f25f1bae7934940605fa1c6a728364cb4d",
+    "reviewed_at": "2026-11-28",
+    "review_kind": "documentation_only"
+  },
+  "adongwanai/adong-skills": {
+    "use_zh": "文献检索、引文核验与综述整理",
+    "use_en": "Literature search, citation verification and synthesis",
+    "source_quote": "**`adong-ai-daily`**：每天早起扫全网动态用的。脚本直接去抓 X 上的建设者推文、播客、GitHub Trending、HN、HF/arXiv 和 9 家中文 AI 媒体，把撞车的同一件事合并去重，最后只吐出两个文件：一个能筛选搜索、能顺手导出小红书卡片的**单文件 HTML 日报**，再加一份**直接复制就能发微信群的纯文本早报**（线上自动更新站：adong-ai-daily）。不用配任何 A…",
+    "source_url": "https://github.com/adongwanai/adong-skills/blob/main/README.md",
+    "source_sha": "5d59813f754a8b717262c2fcc0074eed76381ab2",
+    "reviewed_at": "2026-11-28",
+    "review_kind": "documentation_only"
+  },
+  "knowzou/academic-paper-writing": {
+    "use_zh": "支持学术论文起草与写作的科研技能",
+    "use_en": "Academic writing, polishing and manuscript formatting",
+    "source_quote": "This repository contains an `academic-paper-writing` skill for Codex/Claude-style agent workflows focused on STEM paper writing and revision.",
+    "source_url": "https://github.com/knowzou/academic-paper-writing/blob/main/README.md",
+    "source_sha": "1b035f042667057cac6148bdd2ceeb5d4fdfd066",
+    "reviewed_at": "2026-11-28",
+    "review_kind": "documentation_only"
+  },
+  "summer-ai-lab/scientific-figure-shapes": {
+    "use_zh": "支持科研配图与数据可视化的科研技能",
+    "use_en": "Publication figures, diagrams and presentation slides",
+    "source_quote": "Scientific Figure Shapes",
+    "source_url": "https://github.com/summer-ai-lab/scientific-figure-shapes/blob/main/README.md",
+    "source_sha": "89323b85df2345a280d6dbca3997fbc4f974fa42",
+    "reviewed_at": "2026-11-28",
+    "review_kind": "documentation_only"
   }
 }

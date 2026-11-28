@@ -4787,6 +4787,34 @@
       "common": false,
       "reviewed_at": "2026-11-28",
       "evidence": true
+    },
+    "evoscientist/evoscientist": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-28",
+      "evidence": true
+    },
+    "adongwanai/adong-skills": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-28",
+      "evidence": true
+    },
+    "knowzou/academic-paper-writing": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-28",
+      "evidence": true
+    },
+    "summer-ai-lab/scientific-figure-shapes": {
+      "disciplines": [],
+      "majors": [],
+      "common": true,
+      "reviewed_at": "2026-11-28",
+      "evidence": true
     }
   }
 }
