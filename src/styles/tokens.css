@@ -14,23 +14,23 @@
   --prs-secondary: #059669;
   --prs-deep: #0284c7;
   --prs-bg: #f4f7fa;
-  --prs-tint: #eef7f3;
+  --prs-tint: #f1f8f5;
   --prs-panel: #ffffff;
   --prs-text: #0f172a;
   --prs-body: #334155;
   --prs-muted: #64748b;
-  --prs-border: #e2e8f0;
+  --prs-border: rgba(15, 23, 42, 0.068);
   --prs-pill-dark: #0d9f6e;
-  --prs-tag-bg: #f1f5f9;
+  --prs-tag-bg: #f3f6f9;
   --prs-tag-text: #475569;
   /* 鲜橙点缀：色块用 warm，文字用 warm-strong */
   --prs-warm: #f26a1b;
   --prs-warm-rgb: 242 106 27;
   --prs-warm-strong: #ea580c;
-  --prs-warm-tint: #fff1e8;
+  --prs-warm-tint: #fff4ec;
   --prs-shadow: none;
-  --prs-shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
-  --prs-shadow-md: 0 10px 26px -6px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.04);
+  --prs-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.02), 0 4px 16px -4px rgba(15, 23, 42, 0.035);
+  --prs-shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.045), 0 14px 32px -10px rgba(15, 23, 42, 0.065);
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -52,7 +52,7 @@
   --prs-text: #f1f5f9;
   --prs-body: #cbd5e1;
   --prs-muted: #94a3b8;
-  --prs-border: #1e293b;
+  --prs-border: rgba(148, 163, 184, 0.13);
   --prs-pill-dark: #34d399;
   --prs-tag-bg: #1e293b;
   --prs-tag-text: #cbd5e1;

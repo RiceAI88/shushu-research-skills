@@ -1071,7 +1071,7 @@ function Dashboard({ state, update, switchLang }) {
                         height="14"
                         fill="none"
                         stroke="currentColor"
-                        strokeWidth="2"
+                        strokeWidth="1.45"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       >

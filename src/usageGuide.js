@@ -147,28 +147,28 @@ export function classifyInstallLocation(installation, lang = "zh") {
     return {
       kind: "terminal",
       badge: zh
-        ? "💻 在电脑终端执行（Terminal / PowerShell）"
-        : "💻 Run in system terminal (Terminal / PowerShell)",
+        ? "支持客户端对话框代装 · 或内置终端运行"
+        : "Paste to AI Client chat · or run in terminal",
       hint: zh
-        ? "打开 macOS 终端、Windows PowerShell 或 VS Code 集成终端，粘贴下方命令回车执行。"
-        : "Open macOS Terminal, Windows PowerShell, or the VS Code terminal and run the command below.",
+        ? "可直接把下方命令发给 Antigravity / Claude Code / Codex 客户端对话框让 AI 自动装好，或在内置终端粘贴执行。"
+        : "Send the command below directly to your Antigravity / Claude Code / Codex client chat for auto-setup, or run it in the built-in terminal.",
     };
   }
   if (installation.mode === "manual") {
     return {
       kind: "manual",
-      badge: zh ? "📋 按官方步骤手动配置" : "📋 Manual setup via docs",
+      badge: zh ? "客户端文件夹配置 · 或发链接让 AI 自动装" : "Client folder setup · or ask AI client",
       hint: zh
-        ? "需按官方文档复制技能文件或配置参数；不熟悉命令行可直接用下方“让 AI 帮你装”提示词。"
-        : "Follow the official docs to place skill files or config; or copy the AI-assisted setup prompt below.",
+        ? "将仓库链接发给客户端对话框让 AI 按官方文档自动配置，或下载解压拖入客户端 skills 目录。"
+        : "Send the repo URL to your AI client chat for automatic setup, or drag the unzipped folder into your skills directory.",
     };
   }
   return {
     kind: "docs",
-    badge: zh ? "📄 查看官方文档或让 AI 帮你装" : "📄 Follow official docs or ask AI",
+    badge: zh ? "查阅官方说明 · 或发链接让客户端自动装" : "Official docs · or ask AI client to install",
     hint: zh
-      ? "本站尚未提炼单行命令，你可以直接查看官方 README，或复制下方提示词让 AI 助手读文档帮你完成安装。"
-      : "No single-line command is verified yet—open the official README or copy the prompt below so your AI assistant installs it for you.",
+      ? "直接打开官方仓库查阅说明，或把仓库链接粘贴给 Antigravity / Claude Code / Codex 客户端让 AI 自动配置。"
+      : "Open the official README, or paste the repository URL into your AI client chat to configure it automatically.",
   };
 }
 

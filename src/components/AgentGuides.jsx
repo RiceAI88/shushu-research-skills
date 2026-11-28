@@ -245,13 +245,13 @@ export default function AgentGuides({
           <div>
             <h2 id="agent-guides-heading">
               {zh
-                ? "科研 AI Agent 零基础装机与 Skills 实战专栏"
-                : "Research AI Agent Setup & Skills Tutorials"}
+                ? "科研 AI Agent 客户端零基础装机与实战专栏"
+                : "Research AI Agent Client Setup & Tutorials"}
             </h2>
             <p>
               {zh
-                ? "专门写给还没装过本地 AI 助手的同学：挑下方任意 1 款工具花 5 分钟装好，即可解锁本站 500+ 科研 Skills 的完整读写文献与运行绘图能力。"
-                : "New to local AI Agents? Pick any one tool below, set it up in 5 minutes, and unlock all 500+ verified research Skills."}
+                ? "告别黑框命令行：挑下方任意一款官方可视化桌面客户端，点鼠标打开论文文件夹、发一句话即可自动挂载 500+ 科研 Skills。"
+                : "Zero terminal setup: pick any visual desktop client below, open your paper folder, and mount 500+ research Skills in one click."}
             </p>
           </div>
           <button
@@ -260,13 +260,14 @@ export default function AgentGuides({
             data-testid="guides-back-to-ranking"
             onClick={onBackToRanking}
           >
-            {zh ? "← 装好了？返回 Skills 榜单" : "← Back to Skills Ranking"}
+            {zh ? "← 返回 Skills 榜单" : "← Back to Skills"}
           </button>
         </div>
 
-        <div className="agent-guides-cards" role="tablist" aria-label={zh ? "主流科研 Agent 快速切换" : "Popular AI Agents"}>
+        <div className="agent-guides-cards" role="tablist" aria-label={zh ? "主流科研 Agent 客户端切换" : "Popular AI Agent Clients"}>
           {topAgentCards.map((g) => {
             const active = g.slug === current.slug;
+            const cleanTitle = String(g.card_title || "").replace(/^[^\w\u4e00-\u9fa5]+\s*/, "");
             return (
               <button
                 key={g.slug}
@@ -278,7 +279,7 @@ export default function AgentGuides({
                 onClick={() => onSelectSlug(g.slug)}
               >
                 <div className="agent-guide-card-head">
-                  <strong>{g.card_title}</strong>
+                  <strong>{cleanTitle}</strong>
                   {g.badge && <em>{g.badge}</em>}
                 </div>
                 <span>{g.card_desc}</span>
@@ -295,6 +296,7 @@ export default function AgentGuides({
               <div className="agent-guides-group-title">{groupName}</div>
               {list.map((g) => {
                 const active = g.slug === current.slug;
+                const cleanNavTitle = String(g.card_title || g.title || "").replace(/^[^\w\u4e00-\u9fa5]+\s*/, "");
                 return (
                   <button
                     key={g.slug}
@@ -304,7 +306,7 @@ export default function AgentGuides({
                     aria-current={active ? "page" : undefined}
                     onClick={() => onSelectSlug(g.slug)}
                   >
-                    <span>{g.card_title || g.title}</span>
+                    <span>{cleanNavTitle}</span>
                   </button>
                 );
               })}
@@ -427,10 +429,10 @@ export default function AgentGuides({
           <div className="agent-recharge-card" data-testid="guide-recharge-card">
             <div>
               <strong>
-                💡 没有海外信用卡或怕封号？本站自营正规 AI 订阅代充与 API 额度
+                没有海外卡或担心封号？本站自营正规 AI 客户端会员代充与订阅
               </strong>
               <p>
-                官方渠道支持 Claude / ChatGPT / Gemini / Codex · 自动发货 ·{" "}
+                官方渠道支持 Claude / ChatGPT (Codex) / Gemini · 自动发货 ·{" "}
                 <em>可开增值税发票（技术服务费 / 文献检索）走课题组报销</em>
               </p>
             </div>
@@ -452,8 +454,8 @@ export default function AgentGuides({
 
           <div className="agent-finish-card">
             <div>
-              <strong>🎉 软件环境准备好了？立即去挑你的第一款科研 Skill！</strong>
-              <p>按你的学科门类（理学 / 工学 / 医学 / 经管等）或科研任务一键复制安装命令。</p>
+              <strong>客户端装好了？立即去挑你的第一款科研 Skill</strong>
+              <p>按学科门类（理学 / 工学 / 医学 / 经管等）或论文环节挑选，复制一句话发给客户端即可自动配置。</p>
             </div>
             <button
               type="button"
@@ -484,8 +486,8 @@ export default function AgentGuides({
 
           {onOpenCommunity && (
             <div className="agent-side-box is-mint">
-              <strong>💬 卡在某一步装不上？</strong>
-              <p>扫码加入科研鼠鼠交流群，同专业师兄师姐在线帮你看报错截图。</p>
+              <strong>安装遇到问题？</strong>
+              <p>扫码加入科研鼠鼠交流群，同专业师兄师姐在线帮你看界面截图。</p>
               <button type="button" onClick={() => onOpenCommunity("agent_guide")}>
                 扫码加入交流群
               </button>
@@ -493,8 +495,8 @@ export default function AgentGuides({
           )}
 
           <div className="agent-side-box">
-            <strong>⏳ 明天就要交开题/初稿？</strong>
-            <p>来不及配本地环境，可用合作工作台 <b>智一刻 AI</b> 直接生成带引文的论文提纲与初稿。</p>
+            <strong>急交开题或初稿？</strong>
+            <p>来不及装桌面客户端，可用合作工作台 <b>智一刻 AI</b> 在线生成带引文的论文提纲与初稿。</p>
             <a
               href="https://zhi1ke.com?pic=6PEB"
               target="_blank"

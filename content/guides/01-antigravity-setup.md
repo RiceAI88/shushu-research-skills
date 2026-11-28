@@ -1,72 +1,57 @@
 ---
 slug: antigravity-setup
 order: 1
-group: 保姆级装机图文教程
-agent: antigravity
-card_title: 🚀 Google Antigravity 教程
-card_desc: 可视化双栏界面 · 零基础最友好 · 原生支持 Skills
+group: 客户端可视化教程
+card_title: Antigravity 客户端
 badge: 新手首选
-title: Google Antigravity 零基础安装与第一个科研 Skill 挂载教程
-summary: 手把手教你在 macOS 与 Windows 安装 Google Antigravity，配置本地 .agents/skills 目录，5 分钟跑通文献精读与科研绘图技能。
+card_desc: Google 官方桌面端 · 全程点鼠标零命令行
+title: Google Antigravity 客户端零基础安装与科研 Skills 挂载教程
+summary: 全程图形界面、无需打开黑框命令行：5 分钟在 macOS / Windows 装好 Google Antigravity 桌面客户端，拖入论文文件夹并自动挂载科研 Skills。
+reading_time: 3 分钟
 updated: 2026-11-28
-reading_time: 4 分钟
 ---
 
-相比纯黑框终端工具，**Google Antigravity** 自带直观的可视化文件树、右侧文档实时预览与内置终端，非常适合第一次接触 AI Agent 的本硕博同学用来精读 PDF 论文、自动运行 Python 画 300 DPI 顶刊统计图、改写 LaTeX 或 Word 论文。
+对于第一次使用科研 AI Agent 的同学，**Google Antigravity 桌面客户端**是最友好的起点：它自带左侧可视化文件夹树、中间文档与配图实时预览、右侧中文对话框，**全程点鼠标就能完成安装和科研技能挂载，完全不需要敲黑框命令行**。
 
-## 1. 下载安装客户端与初始化环境
+## 1. 下载安装桌面客户端并打开论文文件夹
 
-前往 Google Antigravity 官方下载页获取对应系统安装包（macOS 支持 Apple Silicon 与 Intel，Windows 支持 Win10/11 64 位），像安装普通软件一样拖入应用程序或双击完成安装。
+1. 前往 **Google Antigravity 官方网站**下载对应系统的桌面安装包（macOS 支持 Apple Silicon 与 Intel 芯片 `.dmg`，Windows 支持 Win10/11 `.exe` 安装程序），像安装微信或 Office 一样拖入应用或双击完成安装。
+2. 打开客户端并登录 Google 账号。
+3. 在电脑桌面新建一个专门存放当前课题的文件夹（例如 `我的毕业论文-2026`，把要读的 PDF 文献或实验数据 `.csv` 放进去），点击客户端左上角的 **File → Open Folder（打开文件夹）** 选中它。
 
-为后续能够使用一行命令安装全站开源 Skills，建议同时确保电脑已安装 **Node.js（v20 及以上）**。打开 Antigravity 底部内置终端（快捷键 ``Ctrl + ` ``），验证环境是否就绪：
+> [!TIP]
+> 只要用「打开文件夹」关联了你的课题目录，右侧对话框里的 AI 就能直接读取该文件夹下的 PDF 论文、Word / LaTeX 初稿与实验表格，不需要再反复手动上传附件。
 
-```bash
-node -v && npm -v
-```
+## 2. 零命令行把本站科研 Skills 装进客户端
 
-若国内校园网下载依赖较慢，可先设置国内淘宝 npm 镜像源（只需执行一次，永久生效）：
+看中本站榜单里的任意一款科研 Skill 后，你**不需要自己敲任何安装命令**，推荐任选以下两种纯图形界面方式：
 
-```bash
-npm config set registry https://registry.npmmirror.com
-```
+### 方式一：复制一句话发给右侧对话框，让客户端自动帮你装（最省心）
 
-## 2. 两种方式把科研 Skills 装进 Antigravity
-
-先在电脑上新建一个专门存放你当前课题或论文的文件夹（例如 `My-Paper-2026`），在 Antigravity 中点击 **File → Open Folder** 打开该文件夹。
-
-### 方式一：使用官方 Skills CLI 一键安装（最推荐）
-
-在本站找到心仪的仓库后，直接复制详情页的安装命令粘贴进终端回车，工具会自动识别 Antigravity 并挂载到当前项目或全局目录：
-
-```bash
-npx skills add Imbad0202/academic-research-skills
-```
-
-如果只想从几百个技能的大合集（如 `K-Dense-AI/scientific-agent-skills`）里单独安装某 1 个子技能（例如单细胞分析 `scanpy`），加上 `--skill` 参数即可避免撑爆上下文：
-
-```bash
-npx skills add K-Dense-AI/scientific-agent-skills --skill scanpy
-```
-
-### 方式二：手动放置文件夹（网络受限备选）
-
-Antigravity 会自动扫描以下两个标准路径中的 `SKILL.md` 文件：
-- **当前论文项目专属技能**：`<你的论文文件夹>/.agents/skills/<技能名>/SKILL.md`
-- **全局跨项目通用技能**：`~/.agents/skills/<技能名>/SKILL.md`（Windows 位于 `C:\Users\<用户名>\.agents\skills\`）
-
-你只需将从 GitHub 下载的包含 `SKILL.md` 的技能文件夹放入上述目录，Antigravity 右侧面板即可自动识别加载。
-
-## 3. 在论文目录发送第一句科研指令
-
-把你的英文参考文献 `paper.pdf` 或实验数据 `results.csv` 放进当前打开的文件夹中，直接在 Antigravity 对话框输入自然语言指令：
+点开本站任意 Skill 卡片复制它的 GitHub 仓库地址（或卡片上的安装口令），直接粘贴到 Antigravity 右侧聊天输入框发送，客户端内置的智能体就会自动帮你下载并挂载好：
 
 ```text
-请调用刚安装的科研技能，精读当前目录下的 paper.pdf，按“核心研究假设、方法创新、实验数据结论、方法局限性”整理一份 Markdown 组会汇报笔记保存到 notes.md。
+请帮我把这个科研 Skill 仓库下载并配置到当前工作区的 .agents/skills/ 文件夹中，装好后告诉我怎么用：https://github.com/K-Dense-AI/scientific-agent-skills
 ```
 
-Agent 会自动读取本地 PDF、遵守该 Skill 预设的严谨学术规范完成拆解，并将结果直接写入本地文件。
+当聊天框弹出绿色的确认按钮（**Run / Allow**）时，用鼠标点一下同意，几秒钟即自动部署完成。
 
-## 4. 常见安装报错排查（FAQ）
+### 方式二：客户端面板添加或鼠标拖拽文件夹
 
-- **终端提示 `command not found: npx`**：说明电脑尚未安装 Node.js，前往 `nodejs.org` 下载 LTS 长期支持版安装后重启 Antigravity 即可。
-- **执行 `npx skills add` 卡住不动**：校园网直连 GitHub 超时，可在命令前加上镜像参数：`npx --registry=https://registry.npmmirror.com skills add <仓库名>`，或开启稳定网络环境后重试。
+- **内置面板管理**：点击客户端侧边栏的 **Customizations / Skills（技能与插件）** 图标，可直接查看当前已启用的全部本地技能或从市场一键添加。
+- **ZIP 拖拽安装**：在目标 GitHub 仓库页面点击右上角绿色 **Code → Download ZIP** 解压到本地，直接用鼠标把包含 `SKILL.md` 的技能文件夹拖进论文目录下的 `.agents/skills/` 文件夹中，Antigravity 会立即自动识别生效。
+
+## 3. 在客户端对话框发出第一句科研指令
+
+装好技能后，直接在右侧对话框里输入 `@` 点选文件夹里的文献或数据表，用大白话吩咐任务即可：
+
+```text
+请调用刚装好的科研技能，精读文件夹里的 @paper.pdf，按「核心研究假设 → 实验设计 → 关键结论 → 局限性」整理成结构化中文笔记，保存为 reading-notes.md。
+```
+
+生成好的笔记、表格或高清科研配图会直接出现在左侧文件列表里，点击即可在中间窗口实时双栏预览与修改。
+
+## 4. 常见客户端使用小贴士
+
+- **想让所有课题文件夹共用同一套技能？** 对右侧 AI 说一句「请把这个技能放到我电脑的全局技能目录 `~/.agents/skills/` 里」，以后新建任何论文文件夹都能直接调用。
+- **如何确认技能已经被成功调用？** 发送任务后，右侧对话流顶部会显示 `Reading SKILL.md` 状态卡片，代表 AI 正在严格按照该科研技能的学术规范执行。

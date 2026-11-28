@@ -12,7 +12,7 @@ export const THEME_TOKENS = {
     tableHeaderBg: "#FFFFFF",
     text: "#0F172A",
     textSecondary: "#64748B",
-    border: "#E2E8F0",
+    border: "#EAEFF4",
     // 鲜橙点缀色（与 tokens.css 的 --prs-warm / --prs-warm-strong 一致）
     warm: "#F26A1B",
     warmStrong: "#EA580C",

@@ -81,7 +81,9 @@ test("stage quick-picks, shared toolkit pack banner, and zero-CLI Web AI guide w
   await expect(guidesModule).toBeVisible();
   await expect(guidesModule).toContainText("Antigravity");
   await guidesModule.locator('[data-guide-card="claude-code-setup"]').click();
-  await expect(guidesModule).toContainText("Claude Code 国内安装");
+  await expect(guidesModule).toContainText("Claude Code 客户端");
+  await guidesModule.locator('[data-guide-card="codex-cli-setup"]').click();
+  await expect(guidesModule).toContainText("OpenAI Codex 客户端");
   await guidesModule.getByTestId("guides-back-to-ranking").click();
   await expect(page.getByTestId("repo-card").first()).toBeVisible();
 });
@@ -230,7 +232,7 @@ test("static skill SEO page, auto preview for new repos, direct web prompt, and 
   await page.goto("./guides/antigravity-setup/");
   await expect(page).toHaveTitle(/Antigravity/);
   expect(new URL(page.url()).hash).toBe("");
-  await expect(page.getByTestId("agent-guides-module")).toContainText("Google Antigravity 零基础安装");
+  await expect(page.getByTestId("agent-guides-module")).toContainText("Google Antigravity 客户端零基础安装");
 
   // 3. 选择“经济学”后重新访问首页，展示上次浏览专业提示并支持一键切回
   await page.goto("./");
